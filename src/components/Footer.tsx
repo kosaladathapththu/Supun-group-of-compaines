@@ -1,102 +1,35 @@
 import { Link } from "react-router-dom";
-import { Mail, Phone } from "lucide-react";
+import { ArrowUpRight, Mail, MapPin, Phone } from "lucide-react";
 import logo from "@/assets/supun-group-of-companies-logo.png";
 
-const Footer = () => {
-  const currentYear = new Date().getFullYear();
-
-  return (
-    <footer className="bg-primary text-primary-foreground">
-      <div className="container mx-auto px-4 py-12">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
-          {/* Company Info */}
-          <div className="col-span-1 md:col-span-2">
-            <Link to="/" className="inline-block mb-4">
-              <div className="bg-white px-5 py-3 rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-0.5 inline-block">
-                <img 
-                  src={logo} 
-                  alt="Supun Group of Companies" 
-                  className="h-14 w-auto"
-                />
-              </div>
-            </Link>
-            <p className="text-primary-foreground/80 mb-4">
-              A diversified Sri Lankan conglomerate with expertise in manufacturing,
-              retail, hospitality, and technology. Established in 1999.
-            </p>
-            <div className="flex flex-col space-y-2">
-              <a
-                href="mailto:info@supungroup.lk"
-                className="flex items-center space-x-2 hover:text-accent transition-smooth"
-              >
-                <Mail size={16} />
-                <span>info@supungroup.lk</span>
-              </a>
-              <a
-                href="tel:+94112055026"
-                className="flex items-center space-x-2 hover:text-accent transition-smooth"
-              >
-                <Phone size={16} />
-                <span>+94 112 055 026</span>
-              </a>
-            </div>
-          </div>
-
-          {/* Quick Links */}
-          <div>
-            <h4 className="text-lg font-semibold mb-4">Quick Links</h4>
-            <ul className="space-y-2">
-              <li>
-                <Link to="/" className="hover:text-accent transition-smooth">
-                  Home
-                </Link>
-              </li>
-              <li>
-                <Link to="/about" className="hover:text-accent transition-smooth">
-                  About Us
-                </Link>
-              </li>
-              <li>
-                <Link to="/companies" className="hover:text-accent transition-smooth">
-                  Companies
-                </Link>
-              </li>
-              <li>
-                <Link to="/contact" className="hover:text-accent transition-smooth">
-                  Contact
-                </Link>
-              </li>
-            </ul>
-          </div>
-
-          {/* Our Vision */}
-          <div>
-            <h4 className="text-lg font-semibold mb-4">Our Vision</h4>
-            <p className="text-primary-foreground/80 text-sm italic">
-              "Innovate. Unleash and Excel"
-            </p>
-          </div>
+const Footer = () => (
+  <footer className="bg-[#071b34] text-white">
+    <div className="mx-auto max-w-[1440px] px-6 py-20 md:px-12 lg:px-20 lg:py-24">
+      <div className="grid gap-14 lg:grid-cols-[1.25fr_.75fr] lg:gap-24">
+        <div>
+          <p className="mb-5 text-xs font-bold uppercase tracking-[0.22em] text-[#f5a20a]">Start a conversation</p>
+          <h2 className="max-w-3xl text-5xl font-semibold leading-[.98] tracking-[-0.035em] normal-case md:text-7xl">Let's build what<br />comes next.</h2>
+          <Link to="/contact" className="group mt-9 inline-flex items-center gap-4 text-base font-semibold text-white">Contact Supun Group<span className="grid h-11 w-11 place-items-center rounded-full bg-[#f5a20a] text-[#071b34] transition-transform group-hover:-translate-y-1 group-hover:translate-x-1"><ArrowUpRight size={18} /></span></Link>
         </div>
-
-        <div className="border-t border-primary-foreground/20 mt-8 pt-8 text-center">
-          <p className="text-primary-foreground/60 text-sm">
-            © {currentYear} Supun Group of Companies. All rights reserved.
-          </p>
-          <p className="text-primary-foreground/60 text-sm mt-2">
-            Developed by{" "}
-            <a
-              href="https://zenax.info/"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-accent hover:text-accent/80 transition-colors duration-300 font-medium underline decoration-accent/50 hover:decoration-accent"
-            >
-              ZENAX
-            </a>
-          </p>
+        <div className="border-t border-white/15 pt-8 lg:border-l lg:border-t-0 lg:pl-14 lg:pt-2">
+          <p className="mb-7 text-xs font-bold uppercase tracking-[0.18em] text-white/45">Group office</p>
+          <div className="space-y-5 text-sm text-white/75">
+            <a href="mailto:info@supungroup.lk" className="flex items-center gap-3 transition hover:text-[#f5a20a]"><Mail size={17} />info@supungroup.lk</a>
+            <a href="tel:+94112055026" className="flex items-center gap-3 transition hover:text-[#f5a20a]"><Phone size={17} />+94 112 055 026</a>
+            <p className="flex items-center gap-3"><MapPin size={17} />Colombo, Sri Lanka</p>
+          </div>
+          <p className="mt-9 text-xs leading-6 text-white/45">Mon–Fri 9:00 AM–6:00 PM<br />Sat 9:00 AM–1:00 PM</p>
         </div>
       </div>
-    </footer>
-  );
-};
+
+      <div className="mt-20 grid gap-10 border-t border-white/15 pt-10 md:grid-cols-[1.3fr_1fr_1fr]">
+        <div><div className="inline-block bg-white p-3"><img src={logo} alt="Supun Group of Companies" className="h-12 w-auto" /></div><p className="mt-5 max-w-sm text-sm leading-7 text-white/50">A family-run Sri Lankan group creating lasting value across manufacturing, retail, distribution and hospitality since 1978.</p></div>
+        <div><p className="mb-5 text-xs font-bold uppercase tracking-[0.16em] text-white/40">Explore</p><div className="grid gap-3 text-sm text-white/70"><Link to="/about" className="hover:text-white">About us</Link><Link to="/companies" className="hover:text-white">Our companies</Link><Link to="/shop" className="hover:text-white">Camy products</Link><Link to="/careers" className="hover:text-white">Careers</Link><Link to="/contact" className="hover:text-white">Contact</Link></div></div>
+        <div><p className="mb-5 text-xs font-bold uppercase tracking-[0.16em] text-white/40">Our vision</p><p className="font-heading text-2xl font-medium text-white/85">“Innovate. Unleash and Excel.”</p></div>
+      </div>
+      <div className="mt-12 flex flex-col gap-3 border-t border-white/10 pt-7 text-[11px] text-white/35 sm:flex-row sm:justify-between"><p>© {new Date().getFullYear()} Supun Group of Companies. All rights reserved.</p><p>Designed for a new chapter.</p></div>
+    </div>
+  </footer>
+);
 
 export default Footer;

@@ -18,6 +18,7 @@ import CompanyDetail from "./pages/CompanyDetail";
 import Shop from "./pages/Shop";
 import ProductDetail from "./pages/ProductDetail";
 import Contact from "./pages/Contact";
+import Careers from "./pages/Careers";
 import NotFound from "./pages/NotFound";
 import Login from "./pages/admin/Login";
 import CompanyList from "./pages/admin/CompanyList";
@@ -92,6 +93,17 @@ const App = () => (
                   <Navigation />
                   <main className="flex-1">
                     <Contact />
+                  </main>
+                  <Footer />
+                </div>
+              </PageTransition>
+            } />
+            <Route path="/careers" element={
+              <PageTransition>
+                <div className="flex flex-col min-h-screen">
+                  <Navigation />
+                  <main className="flex-1">
+                    <Careers />
                   </main>
                   <Footer />
                 </div>

@@ -1,473 +1,105 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { Link } from "react-router-dom";
-import { Button } from "@/components/ui/button";
-import { Card, CardContent } from "@/components/ui/card";
-import { Skeleton } from "@/components/ui/skeleton";
-import { ArrowRight, Building2, Factory, Hotel, ShoppingBag, Cpu, Target, Lightbulb, TrendingUp } from "lucide-react";
-import { companiesAPI, brandsAPI, type Company, type Brand } from "@/services/api";
-import { CompanyImage } from "@/components/ImagePlaceholder";
-import { BrandShowcase } from "@/components/BrandShowcase";
-import Seo, { SITE_NAME, SITE_URL, DEFAULT_IMAGE } from "@/components/Seo";
-import heroManufacturing from "@/assets/hero-manufacturing.jpg";
-import illustrator1 from "@/assets/illustrator-1.png";
-import illustrator2 from "@/assets/illustrator-2.png";
+import { ArrowDown, ArrowRight, ArrowUpRight, Factory, Hotel, ShoppingBag, Sparkles } from "lucide-react";
+import Seo, { DEFAULT_IMAGE, SITE_NAME, SITE_URL } from "@/components/Seo";
 import companyVideo from "@/assets/SUPUN GROUP OF COMPANY.mp4";
+import heroPoster from "@/assets/home-hero-ai-placeholder.png";
+import manufacturingImage from "@/assets/hero-manufacturing.jpg";
+import retailImage from "@/assets/retail-store.jpg";
+import hospitalityImage from "@/assets/hotel-interior.jpg";
+import camyImage from "@/assets/cookware-manufacturing.jpg";
+import careersImage from "@/assets/careers-hero-ai-placeholder.png";
+import supunTradersLogo from "@/assets/company-logos/supun-traders.png";
+import supunArcadeLogo from "@/assets/company-logos/supun-arcade.png";
+import ymacLogo from "@/assets/company-logos/ymac.png";
+import supunSuperCenterLogo from "@/assets/company-logos/supun-super-center.png";
+import camyGlobalLogo from "@/assets/company-logos/camy-global.png";
+import camySmartLogo from "@/assets/company-logos/camy-smart.png";
+import newCamySmartLogo from "@/assets/company-logos/new-camy-smart.png";
+import aeroStarLogo from "@/assets/company-logos/aero-star.png";
+import rodsonsLogo from "@/assets/company-logos/rodsons.png";
+
+const sectors = [
+  { number: "01", title: "Manufacturing", short: "Products made here, for life here.", copy: "Building Sri Lanka's own consumer durables—from SLS-certified motorcycle helmets and the country's first PU footwear to cookware, appliances and cooling solutions.", image: manufacturingImage, icon: Factory, link: "/companies" },
+  { number: "02", title: "Retail & Distribution", short: "From trusted shelves to every corner.", copy: "Connecting Sri Lankan households to dependable products through our original wholesale roots, modern retail and an island-wide distributor network.", image: retailImage, icon: ShoppingBag, link: "/companies" },
+  { number: "03", title: "Hospitality & Dining", short: "Colombo stays. Elevated dining.", copy: "Creating considered experiences at Supun Arcade Residency and Area 56—from fully serviced city living to rooftop dining above Colombo.", image: hospitalityImage, icon: Hotel, link: "/companies" },
+  { number: "04", title: "The Camy Brand", short: "Sri Lankan durables, built in-house.", copy: "A growing family of locally manufactured helmets, cookware, appliances, air conditioners and fans designed around everyday Sri Lankan life.", image: camyImage, icon: Sparkles, link: "/shop" },
+];
+
+const companies = [
+  { name: "Supun Traders", sector: "Retail & Distribution", logo: supunTradersLogo, path: "/companies/supun-traders" },
+  { name: "Supun Super Center", sector: "Retail", logo: supunSuperCenterLogo, path: "/companies/supun-super-centre" },
+  { name: "Supun Arcade Residency", sector: "Hospitality", logo: supunArcadeLogo, path: "/companies/supun-arcade" },
+  { name: "Area 56", sector: "Hospitality & Dining", wordmark: "AREA 56", path: "/companies/area-56" },
+  { name: "Supun Aerosoft", sector: "Manufacturing", logo: ymacLogo, path: "/companies/supun-aerosoft" },
+  { name: "Aero Star", sector: "Manufacturing", logo: aeroStarLogo, path: "/companies/aero-star" },
+  { name: "Camy Smart", sector: "Manufacturing", logo: camySmartLogo, path: "/companies/camy-smart" },
+  { name: "Rodsons", sector: "Manufacturing", logo: rodsonsLogo, path: "/companies/rodsons" },
+  { name: "New Camy Smart", sector: "Manufacturing", logo: newCamySmartLogo, path: "/companies/new-camy-smart" },
+  { name: "Fuji Industries", sector: "Manufacturing", wordmark: "FUJI INDUSTRIES", path: "/companies/fuji" },
+  { name: "Camy Global", sector: "Distribution", logo: camyGlobalLogo, path: "/companies/camy-global" },
+];
 
 const Home = () => {
-  const [companies, setCompanies] = useState<Company[]>([]);
-  const [brands, setBrands] = useState<Brand[]>([]);
-  const [isLoading, setIsLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
-
-  useEffect(() => {
-    loadData();
-  }, []);
-
-  const loadData = async () => {
-    try {
-      const [companiesData, brandsData] = await Promise.all([
-        companiesAPI.getAll(),
-        brandsAPI.getAll(),
-      ]);
-      setCompanies(companiesData);
-      setBrands(brandsData);
-      setError(null);
-    } catch (err) {
-      console.error('Failed to load data:', err);
-      setError('Failed to load data. Please try again later.');
-    } finally {
-      setIsLoading(false);
-    }
-  };
-
-  const industryIcons = {
-    "Retail & Distribution": ShoppingBag,
-    "Manufacturing": Factory,
-    "Hospitality": Hotel,
-    "Retail": ShoppingBag,
-    "Technology & Design": Cpu,
-  };
+  const [activeSector, setActiveSector] = useState(0);
+  const sector = sectors[activeSector];
+  const SectorIcon = sector.icon;
 
   return (
-    <div className="min-h-screen">
-      <Seo
-        title="Supun Group of Companies | Leading Conglomerate in Sri Lanka"
-        description="Supun Group of Companies - A diversified Sri Lankan conglomerate with expertise in manufacturing, retail, hospitality, and technology. Established in 1999, serving local and international markets with excellence and innovation."
-        keywords="Supun Group, Sri Lanka, conglomerate, manufacturing, retail, hospitality, technology, cookware, helmets, chrome plating, automotive design, hotels, business group, Sri Lankan companies"
-        jsonLd={{
-          "@context": "https://schema.org",
-          "@type": "Organization",
-          name: SITE_NAME,
-          description: "A diversified Sri Lankan conglomerate with expertise in manufacturing, retail, hospitality, and technology.",
-          url: SITE_URL,
-          logo: DEFAULT_IMAGE,
-          foundingDate: "1999",
-          address: {
-            "@type": "PostalAddress",
-            addressCountry: "LK",
-            addressLocality: "Sri Lanka",
-          },
-          contactPoint: {
-            "@type": "ContactPoint",
-            telephone: "+94-112-055-026",
-            contactType: "Customer Service",
-            email: "info@supungroup.lk",
-          },
-        }}
-      />
-      {/* Hero Section */}
-      <section className="relative h-[600px] flex items-center justify-center overflow-hidden">
-        <div
-          className="absolute inset-0 bg-cover bg-center"
-          style={{ backgroundImage: `url(${heroManufacturing})` }}
-        >
-          <div className="absolute inset-0 gradient-hero opacity-90"></div>
+    <div className="overflow-hidden bg-[#f7f7f5] text-[#0b2340]">
+      <Seo title="Supun Group of Companies | Built in Sri Lanka. Built to Last." description="One Sri Lankan group, built across manufacturing, retail, distribution and hospitality since 1978." keywords="Supun Group, Sri Lanka, manufacturing, retail, distribution, hospitality, Camy" jsonLd={{ "@context": "https://schema.org", "@type": "Organization", name: SITE_NAME, url: SITE_URL, logo: DEFAULT_IMAGE, foundingDate: "1978" }} />
+
+      <section className="relative min-h-[720px] h-[calc(100svh-88px)] bg-[#06172e] text-white">
+        <video className="absolute inset-0 h-full w-full object-cover" autoPlay muted loop playsInline preload="metadata" poster={heroPoster} aria-label="Supun Group company film"><source src={companyVideo} type="video/mp4" /></video>
+        <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(4,19,38,.94)_0%,rgba(4,19,38,.62)_44%,rgba(4,19,38,.12)_78%)]" />
+        <div className="absolute inset-0 bg-gradient-to-t from-[#06172e]/75 via-transparent to-[#06172e]/15" />
+        <div className="relative mx-auto flex h-full max-w-[1440px] flex-col justify-center px-6 pb-28 pt-16 md:px-12 lg:px-20">
+          <div className="max-w-4xl">
+            <div className="mb-7 flex items-center gap-4 text-[10px] font-bold uppercase tracking-[.27em] text-[#ffab16]"><span className="h-px w-12 bg-[#ffab16]" />A Sri Lankan legacy · 1978—Today</div>
+            <h1 className="text-[clamp(3.4rem,7vw,7rem)] font-semibold leading-[.91] tracking-[-.045em] normal-case">Built in Sri Lanka.<span className="block text-[#ffab16]">Built to last.</span></h1>
+            <p className="mt-7 max-w-xl border-l border-white/35 pl-5 text-lg leading-8 text-white/78">One family-led Group creating products, experiences and opportunity across four industries.</p>
+            <div className="mt-10 flex flex-col gap-3 sm:flex-row"><Link to="/companies" className="group inline-flex h-14 items-center justify-center gap-4 bg-[#ffab16] px-7 text-sm font-bold text-[#071b34] transition hover:bg-white">Explore our companies <ArrowRight size={18} className="transition-transform group-hover:translate-x-1" /></Link><Link to="/about" className="inline-flex h-14 items-center justify-center border border-white/45 bg-white/5 px-7 text-sm font-bold backdrop-blur-sm transition hover:bg-white hover:text-[#071b34]">Our story</Link></div>
+          </div>
         </div>
-        
-        {/* Illustrator Overlay */}
-        <div className="absolute inset-0 opacity-30 pointer-events-none" style={{ 
-          backgroundImage: `url(${illustrator1})`,
-          backgroundSize: 'cover',
-          backgroundPosition: 'center',
-          backgroundAttachment: 'fixed'
-        }}>
+        <a href="#legacy" className="absolute bottom-6 left-6 hidden items-center gap-3 text-[9px] font-bold uppercase tracking-[.2em] text-white/50 md:left-12 md:flex lg:left-20"><span className="grid h-10 w-10 place-items-center rounded-full border border-white/25"><ArrowDown size={14} /></span>Scroll to explore</a>
+        <div className="absolute bottom-0 right-0 hidden h-24 items-center bg-[#ffab16] px-12 text-[#071b34] lg:flex"><strong className="font-heading text-5xl">46+</strong><span className="ml-4 max-w-[90px] text-[9px] font-extrabold uppercase leading-4 tracking-[.15em]">Years of excellence</span></div>
+      </section>
+
+      <section id="legacy" className="bg-white px-6 py-24 md:px-12 lg:px-20 lg:py-36">
+        <div className="mx-auto max-w-[1280px]">
+          <div className="grid gap-12 lg:grid-cols-[1.2fr_.8fr] lg:items-end">
+            <div><p className="mb-6 text-[10px] font-extrabold uppercase tracking-[.24em] text-[#d87f00]">Who we are</p><h2 className="max-w-4xl text-[clamp(2.8rem,5.4vw,5.6rem)] font-medium leading-[1.03] tracking-[-.04em] normal-case">We turned a trading legacy into the power to <span className="text-[#1d5795]">make locally.</span></h2></div>
+            <div className="border-t border-[#0b2340]/15 pt-7"><p className="text-base leading-8 text-[#5f6d7c]">Since Mohamed Fareed founded Supun Traders in Colombo in 1978, the Group has grown through two generations—moving from importing everyday goods to manufacturing them in Sri Lanka.</p><Link to="/about" className="group mt-8 inline-flex items-center gap-3 text-sm font-bold text-[#174f8d]">Explore our journey <ArrowUpRight size={17} className="transition-transform group-hover:-translate-y-1 group-hover:translate-x-1" /></Link></div>
+          </div>
+          <div className="mt-20 grid grid-cols-2 border-y border-[#0b2340]/12 md:grid-cols-4">{[["11", "Group companies"], ["4", "Industry sectors"], ["300+", "People"], ["250+", "Island-wide distributors"]].map(([value,label],i)=><div key={label} className={`py-8 md:px-7 ${i>0?"md:border-l md:border-[#0b2340]/12":""}`}><strong className="block font-heading text-5xl font-medium text-[#174f8d]">{value}</strong><span className="mt-2 block text-[10px] font-bold uppercase tracking-[.15em] text-[#6d7886]">{label}</span></div>)}</div>
         </div>
-        
-        <div className="relative z-10 container mx-auto px-4 text-center text-primary-foreground">
-          <h1 className="text-5xl md:text-7xl font-bold mb-6">
-            Supun Group of Companies
-          </h1>
-          <p className="text-xl md:text-2xl mb-8 max-w-3xl mx-auto">
-            A Proud Sri Lankan Conglomerate Driving Innovation Since 1999
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Link to="/companies">
-              <Button size="lg" variant="secondary" className="w-full sm:w-auto">
-                Explore Our Companies <ArrowRight className="ml-2" size={20} />
-              </Button>
-            </Link>
-            <Link to="/contact">
-              <Button size="lg" variant="outline" className="w-full sm:w-auto bg-transparent border-primary-foreground text-primary-foreground hover:bg-primary-foreground hover:text-primary">
-                Get In Touch
-              </Button>
-            </Link>
+      </section>
+
+      <section className="bg-[#071b34] text-white">
+        <div className="mx-auto grid max-w-[1440px] lg:grid-cols-[1.15fr_.85fr]">
+          <div className="relative min-h-[560px] overflow-hidden lg:min-h-[780px]"><img key={sector.image} src={sector.image} alt="" className="absolute inset-0 h-full w-full object-cover animate-fade-in" /><div className="absolute inset-0 bg-gradient-to-t from-[#06172e]/80 via-[#06172e]/10 to-transparent" /><div className="absolute bottom-9 left-8 right-8 md:bottom-12 md:left-12"><div className="mb-5 grid h-12 w-12 place-items-center rounded-full bg-[#ffab16] text-[#071b34]"><SectorIcon size={20} /></div><p className="max-w-2xl text-2xl font-medium leading-snug md:text-4xl">{sector.short}</p></div></div>
+          <div className="flex flex-col justify-center px-6 py-20 md:px-12 lg:px-16">
+            <p className="mb-8 text-[10px] font-extrabold uppercase tracking-[.24em] text-[#ffab16]">Our sectors</p>
+            <div className="border-t border-white/15">{sectors.map((item,index)=><button key={item.title} onClick={()=>setActiveSector(index)} onMouseEnter={()=>setActiveSector(index)} className={`w-full border-b border-white/15 py-6 text-left transition ${activeSector===index?"text-white":"text-white/45 hover:text-white/80"}`}><span className="flex items-center justify-between"><span className="flex items-center gap-5"><span className="font-heading text-xs text-[#ffab16]">{item.number}</span><span className="font-heading text-2xl font-semibold md:text-3xl">{item.title}</span></span><ArrowRight size={18} className={`transition-transform ${activeSector===index?"translate-x-0 opacity-100":"-translate-x-2 opacity-0"}`} /></span>{activeSector===index&&<span className="mt-4 block max-w-lg pl-9 text-sm leading-7 text-white/60">{item.copy}</span>}</button>)}</div>
+            <Link to={sector.link} className="mt-9 inline-flex items-center gap-3 self-start text-xs font-bold uppercase tracking-[.15em] text-[#ffab16]">Discover this sector <ArrowUpRight size={15} /></Link>
           </div>
         </div>
       </section>
 
-      {/* Stats Section */}
-      <section className="py-20 bg-primary text-primary-foreground relative overflow-hidden">
-        {/* Parallax Illustrator Overlay */}
-        <div className="absolute inset-0 opacity-10 pointer-events-none" style={{ 
-          backgroundImage: `url(${illustrator1})`,
-          backgroundSize: 'cover',
-          backgroundPosition: 'center',
-          backgroundAttachment: 'fixed'
-        }}>
-        </div>
-        
-        <div className="container mx-auto px-4 relative z-10">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
-            <div className="space-y-2">
-              <div className="text-5xl md:text-6xl font-heading font-bold text-accent">25+</div>
-              <div className="text-sm md:text-base uppercase tracking-wide">Years of Excellence</div>
-            </div>
-            <div className="space-y-2">
-              <div className="text-5xl md:text-6xl font-heading font-bold text-accent">
-                {isLoading ? <Skeleton className="h-16 w-20 mx-auto bg-accent/20" /> : companies.length}
-              </div>
-              <div className="text-sm md:text-base uppercase tracking-wide">Subsidiary Companies</div>
-            </div>
-            <div className="space-y-2">
-              <div className="text-5xl md:text-6xl font-heading font-bold text-accent">
-                {isLoading ? <Skeleton className="h-16 w-12 mx-auto bg-accent/20" /> : new Set(companies.map(c => c.industry)).size}
-              </div>
-              <div className="text-sm md:text-base uppercase tracking-wide">Industry Sectors</div>
-            </div>
-            <div className="space-y-2">
-              <div className="text-5xl md:text-6xl font-heading font-bold text-accent">250+</div>
-              <div className="text-sm md:text-base uppercase tracking-wide">Distribution Network</div>
-            </div>
+      <section className="bg-[#f2f3f3] px-6 py-24 md:px-12 lg:px-20 lg:py-36">
+        <div className="mx-auto max-w-[1280px]">
+          <div className="mb-14 grid gap-7 md:grid-cols-[1fr_.55fr] md:items-end"><div><p className="mb-5 text-[10px] font-extrabold uppercase tracking-[.24em] text-[#d87f00]">The Supun family</p><h2 className="text-[clamp(2.8rem,5.2vw,5.4rem)] font-medium leading-none tracking-[-.04em] normal-case">Our companies.<br /><span className="text-[#1d5795]">One shared standard.</span></h2></div><p className="max-w-md text-sm leading-7 text-[#65717f]">A connected portfolio spanning manufacturing, retail, distribution and hospitality.</p></div>
+          <div className="grid grid-cols-1 gap-px overflow-hidden border border-[#d9dee3] bg-[#d9dee3] sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+            {companies.map((company,index)=><Link key={company.name} to={company.path} className={`group relative flex min-h-[235px] flex-col justify-between bg-white p-6 transition hover:z-10 hover:bg-[#0d3767] hover:text-white ${index===10?"xl:col-span-2":""}`}><div className="flex items-start justify-between"><span className="text-[9px] font-bold uppercase tracking-[.15em] text-[#d87f00]">{company.sector}</span><ArrowUpRight size={16} className="text-[#8e99a5] transition group-hover:-translate-y-1 group-hover:translate-x-1 group-hover:text-[#ffab16]" /></div><div className="grid min-h-[105px] place-items-center py-4">{company.logo?<img src={company.logo} alt={`${company.name} logo`} className="max-h-20 max-w-[76%] object-contain transition duration-300 group-hover:rounded-sm group-hover:bg-white group-hover:p-2" />:<span className="font-heading text-2xl font-bold tracking-[.1em] text-[#174f8d] group-hover:text-white">{company.wordmark}</span>}</div><h3 className="border-t border-[#0b2340]/10 pt-4 text-lg font-semibold normal-case group-hover:border-white/20">{company.name}</h3></Link>)}
           </div>
+          <div className="mt-9 flex justify-end"><Link to="/companies" className="group inline-flex items-center gap-3 text-sm font-bold text-[#174f8d]">Meet all our companies <span className="grid h-10 w-10 place-items-center rounded-full bg-[#174f8d] text-white transition group-hover:bg-[#ffab16] group-hover:text-[#071b34]"><ArrowRight size={16} /></span></Link></div>
         </div>
       </section>
 
-      {/* About Section */}
-      <section className="py-20 bg-muted relative overflow-hidden">
-        {/* Parallax Illustrator Overlay */}
-        <div className="absolute inset-0 opacity-5 pointer-events-none" style={{ 
-          backgroundImage: `url(${illustrator1})`,
-          backgroundSize: 'cover',
-          backgroundPosition: 'center',
-          backgroundAttachment: 'fixed'
-        }}>
-        </div>
-        
-        <div className="container mx-auto px-4 relative z-10">
-          <div className="max-w-4xl mx-auto text-center">
-            <h2 className="text-4xl font-bold mb-6">A Proud Sri Lankan Origin</h2>
-            <p className="text-lg text-muted-foreground mb-8">
-              Supun, a diversified conglomerate with its footprint into manufacturing, retailing, trading, 
-              distribution, hospitality and real estate has a proud corporate philosophy to inherit the local 
-              value system within the member companies and strive to serve its customers with quality and efficiency. 
-              The group is dedicated to use its unique and innovative approach to contribute to the benefit of the 
-              local culture and the society it deals with, by providing goods and services meeting to international standards.
-            </p>
-          </div>
-        </div>
-      </section>
-
-      {/* Video Showcase Section */}
-      <section className="py-20 bg-gradient-to-br from-primary/5 via-background to-accent/5 relative overflow-hidden">
-        {/* Decorative Background Elements */}
-        <div className="absolute top-0 left-0 w-full h-full opacity-5 pointer-events-none">
-          <div className="absolute top-10 right-10 w-64 h-64 bg-primary rounded-full blur-3xl"></div>
-          <div className="absolute bottom-10 left-10 w-96 h-96 bg-accent rounded-full blur-3xl"></div>
-        </div>
-
-        <div className="container mx-auto px-4 relative z-10">
-          <div className="text-center mb-12">
-            <h2 className="text-4xl font-bold mb-4">Discover Our Journey</h2>
-            <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-              Experience the innovation and excellence that defines Supun Group of Companies
-            </p>
-          </div>
-
-          <div className="max-w-6xl mx-auto">
-            <Card className="overflow-hidden shadow-2xl border-2 border-primary/10">
-              <div className="relative aspect-video bg-black group">
-                {/* Video Player */}
-                <video
-                  className="w-full h-full object-cover"
-                  autoPlay
-                  loop
-                  muted
-                  playsInline
-                  poster={heroManufacturing}
-                  preload="auto"
-                >
-                  <source src={companyVideo} type="video/mp4" />
-                  Your browser does not support the video tag.
-                </video>
-                
-                {/* Decorative Corner Accents */}
-                <div className="absolute top-0 left-0 w-20 h-20 border-t-4 border-l-4 border-accent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                <div className="absolute top-0 right-0 w-20 h-20 border-t-4 border-r-4 border-accent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                <div className="absolute bottom-0 left-0 w-20 h-20 border-b-4 border-l-4 border-accent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                <div className="absolute bottom-0 right-0 w-20 h-20 border-b-4 border-r-4 border-accent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-              </div>
-              
-              {/* Video Caption/Info Bar */}
-              <div className="bg-gradient-to-r from-primary to-primary/80 text-primary-foreground p-6">
-                <div className="flex flex-col md:flex-row items-center justify-between gap-4">
-                  <div className="text-center md:text-left">
-                    <h3 className="text-xl font-bold mb-1">Supun Group of Companies</h3>
-                    <p className="text-sm opacity-90">Building Excellence Since 1999</p>
-                  </div>
-                  <div className="flex gap-3">
-                    <Link to="/about">
-                      <Button variant="secondary" size="sm">
-                        Learn More
-                      </Button>
-                    </Link>
-                    <Link to="/companies">
-                      <Button variant="outline" size="sm" className="bg-transparent border-primary-foreground text-primary-foreground hover:bg-primary-foreground hover:text-primary">
-                        Explore Companies
-                      </Button>
-                    </Link>
-                  </div>
-                </div>
-              </div>
-            </Card>
-          </div>
-
-          {/* Additional Info Cards Below Video */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-6xl mx-auto mt-12">
-            <Card className="shadow-elegant hover:shadow-xl transition-smooth border-l-4 border-l-primary">
-              <CardContent className="p-6">
-                <div className="flex items-start space-x-4">
-                  <div className="p-3 bg-primary/10 rounded-lg">
-                    <Factory className="text-primary" size={24} />
-                  </div>
-                  <div>
-                    <h4 className="font-semibold mb-2">Manufacturing Excellence</h4>
-                    <p className="text-sm text-muted-foreground">
-                      State-of-the-art facilities producing world-class products
-                    </p>
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
-
-            <Card className="shadow-elegant hover:shadow-xl transition-smooth border-l-4 border-l-accent">
-              <CardContent className="p-6">
-                <div className="flex items-start space-x-4">
-                  <div className="p-3 bg-accent/10 rounded-lg">
-                    <ShoppingBag className="text-accent" size={24} />
-                  </div>
-                  <div>
-                    <h4 className="font-semibold mb-2">Retail Network</h4>
-                    <p className="text-sm text-muted-foreground">
-                      Extensive distribution across Sri Lanka
-                    </p>
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
-
-            <Card className="shadow-elegant hover:shadow-xl transition-smooth border-l-4 border-l-primary">
-              <CardContent className="p-6">
-                <div className="flex items-start space-x-4">
-                  <div className="p-3 bg-primary/10 rounded-lg">
-                    <Hotel className="text-primary" size={24} />
-                  </div>
-                  <div>
-                    <h4 className="font-semibold mb-2">Hospitality & More</h4>
-                    <p className="text-sm text-muted-foreground">
-                      Diverse portfolio serving multiple industries
-                    </p>
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
-          </div>
-        </div>
-      </section>
-
-      {/* Vision & Mission */}
-      <section className="py-20">
-        <div className="container mx-auto px-4">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <Card className="shadow-elegant hover:shadow-xl transition-smooth">
-              <CardContent className="p-8 text-center">
-                <div className="inline-block p-4 bg-primary/10 rounded-full mb-4">
-                  <Target className="text-primary" size={40} />
-                </div>
-                <h3 className="text-2xl font-bold mb-4">Our Vision</h3>
-                <p className="text-muted-foreground italic mb-4">"Innovate. Unleash and Excel"</p>
-                <p className="text-sm">
-                  To unleash the potential within us to transform the markets through innovation and exceed 
-                  people's expectations for a better tomorrow.
-                </p>
-              </CardContent>
-            </Card>
-
-            <Card className="shadow-elegant hover:shadow-xl transition-smooth">
-              <CardContent className="p-8 text-center">
-                <div className="inline-block p-4 bg-primary/10 rounded-full mb-4">
-                  <Lightbulb className="text-primary" size={40} />
-                </div>
-                <h3 className="text-2xl font-bold mb-4">Our Mission</h3>
-                <p className="text-sm">
-                  To harness superior thinking in the creation of products and services, which functionally 
-                  enhances the livelihood of people, whilst being cautious in reducing the carbon footprint.
-                </p>
-              </CardContent>
-            </Card>
-
-            <Card className="shadow-elegant hover:shadow-xl transition-smooth">
-              <CardContent className="p-8 text-center">
-                <div className="inline-block p-4 bg-primary/10 rounded-full mb-4">
-                  <TrendingUp className="text-primary" size={40} />
-                </div>
-                <h3 className="text-2xl font-bold mb-4">Our Growth</h3>
-                <p className="text-sm">
-                  From humble beginnings in 1999 to a diversified group of 10 companies spanning manufacturing, 
-                  retail, hospitality, and technology sectors across Sri Lanka.
-                </p>
-              </CardContent>
-            </Card>
-          </div>
-        </div>
-      </section>
-
-      {/* Companies Grid */}
-      <section className="py-20 bg-muted">
-        <div className="container mx-auto px-4">
-          <div className="text-center mb-12">
-            <h2 className="text-4xl font-bold mb-4">Our Companies</h2>
-            <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-              Explore our diverse portfolio of companies across multiple industries
-            </p>
-          </div>
-
-          {/* Loading State */}
-          {isLoading && (
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-              {[1, 2, 3, 4, 5, 6].map((i) => (
-                <Card key={i} className="h-full shadow-elegant overflow-hidden">
-                  <Skeleton className="h-48 w-full" />
-                  <CardContent className="p-6">
-                    <Skeleton className="h-8 w-3/4 mb-4" />
-                    <Skeleton className="h-4 w-1/2 mb-4" />
-                    <Skeleton className="h-16 w-full mb-4" />
-                    <Skeleton className="h-6 w-24" />
-                  </CardContent>
-                </Card>
-              ))}
-            </div>
-          )}
-
-          {/* Error State */}
-          {error && !isLoading && (
-            <div className="text-center py-12">
-              <p className="text-destructive mb-4">{error}</p>
-              <Button onClick={loadData}>Try Again</Button>
-            </div>
-          )}
-
-          {/* Companies List */}
-          {!isLoading && !error && (
-            <>
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                {companies.map((company) => {
-                  const Icon = industryIcons[company.industry as keyof typeof industryIcons] || Building2;
-                  
-                  return (
-                    <Link key={company.id} to={`/companies/${company.id}`}>
-                      <Card className="h-full shadow-elegant hover:shadow-xl transition-smooth hover:-translate-y-2 group overflow-hidden">
-                        {/* Feature Image */}
-                        <CompanyImage 
-                          imageUrl={company.imageUrl}
-                          companyName={company.shortName}
-                          industry={company.industry}
-                          className="h-48 group-hover:scale-110 transition-transform duration-300"
-                          alt={company.shortName}
-                        />
-                    
-                    <CardContent className="p-6">
-                      <div className="flex items-start space-x-4 mb-4">
-                        <div className="p-3 bg-primary/10 rounded-lg group-hover:bg-accent/20 transition-smooth">
-                          <Icon className="text-primary group-hover:text-accent transition-smooth" size={32} />
-                        </div>
-                        <div className="flex-1">
-                          <h3 className="text-xl font-bold mb-2 group-hover:text-primary transition-smooth">{company.shortName}</h3>
-                          <span className="text-xs text-accent font-semibold uppercase tracking-wide">{company.industry}</span>
-                        </div>
-                      </div>
-                      <p className="text-sm text-muted-foreground mb-4">
-                        {company.description}
-                      </p>
-                      <Button variant="link" className="p-0 h-auto group-hover:text-accent">
-                        Learn More <ArrowRight className="ml-2 group-hover:translate-x-1 transition-smooth" size={16} />
-                      </Button>
-                    </CardContent>
-                  </Card>
-                </Link>
-              );
-            })}
-          </div>
-
-          <div className="text-center mt-12">
-            <Link to="/companies">
-              <Button size="lg">
-                View All Companies <ArrowRight className="ml-2" />
-              </Button>
-            </Link>
-          </div>
-            </>
-          )}
-        </div>
-      </section>
-
-      {/* Brand Showcase Section */}
-      {!isLoading && brands.length > 0 && (
-        <section className="py-20 bg-white dark:bg-gray-950">
-          <div className="container mx-auto px-4">
-            <div className="text-center mb-16">
-              <h2 className="text-4xl md:text-5xl font-bold mb-4 bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
-                Our Brand Portfolio
-              </h2>
-              <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-                Discover the diverse range of brands under the Supun Group umbrella, each committed to excellence and innovation
-              </p>
-            </div>
-            <BrandShowcase brands={brands} />
-          </div>
-        </section>
-      )}
-
-      {/* CTA Section */}
-      <section className="py-20 gradient-primary text-primary-foreground relative overflow-hidden">
-        {/* Parallax Illustrator Overlay */}
-        <div className="absolute inset-0 opacity-15 pointer-events-none" style={{ 
-          backgroundImage: `url(${illustrator1})`,
-          backgroundSize: 'cover',
-          backgroundPosition: 'center',
-          backgroundAttachment: 'fixed'
-        }}>
-        </div>
-        
-        <div className="container mx-auto px-4 text-center relative z-10">
-          <h2 className="text-4xl font-bold mb-6">Ready to Partner With Us?</h2>
-          <p className="text-xl mb-8 max-w-2xl mx-auto">
-            Join hands with Sri Lanka's leading conglomerate and explore opportunities across multiple industries
-          </p>
-          <Link to="/contact">
-            <Button size="lg" variant="secondary">
-              Contact Us Today
-            </Button>
-          </Link>
+      <section className="bg-white px-6 py-24 md:px-12 lg:px-20 lg:py-32">
+        <div className="mx-auto grid max-w-[1280px] overflow-hidden bg-[#0d3767] text-white lg:grid-cols-2">
+          <div className="relative min-h-[430px]"><img src={careersImage} alt="Sri Lankan professionals collaborating" className="absolute inset-0 h-full w-full object-cover" /><div className="absolute inset-0 bg-gradient-to-r from-transparent to-[#0d3767]/25" /></div>
+          <div className="flex flex-col justify-center p-8 md:p-14 lg:p-16"><p className="mb-5 text-[10px] font-extrabold uppercase tracking-[.24em] text-[#ffab16]">Careers at Supun</p><h2 className="text-4xl font-medium leading-tight tracking-[-.03em] normal-case md:text-6xl">Build your future with ours.</h2><p className="mt-6 max-w-lg text-sm leading-7 text-white/65">Across factory floors, retail operations and hospitality, our people turn ideas into products and service into lasting relationships.</p><Link to="/careers" className="group mt-9 inline-flex h-13 items-center gap-4 self-start bg-[#ffab16] px-6 py-4 text-sm font-bold text-[#071b34] transition hover:bg-white">Explore careers <ArrowRight size={17} className="transition-transform group-hover:translate-x-1" /></Link></div>
         </div>
       </section>
     </div>
