@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import { Mail, Phone } from "lucide-react";
-import logo from "@/assets/supun-group-of-companies-logo.png";
+const logo = "/supun-group-of-companies-logo.png";
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
