@@ -10,7 +10,7 @@ import { Label } from '@/components/ui/label';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Alert, AlertDescription } from '@/components/ui/alert';
 import { Loader2, Lock, User } from 'lucide-react';
-import logo from '@/assets/supun-group-of-companies-logo.png';
+const logo = '/supun-group-of-companies-logo.png';
 import Seo from '@/components/Seo';
 
 const loginSchema = z.object({
