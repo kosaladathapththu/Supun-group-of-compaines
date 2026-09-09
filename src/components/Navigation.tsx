@@ -9,7 +9,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { companiesAPI, type Company } from "@/services/api";
-import logo from "@/assets/supun-group-of-companies-logo.png";
+const logo = "/supun-group-of-companies-logo.png";
 
 const Navigation = () => {
   const [isOpen, setIsOpen] = useState(false);
