@@ -11,7 +11,7 @@ import {
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
 import { Building2, LogOut, Menu, User as UserIcon, X, KeyRound, Image, Tags, Package } from 'lucide-react';
-import logo from '@/assets/supun-group-of-companies-logo.png';
+const logo = '/supun-group-of-companies-logo.png';
 
 export default function AdminLayout() {
   const navigate = useNavigate();
