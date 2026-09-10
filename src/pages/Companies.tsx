@@ -1,18 +1,13 @@
 import { useMemo, useState } from "react";
 import { Link } from "react-router-dom";
-import { ArrowRight, Factory, Hotel, ShoppingBag } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
+import { CompanyLogo } from "@/components/CompanyLogo";
 import Seo, { SITE_URL } from "@/components/Seo";
 import { companies, type CompanySector } from "@/data/companies";
 
 const filters: Array<"All" | CompanySector> = ["All", "Manufacturing", "Retail & Distribution", "Hospitality"];
-
-const sectorIcon = (sector: CompanySector) => {
-  if (sector === "Manufacturing") return Factory;
-  if (sector === "Hospitality") return Hotel;
-  return ShoppingBag;
-};
 
 const Companies = () => {
   const [activeFilter, setActiveFilter] = useState<(typeof filters)[number]>("All");
@@ -66,30 +61,30 @@ const Companies = () => {
           </div>
 
           <div className="grid md:grid-cols-2 xl:grid-cols-3 gap-6 max-w-7xl mx-auto">
-            {visibleCompanies.map((company) => {
-              const Icon = sectorIcon(company.industry);
-              return (
-                <Card key={company.id} className="group h-full overflow-hidden hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
-                  <CardContent className="p-7 h-full flex flex-col">
-                    <div className="flex items-start justify-between gap-4 mb-5">
-                      <div className="w-12 h-12 rounded-lg bg-primary/10 text-primary flex items-center justify-center">
-                        <Icon size={24} />
-                      </div>
-                      <span className="text-xs font-semibold rounded-full bg-accent/10 text-accent px-3 py-1">{company.industry}</span>
-                    </div>
-                    <p className="text-sm text-accent font-semibold mb-2">{company.tagline}</p>
-                    <h2 className="text-2xl normal-case mb-3">{company.shortName}</h2>
-                    <p className="text-muted-foreground leading-relaxed flex-1">{company.description}</p>
-                    <div className="flex items-center justify-between mt-6 pt-5 border-t">
-                      <span className="text-sm text-muted-foreground">{company.established ? `Established ${company.established}` : "Distribution"}</span>
-                      <Link to={`/companies/${company.id}`} className="text-primary font-semibold text-sm inline-flex items-center">
-                        View details <ArrowRight className="ml-1.5 group-hover:translate-x-1 transition-transform" size={16} />
-                      </Link>
-                    </div>
-                  </CardContent>
-                </Card>
-              );
-            })}
+            {visibleCompanies.map((company) => (
+              <Card key={company.id} className="group h-full overflow-hidden hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
+                <CardContent className="p-7 h-full flex flex-col">
+                  <CompanyLogo
+                    companyId={company.id}
+                    companyName={company.shortName}
+                    className="mb-5 h-24 w-full rounded-xl border border-primary/10 p-4 shadow-sm"
+                    imageClassName="transition-transform duration-300 group-hover:scale-105"
+                  />
+                  <div className="flex justify-end mb-4">
+                    <span className="text-xs font-semibold rounded-full bg-accent/10 text-accent px-3 py-1">{company.industry}</span>
+                  </div>
+                  <p className="text-sm text-accent font-semibold mb-2">{company.tagline}</p>
+                  <h2 className="text-2xl normal-case mb-3">{company.shortName}</h2>
+                  <p className="text-muted-foreground leading-relaxed flex-1">{company.description}</p>
+                  <div className="flex items-center justify-between mt-6 pt-5 border-t">
+                    <span className="text-sm text-muted-foreground">{company.established ? `Established ${company.established}` : "Distribution"}</span>
+                    <Link to={`/companies/${company.id}`} className="text-primary font-semibold text-sm inline-flex items-center">
+                      View details <ArrowRight className="ml-1.5 group-hover:translate-x-1 transition-transform" size={16} />
+                    </Link>
+                  </div>
+                </CardContent>
+              </Card>
+            ))}
           </div>
         </div>
       </section>
