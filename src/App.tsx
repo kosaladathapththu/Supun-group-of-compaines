@@ -32,7 +32,15 @@ import ProductList from "./pages/admin/ProductList";
 import ProductForm from "./pages/admin/ProductForm";
 
 const queryClient = new QueryClient();
-const PublicPage = ({ children }: { children: ReactNode }) => <PageTransition><div className="flex flex-col min-h-screen"><Navigation /><main className="flex-1">{children}</main><Footer /></div></PageTransition>;
+const PublicPage = ({ children }: { children: ReactNode }) => (
+  <div className="min-h-screen">
+    <Navigation />
+    <PageTransition>
+      <main>{children}</main>
+      <Footer />
+    </PageTransition>
+  </div>
+);
 
 const App = () => <QueryClientProvider client={queryClient}><TooltipProvider><Toaster /><Sonner /><BrowserRouter><ScrollToTop /><Suspense fallback={<RouteLoader />}><Routes>
   <Route path="/" element={<PublicPage><Home /></PublicPage>} />
