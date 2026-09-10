@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { Link } from "react-router-dom";
 import { ArrowDown, ArrowRight, Factory, Globe2, Hotel, Play, ShieldCheck, ShoppingBag, Sparkles } from "lucide-react";
 import Seo, { DEFAULT_IMAGE, SITE_NAME, SITE_URL } from "@/components/Seo";
@@ -18,7 +19,10 @@ const sectorMeta = [
 
 const featuredCompanies = [companies[6], companies[4], companies[2]];
 
-const Home = () => (
+const Home = () => {
+  const [heroVideoReady, setHeroVideoReady] = useState(false);
+
+  return (
   <div className="min-h-screen overflow-hidden bg-[#edf3fb]">
     <Seo
       title="Supun Group of Companies | Built in Sri Lanka. Built to Last."
@@ -34,7 +38,17 @@ const Home = () => (
     />
 
     <section className="premium-hero relative isolate min-h-[calc(100svh-5rem)] bg-[#04142d] text-white">
-      <video className="absolute inset-0 h-full w-full object-cover" autoPlay muted loop playsInline preload="metadata" poster={heroPoster} aria-hidden="true">
+      <div className={`absolute inset-0 bg-[radial-gradient(circle_at_75%_25%,#174c96_0%,#082b61_32%,#04142d_72%)] transition-opacity duration-1000 ${heroVideoReady ? "opacity-0" : "opacity-100"}`} aria-hidden="true" />
+      <video
+        className={`absolute inset-0 h-full w-full object-cover transition-opacity duration-1000 ${heroVideoReady ? "opacity-100" : "opacity-0"}`}
+        autoPlay
+        muted
+        loop
+        playsInline
+        preload="auto"
+        onCanPlay={() => setHeroVideoReady(true)}
+        aria-hidden="true"
+      >
         <source src={heroVideo} type="video/mp4" />
       </video>
       <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(2,12,30,.96)_0%,rgba(8,35,80,.78)_48%,rgba(7,32,73,.24)_100%)]" />
@@ -97,6 +111,7 @@ const Home = () => (
 
     <section className="relative overflow-hidden bg-[linear-gradient(120deg,#0b3d82,#1763bd_55%,#0a2b5e)] py-20 text-white md:py-24"><Globe2 className="absolute -right-20 -top-24 h-96 w-96 opacity-10" strokeWidth={0.7} aria-hidden="true" /><div className="absolute left-1/3 top-0 h-full w-px bg-white/10" /><div className="container relative mx-auto px-4"><div className="grid items-center gap-10 lg:grid-cols-[1fr_auto]"><div><p className="mb-5 flex items-center gap-2 text-xs font-bold uppercase tracking-[0.2em] text-blue-200"><Sparkles size={15} /> The next chapter</p><h2 className="max-w-4xl text-4xl font-semibold normal-case leading-[1.03] tracking-[-0.035em] md:text-6xl">Building what Sri Lanka needs next.</h2></div><Link to="/contact" className="glass-button group inline-flex min-h-16 items-center justify-center gap-4 px-8 font-semibold text-white">Start a conversation <ArrowRight className="transition-transform group-hover:translate-x-1" size={19} /></Link></div></div></section>
   </div>
-);
+  );
+};
 
 export default Home;
