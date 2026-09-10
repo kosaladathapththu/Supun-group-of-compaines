@@ -1,299 +1,34 @@
-import { useState } from "react";
-import { Card, CardContent } from "@/components/ui/card";
+import { FormEvent } from "react";
+import { Clock, Mail, MapPin, Phone } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { Card, CardContent } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
-import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
-import { toast } from "sonner";
-import { Mail, Phone, MapPin, Send } from "lucide-react";
-import illustrator1 from "@/assets/illustrator-1.png";
-import illustrator2 from "@/assets/illustrator-2.png";
-import Seo, { SITE_URL } from "@/components/Seo";
+import { Textarea } from "@/components/ui/textarea";
+import Seo, { SITE_NAME, SITE_URL } from "@/components/Seo";
+import { companies } from "@/data/companies";
 
 const Contact = () => {
-  const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-    phone: "",
-    company: "",
-    message: "",
-  });
-
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    
-    // Validate required fields
-    if (!formData.name || !formData.email || !formData.message) {
-      toast.error("Please fill in all required fields");
-      return;
-    }
-
-    // Create email body with form data
-    const subject = `Contact Form Submission from ${formData.name}`;
-    const body = `
-Name: ${formData.name}
-Email: ${formData.email}
-Phone: ${formData.phone || "Not provided"}
-Company: ${formData.company || "Not provided"}
-
-Message:
-${formData.message}
-
----
-This message was sent from the Supun Group of Companies contact form.
-    `.trim();
-
-    // Create mailto link
-    const mailtoLink = `mailto:info@supungroup.lk?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-    
-    // Open email client
-    window.location.href = mailtoLink;
-    
-    // Show success message
-    toast.success("Opening your email client...");
-    
-    // Reset form after a short delay
-    setTimeout(() => {
-      setFormData({
-        name: "",
-        email: "",
-        phone: "",
-        company: "",
-        message: "",
-      });
-    }, 1000);
+  const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    const data = new FormData(event.currentTarget);
+    const subject = `Website enquiry from ${String(data.get("fullName") || "Visitor")}`;
+    const body = [`Name: ${String(data.get("fullName") || "")}`, `Email: ${String(data.get("email") || "")}`, `Phone: ${String(data.get("phone") || "")}`, `Company: ${String(data.get("companyName") || "")}`, "", String(data.get("message") || "")].join("\n");
+    window.location.href = `mailto:info@supungroup.lk?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
   };
 
-  const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-  ) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value,
-    });
-  };
-
-  return (
-    <div className="min-h-screen">
-      <Seo
-        title="Contact Us | Supun Group of Companies"
-        description="Contact Supun Group of Companies. Email info@supungroup.lk or call +94 112 055 026. We'd love to discuss how we can work together."
-        keywords="Contact Supun Group, Sri Lanka conglomerate contact, email, phone, Colombo Sri Lanka"
-        jsonLd={{
-          "@context": "https://schema.org",
-          "@type": "ContactPage",
-          name: "Contact Supun Group of Companies",
-          url: `${SITE_URL}/contact`,
-          mainEntity: {
-            "@type": "Organization",
-            name: "Supun Group of Companies",
-            url: SITE_URL,
-            telephone: "+94-112-055-026",
-            email: "info@supungroup.lk",
-            contactPoint: {
-              "@type": "ContactPoint",
-              telephone: "+94-112-055-026",
-              contactType: "Customer Service",
-              email: "info@supungroup.lk",
-            },
-          },
-        }}
-      />
-      {/* Hero Section */}
-      <section className="gradient-hero py-20 text-primary-foreground">
-        <div className="container mx-auto px-4">
-          <div className="max-w-3xl mx-auto text-center">
-            <h1 className="text-5xl md:text-6xl font-bold mb-6">Get In Touch</h1>
-            <p className="text-xl">
-              We'd love to hear from you. Let's discuss how we can work together
-            </p>
-          </div>
-        </div>
-      </section>
-
-      {/* Contact Information & Form */}
-      <section className="py-20 relative overflow-hidden">
-        {/* Decorative Illustrator Background */}
-        <div className="absolute top-10 right-0 opacity-5 pointer-events-none">
-          <img src={illustrator2} alt="" className="w-64 md:w-96" />
-        </div>
-        <div className="absolute bottom-10 left-0 opacity-5 pointer-events-none">
-          <img src={illustrator1} alt="" className="w-64 md:w-96 transform -scale-x-100" />
-        </div>
-        
-        <div className="container mx-auto px-4 relative z-10">
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-12 max-w-6xl mx-auto">
-            {/* Contact Info */}
-            <div className="space-y-6">
-              <div>
-                <h2 className="text-3xl font-bold mb-6">Contact Information</h2>
-                <p className="text-muted-foreground mb-8">
-                  Reach out to us through any of the following channels
-                </p>
-              </div>
-
-              <Card className="shadow-elegant">
-                <CardContent className="p-6">
-                  <div className="flex items-start space-x-4">
-                    <div className="p-3 bg-primary/10 rounded-lg">
-                      <Mail className="text-primary" size={24} />
-                    </div>
-                    <div>
-                      <h3 className="font-semibold mb-2">Email</h3>
-                      <a
-                        href="mailto:info@supungroup.lk"
-                        className="text-muted-foreground hover:text-primary transition-smooth"
-                      >
-                        info@supungroup.lk
-                      </a>
-                    </div>
-                  </div>
-                </CardContent>
-              </Card>
-
-              <Card className="shadow-elegant">
-                <CardContent className="p-6">
-                  <div className="flex items-start space-x-4">
-                    <div className="p-3 bg-primary/10 rounded-lg">
-                      <Phone className="text-primary" size={24} />
-                    </div>
-                    <div>
-                      <h3 className="font-semibold mb-2">Phone</h3>
-                      <a
-                        href="tel:+94112055026"
-                        className="text-muted-foreground hover:text-primary transition-smooth"
-                      >
-                        +94 112 055 026
-                      </a>
-                    </div>
-                  </div>
-                </CardContent>
-              </Card>
-
-              <Card className="shadow-elegant">
-                <CardContent className="p-6">
-                  <div className="flex items-start space-x-4">
-                    <div className="p-3 bg-primary/10 rounded-lg">
-                      <MapPin className="text-primary" size={24} />
-                    </div>
-                    <div>
-                      <h3 className="font-semibold mb-2">Location</h3>
-                      <p className="text-muted-foreground">
-                        Colombo, Sri Lanka
-                      </p>
-                    </div>
-                  </div>
-                </CardContent>
-              </Card>
-            </div>
-
-            {/* Contact Form */}
-            <div className="lg:col-span-2">
-              <Card className="shadow-elegant">
-                <CardContent className="p-8">
-                  <h2 className="text-3xl font-bold mb-6">Send Us a Message</h2>
-                  <form onSubmit={handleSubmit} className="space-y-6">
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                      <div className="space-y-2">
-                        <Label htmlFor="name">Full Name *</Label>
-                        <Input
-                          id="name"
-                          name="name"
-                          value={formData.name}
-                          onChange={handleChange}
-                          placeholder="John Doe"
-                          required
-                        />
-                      </div>
-
-                      <div className="space-y-2">
-                        <Label htmlFor="email">Email Address *</Label>
-                        <Input
-                          id="email"
-                          name="email"
-                          type="email"
-                          value={formData.email}
-                          onChange={handleChange}
-                          placeholder="john@example.com"
-                          required
-                        />
-                      </div>
-                    </div>
-
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                      <div className="space-y-2">
-                        <Label htmlFor="phone">Phone Number</Label>
-                        <Input
-                          id="phone"
-                          name="phone"
-                          type="tel"
-                          value={formData.phone}
-                          onChange={handleChange}
-                          placeholder="+94 XX XXX XXXX"
-                        />
-                      </div>
-
-                      <div className="space-y-2">
-                        <Label htmlFor="company">Company Name</Label>
-                        <Input
-                          id="company"
-                          name="company"
-                          value={formData.company}
-                          onChange={handleChange}
-                          placeholder="Your Company"
-                        />
-                      </div>
-                    </div>
-
-                    <div className="space-y-2">
-                      <Label htmlFor="message">Message *</Label>
-                      <Textarea
-                        id="message"
-                        name="message"
-                        value={formData.message}
-                        onChange={handleChange}
-                        placeholder="Tell us about your inquiry..."
-                        rows={6}
-                        required
-                      />
-                    </div>
-
-                    <Button type="submit" size="lg" className="w-full">
-                      <Send className="mr-2" size={16} />
-                      Send Message
-                    </Button>
-                  </form>
-                </CardContent>
-              </Card>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Business Hours */}
-      <section className="py-20 bg-muted">
-        <div className="container mx-auto px-4">
-          <div className="max-w-4xl mx-auto">
-            <Card className="shadow-elegant">
-              <CardContent className="p-8">
-                <h2 className="text-3xl font-bold mb-6 text-center">Business Hours</h2>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6 text-center">
-                  <div>
-                    <h3 className="font-semibold mb-2">Weekdays</h3>
-                    <p className="text-muted-foreground">Monday - Friday: 9:00 AM - 6:00 PM</p>
-                  </div>
-                  <div>
-                    <h3 className="font-semibold mb-2">Weekends</h3>
-                    <p className="text-muted-foreground">Saturday: 9:00 AM - 1:00 PM<br />Sunday: Closed</p>
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
-          </div>
-        </div>
-      </section>
-    </div>
-  );
+  return <div className="min-h-screen">
+    <Seo title="Contact Supun Group of Companies | Colombo, Sri Lanka" description="Contact Supun Group of Companies in Colombo, Sri Lanka. Find the Group's phone, email, business hours and company directory." keywords="Contact Supun Group, Supun Group Colombo, info@supungroup.lk, Supun companies contact" jsonLd={{"@context":"https://schema.org","@type":"Organization",name:SITE_NAME,url:SITE_URL,email:"info@supungroup.lk",telephone:"+94 112 055 026",address:{"@type":"PostalAddress",addressLocality:"Colombo",addressCountry:"LK"}}} />
+    <section className="gradient-hero py-24 text-white text-center"><div className="container mx-auto px-4"><p className="text-accent font-semibold uppercase tracking-[0.2em] mb-4">Contact</p><h1 className="text-5xl md:text-6xl normal-case mb-6">Get in touch with Supun Group</h1><p className="text-xl max-w-3xl mx-auto text-white/85">Group enquiries and contact details for our companies.</p></div></section>
+    <section className="py-16 bg-muted/40"><div className="container mx-auto px-4"><div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5 max-w-6xl mx-auto">
+      <Card><CardContent className="p-6"><Mail className="text-primary mb-4" /><h2 className="text-lg normal-case">Email</h2><a className="text-primary hover:underline break-all" href="mailto:info@supungroup.lk">info@supungroup.lk</a></CardContent></Card>
+      <Card><CardContent className="p-6"><Phone className="text-primary mb-4" /><h2 className="text-lg normal-case">Phone</h2><a className="text-primary hover:underline" href="tel:+94112055026">+94 112 055 026</a></CardContent></Card>
+      <Card><CardContent className="p-6"><MapPin className="text-primary mb-4" /><h2 className="text-lg normal-case">Location</h2><p className="text-muted-foreground">Colombo, Sri Lanka</p></CardContent></Card>
+      <Card><CardContent className="p-6"><Clock className="text-primary mb-4" /><h2 className="text-lg normal-case">Business Hours</h2><p className="text-sm text-muted-foreground">Mon–Fri 9:00 AM–6:00 PM<br />Sat 9:00 AM–1:00 PM<br />Sun Closed</p></CardContent></Card>
+    </div></div></section>
+    <section className="py-20"><div className="container mx-auto px-4 grid lg:grid-cols-[0.9fr_1.1fr] gap-10 max-w-6xl"><div><p className="text-accent font-semibold uppercase tracking-wider mb-3">Send an Enquiry</p><h2 className="text-4xl normal-case mb-5">Tell us how we can help</h2><p className="text-muted-foreground leading-relaxed mb-5">Complete the form and your email application will open with the details prepared for Supun Group.</p><p className="text-sm text-muted-foreground">A server-side form endpoint can be connected later if the Group wants messages stored directly from the website.</p></div><Card className="shadow-elegant"><CardContent className="p-7"><form onSubmit={handleSubmit} className="grid sm:grid-cols-2 gap-5"><div className="space-y-2"><Label htmlFor="fullName">Full Name</Label><Input id="fullName" name="fullName" required /></div><div className="space-y-2"><Label htmlFor="email">Email</Label><Input id="email" name="email" type="email" required /></div><div className="space-y-2"><Label htmlFor="phone">Phone</Label><Input id="phone" name="phone" /></div><div className="space-y-2"><Label htmlFor="companyName">Company Name</Label><Input id="companyName" name="companyName" /></div><div className="space-y-2 sm:col-span-2"><Label htmlFor="message">Message</Label><Textarea id="message" name="message" rows={6} required /></div><div className="sm:col-span-2"><Button type="submit" size="lg">Continue by Email</Button></div></form></CardContent></Card></div></section>
+    <section className="py-20 bg-muted/50"><div className="container mx-auto px-4 max-w-7xl"><div className="text-center max-w-3xl mx-auto mb-12"><p className="text-accent font-semibold uppercase tracking-wider mb-3">Company Directory</p><h2 className="text-4xl normal-case">Contact our companies</h2></div><div className="grid md:grid-cols-2 xl:grid-cols-3 gap-5">{companies.map((company) => <Card key={company.id} className="h-full"><CardContent className="p-6"><h3 className="text-xl normal-case">{company.shortName}</h3><div className="mt-4 space-y-3 text-sm">{company.phone && <a className="flex gap-2 text-primary hover:underline" href={`tel:${company.phone.replace(/[^+\d]/g, "")}`}><Phone size={16} className="shrink-0 mt-0.5" />{company.phone}</a>}{company.email && <a className="flex gap-2 text-primary hover:underline break-all" href={`mailto:${company.email}`}><Mail size={16} className="shrink-0 mt-0.5" />{company.email}</a>}{company.location && <div className="flex gap-2 text-muted-foreground"><MapPin size={16} className="shrink-0 mt-0.5" />{company.location}</div>}{!company.phone && !company.email && !company.location && <p className="text-muted-foreground">Please contact the Group head office for this company.</p>}</div></CardContent></Card>)}</div></div></section>
+  </div>;
 };
 
 export default Contact;

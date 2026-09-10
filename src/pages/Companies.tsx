@@ -1,215 +1,95 @@
-import { useState, useEffect } from "react";
+import { useMemo, useState } from "react";
 import { Link } from "react-router-dom";
-import { Card, CardContent } from "@/components/ui/card";
+import { ArrowRight, Factory, Hotel, ShoppingBag } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { Skeleton } from "@/components/ui/skeleton";
-import { ArrowRight, Building2, Factory, Hotel, ShoppingBag, Cpu } from "lucide-react";
-import { companiesAPI, type Company } from "@/services/api";
-import { CompanyImage } from "@/components/ImagePlaceholder";
-import illustrator1 from "@/assets/illustrator-1.png";
-import illustrator2 from "@/assets/illustrator-2.png";
-import Seo from "@/components/Seo";
+import { Card, CardContent } from "@/components/ui/card";
+import Seo, { SITE_URL } from "@/components/Seo";
+import { companies, type CompanySector } from "@/data/companies";
+
+const filters: Array<"All" | CompanySector> = ["All", "Manufacturing", "Retail & Distribution", "Hospitality"];
+
+const sectorIcon = (sector: CompanySector) => {
+  if (sector === "Manufacturing") return Factory;
+  if (sector === "Hospitality") return Hotel;
+  return ShoppingBag;
+};
 
 const Companies = () => {
-  const [companies, setCompanies] = useState<Company[]>([]);
-  const [isLoading, setIsLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
-
-  useEffect(() => {
-    loadCompanies();
-  }, []);
-
-  const loadCompanies = async () => {
-    try {
-      const data = await companiesAPI.getAll();
-      setCompanies(data);
-      setError(null);
-    } catch (err) {
-      console.error('Failed to load companies:', err);
-      setError('Failed to load companies. Please try again later.');
-    } finally {
-      setIsLoading(false);
-    }
-  };
-
-  const industryIcons = {
-    "Retail & Distribution": ShoppingBag,
-    "Manufacturing": Factory,
-    "Hospitality": Hotel,
-    "Retail": ShoppingBag,
-    "Technology & Design": Cpu,
-  };
+  const [activeFilter, setActiveFilter] = useState<(typeof filters)[number]>("All");
+  const visibleCompanies = useMemo(
+    () => (activeFilter === "All" ? companies : companies.filter((company) => company.industry === activeFilter)),
+    [activeFilter]
+  );
 
   return (
     <div className="min-h-screen">
       <Seo
         title="Our Companies | Supun Group of Companies"
-        description="Explore the portfolio of 10 companies under Supun Group of Companies spanning manufacturing, retail, hospitality, and technology sectors across Sri Lanka."
-        keywords="Supun Group companies, Sri Lanka subsidiaries, manufacturing companies Sri Lanka, retail, hospitality, technology conglomerate"
+        description="Explore 11 Supun Group companies across manufacturing, retail, distribution and hospitality in Sri Lanka."
+        keywords="Supun Group companies, Camy Smart, Supun Traders, Supun Super Center, Fuji Industries, Sri Lanka manufacturing"
+        jsonLd={{
+          "@context": "https://schema.org",
+          "@type": "ItemList",
+          itemListElement: companies.map((company, index) => ({
+            "@type": "ListItem",
+            position: index + 1,
+            name: company.name,
+            url: `${SITE_URL}/companies/${company.id}`,
+          })),
+        }}
       />
-      {/* Hero Section */}
-      <section className="gradient-hero py-20 text-primary-foreground relative overflow-hidden">
-        {/* Parallax Illustrator Overlay */}
-        <div className="absolute inset-0 opacity-10 pointer-events-none" style={{ 
-          backgroundImage: `url(${illustrator1})`,
-          backgroundSize: 'cover',
-          backgroundPosition: 'center',
-          backgroundAttachment: 'fixed'
-        }}>
-        </div>
-        
-        <div className="container mx-auto px-4 relative z-10">
-          <div className="max-w-3xl mx-auto text-center">
-            <h1 className="text-5xl md:text-6xl font-bold mb-6">Our Companies</h1>
-            <p className="text-xl">
-              Discover our diverse portfolio of 10 companies spanning manufacturing, retail, 
-              hospitality, and technology sectors across Sri Lanka
-            </p>
-          </div>
+
+      <section className="gradient-hero py-24 text-primary-foreground">
+        <div className="container mx-auto px-4 text-center">
+          <p className="text-accent font-semibold uppercase tracking-[0.2em] mb-4">Our Companies</p>
+          <h1 className="text-5xl md:text-6xl normal-case mb-6">11 companies. Built across Sri Lanka.</h1>
+          <p className="text-xl max-w-3xl mx-auto text-white/85">
+            Explore the Group by sector: manufacturing, retail and distribution, and hospitality.
+          </p>
         </div>
       </section>
 
-      {/* Companies List */}
-      <section className="py-20 relative overflow-hidden">
-        {/* Parallax Illustrator Overlay */}
-        <div className="absolute inset-0 opacity-5 pointer-events-none" style={{ 
-          backgroundImage: `url(${illustrator1})`,
-          backgroundSize: 'cover',
-          backgroundPosition: 'center',
-          backgroundAttachment: 'fixed'
-        }}>
-        </div>
-        
-        <div className="container mx-auto px-4 relative z-10">
-          {/* Loading State */}
-          {isLoading && (
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-6xl mx-auto">
-              {[1, 2, 3, 4, 5, 6].map((i) => (
-                <Card key={i} className="shadow-elegant overflow-hidden">
-                  <Skeleton className="h-48 w-full" />
-                  <CardContent className="p-8">
-                    <div className="flex items-start space-x-4 mb-6">
-                      <Skeleton className="h-16 w-16 rounded-lg" />
-                      <div className="flex-1 space-y-2">
-                        <Skeleton className="h-4 w-12" />
-                        <Skeleton className="h-8 w-3/4" />
-                        <Skeleton className="h-6 w-24 rounded-full" />
-                      </div>
-                    </div>
-                    <Skeleton className="h-16 w-full mb-4" />
-                    <Skeleton className="h-4 w-1/2 mb-6" />
-                    <Skeleton className="h-10 w-full" />
-                  </CardContent>
-                </Card>
-              ))}
-            </div>
-          )}
+      <section className="py-16">
+        <div className="container mx-auto px-4">
+          <div className="flex flex-wrap justify-center gap-3 mb-12" role="tablist" aria-label="Filter companies by sector">
+            {filters.map((filter) => (
+              <Button
+                key={filter}
+                type="button"
+                variant={activeFilter === filter ? "default" : "outline"}
+                onClick={() => setActiveFilter(filter)}
+                aria-pressed={activeFilter === filter}
+              >
+                {filter}
+              </Button>
+            ))}
+          </div>
 
-          {/* Error State */}
-          {error && !isLoading && (
-            <div className="text-center py-12">
-              <p className="text-destructive mb-4">{error}</p>
-              <Button onClick={loadCompanies}>Try Again</Button>
-            </div>
-          )}
-
-          {/* Companies List */}
-          {!isLoading && !error && (
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-6xl mx-auto">
-              {companies.map((company, index) => {
-              const Icon = industryIcons[company.industry as keyof typeof industryIcons] || Building2;
-              
+          <div className="grid md:grid-cols-2 xl:grid-cols-3 gap-6 max-w-7xl mx-auto">
+            {visibleCompanies.map((company) => {
+              const Icon = sectorIcon(company.industry);
               return (
-                <Card
-                  key={company.id}
-                  className="shadow-elegant hover:shadow-xl transition-smooth hover:-translate-y-1 overflow-hidden group"
-                >
-                  {/* Feature Image */}
-                  <CompanyImage 
-                    imageUrl={company.imageUrl}
-                    companyName={company.name}
-                    industry={company.industry}
-                    className="h-48 group-hover:scale-110 transition-transform duration-300"
-                    alt={company.name}
-                  />
-                  
-                  <CardContent className="p-8">
-                    <div className="flex items-start space-x-4 mb-6">
-                      <div className="p-4 bg-primary/10 rounded-lg">
-                        <Icon className="text-primary" size={40} />
+                <Card key={company.id} className="group h-full overflow-hidden hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
+                  <CardContent className="p-7 h-full flex flex-col">
+                    <div className="flex items-start justify-between gap-4 mb-5">
+                      <div className="w-12 h-12 rounded-lg bg-primary/10 text-primary flex items-center justify-center">
+                        <Icon size={24} />
                       </div>
-                      <div className="flex-1">
-                        <div className="text-sm font-semibold text-accent mb-2">
-                          {String(index + 1).padStart(2, "0")}
-                        </div>
-                        <h3 className="text-2xl font-bold mb-2">{company.name}</h3>
-                        <span className="inline-block px-3 py-1 bg-accent/10 text-accent text-xs font-semibold rounded-full">
-                          {company.industry}
-                        </span>
-                      </div>
+                      <span className="text-xs font-semibold rounded-full bg-accent/10 text-accent px-3 py-1">{company.industry}</span>
                     </div>
-
-                    <p className="text-muted-foreground mb-6">
-                      {company.description}
-                    </p>
-
-                    {company.established && (
-                      <p className="text-sm text-muted-foreground mb-4">
-                        <strong>Established:</strong> {company.established}
-                      </p>
-                    )}
-
-                    <Link to={`/companies/${company.id}`}>
-                      <Button variant="outline" className="w-full">
-                        View Details <ArrowRight className="ml-2" size={16} />
-                      </Button>
-                    </Link>
+                    <p className="text-sm text-accent font-semibold mb-2">{company.tagline}</p>
+                    <h2 className="text-2xl normal-case mb-3">{company.shortName}</h2>
+                    <p className="text-muted-foreground leading-relaxed flex-1">{company.description}</p>
+                    <div className="flex items-center justify-between mt-6 pt-5 border-t">
+                      <span className="text-sm text-muted-foreground">{company.established ? `Established ${company.established}` : "Distribution"}</span>
+                      <Link to={`/companies/${company.id}`} className="text-primary font-semibold text-sm inline-flex items-center">
+                        View details <ArrowRight className="ml-1.5 group-hover:translate-x-1 transition-transform" size={16} />
+                      </Link>
+                    </div>
                   </CardContent>
                 </Card>
               );
             })}
-            </div>
-          )}
-        </div>
-      </section>
-
-      {/* Industries Overview */}
-      <section className="py-20 bg-muted">
-        <div className="container mx-auto px-4">
-          <h2 className="text-4xl font-bold mb-12 text-center">Industries We Serve</h2>
-          
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 max-w-6xl mx-auto">
-            <Card className="text-center shadow-elegant">
-              <CardContent className="p-6">
-                <Factory className="mx-auto mb-4 text-primary" size={48} />
-                <h3 className="text-xl font-bold mb-2">Manufacturing</h3>
-                <p className="text-sm text-muted-foreground">6 Companies</p>
-              </CardContent>
-            </Card>
-
-            <Card className="text-center shadow-elegant">
-              <CardContent className="p-6">
-                <ShoppingBag className="mx-auto mb-4 text-primary" size={48} />
-                <h3 className="text-xl font-bold mb-2">Retail</h3>
-                <p className="text-sm text-muted-foreground">3 Companies</p>
-              </CardContent>
-            </Card>
-
-            <Card className="text-center shadow-elegant">
-              <CardContent className="p-6">
-                <Hotel className="mx-auto mb-4 text-primary" size={48} />
-                <h3 className="text-xl font-bold mb-2">Hospitality</h3>
-                <p className="text-sm text-muted-foreground">1 Company</p>
-              </CardContent>
-            </Card>
-
-            <Card className="text-center shadow-elegant">
-              <CardContent className="p-6">
-                <Cpu className="mx-auto mb-4 text-primary" size={48} />
-                <h3 className="text-xl font-bold mb-2">Technology</h3>
-                <p className="text-sm text-muted-foreground">1 Company</p>
-              </CardContent>
-            </Card>
           </div>
         </div>
       </section>

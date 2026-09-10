@@ -1,13 +1,20 @@
+export type CompanySector = "Manufacturing" | "Retail & Distribution" | "Hospitality";
+
 export interface Company {
   id: string;
   name: string;
   shortName: string;
+  tagline: string;
   description: string;
   fullDescription: string;
-  industry: string;
+  industry: CompanySector;
   established?: string;
   website?: string;
   features: string[];
+  phone?: string;
+  email?: string;
+  location?: string;
+  awards?: string[];
 }
 
 export const companies: Company[] = [
@@ -15,151 +22,195 @@ export const companies: Company[] = [
     id: "supun-traders",
     name: "Supun Traders & Distributors (Pvt) Ltd",
     shortName: "Supun Traders",
-    description: "Pioneering retailer and wholesaler of household goods, home appliances, and electronics.",
-    fullDescription: "SUPUN TRADERS is considered to be the birth of today's gigantic business brand 'SUPUN GROUP.' Established by the co-founders (late Mr. Mohomed and Mrs. Doole), it has been in operation for over two decades as a renowned retailer and wholesaler of imported and locally manufactured household goods, home appliances, and electronics.",
+    tagline: "Where the Group Began",
+    description: "The Group's original wholesale and retail business, trusted since 1978.",
+    fullDescription:
+      "Supun Traders is where it all started. Founded in 1978 by Mohamed Fareed, it began as a trading business importing and distributing household goods, and grew into the foundation the Group stands on today. In 1999, his son, current Chairman Mr. Kaleel, took on that legacy and built it into what is now the Supun Group of Companies. Today, Supun Traders remains a trusted wholesaler and retailer of imported and locally manufactured household goods, home appliances, and electronics.",
     industry: "Retail & Distribution",
-    established: "1999",
+    established: "1978",
     features: [
-      "Wide range of household goods and appliances",
-      "Over 20 years of industry experience",
-      "Strong supplier relationships",
-      "Island-wide distribution network"
-    ]
+      "Founded in 1978, the original Supun business",
+      "Strong, long-standing supplier relationships",
+      "Island-wide wholesale distribution network",
+      "Wide range of household goods, appliances and electronics",
+    ],
+    phone: "0112 433 784",
+    location: "2nd Cross Street, Colombo 11",
   },
   {
-    id: "aero-star",
-    name: "Aero Star (Pvt) Ltd",
-    shortName: "Aero Star",
-    description: "Leading manufacturer of chrome and chrome-plated products for local and international markets.",
-    fullDescription: "Aero Star is pioneering in manufacturing and supplying of chrome and chrome-plated products to the local and international markets. With state-of-the-art manufacturing facilities and stringent quality control measures, we deliver products that meet international standards.",
-    industry: "Manufacturing",
+    id: "supun-super-center",
+    name: "Supun Super Centre (Pvt) Ltd",
+    shortName: "Supun Super Center",
+    tagline: "Colombo's Retail Destination",
+    description: "Colombo's one-stop retail destination.",
+    fullDescription:
+      "Supun Super Center brings together a wide product range under one roof in the heart of Colombo. The company focuses on the right balance of price and quality for every customer. Its newest chapter is digital: Anythingatsupun.lk, the Group's online marketplace, lets customers anywhere in the world order or gift products to anywhere in Sri Lanka.",
+    industry: "Retail & Distribution",
+    established: "2003",
+    website: "https://www.anythingatsupun.lk/",
     features: [
-      "Advanced chrome plating technology",
-      "Export-oriented production",
-      "ISO quality standards",
-      "Custom manufacturing capabilities"
-    ]
+      "Wide product range",
+      "Multi-brand retail",
+      "Online ordering and gifting via Anythingatsupun.lk",
+    ],
+    phone: "0112 504 920",
+    location: "16 R.A. De Mel Mawatha, Colombo 00500",
   },
   {
-    id: "supun-arcade",
+    id: "supun-arcade-residency",
     name: "Supun Arcade Residency (Pvt) Ltd",
-    shortName: "Supun Arcade",
-    description: "Luxury city apartment hotel in the heart of Colombo with modern amenities.",
-    fullDescription: "SUPUN ARCADE RESIDENCY is a luxury city apartment hotel located in the heart of Colombo offering all modern luxury. Fully air-conditioned apartments provide a panoramic ocean view, or a dynamic city view to make the stay memorable. The 40-suite complex is equipped with all the amenities the discerning traveler is looking for today.",
+    shortName: "Supun Arcade Residency",
+    tagline: "Luxury Serviced Living in Colombo",
+    description: "Luxury serviced apartments in central Colombo.",
+    fullDescription:
+      "Supun Arcade Residency offers fully furnished, air-conditioned suites in central Colombo, with panoramic ocean or city views. Guests enjoy a rooftop pool and premium hospitality throughout the property.",
     industry: "Hospitality",
+    established: "2010",
+    website: "https://www.supunarcaderesidency.com/",
+    features: ["40 luxury suites across 8 floors", "Rooftop pool", "Premium hospitality"],
+    phone: "0112 055 040",
+    email: "reservations@supunarcaderesidency.com",
+    location: "56 Galle Road, Colombo 00600",
+    awards: ["Outstanding Hotel Partner Award — Booking.com"],
+  },
+  {
+    id: "area-56",
+    name: "Area 56 (Pvt) Ltd",
+    shortName: "Area 56",
+    tagline: "Rooftop Dining in the Heart of the City",
+    description: "Rooftop dining atop Supun Arcade Residency.",
+    fullDescription:
+      "Area 56 is the rooftop restaurant atop Supun Arcade Residency, named for the property's own address at 56 Galle Road. It serves Asian and Western fusion cuisine with panoramic views over Colombo, open to both residency guests and outside diners.",
+    industry: "Hospitality",
+    established: "2010",
     features: [
-      "40 luxury suites",
-      "Ocean and city views",
-      "Prime Colombo location",
-      "Modern amenities and services",
-      "Fully air-conditioned"
-    ]
+      "Rooftop dining with panoramic Colombo views",
+      "Asian and Western fusion cuisine",
+      "Open to residency guests and the public",
+    ],
+    phone: "0112 055 040",
+    location: "56 Galle Road, Colombo 00600",
+  },
+  {
+    id: "supun-aerosoft",
+    name: "Supun Aerosoft (Pvt) Ltd",
+    shortName: "Supun Aerosoft (YMAC Smart)",
+    tagline: "Sri Lanka's First PU Footwear Manufacturer",
+    description: "Sri Lanka's first PU footwear manufacturer.",
+    fullDescription:
+      "Supun Aerosoft was the first to bring PU (Polyurethane) manufacturing technology to Sri Lanka's footwear industry. Producing sandals and shoes for men, women, and children under the YMAC Smart brand, Aerosoft combines local craftsmanship with modern manufacturing in our own factories. In 2025, YMAC Smart became the only Sri Lankan footwear brand featured at the Canton Fair, marking a new chapter of international recognition for the brand.",
+    industry: "Manufacturing",
+    established: "2011",
+    features: [
+      "Sri Lanka's first PU footwear manufacturer",
+      "Sandals and shoes for men, women, and children",
+      "Made in our own factories",
+      "Only Sri Lankan brand featured at the 2025 Canton Fair",
+    ],
+    phone: "011 2436390 / 077 0038414",
+    email: "supunaerosoft318@gmail.com",
+    location: "Kotahena, Colombo 13",
+  },
+  {
+    id: "aerostar-home-appliances",
+    name: "Aerostar Home Appliances (Pvt) Ltd",
+    shortName: "Aero Star",
+    tagline: "Precision Chrome Plating for Camy Appliances",
+    description: "Chrome plating for Sri Lanka's Camy appliances.",
+    fullDescription:
+      "Aero Star's chrome-plating expertise, built to local and international standards, feeds directly into the Camy wall clocks, mixer grinders, and water filters found in homes across Sri Lanka. It's precision manufacturing most customers never see, but touch every day.",
+    industry: "Manufacturing",
+    established: "2016",
+    features: [
+      "Chrome and chrome-plating manufacturing",
+      "Manufactures Camy wall clocks, mixer grinders and water filters",
+    ],
+    phone: "034 2262430",
+    email: "aerostarhome@gmail.com",
+    awards: ["Made in Sri Lanka National Certification — Ministry of Industries & NEDA"],
   },
   {
     id: "camy-smart",
     name: "Camy Smart (Pvt) Ltd",
     shortName: "Camy Smart",
-    description: "Sri Lanka's leading motorcycle helmet manufacturer with over 250 island-wide distributors.",
-    fullDescription: "Specialized in manufacturing motorcycle riding helmets to meet local and international safety standards and comfort for the riders, utilizing the latest technology and manufacturing methodologies under strict quality control measures. CAMY SMART branded helmets have gained market acceptance year on year and today it is one of the largest riding helmet manufacturers in Sri Lanka with over 250 distributors island-wide.",
+    tagline: "One of Sri Lanka's Largest Helmet Manufacturers",
+    description: "One of Sri Lanka's largest SLS-certified helmet manufacturers.",
+    fullDescription:
+      "Every Camy Smart helmet leaving the factory is SLS certified, meeting Sri Lanka's official safety standard for motorcycle helmets. What started as a single factory is now one of the largest helmet manufacturers in the country, with a distribution network of more than 250 dealers reaching every corner of the island.",
     industry: "Manufacturing",
+    established: "2017",
     features: [
-      "International safety standards",
-      "250+ distributors island-wide",
-      "Latest manufacturing technology",
-      "Strict quality control",
-      "Market leader in Sri Lanka"
-    ]
+      "SLS Certified: Sri Lanka's official safety standard",
+      "250+ island-wide distributors",
+      "One of Sri Lanka's largest helmet manufacturers",
+    ],
+    location: "Horana, Sri Lanka",
+    awards: ["Made in Sri Lanka National Certification — Ministry of Industries & NEDA"],
+  },
+  {
+    id: "rodsons",
+    name: "Rodsons (Pvt) Ltd",
+    shortName: "Rodsons",
+    tagline: "The Plastic Moulding Behind Every Camy Product",
+    description: "The plastic moulding behind every Camy product.",
+    fullDescription:
+      "Rodsons is the plastic moulding plant that makes the body parts the rest of the Camy manufacturing line depends on: the shells of Camy Smart helmets, the bodies of Camy wall clocks and mixer grinders, and components across the wider Camy product range.",
+    industry: "Manufacturing",
+    established: "2017",
+    features: [
+      "Plastic injection moulding and in-house tooling",
+      "Supplies body parts across the full Camy product range",
+    ],
   },
   {
     id: "new-camy-smart",
     name: "New Camy Smart (Pvt) Ltd",
     shortName: "New Camy Smart",
-    description: "Premier manufacturer of non-stick cookware with Korean technology collaboration.",
-    fullDescription: "The undisputed leader in the manufacturing of non-stick cookware locally, with the technology adaptation and supervision of Korea. It uses highly purified Aluminum as the base material of its non-stick cookware products, ensuring superior quality and durability.",
+    tagline: "Non-Stick Cookware, Korean Technology",
+    description: "Non-stick cookware, built with Korean technology.",
+    fullDescription:
+      "New Camy Smart manufactures Sri Lanka's leading non-stick cookware, built on highly purified aluminum and finished with ceramic and non-stick coating technology developed in partnership with Korean manufacturing experts.",
     industry: "Manufacturing",
+    established: "2018",
     features: [
-      "Korean technology transfer",
-      "Highly purified aluminum base",
-      "Non-stick coating expertise",
-      "Market leader in Sri Lanka",
-      "Export quality products"
-    ]
+      "Non-stick and ceramic-coated cookware",
+      "Korean technology collaboration",
+      "Market-leading local cookware manufacturer",
+    ],
+    phone: "011 2418724",
   },
   {
-    id: "supun-super-centre",
-    name: "Supun Super Centre (Pvt) Ltd",
-    shortName: "Supun Super Centre",
-    description: "Modern retail center with online platform serving customers worldwide.",
-    fullDescription: "Strategically located in the heart of Colombo with ample parking provides with an ultimate shopping experience to its customers from products ranging from household utilities to electronics and fragrances. The company focuses equally on developing the right balance in providing the best product to its customer, in terms of price and quality. The latest innovation to super center is the launch of our online platform www.anythingatsupun.lk, customers from anywhere around the world can order/gift our products to anywhere in Sri Lanka.",
-    industry: "Retail",
-    website: "www.anythingatsupun.lk",
-    features: [
-      "Prime Colombo location",
-      "Wide product range",
-      "Online shopping platform",
-      "Worldwide ordering capability",
-      "Ample parking facilities"
-    ]
-  },
-  {
-    id: "supun-aerosoft",
-    name: "Supun Aerosoft (Pvt) Ltd",
-    shortName: "Aerosoft",
-    description: "Innovative PU (Polyurethane) product manufacturer serving top corporates and international brands.",
-    fullDescription: "AEROSOFT is pioneering the manufacturing and supplying of products using PU (Polyurethane) for top corporates in Sri Lanka including international brands such as BATA. PU is closely associated with human wants, by bridging the gap between rubber and plastic on hardness. It also has excellent abrasion resistance and has outperformed ordinary rubber and plastic.",
+    id: "fuji-industries",
+    name: "Fuji Industries (Pvt) Ltd",
+    shortName: "Fuji Industries",
+    tagline: "Camy Air Conditioners and Fans",
+    description: "Camy air conditioners and fans, made in Sri Lanka.",
+    fullDescription:
+      "The Group's newest venture, Fuji Industries produces Camy air conditioners and Camy fans for residential and commercial customers, made in Sri Lanka.",
     industry: "Manufacturing",
+    established: "2023",
     features: [
-      "Polyurethane expertise",
-      "Partnership with BATA and other international brands",
-      "Advanced material technology",
-      "Superior abrasion resistance",
-      "Custom PU solutions"
-    ]
+      "Camy air conditioners, made in Sri Lanka",
+      "Camy fans, made in Sri Lanka",
+      "Residential and commercial cooling solutions",
+    ],
+    awards: ["VIP Award, 2024 TCL AC Global Partners Conference — TCL"],
   },
   {
-    id: "supun-super-mart",
-    name: "Supun Super Mart (Pvt) Ltd",
-    shortName: "Supun Super Mart",
-    description: "Modern grocery retail chain with convenient online shopping facilities.",
-    fullDescription: "This is one of Supun's latest novel retail ventures primarily located right below Supun Arcade residency with the hopes of extending its branches across the island. Supun supermart is yet another excellently planned production contributing to the outstanding success of the Supun group of companies. Taking on a completely different direction in the business, this super convenient, efficient and largely accessible one-stop grocery shopping experience features a wide range of all your grocery needs with popular online facilities.",
-    industry: "Retail",
+    id: "camy-global",
+    name: "Camy Global",
+    shortName: "Camy Global",
+    tagline: "Distributing Camy Across Sri Lanka",
+    description: "Getting Camy products to every corner of the island.",
+    fullDescription:
+      "Camy Global is the distribution engine that gets Camy products, from helmets and cookware to clocks, appliances, air conditioners, and fans, from the factory floor to retail shelves island-wide.",
+    industry: "Retail & Distribution",
     features: [
-      "Modern grocery retail",
-      "Online shopping platform",
-      "One-stop shopping experience",
-      "Expansion plans island-wide",
-      "Convenient location"
-    ]
+      "Islandwide distribution network",
+      "Retail outlet and partner network",
+      "Distributes the full range of Camy-branded products",
+    ],
   },
-  {
-    id: "kewr-technologies",
-    name: "Kewr Technologies (Pvt) Ltd",
-    shortName: "Kewr Technologies",
-    description: "Sri Lanka's first technology house for automobile and component research and design.",
-    fullDescription: "Sri Lanka's 1st technology house, with direct emphasis on automobile and automobile component research and design as an independent Design House. KEWR Technologies is headed by world-class designers and manufacturing engineers with technology transfer programs with Siemens, CARBENCH and other internationally acclaimed institutions for design, prototyping, simulation and verification process to provide a concept to mass-produce automobiles as per client/market requirement with conformity to standards of the local and international regulators.",
-    industry: "Technology & Design",
-    website: "www.kewrtech.com",
-    features: [
-      "World-class design team",
-      "Technology partnerships with Siemens & CARBENCH",
-      "Complete design to production capability",
-      "International standards compliance",
-      "Advanced CAD and simulation tools"
-    ]
-  },
-  {
-    id: "ksk-industries",
-    name: "KSK Industries (Pvt) Ltd",
-    shortName: "KSK Industries",
-    description: "Diversified manufacturer of automobile parts and bathroom accessories using advanced technologies.",
-    fullDescription: "Specializes using Poly urethane/Plastic injection molding, Steel press, and Fiber glass technologies, in design and manufacture of Automobile seats, body parts/panels, lights and interior accessories, Bathroom accessories and fittings. With cutting-edge manufacturing capabilities and a commitment to quality, KSK Industries serves both automotive and construction industries.",
-    industry: "Manufacturing",
-    features: [
-      "Multiple manufacturing technologies",
-      "Automobile component expertise",
-      "Bathroom accessories production",
-      "Injection molding capabilities",
-      "Steel press and fiberglass expertise"
-    ]
-  }
 ];
+
+export const companyById = (id?: string) => companies.find((company) => company.id === id);
