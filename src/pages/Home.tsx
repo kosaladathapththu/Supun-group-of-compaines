@@ -198,7 +198,7 @@ const Home = () => {
               <p className="mb-3 text-sm font-medium text-primary/70">{company.tagline}</p>
               <h3 className="text-3xl font-semibold normal-case tracking-[-0.03em] text-[#10233f]">{company.shortName}</h3>
               <p className="mt-4 leading-relaxed text-[#667388]">{company.description}</p>
-              <span className="mt-7 inline-flex items-center gap-2 font-semibold text-primary">View company <ArrowRight className="transition-transform group-hover:translate-x-1" size={17} /></span>
+              <span className="company-link relative mt-7 inline-flex items-center gap-4 font-semibold text-primary">View company <span className="flex h-11 w-11 items-center justify-center rounded-full border border-[#78be43]/45 bg-[#78be43]/10 text-[#5b9d2c] transition duration-300 group-hover:rotate-[-35deg] group-hover:bg-[#78be43] group-hover:text-white"><ArrowRight size={18} /></span></span>
             </div>
           </Link>
         ))}

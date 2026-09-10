@@ -307,6 +307,19 @@ All colors MUST be HSL.
     box-shadow: 0 32px 75px rgb(18 64 120 / 0.18), inset 0 1px 0 white;
   }
 
+  .company-link::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -4px;
+    width: 0;
+    height: 1px;
+    background: #78be43;
+    transition: width .35s ease;
+  }
+
+  .group:hover .company-link::after { width: calc(100% - 3.8rem); }
+
   .hero-grid {
     background-image:
       linear-gradient(rgba(255, 255, 255, 0.13) 1px, transparent 1px),
