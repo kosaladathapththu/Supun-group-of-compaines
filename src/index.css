@@ -320,14 +320,6 @@ All colors MUST be HSL.
 
   .group:hover .company-link::after { width: calc(100% - 3.8rem); }
 
-  .hero-grid {
-    background-image:
-      linear-gradient(rgba(255, 255, 255, 0.13) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(255, 255, 255, 0.13) 1px, transparent 1px);
-    background-size: 90px 90px;
-    mask-image: linear-gradient(to right, transparent, black 38%, black);
-  }
-
   .section-kicker {
     @apply flex items-center gap-3 text-xs font-bold uppercase tracking-[0.22em] text-primary;
   }
