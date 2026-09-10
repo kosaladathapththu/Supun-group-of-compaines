@@ -38,8 +38,8 @@ const Home = () => {
       }}
     />
 
-    <section className="premium-hero relative isolate min-h-[calc(100svh-5rem)] bg-[#04142d] text-white">
-      <div className={`absolute inset-0 bg-[radial-gradient(circle_at_75%_25%,#174c96_0%,#082b61_32%,#04142d_72%)] transition-opacity duration-1000 ${heroVideoReady ? "opacity-0" : "opacity-100"}`} aria-hidden="true" />
+    <section className="premium-hero relative isolate min-h-[calc(100svh-5rem)] bg-[#101311] text-white">
+      <div className={`absolute inset-0 bg-[radial-gradient(circle_at_75%_25%,#344039_0%,#1b211d_34%,#0d100e_74%)] transition-opacity duration-1000 ${heroVideoReady ? "opacity-0" : "opacity-100"}`} aria-hidden="true" />
       <video
         className={`absolute inset-0 h-full w-full object-cover transition-opacity duration-1000 ${heroVideoReady ? "opacity-100" : "opacity-0"}`}
         autoPlay
@@ -52,8 +52,8 @@ const Home = () => {
       >
         <source src={heroVideo} type="video/mp4" />
       </video>
-      <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(2,12,30,.96)_0%,rgba(8,35,80,.78)_48%,rgba(7,32,73,.24)_100%)]" />
-      <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(4,15,34,.04)_25%,rgba(3,18,42,.94)_100%)]" />
+      <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(8,10,9,.96)_0%,rgba(19,24,21,.74)_48%,rgba(18,23,20,.22)_100%)]" />
+      <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(10,12,11,.04)_25%,rgba(8,11,9,.94)_100%)]" />
       <div className="hero-grid absolute inset-0 opacity-20" aria-hidden="true" />
       <div className="hero-orb hero-orb-one" aria-hidden="true" />
       <div className="hero-orb hero-orb-two" aria-hidden="true" />
@@ -93,7 +93,7 @@ const Home = () => {
         <AnimatedSection animation="slide-up" duration={850}>
           <div className="mb-10 flex items-center justify-between gap-5 md:mb-14">
             <p className="section-kicker text-white before:bg-[#78be43]">Our legacy</p>
-            <div className="hidden items-center gap-3 text-[10px] font-semibold uppercase tracking-[0.22em] text-white/40 sm:flex"><span>1978</span><span className="h-px w-14 bg-gradient-to-r from-[#78be43] to-[#2971c8]" /><span>Today</span></div>
+            <div className="hidden items-center gap-3 text-[10px] font-semibold uppercase tracking-[0.22em] text-white/40 sm:flex"><span>1978</span><span className="h-px w-14 bg-gradient-to-r from-[#78be43] to-white/30" /><span>Today</span></div>
           </div>
         </AnimatedSection>
         <div className="grid items-stretch gap-6 lg:grid-cols-[.72fr_1.28fr]">

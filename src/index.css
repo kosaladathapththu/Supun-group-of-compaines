@@ -140,7 +140,7 @@ All colors MUST be HSL.
     top: 18%;
     width: 22rem;
     height: 22rem;
-    background: rgb(36 112 221 / 0.18);
+    background: rgb(120 190 67 / 0.13);
   }
 
   .hero-orb-two {
@@ -148,7 +148,7 @@ All colors MUST be HSL.
     bottom: 8%;
     width: 16rem;
     height: 16rem;
-    background: rgb(67 145 255 / 0.11);
+    background: rgb(255 255 255 / 0.07);
     animation-delay: -4s;
   }
 
@@ -193,7 +193,7 @@ All colors MUST be HSL.
   }
 
   .legacy-premium {
-    background: radial-gradient(circle at 74% 20%, rgb(25 87 163 / .26), transparent 34%), linear-gradient(135deg, #031126 0%, #071d3d 48%, #092b58 100%);
+    background: radial-gradient(circle at 74% 20%, rgb(120 190 67 / .10), transparent 34%), linear-gradient(135deg, #0b0e0c 0%, #151a17 48%, #202721 100%);
   }
 
   .legacy-lines {
@@ -203,7 +203,7 @@ All colors MUST be HSL.
   }
 
   .legacy-aurora { @apply pointer-events-none absolute rounded-full blur-3xl; animation: legacy-float 12s ease-in-out infinite alternate; }
-  .legacy-aurora-blue { right: -8rem; top: -10rem; height: 28rem; width: 28rem; background: rgb(38 120 220 / .24); }
+  .legacy-aurora-blue { right: -8rem; top: -10rem; height: 28rem; width: 28rem; background: rgb(255 255 255 / .08); }
   .legacy-aurora-green { bottom: -12rem; left: -7rem; height: 25rem; width: 25rem; background: rgb(120 190 67 / .13); animation-delay: -5s; }
 
   .legacy-year-card, .legacy-story-card {
@@ -213,18 +213,18 @@ All colors MUST be HSL.
     backdrop-filter: blur(22px) saturate(130%);
   }
 
-  .legacy-story-card { background: linear-gradient(145deg, rgb(20 66 124 / .38), rgb(255 255 255 / .04)); }
+  .legacy-story-card { background: linear-gradient(145deg, rgb(57 70 61 / .38), rgb(255 255 255 / .04)); }
   .legacy-year-card { transition: transform .6s cubic-bezier(.22, 1, .36, 1), border-color .5s ease; }
   .legacy-year-card:hover { transform: translateY(-8px) rotateX(1deg) rotateY(-1deg); border-color: rgb(120 190 67 / .42); }
 
   .legacy-year-ring { position: absolute; right: -8rem; top: 50%; width: 25rem; height: 25rem; transform: translateY(-50%); }
-  .legacy-year-ring span { position: absolute; inset: 0; border: 1px solid rgb(105 168 255 / .14); border-radius: 999px; animation: legacy-ring 9s linear infinite; }
+  .legacy-year-ring span { position: absolute; inset: 0; border: 1px solid rgb(255 255 255 / .12); border-radius: 999px; animation: legacy-ring 9s linear infinite; }
   .legacy-year-ring span:nth-child(2) { inset: 3rem; animation-direction: reverse; animation-duration: 12s; border-color: rgb(120 190 67 / .18); }
   .legacy-year-ring span:nth-child(3) { inset: 6rem; animation-duration: 7s; }
 
   .legacy-year {
     text-shadow: 0 18px 55px rgb(0 8 28 / .5);
-    background: linear-gradient(110deg, #fff 25%, #9dc9ff 52%, #fff 76%);
+    background: linear-gradient(110deg, #fff 25%, #b9d8a2 52%, #fff 76%);
     background-size: 220% auto;
     background-clip: text;
     color: transparent;
@@ -234,7 +234,7 @@ All colors MUST be HSL.
   .legacy-pulse { @apply relative flex h-8 w-8 items-center justify-center rounded-full border border-[#78be43]/30; }
   .legacy-pulse::before { content: ""; @apply absolute inset-0 rounded-full border border-[#78be43]/35; animation: legacy-pulse 2.2s ease-out infinite; }
   .legacy-pulse span { @apply h-2 w-2 rounded-full bg-[#78be43]; box-shadow: 0 0 18px #78be43; }
-  .legacy-gradient-text { background: linear-gradient(90deg, #76aff4, #9bd36f); background-clip: text; color: transparent; }
+  .legacy-gradient-text { background: linear-gradient(90deg, #ffffff, #9bd36f); background-clip: text; color: transparent; }
 
   .legacy-corner-mark {
     position: absolute; right: -5rem; top: -5rem; width: 16rem; height: 16rem; border: 1px solid rgb(120 190 67 / .13); border-radius: 999px;
