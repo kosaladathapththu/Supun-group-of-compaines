@@ -122,6 +122,14 @@ All colors MUST be HSL.
 }
 
 @layer utilities {
+  .nav-glass {
+    border: 1px solid rgb(255 255 255 / 0.72);
+    background: linear-gradient(135deg, rgb(255 255 255 / 0.82), rgb(247 251 255 / 0.66));
+    box-shadow: 0 14px 40px rgb(15 49 91 / 0.13), inset 0 1px 0 rgb(255 255 255 / 0.9);
+    backdrop-filter: blur(24px) saturate(155%);
+    -webkit-backdrop-filter: blur(24px) saturate(155%);
+  }
+
   .premium-hero video {
     animation: hero-zoom 18s ease-in-out infinite alternate;
   }
@@ -193,38 +201,38 @@ All colors MUST be HSL.
   }
 
   .legacy-premium {
-    background: radial-gradient(circle at 74% 20%, rgb(120 190 67 / .10), transparent 34%), linear-gradient(135deg, #0b0e0c 0%, #151a17 48%, #202721 100%);
+    background: radial-gradient(circle at 78% 18%, rgb(35 101 181 / .08), transparent 34%), radial-gradient(circle at 8% 88%, rgb(120 190 67 / .09), transparent 30%), #fff;
   }
 
   .legacy-lines {
-    background-image: linear-gradient(rgb(255 255 255 / .045) 1px, transparent 1px), linear-gradient(90deg, rgb(255 255 255 / .045) 1px, transparent 1px);
+    background-image: linear-gradient(rgb(24 71 143 / .045) 1px, transparent 1px), linear-gradient(90deg, rgb(24 71 143 / .045) 1px, transparent 1px);
     background-size: 72px 72px;
     mask-image: linear-gradient(to bottom, transparent, black 22%, black 80%, transparent);
   }
 
   .legacy-aurora { @apply pointer-events-none absolute rounded-full blur-3xl; animation: legacy-float 12s ease-in-out infinite alternate; }
-  .legacy-aurora-blue { right: -8rem; top: -10rem; height: 28rem; width: 28rem; background: rgb(255 255 255 / .08); }
-  .legacy-aurora-green { bottom: -12rem; left: -7rem; height: 25rem; width: 25rem; background: rgb(120 190 67 / .13); animation-delay: -5s; }
+  .legacy-aurora-blue { right: -8rem; top: -10rem; height: 28rem; width: 28rem; background: rgb(35 101 181 / .10); }
+  .legacy-aurora-green { bottom: -12rem; left: -7rem; height: 25rem; width: 25rem; background: rgb(120 190 67 / .11); animation-delay: -5s; }
 
   .legacy-year-card, .legacy-story-card {
-    border: 1px solid rgb(255 255 255 / .14);
-    background: linear-gradient(145deg, rgb(255 255 255 / .11), rgb(255 255 255 / .035));
-    box-shadow: inset 0 1px 0 rgb(255 255 255 / .12), 0 28px 80px rgb(0 5 18 / .35);
+    border: 1px solid rgb(24 71 143 / .11);
+    background: linear-gradient(145deg, rgb(255 255 255 / .92), rgb(239 246 255 / .72));
+    box-shadow: inset 0 1px 0 white, 0 28px 80px rgb(18 64 120 / .12);
     backdrop-filter: blur(22px) saturate(130%);
   }
 
-  .legacy-story-card { background: linear-gradient(145deg, rgb(57 70 61 / .38), rgb(255 255 255 / .04)); }
+  .legacy-story-card { background: linear-gradient(145deg, rgb(255 255 255 / .94), rgb(244 249 255 / .76)); }
   .legacy-year-card { transition: transform .6s cubic-bezier(.22, 1, .36, 1), border-color .5s ease; }
   .legacy-year-card:hover { transform: translateY(-8px) rotateX(1deg) rotateY(-1deg); border-color: rgb(120 190 67 / .42); }
 
   .legacy-year-ring { position: absolute; right: -8rem; top: 50%; width: 25rem; height: 25rem; transform: translateY(-50%); }
-  .legacy-year-ring span { position: absolute; inset: 0; border: 1px solid rgb(255 255 255 / .12); border-radius: 999px; animation: legacy-ring 9s linear infinite; }
+  .legacy-year-ring span { position: absolute; inset: 0; border: 1px solid rgb(24 71 143 / .11); border-radius: 999px; animation: legacy-ring 9s linear infinite; }
   .legacy-year-ring span:nth-child(2) { inset: 3rem; animation-direction: reverse; animation-duration: 12s; border-color: rgb(120 190 67 / .18); }
   .legacy-year-ring span:nth-child(3) { inset: 6rem; animation-duration: 7s; }
 
   .legacy-year {
-    text-shadow: 0 18px 55px rgb(0 8 28 / .5);
-    background: linear-gradient(110deg, #fff 25%, #b9d8a2 52%, #fff 76%);
+    text-shadow: 0 18px 55px rgb(18 64 120 / .14);
+    background: linear-gradient(110deg, #174c96 25%, #78be43 52%, #174c96 76%);
     background-size: 220% auto;
     background-clip: text;
     color: transparent;
@@ -234,7 +242,7 @@ All colors MUST be HSL.
   .legacy-pulse { @apply relative flex h-8 w-8 items-center justify-center rounded-full border border-[#78be43]/30; }
   .legacy-pulse::before { content: ""; @apply absolute inset-0 rounded-full border border-[#78be43]/35; animation: legacy-pulse 2.2s ease-out infinite; }
   .legacy-pulse span { @apply h-2 w-2 rounded-full bg-[#78be43]; box-shadow: 0 0 18px #78be43; }
-  .legacy-gradient-text { background: linear-gradient(90deg, #ffffff, #9bd36f); background-clip: text; color: transparent; }
+  .legacy-gradient-text { background: linear-gradient(90deg, #2678dc, #67a936); background-clip: text; color: transparent; }
 
   .legacy-corner-mark {
     position: absolute; right: -5rem; top: -5rem; width: 16rem; height: 16rem; border: 1px solid rgb(120 190 67 / .13); border-radius: 999px;

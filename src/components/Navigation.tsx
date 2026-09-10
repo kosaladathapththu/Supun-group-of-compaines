@@ -23,16 +23,16 @@ const Navigation = () => {
     : location.pathname === path || location.pathname.startsWith(`${path}/`);
 
   return (
-    <nav className="sticky top-0 z-50 border-b border-primary/10 bg-white/95 text-primary shadow-sm backdrop-blur-xl">
-      <div className="container mx-auto px-4">
-        <div className="flex min-h-[4.5rem] items-center justify-between gap-4 md:min-h-20">
+    <nav className="sticky top-0 z-50 bg-transparent px-3 py-2.5 text-primary sm:px-4 sm:py-3">
+      <div className="nav-glass mx-auto max-w-[1380px] rounded-[1.35rem] px-3 sm:px-5">
+        <div className="flex min-h-[3.75rem] items-center justify-between gap-3 md:min-h-[4.25rem]">
           <Link to="/" className="flex items-center py-2" aria-label="Supun Group of Companies home" onClick={() => setIsOpen(false)}>
-            <div className="rounded-lg border border-primary/10 bg-white px-2.5 py-1.5 md:px-3 md:py-2">
-              <img src={logo} alt="Supun Group of Companies" className="h-12 w-auto md:h-16" />
+            <div className="rounded-xl bg-white/55 px-2 py-1 ring-1 ring-primary/10">
+              <img src={logo} alt="Supun Group of Companies" className="h-10 w-auto md:h-12" />
             </div>
           </Link>
 
-          <div className="hidden items-center gap-1 xl:flex">
+          <div className="hidden items-center gap-0.5 xl:flex">
             {primaryLinks.slice(0, 2).map((link) => <Link key={link.path} to={link.path}><Button variant={isActive(link.path) ? "default" : "ghost"}>{link.name}</Button></Link>)}
             <DropdownMenu>
               <DropdownMenuTrigger asChild><Button variant={isActive("/companies") ? "default" : "ghost"}>Our Companies <ChevronDown className="ml-1" size={16} /></Button></DropdownMenuTrigger>
@@ -44,13 +44,13 @@ const Navigation = () => {
             {primaryLinks.slice(2).map((link) => <Link key={link.path} to={link.path}><Button variant={isActive(link.path) ? "default" : "ghost"}>{link.name}</Button></Link>)}
           </div>
 
-          <button className="rounded-xl border border-primary/10 p-2.5 transition hover:bg-primary/5 xl:hidden" onClick={() => setIsOpen((open) => !open)} aria-label="Toggle navigation" aria-expanded={isOpen}>
+          <button className="rounded-xl border border-primary/10 bg-white/45 p-2 transition hover:bg-white/80 xl:hidden" onClick={() => setIsOpen((open) => !open)} aria-label="Toggle navigation" aria-expanded={isOpen}>
             {isOpen ? <X size={23} /> : <Menu size={23} />}
           </button>
         </div>
 
         {isOpen && (
-          <div className="border-t border-primary/10 bg-white/98 py-3 xl:hidden">
+          <div className="mb-3 border-t border-primary/10 py-3 xl:hidden">
             <div className="grid gap-1">
               {primaryLinks.slice(0, 2).map((link) => <Link key={link.path} to={link.path} onClick={() => setIsOpen(false)}><Button variant={isActive(link.path) ? "default" : "ghost"} className="w-full justify-start">{link.name}</Button></Link>)}
               <Link to="/companies" onClick={() => setIsOpen(false)}><Button variant={isActive("/companies") ? "default" : "ghost"} className="w-full justify-start">Our Companies</Button></Link>
