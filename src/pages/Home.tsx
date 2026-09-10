@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { ArrowDown, ArrowRight, Factory, Globe2, Hotel, Play, ShieldCheck, ShoppingBag, Sparkles } from "lucide-react";
 import Seo, { DEFAULT_IMAGE, SITE_NAME, SITE_URL } from "@/components/Seo";
 import { AnimatedSection } from "@/components/AnimatedSection";
+import { CompanyLogo } from "@/components/CompanyLogo";
 import { companies } from "@/data/companies";
 import { sectorHighlights, siteStats } from "@/data/siteContent";
 import heroVideo from "@/assets/supun-group-hero-optimized.mp4";
@@ -186,7 +187,21 @@ const Home = () => {
     <section className="py-16 sm:py-20 md:py-32"><div className="container mx-auto px-4">
       <div className="flex flex-col justify-between gap-6 md:flex-row md:items-end"><div><p className="section-kicker">Inside the group</p><h2 className="mt-5 text-4xl font-semibold normal-case tracking-[-0.035em] text-[#10233f] md:text-6xl">Businesses built for impact.</h2></div><Link to="/companies" className="group inline-flex items-center gap-3 font-semibold text-primary">Meet all 11 companies <ArrowRight className="transition-transform group-hover:translate-x-1" size={18} /></Link></div>
       <div className="mt-14 grid gap-5 lg:grid-cols-3">
-        {featuredCompanies.map((company, index) => <Link key={company.id} to={`/companies/${company.id}`} className="company-glass group relative flex min-h-[380px] flex-col overflow-hidden rounded-[1.5rem] p-7 transition duration-500 hover:-translate-y-2 md:p-9"><span className="absolute right-5 top-3 text-8xl font-semibold tracking-[-0.08em] text-primary/[.045]">0{index + 1}</span><div className="relative"><span className="inline-flex rounded-full border border-primary/10 bg-primary/[.07] px-3 py-1 text-[10px] font-bold uppercase tracking-[0.16em] text-primary">{company.industry}</span></div><div className="relative mt-auto"><p className="mb-3 text-sm font-medium text-primary/70">{company.tagline}</p><h3 className="text-3xl font-semibold normal-case tracking-[-0.03em] text-[#10233f]">{company.shortName}</h3><p className="mt-4 leading-relaxed text-[#667388]">{company.description}</p><span className="mt-7 inline-flex items-center gap-2 font-semibold text-primary">View company <ArrowRight className="transition-transform group-hover:translate-x-1" size={17} /></span></div></Link>)}
+        {featuredCompanies.map((company, index) => (
+          <Link key={company.id} to={`/companies/${company.id}`} className="company-glass group relative flex min-h-[430px] flex-col overflow-hidden rounded-[1.5rem] p-7 transition duration-500 hover:-translate-y-2 md:p-9">
+            <span className="absolute right-5 top-3 text-8xl font-semibold tracking-[-0.08em] text-primary/[.045]">0{index + 1}</span>
+            <div className="relative flex items-start justify-between gap-5">
+              <CompanyLogo companyId={company.id} companyName={company.shortName} className="h-24 w-36 rounded-2xl border border-primary/10 p-3 shadow-[0_12px_35px_rgba(18,64,120,.10)] transition duration-500 group-hover:scale-[1.04] group-hover:shadow-[0_16px_40px_rgba(18,64,120,.16)]" imageClassName="transition-transform duration-500 group-hover:scale-105" />
+              <span className="inline-flex rounded-full border border-primary/10 bg-primary/[.07] px-3 py-1 text-[10px] font-bold uppercase tracking-[0.16em] text-primary">{company.industry}</span>
+            </div>
+            <div className="relative mt-auto pt-8">
+              <p className="mb-3 text-sm font-medium text-primary/70">{company.tagline}</p>
+              <h3 className="text-3xl font-semibold normal-case tracking-[-0.03em] text-[#10233f]">{company.shortName}</h3>
+              <p className="mt-4 leading-relaxed text-[#667388]">{company.description}</p>
+              <span className="mt-7 inline-flex items-center gap-2 font-semibold text-primary">View company <ArrowRight className="transition-transform group-hover:translate-x-1" size={17} /></span>
+            </div>
+          </Link>
+        ))}
       </div>
     </div></section>
 
