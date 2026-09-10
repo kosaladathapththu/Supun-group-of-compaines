@@ -159,7 +159,26 @@ const Home = () => {
     <section className="sector-section relative bg-white py-16 text-[#10233f] sm:py-20 md:py-32"><div className="container relative z-10 mx-auto px-4">
       <div className="mb-14 flex flex-col justify-between gap-8 md:flex-row md:items-end"><div><p className="section-kicker text-primary before:bg-[#78be43]">What we do</p><h2 className="mt-5 max-w-3xl text-4xl font-semibold normal-case leading-tight tracking-[-0.035em] text-primary md:text-6xl">Four strengths. One shared standard.</h2></div><p className="max-w-md text-base leading-relaxed text-[#526278]">An ecosystem built to design, manufacture, distribute and serve—with every capability strengthening the next.</p></div>
       <div className="grid gap-5 md:grid-cols-2 xl:grid-cols-4">
-        {sectorHighlights.map((sector, index) => { const meta = sectorMeta[index]; const Icon = meta.icon; return <article key={sector.title} className="sector-glass group relative min-h-[430px] overflow-hidden rounded-[1.5rem] p-7 md:p-8"><img src={meta.image} alt="" className="absolute inset-0 h-full w-full object-cover opacity-35 transition duration-700 group-hover:scale-105 group-hover:opacity-50" /><div className="absolute inset-0 bg-gradient-to-t from-white from-[28%] via-white/85 via-[58%] to-white/10 transition duration-500 group-hover:via-white/75" /><div className="absolute inset-x-0 top-0 h-36 bg-gradient-to-b from-primary/10 to-transparent" /><div className="relative flex h-full flex-col"><div className="flex items-center justify-between"><span className="text-xs font-semibold tracking-[0.18em] text-primary/55">0{index + 1}</span><span className="flex h-12 w-12 items-center justify-center rounded-2xl border border-white/60 bg-white/65 shadow-sm backdrop-blur-xl"><Icon className="text-primary" size={23} strokeWidth={1.5} /></span></div><div className="mt-auto"><p className="mb-3 text-xs font-semibold uppercase tracking-[0.18em] text-[#5b9d2c]">{meta.eyebrow}</p><h3 className="text-2xl font-semibold normal-case text-primary">{sector.title}</h3><p className="mt-4 leading-relaxed text-[#526278]">{sector.description}</p></div></div></article>; })}
+        {sectorHighlights.map((sector, index) => {
+          const meta = sectorMeta[index];
+          const Icon = meta.icon;
+          return (
+            <article key={sector.title} className="sector-glass group relative overflow-hidden rounded-[1.5rem]">
+              <div className="relative h-52 overflow-hidden sm:h-56">
+                <img src={meta.image} alt="" className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105" />
+                <div className="absolute inset-x-0 top-0 flex items-center justify-between p-5">
+                  <span className="rounded-full bg-white/95 px-3 py-1 text-xs font-semibold tracking-[0.18em] text-primary shadow-sm">0{index + 1}</span>
+                  <span className="flex h-12 w-12 items-center justify-center rounded-2xl border border-white/80 bg-white/95 shadow-lg"><Icon className="text-primary" size={23} strokeWidth={1.5} /></span>
+                </div>
+              </div>
+              <div className="min-h-[255px] bg-white p-7">
+                <p className="mb-3 text-xs font-semibold uppercase tracking-[0.18em] text-[#5b9d2c]">{meta.eyebrow}</p>
+                <h3 className="text-2xl font-semibold normal-case text-primary">{sector.title}</h3>
+                <p className="mt-4 leading-relaxed text-[#526278]">{sector.description}</p>
+              </div>
+            </article>
+          );
+        })}
       </div>
     </div></section>
 
