@@ -124,8 +124,8 @@ All colors MUST be HSL.
 @layer utilities {
   .nav-glass {
     border: 1px solid rgb(255 255 255 / 0.72);
-    background: linear-gradient(135deg, rgb(255 255 255 / 0.82), rgb(247 251 255 / 0.66));
-    box-shadow: 0 14px 40px rgb(15 49 91 / 0.13), inset 0 1px 0 rgb(255 255 255 / 0.9);
+    background: linear-gradient(135deg, rgb(255 255 255 / 0.76), rgb(247 251 255 / 0.58));
+    box-shadow: 0 14px 40px rgb(4 15 30 / 0.2), inset 0 1px 0 rgb(255 255 255 / 0.9);
     backdrop-filter: blur(24px) saturate(155%);
     -webkit-backdrop-filter: blur(24px) saturate(155%);
   }

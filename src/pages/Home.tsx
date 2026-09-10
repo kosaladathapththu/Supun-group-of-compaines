@@ -79,7 +79,7 @@ const Home = () => {
       }}
     />
 
-    <section className="premium-hero relative isolate min-h-[calc(100svh-5rem)] bg-[#101311] text-white">
+    <section className="premium-hero relative isolate min-h-screen bg-[#101311] text-white">
       <div className={`absolute inset-0 bg-[radial-gradient(circle_at_75%_25%,#344039_0%,#1b211d_34%,#0d100e_74%)] transition-opacity duration-1000 ${heroVideoReady ? "opacity-0" : "opacity-100"}`} aria-hidden="true" />
       <video
         className={`absolute inset-0 h-full w-full object-cover transition-opacity duration-1000 ${heroVideoReady ? "opacity-100" : "opacity-0"}`}
@@ -99,7 +99,7 @@ const Home = () => {
       <div className="hero-orb hero-orb-one" aria-hidden="true" />
       <div className="hero-orb hero-orb-two" aria-hidden="true" />
 
-      <div className="container relative z-10 mx-auto flex min-h-[calc(100svh-5rem)] flex-col justify-between px-4 py-6 sm:py-8 md:py-12">
+      <div className="container relative z-10 mx-auto flex min-h-screen flex-col justify-between px-4 pb-6 pt-28 sm:pb-8 sm:pt-32 md:pb-12 md:pt-36">
         <div className="flex items-center justify-between gap-5 border-b border-white/20 pb-5 text-[11px] font-semibold uppercase tracking-[0.22em] text-white/70">
           <span>Independent. Sri Lankan. Since 1978.</span>
           <span className="hidden items-center gap-2 sm:flex"><span className="h-2 w-2 rounded-full bg-[#f5a623]" /> Colombo, Sri Lanka</span>

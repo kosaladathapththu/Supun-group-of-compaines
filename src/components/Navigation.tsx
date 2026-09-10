@@ -18,13 +18,14 @@ const primaryLinks = [
 const Navigation = () => {
   const [isOpen, setIsOpen] = useState(false);
   const location = useLocation();
+  const isHome = location.pathname === "/";
   const isActive = (path: string) => path === "/"
     ? location.pathname === "/"
     : location.pathname === path || location.pathname.startsWith(`${path}/`);
 
   return (
-    <nav className="sticky top-0 z-50 bg-transparent px-3 py-2.5 text-primary sm:px-4 sm:py-3">
-      <div className="nav-glass mx-auto max-w-[1380px] rounded-[1.35rem] px-3 sm:px-5">
+    <nav className={`${isHome ? "fixed" : "sticky"} left-0 right-0 top-0 z-50 bg-transparent px-3 py-2.5 text-primary sm:px-4 sm:py-3`}>
+      <div className="nav-glass mx-auto max-w-[1180px] rounded-[1.35rem] px-3 sm:px-5">
         <div className="flex min-h-[3.75rem] items-center justify-between gap-3 md:min-h-[4.25rem]">
           <Link to="/" className="flex items-center py-2" aria-label="Supun Group of Companies home" onClick={() => setIsOpen(false)}>
             <div className="rounded-xl bg-white/55 px-2 py-1 ring-1 ring-primary/10">
