@@ -191,7 +191,7 @@ const Home = () => {
           <Link key={company.id} to={`/companies/${company.id}`} className="company-glass group relative flex min-h-[430px] flex-col overflow-hidden rounded-[1.5rem] p-7 transition duration-500 hover:-translate-y-2 md:p-9">
             <span className="absolute right-5 top-3 text-8xl font-semibold tracking-[-0.08em] text-primary/[.045]">0{index + 1}</span>
             <div className="relative flex items-start justify-between gap-5">
-              <CompanyLogo companyId={company.id} companyName={company.shortName} className="h-24 w-36 rounded-2xl border border-primary/10 p-3 shadow-[0_12px_35px_rgba(18,64,120,.10)] transition duration-500 group-hover:scale-[1.04] group-hover:shadow-[0_16px_40px_rgba(18,64,120,.16)]" imageClassName="transition-transform duration-500 group-hover:scale-105" />
+              <CompanyLogo companyId={company.id} companyName={company.shortName} className="h-32 w-52 max-w-[65%] rounded-2xl border border-primary/10 p-2 shadow-[0_12px_35px_rgba(18,64,120,.10)] transition duration-500 group-hover:scale-[1.03] group-hover:shadow-[0_16px_40px_rgba(18,64,120,.16)]" imageClassName="scale-[1.55] transition-transform duration-500 group-hover:scale-[1.68]" />
               <span className="inline-flex rounded-full border border-primary/10 bg-primary/[.07] px-3 py-1 text-[10px] font-bold uppercase tracking-[0.16em] text-primary">{company.industry}</span>
             </div>
             <div className="relative mt-auto pt-8">
