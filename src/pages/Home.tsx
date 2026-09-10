@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import { ArrowDown, ArrowRight, Factory, Globe2, Hotel, Play, ShieldCheck, ShoppingBag, Sparkles } from "lucide-react";
 import Seo, { DEFAULT_IMAGE, SITE_NAME, SITE_URL } from "@/components/Seo";
@@ -19,6 +19,47 @@ const sectorMeta = [
 ];
 
 const featuredCompanies = [companies[6], companies[4], companies[2]];
+
+const CountUpStat = ({ value, label, index }: { value: string; label: string; index: number }) => {
+  const target = Number.parseInt(value, 10);
+  const suffix = value.replace(String(target), "");
+  const [count, setCount] = useState(0);
+  const ref = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const element = ref.current;
+    if (!element) return;
+    const observer = new IntersectionObserver(([entry]) => {
+      if (!entry.isIntersecting) return;
+      observer.disconnect();
+      if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+        setCount(target);
+        return;
+      }
+      const duration = 1400;
+      const start = performance.now();
+      const animate = (time: number) => {
+        const progress = Math.min((time - start) / duration, 1);
+        const eased = 1 - Math.pow(1 - progress, 3);
+        setCount(Math.round(target * eased));
+        if (progress < 1) requestAnimationFrame(animate);
+      };
+      requestAnimationFrame(animate);
+    }, { threshold: 0.4 });
+    observer.observe(element);
+    return () => observer.disconnect();
+  }, [target]);
+
+  return (
+    <div ref={ref} className="hero-stat group relative py-2 md:py-3" style={{ animationDelay: `${index * 100}ms` }}>
+      <div className="flex items-start gap-2">
+        <span className="text-3xl font-semibold tracking-[-0.04em] text-white tabular-nums sm:text-4xl">{count}{suffix}</span>
+        <span className="mt-1 h-1.5 w-1.5 rounded-full bg-[#78be43] shadow-[0_0_12px_#78be43]" />
+      </div>
+      <div className="mt-1.5 max-w-[9rem] text-[9px] font-semibold uppercase leading-snug tracking-[0.14em] text-white/50 sm:text-[10px]">{label}</div>
+    </div>
+  );
+};
 
 const Home = () => {
   const [heroVideoReady, setHeroVideoReady] = useState(false);
@@ -78,8 +119,8 @@ const Home = () => {
 
         <div className="flex items-end justify-between gap-6">
           <a href="#legacy" className="hidden items-center gap-3 text-xs font-semibold uppercase tracking-[0.2em] text-white/60 transition hover:text-white md:flex"><span className="flex h-10 w-10 items-center justify-center rounded-full border border-white/25"><ArrowDown size={16} /></span>Scroll to discover</a>
-          <div className="glass-panel ml-auto grid w-full max-w-2xl grid-cols-2 overflow-hidden rounded-2xl md:grid-cols-4 md:rounded-none">
-            {siteStats.map((stat) => <div key={stat.label} className="border-white/15 p-3.5 odd:border-r md:border-r md:p-5 md:last:border-r-0"><div className="text-xl font-semibold tracking-tight text-white sm:text-2xl md:text-3xl">{stat.value}</div><div className="mt-1 text-[9px] uppercase leading-snug tracking-[0.12em] text-white/55 sm:text-[10px] sm:tracking-[0.16em]">{stat.label}</div></div>)}
+          <div className="ml-auto grid w-full max-w-2xl grid-cols-2 gap-x-7 gap-y-4 sm:grid-cols-4 sm:gap-6">
+            {siteStats.map((stat, index) => <CountUpStat key={stat.label} value={stat.value} label={stat.label} index={index} />)}
           </div>
         </div>
       </div>

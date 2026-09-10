@@ -167,6 +167,19 @@ All colors MUST be HSL.
     backdrop-filter: blur(22px) saturate(135%);
   }
 
+  .hero-stat::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 2rem;
+    height: 1px;
+    background: linear-gradient(90deg, #78be43, transparent);
+    transition: width .45s cubic-bezier(.22, 1, .36, 1);
+  }
+
+  .hero-stat:hover::before { width: 70%; }
+
   .premium-button {
     border: 1px solid rgb(99 168 255 / 0.55);
     background: linear-gradient(135deg, #2678dc, #124b99);
