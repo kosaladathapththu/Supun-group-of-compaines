@@ -7,15 +7,16 @@ import { companies } from "@/data/companies";
 import { sectorHighlights, siteStats } from "@/data/siteContent";
 import heroVideo from "@/assets/supun-group-hero-optimized.mp4";
 import heroPoster from "@/assets/hero-corporate.jpg";
-import manufacturingImage from "@/assets/hero-manufacturing.jpg";
-import hospitalityImage from "@/assets/hotel-interior.jpg";
-import retailImage from "@/assets/retail-store.jpg";
+import manufacturingImage from "@/assets/sector-manufacturing-v2.jpg";
+import hospitalityImage from "@/assets/sector-hospitality-v2.jpg";
+import retailImage from "@/assets/sector-retail-v2.jpg";
+import camyImage from "@/assets/sector-camy-v2.jpg";
 
 const sectorMeta = [
   { icon: Factory, image: manufacturingImage, eyebrow: "Made here" },
   { icon: ShoppingBag, image: retailImage, eyebrow: "Across the island" },
   { icon: Hotel, image: hospitalityImage, eyebrow: "Distinctly Colombo" },
-  { icon: ShieldCheck, image: heroPoster, eyebrow: "A Sri Lankan original" },
+  { icon: ShieldCheck, image: camyImage, eyebrow: "A Sri Lankan original" },
 ];
 
 const featuredCompanies = [companies[6], companies[4], companies[2]];
