@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import { ArrowDown, ArrowRight, Factory, Globe2, Hotel, Play, ShieldCheck, ShoppingBag, Sparkles } from "lucide-react";
 import Seo, { DEFAULT_IMAGE, SITE_NAME, SITE_URL } from "@/components/Seo";
+import { AnimatedSection } from "@/components/AnimatedSection";
 import { companies } from "@/data/companies";
 import { sectorHighlights, siteStats } from "@/data/siteContent";
 import heroVideo from "@/assets/supun-group-hero-optimized.mp4";
@@ -84,15 +85,34 @@ const Home = () => {
       </div>
     </section>
 
-    <section id="legacy" className="blueprint-bg relative py-16 sm:py-20 md:py-32">
-      <div className="container mx-auto px-4"><div className="grid gap-14 lg:grid-cols-[.8fr_1.2fr] lg:gap-24">
-        <div><p className="section-kicker">Our legacy</p><div className="mt-12 flex items-end gap-4"><span className="text-7xl font-semibold tracking-[-0.06em] text-primary md:text-8xl">1978</span><span className="mb-3 h-px flex-1 bg-primary/20" /></div></div>
-        <div>
-          <h2 className="text-4xl font-semibold normal-case leading-[1.05] tracking-[-0.035em] text-[#10233f] md:text-6xl">A family business with the courage to keep building.</h2>
-          <div className="mt-8 grid gap-6 border-t border-[#10233f]/15 pt-8 md:grid-cols-2"><p className="text-lg leading-relaxed text-[#415168]">What began as a Colombo trading business has grown into a connected group spanning manufacturing, retail, distribution and hospitality.</p><p className="text-lg leading-relaxed text-[#415168]">Through every new chapter, one standard remains: create lasting value for our customers, our people and our country.</p></div>
-          <Link to="/about" className="group mt-9 inline-flex items-center gap-3 font-semibold text-primary">Read our story <span className="flex h-9 w-9 items-center justify-center rounded-full border border-primary/25 transition group-hover:bg-primary group-hover:text-white"><ArrowRight size={16} /></span></Link>
+    <section id="legacy" className="legacy-premium relative isolate overflow-hidden py-16 sm:py-20 md:py-32">
+      <div className="legacy-aurora legacy-aurora-blue" aria-hidden="true" />
+      <div className="legacy-aurora legacy-aurora-green" aria-hidden="true" />
+      <div className="legacy-lines absolute inset-0 opacity-50" aria-hidden="true" />
+      <div className="container relative z-10 mx-auto px-4">
+        <AnimatedSection animation="slide-up" duration={850}>
+          <div className="mb-10 flex items-center justify-between gap-5 md:mb-14">
+            <p className="section-kicker text-white before:bg-[#78be43]">Our legacy</p>
+            <div className="hidden items-center gap-3 text-[10px] font-semibold uppercase tracking-[0.22em] text-white/40 sm:flex"><span>1978</span><span className="h-px w-14 bg-gradient-to-r from-[#78be43] to-[#2971c8]" /><span>Today</span></div>
+          </div>
+        </AnimatedSection>
+        <div className="grid items-stretch gap-6 lg:grid-cols-[.72fr_1.28fr]">
+          <AnimatedSection animation="slide-right" duration={900}>
+            <div className="legacy-year-card group relative flex h-full min-h-[350px] flex-col justify-between overflow-hidden rounded-[2rem] p-7 sm:min-h-[430px] sm:p-10">
+              <div className="legacy-year-ring" aria-hidden="true"><span /><span /><span /></div>
+              <div className="relative flex items-center justify-between"><span className="rounded-full border border-white/15 bg-white/[.07] px-3 py-1.5 text-[10px] font-semibold uppercase tracking-[0.2em] text-white/70 backdrop-blur-xl">Where it began</span><span className="legacy-pulse"><span /></span></div>
+              <div className="relative"><p className="text-xs font-semibold uppercase tracking-[0.25em] text-[#9bd36f]">Established</p><div className="legacy-year mt-2 text-[clamp(5rem,14vw,9rem)] font-semibold leading-none tracking-[-0.075em]">1978</div><p className="mt-4 max-w-xs border-l-2 border-[#78be43] pl-4 text-sm leading-relaxed text-white/55">One vision in Colombo became a group built across generations.</p></div>
+            </div>
+          </AnimatedSection>
+          <AnimatedSection animation="slide-left" delay={140} duration={950}>
+            <div className="legacy-story-card relative flex h-full min-h-[430px] flex-col overflow-hidden rounded-[2rem] p-7 sm:p-10 lg:p-12">
+              <div className="legacy-corner-mark" aria-hidden="true" />
+              <div className="relative"><span className="mb-6 inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.2em] text-[#78be43]"><span className="h-2 w-2 rounded-full bg-[#78be43] shadow-[0_0_16px_#78be43]" /> Built across generations</span><h2 className="max-w-4xl text-4xl font-semibold normal-case leading-[1.04] tracking-[-0.04em] text-white sm:text-5xl lg:text-6xl">A family business with the courage to <span className="legacy-gradient-text">keep building.</span></h2></div>
+              <div className="relative mt-auto pt-10"><div className="grid gap-6 border-t border-white/15 pt-7 md:grid-cols-2"><p className="leading-relaxed text-white/65">What began as a Colombo trading business has grown into a connected group spanning manufacturing, retail, distribution and hospitality.</p><p className="leading-relaxed text-white/65">Through every new chapter, one standard remains: create lasting value for our customers, our people and our country.</p></div><Link to="/about" className="legacy-link group mt-8 inline-flex items-center gap-4 font-semibold text-white">Read our story <span className="flex h-11 w-11 items-center justify-center rounded-full border border-[#78be43]/40 bg-[#78be43]/10 text-[#9bd36f] transition duration-300 group-hover:rotate-[-35deg] group-hover:bg-[#78be43] group-hover:text-[#07172f]"><ArrowRight size={18} /></span></Link></div>
+            </div>
+          </AnimatedSection>
         </div>
-      </div></div>
+      </div>
     </section>
 
     <section className="relative bg-[radial-gradient(circle_at_top_right,#174c96_0%,#092654_32%,#04142d_75%)] py-16 text-white sm:py-20 md:py-32"><div className="container mx-auto px-4">
