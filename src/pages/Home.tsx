@@ -4,7 +4,7 @@ import { ArrowDown, ArrowRight, Factory, Globe2, Hotel, Play, ShieldCheck, Shopp
 import Seo, { DEFAULT_IMAGE, SITE_NAME, SITE_URL } from "@/components/Seo";
 import { companies } from "@/data/companies";
 import { sectorHighlights, siteStats } from "@/data/siteContent";
-import heroVideo from "@/assets/SUPUN GROUP OF COMPANY.mp4";
+import heroVideo from "@/assets/supun-group-hero-optimized.mp4";
 import heroPoster from "@/assets/hero-corporate.jpg";
 import manufacturingImage from "@/assets/hero-manufacturing.jpg";
 import hospitalityImage from "@/assets/hotel-interior.jpg";
