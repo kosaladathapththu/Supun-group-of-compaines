@@ -6,20 +6,61 @@ import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigge
 import { companies } from "@/data/companies";
 import logo from "@/assets/supun-group-of-companies-logo.png";
 
+const primaryLinks = [
+  { name: "Home", path: "/" },
+  { name: "About Us", path: "/about" },
+  { name: "Camy Products", path: "/camy-products" },
+  { name: "Careers", path: "/careers" },
+  { name: "News & Media", path: "/news" },
+  { name: "Contact", path: "/contact" },
+];
+
 const Navigation = () => {
   const [isOpen, setIsOpen] = useState(false);
   const location = useLocation();
-  const isActive = (path: string) => path === "/" ? location.pathname === "/" : location.pathname === path || location.pathname.startsWith(`${path}/`);
-  const primaryLinks = [{ name: "Home", path: "/" }, { name: "About Us", path: "/about" }, { name: "Camy Products", path: "/camy-products" }, { name: "Careers", path: "/careers" }, { name: "News & Media", path: "/news" }, { name: "Contact", path: "/contact" }];
+  const isActive = (path: string) => path === "/"
+    ? location.pathname === "/"
+    : location.pathname === path || location.pathname.startsWith(`${path}/`);
 
-  return <nav className="bg-white/95 backdrop-blur text-primary border-b border-gray-200 sticky top-0 z-50 shadow-sm"><div className="container mx-auto px-4"><div className="flex items-center justify-between min-h-20 gap-4">
-    <Link to="/" className="flex items-center py-2" aria-label="Supun Group of Companies home"><div className="bg-white px-3 py-2 rounded-lg border border-primary/10"><img src={logo} alt="Supun Group of Companies" className="h-14 md:h-16 w-auto" /></div></Link>
-    <div className="hidden xl:flex items-center gap-1">{primaryLinks.slice(0,2).map((link) => <Link key={link.path} to={link.path}><Button variant={isActive(link.path) ? "default" : "ghost"}>{link.name}</Button></Link>)}
-      <DropdownMenu><DropdownMenuTrigger asChild><Button variant={isActive("/companies") ? "default" : "ghost"}>Our Companies <ChevronDown className="ml-1" size={16} /></Button></DropdownMenuTrigger><DropdownMenuContent className="w-80 max-h-[70vh] overflow-y-auto" align="center"><Link to="/companies"><DropdownMenuItem className="font-semibold text-primary cursor-pointer">View All Companies →</DropdownMenuItem></Link>{companies.map((company) => <Link key={company.id} to={`/companies/${company.id}`}><DropdownMenuItem className="cursor-pointer py-2.5"><div><div className="font-semibold text-sm">{company.shortName}</div><div className="text-xs text-muted-foreground">{company.industry}</div></div></DropdownMenuItem></Link>)}</DropdownMenuContent></DropdownMenu>
-      {primaryLinks.slice(2).map((link) => <Link key={link.path} to={link.path}><Button variant={isActive(link.path) ? "default" : "ghost"}>{link.name}</Button></Link>)}
-    </div>
-    <button className="xl:hidden p-2" onClick={() => setIsOpen((open) => !open)} aria-label="Toggle navigation" aria-expanded={isOpen}>{isOpen ? <X size={25} /> : <Menu size={25} />}</button>
-  </div>{isOpen && <div className="xl:hidden border-t py-4 max-h-[75vh] overflow-y-auto"><div className="flex flex-col gap-1">{primaryLinks.slice(0,2).map((link) => <Link key={link.path} to={link.path} onClick={() => setIsOpen(false)}><Button variant={isActive(link.path) ? "default" : "ghost"} className="w-full justify-start">{link.name}</Button></Link>)}<div className="px-3 pt-3 pb-1 text-xs uppercase tracking-wider text-muted-foreground font-semibold">Our Companies</div><Link to="/companies" onClick={() => setIsOpen(false)}><Button variant="ghost" className="w-full justify-start font-semibold">View All Companies →</Button></Link>{companies.map((company) => <Link key={company.id} to={`/companies/${company.id}`} onClick={() => setIsOpen(false)}><Button variant="ghost" className="w-full justify-start h-auto py-2 text-sm">{company.shortName}</Button></Link>)}<div className="border-t my-2" />{primaryLinks.slice(2).map((link) => <Link key={link.path} to={link.path} onClick={() => setIsOpen(false)}><Button variant={isActive(link.path) ? "default" : "ghost"} className="w-full justify-start">{link.name}</Button></Link>)}</div></div>}</div></nav>;
+  return (
+    <nav className="sticky top-0 z-50 border-b border-primary/10 bg-white/95 text-primary shadow-sm backdrop-blur-xl">
+      <div className="container mx-auto px-4">
+        <div className="flex min-h-[4.5rem] items-center justify-between gap-4 md:min-h-20">
+          <Link to="/" className="flex items-center py-2" aria-label="Supun Group of Companies home" onClick={() => setIsOpen(false)}>
+            <div className="rounded-lg border border-primary/10 bg-white px-2.5 py-1.5 md:px-3 md:py-2">
+              <img src={logo} alt="Supun Group of Companies" className="h-12 w-auto md:h-16" />
+            </div>
+          </Link>
+
+          <div className="hidden items-center gap-1 xl:flex">
+            {primaryLinks.slice(0, 2).map((link) => <Link key={link.path} to={link.path}><Button variant={isActive(link.path) ? "default" : "ghost"}>{link.name}</Button></Link>)}
+            <DropdownMenu>
+              <DropdownMenuTrigger asChild><Button variant={isActive("/companies") ? "default" : "ghost"}>Our Companies <ChevronDown className="ml-1" size={16} /></Button></DropdownMenuTrigger>
+              <DropdownMenuContent className="max-h-[70vh] w-80 overflow-y-auto" align="center">
+                <Link to="/companies"><DropdownMenuItem className="cursor-pointer font-semibold text-primary">View All Companies →</DropdownMenuItem></Link>
+                {companies.map((company) => <Link key={company.id} to={`/companies/${company.id}`}><DropdownMenuItem className="cursor-pointer py-2.5"><div><div className="text-sm font-semibold">{company.shortName}</div><div className="text-xs text-muted-foreground">{company.industry}</div></div></DropdownMenuItem></Link>)}
+              </DropdownMenuContent>
+            </DropdownMenu>
+            {primaryLinks.slice(2).map((link) => <Link key={link.path} to={link.path}><Button variant={isActive(link.path) ? "default" : "ghost"}>{link.name}</Button></Link>)}
+          </div>
+
+          <button className="rounded-xl border border-primary/10 p-2.5 transition hover:bg-primary/5 xl:hidden" onClick={() => setIsOpen((open) => !open)} aria-label="Toggle navigation" aria-expanded={isOpen}>
+            {isOpen ? <X size={23} /> : <Menu size={23} />}
+          </button>
+        </div>
+
+        {isOpen && (
+          <div className="border-t border-primary/10 bg-white/98 py-3 xl:hidden">
+            <div className="grid gap-1">
+              {primaryLinks.slice(0, 2).map((link) => <Link key={link.path} to={link.path} onClick={() => setIsOpen(false)}><Button variant={isActive(link.path) ? "default" : "ghost"} className="w-full justify-start">{link.name}</Button></Link>)}
+              <Link to="/companies" onClick={() => setIsOpen(false)}><Button variant={isActive("/companies") ? "default" : "ghost"} className="w-full justify-start">Our Companies</Button></Link>
+              {primaryLinks.slice(2).map((link) => <Link key={link.path} to={link.path} onClick={() => setIsOpen(false)}><Button variant={isActive(link.path) ? "default" : "ghost"} className="w-full justify-start">{link.name}</Button></Link>)}
+            </div>
+          </div>
+        )}
+      </div>
+    </nav>
+  );
 };
 
 export default Navigation;
