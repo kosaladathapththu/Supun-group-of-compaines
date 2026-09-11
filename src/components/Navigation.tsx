@@ -20,6 +20,7 @@ const Navigation = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const location = useLocation();
   const isHome = location.pathname === "/";
+  const overlaysHero = isHome || location.pathname === "/about";
   const isActive = (path: string) => path === "/"
     ? location.pathname === "/"
     : location.pathname === path || location.pathname.startsWith(`${path}/`);
@@ -40,7 +41,7 @@ const Navigation = () => {
     : "bg-[#78be43]/15 text-white ring-1 ring-[#78be43]/25";
 
   return (
-    <nav className={`${isHome ? "fixed" : "sticky"} left-0 right-0 top-0 z-50 bg-transparent px-3 py-2.5 transition-all duration-500 sm:px-4 sm:py-3`}>
+    <nav className={`${overlaysHero ? "fixed" : "sticky"} left-0 right-0 top-0 z-50 bg-transparent px-3 py-2.5 transition-all duration-500 sm:px-4 sm:py-3`}>
       <div className={`${transparentHome ? "nav-soft-glass" : "nav-dark-glass"} mx-auto max-w-[1180px] rounded-[1.35rem] px-3 transition-all duration-500 sm:px-5`}>
         <div className="flex min-h-[3.75rem] items-center justify-between gap-3 md:min-h-[4.25rem]">
           <Link to="/" className="flex items-center py-2" aria-label="Supun Group of Companies home" onClick={() => setIsOpen(false)}>
