@@ -74,7 +74,7 @@ const About = () => (
     <section className="bg-[#f1f0eb] py-20 md:py-28">
       <div className="container mx-auto px-4">
         <AnimatedSection animation="slide-up" duration={800} triggerOnce={false}>
-          <div className="mb-12 grid gap-6 lg:grid-cols-[1fr_auto] lg:items-end"><div><p className="flex items-center gap-3 text-xs font-semibold uppercase tracking-[.22em] text-primary"><span className="h-px w-9 bg-[#78be43]" /> Chairman’s message</p><h2 className="mt-6 max-w-4xl text-4xl font-semibold normal-case leading-[1.02] tracking-[-.045em] text-[#10233f] sm:text-5xl md:text-6xl">Leadership with a long-term view.</h2></div><p className="max-w-xs leading-relaxed text-[#6a7166]">The personality behind the Supun Group success story.</p></div>
+          <div className="mb-12"><p className="flex items-center gap-3 text-xs font-semibold uppercase tracking-[.22em] text-primary"><span className="h-px w-9 bg-[#78be43]" /> Chairman’s Message</p><h2 className="mt-6 max-w-5xl text-4xl font-semibold normal-case leading-[1.02] tracking-[-.045em] text-[#10233f] sm:text-5xl md:text-6xl">The Personality Behind the Success Story of Supun Group of Companies</h2></div>
         </AnimatedSection>
 
         <div className="grid gap-8 lg:grid-cols-[.7fr_1.3fr] lg:items-stretch">
@@ -91,12 +91,12 @@ const About = () => (
             <article className="relative h-full overflow-hidden rounded-[2rem] bg-[#fbfaf6] p-7 shadow-[0_22px_60px_rgba(42,45,39,.08)] sm:p-10 lg:p-12">
               <span className="absolute right-10 top-5 text-[9rem] font-serif leading-none text-[#78be43]/10">“</span>
               <div className="relative max-w-4xl space-y-6 leading-relaxed text-[#62695f]">
-                <p className="pr-10 text-xl font-medium leading-relaxed text-[#10233f]">Since the company was established in 1999, Supun Group of Companies has cultivated its status as a pioneer in the manufacturing and the trading business.</p>
+                <p className="pr-10 text-xl font-medium leading-relaxed text-[#10233f]">Since the company was established in 1999, Supun Group of Companies has cultivated its status as a pioneer in the manufacturing and the trading business. Guided by our corporate creed of “Innovation &amp; Creativity”, we have continued to challenge ourselves to provide a wide range of products and services locally and internationally through technology transfers, human commitment and professionalism.</p>
                 <div className="h-px w-20 bg-[#78be43]/55" />
                 <p>Guided by our corporate creed of “Innovation &amp; Creativity”, we have continued to challenge ourselves to provide a wide range of products and services locally and internationally through technology transfers, human commitment and professionalism.</p>
-                <p>The business environment has experienced radical changes due to the rapid advancement of technology and natural environmental distresses. This has helped businesses identify new opportunities and also challenged them with greater pressures for change, driving a more agile, lean and forward-thinking structure.</p>
-                <p>We too are constantly challenged by competitive forces, be they natural or man-made. Facing them positively and proactively with our dedicated team is what we always strive for.</p>
-                <p className="border-l-2 border-[#78be43]/55 pl-5 text-[#3f463d]">At Supun, I am proud to be part of an excellent team dedicated to the success story of a proud Sri Lankan entity. We continue to seize every opportunity within our reach, enriching the lives of our stakeholders and exceeding their expectations as we nurture future business goals through new products and services.</p>
+                <p>The business environment has experienced radical changes due to the rapid advancement of technology and natural environmental distresses. This has helped businesses to identify new opportunities and also challenged them with greater pressures for change in their approach. As a result, businesses continually change their conventional approach to a more agile, lean and forward-thinking structure in the perpetually changing environment.</p>
+                <p>We too are constantly challenged by these competitive forces, be it natural or man-made, facing them positively and proactively with our dedicated team is what we always strive for.</p>
+                <p className="border-l-2 border-[#78be43]/55 pl-5 text-[#3f463d]">At Supun, I am proud to be a part of an excellent team, that has dedicated themselves to the success story of a proud Sri Lankan entity. We continue to challenge ourselves to seize every opportunity within our reach enabling us to enrich the lives of our stakeholders in our efforts to exceed their expectations. This has been the core of our success story and we strive to continue our journey in nurturing business goals through various new products and services in the future.</p>
               </div>
             </article>
           </AnimatedSection>
