@@ -62,6 +62,16 @@ const CountUpStat = ({ value, label, index }: { value: string; label: string; in
 
 const Home = () => {
   const [heroVideoReady, setHeroVideoReady] = useState(false);
+  const companyCarouselRef = useRef<HTMLDivElement>(null);
+
+  const scrollCompanies = (direction: -1 | 1) => {
+    const carousel = companyCarouselRef.current;
+    if (carousel) {
+      const firstCard = carousel.firstElementChild as HTMLElement | null;
+      const distance = (firstCard?.offsetWidth ?? carousel.clientWidth * 0.85) + 20;
+      carousel.scrollBy({ left: direction * distance, behavior: "smooth" });
+    }
+  };
 
   return (
   <div className="min-h-screen overflow-hidden bg-[#edf3fb]">
@@ -233,11 +243,18 @@ const Home = () => {
 
     <section className="py-16 sm:py-20 md:py-32"><div className="container mx-auto px-4">
       <AnimatedSection animation="slide-up" duration={800} triggerOnce={false}>
-        <div className="flex flex-col justify-between gap-6 md:flex-row md:items-end"><div><p className="section-kicker">Inside the group</p><h2 className="mt-5 text-4xl font-semibold normal-case tracking-[-0.035em] text-[#10233f] md:text-6xl">Businesses built for impact.</h2></div><Link to="/companies" className="group inline-flex items-center gap-3 font-semibold text-primary">Meet all 11 companies <ArrowRight className="transition-transform group-hover:translate-x-1" size={18} /></Link></div>
+        <div className="flex flex-col justify-between gap-6 md:flex-row md:items-end">
+          <div><p className="section-kicker">Inside the group</p><h2 className="mt-5 text-4xl font-semibold normal-case tracking-[-0.035em] text-[#10233f] md:text-6xl">Businesses built for impact.</h2></div>
+          <div className="flex items-center gap-3">
+            <Link to="/companies" className="mr-2 hidden font-semibold text-primary transition hover:text-[#5b9d2c] sm:inline">Meet all 11</Link>
+            <button type="button" onClick={() => scrollCompanies(-1)} aria-label="Previous companies" className="flex h-12 w-12 items-center justify-center rounded-full border border-primary/20 bg-white text-primary transition hover:border-primary hover:bg-primary hover:text-white"><ArrowRight className="rotate-180" size={19} /></button>
+            <button type="button" onClick={() => scrollCompanies(1)} aria-label="Next companies" className="flex h-12 w-12 items-center justify-center rounded-full bg-primary text-white transition hover:bg-[#78be43]"><ArrowRight size={19} /></button>
+          </div>
+        </div>
       </AnimatedSection>
-      <div className="mt-14 grid gap-5 lg:grid-cols-3">
+      <div ref={companyCarouselRef} className="mt-14 flex snap-x snap-mandatory gap-5 overflow-x-auto scroll-smooth pb-6 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
         {companies.map((company, index) => (
-          <AnimatedSection key={company.id} animation="slide-up" delay={index * 130} duration={850} triggerOnce={false} className="h-full">
+          <AnimatedSection key={company.id} animation="slide-up" delay={(index % 3) * 130} duration={850} triggerOnce={false} className="h-full w-[88%] flex-none snap-start sm:w-[calc(50%_-_0.625rem)] lg:w-[calc(33.333%_-_0.833rem)]">
           <Link to={`/companies/${company.id}`} className="company-glass group relative flex h-full min-h-[430px] flex-col overflow-hidden rounded-[1.5rem] p-7 transition duration-500 hover:-translate-y-2 md:p-9">
             <span className="absolute right-5 top-3 text-8xl font-semibold tracking-[-0.08em] text-primary/[.045]">0{index + 1}</span>
             <div className="relative flex items-start justify-between gap-5">
