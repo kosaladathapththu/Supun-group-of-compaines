@@ -5,9 +5,9 @@ import Seo, { DEFAULT_IMAGE, SITE_NAME, SITE_URL } from "@/components/Seo";
 import { AnimatedSection } from "@/components/AnimatedSection";
 import { CompanyLogo } from "@/components/CompanyLogo";
 import { companies } from "@/data/companies";
+import { getCompanyLogo } from "@/data/companyLogos";
 import { sectorHighlights, siteStats } from "@/data/siteContent";
 import heroVideo from "@/assets/supun-group-hero-optimized.mp4";
-import heroPoster from "@/assets/hero-corporate.jpg";
 import manufacturingImage from "@/assets/sector-manufacturing-v2.jpg";
 import hospitalityImage from "@/assets/sector-hospitality-v2.jpg";
 import retailImage from "@/assets/sector-retail-v2.jpg";
@@ -21,6 +21,7 @@ const sectorMeta = [
 ];
 
 const featuredCompanies = [companies[6], companies[4], companies[2]];
+const logoCompanies = companies.filter((company) => getCompanyLogo(company.id));
 
 const CountUpStat = ({ value, label, index }: { value: string; label: string; index: number }) => {
   const target = Number.parseInt(value, 10);
@@ -127,6 +128,31 @@ const Home = () => {
       </div>
     </section>
 
+    <section className="company-marquee relative z-20 overflow-hidden bg-white" aria-label="Supun Group companies">
+      <div className="company-marquee-track py-5 sm:py-6">
+        {[0, 1].map((group) => (
+          <div className="company-marquee-group" key={group} aria-hidden={group === 1 ? "true" : undefined}>
+            {logoCompanies.map((company) => (
+              <Link
+                to={`/companies/${company.id}`}
+                className="company-marquee-item group"
+                key={`${group}-${company.id}`}
+                aria-label={group === 0 ? `View ${company.shortName}` : undefined}
+                tabIndex={group === 1 ? -1 : undefined}
+              >
+                <CompanyLogo
+                  companyId={company.id}
+                  companyName={company.name}
+                  className="h-24 w-52 shrink-0 overflow-hidden bg-transparent sm:h-28 sm:w-64"
+                  imageClassName="h-full w-full scale-[1.75] transition duration-300 group-hover:scale-[1.85]"
+                />
+              </Link>
+            ))}
+          </div>
+        ))}
+      </div>
+    </section>
+
     <section id="legacy" className="legacy-premium relative isolate overflow-hidden py-16 sm:py-20 md:py-32">
       <div className="legacy-aurora legacy-aurora-blue" aria-hidden="true" />
       <div className="legacy-aurora legacy-aurora-green" aria-hidden="true" />
@@ -204,7 +230,30 @@ const Home = () => {
       </div>
     </div></section>
 
-    <section className="relative overflow-hidden bg-[linear-gradient(120deg,#0b3d82,#1763bd_55%,#0a2b5e)] py-20 text-white md:py-24"><Globe2 className="absolute -right-20 -top-24 h-96 w-96 opacity-10" strokeWidth={0.7} aria-hidden="true" /><div className="absolute left-1/3 top-0 h-full w-px bg-white/10" /><div className="container relative mx-auto px-4"><div className="grid items-center gap-10 lg:grid-cols-[1fr_auto]"><div><p className="mb-5 flex items-center gap-2 text-xs font-bold uppercase tracking-[0.2em] text-blue-200"><Sparkles size={15} /> The next chapter</p><h2 className="max-w-4xl text-4xl font-semibold normal-case leading-[1.03] tracking-[-0.035em] md:text-6xl">Building what Sri Lanka needs next.</h2></div><Link to="/contact" className="glass-button group inline-flex min-h-16 items-center justify-center gap-4 px-8 font-semibold text-white">Start a conversation <ArrowRight className="transition-transform group-hover:translate-x-1" size={19} /></Link></div></div></section>
+    <section className="relative overflow-hidden bg-[#f3f7fb] px-4 py-16 sm:py-20 md:py-28">
+      <div className="container mx-auto">
+        <div className="relative isolate overflow-hidden rounded-[2rem] bg-[#071b2d] px-7 py-12 text-white shadow-[0_30px_80px_rgba(7,27,45,.20)] sm:px-12 sm:py-16 md:rounded-[3rem] lg:px-20 lg:py-20">
+          <div className="absolute inset-y-0 right-0 -z-10 w-full bg-[radial-gradient(circle_at_85%_35%,rgba(120,190,67,.22),transparent_30%),linear-gradient(115deg,transparent_45%,rgba(25,83,132,.38))] lg:w-2/3" />
+          <Globe2 className="absolute -bottom-28 -right-24 -z-10 h-[28rem] w-[28rem] text-white/[.06]" strokeWidth={0.65} aria-hidden="true" />
+
+          <div className="grid gap-12 lg:grid-cols-[1fr_18rem] lg:items-end lg:gap-20">
+            <div>
+              <p className="mb-6 flex items-center gap-3 text-xs font-bold uppercase tracking-[0.24em] text-[#9bd46f]"><Sparkles size={15} /> The next chapter</p>
+              <h2 className="max-w-4xl text-4xl font-semibold normal-case leading-[1.02] tracking-[-0.04em] sm:text-5xl md:text-7xl">Let’s build something <span className="text-[#9bd46f]">lasting.</span></h2>
+              <p className="mt-7 max-w-2xl text-base leading-relaxed text-white/65 sm:text-lg">From ambitious ideas to trusted partnerships, we are ready to create what Sri Lanka needs next.</p>
+            </div>
+
+            <div className="border-t border-white/15 pt-7 lg:border-l lg:border-t-0 lg:pl-10 lg:pt-0">
+              <p className="mb-6 text-sm leading-relaxed text-white/55">Have an opportunity, partnership or idea in mind?</p>
+              <Link to="/contact" className="group inline-flex w-full items-center justify-between rounded-full bg-[#78be43] px-6 py-4 font-semibold text-[#071b2d] transition duration-300 hover:bg-white">
+                Talk to our team
+                <span className="flex h-10 w-10 items-center justify-center rounded-full bg-[#071b2d] text-white transition-transform duration-300 group-hover:translate-x-1"><ArrowRight size={18} /></span>
+              </Link>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
   </div>
   );
 };

@@ -20,7 +20,7 @@ All colors MUST be HSL.
     --primary: 217 71% 33%;
     --primary-foreground: 0 0% 100%;
 
-    --primary-dark: 217 71% 23%;
+    --primary-dark: 217 71% 33%;
     --primary-light: 217 71% 53%;
 
     --secondary: 215 16% 35%;
@@ -184,6 +184,46 @@ All colors MUST be HSL.
     height: 1px;
     background: linear-gradient(90deg, #78be43, transparent);
     transition: width .45s cubic-bezier(.22, 1, .36, 1);
+  }
+
+  .company-marquee-track {
+    display: flex;
+    width: max-content;
+    will-change: transform;
+    animation: company-marquee 34s linear infinite;
+  }
+
+  .company-marquee:hover .company-marquee-track {
+    animation-play-state: paused;
+  }
+
+  .company-marquee-group {
+    display: flex;
+    flex-shrink: 0;
+    align-items: center;
+    gap: 3rem;
+    padding-right: 3rem;
+  }
+
+  .company-marquee-item {
+    display: block;
+    overflow: hidden;
+    opacity: 1;
+    filter: saturate(1) contrast(1.06);
+    transition: opacity 300ms ease, filter 300ms ease, transform 300ms ease;
+  }
+
+  .company-marquee-item:hover {
+    opacity: 1;
+    filter: saturate(1.08) contrast(1.08);
+    transform: translateY(-2px);
+  }
+
+  @media (min-width: 640px) {
+    .company-marquee-group {
+      gap: 5rem;
+      padding-right: 5rem;
+    }
   }
 
   .hero-stat:hover::before { width: 70%; }
@@ -605,6 +645,11 @@ All colors MUST be HSL.
 @keyframes hero-reveal {
   from { opacity: 0; transform: translateY(34px); }
   to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes company-marquee {
+  from { transform: translate3d(0, 0, 0); }
+  to { transform: translate3d(-50%, 0, 0); }
 }
 
 @keyframes hero-zoom {
