@@ -108,21 +108,19 @@ const About = () => (
       <div className="absolute -left-40 top-1/2 h-96 w-96 -translate-y-1/2 rounded-full border border-[#78be43]/10" />
       <div className="container relative mx-auto px-4">
         <AnimatedSection animation="slide-up" duration={800} triggerOnce={false}>
-          <div className="mb-12 max-w-3xl"><p className="flex items-center gap-3 text-xs font-semibold uppercase tracking-[.22em] text-[#596255]"><span className="h-px w-9 bg-[#78be43]" /> Our direction</p><h2 className="mt-6 text-4xl font-semibold normal-case tracking-[-.04em] text-[#20251f] md:text-6xl">Purpose that moves us forward.</h2></div>
+          <div className="mb-12 max-w-3xl"><p className="flex items-center gap-3 text-xs font-semibold uppercase tracking-[.22em] text-[#596255]"><span className="h-px w-9 bg-[#78be43]" /> Our direction</p><h2 className="mt-6 text-4xl font-semibold normal-case tracking-[-.04em] text-[#10233f] md:text-6xl">Purpose that moves us forward.</h2></div>
         </AnimatedSection>
 
         <div className="grid gap-6 lg:grid-cols-2 lg:items-start">
           <AnimatedSection animation="slide-right" duration={850} triggerOnce={false}>
             <article className="relative min-h-[430px] overflow-hidden rounded-[2.25rem] bg-[#faf9f5] p-8 text-[#20251f] shadow-[0_22px_60px_rgba(42,45,39,.10)] sm:p-11">
-              <span className="absolute -right-8 -top-16 text-[11rem] font-semibold leading-none text-[#20251f]/[.025]">01</span>
               <div className="flex h-14 w-14 items-center justify-center rounded-full bg-[#dfead6] text-[#527f32]"><Lightbulb size={25} strokeWidth={1.5} /></div>
               <div className="mt-20"><p className="text-xs font-semibold uppercase tracking-[.22em] text-[#657060]">Our vision</p><h2 className="mt-5 max-w-xl text-4xl font-semibold normal-case leading-[1.05] tracking-[-.04em] md:text-5xl">Innovate. Unleash and Excel.</h2><p className="mt-7 max-w-xl leading-relaxed text-[#697064]">To unleash the potential within us to transform the markets through innovation and exceed people’s expectations for a better tomorrow, through the goods and services which empower and enrich the lives of Sri Lankans.</p></div>
             </article>
           </AnimatedSection>
 
           <AnimatedSection animation="slide-left" delay={100} duration={850} triggerOnce={false} className="lg:mt-16">
-            <article className="relative min-h-[430px] overflow-hidden rounded-[2.25rem] bg-[#20251f] p-8 text-white shadow-[0_24px_65px_rgba(32,37,31,.18)] sm:p-11">
-              <span className="absolute -right-8 -top-16 text-[11rem] font-semibold leading-none text-white/[.025]">02</span>
+            <article className="relative min-h-[430px] overflow-hidden rounded-[2.25rem] bg-[#10233f] p-8 text-white shadow-[0_24px_65px_rgba(16,35,63,.22)] sm:p-11">
               <div className="flex h-14 w-14 items-center justify-center rounded-full border border-[#78be43]/30 bg-[#78be43]/10 text-[#91ca67]"><Target size={25} strokeWidth={1.5} /></div>
               <div className="mt-20"><p className="text-xs font-semibold uppercase tracking-[.22em] text-white/45">Our mission</p><h2 className="mt-5 max-w-xl text-4xl font-semibold normal-case leading-[1.05] tracking-[-.04em] md:text-5xl">Superior thinking. Sustainable value.</h2><p className="mt-7 max-w-xl leading-relaxed text-white/58">To harness superior thinking in the creation of products and services that functionally enhance the livelihood of people, while remaining cautious in reducing our carbon footprint. We integrate sustainable practices across our operations while delivering exceptional value to our stakeholders.</p></div>
             </article>
