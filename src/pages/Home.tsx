@@ -8,16 +8,13 @@ import { companies } from "@/data/companies";
 import { getCompanyLogo } from "@/data/companyLogos";
 import { sectorHighlights, siteStats } from "@/data/siteContent";
 import heroVideo from "@/assets/supun-group-hero-optimized.mp4";
-import manufacturingImage from "@/assets/sector-manufacturing-v2.jpg";
-import hospitalityImage from "@/assets/sector-hospitality-v2.jpg";
-import retailImage from "@/assets/sector-retail-v2.jpg";
-import camyImage from "@/assets/sector-camy-v2.jpg";
+import groupLogo from "@/assets/supun-group-of-companies-logo.png";
 
 const sectorMeta = [
-  { icon: Factory, image: manufacturingImage, eyebrow: "Made here" },
-  { icon: ShoppingBag, image: retailImage, eyebrow: "Across the island" },
-  { icon: Hotel, image: hospitalityImage, eyebrow: "Distinctly Colombo" },
-  { icon: ShieldCheck, image: camyImage, eyebrow: "A Sri Lankan original" },
+  { icon: Factory },
+  { icon: ShoppingBag },
+  { icon: Hotel },
+  { icon: ShieldCheck },
 ];
 
 const featuredCompanies = [companies[6], companies[4], companies[2]];
@@ -158,21 +155,21 @@ const Home = () => {
       <div className="legacy-aurora legacy-aurora-green" aria-hidden="true" />
       <div className="legacy-lines absolute inset-0 opacity-50" aria-hidden="true" />
       <div className="container relative z-10 mx-auto px-4">
-        <AnimatedSection animation="slide-up" duration={850}>
+        <AnimatedSection animation="slide-up" duration={850} triggerOnce={false}>
           <div className="mb-10 flex items-center justify-between gap-5 md:mb-14">
             <p className="section-kicker text-primary before:bg-[#78be43]">Our legacy</p>
             <div className="hidden items-center gap-3 text-[10px] font-semibold uppercase tracking-[0.22em] text-primary/45 sm:flex"><span>1978</span><span className="h-px w-14 bg-gradient-to-r from-[#78be43] to-primary/30" /><span>Today</span></div>
           </div>
         </AnimatedSection>
         <div className="grid items-stretch gap-6 lg:grid-cols-[.72fr_1.28fr]">
-          <AnimatedSection animation="slide-right" duration={900}>
+          <AnimatedSection animation="slide-right" duration={900} triggerOnce={false}>
             <div className="legacy-year-card group relative flex h-full min-h-[350px] flex-col justify-between overflow-hidden rounded-[2rem] p-7 sm:min-h-[430px] sm:p-10">
               <div className="legacy-year-ring" aria-hidden="true"><span /><span /><span /></div>
               <div className="relative flex items-center justify-between"><span className="rounded-full border border-primary/10 bg-white/65 px-3 py-1.5 text-[10px] font-semibold uppercase tracking-[0.2em] text-primary/70 backdrop-blur-xl">Where it began</span><span className="legacy-pulse"><span /></span></div>
               <div className="relative"><p className="text-xs font-semibold uppercase tracking-[0.25em] text-[#5b9d2c]">Established</p><div className="legacy-year mt-2 text-[clamp(5rem,14vw,9rem)] font-semibold leading-none tracking-[-0.075em]">1978</div><p className="mt-4 max-w-xs border-l-2 border-[#78be43] pl-4 text-sm leading-relaxed text-[#526278]">One vision in Colombo became a group built across generations.</p></div>
             </div>
           </AnimatedSection>
-          <AnimatedSection animation="slide-left" delay={140} duration={950}>
+          <AnimatedSection animation="slide-left" delay={140} duration={950} triggerOnce={false}>
             <div className="legacy-story-card relative flex h-full min-h-[430px] flex-col overflow-hidden rounded-[2rem] p-7 sm:p-10 lg:p-12">
               <div className="legacy-corner-mark" aria-hidden="true" />
               <div className="relative"><span className="mb-6 inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.2em] text-[#5b9d2c]"><span className="h-2 w-2 rounded-full bg-[#78be43] shadow-[0_0_16px_#78be43]" /> Built across generations</span><h2 className="max-w-4xl text-4xl font-semibold normal-case leading-[1.04] tracking-[-0.04em] text-[#10233f] sm:text-5xl lg:text-6xl">A family business with the courage to <span className="legacy-gradient-text">keep building.</span></h2></div>
@@ -183,37 +180,66 @@ const Home = () => {
       </div>
     </section>
 
-    <section className="sector-section relative bg-white py-16 text-[#10233f] sm:py-20 md:py-32"><div className="container relative z-10 mx-auto px-4">
-      <div className="mb-14 flex flex-col justify-between gap-8 md:flex-row md:items-end"><div><p className="section-kicker text-primary before:bg-[#78be43]">What we do</p><h2 className="mt-5 max-w-3xl text-4xl font-semibold normal-case leading-tight tracking-[-0.035em] text-[#10233f] md:text-6xl">Four strengths. One shared standard.</h2></div><p className="max-w-md text-base leading-relaxed text-[#526278]">An ecosystem built to design, manufacture, distribute and serve—with every capability strengthening the next.</p></div>
-      <div className="grid gap-5 md:grid-cols-2 xl:grid-cols-4">
-        {sectorHighlights.map((sector, index) => {
-          const meta = sectorMeta[index];
-          const Icon = meta.icon;
-          return (
-            <article key={sector.title} className="sector-glass group relative overflow-hidden rounded-[1.5rem]">
-              <div className="relative h-52 overflow-hidden sm:h-56">
-                <img src={meta.image} alt="" className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105" />
-                <div className="absolute inset-x-0 top-0 flex items-center justify-between p-5">
-                  <span className="rounded-full bg-white/95 px-3 py-1 text-xs font-semibold tracking-[0.18em] text-primary shadow-sm">0{index + 1}</span>
-                  <span className="flex h-12 w-12 items-center justify-center rounded-2xl border border-white/80 bg-white/95 shadow-lg"><Icon className="text-primary" size={23} strokeWidth={1.5} /></span>
-                </div>
+    <section className="relative overflow-hidden bg-[#f5f6f1] py-16 text-[#10233f] sm:py-20 md:py-28">
+      <div className="container relative z-10 mx-auto px-4">
+        <div className="grid gap-14 lg:grid-cols-[0.82fr_1.18fr] lg:items-center lg:gap-20">
+          <AnimatedSection animation="slide-right" duration={900} triggerOnce={false}>
+            <div className="relative min-h-[430px] sm:min-h-[560px]">
+              <div className="absolute left-0 top-0 z-10 w-44 rounded-2xl border border-[#10233f]/10 bg-white p-5 shadow-[0_20px_55px_rgba(16,35,63,.10)] sm:w-52 sm:p-6">
+                <strong className="block text-4xl font-semibold tracking-[-0.05em] text-[#10233f]">46+</strong>
+                <span className="mt-2 block text-xs font-semibold uppercase tracking-[0.16em] text-primary">Years of excellence</span>
+                <p className="mt-3 text-xs leading-relaxed text-[#667388]">Building trusted businesses for Sri Lankan families since 1978.</p>
               </div>
-              <div className="min-h-[255px] bg-white p-7">
-                <p className="mb-3 text-xs font-semibold uppercase tracking-[0.18em] text-[#5b9d2c]">{meta.eyebrow}</p>
-                <h3 className="text-2xl font-semibold normal-case text-[#10233f]">{sector.title}</h3>
-                <p className="mt-4 leading-relaxed text-[#526278]">{sector.description}</p>
+
+              <div className="absolute inset-x-4 bottom-0 top-24 flex items-center justify-center rounded-[2rem] border border-white/80 bg-[radial-gradient(circle_at_center,rgba(120,190,67,.11),transparent_58%)] sm:inset-x-10">
+                <span className="absolute h-72 w-72 rounded-full border border-[#78be43]/15 sm:h-96 sm:w-96" />
+                <span className="absolute h-52 w-52 rounded-full border border-primary/10 sm:h-72 sm:w-72" />
+                <img src={groupLogo} alt="Supun Group of Companies" className="relative w-64 drop-shadow-[0_22px_30px_rgba(16,35,63,.12)] sm:w-80" />
               </div>
-            </article>
-          );
-        })}
+            </div>
+          </AnimatedSection>
+
+          <div>
+            <AnimatedSection animation="slide-up" duration={800} triggerOnce={false}>
+              <p className="section-kicker text-primary before:bg-[#78be43]">What we do</p>
+              <h2 className="mt-5 max-w-3xl text-4xl font-semibold normal-case leading-[1.05] tracking-[-0.04em] text-[#10233f] sm:text-5xl md:text-6xl">A Sri Lankan group built on making things well.</h2>
+              <p className="mt-6 max-w-2xl text-base leading-relaxed text-[#526278]">From our Colombo trading roots to manufacturing, retail, hospitality and homegrown consumer products, every capability strengthens the next.</p>
+            </AnimatedSection>
+
+            <div className="mt-9 border-t border-[#10233f]/12">
+              {sectorHighlights.map((sector, index) => {
+                const Icon = sectorMeta[index].icon;
+                return (
+                  <AnimatedSection key={sector.title} animation="slide-left" delay={index * 90} duration={750} triggerOnce={false}>
+                    <article className="group grid grid-cols-[2.5rem_1fr_auto] gap-4 border-b border-[#10233f]/12 py-5 sm:grid-cols-[3rem_1fr_auto] sm:items-center">
+                      <span className="pt-1 text-xs font-semibold tracking-[0.18em] text-primary/55 sm:pt-0">0{index + 1}</span>
+                      <div>
+                        <h3 className="text-xl font-semibold normal-case text-[#10233f] sm:text-2xl">{sector.title}</h3>
+                        <p className="mt-2 max-w-xl text-sm leading-relaxed text-[#667388] sm:text-base">{sector.description}</p>
+                      </div>
+                      <span className="flex h-11 w-11 items-center justify-center rounded-full border border-primary/15 bg-white text-primary transition duration-300 group-hover:border-[#78be43] group-hover:bg-[#78be43] group-hover:text-white"><Icon size={19} strokeWidth={1.6} /></span>
+                    </article>
+                  </AnimatedSection>
+                );
+              })}
+            </div>
+
+            <AnimatedSection animation="fade" delay={250} duration={700} triggerOnce={false}>
+              <Link to="/companies" className="group mt-8 inline-flex items-center gap-4 font-semibold text-primary">Explore the group <span className="flex h-11 w-11 items-center justify-center rounded-full bg-[#10233f] text-white transition duration-300 group-hover:translate-x-1 group-hover:bg-[#78be43]"><ArrowRight size={18} /></span></Link>
+            </AnimatedSection>
+          </div>
+        </div>
       </div>
-    </div></section>
+    </section>
 
     <section className="py-16 sm:py-20 md:py-32"><div className="container mx-auto px-4">
-      <div className="flex flex-col justify-between gap-6 md:flex-row md:items-end"><div><p className="section-kicker">Inside the group</p><h2 className="mt-5 text-4xl font-semibold normal-case tracking-[-0.035em] text-[#10233f] md:text-6xl">Businesses built for impact.</h2></div><Link to="/companies" className="group inline-flex items-center gap-3 font-semibold text-primary">Meet all 11 companies <ArrowRight className="transition-transform group-hover:translate-x-1" size={18} /></Link></div>
+      <AnimatedSection animation="slide-up" duration={800} triggerOnce={false}>
+        <div className="flex flex-col justify-between gap-6 md:flex-row md:items-end"><div><p className="section-kicker">Inside the group</p><h2 className="mt-5 text-4xl font-semibold normal-case tracking-[-0.035em] text-[#10233f] md:text-6xl">Businesses built for impact.</h2></div><Link to="/companies" className="group inline-flex items-center gap-3 font-semibold text-primary">Meet all 11 companies <ArrowRight className="transition-transform group-hover:translate-x-1" size={18} /></Link></div>
+      </AnimatedSection>
       <div className="mt-14 grid gap-5 lg:grid-cols-3">
         {featuredCompanies.map((company, index) => (
-          <Link key={company.id} to={`/companies/${company.id}`} className="company-glass group relative flex min-h-[430px] flex-col overflow-hidden rounded-[1.5rem] p-7 transition duration-500 hover:-translate-y-2 md:p-9">
+          <AnimatedSection key={company.id} animation="slide-up" delay={index * 130} duration={850} triggerOnce={false} className="h-full">
+          <Link to={`/companies/${company.id}`} className="company-glass group relative flex h-full min-h-[430px] flex-col overflow-hidden rounded-[1.5rem] p-7 transition duration-500 hover:-translate-y-2 md:p-9">
             <span className="absolute right-5 top-3 text-8xl font-semibold tracking-[-0.08em] text-primary/[.045]">0{index + 1}</span>
             <div className="relative flex items-start justify-between gap-5">
               <CompanyLogo companyId={company.id} companyName={company.shortName} className="h-32 w-52 max-w-[65%] rounded-2xl border border-primary/10 p-2 shadow-[0_12px_35px_rgba(18,64,120,.10)] transition duration-500 group-hover:scale-[1.03] group-hover:shadow-[0_16px_40px_rgba(18,64,120,.16)]" imageClassName="scale-[1.55] transition-transform duration-500 group-hover:scale-[1.68]" />
@@ -226,12 +252,13 @@ const Home = () => {
               <span className="company-link relative mt-7 inline-flex items-center gap-4 font-semibold text-primary">View company <span className="flex h-11 w-11 items-center justify-center rounded-full border border-[#78be43]/45 bg-[#78be43]/10 text-[#5b9d2c] transition duration-300 group-hover:rotate-[-35deg] group-hover:bg-[#78be43] group-hover:text-white"><ArrowRight size={18} /></span></span>
             </div>
           </Link>
+          </AnimatedSection>
         ))}
       </div>
     </div></section>
 
     <section className="relative overflow-hidden bg-[#f3f7fb] px-4 py-16 sm:py-20 md:py-28">
-      <div className="container mx-auto">
+      <AnimatedSection animation="scale" duration={900} triggerOnce={false} className="container mx-auto">
         <div className="relative isolate overflow-hidden rounded-[2rem] bg-[#071b2d] px-7 py-12 text-white shadow-[0_30px_80px_rgba(7,27,45,.20)] sm:px-12 sm:py-16 md:rounded-[3rem] lg:px-20 lg:py-20">
           <div className="absolute inset-y-0 right-0 -z-10 w-full bg-[radial-gradient(circle_at_85%_35%,rgba(120,190,67,.22),transparent_30%),linear-gradient(115deg,transparent_45%,rgba(25,83,132,.38))] lg:w-2/3" />
           <Globe2 className="absolute -bottom-28 -right-24 -z-10 h-[28rem] w-[28rem] text-white/[.06]" strokeWidth={0.65} aria-hidden="true" />
@@ -252,7 +279,7 @@ const Home = () => {
             </div>
           </div>
         </div>
-      </div>
+      </AnimatedSection>
     </section>
   </div>
   );

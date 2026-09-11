@@ -8,6 +8,7 @@ interface AnimatedSectionProps {
   className?: string;
   threshold?: number;
   duration?: number;
+  triggerOnce?: boolean;
 }
 
 export const AnimatedSection = ({
@@ -17,8 +18,9 @@ export const AnimatedSection = ({
   className = '',
   threshold = 0.1,
   duration = 700,
+  triggerOnce = true,
 }: AnimatedSectionProps) => {
-  const { ref, isVisible } = useScrollAnimation({ threshold, triggerOnce: true });
+  const { ref, isVisible } = useScrollAnimation({ threshold, triggerOnce });
 
   const animations = {
     fade: {
