@@ -140,30 +140,44 @@ const About = () => (
           <div className="mb-14 flex flex-col justify-between gap-6 md:flex-row md:items-end"><div><p className="section-kicker">Our journey</p><h2 className="mt-5 text-4xl font-semibold normal-case tracking-[-.04em] md:text-6xl">Milestones since 1978.</h2></div><p className="max-w-sm leading-relaxed text-[#5d6d82]">One trading business became an interconnected Sri Lankan group, one purposeful step at a time.</p></div>
         </AnimatedSection>
 
-        <div id="journey" className="journey-map relative overflow-hidden rounded-[2.5rem] bg-[#071426] px-5 py-10 text-white shadow-[0_35px_90px_rgba(7,20,38,.22)] sm:px-8 md:px-12 md:py-16">
-          <div className="absolute left-1/2 top-0 h-full w-[32rem] -translate-x-1/2 bg-[radial-gradient(ellipse_at_center,rgba(35,107,201,.18),transparent_68%)]" />
-          <div className="journey-spine absolute bottom-16 left-1/2 top-16 hidden w-px -translate-x-1/2 bg-gradient-to-b from-blue-300/10 via-blue-400/70 to-blue-300/10 md:block" />
-
-          <div className="relative space-y-5 md:space-y-7">
-            {Array.from({ length: Math.ceil(journey.length / 2) }, (_, rowIndex) => journey.slice(rowIndex * 2, rowIndex * 2 + 2)).map((pair, rowIndex) => (
-              <div key={pair[0][0]} className="journey-row relative grid gap-4 md:grid-cols-[1fr_5rem_1fr] md:items-stretch md:gap-6">
-                {pair.map(([year, text], itemIndex) => (
-                  <AnimatedSection key={year} animation={itemIndex === 0 ? "slide-right" : "slide-left"} delay={itemIndex * 100} duration={800} triggerOnce={false} className={itemIndex === 1 ? "md:col-start-3" : ""}>
-                    <article className="journey-card group relative h-full overflow-hidden rounded-[1.5rem] border border-blue-200/10 bg-white/[.055] p-6 backdrop-blur-sm transition duration-500 hover:-translate-y-1 hover:border-blue-300/35 hover:bg-white/[.085] sm:p-7">
-                      <span className="absolute -right-4 -top-8 text-[7rem] font-semibold leading-none tracking-[-.08em] text-white/[.025]">{String(rowIndex * 2 + itemIndex + 1).padStart(2, "0")}</span>
-                      <div className="relative flex items-center justify-between gap-4"><strong className="text-3xl font-semibold tracking-[-.04em] text-blue-300 md:text-4xl">{year}</strong><span className="flex h-9 w-9 items-center justify-center rounded-full border border-blue-300/20 text-[10px] font-semibold text-blue-200">{String(rowIndex * 2 + itemIndex + 1).padStart(2, "0")}</span></div>
-                      <p className="relative mt-5 leading-relaxed text-white/62">{text}</p>
-                    </article>
-                  </AnimatedSection>
-                ))}
-                <div className="journey-node pointer-events-none absolute left-1/2 hidden h-full -translate-x-1/2 items-center justify-center md:flex">
-                  <span className="relative flex h-12 w-12 items-center justify-center rounded-full border border-blue-300/35 bg-[#0d2a51] shadow-[0_0_0_8px_rgba(50,126,220,.08),0_0_30px_rgba(71,145,235,.25)]"><span className="h-2.5 w-2.5 rounded-full bg-[#78be43] shadow-[0_0_14px_#78be43]" /></span>
+        <div id="journey" className="relative overflow-hidden rounded-[2.5rem] border border-[#10233f]/12 bg-[#e5e1d7] px-5 py-10 shadow-[0_28px_75px_rgba(49,45,37,.12)] sm:px-8 md:px-12 md:py-16">
+          <div aria-hidden="true" className="absolute -left-20 -top-24 h-64 w-64 rounded-full border border-[#78be43]/20" />
+          <div aria-hidden="true" className="absolute -bottom-24 right-[12%] h-72 w-72 rounded-full bg-[#dfe9d6]/60 blur-2xl" />
+          <div className="relative mx-auto max-w-6xl">
+            {Array.from({ length: Math.ceil(journey.length / 2) }, (_, rowIndex) => journey.slice(rowIndex * 2, rowIndex * 2 + 2)).map((pair, rowIndex) => {
+              const reverse = rowIndex % 2 === 1;
+              const surfaces = ["bg-[#ece8de]", "bg-[#d2ddca]", "bg-[#d9d1c3]", "bg-[#e2dfd6]"];
+              return (
+                <div key={pair[0][0]}>
+                  <div className="grid items-stretch gap-4 md:grid-cols-[1fr_4.5rem_1fr] md:gap-5">
+                    {pair.map(([year, text], itemIndex) => {
+                      const index = rowIndex * 2 + itemIndex;
+                      const desktopPosition = reverse ? (itemIndex === 0 ? "md:col-start-3 md:row-start-1" : "md:col-start-1 md:row-start-1") : (itemIndex === 0 ? "md:col-start-1 md:row-start-1" : "md:col-start-3 md:row-start-1");
+                      return <AnimatedSection key={year} animation={itemIndex === 0 ? "slide-right" : "slide-left"} duration={800} triggerOnce={false} className={desktopPosition}>
+                        <article className={`group relative h-full overflow-hidden rounded-[1.5rem] border border-[#10233f]/10 p-6 transition duration-500 hover:-translate-y-1 hover:border-[#78be43]/55 hover:shadow-[0_18px_45px_rgba(49,45,37,.10)] ${surfaces[index % surfaces.length]}`}>
+                          <span className="text-[9px] font-semibold uppercase tracking-[.22em] text-[#687269]">Chapter {String(index + 1).padStart(2, "0")}</span>
+                          <strong className="mt-2 block text-3xl font-semibold tracking-[-.05em] text-[#10233f] lg:text-4xl">{year}</strong>
+                          <p className="mt-4 leading-relaxed text-[#59675f]">{text}</p>
+                          <span className="absolute right-5 top-5 h-2.5 w-2.5 rounded-full bg-[#78be43] opacity-60 transition group-hover:opacity-100 group-hover:shadow-[0_0_15px_#78be43]" />
+                        </article>
+                      </AnimatedSection>;
+                    })}
+                    {pair.length > 1 && <div className="relative flex h-16 items-center justify-center md:col-start-2 md:row-start-1 md:h-auto">
+                      <span className="absolute inset-y-0 left-1/2 w-px -translate-x-1/2 bg-[#10233f]/35 md:inset-x-0 md:inset-y-auto md:left-0 md:top-1/2 md:h-px md:w-auto md:translate-x-0" />
+                      <span className={`journey-flow-side relative flex h-10 w-10 items-center justify-center rounded-full border border-[#10233f] bg-[#10233f] text-white shadow-[0_8px_20px_rgba(16,35,63,.24)] ${reverse ? "md:rotate-180" : ""}`}><ArrowRight className="hidden md:block" size={18} strokeWidth={2.3} /><ArrowDown className="md:hidden" size={18} strokeWidth={2.3} /></span>
+                    </div>}
+                  </div>
+                  {rowIndex < Math.ceil(journey.length / 2) - 1 && (
+                    <div className={`journey-connector relative flex h-20 items-center ${reverse ? "md:justify-start md:pl-[21%]" : "md:justify-end md:pr-[21%]"} justify-center`}>
+                      <span className={`absolute inset-y-0 w-px bg-gradient-to-b from-[#10233f]/30 via-[#10233f]/55 to-[#10233f]/30 ${reverse ? "left-1/2 -translate-x-1/2 md:left-[21%]" : "left-1/2 -translate-x-1/2 md:left-auto md:right-[21%] md:translate-x-0"}`} />
+                      <span style={{ animationDelay: `${rowIndex * 120}ms` }} className="journey-flow-down relative flex h-10 w-10 items-center justify-center rounded-full border border-[#10233f] bg-[#10233f] text-white shadow-[0_8px_22px_rgba(16,35,63,.25)]"><ArrowDown size={18} strokeWidth={2.3} /></span>
+                    </div>
+                  )}
                 </div>
-              </div>
-            ))}
+              );
+            })}
           </div>
-
-          <div className="relative mt-8 flex items-center justify-between border-t border-white/10 pt-7 text-[10px] font-semibold uppercase tracking-[.2em] text-blue-200/55"><span>Colombo · 1978</span><span>Growing forward</span><span>Today · Sri Lanka</span></div>
+          <div className="relative mt-10 flex flex-wrap items-center justify-between gap-4 border-t border-[#10233f]/10 pt-7 text-[10px] font-semibold uppercase tracking-[.2em] text-[#687269]"><span>Colombo · 1978</span><span className="inline-flex items-center gap-3"><i className="h-2 w-2 rounded-full bg-[#78be43]" /> Growing year by year</span><span>Today · Sri Lanka</span></div>
         </div>
       </div>
     </section>

@@ -698,6 +698,24 @@ All colors MUST be HSL.
 
 @keyframes legacy-shimmer { to { background-position: 220% center; } }
 
+.journey-flow-down {
+  animation: journey-arrow-flow 1.8s ease-in-out infinite;
+}
+
+.journey-flow-side {
+  animation: journey-arrow-pulse 1.8s ease-in-out infinite;
+}
+
+@keyframes journey-arrow-flow {
+  0%, 100% { transform: translateY(-4px); }
+  50% { transform: translateY(7px); }
+}
+
+@keyframes journey-arrow-pulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(120, 190, 67, .08); }
+  50% { box-shadow: 0 0 0 8px rgba(120, 190, 67, .12); }
+}
+
 @keyframes legacy-pulse {
   from { opacity: .8; transform: scale(.7); }
   to { opacity: 0; transform: scale(1.8); }
