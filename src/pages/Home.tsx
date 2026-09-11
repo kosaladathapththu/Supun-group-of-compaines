@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
-import { ArrowDown, ArrowRight, Factory, Hotel, ShieldCheck, ShoppingBag } from "lucide-react";
+import { ArrowDown, ArrowRight, Factory, Globe2, Hotel, ShieldCheck, ShoppingBag, Sparkles } from "lucide-react";
 import Seo, { DEFAULT_IMAGE, SITE_NAME, SITE_URL } from "@/components/Seo";
 import { AnimatedSection } from "@/components/AnimatedSection";
 import { CompanyLogo } from "@/components/CompanyLogo";
@@ -271,6 +271,31 @@ const Home = () => {
         ))}
       </div>
     </div></section>
+
+    <section className="relative overflow-hidden bg-[#f3f7fb] px-4 pb-16 sm:pb-20 md:pb-28">
+      <AnimatedSection animation="scale" duration={900} triggerOnce={false} className="container mx-auto">
+        <div className="relative isolate overflow-hidden rounded-[2rem] bg-[#071b2d] px-7 py-12 text-white shadow-[0_30px_80px_rgba(7,27,45,.20)] sm:px-12 sm:py-16 md:rounded-[3rem] lg:px-20 lg:py-20">
+          <div className="absolute inset-y-0 right-0 -z-10 w-full bg-[radial-gradient(circle_at_85%_35%,rgba(120,190,67,.22),transparent_30%),linear-gradient(115deg,transparent_45%,rgba(25,83,132,.38))] lg:w-2/3" />
+          <Globe2 className="absolute -bottom-28 -right-24 -z-10 h-[28rem] w-[28rem] text-white/[.06]" strokeWidth={0.65} aria-hidden="true" />
+
+          <div className="grid gap-12 lg:grid-cols-[1fr_18rem] lg:items-end lg:gap-20">
+            <div>
+              <p className="mb-6 flex items-center gap-3 text-xs font-bold uppercase tracking-[0.24em] text-[#9bd46f]"><Sparkles size={15} /> The next chapter</p>
+              <h2 className="max-w-4xl text-4xl font-semibold normal-case leading-[1.02] tracking-[-0.04em] sm:text-5xl md:text-7xl">Let’s build something <span className="text-[#9bd46f]">lasting.</span></h2>
+              <p className="mt-7 max-w-2xl text-base leading-relaxed text-white/65 sm:text-lg">From ambitious ideas to trusted partnerships, we are ready to create what Sri Lanka needs next.</p>
+            </div>
+
+            <div className="border-t border-white/15 pt-7 lg:border-l lg:border-t-0 lg:pl-10 lg:pt-0">
+              <p className="mb-6 text-sm leading-relaxed text-white/55">Have an opportunity, partnership or idea in mind?</p>
+              <Link to="/contact" className="group inline-flex w-full items-center justify-between rounded-full bg-[#78be43] px-6 py-4 font-semibold text-[#071b2d] transition duration-300 hover:bg-white">
+                Talk to our team
+                <span className="flex h-10 w-10 items-center justify-center rounded-full bg-[#071b2d] text-white transition-transform duration-300 group-hover:translate-x-1"><ArrowRight size={18} /></span>
+              </Link>
+            </div>
+          </div>
+        </div>
+      </AnimatedSection>
+    </section>
 
   </div>
   );
