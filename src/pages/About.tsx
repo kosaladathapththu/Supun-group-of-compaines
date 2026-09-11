@@ -21,7 +21,7 @@ const groupSectors = [
 ];
 
 const About = () => (
-  <div className="min-h-screen overflow-hidden bg-[#f4f7fb] text-[#10233f]">
+  <div className="min-h-screen overflow-hidden bg-[#f7f7f4] text-[#10233f]">
     <Seo
       title="About Supun Group of Companies | Our Story Since 1978"
       description="Discover the story, leadership, vision, journey and values of Supun Group of Companies, a Sri Lankan family-run group with roots dating to 1978."
@@ -34,31 +34,34 @@ const About = () => (
       <div className="absolute inset-x-0 bottom-0 h-48 bg-gradient-to-t from-[#071426] to-transparent" />
       <div className="container relative z-10 mx-auto px-4 pb-12 pt-40 md:pb-16">
         <div className="max-w-4xl">
-          <p className="mb-6 flex items-center gap-3 text-xs font-semibold uppercase tracking-[.24em] text-blue-200"><span className="h-px w-10 bg-blue-400" /> About Supun Group</p>
-          <h1 className="about-hero-title font-semibold normal-case">Rooted in Sri Lanka.<br /><span className="text-blue-300">Built across generations.</span></h1>
+          <p className="mb-6 flex items-center gap-3 text-xs font-semibold uppercase tracking-[.24em] text-blue-200"><span className="h-px w-10 bg-[#78be43] shadow-[0_0_12px_rgba(120,190,67,.55)]" /> About Supun Group</p>
+          <h1 className="about-hero-title font-semibold normal-case">Rooted in Sri Lanka.<br /><span className="text-white/65">Built across generations.</span></h1>
           <p className="mt-7 max-w-2xl text-lg leading-relaxed text-white/72 md:text-xl">From a Colombo trading business to a connected group spanning manufacturing, retail, distribution and hospitality.</p>
         </div>
         <a href="#story" className="mt-10 inline-flex items-center gap-3 text-xs font-semibold uppercase tracking-[.2em] text-white/65 transition hover:text-white"><span className="flex h-11 w-11 items-center justify-center rounded-full border border-white/25"><ArrowDown size={17} /></span> Discover our story</a>
       </div>
     </section>
 
-    <section id="story" className="relative py-20 md:py-32">
+    <section id="story" className="relative bg-white py-20 md:py-28">
       <div className="container mx-auto px-4">
-        <div className="grid gap-14 lg:grid-cols-[1.12fr_.88fr] lg:gap-20">
+        <div className="grid gap-10 border-b border-[#10233f]/12 pb-14 lg:grid-cols-[.8fr_1.2fr] lg:gap-24 lg:pb-20">
           <AnimatedSection animation="slide-right" duration={850} triggerOnce={false}>
             <p className="section-kicker">Our story</p>
-            <h2 className="mt-6 max-w-3xl text-4xl font-semibold normal-case leading-[1.05] tracking-[-.04em] md:text-6xl">From trading goods to <span className="text-primary">making them.</span></h2>
-            <div className="mt-8 space-y-5 text-base leading-relaxed text-[#5d6d82] md:text-lg">
-              <p>A family-run business since 1978, Supun Group began when Mr. Mohamed Fareed founded Supun Traders in Colombo, trading household goods for Sri Lankan homes. In 1999, his son, current Chairman Mr. M.F.M. Kaleel, took over the business and formalized it as the Supun Group of Companies.</p>
-              <p>Through structured growth, the Group now operates across manufacturing, retail, distribution and hospitality, each held to the same standard of quality and Sri Lankan craftsmanship.</p>
-              <p>Under the Camy name, Supun manufactures consumer products in its own factories, reaching homes across the island through Supun Super Center and a network of more than 250 distributors.</p>
+            <h2 className="mt-6 text-4xl font-semibold normal-case leading-[1.04] tracking-[-.045em] sm:text-5xl md:text-6xl">From trading goods to <span className="relative whitespace-nowrap">making them.<i className="absolute -bottom-1 left-0 h-1 w-16 rounded-full bg-[#78be43]/60" /></span></h2>
+            <div className="mt-9 flex items-center gap-5"><strong className="text-5xl font-semibold tracking-[-.05em] text-[#10233f]">1978</strong><span className="h-10 w-px bg-[#78be43]/55" /><p className="max-w-36 text-xs font-semibold uppercase leading-relaxed tracking-[.14em] text-[#667388]">A Sri Lankan story begins</p></div>
+          </AnimatedSection>
+
+          <AnimatedSection animation="slide-left" delay={100} duration={850} triggerOnce={false}>
+            <div className="space-y-6 text-base leading-relaxed text-[#5d6d82] md:text-lg">
+              <p className="text-xl leading-relaxed text-[#10233f] md:text-2xl">A family-run business since 1978, Supun Group began when Mr. Mohamed Fareed founded Supun Traders in Colombo, trading household goods for Sri Lankan homes.</p>
+              <div className="grid gap-6 md:grid-cols-2"><p>In 1999, his son, current Chairman Mr. M.F.M. Kaleel, took over the business and formalized it as the Supun Group of Companies, moving from trading goods to manufacturing them.</p><p>Today, the Group operates across manufacturing, retail, distribution and hospitality, united by quality and Sri Lankan craftsmanship.</p></div>
+              <p className="border-l-2 border-[#78be43]/65 pl-5">Under the Camy name, Supun manufactures consumer products in its own factories, reaching homes through Supun Super Center and a network of more than 250 distributors.</p>
             </div>
           </AnimatedSection>
-          <AnimatedSection animation="slide-left" delay={120} duration={900} triggerOnce={false}>
-            <div className="grid grid-cols-2 overflow-hidden rounded-[2rem] bg-[#0b2242] shadow-[0_28px_70px_rgba(16,35,63,.18)]">
-              {stats.map(([value, label], index) => <div key={label} className={`min-h-44 p-7 md:p-9 ${index === 0 ? "bg-primary" : "border-white/10"} ${index < 2 ? "border-b" : ""} ${index % 2 === 0 ? "border-r" : ""}`}><strong className="text-4xl font-semibold tracking-[-.04em] text-white md:text-5xl">{value}</strong><p className="mt-3 text-sm leading-relaxed text-blue-100/65">{label}</p></div>)}
-            </div>
-          </AnimatedSection>
+        </div>
+
+        <div className="grid grid-cols-2 gap-px overflow-hidden rounded-[1.75rem] bg-[#10233f]/10 shadow-[0_18px_50px_rgba(16,35,63,.08)] md:grid-cols-4">
+          {stats.map(([value, label], index) => <AnimatedSection key={label} animation="slide-up" delay={index * 80} duration={700} triggerOnce={false}><div className="group relative min-h-40 bg-[#f2f1ec] p-6 sm:p-8"><span className="absolute right-6 top-6 h-1.5 w-1.5 rounded-full bg-[#78be43] opacity-40 transition group-hover:opacity-100" /><strong className="text-4xl font-semibold tracking-[-.05em] text-[#10233f] md:text-5xl">{value}</strong><p className="mt-4 text-sm text-[#667388]">{label}</p></div></AnimatedSection>)}
         </div>
       </div>
     </section>
@@ -85,17 +88,44 @@ const About = () => (
       </div>
     </section>
 
-    <section className="py-20 md:py-28">
+    <section className="bg-[#eaf1f9] py-20 md:py-28">
       <div className="container mx-auto px-4">
-        <AnimatedSection animation="slide-up" duration={800} triggerOnce={false}><div className="mb-14 max-w-3xl"><p className="section-kicker">Our journey</p><h2 className="mt-5 text-4xl font-semibold normal-case tracking-[-.04em] md:text-6xl">Milestones since 1978.</h2></div></AnimatedSection>
-        <div className="grid gap-x-12 md:grid-cols-2">{journey.map(([year, text], index) => <AnimatedSection key={year} animation="slide-up" delay={(index % 2) * 100} duration={750} triggerOnce={false}><article className="grid grid-cols-[5rem_1fr] gap-5 border-t border-[#10233f]/15 py-7"><strong className="text-xl text-primary">{year}</strong><p className="leading-relaxed text-[#5d6d82]">{text}</p></article></AnimatedSection>)}</div>
+        <AnimatedSection animation="slide-up" duration={800} triggerOnce={false}>
+          <div className="mb-14 flex flex-col justify-between gap-6 md:flex-row md:items-end"><div><p className="section-kicker">Our journey</p><h2 className="mt-5 text-4xl font-semibold normal-case tracking-[-.04em] md:text-6xl">Milestones since 1978.</h2></div><p className="max-w-sm leading-relaxed text-[#5d6d82]">One trading business became an interconnected Sri Lankan group, one purposeful step at a time.</p></div>
+        </AnimatedSection>
+
+        <div id="journey" className="journey-map relative overflow-hidden rounded-[2.5rem] bg-[#071426] px-5 py-10 text-white shadow-[0_35px_90px_rgba(7,20,38,.22)] sm:px-8 md:px-12 md:py-16">
+          <div className="absolute left-1/2 top-0 h-full w-[32rem] -translate-x-1/2 bg-[radial-gradient(ellipse_at_center,rgba(35,107,201,.18),transparent_68%)]" />
+          <div className="journey-spine absolute bottom-16 left-1/2 top-16 hidden w-px -translate-x-1/2 bg-gradient-to-b from-blue-300/10 via-blue-400/70 to-blue-300/10 md:block" />
+
+          <div className="relative space-y-5 md:space-y-7">
+            {Array.from({ length: Math.ceil(journey.length / 2) }, (_, rowIndex) => journey.slice(rowIndex * 2, rowIndex * 2 + 2)).map((pair, rowIndex) => (
+              <div key={pair[0][0]} className="journey-row relative grid gap-4 md:grid-cols-[1fr_5rem_1fr] md:items-stretch md:gap-6">
+                {pair.map(([year, text], itemIndex) => (
+                  <AnimatedSection key={year} animation={itemIndex === 0 ? "slide-right" : "slide-left"} delay={itemIndex * 100} duration={800} triggerOnce={false} className={itemIndex === 1 ? "md:col-start-3" : ""}>
+                    <article className="journey-card group relative h-full overflow-hidden rounded-[1.5rem] border border-blue-200/10 bg-white/[.055] p-6 backdrop-blur-sm transition duration-500 hover:-translate-y-1 hover:border-blue-300/35 hover:bg-white/[.085] sm:p-7">
+                      <span className="absolute -right-4 -top-8 text-[7rem] font-semibold leading-none tracking-[-.08em] text-white/[.025]">{String(rowIndex * 2 + itemIndex + 1).padStart(2, "0")}</span>
+                      <div className="relative flex items-center justify-between gap-4"><strong className="text-3xl font-semibold tracking-[-.04em] text-blue-300 md:text-4xl">{year}</strong><span className="flex h-9 w-9 items-center justify-center rounded-full border border-blue-300/20 text-[10px] font-semibold text-blue-200">{String(rowIndex * 2 + itemIndex + 1).padStart(2, "0")}</span></div>
+                      <p className="relative mt-5 leading-relaxed text-white/62">{text}</p>
+                    </article>
+                  </AnimatedSection>
+                ))}
+                <div className="journey-node pointer-events-none absolute left-1/2 hidden h-full -translate-x-1/2 items-center justify-center md:flex">
+                  <span className="relative flex h-12 w-12 items-center justify-center rounded-full border border-blue-300/35 bg-[#0d2a51] shadow-[0_0_0_8px_rgba(50,126,220,.08),0_0_30px_rgba(71,145,235,.25)]"><span className="h-2.5 w-2.5 rounded-full bg-[#78be43] shadow-[0_0_14px_#78be43]" /></span>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          <div className="relative mt-8 flex items-center justify-between border-t border-white/10 pt-7 text-[10px] font-semibold uppercase tracking-[.2em] text-blue-200/55"><span>Colombo · 1978</span><span>Growing forward</span><span>Today · Sri Lanka</span></div>
+        </div>
       </div>
     </section>
 
     <section className="bg-white py-20 md:py-28">
       <div className="container mx-auto px-4">
         <AnimatedSection animation="slide-up" duration={800} triggerOnce={false}><div className="mb-14 text-center"><p className="section-kicker justify-center before:hidden">What guides us</p><h2 className="mt-5 text-4xl font-semibold normal-case tracking-[-.04em] md:text-6xl">Values made visible.</h2></div></AnimatedSection>
-        <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-4">{coreValues.map((value, index) => <AnimatedSection key={value.title} animation="slide-up" delay={index * 90} duration={750} triggerOnce={false}><article className="h-full rounded-[1.5rem] border border-[#10233f]/10 bg-[#f6f9fc] p-7 transition duration-300 hover:-translate-y-1 hover:border-primary/30 hover:shadow-[0_18px_45px_rgba(16,35,63,.09)]"><span className="text-xs font-semibold tracking-[.18em] text-primary/45">0{index + 1}</span><h3 className="mt-10 text-2xl font-semibold normal-case">{value.title}</h3><p className="mt-4 leading-relaxed text-[#667388]">{value.description}</p></article></AnimatedSection>)}</div>
+        <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-4">{coreValues.map((value, index) => <AnimatedSection key={value.title} animation="slide-up" delay={index * 90} duration={750} triggerOnce={false}><article className="group h-full rounded-[1.5rem] border border-[#10233f]/10 bg-[#f6f9fc] p-7 transition duration-300 hover:-translate-y-1 hover:border-[#78be43]/40 hover:shadow-[0_18px_45px_rgba(16,35,63,.09)]"><span className="flex items-center gap-2 text-xs font-semibold tracking-[.18em] text-primary/45"><i className="h-1.5 w-1.5 rounded-full bg-[#78be43] opacity-40 transition group-hover:opacity-100" />0{index + 1}</span><h3 className="mt-10 text-2xl font-semibold normal-case">{value.title}</h3><p className="mt-4 leading-relaxed text-[#667388]">{value.description}</p></article></AnimatedSection>)}</div>
       </div>
     </section>
 
@@ -116,7 +146,7 @@ const About = () => (
     <section className="bg-white py-20 md:py-28">
       <div className="container mx-auto px-4">
         <AnimatedSection animation="slide-up" duration={800} triggerOnce={false}><div className="mb-14 flex flex-col justify-between gap-6 md:flex-row md:items-end"><div><p className="section-kicker">Recognition</p><h2 className="mt-5 text-4xl font-semibold normal-case tracking-[-.04em] md:text-6xl">Standards that earn trust.</h2></div><Link to="/companies" className="inline-flex items-center gap-3 font-semibold text-primary">Explore our companies <ArrowRight size={18} /></Link></div></AnimatedSection>
-        <div className="grid gap-5 md:grid-cols-2">{awards.map((item, index) => <AnimatedSection key={`${item.award}-${item.awardedTo}`} animation="slide-up" delay={(index % 2) * 90} duration={750} triggerOnce={false}><article className="flex h-full gap-5 rounded-[1.5rem] border border-[#10233f]/10 p-7"><Award className="mt-1 shrink-0 text-primary" /><div><h3 className="text-lg font-semibold normal-case">{item.award}</h3><p className="mt-3 font-semibold text-primary">{item.awardedTo}</p><p className="mt-1 text-sm text-[#667388]">{item.givenBy}</p></div></article></AnimatedSection>)}</div>
+        <div className="grid gap-5 md:grid-cols-2">{awards.map((item, index) => <AnimatedSection key={`${item.award}-${item.awardedTo}`} animation="slide-up" delay={(index % 2) * 90} duration={750} triggerOnce={false}><article className="group flex h-full gap-5 rounded-[1.5rem] border border-[#10233f]/10 p-7 transition hover:border-[#78be43]/35"><Award className="mt-1 shrink-0 text-primary transition group-hover:text-[#5b9d2c]" /><div><h3 className="text-lg font-semibold normal-case">{item.award}</h3><p className="mt-3 font-semibold text-primary">{item.awardedTo}</p><p className="mt-1 text-sm text-[#667388]">{item.givenBy}</p></div></article></AnimatedSection>)}</div>
       </div>
     </section>
   </div>
