@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
-import { ArrowDown, ArrowRight, Factory, Globe2, Hotel, Play, ShieldCheck, ShoppingBag, Sparkles } from "lucide-react";
+import { ArrowDown, ArrowRight, Factory, Hotel, ShieldCheck, ShoppingBag } from "lucide-react";
 import Seo, { DEFAULT_IMAGE, SITE_NAME, SITE_URL } from "@/components/Seo";
 import { AnimatedSection } from "@/components/AnimatedSection";
 import { CompanyLogo } from "@/components/CompanyLogo";
@@ -17,7 +17,6 @@ const sectorMeta = [
   { icon: ShieldCheck },
 ];
 
-const featuredCompanies = [companies[6], companies[4], companies[2]];
 const logoCompanies = companies.filter((company) => getCompanyLogo(company.id));
 
 const CountUpStat = ({ value, label, index }: { value: string; label: string; index: number }) => {
@@ -107,12 +106,12 @@ const Home = () => {
         <div className="hero-copy max-w-5xl py-12 sm:py-16 md:py-24">
           <p className="mb-5 flex items-center gap-3 text-xs font-semibold uppercase tracking-[0.22em] text-[#f5a623] sm:mb-6 sm:text-sm sm:tracking-[0.28em]"><span className="h-px w-8 bg-current sm:w-10" /> One group. Many possibilities.</p>
           <h1 className="max-w-5xl text-[clamp(3rem,14vw,8.4rem)] font-semibold normal-case leading-[0.88] tracking-[-0.045em] text-white md:leading-[0.84]">
-            Built in Sri Lanka.<br /><span className="text-white/55">Built to last.</span>
+            Built in Sri Lanka.<br /><span className="text-white/55">Built to Last.</span>
           </h1>
-          <p className="mt-6 max-w-2xl text-base leading-relaxed text-white/75 sm:mt-8 sm:text-lg md:text-xl">From factory floors to family homes, we build products, places and partnerships that move Sri Lanka forward.</p>
+          <p className="mt-6 max-w-2xl text-base leading-relaxed text-white/75 sm:mt-8 sm:text-lg md:text-xl">One Sri Lankan Group, built across four industries since 1978.</p>
           <div className="mt-8 flex flex-col gap-3 sm:mt-10 sm:flex-row">
             <Link to="/companies" className="premium-button group inline-flex min-h-14 items-center justify-center gap-3 px-7 font-semibold text-white">Explore our companies <ArrowRight className="transition-transform group-hover:translate-x-1" size={19} /></Link>
-            <Link to="/about" className="glass-button inline-flex min-h-14 items-center justify-center gap-3 px-7 font-semibold text-white"><Play size={17} fill="currentColor" /> Discover our story</Link>
+            <Link to="/contact" className="glass-button inline-flex min-h-14 items-center justify-center gap-3 px-7 font-semibold text-white">Get In Touch <ArrowRight size={18} /></Link>
           </div>
         </div>
 
@@ -237,7 +236,7 @@ const Home = () => {
         <div className="flex flex-col justify-between gap-6 md:flex-row md:items-end"><div><p className="section-kicker">Inside the group</p><h2 className="mt-5 text-4xl font-semibold normal-case tracking-[-0.035em] text-[#10233f] md:text-6xl">Businesses built for impact.</h2></div><Link to="/companies" className="group inline-flex items-center gap-3 font-semibold text-primary">Meet all 11 companies <ArrowRight className="transition-transform group-hover:translate-x-1" size={18} /></Link></div>
       </AnimatedSection>
       <div className="mt-14 grid gap-5 lg:grid-cols-3">
-        {featuredCompanies.map((company, index) => (
+        {companies.map((company, index) => (
           <AnimatedSection key={company.id} animation="slide-up" delay={index * 130} duration={850} triggerOnce={false} className="h-full">
           <Link to={`/companies/${company.id}`} className="company-glass group relative flex h-full min-h-[430px] flex-col overflow-hidden rounded-[1.5rem] p-7 transition duration-500 hover:-translate-y-2 md:p-9">
             <span className="absolute right-5 top-3 text-8xl font-semibold tracking-[-0.08em] text-primary/[.045]">0{index + 1}</span>
@@ -246,7 +245,6 @@ const Home = () => {
               <span className="inline-flex rounded-full border border-primary/10 bg-primary/[.07] px-3 py-1 text-[10px] font-bold uppercase tracking-[0.16em] text-primary">{company.industry}</span>
             </div>
             <div className="relative mt-auto pt-8">
-              <p className="mb-3 text-sm font-medium text-primary/70">{company.tagline}</p>
               <h3 className="text-3xl font-semibold normal-case tracking-[-0.03em] text-[#10233f]">{company.shortName}</h3>
               <p className="mt-4 leading-relaxed text-[#667388]">{company.description}</p>
               <span className="company-link relative mt-7 inline-flex items-center gap-4 font-semibold text-primary">View company <span className="flex h-11 w-11 items-center justify-center rounded-full border border-[#78be43]/45 bg-[#78be43]/10 text-[#5b9d2c] transition duration-300 group-hover:rotate-[-35deg] group-hover:bg-[#78be43] group-hover:text-white"><ArrowRight size={18} /></span></span>
@@ -257,30 +255,6 @@ const Home = () => {
       </div>
     </div></section>
 
-    <section className="relative overflow-hidden bg-[#f3f7fb] px-4 py-16 sm:py-20 md:py-28">
-      <AnimatedSection animation="scale" duration={900} triggerOnce={false} className="container mx-auto">
-        <div className="relative isolate overflow-hidden rounded-[2rem] bg-[#071b2d] px-7 py-12 text-white shadow-[0_30px_80px_rgba(7,27,45,.20)] sm:px-12 sm:py-16 md:rounded-[3rem] lg:px-20 lg:py-20">
-          <div className="absolute inset-y-0 right-0 -z-10 w-full bg-[radial-gradient(circle_at_85%_35%,rgba(120,190,67,.22),transparent_30%),linear-gradient(115deg,transparent_45%,rgba(25,83,132,.38))] lg:w-2/3" />
-          <Globe2 className="absolute -bottom-28 -right-24 -z-10 h-[28rem] w-[28rem] text-white/[.06]" strokeWidth={0.65} aria-hidden="true" />
-
-          <div className="grid gap-12 lg:grid-cols-[1fr_18rem] lg:items-end lg:gap-20">
-            <div>
-              <p className="mb-6 flex items-center gap-3 text-xs font-bold uppercase tracking-[0.24em] text-[#9bd46f]"><Sparkles size={15} /> The next chapter</p>
-              <h2 className="max-w-4xl text-4xl font-semibold normal-case leading-[1.02] tracking-[-0.04em] sm:text-5xl md:text-7xl">Let’s build something <span className="text-[#9bd46f]">lasting.</span></h2>
-              <p className="mt-7 max-w-2xl text-base leading-relaxed text-white/65 sm:text-lg">From ambitious ideas to trusted partnerships, we are ready to create what Sri Lanka needs next.</p>
-            </div>
-
-            <div className="border-t border-white/15 pt-7 lg:border-l lg:border-t-0 lg:pl-10 lg:pt-0">
-              <p className="mb-6 text-sm leading-relaxed text-white/55">Have an opportunity, partnership or idea in mind?</p>
-              <Link to="/contact" className="group inline-flex w-full items-center justify-between rounded-full bg-[#78be43] px-6 py-4 font-semibold text-[#071b2d] transition duration-300 hover:bg-white">
-                Talk to our team
-                <span className="flex h-10 w-10 items-center justify-center rounded-full bg-[#071b2d] text-white transition-transform duration-300 group-hover:translate-x-1"><ArrowRight size={18} /></span>
-              </Link>
-            </div>
-          </div>
-        </div>
-      </AnimatedSection>
-    </section>
   </div>
   );
 };
