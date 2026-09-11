@@ -121,6 +121,11 @@ const About = () => (
 
           <AnimatedSection animation="slide-left" delay={100} duration={850} triggerOnce={false} className="lg:mt-16">
             <article className="relative min-h-[430px] overflow-hidden rounded-[2.25rem] bg-[#10233f] p-8 text-white shadow-[0_24px_65px_rgba(16,35,63,.22)] sm:p-11">
+              <div aria-hidden="true" className="pointer-events-none absolute -right-16 -top-16 h-52 w-52 rounded-full border border-white/10">
+                <span className="absolute inset-8 rounded-full border border-[#78be43]/25" />
+                <span className="absolute inset-[4.25rem] rounded-full border border-white/15" />
+                <span className="absolute left-1/2 top-1/2 h-3 w-3 -translate-x-1/2 -translate-y-1/2 rounded-full bg-[#78be43] shadow-[0_0_22px_rgba(120,190,67,.7)]" />
+              </div>
               <div className="flex h-14 w-14 items-center justify-center rounded-full border border-[#78be43]/30 bg-[#78be43]/10 text-[#91ca67]"><Target size={25} strokeWidth={1.5} /></div>
               <div className="mt-20"><p className="text-xs font-semibold uppercase tracking-[.22em] text-white/45">Our mission</p><h2 className="mt-5 max-w-xl text-4xl font-semibold normal-case leading-[1.05] tracking-[-.04em] md:text-5xl">Superior thinking. Sustainable value.</h2><p className="mt-7 max-w-xl leading-relaxed text-white/58">To harness superior thinking in the creation of products and services that functionally enhance the livelihood of people, while remaining cautious in reducing our carbon footprint. We integrate sustainable practices across our operations while delivering exceptional value to our stakeholders.</p></div>
             </article>
