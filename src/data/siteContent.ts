@@ -69,7 +69,7 @@ export const journey = [
   ["2016", "Aero Star founded, bringing chrome plating and Camy-branded appliance manufacturing in-house"],
   ["2017", "Camy Smart and Rodsons founded, helmet manufacturing and the components that support it"],
   ["2018", "New Camy Smart founded, adding non-stick cookware manufacturing"],
-  ["2023", "Fuji Industries founded, manufacturing air conditioners and fans"],
+  ["2023", "Fuji Industries founded, the Group's newest venture, manufacturing air conditioners and fans"],
   ["Today", "11 companies across manufacturing, retail, distribution, and hospitality, employing 300+ people"],
 ] as const;
 
