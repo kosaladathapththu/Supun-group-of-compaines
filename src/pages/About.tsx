@@ -66,7 +66,7 @@ const About = () => (
       </div>
     </section>
 
-    <section className="bg-[#eaf1f9] py-20 md:py-28">
+    <section className="bg-[#f1f0eb] py-20 md:py-28">
       <div className="container mx-auto px-4">
         <AnimatedSection animation="slide-up" duration={800} triggerOnce={false}>
           <div className="mb-12 flex flex-col justify-between gap-6 md:flex-row md:items-end"><div><p className="section-kicker">Chairman’s message</p><h2 className="mt-5 max-w-3xl text-4xl font-semibold normal-case tracking-[-.04em] md:text-6xl">Leadership with a long-term view.</h2></div><p className="max-w-sm text-[#5d6d82]">The personality behind the Supun Group success story.</p></div>
@@ -88,7 +88,7 @@ const About = () => (
       </div>
     </section>
 
-    <section className="bg-[#eaf1f9] py-20 md:py-28">
+    <section className="bg-[#f7f7f4] py-20 md:py-28">
       <div className="container mx-auto px-4">
         <AnimatedSection animation="slide-up" duration={800} triggerOnce={false}>
           <div className="mb-14 flex flex-col justify-between gap-6 md:flex-row md:items-end"><div><p className="section-kicker">Our journey</p><h2 className="mt-5 text-4xl font-semibold normal-case tracking-[-.04em] md:text-6xl">Milestones since 1978.</h2></div><p className="max-w-sm leading-relaxed text-[#5d6d82]">One trading business became an interconnected Sri Lankan group, one purposeful step at a time.</p></div>
@@ -129,7 +129,7 @@ const About = () => (
       </div>
     </section>
 
-    <section className="bg-[#eaf1f9] py-20 md:py-28">
+    <section className="bg-[#f1f0eb] py-20 md:py-28">
       <div className="container mx-auto px-4">
         <AnimatedSection animation="slide-up" duration={800} triggerOnce={false}><div className="mb-14 flex flex-col justify-between gap-5 md:flex-row md:items-end"><div><p className="section-kicker">Leadership team</p><h2 className="mt-5 text-4xl font-semibold normal-case tracking-[-.04em] md:text-6xl">Leading across the Group.</h2></div><Users className="hidden text-primary/20 md:block" size={72} strokeWidth={1} /></div></AnimatedSection>
         <div className="grid gap-5 md:grid-cols-2 xl:grid-cols-3">{leadership.map((person, index) => <AnimatedSection key={person.name} animation="slide-up" delay={(index % 3) * 90} duration={750} triggerOnce={false}><article className="h-full rounded-[1.5rem] bg-white p-7 shadow-[0_14px_38px_rgba(16,35,63,.07)]"><div className="flex h-11 w-11 items-center justify-center rounded-full bg-primary/10 text-primary"><Users size={20} /></div><h3 className="mt-8 text-2xl font-semibold normal-case">{person.name}</h3><p className="mt-2 font-semibold text-primary">{person.title}</p>{person.description && <p className="mt-4 leading-relaxed text-[#667388]">{person.description}</p>}</article></AnimatedSection>)}</div>
