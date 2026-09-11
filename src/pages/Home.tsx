@@ -184,7 +184,7 @@ const Home = () => {
     </section>
 
     <section className="sector-section relative bg-white py-16 text-[#10233f] sm:py-20 md:py-32"><div className="container relative z-10 mx-auto px-4">
-      <div className="mb-14 flex flex-col justify-between gap-8 md:flex-row md:items-end"><div><p className="section-kicker text-primary before:bg-[#78be43]">What we do</p><h2 className="mt-5 max-w-3xl text-4xl font-semibold normal-case leading-tight tracking-[-0.035em] text-primary md:text-6xl">Four strengths. One shared standard.</h2></div><p className="max-w-md text-base leading-relaxed text-[#526278]">An ecosystem built to design, manufacture, distribute and serve—with every capability strengthening the next.</p></div>
+      <div className="mb-14 flex flex-col justify-between gap-8 md:flex-row md:items-end"><div><p className="section-kicker text-primary before:bg-[#78be43]">What we do</p><h2 className="mt-5 max-w-3xl text-4xl font-semibold normal-case leading-tight tracking-[-0.035em] text-[#10233f] md:text-6xl">Four strengths. One shared standard.</h2></div><p className="max-w-md text-base leading-relaxed text-[#526278]">An ecosystem built to design, manufacture, distribute and serve—with every capability strengthening the next.</p></div>
       <div className="grid gap-5 md:grid-cols-2 xl:grid-cols-4">
         {sectorHighlights.map((sector, index) => {
           const meta = sectorMeta[index];
@@ -200,7 +200,7 @@ const Home = () => {
               </div>
               <div className="min-h-[255px] bg-white p-7">
                 <p className="mb-3 text-xs font-semibold uppercase tracking-[0.18em] text-[#5b9d2c]">{meta.eyebrow}</p>
-                <h3 className="text-2xl font-semibold normal-case text-primary">{sector.title}</h3>
+                <h3 className="text-2xl font-semibold normal-case text-[#10233f]">{sector.title}</h3>
                 <p className="mt-4 leading-relaxed text-[#526278]">{sector.description}</p>
               </div>
             </article>
