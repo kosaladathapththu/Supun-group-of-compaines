@@ -4,11 +4,11 @@ import Seo from "@/components/Seo";
 import { AnimatedSection } from "@/components/AnimatedSection";
 import chairmanImage from "@/assets/Chairman.png";
 import aboutHero from "@/assets/about-hero-v2.png";
+import groupLogo from "@/assets/supun-group-of-companies-logo.png";
 import { awards, coreValues, journey, leadership } from "@/data/siteContent";
 import { companies } from "@/data/companies";
 
 const stats = [
-  ["1978", "Our story began"],
   ["11", "Group companies"],
   ["300+", "Employees"],
   ["250+", "Distributors"],
@@ -44,24 +44,29 @@ const About = () => (
 
     <section id="story" className="relative bg-white py-20 md:py-28">
       <div className="container mx-auto px-4">
-        <div className="grid gap-10 border-b border-[#10233f]/12 pb-14 lg:grid-cols-[.8fr_1.2fr] lg:gap-24 lg:pb-20">
+        <div className="grid gap-8 lg:grid-cols-[.72fr_1.28fr] lg:gap-12">
           <AnimatedSection animation="slide-right" duration={850} triggerOnce={false}>
-            <p className="section-kicker">Our story</p>
-            <h2 className="mt-6 text-4xl font-semibold normal-case leading-[1.04] tracking-[-.045em] sm:text-5xl md:text-6xl">From trading goods to <span className="relative whitespace-nowrap">making them.<i className="absolute -bottom-1 left-0 h-1 w-16 rounded-full bg-[#78be43]/60" /></span></h2>
-            <div className="mt-9 flex items-center gap-5"><strong className="text-5xl font-semibold tracking-[-.05em] text-[#10233f]">1978</strong><span className="h-10 w-px bg-[#78be43]/55" /><p className="max-w-36 text-xs font-semibold uppercase leading-relaxed tracking-[.14em] text-[#667388]">A Sri Lankan story begins</p></div>
+            <aside className="relative flex h-full min-h-[500px] flex-col overflow-hidden rounded-[2rem] bg-[#f1f0eb] p-7 sm:p-10">
+              <div className="absolute -right-24 -top-24 h-72 w-72 rounded-full border border-[#10233f]/[.06]" />
+              <div className="absolute -right-10 -top-10 h-44 w-44 rounded-full border border-[#78be43]/15" />
+              <p className="section-kicker relative">Our story</p>
+              <div className="relative my-auto flex justify-center py-12"><img src={groupLogo} alt="Supun Group of Companies" className="w-64 drop-shadow-[0_18px_25px_rgba(16,35,63,.12)] sm:w-72" /></div>
+              <div className="relative flex items-end justify-between gap-5 border-t border-[#10233f]/10 pt-7"><div><strong className="text-6xl font-semibold tracking-[-.06em]">1978</strong><p className="mt-2 text-xs font-semibold uppercase tracking-[.16em] text-[#667388]">Where our story began</p></div><span className="mb-2 h-2.5 w-2.5 rounded-full bg-[#78be43] shadow-[0_0_16px_rgba(120,190,67,.6)]" /></div>
+            </aside>
           </AnimatedSection>
 
           <AnimatedSection animation="slide-left" delay={100} duration={850} triggerOnce={false}>
-            <div className="space-y-6 text-base leading-relaxed text-[#5d6d82] md:text-lg">
-              <p className="text-xl leading-relaxed text-[#10233f] md:text-2xl">A family-run business since 1978, Supun Group began when Mr. Mohamed Fareed founded Supun Traders in Colombo, trading household goods for Sri Lankan homes.</p>
-              <div className="grid gap-6 md:grid-cols-2"><p>In 1999, his son, current Chairman Mr. M.F.M. Kaleel, took over the business and formalized it as the Supun Group of Companies, moving from trading goods to manufacturing them.</p><p>Today, the Group operates across manufacturing, retail, distribution and hospitality, united by quality and Sri Lankan craftsmanship.</p></div>
-              <p className="border-l-2 border-[#78be43]/65 pl-5">Under the Camy name, Supun manufactures consumer products in its own factories, reaching homes through Supun Super Center and a network of more than 250 distributors.</p>
+            <div className="flex h-full flex-col rounded-[2rem] border border-[#10233f]/10 p-7 sm:p-10 lg:p-12">
+              <h2 className="max-w-3xl text-4xl font-semibold normal-case leading-[1.04] tracking-[-.045em] sm:text-5xl md:text-6xl">From trading goods to <span className="relative whitespace-nowrap">making them.<i className="absolute -bottom-1 left-0 h-1 w-16 rounded-full bg-[#78be43]/60" /></span></h2>
+              <p className="mt-8 text-xl leading-relaxed text-[#10233f] md:text-2xl">A family-run business since 1978, Supun Group began when Mr. Mohamed Fareed founded Supun Traders in Colombo.</p>
+              <div className="mt-8 grid gap-6 border-t border-[#10233f]/10 pt-8 text-base leading-relaxed text-[#5d6d82] md:grid-cols-2"><p>In 1999, his son, current Chairman Mr. M.F.M. Kaleel, took over and formalized the Supun Group of Companies, moving from trading goods to manufacturing them.</p><p>Today, the Group operates across manufacturing, retail, distribution and hospitality, united by quality and Sri Lankan craftsmanship.</p></div>
+              <p className="mt-7 border-l-2 border-[#78be43]/60 pl-5 text-sm leading-relaxed text-[#667388]">Under the Camy name, Supun manufactures consumer products in its own factories, reaching homes through Supun Super Center and more than 250 distributors.</p>
+
+              <div className="mt-auto grid grid-cols-3 gap-3 pt-10">
+                {stats.map(([value, label]) => <div key={label} className="rounded-2xl bg-[#f4f3ef] p-4 sm:p-5"><strong className="text-2xl font-semibold tracking-[-.04em] sm:text-3xl">{value}</strong><p className="mt-2 text-xs leading-snug text-[#667388]">{label}</p></div>)}
+              </div>
             </div>
           </AnimatedSection>
-        </div>
-
-        <div className="grid grid-cols-2 gap-px overflow-hidden rounded-[1.75rem] bg-[#10233f]/10 shadow-[0_18px_50px_rgba(16,35,63,.08)] md:grid-cols-4">
-          {stats.map(([value, label], index) => <AnimatedSection key={label} animation="slide-up" delay={index * 80} duration={700} triggerOnce={false}><div className="group relative min-h-40 bg-[#f2f1ec] p-6 sm:p-8"><span className="absolute right-6 top-6 h-1.5 w-1.5 rounded-full bg-[#78be43] opacity-40 transition group-hover:opacity-100" /><strong className="text-4xl font-semibold tracking-[-.05em] text-[#10233f] md:text-5xl">{value}</strong><p className="mt-4 text-sm text-[#667388]">{label}</p></div></AnimatedSection>)}
         </div>
       </div>
     </section>
