@@ -18,6 +18,19 @@ const productImages: Record<string, string> = {
   "Wall Clocks": chromeImage,
 };
 
+const categoryLinks: Record<string, string> = {
+  "Motorcycle Helmets": "https://www.anythingatsupun.lk/brand/camy/",
+  "Water Filters": "https://www.anythingatsupun.lk/product-category/household/water-filters/",
+  "Mixer Grinders": "https://www.anythingatsupun.lk/product-category/electronics/mixer-grinder/",
+  "Non-Stick Cookware": "https://www.anythingatsupun.lk/product-category/kitchenware/cookware/",
+  "Air Conditioners": "https://www.anythingatsupun.lk/product-category/air-conditioners/",
+  "Fans": "https://www.anythingatsupun.lk/product-category/electronics/stand-fans/",
+  "TVs": "https://www.anythingatsupun.lk/product-category/electronics/tvs/",
+  "Wall Clocks": "https://www.anythingatsupun.lk/product-category/wall-clocks/",
+  "Electric Kettles": "https://www.anythingatsupun.lk/product-category/electronics/electric-kettles/",
+  "Gas Cookers": "https://www.anythingatsupun.lk/product-category/kitchenware/gas-cookers/",
+};
+
 const CamyProducts = () => (
   <main className="min-h-screen bg-[#f7f6f3] text-[#111]">
     <Seo
@@ -40,16 +53,23 @@ const CamyProducts = () => (
       .camy-card:hover { transform:translateY(-5px); border-color:rgba(237,28,36,.3); box-shadow:0 24px 55px rgba(0,0,0,.09); }
       .camy-card:nth-child(4n+2),.camy-card:nth-child(4n+3) { grid-template-columns:54% 46%; }
       .camy-card:nth-child(4n+2) .camy-media,.camy-card:nth-child(4n+3) .camy-media { order:2; }
-      .camy-media { min-width:0; overflow:hidden; background:#e8e7e3; }
-      .camy-media img { display:block; width:100%; height:100%; object-fit:cover; transition:transform .7s cubic-bezier(.22,1,.36,1); }
-      .camy-card:hover .camy-media img { transform:scale(1.045); }
+      .camy-media { position:relative; min-width:0; overflow:hidden; background:#f0efeb; clip-path:inset(0 round 0); transition:clip-path .65s cubic-bezier(.22,1,.36,1),transform .65s cubic-bezier(.22,1,.36,1); }
+      .camy-media::after { content:"CAMY"; position:absolute; inset:0; display:grid; place-items:center; color:#fff; font-size:.72rem; font-weight:900; letter-spacing:.28em; opacity:0; background:linear-gradient(180deg,transparent 35%,rgba(0,0,0,.48)); transition:opacity .35s ease .1s; pointer-events:none; }
+      .camy-media img { display:block; width:100%; height:100%; object-fit:cover; transition:transform .75s cubic-bezier(.22,1,.36,1),filter .45s ease; }
+      .camy-card:hover .camy-media { clip-path:inset(18px round 999px); transform:scale(.96); }
+      .camy-card:hover .camy-media img { transform:scale(1.11); filter:saturate(.82) contrast(1.04); }
+      .camy-card:hover .camy-media::after { opacity:1; }
       .camy-copy { display:flex; min-width:0; flex-direction:column; justify-content:space-between; padding:2rem; }
       .camy-tag { display:inline-flex; align-items:center; gap:.4rem; color:#ed1c24; font-size:.68rem; font-weight:800; letter-spacing:.14em; text-transform:uppercase; }
       .camy-link { display:flex; align-items:center; justify-content:space-between; border-top:1px solid rgba(17,17,17,.1); padding-top:1rem; color:#111!important; font-size:.78rem; font-weight:800; }
       .camy-link-icon { display:grid; width:2.25rem; height:2.25rem; place-items:center; border-radius:50%; background:#111; color:#fff; transition:.3s ease; }
       .camy-card:hover .camy-link-icon { transform:translateX(3px); background:#ed1c24; }
+      .camy-categories { display:flex; gap:.7rem; overflow-x:auto; padding:0 0 1rem; scrollbar-width:thin; }
+      .camy-category { display:inline-flex; flex:0 0 auto; align-items:center; gap:.7rem; border:1px solid rgba(17,17,17,.12); border-radius:999px; background:#fff; padding:.8rem 1.05rem; color:#111!important; font-size:.76rem; font-weight:800; transition:.3s ease; }
+      .camy-category::before { content:""; width:.45rem; height:.45rem; border-radius:50%; background:#ed1c24; }
+      .camy-category:hover { transform:translateY(-2px); border-color:#ed1c24; color:#ed1c24!important; box-shadow:0 8px 22px rgba(0,0,0,.07); }
       @media(max-width:1023px) { .camy-hero { grid-template-columns:1fr; } .camy-visual { min-height:470px; } .camy-catalog { grid-template-columns:1fr; } }
-      @media(max-width:640px) { .camy-actions { flex-direction:column; } .camy-button { width:100%; } .camy-card,.camy-card:nth-child(n) { grid-template-columns:1fr; } .camy-card:nth-child(n) .camy-media { order:0; height:235px; } .camy-copy { min-height:245px; padding:1.5rem; } }
+      @media(max-width:640px) { .camy-actions { flex-direction:column; } .camy-button { width:100%; } .camy-card,.camy-card:nth-child(n) { grid-template-columns:1fr; } .camy-card:nth-child(n) .camy-media,.camy-card:hover .camy-media { order:0; height:235px; clip-path:inset(0 round 0); transform:none; } .camy-copy { min-height:245px; padding:1.5rem; } }
     `}</style>
 
     <section className="border-b border-black/10 bg-white pb-14 pt-32 md:pb-20 md:pt-40">
@@ -92,6 +112,20 @@ const CamyProducts = () => (
         <div className="mb-12 flex flex-col justify-between gap-5 border-b border-black/15 pb-8 md:flex-row md:items-end">
           <div><p className="text-xs font-bold uppercase tracking-[.24em] text-[#ed1c24]">The Camy range</p><h2 className="mt-4 text-4xl font-bold tracking-[-.035em] md:text-6xl">Products for real life.</h2></div>
           <p className="max-w-md text-base leading-7 text-black/55">A considered collection of locally manufactured products, connected by one trusted Sri Lankan brand.</p>
+        </div>
+
+        <div className="mb-9">
+          <div className="mb-4 flex items-center justify-between gap-4">
+            <p className="text-xs font font-bold uppercase tracking-[.2em] text-black/45">Shop by category</p>
+            <span className="hidden text-xs text-black/35 sm:block">Opens the matching Anything at Supun catalogue</span>
+          </div>
+          <nav className="camy-categorieslish" aria-label="Camy shop categories">
+            {camyProducts.map((product) => (
+              <a key={product.name} href={categoryLinks[product.name] || shopUrl} target="_blank" rel="noopener noreferrer" className="camy-category">
+                {product.name}<ExternalLink size={13} />
+              </a>
+            ))}
+          </nav>
         </div>
 
         <div className="camy-catalog">
