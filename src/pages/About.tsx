@@ -228,10 +228,30 @@ const About = () => (
       </div>
     </section>
 
-    <section className="bg-white py-20 md:py-28">
+    <section className="bg-[#f3f0e9] py-20 md:py-28">
       <div className="container mx-auto px-4">
-        <AnimatedSection animation="slide-up" duration={800} triggerOnce={false}><div className="mb-14 flex flex-col justify-between gap-6 md:flex-row md:items-end"><div><p className="section-kicker">Recognition</p><h2 className="mt-5 text-4xl font-semibold normal-case tracking-[-.04em] md:text-6xl">Standards that earn trust.</h2><p className="mt-5 max-w-2xl leading-relaxed text-[#667388]">Recognition earned across the Group, from national manufacturing certification to industry and hospitality awards.</p></div><Link to="/companies" className="inline-flex items-center gap-3 font-semibold text-primary">Explore our companies <ArrowRight size={18} /></Link></div></AnimatedSection>
-        <div className="grid gap-5 md:grid-cols-2">{awards.map((item, index) => <AnimatedSection key={`${item.award}-${item.awardedTo}`} animation="slide-up" delay={(index % 2) * 90} duration={750} triggerOnce={false}><article className="group flex h-full gap-5 rounded-[1.5rem] border border-[#10233f]/10 p-7 transition hover:border-[#78be43]/35"><Award className="mt-1 shrink-0 text-primary transition group-hover:text-[#5b9d2c]" /><div><h3 className="text-lg font-semibold normal-case">{item.award}</h3><p className="mt-3 font-semibold text-primary">{item.awardedTo}</p><p className="mt-1 text-sm text-[#667388]">{item.givenBy}</p></div></article></AnimatedSection>)}</div>
+        <AnimatedSection animation="slide-up" duration={800} triggerOnce={false}><div className="mb-16 flex flex-col justify-between gap-6 md:flex-row md:items-end"><div><p className="section-kicker">Recognition</p><h2 className="mt-5 text-4xl font-semibold normal-case tracking-[-.04em] md:text-6xl">Medals and awards.</h2><p className="mt-5 max-w-2xl leading-relaxed text-[#667069]">Honours earned across the Group—from national manufacturing certification to industry and hospitality recognition.</p></div><Link to="/companies" className="group inline-flex items-center gap-3 font-semibold text-[#10233f]">Explore our companies <span className="flex h-10 w-10 items-center justify-center rounded-full bg-[#10233f] text-white transition group-hover:translate-x-1 group-hover:bg-[#78be43]"><ArrowRight size={17} /></span></Link></div></AnimatedSection>
+        <div className="grid gap-5 md:grid-cols-6">
+          {awards.map((item, index) => {
+            const medal = ["from-[#f5d77b] via-[#c9962f] to-[#8e641b]", "from-[#e9edf0] via-[#aeb9c2] to-[#77838d]", "from-[#e6b28a] via-[#b7723c] to-[#7e4729]"][index % 3];
+            const span = index === 0 ? "md:col-span-6 lg:col-span-4" : index === 1 ? "md:col-span-3 lg:col-span-2" : "md:col-span-3 lg:col-span-2";
+            return <AnimatedSection key={`${item.award}-${item.awardedTo}`} animation="slide-up" delay={(index % 3) * 90} duration={750} triggerOnce={false} className={span}>
+              <article className="group relative flex h-full min-h-[285px] flex-col overflow-hidden rounded-[1.75rem] border border-[#10233f]/10 bg-[#fffdf8] p-7 pt-8 transition duration-500 hover:-translate-y-1 hover:border-[#c9962f]/45 hover:shadow-[0_22px_55px_rgba(64,52,32,.11)] sm:p-8">
+                <div className="relative h-20 w-20">
+                  <span className="absolute bottom-0 left-3 h-9 w-6 -rotate-[12deg] bg-[#10233f] [clip-path:polygon(0_0,100%_0,82%_100%,50%_76%,18%_100%)]" />
+                  <span className="absolute bottom-0 right-3 h-9 w-6 rotate-[12deg] bg-[#78be43] [clip-path:polygon(0_0,100%_0,82%_100%,50%_76%,18%_100%)]" />
+                  <span className={`absolute left-1/2 top-0 flex h-16 w-16 -translate-x-1/2 items-center justify-center rounded-full border-4 border-white bg-gradient-to-br shadow-[0_7px_18px_rgba(67,52,27,.24)] ${medal}`}><Award size={29} strokeWidth={1.8} className="text-white drop-shadow" /></span>
+                </div>
+                <div className="mt-auto pt-8">
+                  <p className="text-[10px] font-semibold uppercase tracking-[.18em] text-[#8b6a2b]">Award {String(index + 1).padStart(2, "0")}</p>
+                  <h3 className="mt-3 text-xl font-semibold normal-case leading-snug text-[#10233f]">{item.award}</h3>
+                  <div className="mt-6 border-t border-[#10233f]/10 pt-5"><p className="font-semibold text-[#315f9f]">{item.awardedTo}</p><p className="mt-1.5 text-sm text-[#6a746d]">{item.givenBy}</p></div>
+                </div>
+                <span className="absolute right-7 top-7 text-5xl font-semibold tracking-[-.06em] text-[#10233f]/[.035]">{String(index + 1).padStart(2, "0")}</span>
+              </article>
+            </AnimatedSection>;
+          })}
+        </div>
       </div>
     </section>
   </div>
