@@ -67,8 +67,8 @@ const Companies = () => {
                   <CompanyLogo
                     companyId={company.id}
                     companyName={company.shortName}
-                    className="mb-5 h-24 w-full rounded-xl border border-primary/10 p-4 shadow-sm"
-                    imageClassName="transition-transform duration-300 group-hover:scale-105"
+                    className="mb-6 h-36 w-full rounded-2xl border border-primary/10 p-2 shadow-sm sm:h-40"
+                    imageClassName="!h-full !w-full !max-h-none !max-w-none scale-110 transition-transform duration-300 group-hover:scale-[1.18]"
                   />
                   <div className="flex justify-end mb-4">
                     <span className="text-xs font-semibold rounded-full bg-accent/10 text-accent px-3 py-1">{company.industry}</span>
