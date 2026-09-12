@@ -1,208 +1,78 @@
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
+import { ChevronDown, Menu, X } from "lucide-react";
 import { Link, useLocation } from "react-router-dom";
-import { Menu, X, ChevronDown } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
-import { companiesAPI, type Company } from "@/services/api";
-const logo = "/supun-group-of-companies-logo.png";
+import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
+import { companies } from "@/data/companies";
+import logo from "@/assets/supun-group-of-companies-logo.png";
+
+const primaryLinks = [
+  { name: "Home", path: "/" },
+  { name: "About Us", path: "/about" },
+  { name: "Camy Products", path: "/camy-products" },
+  { name: "Careers", path: "/careers" },
+  { name: "News & Media", path: "/news" },
+  { name: "Contact", path: "/contact" },
+];
 
 const Navigation = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const [companies, setCompanies] = useState<Company[]>([]);
-  const [isLoadingCompanies, setIsLoadingCompanies] = useState(true);
+  const [isScrolled, setIsScrolled] = useState(false);
   const location = useLocation();
+  const isHome = location.pathname === "/";
+  const overlaysHero = isHome || location.pathname === "/about";
+  const isActive = (path: string) => path === "/"
+    ? location.pathname === "/"
+    : location.pathname === path || location.pathname.startsWith(`${path}/`);
 
   useEffect(() => {
-    loadCompanies();
+    const updateNavigation = () => setIsScrolled(window.scrollY > 40);
+    updateNavigation();
+    window.addEventListener("scroll", updateNavigation, { passive: true });
+    return () => window.removeEventListener("scroll", updateNavigation);
   }, []);
 
-  const loadCompanies = async () => {
-    try {
-      const data = await companiesAPI.getAll();
-      setCompanies(data);
-    } catch (error) {
-      console.error('Failed to load companies for navigation:', error);
-      // Silently fail - navigation will just show "View All Companies" without dropdown items
-    } finally {
-      setIsLoadingCompanies(false);
-    }
-  };
-
-  const isActive = (path: string) => {
-    if (path === '/') {
-      return location.pathname === '/';
-    }
-
-    return location.pathname === path || location.pathname.startsWith(path + '/');
-  };
-
-  const navLinks = [
-    { name: "Home", path: "/" },
-    { name: "About Us", path: "/about" },
-    { name: "Shop", path: "/shop" },
-    { name: "Contact", path: "/contact" },
-  ];
+  const transparentHome = isHome && !isScrolled && !isOpen;
+  const navLinkClass = transparentHome
+    ? "text-white hover:bg-white/10 hover:text-white"
+    : "text-white/80 hover:bg-white/10 hover:text-white";
+  const activeLinkClass = transparentHome
+    ? "bg-white/10 text-white ring-1 ring-white/15"
+    : "bg-[#78be43]/15 text-white ring-1 ring-[#78be43]/25";
 
   return (
-    <nav className="bg-white text-primary border-b border-gray-200 sticky top-0 z-50 shadow-md">
-      <div className="container mx-auto px-4">
-        <div className="flex items-center justify-between h-20">
-          <Link to="/" className="relative z-10">
-            <div className="absolute top-2 left-0 bg-white px-6 py-4 rounded-xl  transition-all duration-300 transform  border border-primary/10">
-              <img
-                src={logo}
-                alt="Supun Group of Companies"
-                className="h-16 md:h-20 w-auto"
-              />
+    <nav className={`${overlaysHero ? "fixed" : "sticky"} left-0 right-0 top-0 z-50 bg-transparent px-3 py-2.5 transition-all duration-500 sm:px-4 sm:py-3`}>
+      <div className={`${transparentHome ? "nav-soft-glass" : "nav-dark-glass"} mx-auto max-w-[1180px] rounded-[1.35rem] px-3 transition-all duration-500 sm:px-5`}>
+        <div className="flex min-h-[3.75rem] items-center justify-between gap-3 md:min-h-[4.25rem]">
+          <Link to="/" className="flex items-center py-2" aria-label="Supun Group of Companies home" onClick={() => setIsOpen(false)}>
+            <div className={`${transparentHome ? "bg-white/90" : "bg-white/95"} rounded-xl px-2 py-1 shadow-sm ring-1 ring-white/20 transition-all duration-500`}>
+              <img src={logo} alt="Supun Group of Companies" className="h-10 w-auto md:h-12" />
             </div>
-            {/* Spacer to prevent layout shift */}
-            <div className="h-16 md:h-20 w-32 md:w-40"></div>
           </Link>
 
-          {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center space-x-1">
-            {navLinks.map((link) => (
-              <Link key={link.path} to={link.path}>
-                <Button
-                  variant={isActive(link.path) ? "default" : "ghost"}
-                  className={isActive(link.path)
-                    ? "text-white bg-primary hover:bg-primary/90"
-                    : "text-primary hover:text-white hover:bg-primary/90 transition-smooth"
-                  }
-                >
-                  {link.name}
-                </Button>
-              </Link>
-            ))}
-
-            {/* Companies Dropdown */}
+          <div className="hidden items-center gap-0.5 xl:flex">
+            {primaryLinks.slice(0, 2).map((link) => <Link key={link.path} to={link.path}><Button variant="ghost" className={isActive(link.path) ? activeLinkClass : navLinkClass}>{link.name}</Button></Link>)}
             <DropdownMenu>
-              <DropdownMenuTrigger asChild>
-                <Button
-                  variant={location.pathname.includes("/companies") ? "default" : "ghost"}
-                  className={location.pathname.includes("/companies")
-                    ? "text-white bg-primary hover:bg-primary/90"
-                    : "text-primary hover:text-white hover:bg-primary/90 transition-smooth"
-                  }
-                >
-                  Companies <ChevronDown className="ml-1" size={16} />
-                </Button>
-              </DropdownMenuTrigger>
-              <DropdownMenuContent
-                className="w-80 max-h-96 overflow-y-auto bg-card z-50"
-                align="end"
-              >
-                <div className="p-2">
-                  <Link to="/companies">
-                    <DropdownMenuItem className="cursor-pointer font-semibold text-primary mb-2">
-                      View All Companies →
-                    </DropdownMenuItem>
-                  </Link>
-                  <div className="border-t pt-2">
-                    {isLoadingCompanies ? (
-                      <div className="py-4 text-center text-sm text-muted-foreground">
-                        Loading companies...
-                      </div>
-                    ) : companies.length === 0 ? (
-                      <div className="py-4 text-center text-sm text-muted-foreground">
-                        No companies available
-                      </div>
-                    ) : (
-                      companies.map((company) => (
-                        <Link key={company.id} to={`/companies/${company.id}`}>
-                          <DropdownMenuItem className="cursor-pointer py-3">
-                            <div>
-                              <div className="font-semibold text-sm">{company.shortName}</div>
-                              <div className="text-xs text-muted-foreground">{company.industry}</div>
-                            </div>
-                          </DropdownMenuItem>
-                        </Link>
-                      ))
-                    )}
-                  </div>
-                </div>
+              <DropdownMenuTrigger asChild><Button variant="ghost" className={isActive("/companies") ? activeLinkClass : navLinkClass}>Our Companies <ChevronDown className="ml-1" size={16} /></Button></DropdownMenuTrigger>
+              <DropdownMenuContent className="max-h-[70vh] w-80 overflow-y-auto" align="center">
+                <Link to="/companies"><DropdownMenuItem className="cursor-pointer font-semibold text-primary">View All Companies →</DropdownMenuItem></Link>
+                {companies.map((company) => <Link key={company.id} to={`/companies/${company.id}`}><DropdownMenuItem className="cursor-pointer py-2.5"><div><div className="text-sm font-semibold">{company.shortName}</div><div className="text-xs text-muted-foreground">{company.industry}</div></div></DropdownMenuItem></Link>)}
               </DropdownMenuContent>
             </DropdownMenu>
+            {primaryLinks.slice(2).map((link) => <Link key={link.path} to={link.path}><Button variant="ghost" className={isActive(link.path) ? activeLinkClass : navLinkClass}>{link.name}</Button></Link>)}
           </div>
 
-          {/* Mobile menu button */}
-          <button
-            className="md:hidden p-2 text-primary hover:text-primary/70"
-            onClick={() => setIsOpen(!isOpen)}
-            aria-label="Toggle menu"
-          >
-            {isOpen ? <X size={24} /> : <Menu size={24} />}
+          <button className="rounded-xl border border-white/15 bg-white/10 p-2 text-white backdrop-blur-md transition hover:bg-white/20 xl:hidden" onClick={() => setIsOpen((open) => !open)} aria-label="Toggle navigation" aria-expanded={isOpen}>
+            {isOpen ? <X size={23} /> : <Menu size={23} />}
           </button>
         </div>
 
-        {/* Mobile Navigation */}
         {isOpen && (
-          <div className="md:hidden pb-4 border-t border-gray-200 mt-2">
-            <div className="flex flex-col space-y-2 pt-4">
-              {navLinks.map((link) => (
-                <Link
-                  key={link.path}
-                  to={link.path}
-                  onClick={() => setIsOpen(false)}
-                >
-                  <Button
-                    variant={isActive(link.path) ? "default" : "ghost"}
-                    className={isActive(link.path)
-                      ? "w-full justify-start text-white bg-primary hover:bg-primary/90"
-                      : "w-full justify-start text-primary hover:text-white hover:bg-primary/90"
-                    }
-                  >
-                    {link.name}
-                  </Button>
-                </Link>
-              ))}
-
-              {/* Mobile Companies Dropdown */}
-              <div className="border-t border-gray-200 pt-2 mt-2">
-                <div className="text-xs text-primary/60 px-3 py-2 font-semibold uppercase">
-                  OUR COMPANIES
-                </div>
-                <Link to="/companies" onClick={() => setIsOpen(false)}>
-                  <Button
-                    variant="ghost"
-                    className="w-full justify-start text-primary hover:text-white hover:bg-primary/90 font-semibold"
-                  >
-                    View All Companies →
-                  </Button>
-                </Link>
-                {isLoadingCompanies ? (
-                  <div className="py-4 text-center text-sm text-muted-foreground">
-                    Loading companies...
-                  </div>
-                ) : companies.length === 0 ? (
-                  <div className="py-4 text-center text-sm text-muted-foreground">
-                    No companies available
-                  </div>
-                ) : (
-                  companies.map((company) => (
-                    <Link
-                      key={company.id}
-                      to={`/companies/${company.id}`}
-                      onClick={() => setIsOpen(false)}
-                    >
-                      <Button
-                        variant="ghost"
-                        className="w-full justify-start text-primary hover:text-white hover:bg-primary/90 text-xs h-auto py-2"
-                      >
-                        <div className="text-left">
-                          <div className="font-semibold">{company.shortName}</div>
-                          <div className="text-xs text-primary/60">{company.industry}</div>
-                        </div>
-                      </Button>
-                    </Link>
-                  ))
-                )}
-              </div>
+          <div className="mb-3 border-t border-white/10 py-3 xl:hidden">
+            <div className="grid gap-1">
+              {primaryLinks.slice(0, 2).map((link) => <Link key={link.path} to={link.path} onClick={() => setIsOpen(false)}><Button variant="ghost" className={`w-full justify-start ${isActive(link.path) ? activeLinkClass : navLinkClass}`}>{link.name}</Button></Link>)}
+              <Link to="/companies" onClick={() => setIsOpen(false)}><Button variant="ghost" className={`w-full justify-start ${isActive("/companies") ? activeLinkClass : navLinkClass}`}>Our Companies</Button></Link>
+              {primaryLinks.slice(2).map((link) => <Link key={link.path} to={link.path} onClick={() => setIsOpen(false)}><Button variant="ghost" className={`w-full justify-start ${isActive(link.path) ? activeLinkClass : navLinkClass}`}>{link.name}</Button></Link>)}
             </div>
           </div>
         )}
