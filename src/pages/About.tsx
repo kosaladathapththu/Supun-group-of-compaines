@@ -170,7 +170,7 @@ const About = () => (
                     </div>}
                   </div>
                   {rowIndex < Math.ceil(journey.length / 2) - 1 && (
-                    <div className={`journey-connector relative flex h-20 items-center ${reverse ? "md:justify-start md:pl-[21%]" : "md:justify-end md:pr-[21%]"} justify-center`}>
+                    <div className={`journey-connector relative flex h-20 items-center ${reverse ? "md:justify-start md:pl-[calc(21%-1.25rem)]" : "md:justify-end md:pr-[calc(21%-1.25rem)]"} justify-center`}>
                       <span className={`absolute inset-y-0 w-px bg-gradient-to-b from-[#10233f]/30 via-[#10233f]/55 to-[#10233f]/30 ${reverse ? "left-1/2 -translate-x-1/2 md:left-[21%]" : "left-1/2 -translate-x-1/2 md:left-auto md:right-[21%] md:translate-x-0"}`} />
                       <span style={{ animationDelay: `${rowIndex * 120}ms` }} className="journey-flow-down relative flex h-10 w-10 items-center justify-center rounded-full border border-[#10233f] bg-[#10233f] text-white shadow-[0_8px_22px_rgba(16,35,63,.25)]"><ArrowDown size={18} strokeWidth={2.3} /></span>
                     </div>
