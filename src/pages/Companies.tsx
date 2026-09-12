@@ -1,7 +1,6 @@
 import { useMemo, useState } from "react";
 import { Link } from "react-router-dom";
 import { ArrowRight } from "lucide-react";
-import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { CompanyLogo } from "@/components/CompanyLogo";
 import Seo, { SITE_URL } from "@/components/Seo";
@@ -34,41 +33,27 @@ const Companies = () => {
         }}
       />
 
-      <section className="relative overflow-hidden bg-[#f1efe8] py-20 text-[#10233f] md:py-28">
-        <div className="absolute -right-24 -top-32 h-[32rem] w-[32rem] rounded-full border border-[#78be43]/20" />
-        <div className="absolute -right-4 -top-12 h-72 w-72 rounded-full border border-[#10233f]/[.06]" />
-        <div className="container relative mx-auto px-4">
-          <div className="grid items-end gap-12 lg:grid-cols-[1.25fr_.75fr] lg:gap-20">
+      <section className="border-b border-[#10233f]/10 py-16 text-[#10233f] md:py-20">
+        <div className="container mx-auto px-4">
+          <div className="grid items-end gap-10 lg:grid-cols-[1fr_.8fr] lg:gap-20">
             <div>
               <p className="flex items-center gap-3 text-xs font-semibold uppercase tracking-[.24em] text-[#315f9f]"><span className="h-px w-10 bg-[#78be43]" /> Our companies</p>
-              <h1 className="mt-7 max-w-5xl text-5xl font-semibold normal-case leading-[.98] tracking-[-.055em] sm:text-6xl md:text-7xl lg:text-[5.4rem]">Built differently.<br /><span className="text-[#315f9f]">Connected by one standard.</span></h1>
+              <h1 className="mt-7 max-w-4xl text-5xl font-semibold normal-case leading-[1.01] tracking-[-.05em] sm:text-6xl md:text-7xl">Built to make.<br />Ready to move forward.</h1>
             </div>
-            <div className="relative border-t border-[#10233f]/15 pt-7 lg:border-l lg:border-t-0 lg:pl-10 lg:pt-0">
-              <div className="flex items-end gap-5"><strong className="text-[7rem] font-semibold leading-[.72] tracking-[-.09em] text-[#10233f] md:text-[9rem]">11</strong><span className="mb-1 h-3 w-3 rounded-full bg-[#78be43] shadow-[0_0_18px_rgba(120,190,67,.65)]" /></div>
-              <p className="mt-8 max-w-md text-lg leading-relaxed text-[#5d6a79]">Sri Lankan companies working across manufacturing, retail and distribution, and hospitality.</p>
-              <div className="mt-7 flex flex-wrap gap-2 text-[10px] font-semibold uppercase tracking-[.12em] text-[#10233f]/65"><span className="rounded-full border border-[#10233f]/10 bg-white/60 px-3 py-2">Manufacturing</span><span className="rounded-full border border-[#10233f]/10 bg-white/60 px-3 py-2">Retail</span><span className="rounded-full border border-[#10233f]/10 bg-white/60 px-3 py-2">Hospitality</span></div>
+            <div className="grid grid-cols-[auto_1fr] items-end gap-7 border-t border-[#10233f]/15 pt-7 lg:border-l lg:border-t-0 lg:pl-10 lg:pt-0">
+              <strong className="text-7xl font-semibold leading-none tracking-[-.07em] text-[#315f9f] md:text-8xl">11</strong>
+              <div><p className="text-xs font-semibold uppercase tracking-[.18em] text-[#5b9d2c]">Connected companies</p><p className="mt-3 max-w-sm leading-relaxed text-[#5d6a79]">Manufacturing, retail, distribution and hospitality—built in Sri Lanka since 1978.</p></div>
             </div>
           </div>
         </div>
       </section>
 
-      <section className="py-16">
+      <section id="company-directory" className="scroll-mt-28 py-16">
         <div className="container mx-auto px-4">
-          <div className="flex flex-wrap justify-center gap-3 mb-12" role="tablist" aria-label="Filter companies by sector">
-            {filters.map((filter) => (
-              <Button
-                key={filter}
-                type="button"
-                variant={activeFilter === filter ? "default" : "outline"}
-                onClick={() => setActiveFilter(filter)}
-                aria-pressed={activeFilter === filter}
-              >
-                {filter}
-              </Button>
-            ))}
-          </div>
-
-          <div className="grid md:grid-cols-2 xl:grid-cols-3 gap-6 max-w-7xl mx-auto">
+          <div className="mb-10 md:hidden"><label htmlFor="company-sector" className="mb-2 block text-xs font-semibold uppercase tracking-[.16em] text-[#667388]">Browse by sector</label><select id="company-sector" value={activeFilter} onChange={(event) => setActiveFilter(event.target.value as (typeof filters)[number])} className="w-full border-b border-[#10233f]/25 bg-transparent px-0 py-3 font-semibold text-[#10233f] outline-none focus:border-[#78be43]">{filters.map((filter) => <option key={filter} value={filter}>{filter} ({filter === "All" ? companies.length : companies.filter((company) => company.industry === filter).length})</option>)}</select></div>
+          <div className="mx-auto grid max-w-7xl gap-10 md:grid-cols-[220px_1fr] lg:gap-14">
+            <aside className="hidden md:block"><div className="sticky top-28"><p className="mb-5 text-xs font-semibold uppercase tracking-[.18em] text-[#667388]">Browse by sector</p><div className="border-t border-[#10233f]/15" role="tablist" aria-label="Filter companies by sector">{filters.map((filter) => <button key={filter} type="button" onClick={() => setActiveFilter(filter)} aria-pressed={activeFilter === filter} className={`group flex w-full items-center justify-between border-b border-[#10233f]/10 py-5 text-left text-sm font-semibold transition ${activeFilter === filter ? "text-[#315f9f]" : "text-[#667388] hover:text-[#10233f]"}`}><span>{filter}</span><span className="flex items-center gap-2"><small className={activeFilter === filter ? "text-[#5b9d2c]" : "text-[#10233f]/30"}>{String(filter === "All" ? companies.length : companies.filter((company) => company.industry === filter).length).padStart(2, "0")}</small><ArrowRight size={15} className={`transition-transform ${activeFilter === filter ? "translate-x-0 text-[#78be43]" : "-translate-x-2 opacity-0 group-hover:translate-x-0 group-hover:opacity-100"}`} /></span></button>)}</div></div></aside>
+          <div className="grid gap-6 lg:grid-cols-2">
             {visibleCompanies.map((company) => (
               <Card key={company.id} className="group h-full overflow-hidden hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
                 <CardContent className="p-7 h-full flex flex-col">
@@ -93,6 +78,7 @@ const Companies = () => {
                 </CardContent>
               </Card>
             ))}
+          </div>
           </div>
         </div>
       </section>
