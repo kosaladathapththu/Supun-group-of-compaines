@@ -55,16 +55,21 @@ const CamyProducts = () => (
       .camy-proof-title { display:block; color:#fff; font-size:1.05rem; font-weight:800; }
       .camy-proof-text { margin-top:.35rem; color:rgba(255,255,255,.72); font-size:.86rem; line-height:1.5; }
       .camy-catalog { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:1.35rem; }
-      .camy-card { display:grid; grid-template-columns:46% 54%; min-height:310px; overflow:hidden; border:1px solid rgba(17,17,17,.1); border-radius:1.65rem; background:#fff; transition:transform .45s cubic-bezier(.22,1,.36,1),box-shadow .45s ease,border-color .35s ease; }
-      .camy-card:hover { transform:translateY(-5px); border-color:rgba(237,28,36,.3); box-shadow:0 24px 55px rgba(0,0,0,.09); }
+      .camy-card { display:grid; grid-template-columns:46% 54%; min-height:310px; overflow:hidden; border:1px solid rgba(17,17,17,.18); border-radius:1.65rem; background:#fff; box-shadow:0 10px 30px rgba(17,17,17,.07); transition:transform .45s cubic-bezier(.22,1,.36,1),box-shadow .45s ease,border-color .35s ease; }
+      .camy-card:hover { transform:translateY(-5px); border-color:rgba(237,28,36,.45); box-shadow:0 25px 60px rgba(17,17,17,.14); }
       .camy-card:nth-child(4n+2),.camy-card:nth-child(4n+3) { grid-template-columns:54% 46%; }
       .camy-card:nth-child(4n+2) .camy-media,.camy-card:nth-child(4n+3) .camy-media { order:2; }
       .camy-media { position:relative; min-width:0; overflow:hidden; background:#f0efeb; clip-path:inset(0 round 0); transition:clip-path .65s cubic-bezier(.22,1,.36,1),transform .65s cubic-bezier(.22,1,.36,1); }
-      .camy-media::after { content:"CAMY"; position:absolute; inset:0; display:grid; place-items:center; color:#fff; font-size:.72rem; font-weight:900; letter-spacing:.28em; opacity:0; background:linear-gradient(180deg,transparent 35%,rgba(0,0,0,.48)); transition:opacity .35s ease .1s; pointer-events:none; }
-      .camy-media img { display:block; width:100%; height:100%; object-fit:cover; transition:transform .75s cubic-bezier(.22,1,.36,1),filter .45s ease; }
+      .camy-media::after { content:""; position:absolute; inset:0; z-index:1; opacity:0; background:rgba(0,0,0,.48); transition:opacity .4s ease; pointer-events:none; }
+      .camy-media>img { display:block; width:100%; height:100%; object-fit:cover; transition:transform .75s cubic-bezier(.22,1,.36,1),filter .45s ease; }
       .camy-card:hover .camy-media { clip-path:inset(18px round 999px); transform:scale(.96); }
-      .camy-card:hover .camy-media img { transform:scale(1.11); filter:saturate(.82) contrast(1.04); }
+      .camy-card:hover .camy-media>img { transform:scale(1.11); filter:saturate(.82) contrast(1.04); }
       .camy-card:hover .camy-media::after { opacity:1; }
+      .camy-hover-brand { position:absolute; inset:0; z-index:2; display:flex; flex-direction:column; align-items:center; justify-content:center; color:#fff; pointer-events:none; }
+      .camy-hover-brand img { width:66px; height:66px; object-fit:contain; border-radius:50%; background:#fff; padding:.35rem; opacity:0; transform:scale(.55) rotate(-12deg); transition:opacity .35s ease .08s,transform .55s cubic-bezier(.22,1,.36,1) .08s; }
+      .camy-hover-brand strong { margin-top:.7rem; font-size:.8rem; letter-spacing:.3em; opacity:0; transform:translateY(12px); transition:opacity .35s ease .32s,transform .45s ease .32s; }
+      .camy-card:hover .camy-hover-brand img { opacity:1; transform:scale(1) rotate(0); }
+      .camy-card:hover .camy-hover-brand strong { opacity:1; transform:translateY(0); }
       .camy-copy { display:flex; min-width:0; flex-direction:column; justify-content:space-between; padding:2rem; }
       .camy-tag { display:inline-flex; align-items:center; gap:.4rem; color:#ed1c24; font-size:.68rem; font-weight:800; letter-spacing:.14em; text-transform:uppercase; }
       .camy-link { display:flex; align-items:center; justify-content:space-between; border-top:1px solid rgba(17,17,17,.1); padding-top:1rem; color:#111!important; font-size:.78rem; font-weight:800; }
@@ -129,7 +134,7 @@ const CamyProducts = () => (
         </div>
 
         <div className="camy-catalog">
-          {camyProducts.map((product, index) => (
+          {camyProducts.map((product) => (
             <article key={product.name} className="camy-card">
               <a
                 href={categoryLinks[product.name] || shopUrl}
@@ -139,9 +144,13 @@ const CamyProducts = () => (
                 aria-label={`Shop ${product.name} at Anything at Supun`}
               >
                 <img src={productImages[product.name] || manufacturingImage} alt={`${product.name} by Camy`} loading="lazy" />
+                <span className="camy-hover-brand" aria-hidden="true">
+                  <img src={camyLogo} alt="" />
+                  <strong>CAMY</strong>
+                </span>
               </a>
               <div className="camy-copy">
-                <div className="flex items-center justify-between gap-3"><span className="camy-tag"><ShieldCheck size={15} />{product.note}</span><span className="text-xs font-bold tracking-[.18em] text-black/20">{String(index + 1).padStart(2, "0")}</span></div>
+                <div><span className="camy-tag"><ShieldCheck size={15} />{product.note}</span></div>
                 <div className="py-7"><h3 className="text-2xl font-bold tracking-[-.025em] md:text-3xl">{product.name}</h3><p className="mt-3 text-sm leading-6 text-black/50">Manufactured in Sri Lanka by <strong className="font-semibold text-black/75">{product.madeBy}</strong>.</p></div>
                 <a href={categoryLinks[product.name] || shopUrl} target="_blank" rel="noopener noreferrer" className="camy-link" aria-label={`View ${product.name}`}><span>Shop category</span><span className="camy-link-icon"><ArrowRight size={16} /></span></a>
               </div>
