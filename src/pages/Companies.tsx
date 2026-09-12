@@ -34,13 +34,21 @@ const Companies = () => {
         }}
       />
 
-      <section className="gradient-hero py-24 text-primary-foreground">
-        <div className="container mx-auto px-4 text-center">
-          <p className="text-accent font-semibold uppercase tracking-[0.2em] mb-4">Our Companies</p>
-          <h1 className="text-5xl md:text-6xl normal-case mb-6">11 companies. Built across Sri Lanka.</h1>
-          <p className="text-xl max-w-3xl mx-auto text-white/85">
-            Explore the Group by sector: manufacturing, retail and distribution, and hospitality.
-          </p>
+      <section className="relative overflow-hidden bg-[#f1efe8] py-20 text-[#10233f] md:py-28">
+        <div className="absolute -right-24 -top-32 h-[32rem] w-[32rem] rounded-full border border-[#78be43]/20" />
+        <div className="absolute -right-4 -top-12 h-72 w-72 rounded-full border border-[#10233f]/[.06]" />
+        <div className="container relative mx-auto px-4">
+          <div className="grid items-end gap-12 lg:grid-cols-[1.25fr_.75fr] lg:gap-20">
+            <div>
+              <p className="flex items-center gap-3 text-xs font-semibold uppercase tracking-[.24em] text-[#315f9f]"><span className="h-px w-10 bg-[#78be43]" /> Our companies</p>
+              <h1 className="mt-7 max-w-5xl text-5xl font-semibold normal-case leading-[.98] tracking-[-.055em] sm:text-6xl md:text-7xl lg:text-[5.4rem]">Built differently.<br /><span className="text-[#315f9f]">Connected by one standard.</span></h1>
+            </div>
+            <div className="relative border-t border-[#10233f]/15 pt-7 lg:border-l lg:border-t-0 lg:pl-10 lg:pt-0">
+              <div className="flex items-end gap-5"><strong className="text-[7rem] font-semibold leading-[.72] tracking-[-.09em] text-[#10233f] md:text-[9rem]">11</strong><span className="mb-1 h-3 w-3 rounded-full bg-[#78be43] shadow-[0_0_18px_rgba(120,190,67,.65)]" /></div>
+              <p className="mt-8 max-w-md text-lg leading-relaxed text-[#5d6a79]">Sri Lankan companies working across manufacturing, retail and distribution, and hospitality.</p>
+              <div className="mt-7 flex flex-wrap gap-2 text-[10px] font-semibold uppercase tracking-[.12em] text-[#10233f]/65"><span className="rounded-full border border-[#10233f]/10 bg-white/60 px-3 py-2">Manufacturing</span><span className="rounded-full border border-[#10233f]/10 bg-white/60 px-3 py-2">Retail</span><span className="rounded-full border border-[#10233f]/10 bg-white/60 px-3 py-2">Hospitality</span></div>
+            </div>
+          </div>
         </div>
       </section>
 
