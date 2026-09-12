@@ -55,26 +55,20 @@ const Companies = () => {
             <aside className="hidden md:block"><div className="sticky top-28"><p className="mb-5 text-xs font-semibold uppercase tracking-[.18em] text-[#667388]">Browse by sector</p><div className="border-t border-[#10233f]/15" role="tablist" aria-label="Filter companies by sector">{filters.map((filter) => <button key={filter} type="button" onClick={() => setActiveFilter(filter)} aria-pressed={activeFilter === filter} className={`group flex w-full items-center justify-between border-b border-[#10233f]/10 py-5 text-left text-sm font-semibold transition ${activeFilter === filter ? "text-[#315f9f]" : "text-[#667388] hover:text-[#10233f]"}`}><span>{filter}</span><span className="flex items-center gap-2"><small className={activeFilter === filter ? "text-[#5b9d2c]" : "text-[#10233f]/30"}>{String(filter === "All" ? companies.length : companies.filter((company) => company.industry === filter).length).padStart(2, "0")}</small><ArrowRight size={15} className={`transition-transform ${activeFilter === filter ? "translate-x-0 text-[#78be43]" : "-translate-x-2 opacity-0 group-hover:translate-x-0 group-hover:opacity-100"}`} /></span></button>)}</div></div></aside>
           <div className="grid gap-6 lg:grid-cols-2">
             {visibleCompanies.map((company) => (
-              <Card key={company.id} className="group h-full overflow-hidden hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
-                <CardContent className="p-7 h-full flex flex-col">
-                  <CompanyLogo
-                    companyId={company.id}
-                    companyName={company.shortName}
-                    className="mb-6 h-36 w-full rounded-2xl border border-primary/10 p-2 shadow-sm sm:h-40"
-                    imageClassName="!h-full !w-full !max-h-none !max-w-none scale-110 transition-transform duration-300 group-hover:scale-[1.18]"
-                  />
-                  <div className="flex justify-end mb-4">
-                    <span className="text-xs font-semibold rounded-full bg-accent/10 text-accent px-3 py-1">{company.industry}</span>
+              <Card key={company.id} className="group relative h-full overflow-hidden rounded-[2rem] border-[#10233f]/10 bg-white shadow-[0_10px_35px_rgba(16,35,63,.05)] transition-all duration-500 hover:-translate-y-1.5 hover:border-[#78be43]/50 hover:shadow-[0_24px_60px_rgba(16,35,63,.11)]">
+                <CardContent className="flex h-full flex-col p-0">
+                  <CompanyLogo companyId={company.id} companyName={company.shortName} className="h-56 w-full border-b border-[#10233f]/10 p-1 sm:h-64" imageClassName="!h-full !w-full !max-h-none !max-w-none scale-[1.35] transition-transform duration-500 group-hover:scale-[1.48]" />
+                  <div className="flex flex-1 flex-col p-7 sm:p-8">
+                    <div className="mb-8"><span className="text-[10px] font-semibold uppercase tracking-[.14em] text-[#5b9d2c]">{company.industry}</span></div>
+                    <p className="mb-3 text-xs font-semibold uppercase tracking-[.12em] text-[#d78a00]">{company.tagline}</p>
+                    <h2 className="mb-4 text-3xl font-semibold normal-case leading-tight tracking-[-.035em] text-[#10233f]">{company.shortName}</h2>
+                    <p className="flex-1 leading-relaxed text-[#667388]">{company.description}</p>
+                    <div className="mt-8 flex items-center justify-between border-t border-[#10233f]/10 pt-5">
+                      <span className="text-xs font-medium uppercase tracking-[.08em] text-[#667388]">{company.established ? `Since ${company.established}` : "Island-wide"}</span>
+                      <Link to={`/companies/${company.id}`} aria-label={`View ${company.shortName}`} className="flex h-11 w-11 items-center justify-center rounded-full border border-[#10233f]/15 text-[#10233f] transition duration-300 group-hover:border-[#78be43] group-hover:bg-[#78be43] group-hover:text-white"><ArrowRight className="transition-transform duration-300 group-hover:translate-x-0.5" size={18} /></Link>
+                    </div>
                   </div>
-                  <p className="text-sm text-accent font-semibold mb-2">{company.tagline}</p>
-                  <h2 className="text-2xl normal-case mb-3">{company.shortName}</h2>
-                  <p className="text-muted-foreground leading-relaxed flex-1">{company.description}</p>
-                  <div className="flex items-center justify-between mt-6 pt-5 border-t">
-                    <span className="text-sm text-muted-foreground">{company.established ? `Established ${company.established}` : "Distribution"}</span>
-                    <Link to={`/companies/${company.id}`} className="text-primary font-semibold text-sm inline-flex items-center">
-                      View details <ArrowRight className="ml-1.5 group-hover:translate-x-1 transition-transform" size={16} />
-                    </Link>
-                  </div>
+                  <span className="absolute inset-x-0 bottom-0 h-1 origin-left scale-x-0 bg-[#78be43] transition-transform duration-500 group-hover:scale-x-100" />
                 </CardContent>
               </Card>
             ))}
