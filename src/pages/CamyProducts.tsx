@@ -48,6 +48,12 @@ const CamyProducts = () => (
       .camy-button-red { background:#ed1c24; box-shadow:0 10px 28px rgba(237,28,36,.24); }
       .camy-visual { position:relative; min-height:550px; overflow:hidden; border-radius:2rem; background:#111; }
       .camy-visual>img { position:absolute; inset:0; width:100%; height:100%; object-fit:cover; filter:grayscale(25%); }
+      .camy-proof { position:absolute; inset-inline:0; bottom:0; display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); border-top:1px solid rgba(255,255,255,.2); background:linear-gradient(110deg,rgba(15,15,15,.98),rgba(38,38,38,.96)); color:#fff; }
+      .camy-proof-item { padding:1.65rem; }
+      .camy-proof-item+.camy-proof-item { border-left:1px solid rgba(255,255,255,.18); }
+      .camy-proof-icon { margin-bottom:.75rem; color:#ed1c24; }
+      .camy-proof-title { display:block; color:#fff; font-size:1.05rem; font-weight:800; }
+      .camy-proof-text { margin-top:.35rem; color:rgba(255,255,255,.72); font-size:.86rem; line-height:1.5; }
       .camy-catalog { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:1.35rem; }
       .camy-card { display:grid; grid-template-columns:46% 54%; min-height:310px; overflow:hidden; border:1px solid rgba(17,17,17,.1); border-radius:1.65rem; background:#fff; transition:transform .45s cubic-bezier(.22,1,.36,1),box-shadow .45s ease,border-color .35s ease; }
       .camy-card:hover { transform:translateY(-5px); border-color:rgba(237,28,36,.3); box-shadow:0 24px 55px rgba(0,0,0,.09); }
@@ -69,7 +75,7 @@ const CamyProducts = () => (
       .camy-category::before { content:""; width:.45rem; height:.45rem; border-radius:50%; background:#ed1c24; }
       .camy-category:hover { transform:translateY(-2px); border-color:#ed1c24; color:#ed1c24!important; box-shadow:0 8px 22px rgba(0,0,0,.07); }
       @media(max-width:1023px) { .camy-hero { grid-template-columns:1fr; } .camy-visual { min-height:470px; } .camy-catalog { grid-template-columns:1fr; } }
-      @media(max-width:640px) { .camy-actions { flex-direction:column; } .camy-button { width:100%; } .camy-card,.camy-card:nth-child(n) { grid-template-columns:1fr; } .camy-card:nth-child(n) .camy-media,.camy-card:hover .camy-media { order:0; height:235px; clip-path:inset(0 round 0); transform:none; } .camy-copy { min-height:245px; padding:1.5rem; } }
+      @media(max-width:640px) { .camy-actions { flex-direction:column; } .camy-button { width:100%; } .camy-proof { grid-template-columns:1fr; } .camy-proof-item { padding:1rem 1.35rem; } .camy-proof-item+.camy-proof-item { border-left:0; border-top:1px solid rgba(255,255,255,.16); } .camy-proof-icon { margin-bottom:.35rem; } .camy-proof-text { margin-top:.2rem; font-size:.78rem; } .camy-card,.camy-card:nth-child(n) { grid-template-columns:1fr; } .camy-card:nth-child(n) .camy-media,.camy-card:hover .camy-media { order:0; height:235px; clip-path:inset(0 round 0); transform:none; } .camy-copy { min-height:245px; padding:1.5rem; } }
     `}</style>
 
     <section className="border-b border-black/10 bg-white pb-14 pt-32 md:pb-20 md:pt-40">
@@ -99,9 +105,17 @@ const CamyProducts = () => (
         <div className="camy-visual">
           <img src={helmetImage} alt="Camy helmet manufacturing in Sri Lanka" />
           <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent" />
-          <div className="absolute inset-x-0 bottom-0 grid grid-cols-2 border-t border-white/20 bg-black/65 text-white backdrop-blur-md">
-            <div className="p-6 md:p-8"><ShieldCheck className="mb-3 text-[#ed1c24]" /><strong>Quality-led</strong><p className="mt-1 text-sm text-white/60">Made for dependable everyday use.</p></div>
-            <div className="border-l border-white/20 p-6 md:p-8"><Factory className="mb-3 text-[#ed1c24]" /><strong>Made locally</strong><p className="mt-1 text-sm text-white/60">Produced by specialist Group companies.</p></div>
+          <div className="camy-proof">
+            <div className="camy-proof-item">
+              <ShieldCheck className="camy-proof-icon" size={24} />
+              <strong className="camy-proof-title">Quality-led</strong>
+              <p className="camy-proof-text">Made for dependable everyday use.</p>
+            </div>
+            <div className="camy-proof-item">
+              <Factory className="camy-proof-icon" size={24} />
+              <strong className="camy-proof-title">Made locally</strong>
+              <p className="camy-proof-text">Produced by specialist Group companies.</p>
+            </div>
           </div>
         </div>
       </div>
