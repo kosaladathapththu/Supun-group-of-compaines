@@ -114,28 +114,22 @@ const CamyProducts = () => (
           <p className="max-w-md text-base leading-7 text-black/55">A considered collection of locally manufactured products, connected by one trusted Sri Lankan brand.</p>
         </div>
 
-        <div className="mb-9">
-          <div className="mb-4 flex items-center justify-between gap-4">
-            <p className="text-xs font font-bold uppercase tracking-[.2em] text-black/45">Shop by category</p>
-            <span className="hidden text-xs text-black/35 sm:block">Opens the matching Anything at Supun catalogue</span>
-          </div>
-          <nav className="camy-categorieslish" aria-label="Camy shop categories">
-            {camyProducts.map((product) => (
-              <a key={product.name} href={categoryLinks[product.name] || shopUrl} target="_blank" rel="noopener noreferrer" className="camy-category">
-                {product.name}<ExternalLink size={13} />
-              </a>
-            ))}
-          </nav>
-        </div>
-
         <div className="camy-catalog">
           {camyProducts.map((product, index) => (
             <article key={product.name} className="camy-card">
-              <div className="camy-media"><img src={productImages[product.name] || manufacturingImage} alt={`${product.name} by Camy`} loading="lazy" /></div>
+              <a
+                href={categoryLinks[product.name] || shopUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="camy-media"
+                aria-label={`Shop ${product.name} at Anything at Supun`}
+              >
+                <img src={productImages[product.name] || manufacturingImage} alt={`${product.name} by Camy`} loading="lazy" />
+              </a>
               <div className="camy-copy">
                 <div className="flex items-center justify-between gap-3"><span className="camy-tag"><ShieldCheck size={15} />{product.note}</span><span className="text-xs font-bold tracking-[.18em] text-black/20">{String(index + 1).padStart(2, "0")}</span></div>
                 <div className="py-7"><h3 className="text-2xl font-bold tracking-[-.025em] md:text-3xl">{product.name}</h3><p className="mt-3 text-sm leading-6 text-black/50">Manufactured in Sri Lanka by <strong className="font-semibold text-black/75">{product.madeBy}</strong>.</p></div>
-                <a href={shopUrl} target="_blank" rel="noopener noreferrer" className="camy-link" aria-label={`View ${product.name}`}><span>View product</span><span className="camy-link-icon"><ArrowRight size={16} /></span></a>
+                <a href={categoryLinks[product.name] || shopUrl} target="_blank" rel="noopener noreferrer" className="camy-link" aria-label={`View ${product.name}`}><span>Shop category</span><span className="camy-link-icon"><ArrowRight size={16} /></span></a>
               </div>
             </article>
           ))}
