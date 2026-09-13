@@ -18,6 +18,7 @@ import CompanyDetail from "./pages/CompanyDetail";
 import CamyProducts from "./pages/CamyProducts";
 import Careers from "./pages/Careers";
 import News from "./pages/News";
+import NewsDetail from "./pages/NewsDetail";
 import Contact from "./pages/Contact";
 import NotFound from "./pages/NotFound";
 import Login from "./pages/admin/Login";
@@ -30,17 +31,11 @@ import CategoryList from "./pages/admin/CategoryList";
 import CategoryForm from "./pages/admin/CategoryForm";
 import ProductList from "./pages/admin/ProductList";
 import ProductForm from "./pages/admin/ProductForm";
+import NewsList from "./pages/admin/NewsList";
+import NewsForm from "./pages/admin/NewsForm";
 
 const queryClient = new QueryClient();
-const PublicPage = ({ children }: { children: ReactNode }) => (
-  <div className="min-h-screen">
-    <Navigation />
-    <PageTransition>
-      <main>{children}</main>
-      <Footer />
-    </PageTransition>
-  </div>
-);
+const PublicPage = ({ children }: { children: ReactNode }) => <div className="min-h-screen"><Navigation /><PageTransition><main>{children}</main><Footer /></PageTransition></div>;
 
 const App = () => <QueryClientProvider client={queryClient}><TooltipProvider><Toaster /><Sonner /><BrowserRouter><ScrollToTop /><Suspense fallback={<RouteLoader />}><Routes>
   <Route path="/" element={<PublicPage><Home /></PublicPage>} />
@@ -50,6 +45,7 @@ const App = () => <QueryClientProvider client={queryClient}><TooltipProvider><To
   <Route path="/camy-products" element={<PublicPage><CamyProducts /></PublicPage>} />
   <Route path="/careers" element={<PublicPage><Careers /></PublicPage>} />
   <Route path="/news" element={<PublicPage><News /></PublicPage>} />
+  <Route path="/news/:slug" element={<PublicPage><NewsDetail /></PublicPage>} />
   <Route path="/contact" element={<PublicPage><Contact /></PublicPage>} />
   <Route path="/shop" element={<Navigate to="/camy-products" replace />} /><Route path="/shop/:id" element={<Navigate to="/camy-products" replace />} />
   <Route path="/admin/login" element={<PageTransition><Login /></PageTransition>} />
@@ -57,7 +53,9 @@ const App = () => <QueryClientProvider client={queryClient}><TooltipProvider><To
     <Route path="companies" element={<PageTransition><CompanyList /></PageTransition>} /><Route path="companies/new" element={<PageTransition><CompanyForm /></PageTransition>} /><Route path="companies/:id/edit" element={<PageTransition><CompanyForm /></PageTransition>} />
     <Route path="brands" element={<PageTransition><BrandList /></PageTransition>} /><Route path="brands/new" element={<PageTransition><BrandForm /></PageTransition>} /><Route path="brands/:id/edit" element={<PageTransition><BrandForm /></PageTransition>} />
     <Route path="categories" element={<PageTransition><CategoryList /></PageTransition>} /><Route path="categories/new" element={<PageTransition><CategoryForm /></PageTransition>} /><Route path="categories/:id/edit" element={<PageTransition><CategoryForm /></PageTransition>} />
-    <Route path="products" element={<PageTransition><ProductList /></PageTransition>} /><Route path="products/new" element={<PageTransition><ProductForm /></PageTransition>} /><Route path="products/:id/edit" element={<PageTransition><ProductForm /></PageTransition>} /><Route path="password-reset" element={<PageTransition><PasswordReset /></PageTransition>} />
+    <Route path="products" element={<PageTransition><ProductList /></PageTransition>} /><Route path="products/new" element={<PageTransition><ProductForm /></PageTransition>} /><Route path="products/:id/edit" element={<PageTransition><ProductForm /></PageTransition>} />
+    <Route path="news" element={<PageTransition><NewsList /></PageTransition>} /><Route path="news/new" element={<PageTransition><NewsForm /></PageTransition>} /><Route path="news/:id/edit" element={<PageTransition><NewsForm /></PageTransition>} />
+    <Route path="password-reset" element={<PageTransition><PasswordReset /></PageTransition>} />
   </Route>
   <Route path="*" element={<PublicPage><NotFound /></PublicPage>} />
 </Routes></Suspense></BrowserRouter></TooltipProvider></QueryClientProvider>;
