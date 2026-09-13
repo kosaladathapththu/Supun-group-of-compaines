@@ -83,7 +83,7 @@ const CamyProducts = () => (
       @media(max-width:640px) { .camy-actions { flex-direction:column; } .camy-button { width:100%; } .camy-proof { grid-template-columns:1fr; } .camy-proof-item { padding:1rem 1.35rem; } .camy-proof-item+.camy-proof-item { border-left:0; border-top:1px solid rgba(255,255,255,.16); } .camy-proof-icon { margin-bottom:.35rem; } .camy-proof-text { margin-top:.2rem; font-size:.78rem; } .camy-card,.camy-card:nth-child(n) { grid-template-columns:1fr; } .camy-card:nth-child(n) .camy-media,.camy-card:hover .camy-media { order:0; height:235px; clip-path:inset(0 round 0); transform:none; } .camy-copy { min-height:245px; padding:1.5rem; } }
     `}</style>
 
-    <section className="border-b border-black/10 bg-white pb-14 pt-32 md:pb-20 md:pt-40">
+    <section className="border-b border-black/10 bg-white pb-14 pt-6 md:pb-20 md:pt-8">
       <div className="camy-hero container mx-auto px-6 lg:px-12">
         <div className="max-w-2xl">
           <div className="mb-8 flex items-center gap-5">

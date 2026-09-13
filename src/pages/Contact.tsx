@@ -27,7 +27,7 @@ const Contact = () => {
       <style>{`
         .contact-page{background:#f5f6f4}.contact-shell{width:min(1540px,calc(100% - 40px));margin-inline:auto}
         .contact-hero{position:relative;overflow:hidden;border:1px solid rgba(16,35,63,.1);border-radius:0 0 42px 42px;background:#fff}.contact-hero:after{content:"";position:absolute;width:520px;height:520px;right:-210px;top:-250px;border:78px solid rgba(120,190,67,.08);border-radius:50%}
-        .hero-layout{display:grid;grid-template-columns:minmax(0,1.18fr) minmax(390px,.82fr);min-height:530px;align-items:end}.contact-methods{display:grid;gap:10px;padding:28px;border-radius:30px 30px 0 0;background:#10233f;color:#fff}
+        .hero-layout{display:grid;grid-template-columns:minmax(0,1.18fr) minmax(390px,.82fr);min-height:430px;align-items:end}.contact-methods{display:grid;gap:10px;padding:28px;border-radius:30px 30px 0 0;background:#10233f;color:#fff}
         .contact-method{display:grid;grid-template-columns:48px minmax(0,1fr) 36px;align-items:center;gap:15px;padding:17px;border:1px solid rgba(255,255,255,.12);border-radius:17px;transition:.25s ease}.contact-method:hover{transform:translateX(-5px);background:rgba(255,255,255,.08);border-color:rgba(155,211,109,.45)}.method-icon{display:grid;width:48px;height:48px;place-items:center;border-radius:14px;background:#78be43;color:#10233f}
         .enquiry-wrap{display:grid;grid-template-columns:minmax(300px,.68fr) minmax(0,1.32fr);overflow:hidden;border:1px solid rgba(16,35,63,.1);border-radius:32px;background:#fff;box-shadow:0 28px 70px rgba(16,35,63,.09)}.enquiry-message{position:relative;overflow:hidden;display:flex;min-height:620px;flex-direction:column;padding:52px;background:linear-gradient(145deg,#0d2a55,#173f7a);color:#fff}.enquiry-message:before{content:"";position:absolute;width:280px;height:280px;right:-130px;top:-100px;border:46px solid rgba(255,255,255,.06);border-radius:50%}
         .enquiry-steps{display:grid;gap:14px;margin-top:auto;padding-top:44px}.enquiry-step{display:grid;grid-template-columns:34px 1fr;gap:13px;align-items:center;padding:14px;border:1px solid rgba(255,255,255,.14);border-radius:15px;background:rgba(255,255,255,.07)}.step-number{display:grid;width:34px;height:34px;place-items:center;border-radius:50%;background:#78be43;color:#10233f;font-size:12px;font-weight:800}
@@ -39,7 +39,7 @@ const Contact = () => {
         @media(max-width:680px){.contact-shell{width:min(100% - 24px,1540px)}.contact-hero{border-radius:0 0 28px 28px}.contact-methods{margin:0 14px 14px;padding:14px}.enquiry-message,.form-panel{padding:28px 22px}.form-grid,.directory-grid{grid-template-columns:1fr}}
       `}</style>
 
-      <section className="contact-hero px-5 pt-56 md:px-8 md:pt-60">
+      <section className="contact-hero px-5 pt-0 md:px-8">
         <div className="contact-shell hero-layout relative z-10">
           <div className="pb-14 pr-6 md:pb-20 lg:pr-16">
             <p className="flex items-center gap-3 text-xs font-bold uppercase tracking-[.25em] text-[#315f9f]"><span className="h-px w-11 bg-[#78be43]" /> Contact Supun Group</p>
