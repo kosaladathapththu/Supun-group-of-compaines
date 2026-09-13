@@ -1,5 +1,5 @@
 import { FormEvent } from "react";
-import { ArrowRight, ArrowUpRight, Building2, Clock3, Mail, MapPin, Phone, Send } from "lucide-react";
+import { ArrowRight, ArrowUpRight, Building2, Clock3, Mail, MapPin, Phone, Send, ShieldCheck } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
@@ -7,9 +7,9 @@ import Seo, { SITE_NAME, SITE_URL } from "@/components/Seo";
 import { companies } from "@/data/companies";
 
 const methods = [
-  { label: "Email", value: "info@supungroup.lk", href: "mailto:info@supungroup.lk", icon: Mail },
-  { label: "Phone", value: "+94 112 055 026", href: "tel:+94112055026", icon: Phone },
-  { label: "Head office", value: "Colombo, Sri Lanka", href: "https://maps.google.com/?q=Colombo,Sri+Lanka", icon: MapPin },
+  { label: "Email us", value: "info@supungroup.lk", note: "General and corporate enquiries", href: "mailto:info@supungroup.lk", icon: Mail },
+  { label: "Call us", value: "+94 112 055 026", note: "Monday–Friday, 9 AM–6 PM", href: "tel:+94112055026", icon: Phone },
+  { label: "Visit us", value: "Colombo, Sri Lanka", note: "Supun Group head office", href: "https://maps.google.com/?q=Colombo,Sri+Lanka", icon: MapPin },
 ];
 
 const Contact = () => {
@@ -17,148 +17,61 @@ const Contact = () => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
     const subject = `Website enquiry from ${String(data.get("fullName") || "Visitor")}`;
-    const body = [
-      `Name: ${String(data.get("fullName") || "")}`,
-      `Email: ${String(data.get("email") || "")}`,
-      `Phone: ${String(data.get("phone") || "")}`,
-      `Company: ${String(data.get("companyName") || "")}`,
-      "",
-      String(data.get("message") || ""),
-    ].join("\n");
+    const body = [`Name: ${data.get("fullName") || ""}`, `Email: ${data.get("email") || ""}`, `Phone: ${data.get("phone") || ""}`, `Company: ${data.get("companyName") || ""}`, "", String(data.get("message") || "")].join("\n");
     window.location.href = `mailto:info@supungroup.lk?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
   };
 
   return (
-    <main className="min-h-screen text-[#10233f]" style={{ backgroundColor: "#f4f6f8" }}>
-      <Seo
-        title="Contact Supun Group of Companies | Colombo, Sri Lanka"
-        description="Contact Supun Group of Companies in Colombo, Sri Lanka."
-        keywords="Contact Supun Group, Supun Group Colombo, info@supungroup.lk"
-        jsonLd={{ "@context": "https://schema.org", "@type": "Organization", name: SITE_NAME, url: SITE_URL, email: "info@supungroup.lk", telephone: "+94 112 055 026", address: { "@type": "PostalAddress", addressLocality: "Colombo", addressCountry: "LK" } }}
-      />
+    <main className="contact-page min-h-screen text-[#10233f]">
+      <Seo title="Contact Supun Group of Companies | Colombo, Sri Lanka" description="Contact Supun Group of Companies in Colombo, Sri Lanka." keywords="Contact Supun Group, Supun Group Colombo, info@supungroup.lk" jsonLd={{ "@context": "https://schema.org", "@type": "Organization", name: SITE_NAME, url: SITE_URL, email: "info@supungroup.lk", telephone: "+94 112 055 026" }} />
       <style>{`
-        .contact-hero-grid { display:grid; grid-template-columns:minmax(0,1.08fr) minmax(360px,.92fr); align-items:stretch; }
-        .contact-direct { background:#e9edf2!important; color:#10233f; border-color:rgba(16,35,63,.1)!important; }
-        .contact-direct > p, .contact-direct small { color:#6b7b90!important; }
-        .contact-direct nav, .contact-direct a { border-color:rgba(16,35,63,.11)!important; }
-        .contact-direct a { background:#fff!important; color:#10233f!important; }
-        .contact-direct a:hover { background:#f4f7f1!important; }
-        .contact-direct svg { color:#5c9c30!important; }
-        .contact-method { display:grid!important; grid-template-columns:46px minmax(0,1fr) 20px; align-items:center; gap:1rem; min-height:94px; }
-        .contact-method-icon { display:grid; width:46px; height:46px; place-items:center; border-radius:50%; background:#e8f2df; }
-        .enquiry-grid { position:relative; display:grid; grid-template-columns:minmax(340px,.78fr) minmax(0,1.22fr); gap:1.5rem; align-items:stretch; }
-        .enquiry-grid::before { content:"→"; position:absolute; z-index:5; left:39%; top:50%; display:grid; width:54px; height:54px; place-items:center; border:7px solid #f4f6f8; border-radius:50%; background:#78be43; color:#10233f; font-size:1.35rem; font-weight:800; line-height:1; transform:translate(-50%,-50%); box-shadow:0 10px 25px rgba(16,35,63,.18); }
-        .enquiry-intro { position:relative; overflow:hidden; min-height:620px; border-radius:2rem; background:linear-gradient(145deg,#071a31 0%,#102f57 100%); color:#fff; padding:3.25rem; box-shadow:0 24px 60px rgba(7,26,49,.28); }
-        .enquiry-intro::before,.enquiry-intro::after { content:""; position:absolute; border-radius:50%; pointer-events:none; }
-        .enquiry-intro::before { width:310px; height:310px; right:-130px; top:-105px; border:54px solid rgba(255,255,255,.065); }
-        .enquiry-intro::after { width:190px; height:190px; left:-105px; bottom:-85px; border:1px solid rgba(255,255,255,.18); }
-        .enquiry-note { position:relative; margin-top:3rem; border:1px solid rgba(255,255,255,.18); border-radius:1.25rem; background:rgba(255,255,255,.10); padding:1.35rem; backdrop-filter:blur(8px); }
-        .enquiry-form { border:1px solid rgba(16,35,63,.1); border-radius:2rem; background:#fff; padding:3rem; box-shadow:0 24px 60px rgba(16,35,63,.09); }
-        .enquiry-field { border:1px solid #dce3eb; border-radius:1rem; background:#f8fafc; padding:.8rem 1rem .45rem; transition:border-color .2s,box-shadow .2s,background .2s; }
-        .enquiry-field:focus-within { border-color:#315f9f; background:#fff; box-shadow:0 0 0 4px rgba(49,95,159,.1); }
-        .enquiry-field label { display:block; color:#617086; font-size:.67rem; font-weight:800; letter-spacing:.12em; text-transform:uppercase; }
-        .enquiry-field input,.enquiry-field textarea { border:0!important; background:transparent!important; padding-left:0!important; padding-right:0!important; box-shadow:none!important; }
-        .directory-grid { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:1rem; }
-        .directory-card { position:relative; display:flex; min-height:230px; flex-direction:column; overflow:hidden; border:1px solid rgba(16,35,63,.11); border-radius:1.5rem; background:#fff; padding:1.55rem; transition:transform .25s,border-color .25s,box-shadow .25s; }
-        multiline్జ .directory-card::before { content:""; position:absolute; inset:0 auto auto 0; width:100%; height:4px; background:linear-gradient(90deg,#315f9f 0 72%,#78be43 72%); transform:scaleX(.28); transform-origin:left; transition:transform .3s; }
-        .directory-card:hover { transform:translateY(-5px); border-color:rgba(49,95,159,.3); box-shadow:0 18px 42px rgba(16,35,63,.1); }
-        .directory-card:hover::before { transform:scaleX(1); }
-        .directory-icon { display:grid; width:46px; height:46px; place-items:center; border-radius:14px; background:#eef3f8; color:#315f9f; }
-        @media(max-width:1100px) { .directory-grid { grid-template-columns:repeat(2,minmax(0,1fr)); } }
-        @media(max-width:900px) { .contact-hero-grid { grid-template-columns:1fr; } }
-        @media(max-width:900px) { .enquiry-grid { grid-template-columns:1fr; gap:1.5rem; } .enquiry-grid::before { left:50%; top:50%; transform:translate(-50%,-50%) rotate(90deg); } .enquiry-intro { min-height:auto; } .enquiry-intro,.enquiry-form { padding:1.75rem; } }
-        @media(max-width:680px) { .directory-grid { grid-template-columns:1fr; } .directory-card { min-height:205px; } }
+        .contact-page{background:#f5f6f4}.contact-shell{width:min(1540px,calc(100% - 40px));margin-inline:auto}
+        .contact-hero{position:relative;overflow:hidden;border:1px solid rgba(16,35,63,.1);border-radius:0 0 42px 42px;background:#fff}.contact-hero:after{content:"";position:absolute;width:520px;height:520px;right:-210px;top:-250px;border:78px solid rgba(120,190,67,.08);border-radius:50%}
+        .hero-layout{display:grid;grid-template-columns:minmax(0,1.18fr) minmax(390px,.82fr);min-height:530px;align-items:end}.contact-methods{display:grid;gap:10px;padding:28px;border-radius:30px 30px 0 0;background:#10233f;color:#fff}
+        .contact-method{display:grid;grid-template-columns:48px minmax(0,1fr) 36px;align-items:center;gap:15px;padding:17px;border:1px solid rgba(255,255,255,.12);border-radius:17px;transition:.25s ease}.contact-method:hover{transform:translateX(-5px);background:rgba(255,255,255,.08);border-color:rgba(155,211,109,.45)}.method-icon{display:grid;width:48px;height:48px;place-items:center;border-radius:14px;background:#78be43;color:#10233f}
+        .enquiry-wrap{display:grid;grid-template-columns:minmax(300px,.68fr) minmax(0,1.32fr);overflow:hidden;border:1px solid rgba(16,35,63,.1);border-radius:32px;background:#fff;box-shadow:0 28px 70px rgba(16,35,63,.09)}.enquiry-message{position:relative;overflow:hidden;display:flex;min-height:620px;flex-direction:column;padding:52px;background:linear-gradient(145deg,#0d2a55,#173f7a);color:#fff}.enquiry-message:before{content:"";position:absolute;width:280px;height:280px;right:-130px;top:-100px;border:46px solid rgba(255,255,255,.06);border-radius:50%}
+        .enquiry-steps{display:grid;gap:14px;margin-top:auto;padding-top:44px}.enquiry-step{display:grid;grid-template-columns:34px 1fr;gap:13px;align-items:center;padding:14px;border:1px solid rgba(255,255,255,.14);border-radius:15px;background:rgba(255,255,255,.07)}.step-number{display:grid;width:34px;height:34px;place-items:center;border-radius:50%;background:#78be43;color:#10233f;font-size:12px;font-weight:800}
+        .form-panel{padding:52px}.form-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px}.field{border:1px solid #dce2e9;border-radius:15px;background:#f7f9fa;padding:10px 15px 5px;transition:.2s ease}.field:focus-within{border-color:#315f9f;background:#fff;box-shadow:0 0 0 4px rgba(49,95,159,.1)}.field label{display:block;color:#68778c;font-size:10px;font-weight:800;letter-spacing:.14em;text-transform:uppercase}.field input,.field textarea{border:0!important;background:transparent!important;padding-inline:0!important;box-shadow:none!important}
+        .directory-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}.company-card{position:relative;display:flex;min-height:220px;flex-direction:column;overflow:hidden;padding:26px;border:1px solid rgba(16,35,63,.1);border-radius:22px;background:#fff;transition:.25s ease}
+        .company-card::before{content:"";position:absolute;inset:0 auto auto 0;width:100%;height:3px;background:#78be43;transform:scaleX(.18);transform-origin:left;transition:.3s ease}.company-card:hover{transform:translateY(-5px);border-color:rgba(49,95,159,.3);box-shadow:0 18px 45px rgba(16,35,63,.09)}.company-card:hover::before{transform:scaleX(1)}
+        @media(max-width:1050px){.hero-layout,.enquiry-wrap{grid-template-columns:1fr}.hero-layout{padding-top:80px}.contact-methods{border-radius:30px;margin:0 28px 28px}.enquiry-message{min-height:auto}.directory-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+        @media(max-width:680px){.contact-shell{width:min(100% - 24px,1540px)}.contact-hero{border-radius:0 0 28px 28px}.contact-methods{margin:0 14px 14px;padding:14px}.enquiry-message,.form-panel{padding:28px 22px}.form-grid,.directory-grid{grid-template-columns:1fr}}
       `}</style>
 
-      <section className="bg-white px-5 pb-10 pt-60 md:px-8 md:pt-64">
-        <div
-          className="container mx-auto overflow-hidden rounded-[2rem] border border-[#10233f]/10 shadow-[0_24px_65px_rgba(16,35,63,.10)]"
-          style={{ backgroundColor: "#f3f5f1", color: "#10233f" }}
-        >
-          <div className="contact-hero-grid">
-            <div className="relative overflow-hidden px-7 py-12 md:px-12 md:py-16 lg:px-16">
-              <div className="absolute -left-24 -top-36 h-96 w-96 rounded-full border border-white/10" />
-              <div className="absolute -left-8 -top-20 h-60 w-60 rounded-full border border-[#78be43]/25" />
-              <p className="relative flex items-center gap-3 text-xs font-bold uppercase tracking-[.24em] text-[#9bd36d]"><span className="h-px w-10 bg-[#78be43]" /> Contact us</p>
-              <h1 className="relative mt-7 max-w-3xl text-5xl font-bold leading-[.98] tracking-[-.05em] md:text-6xl lg:text-7xl">Ideas begin with a conversation.</h1>
-              <p className="relative mt-6 max-w-2xl text-base leading-7 text-[#607189] md:text-lg">For partnerships, company enquiries or general assistance, connect with Supun Group through the channel that works best for you.</p>
-              <div className="relative mt-9 flex flex-wrap gap-3">
-                <a href="#enquiry" className="inline-flex items-center gap-3 rounded-full bg-[#78be43] px-6 py-3.5 text-sm font-bold text-[#0d2340] transition hover:bg-white">Send an enquiry <ArrowRight size={17} /></a>
-                <span className="inline-flex items-center gap-2 px-2 py-3 text-sm text-[#687a91]"><Clock3 size={16} className="text-[#5c9c30]" /> Mon–Fri, 9 AM–6 PM</span>
-              </div>
-            </div>
-
-            <div className="contact-direct border-t p-5 lg:border-l lg:border-t-0 md:p-8">
-              <p className="px-3 pb-4 text-xs font-bold uppercase tracking-[.2em] text-white/45">Direct contacts</p>
-              <div className="overflow-hidden rounded-[1.4rem] border border-white/12">
-                {methods.map(({ label, value, href, icon: Icon }) => (
-                  <a key={label} href={href} target={label === "Head office" ? "_blank" : undefined} rel={label === "Head office" ? "noopener noreferrer" : undefined} className="contact-method group border-b p-5 transition last:border-b-0 md:p-6">
-                    <span className="contact-method-icon"><Icon size={19} /></span>
-                    <span className="min-w-0"><small className="block text-[.65rem] font-bold uppercase tracking-[.17em] text-white/40">{label}</small><strong className="mt-1 block truncate text-sm md:text-base">{value}</strong></span>
-                    <ArrowUpRight className="ml-auto text-white/45 transition group-hover:-translate-y-1 group-hover:translate-x-1 group-hover:text-[#9bd36d]" size={18} />
-                  </a>
-                ))}
-              </div>
-              <p className="px-3 pt-5 text-xs leading-5 text-white/35">We usually respond to Group enquiries during the next business day.</p>
-            </div>
+      <section className="contact-hero px-5 pt-56 md:px-8 md:pt-60">
+        <div className="contact-shell hero-layout relative z-10">
+          <div className="pb-14 pr-6 md:pb-20 lg:pr-16">
+            <p className="flex items-center gap-3 text-xs font-bold uppercase tracking-[.25em] text-[#315f9f]"><span className="h-px w-11 bg-[#78be43]" /> Contact Supun Group</p>
+            <h1 className="mt-7 max-w-4xl text-5xl font-bold leading-[.96] tracking-[-.055em] md:text-7xl lg:text-[5.6rem]">A direct line to the right people.</h1>
+            <p className="mt-7 max-w-2xl text-base leading-8 text-[#65758a] md:text-lg">For a business proposal, a company question or a general enquiry, we’ll help your message reach the right team.</p>
+            <a href="#send-enquiry" className="mt-9 inline-flex items-center gap-3 rounded-full bg-[#78be43] px-7 py-4 text-sm font-bold transition hover:bg-[#10233f] hover:text-white">Start an enquiry <ArrowRight size={17} /></a>
           </div>
+          <aside className="contact-methods">
+            <div className="mb-1 flex items-center justify-between px-2"><p className="text-xs font-bold uppercase tracking-[.2em] text-white/55">Connect directly</p><span className="h-2 w-2 rounded-full bg-[#78be43]" /></div>
+            {methods.map(({ label, value, note, href, icon: Icon }) => <a key={label} href={href} target={label === "Visit us" ? "_blank" : undefined} rel={label === "Visit us" ? "noopener noreferrer" : undefined} className="contact-method group"><span className="method-icon"><Icon size={20} /></span><span className="min-w-0"><small className="block text-[10px] font-bold uppercase tracking-[.15em] text-white/45">{label}</small><strong className="mt-1 block truncate text-sm">{value}</strong><span className="mt-1 block text-xs text-white/50">{note}</span></span><ArrowUpRight className="text-white/45 transition group-hover:text-[#9bd36d]" size={18} /></a>)}
+          </aside>
         </div>
       </section>
 
-      <section id="enquiry" className="px-5 py-12 md:px-8 md:py-16">
-        <div className="enquiry-grid container mx-auto">
-          <div className="enquiry-intro">
-            <p className="relative text-xs font-bold uppercase tracking-[.22em] text-[#a9dc7d]">Your enquiry</p>
-            <h2 className="relative mt-5 max-w-md text-4xl font-bold leading-[1.03] tracking-[-.04em] md:text-5xl">Let’s find the right team for you.</h2>
-            <p className="relative mt-6 max-w-md leading-7 text-white/75">Tell us what you need. Your email application will open with the information prepared for our Group office.</p>
-            <div className="enquiry-note">
-              <div className="flex gap-4"><span className="grid h-11 w-11 shrink-0 place-items-center rounded-full bg-[#91cf5c] text-[#10233f]"><Send size={19} /></span><div><strong className="block text-sm text-white">One message is enough</strong><p className="mt-1 text-sm leading-6 text-white/70">We will direct your enquiry to the most relevant company or department.</p></div></div>
-            </div>
+      <section id="send-enquiry" className="px-5 py-16 md:px-8 md:py-24">
+        <div className="contact-shell enquiry-wrap">
+          <div className="enquiry-message">
+            <p className="relative text-xs font-bold uppercase tracking-[.23em] text-[#a4da78]">One message. The right team.</p><h2 className="relative mt-6 text-4xl font-bold leading-[1.02] tracking-[-.04em] md:text-5xl">Tell us what you need.</h2><p className="relative mt-6 max-w-md leading-7 text-white/70">Complete the form once and we will direct your enquiry to the relevant company or department.</p>
+            <div className="enquiry-steps"><div className="enquiry-step"><span className="step-number">1</span><p className="text-sm text-white/70"><strong className="text-white">Share your details</strong><br />Give us the essentials.</p></div><div className="enquiry-step"><span className="step-number">2</span><p className="text-sm text-white/70"><strong className="text-white">Write one message</strong><br />We’ll identify the right team.</p></div><div className="flex items-center gap-2 pt-2 text-xs text-white/50"><Clock3 size={15} className="text-[#9bd36d]" /> Usually answered the next business day.</div></div>
           </div>
-
-          <div className="enquiry-form">
-            <div className="mb-8 flex items-end justify-between gap-5 border-b border-[#10233f]/10 pb-6">
-              <div><p className="text-xs font-bold uppercase tracking-[.2em] text-[#5c9c30]">Send a message</p><h3 className="mt-2 text-3xl font-bold tracking-[-.03em]">How can we help?</h3></div>
-              <span className="hidden h-12 w-12 place-items-center rounded-full bg-[#eef4e9] text-[#5c9c30] sm:grid"><Mail size={20} /></span>
-            </div>
-            <form onSubmit={handleSubmit} className="grid gap-5 sm:grid-cols-2">
-              <div className="enquiry-field"><Label htmlFor="fullName">Full name</Label><Input id="fullName" name="fullName" required className="h-11" placeholder="Your name" /></div>
-              <div className="enquiry-field"><Label htmlFor="email">Email address</Label><Input id="email" name="email" type="email" required className="h-11" placeholder="you@company.com" /></div>
-              <div className="enquiry-field"><Label htmlFor="phone">Phone number</Label><Input id="phone" name="phone" className="h-11" placeholder="+94" /></div>
-              <div className="enquiry-field"><Label htmlFor="companyName">Company</Label><Input id="companyName" name="companyName" className="h-11" placeholder="Optional" /></div>
-              <div className="enquiry-field sm:col-span-2"><Label htmlFor="message">Your message</Label><Textarea id="message" name="message" rows={5} required className="resize-none" placeholder="Tell us briefly about your enquiry..." /></div>
-              <div className="flex flex-col gap-4 pt-1 sm:col-span-2 sm:flex-row sm:items-center sm:justify-between">
-                <p className="text-xs text-[#79889b]">Your details are used only to respond to this enquiry.</p>
-                <button type="submit" className="inline-flex min-h-12 items-center justify-center gap-3 rounded-full bg-[#315f9f] px-6 text-sm font-bold text-white transition hover:bg-[#0d2340]">Continue by email <ArrowRight size={16} /></button>
-              </div>
+          <div className="form-panel">
+            <div className="mb-8 flex items-start justify-between gap-5 border-b border-[#10233f]/10 pb-7"><div><p className="text-xs font-bold uppercase tracking-[.2em] text-[#5c9c30]">Your enquiry</p><h3 className="mt-2 text-3xl font-bold tracking-[-.035em]">How can we help?</h3></div><span className="grid h-12 w-12 place-items-center rounded-full bg-[#edf4e8] text-[#5c9c30]"><Send size={20} /></span></div>
+            <form onSubmit={handleSubmit} className="form-grid">
+              <div className="field"><Label htmlFor="fullName">Full name</Label><Input id="fullName" name="fullName" required className="h-11" placeholder="Your name" /></div><div className="field"><Label htmlFor="email">Email address</Label><Input id="email" name="email" type="email" required className="h-11" placeholder="you@company.com" /></div><div className="field"><Label htmlFor="phone">Phone number</Label><Input id="phone" name="phone" className="h-11" placeholder="+94" /></div><div className="field"><Label htmlFor="companyName">Company</Label><Input id="companyName" name="companyName" className="h-11" placeholder="Optional" /></div><div className="field sm:col-span-2"><Label htmlFor="message">Your message</Label><Textarea id="message" name="message" rows={5} required className="resize-none" placeholder="Tell us briefly about your enquiry..." /></div>
+              <div className="flex flex-col gap-4 pt-2 sm:col-span-2 sm:flex-row sm:items-center sm:justify-between"><p className="flex items-center gap-2 text-xs text-[#718095]"><ShieldCheck size={15} className="text-[#5c9c30]" /> Used only to answer this enquiry.</p><button type="submit" className="inline-flex items-center justify-center gap-3 rounded-full bg-[#10233f] px-7 py-4 text-sm font-bold text-white transition hover:bg-[#315f9f]">Prepare email <ArrowRight size={16} /></button></div>
             </form>
           </div>
         </div>
       </section>
 
-      <section className="border-t border-[#10233f]/10 bg-white px-5 py-16 md:px-8 md:py-20">
-        <div className="container mx-auto">
-          <div className="grid gap-8 border-b border-[#10233f]/10 pb-9 lg:grid-cols-[1fr_.65fr] lg:items-end">
-            <div><p className="text-xs font-bold uppercase tracking-[.22em] text-[#5c9c30]">Company directory</p><h2 className="mt-4 text-4xl font-bold tracking-[-.04em] md:text-5xl">Contact a business directly.</h2></div>
-            <p className="max-w-lg text-sm leading-6 text-[#697a90] lg:justify-self-end">Choose a company below, or use the enquiry form when you are unsure which team you need.</p>
-          </div>
-
-          <div className="mt-5 grid lg:grid-cols-2">
-            {companies.map((company, index) => (
-              <article key={company.id} className={`group grid grid-cols-[auto_1fr_auto] items-start gap-4 border-b border-[#10233f]/10 py-6 transition hover:bg-[#f6f8f4] sm:px-4 ${index % 2 === 0 ? "lg:border-r lg:pr-8" : "lg:pl-8"}`}>
-                <span className="grid h-10 w-10 place-items-center rounded-xl bg-[#edf3e8] text-[#5c9c30]"><Building2 size={18} /></span>
-                <div className="min-w-0">
-                  <h3 className="text-lg font-bold">{company.shortName}</h3>
-                  <div className="mt-2 flex flex-wrap gap-x-5 gap-y-1 text-xs text-[#6a7a8e]">
-                    {company.phone && <a href={`tel:${company.phone.replace(/[^+\d]/g, "")}`} className="hover:text-[#315f9f]">{company.phone}</a>}
-                    {company.email && <a href={`mailto:${company.email}`} className="truncate hover:text-[#315f9f]">{company.email}</a>}
-                    {!company.phone && !company.email && <span>Via Group head office</span>}
-                  </div>
-                </div>
-                <ArrowUpRight className="mt-1 text-[#315f9f]/40 transition group-hover:-translate-y-1 group-hover:translate-x-1 group-hover:text-[#315f9f]" size={18} />
-              </article>
-            ))}
-          </div>
+      <section className="border-t border-[#10233f]/10 bg-white px-5 py-16 md:px-8 md:py-24">
+        <div className="contact-shell"><div className="grid gap-7 border-b border-[#10233f]/10 pb-9 lg:grid-cols-[1fr_.65fr] lg:items-end"><div><p className="text-xs font-bold uppercase tracking-[.23em] text-[#5c9c30]">Company directory</p><h2 className="mt-4 text-4xl font-bold tracking-[-.045em] md:text-5xl">Contact a business directly.</h2></div><p className="max-w-lg text-sm leading-7 text-[#6d7c90] lg:justify-self-end">Already know who you need? Connect directly with a Supun Group company.</p></div>
+          <div className="directory-grid mt-8">{companies.map((company) => { const destination = company.website || (company.email ? `mailto:${company.email}` : company.phone ? `tel:${company.phone.replace(/[^+\d]/g, "")}` : "mailto:info@supungroup.lk"); return <article key={company.id} className="company-card group"><div className="flex items-start justify-between gap-4"><span className="grid h-11 w-11 place-items-center rounded-xl bg-[#edf3e8] text-[#5c9c30]"><Building2 size={19} /></span><span className="rounded-full border border-[#10233f]/10 px-3 py-1 text-[9px] font-bold uppercase tracking-[.12em] text-[#6c7b8e]">{company.industry}</span></div><div className="mt-6 flex-1"><h3 className="text-lg font-bold">{company.shortName}</h3><p className="mt-2 text-sm leading-6 text-[#718095]">{company.tagline}</p></div><div className="mt-5 flex items-end justify-between gap-4 border-t border-[#10233f]/10 pt-4"><div className="min-w-0 text-xs text-[#66768b]">{company.phone || company.email || "Via Group office"}</div><a href={destination} target={company.website ? "_blank" : undefined} rel={company.website ? "noopener noreferrer" : undefined} className="grid h-10 w-10 shrink-0 place-items-center rounded-full bg-[#10233f] text-white transition group-hover:bg-[#78be43] group-hover:text-[#10233f]" aria-label={`Contact ${company.shortName}`}><ArrowUpRight size={17} /></a></div></article>; })}</div>
         </div>
       </section>
     </main>
