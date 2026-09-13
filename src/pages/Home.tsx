@@ -89,7 +89,7 @@ const Home = () => {
     />
 
     <section className="premium-hero relative isolate min-h-screen bg-[#101311] text-white">
-      <div className={`absolute inset-0 bg-[radial-gradient(circle_at_75%_25%,#344039_0%,#1b211d_34%,#0d100e_74%)] transition-opacity duration-1000 ${heroVideoReady ? "opacity-0" : "opacity-100"}`} aria-hidden="true" />
+      <div className={`absolute inset-0 bg-[radial-gradient(circle_at_75%_25%,#252927_0%,#171a18_34%,#0d100e_74%)] transition-opacity duration-1000 ${heroVideoReady ? "opacity-0" : "opacity-100"}`} aria-hidden="true" />
       <video
         className={`absolute inset-0 h-full w-full object-cover transition-opacity duration-1000 ${heroVideoReady ? "opacity-100" : "opacity-0"}`}
         autoPlay
@@ -104,7 +104,6 @@ const Home = () => {
       </video>
       <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(8,10,9,.96)_0%,rgba(19,24,21,.74)_48%,rgba(18,23,20,.22)_100%)]" />
       <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(10,12,11,.04)_25%,rgba(8,11,9,.94)_100%)]" />
-      <div className="hero-orb hero-orb-one" aria-hidden="true" />
       <div className="hero-orb hero-orb-two" aria-hidden="true" />
 
       <div className="container relative z-10 mx-auto flex min-h-screen flex-col justify-between px-4 pb-6 pt-28 sm:pb-8 sm:pt-32 md:pb-12 md:pt-36">

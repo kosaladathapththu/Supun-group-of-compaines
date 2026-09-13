@@ -151,14 +151,6 @@ All colors MUST be HSL.
     animation: orb-drift 10s ease-in-out infinite alternate;
   }
 
-  .hero-orb-one {
-    right: 12%;
-    top: 18%;
-    width: 22rem;
-    height: 22rem;
-    background: rgb(120 190 67 / 0.13);
-  }
-
   .hero-orb-two {
     left: 35%;
     bottom: 8%;
