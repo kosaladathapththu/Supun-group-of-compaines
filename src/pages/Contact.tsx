@@ -58,8 +58,16 @@ const Contact = () => {
         .enquiry-field:focus-within { border-color:#315f9f; background:#fff; box-shadow:0 0 0 4px rgba(49,95,159,.1); }
         .enquiry-field label { display:block; color:#617086; font-size:.67rem; font-weight:800; letter-spacing:.12em; text-transform:uppercase; }
         .enquiry-field input,.enquiry-field textarea { border:0!important; background:transparent!important; padding-left:0!important; padding-right:0!important; box-shadow:none!important; }
+        .directory-grid { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:1rem; }
+        .directory-card { position:relative; display:flex; min-height:230px; flex-direction:column; overflow:hidden; border:1px solid rgba(16,35,63,.11); border-radius:1.5rem; background:#fff; padding:1.55rem; transition:transform .25s,border-color .25s,box-shadow .25s; }
+        multiline్జ .directory-card::before { content:""; position:absolute; inset:0 auto auto 0; width:100%; height:4px; background:linear-gradient(90deg,#315f9f 0 72%,#78be43 72%); transform:scaleX(.28); transform-origin:left; transition:transform .3s; }
+        .directory-card:hover { transform:translateY(-5px); border-color:rgba(49,95,159,.3); box-shadow:0 18px 42px rgba(16,35,63,.1); }
+        .directory-card:hover::before { transform:scaleX(1); }
+        .directory-icon { display:grid; width:46px; height:46px; place-items:center; border-radius:14px; background:#eef3f8; color:#315f9f; }
+        @media(max-width:1100px) { .directory-grid { grid-template-columns:repeat(2,minmax(0,1fr)); } }
         @media(max-width:900px) { .contact-hero-grid { grid-template-columns:1fr; } }
         @media(max-width:900px) { .enquiry-grid { grid-template-columns:1fr; gap:1.5rem; } .enquiry-grid::before { left:50%; top:50%; transform:translate(-50%,-50%) rotate(90deg); } .enquiry-intro { min-height:auto; } .enquiry-intro,.enquiry-form { padding:1.75rem; } }
+        @media(max-width:680px) { .directory-grid { grid-template-columns:1fr; } .directory-card { min-height:205px; } }
       `}</style>
 
       <section className="bg-white px-5 pb-10 pt-60 md:px-8 md:pt-64">
