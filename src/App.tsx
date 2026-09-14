@@ -6,6 +6,7 @@ import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import Navigation from "./components/Navigation";
 import Footer from "./components/Footer";
+import CookieConsent from "./components/CookieConsent";
 import ScrollToTop from "./components/ScrollToTop";
 import ProtectedRoute from "./components/ProtectedRoute";
 import AdminLayout from "./components/AdminLayout";
@@ -20,6 +21,7 @@ import Careers from "./pages/Careers";
 import News from "./pages/News";
 import NewsDetail from "./pages/NewsDetail";
 import Contact from "./pages/Contact";
+import CookiePolicy from "./pages/CookiePolicy";
 import NotFound from "./pages/NotFound";
 import Login from "./pages/admin/Login";
 import CompanyList from "./pages/admin/CompanyList";
@@ -35,7 +37,7 @@ import NewsList from "./pages/admin/NewsList";
 import NewsForm from "./pages/admin/NewsForm";
 
 const queryClient = new QueryClient();
-const PublicPage = ({ children }: { children: ReactNode }) => <div className="min-h-screen"><Navigation /><PageTransition><main>{children}</main><Footer /></PageTransition></div>;
+const PublicPage = ({ children }: { children: ReactNode }) => <div className="min-h-screen"><Navigation /><PageTransition><main>{children}</main><Footer /></PageTransition><CookieConsent /></div>;
 
 const App = () => <QueryClientProvider client={queryClient}><TooltipProvider><Toaster /><Sonner /><BrowserRouter><ScrollToTop /><Suspense fallback={<RouteLoader />}><Routes>
   <Route path="/" element={<PublicPage><Home /></PublicPage>} />
@@ -47,6 +49,7 @@ const App = () => <QueryClientProvider client={queryClient}><TooltipProvider><To
   <Route path="/news" element={<PublicPage><News /></PublicPage>} />
   <Route path="/news/:slug" element={<PublicPage><NewsDetail /></PublicPage>} />
   <Route path="/contact" element={<PublicPage><Contact /></PublicPage>} />
+  <Route path="/cookie-policy" element={<PublicPage><CookiePolicy /></PublicPage>} />
   <Route path="/shop" element={<Navigate to="/camy-products" replace />} /><Route path="/shop/:id" element={<Navigate to="/camy-products" replace />} />
   <Route path="/admin/login" element={<PageTransition><Login /></PageTransition>} />
   <Route path="/admin" element={<ProtectedRoute><AdminLayout /></ProtectedRoute>}>
