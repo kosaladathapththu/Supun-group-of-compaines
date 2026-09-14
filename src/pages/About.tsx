@@ -130,18 +130,21 @@ const About = () => (
       </div>
     </section>
 
-    <section className="bg-[#f5f7fa] py-16 md:py-24">
+    <section className="bg-[#f5f7fa] py-14 md:py-18">
       <div className="container mx-auto px-4">
         <AnimatedSection animation="slide-up" duration={800} triggerOnce={false}>
-          <div className="mb-14 flex flex-col justify-between gap-6 md:flex-row md:items-end"><div><p className="section-kicker">Our journey</p><h2 className="mt-5 text-4xl font-semibold normal-case tracking-[-.04em] md:text-6xl">Milestones since 1978.</h2></div><p className="max-w-sm leading-relaxed text-[#5d6d82]">One trading business became an interconnected Sri Lankan group, one purposeful step at a time.</p></div>
+          <div className="mb-8 flex flex-col justify-between gap-4 md:flex-row md:items-end"><div><p className="section-kicker">Our journey</p><h2 className="mt-4 text-4xl font-semibold normal-case tracking-[-.04em] md:text-5xl">Milestones since 1978.</h2></div><p className="max-w-sm text-sm leading-6 text-[#5d6d82]">One trading business became an interconnected Sri Lankan group, one purposeful step at a time.</p></div>
         </AnimatedSection>
 
-        <div id="journey" className="relative scroll-mt-24 overflow-hidden rounded-[1.5rem] border border-[#10233f]/10 bg-white px-5 py-8 shadow-[0_16px_45px_rgba(16,35,63,.06)] sm:px-8 md:px-10 md:py-10">
-          <div className="relative mx-auto grid max-w-6xl gap-0 md:grid-cols-2">
-            {journey.map(([year, text], index) => <AnimatedSection key={year} animation="fade" delay={(index % 2) * 50} duration={500} triggerOnce={false}>
-              <article className={`h-full border-[#10233f]/10 px-2 py-6 md:px-7 ${index % 2 === 0 ? "md:border-r" : ""} ${index < journey.length - 2 ? "border-b" : ""}`}>
-                <div className="flex items-baseline gap-4"><strong className="text-3xl font-semibold tracking-[-.05em] text-[#10233f]">{year}</strong><span className="h-px flex-1 bg-[#10233f]/10" /></div>
-                <p className="mt-3 max-w-xl leading-relaxed text-[#596779]">{text}</p>
+        <div id="journey" className="scroll-mt-24">
+          <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+            {journey.map(([year, text], index) => <AnimatedSection key={year} animation="fade" delay={(index % 4) * 35} duration={450} triggerOnce={false}>
+              <article className="group h-full min-h-[155px] rounded-xl border border-[#10233f]/10 bg-white p-5 transition duration-300 hover:-translate-y-0.5 hover:border-[#315f9f]/30 hover:shadow-[0_10px_28px_rgba(16,35,63,.07)]">
+                <div className="flex items-center justify-between gap-3">
+                  <strong className="text-2xl font-semibold tracking-[-.04em] text-[#10233f]">{year}</strong>
+                  <span className="h-2 w-2 rounded-full bg-[#78be43]" />
+                </div>
+                <p className="mt-4 text-sm leading-6 text-[#596779]">{text}</p>
               </article>
             </AnimatedSection>)}
           </div>
