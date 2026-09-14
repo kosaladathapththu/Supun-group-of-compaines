@@ -4,6 +4,7 @@ import Seo from "@/components/Seo";
 import { AnimatedSection } from "@/components/AnimatedSection";
 import chairmanImage from "@/assets/Chairman.png";
 import heroCorporate from "@/assets/hero-corporate.jpg";
+import aboutHeroSriLanka from "@/assets/about-hero-sri-lanka-v3.png";
 import retailStore from "@/assets/retail-store.jpg";
 import manufacturingImage from "@/assets/sector-manufacturing-v2.jpg";
 import hospitalityImage from "@/assets/sector-hospitality-v2.jpg";
@@ -19,10 +20,10 @@ const About = () => (
     <Seo title="About Supun Group of Companies | Our Story Since 1978" description="Discover the story, leadership, vision, journey and values of Supun Group of Companies, a Sri Lankan family-run group with roots dating to 1978." keywords="Supun Group history, Mohamed Fareed, M.F.M. Kaleel, Sri Lanka manufacturing group, Supun Group leadership" />
 
     <section className="relative isolate min-h-[620px] overflow-hidden bg-[#102746] md:min-h-[690px]">
-      <img src={heroCorporate} alt="A modern Sri Lankan business building" className="absolute inset-0 -z-20 h-full w-full object-cover" />
-      <div className="absolute inset-0 -z-10 bg-gradient-to-r from-white via-white/90 to-white/5 md:via-white/70" />
+      <img src={aboutHeroSriLanka} alt="Colombo skyline and a modern Sri Lankan business campus at sunrise" className="absolute inset-0 -z-20 h-full w-full object-cover object-center" />
+      <div className="absolute inset-0 -z-10 bg-gradient-to-r from-[#071426]/90 via-[#071426]/45 to-transparent" />
       <div className="container mx-auto flex min-h-[620px] items-center px-4 pb-16 pt-36 md:min-h-[690px] md:pt-40">
-        <AnimatedSection animation="fade" duration={550} triggerOnce={false}><div className="max-w-2xl"><Label>Our story continues</Label><h1 className="mt-5 text-5xl font-semibold normal-case leading-[1.03] tracking-[-.045em] sm:text-6xl md:text-7xl">Built in Sri Lanka.<br />For a brighter tomorrow.</h1><p className="mt-6 max-w-lg text-base leading-7 text-[#3e536e] md:text-lg">Two generations. Multiple industries. One unwavering commitment to quality, innovation and Sri Lankan pride.</p><Rule /></div></AnimatedSection>
+        <AnimatedSection animation="fade" duration={550} triggerOnce={false}><div className="max-w-2xl text-white"><p className="text-xs font-bold uppercase tracking-[.18em] text-[#efbd55]">Our story continues</p><h1 className="mt-5 text-5xl font-semibold normal-case leading-[1.03] tracking-[-.045em] sm:text-6xl md:text-7xl">Built in Sri Lanka.<br />For a brighter tomorrow.</h1><p className="mt-6 max-w-lg text-base leading-7 text-white/75 md:text-lg">Two generations. Multiple industries. One unwavering commitment to quality, innovation and Sri Lankan pride.</p><div className="mt-7 h-0.5 w-16 bg-[#e2a630]" /></div></AnimatedSection>
       </div>
       <div className="absolute bottom-8 right-6 hidden border-l border-white/50 pl-5 text-[10px] font-bold uppercase leading-6 tracking-[.2em] text-white md:block">People<br />Products<br />Possibilities</div>
     </section>
