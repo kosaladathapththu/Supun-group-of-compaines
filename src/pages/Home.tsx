@@ -8,7 +8,7 @@ import { companies } from "@/data/companies";
 import { getCompanyLogo } from "@/data/companyLogos";
 import { sectorHighlights, siteStats } from "@/data/siteContent";
 import heroVideo from "@/assets/supun-group-hero-optimized.mp4";
-import groupLogo from "@/assets/supun-group-of-companies-logo.png";
+import manufacturingImage from "@/assets/sector-manufacturing-v2.jpg";
 
 const sectorMeta = [
   { icon: Factory },
@@ -53,7 +53,7 @@ const CountUpStat = ({ value, label, index }: { value: string; label: string; in
     <div ref={ref} className="hero-stat group relative py-2 md:py-3" style={{ animationDelay: `${index * 100}ms` }}>
       <div className="flex items-start gap-2">
         <span className="text-3xl font-semibold tracking-[-0.04em] text-white tabular-nums sm:text-4xl">{count}{suffix}</span>
-        <span className="mt-1 h-1.5 w-1.5 rounded-full bg-[#78be43] shadow-[0_0_12px_#78be43]" />
+        <span className="mt-1 h-1.5 w-1.5 rounded-full bg-[#d99a24] shadow-[0_0_12px_rgba(217,154,36,.65)]" />
       </div>
       <div className="mt-1.5 max-w-[9rem] text-[9px] font-semibold uppercase leading-snug tracking-[0.14em] text-white/50 sm:text-[10px]">{label}</div>
     </div>
@@ -160,13 +160,12 @@ const Home = () => {
 
     <section id="legacy" className="legacy-premium relative isolate overflow-hidden py-16 sm:py-20 md:py-32">
       <div className="legacy-aurora legacy-aurora-blue" aria-hidden="true" />
-      <div className="legacy-aurora legacy-aurora-green" aria-hidden="true" />
       <div className="legacy-lines absolute inset-0 opacity-50" aria-hidden="true" />
       <div className="container relative z-10 mx-auto px-4">
         <AnimatedSection animation="slide-up" duration={850} triggerOnce={false}>
           <div className="mb-10 flex items-center justify-between gap-5 md:mb-14">
-            <p className="section-kicker text-primary before:bg-[#78be43]">Our legacy</p>
-            <div className="hidden items-center gap-3 text-[10px] font-semibold uppercase tracking-[0.22em] text-primary/45 sm:flex"><span>1978</span><span className="h-px w-14 bg-gradient-to-r from-[#78be43] to-primary/30" /><span>Today</span></div>
+            <p className="section-kicker text-primary before:bg-[#d99a24]">Our legacy</p>
+            <div className="hidden items-center gap-3 text-[10px] font-semibold uppercase tracking-[0.22em] text-primary/45 sm:flex"><span>1978</span><span className="h-px w-14 bg-gradient-to-r from-[#d99a24] to-primary/30" /><span>Today</span></div>
           </div>
         </AnimatedSection>
         <div className="grid items-stretch gap-6 lg:grid-cols-[.72fr_1.28fr]">
@@ -174,58 +173,56 @@ const Home = () => {
             <div className="legacy-year-card group relative flex h-full min-h-[350px] flex-col justify-between overflow-hidden rounded-[2rem] p-7 sm:min-h-[430px] sm:p-10">
               <div className="legacy-year-ring" aria-hidden="true"><span /><span /><span /></div>
               <div className="relative flex items-center justify-between"><span className="rounded-full border border-primary/10 bg-white/65 px-3 py-1.5 text-[10px] font-semibold uppercase tracking-[0.2em] text-primary/70 backdrop-blur-xl">Where it began</span><span className="legacy-pulse"><span /></span></div>
-              <div className="relative"><p className="text-xs font-semibold uppercase tracking-[0.25em] text-[#5b9d2c]">Established</p><div className="legacy-year mt-2 text-[clamp(5rem,14vw,9rem)] font-semibold leading-none tracking-[-0.075em]">1978</div><p className="mt-4 max-w-xs border-l-2 border-[#78be43] pl-4 text-sm leading-relaxed text-[#526278]">One vision in Colombo became a group built across generations.</p></div>
+              <div className="relative"><p className="text-xs font-semibold uppercase tracking-[0.25em] text-[#a66d0d]">Established</p><div className="legacy-year mt-2 text-[clamp(5rem,14vw,9rem)] font-semibold leading-none tracking-[-0.075em]">1978</div><p className="mt-4 max-w-xs border-l-2 border-[#d99a24] pl-4 text-sm leading-relaxed text-[#526278]">One vision in Colombo became a group built across generations.</p></div>
             </div>
           </AnimatedSection>
           <AnimatedSection animation="slide-left" delay={140} duration={950} triggerOnce={false}>
             <div className="legacy-story-card relative flex h-full min-h-[430px] flex-col overflow-hidden rounded-[2rem] p-7 sm:p-10 lg:p-12">
               <div className="legacy-corner-mark" aria-hidden="true" />
-              <div className="relative"><span className="mb-6 inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.2em] text-[#5b9d2c]"><span className="h-2 w-2 rounded-full bg-[#78be43] shadow-[0_0_16px_#78be43]" /> Built across generations</span><h2 className="max-w-4xl text-4xl font-semibold normal-case leading-[1.04] tracking-[-0.04em] text-[#10233f] sm:text-5xl lg:text-6xl">A family business with the courage to <span className="legacy-gradient-text">keep building.</span></h2></div>
-              <div className="relative mt-auto pt-10"><div className="grid gap-6 border-t border-primary/10 pt-7 md:grid-cols-2"><p className="leading-relaxed text-[#526278]">What began as a Colombo trading business has grown into a connected group spanning manufacturing, retail, distribution and hospitality.</p><p className="leading-relaxed text-[#526278]">Through every new chapter, one standard remains: create lasting value for our customers, our people and our country.</p></div><Link to="/about" className="legacy-link group mt-8 inline-flex items-center gap-4 font-semibold text-primary">Read our story <span className="flex h-11 w-11 items-center justify-center rounded-full border border-[#78be43]/40 bg-[#78be43]/10 text-[#5b9d2c] transition duration-300 group-hover:rotate-[-35deg] group-hover:bg-[#78be43] group-hover:text-white"><ArrowRight size={18} /></span></Link></div>
+              <div className="relative"><span className="mb-6 inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.2em] text-[#a66d0d]"><span className="h-2 w-2 rounded-full bg-[#d99a24]" /> Built across generations</span><h2 className="max-w-4xl text-4xl font-semibold normal-case leading-[1.04] tracking-[-0.04em] text-[#10233f] sm:text-5xl lg:text-6xl">A family business with the courage to <span className="text-[#315f9f]">keep building.</span></h2></div>
+              <div className="relative mt-auto pt-10"><div className="grid gap-6 border-t border-primary/10 pt-7 md:grid-cols-2"><p className="leading-relaxed text-[#526278]">What began as a Colombo trading business has grown into a connected group spanning manufacturing, retail, distribution and hospitality.</p><p className="leading-relaxed text-[#526278]">Through every new chapter, one standard remains: create lasting value for our customers, our people and our country.</p></div><Link to="/about" className="legacy-link group mt-8 inline-flex items-center gap-4 font-semibold text-primary">Read our story <span className="flex h-11 w-11 items-center justify-center rounded-full border border-primary/20 bg-primary/5 text-primary transition duration-300 group-hover:translate-x-1 group-hover:bg-primary group-hover:text-white"><ArrowRight size={18} /></span></Link></div>
             </div>
           </AnimatedSection>
         </div>
       </div>
     </section>
 
-    <section className="relative overflow-hidden bg-[#f5f6f1] py-16 text-[#10233f] sm:py-20 md:py-28">
+    <section className="relative overflow-hidden bg-white py-16 text-[#10233f] sm:py-20 md:py-28">
       <div className="container relative z-10 mx-auto px-4">
-        <div className="grid gap-14 lg:grid-cols-[0.82fr_1.18fr] lg:items-center lg:gap-20">
+        <div className="grid gap-12 lg:grid-cols-[0.82fr_1.18fr] lg:items-center lg:gap-20">
           <AnimatedSection animation="slide-right" duration={900} triggerOnce={false}>
-            <div className="relative min-h-[430px] sm:min-h-[560px]">
-              <div className="absolute left-0 top-0 z-10 w-44 rounded-2xl border border-[#10233f]/10 bg-white p-5 shadow-[0_20px_55px_rgba(16,35,63,.10)] sm:w-52 sm:p-6">
-                <strong className="block text-4xl font-semibold tracking-[-0.05em] text-[#10233f]">46+</strong>
-                <span className="mt-2 block text-xs font-semibold uppercase tracking-[0.16em] text-primary">Years of excellence</span>
-                <p className="mt-3 text-xs leading-relaxed text-[#667388]">Building trusted businesses for Sri Lankan families since 1978.</p>
-              </div>
-
-              <div className="absolute inset-x-4 bottom-0 top-24 flex items-center justify-center rounded-[2rem] border border-white/80 bg-[radial-gradient(circle_at_center,rgba(120,190,67,.11),transparent_58%)] sm:inset-x-10">
-                <span className="absolute h-72 w-72 rounded-full border border-[#78be43]/15 sm:h-96 sm:w-96" />
-                <span className="absolute h-52 w-52 rounded-full border border-primary/10 sm:h-72 sm:w-72" />
-                <img src={groupLogo} alt="Supun Group of Companies" className="relative w-64 drop-shadow-[0_22px_30px_rgba(16,35,63,.12)] sm:w-80" />
+            <div className="relative min-h-[480px] overflow-hidden rounded-[1.5rem] bg-[#10233f] shadow-[0_24px_60px_rgba(16,35,63,.18)] sm:min-h-[570px]">
+              <img src={manufacturingImage} alt="Supun Group manufacturing operations in Sri Lanka" className="absolute inset-0 h-full w-full object-cover" />
+              <div className="absolute inset-0 bg-gradient-to-t from-[#081a32] via-[#10233f]/25 to-transparent" />
+              <div className="absolute inset-x-0 bottom-0 p-7 text-white sm:p-9">
+                <p className="text-xs font-semibold uppercase tracking-[0.22em] text-[#efbd55]">Built in Sri Lanka</p>
+                <h3 className="mt-3 max-w-md text-3xl font-semibold normal-case leading-tight tracking-[-0.03em] sm:text-4xl">Local capability. Lasting value.</h3>
+                <div className="mt-6 flex items-center gap-5 border-t border-white/25 pt-5">
+                  <strong className="text-4xl font-semibold tracking-[-0.05em]">46+</strong>
+                  <span className="max-w-[9rem] text-xs font-semibold uppercase leading-relaxed tracking-[0.14em] text-white/70">Years of trusted enterprise</span>
+                </div>
               </div>
             </div>
           </AnimatedSection>
 
           <div>
             <AnimatedSection animation="slide-up" duration={800} triggerOnce={false}>
-              <p className="section-kicker text-primary before:bg-[#78be43]">What we do</p>
+              <p className="section-kicker text-primary before:bg-[#d99a24]">What we do</p>
               <h2 className="mt-5 max-w-3xl text-4xl font-semibold normal-case leading-[1.05] tracking-[-0.04em] text-[#10233f] sm:text-5xl md:text-6xl">A Sri Lankan group built on making things well.</h2>
               <p className="mt-6 max-w-2xl text-base leading-relaxed text-[#526278]">From our Colombo trading roots to manufacturing, retail, hospitality and homegrown consumer products, every capability strengthens the next.</p>
             </AnimatedSection>
 
-            <div className="mt-9 border-t border-[#10233f]/12">
+            <div className="mt-9 grid gap-3 sm:grid-cols-2">
               {sectorHighlights.map((sector, index) => {
                 const Icon = sectorMeta[index].icon;
                 return (
                   <AnimatedSection key={sector.title} animation="slide-left" delay={index * 90} duration={750} triggerOnce={false}>
-                    <article className="group grid grid-cols-[2.5rem_1fr_auto] gap-4 border-b border-[#10233f]/12 py-5 sm:grid-cols-[3rem_1fr_auto] sm:items-center">
-                      <span className="pt-1 text-xs font-semibold tracking-[0.18em] text-primary/55 sm:pt-0">0{index + 1}</span>
+                    <article className="group h-full rounded-xl border border-[#10233f]/10 bg-[#f7f9fc] p-5 transition duration-300 hover:-translate-y-1 hover:border-[#315f9f]/35 hover:shadow-[0_14px_32px_rgba(16,35,63,.08)]">
+                      <span className="mb-5 flex h-11 w-11 items-center justify-center rounded-lg bg-[#e8eef6] text-[#315f9f]"><Icon size={20} strokeWidth={1.7} /></span>
                       <div>
-                        <h3 className="text-xl font-semibold normal-case text-[#10233f] sm:text-2xl">{sector.title}</h3>
-                        <p className="mt-2 max-w-xl text-sm leading-relaxed text-[#667388] sm:text-base">{sector.description}</p>
+                        <h3 className="text-xl font-semibold normal-case text-[#10233f]">{sector.title}</h3>
+                        <p className="mt-2 text-sm leading-relaxed text-[#667388]">{sector.description}</p>
                       </div>
-                      <span className="flex h-11 w-11 items-center justify-center rounded-full border border-primary/15 bg-white text-primary transition duration-300 group-hover:border-[#78be43] group-hover:bg-[#78be43] group-hover:text-white"><Icon size={19} strokeWidth={1.6} /></span>
                     </article>
                   </AnimatedSection>
                 );
@@ -233,7 +230,7 @@ const Home = () => {
             </div>
 
             <AnimatedSection animation="fade" delay={250} duration={700} triggerOnce={false}>
-              <Link to="/companies" className="group mt-8 inline-flex items-center gap-4 font-semibold text-primary">Explore the group <span className="flex h-11 w-11 items-center justify-center rounded-full bg-[#10233f] text-white transition duration-300 group-hover:translate-x-1 group-hover:bg-[#78be43]"><ArrowRight size={18} /></span></Link>
+              <Link to="/companies" className="group mt-8 inline-flex items-center gap-4 font-semibold text-primary">Explore the group <span className="flex h-11 w-11 items-center justify-center rounded-full bg-[#10233f] text-white transition duration-300 group-hover:translate-x-1 group-hover:bg-[#315f9f]"><ArrowRight size={18} /></span></Link>
             </AnimatedSection>
           </div>
         </div>
@@ -245,9 +242,9 @@ const Home = () => {
         <div className="flex flex-col justify-between gap-6 md:flex-row md:items-end">
           <div><p className="section-kicker">Inside the group</p><h2 className="mt-5 text-4xl font-semibold normal-case tracking-[-0.035em] text-[#10233f] md:text-6xl">Businesses built for impact.</h2></div>
           <div className="flex items-center gap-3">
-            <Link to="/companies" className="mr-2 hidden font-semibold text-primary transition hover:text-[#5b9d2c] sm:inline">Meet all 11</Link>
+            <Link to="/companies" className="mr-2 hidden font-semibold text-primary transition hover:text-[#315f9f] sm:inline">Meet all 11</Link>
             <button type="button" onClick={() => scrollCompanies(-1)} aria-label="Previous companies" className="flex h-12 w-12 items-center justify-center rounded-full border border-primary/20 bg-white text-primary transition hover:border-primary hover:bg-primary hover:text-white"><ArrowRight className="rotate-180" size={19} /></button>
-            <button type="button" onClick={() => scrollCompanies(1)} aria-label="Next companies" className="flex h-12 w-12 items-center justify-center rounded-full bg-primary text-white transition hover:bg-[#78be43]"><ArrowRight size={19} /></button>
+            <button type="button" onClick={() => scrollCompanies(1)} aria-label="Next companies" className="flex h-12 w-12 items-center justify-center rounded-full bg-primary text-white transition hover:bg-[#315f9f]"><ArrowRight size={19} /></button>
           </div>
         </div>
       </AnimatedSection>
@@ -260,7 +257,7 @@ const Home = () => {
               <span className="absolute bottom-4 right-4 inline-flex rounded-full border border-white bg-[#eef4fb]/95 px-3 py-1.5 text-[9px] font-bold uppercase tracking-[0.15em] text-primary shadow-sm">{company.industry}</span>
             </div>
             <div className="relative flex flex-1 flex-col px-2 pb-1 pt-7">
-              <div className="mb-4 flex items-center gap-3 text-[10px] font-bold uppercase tracking-[.16em] text-[#738197]"><span className="h-2 w-2 rounded-full bg-[#78be43]" />{company.established ? `Established ${company.established}` : 'Supun Group company'}</div>
+              <div className="mb-4 flex items-center gap-3 text-[10px] font-bold uppercase tracking-[.16em] text-[#738197]"><span className="h-2 w-2 rounded-full bg-[#d99a24]" />{company.established ? `Established ${company.established}` : 'Supun Group company'}</div>
               <h3 className="text-3xl font-semibold normal-case tracking-[-0.03em] text-[#10233f]">{company.shortName}</h3>
               <p className="mt-3 line-clamp-2 leading-relaxed text-[#667388]">{company.description}</p>
               <div className="mt-auto flex items-center justify-between border-t border-primary/10 pt-5">
@@ -277,19 +274,19 @@ const Home = () => {
     <section className="relative overflow-hidden bg-[#f3f7fb] px-4 pb-16 sm:pb-20 md:pb-28">
       <AnimatedSection animation="scale" duration={900} triggerOnce={false} className="container mx-auto">
         <div className="relative isolate overflow-hidden rounded-[2rem] bg-[#071b2d] px-7 py-12 text-white shadow-[0_30px_80px_rgba(7,27,45,.20)] sm:px-12 sm:py-16 md:rounded-[3rem] lg:px-20 lg:py-20">
-          <div className="absolute inset-y-0 right-0 -z-10 w-full bg-[radial-gradient(circle_at_85%_35%,rgba(120,190,67,.22),transparent_30%),linear-gradient(115deg,transparent_45%,rgba(25,83,132,.38))] lg:w-2/3" />
+          <div className="absolute inset-y-0 right-0 -z-10 w-full bg-[radial-gradient(circle_at_85%_35%,rgba(217,154,36,.16),transparent_30%),linear-gradient(115deg,transparent_45%,rgba(25,83,132,.38))] lg:w-2/3" />
           <Globe2 className="absolute -bottom-28 -right-24 -z-10 h-[28rem] w-[28rem] text-white/[.06]" strokeWidth={0.65} aria-hidden="true" />
 
           <div className="grid gap-12 lg:grid-cols-[1fr_18rem] lg:items-end lg:gap-20">
             <div>
-              <p className="mb-6 flex items-center gap-3 text-xs font-bold uppercase tracking-[0.24em] text-[#9bd46f]"><Sparkles size={15} /> The next chapter</p>
-              <h2 className="max-w-4xl text-4xl font-semibold normal-case leading-[1.02] tracking-[-0.04em] sm:text-5xl md:text-7xl">Let’s build something <span className="text-[#9bd46f]">lasting.</span></h2>
+              <p className="mb-6 flex items-center gap-3 text-xs font-bold uppercase tracking-[0.24em] text-[#efbd55]"><Sparkles size={15} /> The next chapter</p>
+              <h2 className="max-w-4xl text-4xl font-semibold normal-case leading-[1.02] tracking-[-0.04em] sm:text-5xl md:text-7xl">Let’s build something <span className="text-[#efbd55]">lasting.</span></h2>
               <p className="mt-7 max-w-2xl text-base leading-relaxed text-white/65 sm:text-lg">From ambitious ideas to trusted partnerships, we are ready to create what Sri Lanka needs next.</p>
             </div>
 
             <div className="border-t border-white/15 pt-7 lg:border-l lg:border-t-0 lg:pl-10 lg:pt-0">
               <p className="mb-6 text-sm leading-relaxed text-white/55">Have an opportunity, partnership or idea in mind?</p>
-              <Link to="/contact" className="group inline-flex w-full items-center justify-between rounded-full bg-[#78be43] px-6 py-4 font-semibold text-[#071b2d] transition duration-300 hover:bg-white">
+              <Link to="/contact" className="group inline-flex w-full items-center justify-between rounded-full bg-[#efbd55] px-6 py-4 font-semibold text-[#071b2d] transition duration-300 hover:bg-white">
                 Talk to our team
                 <span className="flex h-10 w-10 items-center justify-center rounded-full bg-[#071b2d] text-white transition-transform duration-300 group-hover:translate-x-1"><ArrowRight size={18} /></span>
               </Link>
