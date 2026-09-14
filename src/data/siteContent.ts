@@ -102,4 +102,7 @@ export const camyProducts = [
   { name: "Wall Clocks", madeBy: "Aero Star", note: "Made in Sri Lanka" },
   { name: "Electric Kettles", madeBy: "Group factories", note: "Made in Sri Lanka" },
   { name: "Gas Cookers", madeBy: "Group factories", note: "Made in Sri Lanka" },
+  { name: "Refrigerators", madeBy: "Group factories", note: "Camy Home Appliance" },
+  { name: "Mini Refrigerators", madeBy: "Group factories", note: "Camy Home Appliance" },
+  { name: "Pressure Cookers", madeBy: "Group factories", note: "Camy Kitchenware" },
 ];

@@ -4,18 +4,36 @@ import { camyProducts } from "@/data/siteContent";
 import camyLogo from "@/assets/camy-brand-logo.png";
 import anythingAtSupunLogo from "@/assets/anything-at-supun-logo.png";
 import helmetImage from "@/assets/helmet-manufacturing.jpg";
-import cookwareImage from "@/assets/cookware-manufacturing.jpg";
-import chromeImage from "@/assets/chrome-manufacturing.jpg";
 import manufacturingImage from "@/assets/hero-manufacturing.jpg";
+import airConditionerImage from "@/assets/products/camy-air-conditioners.png";
+import doubleDoorRefrigeratorImage from "@/assets/products/camy-double-door-refrigerator.jpeg";
+import electricKettlesImage from "@/assets/products/camy-electric-kettles.png";
+import fanImage from "@/assets/products/camy-fan.png";
+import gasCookerImage from "@/assets/products/camy-gas-cooker.png";
+import miniRefrigeratorImage from "@/assets/products/camy-mini-refrigerator.jpeg";
+import motorcycleHelmetImage from "@/assets/products/camy-motorcycle-helmet.png";
+import nonStickCookwareImage from "@/assets/products/camy-non-stick-cookware.png";
+import pressureCookerImage from "@/assets/products/camy-pressure-cooker.png";
+import televisionImage from "@/assets/products/camy-tv.png";
+import wallClockImage from "@/assets/products/camy-wall-clock.png";
+import waterFilterImage from "@/assets/products/camy-water-filter.png";
 
 const shopUrl = "https://www.anythingatsupun.lk/";
 
 const productImages: Record<string, string> = {
-  "Motorcycle Helmets": helmetImage,
-  "Non-Stick Cookware": cookwareImage,
-  "Water Filters": chromeImage,
+  "Motorcycle Helmets": motorcycleHelmetImage,
+  "Non-Stick Cookware": nonStickCookwareImage,
+  "Water Filters": waterFilterImage,
   "Mixer Grinders": manufacturingImage,
-  "Wall Clocks": chromeImage,
+  "Air Conditioners": airConditionerImage,
+  "Fans": fanImage,
+  "TVs": televisionImage,
+  "Wall Clocks": wallClockImage,
+  "Electric Kettles": electricKettlesImage,
+  "Gas Cookers": gasCookerImage,
+  "Refrigerators": doubleDoorRefrigeratorImage,
+  "Mini Refrigerators": miniRefrigeratorImage,
+  "Pressure Cookers": pressureCookerImage,
 };
 
 const categoryLinks: Record<string, string> = {
@@ -61,7 +79,7 @@ const CamyProducts = () => (
       .camy-card:nth-child(4n+2) .camy-media,.camy-card:nth-child(4n+3) .camy-media { order:2; }
       .camy-media { position:relative; min-width:0; overflow:hidden; background:#f0efeb; clip-path:inset(0 round 0); transition:clip-path .65s cubic-bezier(.22,1,.36,1),transform .65s cubic-bezier(.22,1,.36,1); }
       .camy-media::after { content:""; position:absolute; inset:0; z-index:1; opacity:0; background:rgba(0,0,0,.48); transition:opacity .4s ease; pointer-events:none; }
-      .camy-media>img { display:block; width:100%; height:100%; object-fit:cover; transition:transform .75s cubic-bezier(.22,1,.36,1),filter .45s ease; }
+      .camy-media>img { display:block; width:100%; height:100%; object-fit:contain; background:#fff; padding:1rem; transition:transform .75s cubic-bezier(.22,1,.36,1),filter .45s ease; }
       .camy-card:hover .camy-media { clip-path:inset(18px round 999px); transform:scale(.96); }
       .camy-card:hover .camy-media>img { transform:scale(1.11); filter:saturate(.82) contrast(1.04); }
       .camy-card:hover .camy-media::after { opacity:1; }
