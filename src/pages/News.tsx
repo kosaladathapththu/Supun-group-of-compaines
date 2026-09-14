@@ -4,6 +4,7 @@ import { ArrowRight, CalendarDays, Newspaper } from 'lucide-react';
 import Seo from '@/components/Seo';
 import { getErrorMessage, getFileUrl } from '@/services/api';
 import { newsAPI, type NewsArticle } from '@/services/newsApi';
+import newsHeroEditorial from '@/assets/news-hero-editorial.png';
 
 const filters = ['All updates', 'Corporate', 'Manufacturing', 'Retail', 'Hospitality'];
 
@@ -39,8 +40,11 @@ export default function News() {
     <main className="min-h-screen bg-[#f5f6f4] text-[#10233f]">
       <Seo title="News & Media | Supun Group of Companies" description="Official news, announcements and media updates from Supun Group of Companies in Sri Lanka." keywords="Supun Group news, Supun Group media, Camy news, Sri Lanka manufacturing news" />
 
-      <section className="border-b border-[#10233f]/10 bg-white px-5 py-20 md:px-8 md:py-28">
-        <div className="mx-auto max-w-7xl"><p className="flex items-center gap-3 text-xs font-bold uppercase tracking-[.25em] text-[#315f9f]"><span className="h-px w-10 bg-[#78be43]" /> News & Media</p><div className="mt-7 grid gap-8 lg:grid-cols-[1.2fr_.8fr] lg:items-end"><h1 className="max-w-4xl text-5xl font-bold leading-[.95] tracking-[-.05em] md:text-7xl">Stories from a Group that keeps moving.</h1><p className="max-w-xl text-lg leading-8 text-[#68788d]">Official announcements, company achievements and approved updates from across Supun Group.</p></div></div>
+      <section className="relative isolate flex min-h-[620px] items-end overflow-hidden border-b border-black/20 px-5 pb-16 pt-32 text-white md:px-8 md:pb-24 md:pt-40">
+        <img src={newsHeroEditorial} alt="Corporate editorial workspace overlooking Colombo" className="absolute inset-0 -z-20 h-full w-full object-cover object-center" />
+        <div className="absolute inset-0 -z-10 bg-[linear-gradient(90deg,rgba(13,12,10,.94)_0%,rgba(20,18,15,.82)_42%,rgba(24,21,17,.30)_72%,rgba(20,18,15,.18)_100%)]" />
+        <div className="absolute inset-0 -z-10 bg-[linear-gradient(180deg,rgba(10,9,8,.20)_0%,rgba(10,9,8,.12)_48%,rgba(10,9,8,.72)_100%)]" />
+        <div className="mx-auto w-full max-w-7xl"><p className="flex items-center gap-3 text-xs font-bold uppercase tracking-[.25em] text-[#e7a72c]"><span className="h-px w-10 bg-[#e7a72c]" /> News & Media</p><div className="mt-7 max-w-4xl"><h1 className="text-5xl font-bold leading-[.95] tracking-[-.05em] md:text-7xl">Stories from a Group that keeps moving.</h1><p className="mt-7 max-w-2xl text-base leading-8 text-white/72 md:text-lg">Official announcements, company achievements and approved updates from across Supun Group.</p></div></div>
       </section>
 
       <section className="px-5 py-16 md:px-8 md:py-24">
