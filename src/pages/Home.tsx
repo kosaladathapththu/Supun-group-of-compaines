@@ -119,13 +119,13 @@ const Home = () => {
           </h1>
           <p className="mt-6 max-w-2xl text-base leading-relaxed text-white/75 sm:mt-8 sm:text-lg md:text-xl">One Sri Lankan Group, built across four industries since 1978.</p>
           <div className="mt-8 flex flex-col gap-3 sm:mt-10 sm:flex-row">
-            <Link to="/companies" className="premium-button group inline-flex min-h-14 items-center justify-center gap-3 px-7 font-semibold text-white">Explore our companies <ArrowRight className="transition-transform group-hover:translate-x-1" size={19} /></Link>
-            <Link to="/contact" className="glass-button inline-flex min-h-14 items-center justify-center gap-3 px-7 font-semibold text-white">Get In Touch <ArrowRight size={18} /></Link>
+            <Link to="/companies" className="premium-button group inline-flex min-h-14 items-center justify-center gap-3 px-7 font-semibold text-white">Explore our companies <ArrowRight className="transition duration-300 group-hover:translate-x-1 group-hover:text-[#78be43]" size={19} /></Link>
+            <Link to="/contact" className="glass-button group inline-flex min-h-14 items-center justify-center gap-3 px-7 font-semibold text-white">Get In Touch <ArrowRight className="transition duration-300 group-hover:translate-x-1 group-hover:text-[#78be43]" size={18} /></Link>
           </div>
         </div>
 
         <div className="flex items-end justify-between gap-6">
-          <a href="#legacy" className="hidden items-center gap-3 text-xs font-semibold uppercase tracking-[0.2em] text-white/60 transition hover:text-white md:flex"><span className="flex h-10 w-10 items-center justify-center rounded-full border border-white/25"><ArrowDown size={16} /></span>Scroll to discover</a>
+          <a href="#legacy" className="group hidden items-center gap-3 text-xs font-semibold uppercase tracking-[0.2em] text-white/60 transition hover:text-white md:flex"><span className="flex h-10 w-10 items-center justify-center rounded-full border border-white/25 transition duration-300 group-hover:border-[#78be43] group-hover:bg-[#78be43] group-hover:text-white"><ArrowDown size={16} /></span>Scroll to discover</a>
           <div className="ml-auto grid w-full max-w-2xl grid-cols-2 gap-x-7 gap-y-4 sm:grid-cols-4 sm:gap-6">
             {siteStats.map((stat, index) => <CountUpStat key={stat.label} value={stat.value} label={stat.label} index={index} />)}
           </div>
@@ -180,7 +180,7 @@ const Home = () => {
             <div className="legacy-story-card relative flex h-full min-h-[430px] flex-col overflow-hidden rounded-[2rem] p-7 sm:p-10 lg:p-12">
               <div className="legacy-corner-mark" aria-hidden="true" />
               <div className="relative"><span className="mb-6 inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.2em] text-[#a66d0d]"><span className="h-2 w-2 rounded-full bg-[#d99a24]" /> Built across generations</span><h2 className="max-w-4xl text-4xl font-semibold normal-case leading-[1.04] tracking-[-0.04em] text-[#10233f] sm:text-5xl lg:text-6xl">A family business with the courage to <span className="text-[#315f9f]">keep building.</span></h2></div>
-              <div className="relative mt-auto pt-10"><div className="grid gap-6 border-t border-primary/10 pt-7 md:grid-cols-2"><p className="leading-relaxed text-[#526278]">What began as a Colombo trading business has grown into a connected group spanning manufacturing, retail, distribution and hospitality.</p><p className="leading-relaxed text-[#526278]">Through every new chapter, one standard remains: create lasting value for our customers, our people and our country.</p></div><Link to="/about" className="legacy-link group mt-8 inline-flex items-center gap-4 font-semibold text-primary">Read our story <span className="flex h-11 w-11 items-center justify-center rounded-full border border-primary/20 bg-primary/5 text-primary transition duration-300 group-hover:translate-x-1 group-hover:bg-primary group-hover:text-white"><ArrowRight size={18} /></span></Link></div>
+              <div className="relative mt-auto pt-10"><div className="grid gap-6 border-t border-primary/10 pt-7 md:grid-cols-2"><p className="leading-relaxed text-[#526278]">What began as a Colombo trading business has grown into a connected group spanning manufacturing, retail, distribution and hospitality.</p><p className="leading-relaxed text-[#526278]">Through every new chapter, one standard remains: create lasting value for our customers, our people and our country.</p></div><Link to="/about" className="legacy-link group mt-8 inline-flex items-center gap-4 font-semibold text-primary">Read our story <span className="flex h-11 w-11 items-center justify-center rounded-full border border-primary/20 bg-primary/5 text-primary transition duration-300 group-hover:translate-x-1 group-hover:border-[#78be43] group-hover:bg-[#78be43] group-hover:text-white"><ArrowRight size={18} /></span></Link></div>
             </div>
           </AnimatedSection>
         </div>
@@ -230,7 +230,7 @@ const Home = () => {
             </div>
 
             <AnimatedSection animation="fade" delay={250} duration={700} triggerOnce={false}>
-              <Link to="/companies" className="group mt-8 inline-flex items-center gap-4 font-semibold text-primary">Explore the group <span className="flex h-11 w-11 items-center justify-center rounded-full bg-[#10233f] text-white transition duration-300 group-hover:translate-x-1 group-hover:bg-[#315f9f]"><ArrowRight size={18} /></span></Link>
+              <Link to="/companies" className="group mt-8 inline-flex items-center gap-4 font-semibold text-primary">Explore the group <span className="flex h-11 w-11 items-center justify-center rounded-full bg-[#10233f] text-white transition duration-300 group-hover:translate-x-1 group-hover:bg-[#78be43]"><ArrowRight size={18} /></span></Link>
             </AnimatedSection>
           </div>
         </div>
@@ -243,8 +243,8 @@ const Home = () => {
           <div><p className="section-kicker">Inside the group</p><h2 className="mt-5 text-4xl font-semibold normal-case tracking-[-0.035em] text-[#10233f] md:text-6xl">Businesses built for impact.</h2></div>
           <div className="flex items-center gap-3">
             <Link to="/companies" className="mr-2 hidden font-semibold text-primary transition hover:text-[#315f9f] sm:inline">Meet all 11</Link>
-            <button type="button" onClick={() => scrollCompanies(-1)} aria-label="Previous companies" className="flex h-12 w-12 items-center justify-center rounded-full border border-primary/20 bg-white text-primary transition hover:border-primary hover:bg-primary hover:text-white"><ArrowRight className="rotate-180" size={19} /></button>
-            <button type="button" onClick={() => scrollCompanies(1)} aria-label="Next companies" className="flex h-12 w-12 items-center justify-center rounded-full bg-primary text-white transition hover:bg-[#315f9f]"><ArrowRight size={19} /></button>
+            <button type="button" onClick={() => scrollCompanies(-1)} aria-label="Previous companies" className="flex h-12 w-12 items-center justify-center rounded-full border border-primary/20 bg-white text-primary transition hover:border-[#78be43] hover:bg-[#78be43] hover:text-white"><ArrowRight className="rotate-180" size={19} /></button>
+            <button type="button" onClick={() => scrollCompanies(1)} aria-label="Next companies" className="flex h-12 w-12 items-center justify-center rounded-full bg-primary text-white transition hover:bg-[#78be43]"><ArrowRight size={19} /></button>
           </div>
         </div>
       </AnimatedSection>
@@ -262,7 +262,7 @@ const Home = () => {
               <p className="mt-3 line-clamp-2 leading-relaxed text-[#667388]">{company.description}</p>
               <div className="mt-auto flex items-center justify-between border-t border-primary/10 pt-5">
                 <span className="font-semibold text-primary">View company</span>
-                <span className="flex h-12 w-12 items-center justify-center rounded-full bg-[#10233f] text-white shadow-[0_8px_20px_rgba(16,35,63,.18)] transition duration-300 group-hover:translate-x-1 group-hover:bg-[#315f9f]"><ArrowRight size={18} /></span>
+                <span className="flex h-12 w-12 items-center justify-center rounded-full bg-[#10233f] text-white shadow-[0_8px_20px_rgba(16,35,63,.18)] transition duration-300 group-hover:translate-x-1 group-hover:bg-[#78be43]"><ArrowRight size={18} /></span>
               </div>
             </div>
           </Link>
@@ -288,7 +288,7 @@ const Home = () => {
               <p className="mb-6 text-sm leading-relaxed text-white/55">Have an opportunity, partnership or idea in mind?</p>
               <Link to="/contact" className="group inline-flex w-full items-center justify-between rounded-full bg-[#efbd55] px-6 py-4 font-semibold text-[#071b2d] transition duration-300 hover:bg-white">
                 Talk to our team
-                <span className="flex h-10 w-10 items-center justify-center rounded-full bg-[#071b2d] text-white transition-transform duration-300 group-hover:translate-x-1"><ArrowRight size={18} /></span>
+                <span className="flex h-10 w-10 items-center justify-center rounded-full bg-[#071b2d] text-white transition duration-300 group-hover:translate-x-1 group-hover:bg-[#78be43]"><ArrowRight size={18} /></span>
               </Link>
             </div>
           </div>
