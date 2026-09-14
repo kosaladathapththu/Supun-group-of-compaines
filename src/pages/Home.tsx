@@ -254,15 +254,19 @@ const Home = () => {
       <div ref={companyCarouselRef} className="mt-14 flex snap-x snap-mandatory gap-5 overflow-x-auto scroll-smooth pb-6 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
         {companies.map((company, index) => (
           <AnimatedSection key={company.id} animation="slide-up" delay={(index % 3) * 130} duration={850} triggerOnce={false} className="h-full w-[88%] flex-none snap-start sm:w-[calc(50%_-_0.625rem)] lg:w-[calc(33.333%_-_0.833rem)]">
-          <Link to={`/companies/${company.id}`} className="company-glass group relative flex h-full min-h-[430px] flex-col overflow-hidden rounded-[1.5rem] p-7 transition duration-500 hover:-translate-y-2 md:p-9">
-            <div className="relative flex items-start justify-between gap-5">
-              <CompanyLogo companyId={company.id} companyName={company.shortName} className="h-32 w-52 max-w-[65%] rounded-2xl border border-primary/10 p-2 shadow-[0_12px_35px_rgba(18,64,120,.10)] transition duration-500 group-hover:scale-[1.03] group-hover:shadow-[0_16px_40px_rgba(18,64,120,.16)]" imageClassName="scale-[1.55] transition-transform duration-500 group-hover:scale-[1.68]" />
-              <span className="inline-flex rounded-full border border-primary/10 bg-primary/[.07] px-3 py-1 text-[10px] font-bold uppercase tracking-[0.16em] text-primary">{company.industry}</span>
+          <Link to={`/companies/${company.id}`} className="company-glass group relative flex h-full min-h-[450px] flex-col overflow-hidden rounded-[1.5rem] p-5 transition duration-500 hover:-translate-y-2 md:p-6">
+            <div className="company-card-visual relative flex min-h-[178px] items-center justify-center overflow-hidden rounded-[1.15rem] border border-primary/10 bg-white/80 px-7 py-6">
+              <CompanyLogo companyId={company.id} companyName={company.shortName} className="h-28 w-full max-w-[260px] bg-transparent p-1 transition duration-500 group-hover:scale-[1.05]" imageClassName="scale-[1.75] transition-transform duration-500 group-hover:scale-[1.9]" />
+              <span className="absolute bottom-4 right-4 inline-flex rounded-full border border-white bg-[#eef4fb]/95 px-3 py-1.5 text-[9px] font-bold uppercase tracking-[0.15em] text-primary shadow-sm">{company.industry}</span>
             </div>
-            <div className="relative mt-auto pt-8">
+            <div className="relative flex flex-1 flex-col px-2 pb-1 pt-7">
+              <div className="mb-4 flex items-center gap-3 text-[10px] font-bold uppercase tracking-[.16em] text-[#738197]"><span className="h-2 w-2 rounded-full bg-[#78be43]" />{company.established ? `Established ${company.established}` : 'Supun Group company'}</div>
               <h3 className="text-3xl font-semibold normal-case tracking-[-0.03em] text-[#10233f]">{company.shortName}</h3>
-              <p className="mt-4 leading-relaxed text-[#667388]">{company.description}</p>
-              <span className="company-link relative mt-7 inline-flex items-center gap-4 font-semibold text-primary">View company <span className="flex h-11 w-11 items-center justify-center rounded-full border border-[#78be43]/45 bg-[#78be43]/10 text-[#5b9d2c] transition duration-300 group-hover:rotate-[-35deg] group-hover:bg-[#78be43] group-hover:text-white"><ArrowRight size={18} /></span></span>
+              <p className="mt-3 line-clamp-2 leading-relaxed text-[#667388]">{company.description}</p>
+              <div className="mt-auto flex items-center justify-between border-t border-primary/10 pt-5">
+                <span className="font-semibold text-primary">View company</span>
+                <span className="flex h-12 w-12 items-center justify-center rounded-full bg-[#10233f] text-white shadow-[0_8px_20px_rgba(16,35,63,.18)] transition duration-300 group-hover:rotate-[-35deg] group-hover:bg-[#78be43]"><ArrowRight size={18} /></span>
+              </div>
             </div>
           </Link>
           </AnimatedSection>
