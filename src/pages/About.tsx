@@ -16,6 +16,13 @@ const stats = [
   ["250+", "Distributors"],
 ];
 
+const valueStyles = [
+  "bg-[#10233f] text-white border-[#10233f] [&_p]:text-white/68",
+  "bg-[#f1e7d7] text-[#10233f] border-[#dbc8aa] [&_p]:text-[#5f625f]",
+  "bg-[#e8eef5] text-[#10233f] border-[#cbd7e5] [&_p]:text-[#5f6d7f]",
+  "bg-[#edf2e8] text-[#10233f] border-[#d4dfca] [&_p]:text-[#626d62]",
+];
+
 const groupSectors = [
   { title: "Manufacturing", icon: Factory, list: companies.filter((company) => company.industry === "Manufacturing") },
   { title: "Retail & Distribution", icon: ShoppingBag, list: companies.filter((company) => company.industry === "Retail & Distribution") },
@@ -130,39 +137,14 @@ const About = () => (
         </AnimatedSection>
 
         <div id="journey" className="relative scroll-mt-24 overflow-hidden rounded-[1.5rem] border border-[#10233f]/10 bg-white px-5 py-8 shadow-[0_16px_45px_rgba(16,35,63,.06)] sm:px-8 md:px-10 md:py-10">
-          <div className="relative mx-auto max-w-6xl">
-            {Array.from({ length: Math.ceil(journey.length / 2) }, (_, rowIndex) => journey.slice(rowIndex * 2, rowIndex * 2 + 2)).map((pair, rowIndex) => {
-              const reverse = rowIndex % 2 === 1;
-              const surfaces = ["bg-white"];
-              return (
-                <div key={pair[0][0]}>
-                  <div className="grid items-stretch gap-4 md:grid-cols-[1fr_4.5rem_1fr] md:gap-5">
-                    {pair.map(([year, text], itemIndex) => {
-                      const index = rowIndex * 2 + itemIndex;
-                      const desktopPosition = reverse ? (itemIndex === 0 ? "md:col-start-3 md:row-start-1" : "md:col-start-1 md:row-start-1") : (itemIndex === 0 ? "md:col-start-1 md:row-start-1" : "md:col-start-3 md:row-start-1");
-                      return <AnimatedSection key={year} animation={itemIndex === 0 ? "slide-right" : "slide-left"} duration={800} triggerOnce={false} className={desktopPosition}>
-                        <article className={`group relative h-full overflow-hidden rounded-[1rem] border border-[#10233f]/10 p-5 transition duration-300 hover:border-[#315f9f]/30 hover:shadow-[0_12px_30px_rgba(16,35,63,.07)] ${surfaces[index % surfaces.length]}`}>
-                          <strong className="block text-3xl font-semibold tracking-[-.05em] text-[#10233f]">{year}</strong>
-                          <p className="mt-3 leading-relaxed text-[#596779]">{text}</p>
-                        </article>
-                      </AnimatedSection>;
-                    })}
-                    {pair.length > 1 && <div className="relative flex h-16 items-center justify-center md:col-start-2 md:row-start-1 md:h-auto">
-                      <span className="absolute inset-y-0 left-1/2 w-px -translate-x-1/2 bg-[#10233f]/35 md:inset-x-0 md:inset-y-auto md:left-0 md:top-1/2 md:h-px md:w-auto md:translate-x-0" />
-                      <span className={`journey-flow-side relative flex h-10 w-10 items-center justify-center rounded-full border border-[#10233f] bg-[#10233f] text-white shadow-[0_8px_20px_rgba(16,35,63,.24)] ${reverse ? "md:rotate-180" : ""}`}><ArrowRight className="hidden md:block" size={18} strokeWidth={2.3} /><ArrowDown className="md:hidden" size={18} strokeWidth={2.3} /></span>
-                    </div>}
-                  </div>
-                  {rowIndex < Math.ceil(journey.length / 2) - 1 && (
-                    <div className={`journey-connector relative flex h-12 items-center ${reverse ? "md:justify-start md:pl-[21%]" : "md:justify-end md:pr-[21%]"} justify-center`}>
-                      <span className={`absolute inset-y-0 w-px bg-gradient-to-b from-[#10233f]/30 via-[#10233f]/55 to-[#10233f]/30 ${reverse ? "left-1/2 -translate-x-1/2 md:left-[21%]" : "left-1/2 -translate-x-1/2 md:left-auto md:right-[21%] md:translate-x-0"}`} />
-                      <span style={{ animationDelay: `${rowIndex * 120}ms` }} className="journey-flow-down relative flex h-10 w-10 items-center justify-center rounded-full border border-[#10233f] bg-[#10233f] text-white shadow-[0_8px_22px_rgba(16,35,63,.25)]"><ArrowDown size={18} strokeWidth={2.3} /></span>
-                    </div>
-                  )}
-                </div>
-              );
-            })}
+          <div className="relative mx-auto grid max-w-6xl gap-0 md:grid-cols-2">
+            {journey.map(([year, text], index) => <AnimatedSection key={year} animation="fade" delay={(index % 2) * 50} duration={500} triggerOnce={false}>
+              <article className={`h-full border-[#10233f]/10 px-2 py-6 md:px-7 ${index % 2 === 0 ? "md:border-r" : ""} ${index < journey.length - 2 ? "border-b" : ""}`}>
+                <div className="flex items-baseline gap-4"><strong className="text-3xl font-semibold tracking-[-.05em] text-[#10233f]">{year}</strong><span className="h-px flex-1 bg-[#10233f]/10" /></div>
+                <p className="mt-3 max-w-xl leading-relaxed text-[#596779]">{text}</p>
+              </article>
+            </AnimatedSection>)}
           </div>
-          <div className="relative mt-10 flex flex-wrap items-center justify-between gap-4 border-t border-[#10233f]/10 pt-7 text-[10px] font-semibold uppercase tracking-[.2em] text-[#687269]"><span>Colombo · 1978</span><span className="inline-flex items-center gap-3"><i className="h-2 w-2 rounded-full bg-[#78be43]" /> Growing year by year</span><span>Today · Sri Lanka</span></div>
         </div>
       </div>
     </section>
@@ -170,7 +152,7 @@ const About = () => (
     <section className="bg-white py-20 md:py-28">
       <div className="container mx-auto px-4">
         <AnimatedSection animation="slide-up" duration={800} triggerOnce={false}><div className="mb-14 text-center"><p className="section-kicker justify-center before:hidden">What guides us</p><h2 className="mt-5 text-4xl font-semibold normal-case tracking-[-.04em] md:text-6xl">Values made visible.</h2></div></AnimatedSection>
-        <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-4">{coreValues.map((value, index) => <AnimatedSection key={value.title} animation="slide-up" delay={index * 90} duration={750} triggerOnce={false}><article className="group h-full rounded-[1.25rem] border border-[#10233f]/10 bg-white p-7 transition duration-300 hover:-translate-y-1 hover:border-[#10233f]/25 hover:shadow-[0_18px_45px_rgba(16,35,63,.08)]"><span className="text-xs font-semibold tracking-[.18em] text-[#315f9f]">0{index + 1}</span><h3 className="mt-8 text-2xl font-semibold normal-case">{value.title}</h3><p className="mt-4 leading-relaxed text-[#626b72]">{value.description}</p></article></AnimatedSection>)}</div>
+        <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-4">{coreValues.map((value, index) => <AnimatedSection key={value.title} animation="slide-up" delay={index * 70} duration={600} triggerOnce={false}><article className={`group flex h-full min-h-[285px] flex-col rounded-[1.25rem] border p-7 transition duration-300 hover:-translate-y-1 hover:shadow-[0_16px_38px_rgba(16,35,63,.09)] ${valueStyles[index % valueStyles.length]}`}><span className="h-1 w-12 rounded-full bg-current opacity-35" /><h3 className="mt-auto pt-12 text-2xl font-semibold normal-case">{value.title}</h3><p className="mt-4 leading-relaxed">{value.description}</p></article></AnimatedSection>)}</div>
       </div>
     </section>
 
@@ -204,23 +186,23 @@ const About = () => (
     <section className="bg-[#f3f0e9] py-20 md:py-28">
       <div className="container mx-auto px-4">
         <AnimatedSection animation="slide-up" duration={800} triggerOnce={false}><div className="mb-16 flex flex-col justify-between gap-6 md:flex-row md:items-end"><div><p className="section-kicker">Recognition</p><h2 className="mt-5 text-4xl font-semibold normal-case tracking-[-.04em] md:text-6xl">Medals and awards.</h2><p className="mt-5 max-w-2xl leading-relaxed text-[#667069]">Honours earned across the Group—from national manufacturing certification to industry and hospitality recognition.</p></div><Link to="/companies" className="group inline-flex items-center gap-3 font-semibold text-[#10233f]">Explore our companies <span className="flex h-10 w-10 items-center justify-center rounded-full bg-[#10233f] text-white transition group-hover:translate-x-1 group-hover:bg-[#78be43]"><ArrowRight size={17} /></span></Link></div></AnimatedSection>
-        <div className="grid gap-5 md:grid-cols-6">
+        <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-3">
           {awards.map((item, index) => {
             const medal = ["from-[#f5d77b] via-[#c9962f] to-[#8e641b]", "from-[#e9edf0] via-[#aeb9c2] to-[#77838d]", "from-[#e6b28a] via-[#b7723c] to-[#7e4729]"][index % 3];
-            const span = index === 0 ? "md:col-span-6 lg:col-span-4" : index === 1 ? "md:col-span-3 lg:col-span-2" : "md:col-span-3 lg:col-span-2";
-            return <AnimatedSection key={`${item.award}-${item.awardedTo}`} animation="slide-up" delay={(index % 3) * 90} duration={750} triggerOnce={false} className={span}>
-              <article className="group relative flex h-full min-h-[285px] flex-col overflow-hidden rounded-[1.75rem] border border-[#10233f]/10 bg-[#fffdf8] p-7 pt-8 transition duration-500 hover:-translate-y-1 hover:border-[#c9962f]/45 hover:shadow-[0_22px_55px_rgba(64,52,32,.11)] sm:p-8">
-                <div className="relative h-20 w-20">
-                  <span className="absolute bottom-0 left-3 h-9 w-6 -rotate-[12deg] bg-[#10233f] [clip-path:polygon(0_0,100%_0,82%_100%,50%_76%,18%_100%)]" />
-                  <span className="absolute bottom-0 right-3 h-9 w-6 rotate-[12deg] bg-[#78be43] [clip-path:polygon(0_0,100%_0,82%_100%,50%_76%,18%_100%)]" />
-                  <span className={`absolute left-1/2 top-0 flex h-16 w-16 -translate-x-1/2 items-center justify-center rounded-full border-4 border-white bg-gradient-to-br shadow-[0_7px_18px_rgba(67,52,27,.24)] ${medal}`}><Award size={29} strokeWidth={1.8} className="text-white drop-shadow" /></span>
+            return <AnimatedSection key={`${item.award}-${item.awardedTo}`} animation="slide-up" delay={(index % 3) * 70} duration={600} triggerOnce={false}>
+              <article className="group relative flex h-full min-h-[370px] flex-col overflow-hidden rounded-[1.35rem] border border-[#10233f]/10 bg-white px-7 pb-7 pt-36 transition duration-300 hover:-translate-y-1 hover:shadow-[0_18px_45px_rgba(16,35,63,.09)] sm:px-8 sm:pb-8">
+                <div className="absolute left-1/2 top-0 h-32 w-28 -translate-x-1/2" aria-hidden="true">
+                  <span className="absolute left-[18px] top-0 h-[78px] w-9 bg-[#10233f] [clip-path:polygon(0_0,100%_0,100%_100%,50%_82%,0_100%)]" />
+                  <span className="absolute right-[18px] top-0 h-[78px] w-9 bg-[#315f9f] [clip-path:polygon(0_0,100%_0,100%_100%,50%_82%,0_100%)]" />
+                  <span className={`absolute bottom-0 left-1/2 flex h-[82px] w-[82px] -translate-x-1/2 items-center justify-center rounded-full border-[6px] border-white bg-gradient-to-br shadow-[0_8px_22px_rgba(38,41,45,.28)] ring-1 ring-black/10 ${medal}`}>
+                    <span className="absolute inset-[7px] rounded-full border border-white/45" />
+                    <Award size={34} strokeWidth={1.8} className="relative text-white drop-shadow" />
+                  </span>
                 </div>
-                <div className="mt-auto pt-8">
-                  <p className="text-[10px] font-semibold uppercase tracking-[.18em] text-[#8b6a2b]">Award {String(index + 1).padStart(2, "0")}</p>
-                  <h3 className="mt-3 text-xl font-semibold normal-case leading-snug text-[#10233f]">{item.award}</h3>
-                  <div className="mt-6 border-t border-[#10233f]/10 pt-5"><p className="font-semibold text-[#315f9f]">{item.awardedTo}</p><p className="mt-1.5 text-sm text-[#6a746d]">{item.givenBy}</p></div>
+                <div className="flex flex-1 flex-col text-center">
+                  <h3 className="text-xl font-semibold normal-case leading-snug text-[#10233f]">{item.award}</h3>
+                  <div className="mt-auto border-t border-[#10233f]/10 pt-5"><p className="font-semibold text-[#315f9f]">{item.awardedTo}</p><p className="mt-1.5 text-sm text-[#6a746d]">{item.givenBy}</p></div>
                 </div>
-                <span className="absolute right-7 top-7 text-5xl font-semibold tracking-[-.06em] text-[#10233f]/[.035]">{String(index + 1).padStart(2, "0")}</span>
               </article>
             </AnimatedSection>;
           })}
