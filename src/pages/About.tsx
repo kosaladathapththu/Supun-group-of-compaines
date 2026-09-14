@@ -1,4 +1,4 @@
-import { ArrowRight, Award, Eye, Flag, Gem, Lightbulb, Target, UserRound } from "lucide-react";
+import { ArrowRight, Award, Eye, Flag, Gem, Lightbulb, Target, UserRound, Users } from "lucide-react";
 import { Link } from "react-router-dom";
 import Seo from "@/components/Seo";
 import { AnimatedSection } from "@/components/AnimatedSection";
