@@ -150,7 +150,7 @@ const Home = () => {
                   companyId={company.id}
                   companyName={company.name}
                   className="h-24 w-52 shrink-0 overflow-hidden bg-transparent sm:h-28 sm:w-64"
-                  imageClassName={`h-full w-full transition duration-300 ${keepOriginalLogoSize(company.id) ? "group-hover:scale-[1.05]" : "scale-[1.55] group-hover:scale-[1.62]"}`}
+                  imageClassName={`h-full w-full transition duration-300 ${keepOriginalLogoSize(company.id) ? "group-hover:scale-[1.05]" : "scale-[1.2] group-hover:scale-[1.25]"}`}
                 />
               </Link>
             ))}
@@ -254,7 +254,7 @@ const Home = () => {
           <AnimatedSection key={company.id} animation="slide-up" delay={(index % 3) * 130} duration={850} triggerOnce={false} className="h-full w-[88%] flex-none snap-start sm:w-[calc(50%_-_0.625rem)] lg:w-[calc(33.333%_-_0.833rem)]">
           <Link to={`/companies/${company.id}`} className="company-glass group relative flex h-full min-h-[450px] flex-col overflow-hidden rounded-[1.5rem] p-5 transition duration-500 hover:-translate-y-2 md:p-6">
             <div className="company-card-visual relative flex min-h-[178px] items-center justify-center overflow-hidden rounded-[1.15rem] border border-primary/10 bg-white/80 px-7 py-6">
-              <CompanyLogo companyId={company.id} companyName={company.shortName} className="h-36 w-full max-w-[310px] bg-transparent transition duration-500" imageClassName={`h-full w-full transition-transform duration-500 ${keepOriginalLogoSize(company.id) ? "scale-[1.12] group-hover:scale-[1.18]" : "scale-[1.48] group-hover:scale-[1.56]"}`} />
+              <CompanyLogo companyId={company.id} companyName={company.shortName} className="h-36 w-full max-w-[310px] bg-transparent transition duration-500" imageClassName={`h-full w-full transition-transform duration-500 ${keepOriginalLogoSize(company.id) ? "group-hover:scale-[1.05]" : "scale-[1.2] group-hover:scale-[1.25]"}`} />
               <span className="absolute bottom-4 right-4 inline-flex rounded-full border border-white bg-[#eef4fb]/95 px-3 py-1.5 text-[9px] font-bold uppercase tracking-[0.15em] text-primary shadow-sm">{company.industry}</span>
             </div>
             <div className="relative flex flex-1 flex-col px-2 pb-1 pt-7">

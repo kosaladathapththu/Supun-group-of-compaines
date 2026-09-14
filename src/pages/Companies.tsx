@@ -57,7 +57,7 @@ const Companies = () => {
             {visibleCompanies.map((company) => (
               <Card key={company.id} className="group relative h-full overflow-hidden rounded-[2rem] border-[#10233f]/10 bg-white shadow-[0_10px_35px_rgba(16,35,63,.05)] transition-all duration-500 hover:-translate-y-1.5 hover:border-[#78be43]/50 hover:shadow-[0_24px_60px_rgba(16,35,63,.11)]">
                 <CardContent className="flex h-full flex-col p-0">
-                  <CompanyLogo companyId={company.id} companyName={company.shortName} className="h-56 w-full border-b border-[#10233f]/10 p-2 sm:h-64" imageClassName={`!h-full !w-full !max-h-none !max-w-none transition-transform duration-500 ${company.id === "fuji-industries" || company.id === "area-56" ? "scale-[1.08] group-hover:scale-[1.14]" : "scale-[1.38] group-hover:scale-[1.46]"}`} />
+                  <CompanyLogo companyId={company.id} companyName={company.shortName} className="h-56 w-full border-b border-[#10233f]/10 p-4 sm:h-64" imageClassName={`!h-full !w-full !max-h-none !max-w-none transition-transform duration-500 ${company.id === "fuji-industries" || company.id === "area-56" ? "group-hover:scale-[1.05]" : "scale-[1.18] group-hover:scale-[1.23]"}`} />
                   <div className="flex flex-1 flex-col p-7 sm:p-8">
                     <div className="mb-8"><span className="text-[10px] font-semibold uppercase tracking-[.14em] text-[#5b9d2c]">{company.industry}</span></div>
                     <p className="mb-3 text-xs font-semibold uppercase tracking-[.12em] text-[#d78a00]">{company.tagline}</p>
