@@ -5,7 +5,6 @@ import { AnimatedSection } from "@/components/AnimatedSection";
 import chairmanImage from "@/assets/Chairman.png";
 import aboutHero from "@/assets/about-hero-v2.png";
 import colomboImage from "../../colombo.jpg";
-import anythingAtSupunLogo from "@/assets/anything-at-supun-logo.png";
 import camyBrandLogo from "@/assets/camy-brand-logo.png";
 import { awards, coreValues, journey, leadership } from "@/data/siteContent";
 import { companies } from "@/data/companies";
@@ -181,8 +180,34 @@ const About = () => (
       <div className="absolute inset-0 -z-10 bg-[#f4f2ec]/[.93]" />
       <div className="absolute inset-0 -z-10 bg-gradient-to-r from-[#f4f2ec] via-transparent to-[#f4f2ec]/90" />
       <div className="container relative mx-auto px-4">
-        <AnimatedSection animation="slide-up" duration={800} triggerOnce={false}><div className="mb-14 text-center"><p className="section-kicker justify-center before:hidden">Group structure</p><h2 className="mt-5 text-4xl font-semibold normal-case tracking-[-.04em] md:text-6xl">One group. Connected businesses.</h2></div></AnimatedSection>
-        <div className="mx-auto max-w-6xl rounded-[2.5rem] border border-white/70 bg-white/65 p-5 shadow-[0_30px_80px_rgba(36,43,39,.12)] backdrop-blur-md sm:p-8"><div className="rounded-2xl bg-[#10233f] p-6 text-center text-xl font-semibold text-white">Supun Group of Companies</div><div className="mx-auto h-10 w-px bg-[#10233f]/25" /><div className="grid gap-5 md:grid-cols-3">{groupSectors.map(({ title, icon: Icon, list }, index) => <AnimatedSection key={title} animation="slide-up" delay={index * 100} duration={800} triggerOnce={false}><article className="h-full rounded-[1.5rem] border border-[#10233f]/10 bg-[#faf9f5]/95 p-7"><div className="flex items-center gap-3"><span className="flex h-11 w-11 items-center justify-center rounded-full bg-[#e2ecd9] text-[#527f32]"><Icon size={20} /></span><h3 className="text-xl font-semibold normal-case">{title}</h3></div><ul className="mt-7 space-y-3 text-sm text-[#626d65]">{list.map((company) => <li key={company.id} className="border-t border-[#10233f]/10"><Link to={"/companies/" + company.id} className="group/link flex items-center justify-between gap-3 py-3 transition hover:text-[#10233f]"><span>{company.shortName}</span><ArrowRight size={15} className="shrink-0 text-[#78be43] transition-transform duration-300 group-hover/link:translate-x-1" /></Link></li>)}</ul></article></AnimatedSection>)}</div><a href="https://www.anythingatsupun.lk/" target="_blank" rel="noopener noreferrer" className="group mt-5 grid items-center gap-6 overflow-hidden rounded-[1.5rem] border border-black/15 bg-[#111111] p-6 text-white transition duration-300 hover:-translate-y-0.5 hover:border-[#ef3340]/70 hover:shadow-[0_18px_45px_rgba(17,17,17,.18)] md:grid-cols-[minmax(250px,.8fr)_1.25fr_auto] md:p-7"><div className="flex items-center gap-3"><span className="flex h-20 w-20 shrink-0 items-center justify-center overflow-hidden rounded-2xl bg-white p-2"><img src={camyBrandLogo} alt="Camy brand" className="h-full w-full object-contain" /></span><span className="flex min-h-20 flex-1 items-center rounded-2xl bg-white px-4 py-3"><img src={anythingAtSupunLogo} alt="Anything at Supun" className="h-auto w-full object-contain" /></span></div><div><p className="text-[10px] font-semibold uppercase tracking-[.18em] text-[#ef3340]">Official Camy shopping destination</p><h3 className="mt-2 text-2xl font-semibold normal-case text-white">Explore the Camy Brand</h3><p className="mt-2 leading-relaxed text-white/60">Shop Camy appliances, cookware, cooling products and more through Anything at Supun.</p></div><span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-[#ef3340] text-white transition-transform duration-300 group-hover:translate-x-1"><ArrowRight size={19} /></span></a></div>
+        <AnimatedSection animation="slide-up" duration={600} triggerOnce={false}>
+          <div className="mb-9 md:flex md:items-end md:justify-between">
+            <div><p className="section-kicker">Group structure</p><h2 className="mt-4 text-4xl font-semibold normal-case tracking-[-.04em] md:text-5xl">Our businesses, clearly organised.</h2></div>
+            <p className="mt-4 max-w-md text-sm leading-6 text-[#657184] md:mt-0">Choose a sector, then select a company to learn more.</p>
+          </div>
+        </AnimatedSection>
+        <div className="mx-auto max-w-6xl space-y-3">
+          {groupSectors.map(({ title, icon: Icon, list }, index) => <AnimatedSection key={title} animation="fade" delay={index * 60} duration={450} triggerOnce={false}>
+            <section className="grid overflow-hidden rounded-xl border border-[#10233f]/10 bg-white shadow-[0_8px_24px_rgba(16,35,63,.05)] md:grid-cols-[250px_1fr]">
+              <header className="flex items-center gap-3 bg-[#10233f] px-5 py-4 text-white">
+                <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-white/10"><Icon size={19} /></span>
+                <div><p className="text-[9px] font-semibold uppercase tracking-[.18em] text-white/55">Sector {index + 1}</p><h3 className="mt-0.5 text-lg font-semibold normal-case text-white">{title}</h3></div>
+              </header>
+              <ul className="grid sm:grid-cols-2 lg:grid-cols-3">
+                {list.map((company) => <li key={company.id} className="border-t border-[#10233f]/10 first:border-t-0 sm:border-l sm:[&:nth-child(-n+2)]:border-t-0 lg:[&:nth-child(-n+3)]:border-t-0">
+                  <Link to={"/companies/" + company.id} className="group/link flex min-h-16 items-center justify-between gap-3 px-5 py-3 text-sm font-medium text-[#445267] transition hover:bg-[#f3f7ef] hover:text-[#10233f]">
+                    <span>{company.shortName}</span><ArrowRight size={16} className="shrink-0 text-[#68ad36] transition-transform duration-300 group-hover/link:translate-x-1" />
+                  </Link>
+                </li>)}
+              </ul>
+            </section>
+          </AnimatedSection>)}
+          <a href="https://www.anythingatsupun.lk/" target="_blank" rel="noopener noreferrer" className="group grid items-center gap-4 rounded-xl bg-[#111] p-4 text-white transition hover:bg-[#191919] sm:grid-cols-[auto_1fr_auto]">
+            <span className="flex h-14 w-14 items-center justify-center rounded-lg bg-white p-2"><img src={camyBrandLogo} alt="Camy brand" className="h-full w-full object-contain" /></span>
+            <div><p className="text-[9px] font-semibold uppercase tracking-[.16em] text-[#ef3340]">Official online store</p><h3 className="mt-1 text-lg font-semibold normal-case text-white">Shop Camy products at Anything at Supun</h3></div>
+            <span className="flex h-10 w-10 items-center justify-center rounded-full bg-[#ef3340]"><ArrowRight size={17} /></span>
+          </a>
+        </div>
       </div>
     </section>
 
