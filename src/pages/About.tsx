@@ -74,7 +74,7 @@ const About = () => (
       </div>
     </section>
 
-    <section className="bg-[#f1f0eb] py-20 md:py-28">
+    <section id="chairman" className="scroll-mt-24 bg-[#f5f7fa] py-16 md:py-24">
       <div className="container mx-auto px-4">
         <AnimatedSection animation="slide-up" duration={800} triggerOnce={false}>
           <div className="mb-12"><p className="flex items-center gap-3 text-xs font-semibold uppercase tracking-[.22em] text-primary"><span className="h-px w-9 bg-[#78be43]" /> Chairman’s Message</p><h2 className="mt-6 max-w-5xl text-4xl font-semibold normal-case leading-[1.02] tracking-[-.045em] text-[#10233f] sm:text-5xl md:text-6xl">The Personality Behind the Success Story of Supun Group of Companies</h2></div>
@@ -82,11 +82,9 @@ const About = () => (
 
         <div className="grid gap-8 lg:grid-cols-[.7fr_1.3fr] lg:items-stretch">
           <AnimatedSection animation="slide-right" duration={850} triggerOnce={false}>
-            <div className="relative h-full min-h-[560px] overflow-hidden rounded-t-[12rem] rounded-b-[2rem] bg-[#dfe3d8]">
-              <div className="absolute inset-x-10 top-16 aspect-square rounded-full border border-[#78be43]/20" />
-              <div className="absolute inset-x-16 top-24 aspect-square rounded-full bg-[#cbd5c3]/55" />
-              <img src={chairmanImage} alt="M.F.M. Kaleel, Chairman of Supun Group of Companies" className="absolute inset-x-0 bottom-0 mx-auto h-[88%] w-full object-contain object-bottom grayscale-[12%]" />
-              <div className="absolute bottom-6 left-6 right-6 rounded-2xl bg-[#20251f]/90 p-5 text-white backdrop-blur-md"><div className="flex items-center justify-between"><div><h3 className="text-2xl font-semibold normal-case">M.F.M. Kaleel</h3><p className="mt-1 text-sm text-white/55">Chairman</p></div><span className="h-2.5 w-2.5 rounded-full bg-[#78be43] shadow-[0_0_14px_rgba(120,190,67,.7)]" /></div></div>
+            <div className="overflow-hidden rounded-[1.5rem] border border-[#10233f]/10 bg-white shadow-[0_18px_45px_rgba(16,35,63,.08)]">
+              <div className="flex min-h-[470px] items-end justify-center bg-[#e9edf2] px-5 pt-8"><img src={chairmanImage} alt="M.F.M. Kaleel, Chairman of Supun Group of Companies" className="max-h-[455px] w-full object-contain object-bottom grayscale-[8%]" /></div>
+              <div className="border-t border-[#10233f]/10 bg-white px-7 py-5"><h3 className="text-2xl font-semibold normal-case">M.F.M. Kaleel</h3><p className="mt-1 text-sm font-medium text-[#65758a]">Chairman</p></div>
             </div>
           </AnimatedSection>
 
@@ -106,8 +104,7 @@ const About = () => (
       </div>
     </section>
 
-    <section className="relative overflow-hidden bg-[#e9e6dd] py-20 md:py-28">
-      <div className="absolute -left-40 top-1/2 h-96 w-96 -translate-y-1/2 rounded-full border border-[#78be43]/10" />
+    <section id="direction" className="relative scroll-mt-24 overflow-hidden bg-white py-16 md:py-24">
       <div className="container relative mx-auto px-4">
         <AnimatedSection animation="slide-up" duration={800} triggerOnce={false}>
           <div className="mb-12 max-w-3xl"><p className="flex items-center gap-3 text-xs font-semibold uppercase tracking-[.22em] text-[#596255]"><span className="h-px w-9 bg-[#78be43]" /> Our direction</p><h2 className="mt-6 text-4xl font-semibold normal-case tracking-[-.04em] text-[#10233f] md:text-6xl">Purpose that moves us forward.</h2></div>
@@ -136,19 +133,17 @@ const About = () => (
       </div>
     </section>
 
-    <section className="bg-[#f7f7f4] py-20 md:py-28">
+    <section className="bg-[#f5f7fa] py-16 md:py-24">
       <div className="container mx-auto px-4">
         <AnimatedSection animation="slide-up" duration={800} triggerOnce={false}>
           <div className="mb-14 flex flex-col justify-between gap-6 md:flex-row md:items-end"><div><p className="section-kicker">Our journey</p><h2 className="mt-5 text-4xl font-semibold normal-case tracking-[-.04em] md:text-6xl">Milestones since 1978.</h2></div><p className="max-w-sm leading-relaxed text-[#5d6d82]">One trading business became an interconnected Sri Lankan group, one purposeful step at a time.</p></div>
         </AnimatedSection>
 
-        <div id="journey" className="relative overflow-hidden rounded-[2.5rem] border border-[#10233f]/12 bg-[#e5e1d7] px-5 py-10 shadow-[0_28px_75px_rgba(49,45,37,.12)] sm:px-8 md:px-12 md:py-16">
-          <div aria-hidden="true" className="absolute -left-20 -top-24 h-64 w-64 rounded-full border border-[#78be43]/20" />
-          <div aria-hidden="true" className="absolute -bottom-24 right-[12%] h-72 w-72 rounded-full bg-[#dfe9d6]/60 blur-2xl" />
+        <div id="journey" className="relative scroll-mt-24 overflow-hidden rounded-[1.5rem] border border-[#10233f]/10 bg-white px-5 py-8 shadow-[0_16px_45px_rgba(16,35,63,.06)] sm:px-8 md:px-10 md:py-10">
           <div className="relative mx-auto max-w-6xl">
             {Array.from({ length: Math.ceil(journey.length / 2) }, (_, rowIndex) => journey.slice(rowIndex * 2, rowIndex * 2 + 2)).map((pair, rowIndex) => {
               const reverse = rowIndex % 2 === 1;
-              const surfaces = ["bg-[#ece8de]", "bg-[#d2ddca]", "bg-[#d9d1c3]", "bg-[#e2dfd6]"];
+              const surfaces = ["bg-white"];
               return (
                 <div key={pair[0][0]}>
                   <div className="grid items-stretch gap-4 md:grid-cols-[1fr_4.5rem_1fr] md:gap-5">
@@ -156,11 +151,9 @@ const About = () => (
                       const index = rowIndex * 2 + itemIndex;
                       const desktopPosition = reverse ? (itemIndex === 0 ? "md:col-start-3 md:row-start-1" : "md:col-start-1 md:row-start-1") : (itemIndex === 0 ? "md:col-start-1 md:row-start-1" : "md:col-start-3 md:row-start-1");
                       return <AnimatedSection key={year} animation={itemIndex === 0 ? "slide-right" : "slide-left"} duration={800} triggerOnce={false} className={desktopPosition}>
-                        <article className={`group relative h-full overflow-hidden rounded-[1.5rem] border border-[#10233f]/10 p-6 transition duration-500 hover:-translate-y-1 hover:border-[#78be43]/55 hover:shadow-[0_18px_45px_rgba(49,45,37,.10)] ${surfaces[index % surfaces.length]}`}>
-                          <span className="text-[9px] font-semibold uppercase tracking-[.22em] text-[#687269]">Chapter {String(index + 1).padStart(2, "0")}</span>
-                          <strong className="mt-2 block text-3xl font-semibold tracking-[-.05em] text-[#10233f] lg:text-4xl">{year}</strong>
-                          <p className="mt-4 leading-relaxed text-[#59675f]">{text}</p>
-                          <span className="absolute right-5 top-5 h-2.5 w-2.5 rounded-full bg-[#78be43] opacity-60 transition group-hover:opacity-100 group-hover:shadow-[0_0_15px_#78be43]" />
+                        <article className={`group relative h-full overflow-hidden rounded-[1rem] border border-[#10233f]/10 p-5 transition duration-300 hover:border-[#315f9f]/30 hover:shadow-[0_12px_30px_rgba(16,35,63,.07)] ${surfaces[index % surfaces.length]}`}>
+                          <strong className="block text-3xl font-semibold tracking-[-.05em] text-[#10233f]">{year}</strong>
+                          <p className="mt-3 leading-relaxed text-[#596779]">{text}</p>
                         </article>
                       </AnimatedSection>;
                     })}
@@ -170,7 +163,7 @@ const About = () => (
                     </div>}
                   </div>
                   {rowIndex < Math.ceil(journey.length / 2) - 1 && (
-                    <div className={`journey-connector relative flex h-20 items-center ${reverse ? "md:justify-start md:pl-[21%]" : "md:justify-end md:pr-[21%]"} justify-center`}>
+                    <div className={`journey-connector relative flex h-12 items-center ${reverse ? "md:justify-start md:pl-[21%]" : "md:justify-end md:pr-[21%]"} justify-center`}>
                       <span className={`absolute inset-y-0 w-px bg-gradient-to-b from-[#10233f]/30 via-[#10233f]/55 to-[#10233f]/30 ${reverse ? "left-1/2 -translate-x-1/2 md:left-[21%]" : "left-1/2 -translate-x-1/2 md:left-auto md:right-[21%] md:translate-x-0"}`} />
                       <span style={{ animationDelay: `${rowIndex * 120}ms` }} className="journey-flow-down relative flex h-10 w-10 items-center justify-center rounded-full border border-[#10233f] bg-[#10233f] text-white shadow-[0_8px_22px_rgba(16,35,63,.25)]"><ArrowDown size={18} strokeWidth={2.3} /></span>
                     </div>
@@ -187,30 +180,20 @@ const About = () => (
     <section className="bg-white py-20 md:py-28">
       <div className="container mx-auto px-4">
         <AnimatedSection animation="slide-up" duration={800} triggerOnce={false}><div className="mb-14 text-center"><p className="section-kicker justify-center before:hidden">What guides us</p><h2 className="mt-5 text-4xl font-semibold normal-case tracking-[-.04em] md:text-6xl">Values made visible.</h2></div></AnimatedSection>
-        <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-4">{coreValues.map((value, index) => <AnimatedSection key={value.title} animation="slide-up" delay={index * 90} duration={750} triggerOnce={false}><article className={`group h-full rounded-[1.5rem] border border-[#10233f]/10 p-7 transition duration-300 hover:-translate-y-1 hover:border-[#78be43]/45 hover:shadow-[0_18px_45px_rgba(45,48,40,.09)] ${index % 2 === 0 ? "bg-[#f0eee7]" : "bg-[#e5ebdf]"}`}><span className="flex items-center gap-2 text-xs font-semibold tracking-[.18em] text-[#10233f]/45"><i className="h-1.5 w-1.5 rounded-full bg-[#78be43] opacity-50 transition group-hover:opacity-100" />0{index + 1}</span><h3 className="mt-10 text-2xl font-semibold normal-case">{value.title}</h3><p className="mt-4 leading-relaxed text-[#626b63]">{value.description}</p></article></AnimatedSection>)}</div>
+        <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-4">{coreValues.map((value, index) => <AnimatedSection key={value.title} animation="slide-up" delay={index * 90} duration={750} triggerOnce={false}><article className="group h-full rounded-[1.25rem] border border-[#10233f]/10 bg-white p-7 transition duration-300 hover:-translate-y-1 hover:border-[#10233f]/25 hover:shadow-[0_18px_45px_rgba(16,35,63,.08)]"><span className="text-xs font-semibold tracking-[.18em] text-[#315f9f]">0{index + 1}</span><h3 className="mt-8 text-2xl font-semibold normal-case">{value.title}</h3><p className="mt-4 leading-relaxed text-[#626b72]">{value.description}</p></article></AnimatedSection>)}</div>
       </div>
     </section>
 
-    <section className="bg-[#f1f0eb] py-20 md:py-28">
+    <section id="leadership" className="scroll-mt-24 bg-[#f5f7fa] py-16 md:py-24">
       <div className="container mx-auto px-4">
         <AnimatedSection animation="slide-up" duration={800} triggerOnce={false}><div className="mb-14 flex flex-col justify-between gap-5 md:flex-row md:items-end"><div><p className="section-kicker">Leadership team</p><h2 className="mt-5 text-4xl font-semibold normal-case tracking-[-.04em] md:text-6xl">Leading across the Group.</h2></div><Users className="hidden text-primary/20 md:block" size={72} strokeWidth={1} /></div></AnimatedSection>
-        <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-12">
+        <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
           {leadership.map((person, index) => {
-            const initials = person.name.split(" ").map((part) => part[0]).slice(0, 2).join("");
-            const surface = ["bg-[#faf9f5]", "bg-[#e5ecdf]", "bg-[#e9e4da]"][index % 3];
-            const span = index < 3 ? "lg:col-span-4" : "lg:col-span-6";
-            return <AnimatedSection key={person.name} animation="slide-up" delay={(index % 3) * 80} duration={750} triggerOnce={false} className={span}>
-              <article className={`group relative flex h-full min-h-[290px] flex-col overflow-hidden rounded-[1.75rem] border border-[#10233f]/10 p-7 transition duration-500 hover:-translate-y-1 hover:border-[#78be43]/55 hover:shadow-[0_22px_55px_rgba(42,47,40,.11)] sm:p-8 ${surface}`}>
-                <div className="flex items-start justify-between gap-5">
-                  <span className="flex h-14 w-14 items-center justify-center rounded-2xl bg-[#10233f] text-lg font-semibold tracking-[-.03em] text-white shadow-[0_10px_25px_rgba(16,35,63,.16)]">{initials}</span>
-                  <span className="text-[10px] font-semibold tracking-[.2em] text-[#10233f]/35">{String(index + 1).padStart(2, "0")}</span>
-                </div>
-                <div className="mt-auto pt-12">
-                  <p className="mb-4 inline-flex rounded-full border border-[#10233f]/10 bg-white/55 px-3 py-1.5 text-[10px] font-semibold uppercase tracking-[.12em] text-[#536275]">{person.title}</p>
-                  <h3 className="text-2xl font-semibold normal-case tracking-[-.025em] text-[#10233f] sm:text-3xl">{person.name}</h3>
-                  {person.description && person.description !== "—" && <p className="mt-5 max-w-xl border-t border-[#10233f]/10 pt-5 leading-relaxed text-[#626d65]">{person.description}</p>}
-                </div>
-                <span className="absolute bottom-0 left-0 h-1 w-0 bg-[#78be43] transition-all duration-500 group-hover:w-full" />
+            return <AnimatedSection key={person.name} animation="slide-up" delay={(index % 3) * 70} duration={650} triggerOnce={false}>
+              <article className="flex h-full min-h-[205px] flex-col rounded-[1.25rem] border border-[#10233f]/10 bg-white p-6 transition duration-300 hover:-translate-y-1 hover:border-[#10233f]/25 hover:shadow-[0_16px_40px_rgba(16,35,63,.08)]">
+                <p className="text-[10px] font-bold uppercase tracking-[.13em] text-[#315f9f]">{person.title}</p>
+                <h3 className="mt-4 text-2xl font-semibold normal-case tracking-[-.025em] text-[#10233f]">{person.name}</h3>
+                {person.description && person.description !== "—" && <p className="mt-auto line-clamp-2 border-t border-[#10233f]/10 pt-4 text-sm leading-6 text-[#68778a]">{person.description}</p>}
               </article>
             </AnimatedSection>;
           })}

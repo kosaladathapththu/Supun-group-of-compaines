@@ -51,7 +51,17 @@ const Navigation = () => {
           </Link>
 
           <div className="hidden items-center gap-0.5 xl:flex">
-            {primaryLinks.slice(0, 2).map((link) => <Link key={link.path} to={link.path}><Button variant="ghost" className={isActive(link.path) ? activeLinkClass : navLinkClass}>{link.name}</Button></Link>)}
+            <Link to="/"><Button variant="ghost" className={isActive("/") ? activeLinkClass : navLinkClass}>Home</Button></Link>
+            <DropdownMenu>
+              <DropdownMenuTrigger asChild><Button variant="ghost" className={isActive("/about") ? activeLinkClass : navLinkClass}>About Us <ChevronDown className="ml-1" size={16} /></Button></DropdownMenuTrigger>
+              <DropdownMenuContent className="w-60" align="center">
+                <Link to="/about#story"><DropdownMenuItem className="cursor-pointer py-2.5">Our Story</DropdownMenuItem></Link>
+                <Link to="/about#chairman"><DropdownMenuItem className="cursor-pointer py-2.5">Chairman&rsquo;s Message</DropdownMenuItem></Link>
+                <Link to="/about#direction"><DropdownMenuItem className="cursor-pointer py-2.5">Vision &amp; Mission</DropdownMenuItem></Link>
+                <Link to="/about#journey"><DropdownMenuItem className="cursor-pointer py-2.5">Our Journey</DropdownMenuItem></Link>
+                <Link to="/about#leadership"><DropdownMenuItem className="cursor-pointer py-2.5">Leadership Team</DropdownMenuItem></Link>
+              </DropdownMenuContent>
+            </DropdownMenu>
             <DropdownMenu>
               <DropdownMenuTrigger asChild><Button variant="ghost" className={isActive("/companies") ? activeLinkClass : navLinkClass}>Our Companies <ChevronDown className="ml-1" size={16} /></Button></DropdownMenuTrigger>
               <DropdownMenuContent className="max-h-[70vh] w-80 overflow-y-auto" align="center">
@@ -70,7 +80,9 @@ const Navigation = () => {
         {isOpen && (
           <div className="mb-3 border-t border-white/10 py-3 xl:hidden">
             <div className="grid gap-1">
-              {primaryLinks.slice(0, 2).map((link) => <Link key={link.path} to={link.path} onClick={() => setIsOpen(false)}><Button variant="ghost" className={`w-full justify-start ${isActive(link.path) ? activeLinkClass : navLinkClass}`}>{link.name}</Button></Link>)}
+              <Link to="/" onClick={() => setIsOpen(false)}><Button variant="ghost" className={`w-full justify-start ${isActive("/") ? activeLinkClass : navLinkClass}`}>Home</Button></Link>
+              <Link to="/about" onClick={() => setIsOpen(false)}><Button variant="ghost" className={`w-full justify-start ${isActive("/about") ? activeLinkClass : navLinkClass}`}>About Us</Button></Link>
+              <div className="grid grid-cols-2 gap-1 border-l border-white/15 pl-3 text-xs text-white/60"><Link to="/about#story" onClick={() => setIsOpen(false)} className="py-2">Our Story</Link><Link to="/about#chairman" onClick={() => setIsOpen(false)} className="py-2">Chairman</Link><Link to="/about#journey" onClick={() => setIsOpen(false)} className="py-2">Our Journey</Link><Link to="/about#leadership" onClick={() => setIsOpen(false)} className="py-2">Leadership</Link></div>
               <Link to="/companies" onClick={() => setIsOpen(false)}><Button variant="ghost" className={`w-full justify-start ${isActive("/companies") ? activeLinkClass : navLinkClass}`}>Our Companies</Button></Link>
               {primaryLinks.slice(2).map((link) => <Link key={link.path} to={link.path} onClick={() => setIsOpen(false)}><Button variant="ghost" className={`w-full justify-start ${isActive(link.path) ? activeLinkClass : navLinkClass}`}>{link.name}</Button></Link>)}
             </div>
