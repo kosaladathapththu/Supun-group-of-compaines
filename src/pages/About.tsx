@@ -50,25 +50,26 @@ const About = () => (
       </div>
     </section>
 
-    <section id="story" className="relative scroll-mt-24 bg-white py-16 md:py-24">
+    <section id="story" className="relative scroll-mt-24 bg-white py-14 md:py-20">
       <div className="container mx-auto px-4">
-        <div className="border-b border-[#10233f]/10 pb-8"><p className="section-kicker">Our story</p></div>
-        <div className="grid gap-10 py-10 lg:grid-cols-[280px_1fr] lg:gap-16 lg:py-14">
+        <div className="mb-8"><p className="section-kicker">Our story</p><h2 className="mt-4 text-4xl font-semibold normal-case tracking-[-.04em] md:text-5xl">From a family business to a diverse Group.</h2></div>
+        <div className="grid overflow-hidden rounded-2xl border border-[#10233f]/10 bg-[#f7f8fa] lg:grid-cols-[310px_1fr]">
           <AnimatedSection animation="slide-right" duration={850} triggerOnce={false}>
-            <aside className="border-l-4 border-[#10233f] pl-6 lg:sticky lg:top-32 lg:self-start">
-              <p className="text-xs font-bold uppercase tracking-[.2em] text-[#65758a]">Established</p>
-              <strong className="mt-3 block text-6xl font-semibold tracking-[-.06em] text-[#10233f]">1978</strong>
-              <p className="mt-4 max-w-[220px] leading-7 text-[#65758a]">A Sri Lankan family business built through two generations of leadership.</p>
+            <aside className="flex h-full flex-col justify-between bg-[#10233f] p-7 text-white sm:p-9">
+              <div><p className="text-[10px] font-bold uppercase tracking-[.2em] text-white/55">Our beginning</p><strong className="mt-2 block text-6xl font-semibold tracking-[-.06em]">1978</strong></div>
+              <div className="mt-10 border-t border-white/15 pt-5"><p className="text-sm font-semibold text-[#9ad16f]">Founded in Colombo</p><p className="mt-2 text-sm leading-6 text-white/65">Mohamed Fareed established Supun Traders as a family-run Sri Lankan business.</p></div>
             </aside>
           </AnimatedSection>
 
           <AnimatedSection animation="slide-left" delay={100} duration={850} triggerOnce={false}>
-            <div>
-              <h2 className="max-w-3xl text-4xl font-semibold normal-case leading-[1.05] tracking-[-.04em] sm:text-5xl">From trading goods to making them.</h2>
-              <p className="mt-7 max-w-4xl text-xl leading-9 text-[#263b59]">Supun Group began when Mr. Mohamed Fareed founded Supun Traders in Colombo, supplying household goods to Sri Lankan homes. In 1999, his son, current Chairman Mr. M.F.M. Kaleel, took over and formalised the Group, beginning its transition from trading to manufacturing.</p>
-              <div className="mt-8 grid gap-6 border-t border-[#10233f]/10 pt-8 leading-8 text-[#5d6d82] md:grid-cols-2"><p>Today, the Group operates across manufacturing, retail, distribution and hospitality. Under the Camy name, it manufactures helmets, cookware, air conditioners, fans and other products in Sri Lanka.</p><p>Supun Arcade Residency and Area 56 extend the Group into hospitality, while the wider business continues to grow around quality, local capability and long-term value.</p></div>
-              <div className="mt-9 grid grid-cols-3 border-y border-[#10233f]/10 py-5">
-                {stats.map(([value, label]) => <div key={label} className="border-r border-[#10233f]/10 px-4 first:pl-0 last:border-0"><strong className="text-2xl font-semibold tracking-[-.04em] sm:text-3xl">{value}</strong><p className="mt-1 text-xs leading-snug text-[#667388]">{label}</p></div>)}
+            <div className="p-7 sm:p-9 lg:p-10">
+              <p className="max-w-4xl text-lg leading-8 text-[#263b59]">Supun Group began by supplying household goods to Sri Lankan homes. In 1999, M.F.M. Kaleel took over the family business and guided its move from trading into local manufacturing.</p>
+              <div className="mt-6 grid gap-4 md:grid-cols-2">
+                <div className="rounded-xl bg-white p-5"><p className="text-[10px] font-bold uppercase tracking-[.16em] text-[#527f32]">What we do today</p><p className="mt-2 text-sm leading-6 text-[#5d6d82]">Manufacturing, retail, distribution and hospitality across a connected group of Sri Lankan companies.</p></div>
+                <div className="rounded-xl bg-white p-5"><p className="text-[10px] font-bold uppercase tracking-[.16em] text-[#527f32]">Our focus</p><p className="mt-2 text-sm leading-6 text-[#5d6d82]">Quality products, local capability and long-term value for customers, employees and partners.</p></div>
+              </div>
+              <div className="mt-5 grid grid-cols-3 gap-2">
+                {stats.map(([value, label]) => <div key={label} className="rounded-xl border border-[#10233f]/10 bg-white px-3 py-4 text-center"><strong className="text-2xl font-semibold tracking-[-.04em] sm:text-3xl">{value}</strong><p className="mt-1 text-[11px] leading-snug text-[#667388]">{label}</p></div>)}
               </div>
             </div>
           </AnimatedSection>
