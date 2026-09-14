@@ -12,7 +12,7 @@ export const CompanyLogo = ({ companyId, companyName, className = "", imageClass
   const logo = getCompanyLogo(companyId);
 
   return (
-    <div className={`flex items-center justify-center overflow-hidden bg-white ${className}`}>
+    <div className={`relative flex items-center justify-center overflow-hidden bg-white ${className}`}>
       {logo ? (
         <img
           src={logo}
@@ -22,6 +22,9 @@ export const CompanyLogo = ({ companyId, companyName, className = "", imageClass
         />
       ) : (
         <Building2 className="text-primary/45" size={28} aria-hidden="true" />
+      )}
+      {companyId === "supun-arcade-residency" && (
+        <span className="pointer-events-none absolute bottom-[12%] left-0 h-[43%] w-[7%] bg-white" aria-hidden="true" />
       )}
     </div>
   );
