@@ -4,7 +4,6 @@ import Seo from "@/components/Seo";
 import { AnimatedSection } from "@/components/AnimatedSection";
 import chairmanImage from "@/assets/Chairman.png";
 import aboutHero from "@/assets/about-hero-v2.png";
-import groupLogo from "@/assets/supun-group-of-companies-logo.png";
 import colomboImage from "../../colombo.jpg";
 import anythingAtSupunLogo from "@/assets/anything-at-supun-logo.png";
 import camyBrandLogo from "@/assets/camy-brand-logo.png";
@@ -45,28 +44,25 @@ const About = () => (
       </div>
     </section>
 
-    <section id="story" className="relative bg-white py-20 md:py-28">
+    <section id="story" className="relative scroll-mt-24 bg-white py-16 md:py-24">
       <div className="container mx-auto px-4">
-        <div className="grid gap-8 lg:grid-cols-[.72fr_1.28fr] lg:gap-12">
+        <div className="border-b border-[#10233f]/10 pb-8"><p className="section-kicker">Our story</p></div>
+        <div className="grid gap-10 py-10 lg:grid-cols-[280px_1fr] lg:gap-16 lg:py-14">
           <AnimatedSection animation="slide-right" duration={850} triggerOnce={false}>
-            <aside className="relative flex h-full min-h-[500px] flex-col overflow-hidden rounded-[2rem] bg-[#f1f0eb] p-7 sm:p-10">
-              <div className="absolute -right-24 -top-24 h-72 w-72 rounded-full border border-[#10233f]/[.06]" />
-              <div className="absolute -right-10 -top-10 h-44 w-44 rounded-full border border-[#78be43]/15" />
-              <p className="section-kicker relative">Our story</p>
-              <div className="relative my-auto flex justify-center py-12"><img src={groupLogo} alt="Supun Group of Companies" className="w-64 drop-shadow-[0_18px_25px_rgba(16,35,63,.12)] sm:w-72" /></div>
-              <div className="relative flex items-end justify-between gap-5 border-t border-[#10233f]/10 pt-7"><div><strong className="text-6xl font-semibold tracking-[-.06em]">1978</strong><p className="mt-2 text-xs font-semibold uppercase tracking-[.16em] text-[#667388]">Where our story began</p></div><span className="mb-2 h-2.5 w-2.5 rounded-full bg-[#78be43] shadow-[0_0_16px_rgba(120,190,67,.6)]" /></div>
+            <aside className="border-l-4 border-[#10233f] pl-6 lg:sticky lg:top-32 lg:self-start">
+              <p className="text-xs font-bold uppercase tracking-[.2em] text-[#65758a]">Established</p>
+              <strong className="mt-3 block text-6xl font-semibold tracking-[-.06em] text-[#10233f]">1978</strong>
+              <p className="mt-4 max-w-[220px] leading-7 text-[#65758a]">A Sri Lankan family business built through two generations of leadership.</p>
             </aside>
           </AnimatedSection>
 
           <AnimatedSection animation="slide-left" delay={100} duration={850} triggerOnce={false}>
-            <div className="flex h-full flex-col rounded-[2rem] border border-[#10233f]/10 p-7 sm:p-10 lg:p-12">
-              <h2 className="max-w-3xl text-4xl font-semibold normal-case leading-[1.04] tracking-[-.045em] sm:text-5xl md:text-6xl">From trading goods to <span className="relative whitespace-nowrap">making them.<i className="absolute -bottom-1 left-0 h-1 w-16 rounded-full bg-[#78be43]/60" /></span></h2>
-              <p className="mt-8 text-xl leading-relaxed text-[#10233f] md:text-2xl">A family run business since 1978, Supun Group of Companies began when Mr. Mohamed Fareed founded Supun Traders in Colombo, trading household goods for Sri Lankan homes. In 1999, his son, current Chairman Mr. M.F.M. Kaleel, took over and formalized the Group, setting it on a new course: from trading goods to manufacturing them.</p>
-              <div className="mt-8 grid gap-6 border-t border-[#10233f]/10 pt-8 text-base leading-relaxed text-[#5d6d82] md:grid-cols-2"><p>Through structured growth, the Group is now involved in manufacturing, retail, distribution, and hospitality, each held to the same standard of quality and Sri Lankan craftsmanship. Under the Camy name, Supun manufactures SLS-certified motorcycle helmets, non-stick cookware, air conditioners, and fans entirely in its own factories.</p><p>Supun Arcade Residency extends the Group into hospitality with luxury serviced apartments in central Colombo, alongside Area 56, its rooftop dining venue.</p></div>
-              <p className="mt-7 border-l-2 border-[#78be43]/60 pl-5 text-sm leading-relaxed text-[#667388]">With an eye on the future and a continued focus on Sri Lankan manufacturing, the Group credits its growth to two generations of family leadership and a shared commitment to quality, innovation, and Sri Lankan pride.</p>
-
-              <div className="mt-auto grid grid-cols-3 gap-3 pt-10">
-                {stats.map(([value, label]) => <div key={label} className="rounded-2xl bg-[#f4f3ef] p-4 sm:p-5"><strong className="text-2xl font-semibold tracking-[-.04em] sm:text-3xl">{value}</strong><p className="mt-2 text-xs leading-snug text-[#667388]">{label}</p></div>)}
+            <div>
+              <h2 className="max-w-3xl text-4xl font-semibold normal-case leading-[1.05] tracking-[-.04em] sm:text-5xl">From trading goods to making them.</h2>
+              <p className="mt-7 max-w-4xl text-xl leading-9 text-[#263b59]">Supun Group began when Mr. Mohamed Fareed founded Supun Traders in Colombo, supplying household goods to Sri Lankan homes. In 1999, his son, current Chairman Mr. M.F.M. Kaleel, took over and formalised the Group, beginning its transition from trading to manufacturing.</p>
+              <div className="mt-8 grid gap-6 border-t border-[#10233f]/10 pt-8 leading-8 text-[#5d6d82] md:grid-cols-2"><p>Today, the Group operates across manufacturing, retail, distribution and hospitality. Under the Camy name, it manufactures helmets, cookware, air conditioners, fans and other products in Sri Lanka.</p><p>Supun Arcade Residency and Area 56 extend the Group into hospitality, while the wider business continues to grow around quality, local capability and long-term value.</p></div>
+              <div className="mt-9 grid grid-cols-3 border-y border-[#10233f]/10 py-5">
+                {stats.map(([value, label]) => <div key={label} className="border-r border-[#10233f]/10 px-4 first:pl-0 last:border-0"><strong className="text-2xl font-semibold tracking-[-.04em] sm:text-3xl">{value}</strong><p className="mt-1 text-xs leading-snug text-[#667388]">{label}</p></div>)}
               </div>
             </div>
           </AnimatedSection>
@@ -77,7 +73,7 @@ const About = () => (
     <section id="chairman" className="scroll-mt-24 bg-[#f5f7fa] py-16 md:py-24">
       <div className="container mx-auto px-4">
         <AnimatedSection animation="slide-up" duration={800} triggerOnce={false}>
-          <div className="mb-12"><p className="flex items-center gap-3 text-xs font-semibold uppercase tracking-[.22em] text-primary"><span className="h-px w-9 bg-[#78be43]" /> Chairman’s Message</p><h2 className="mt-6 max-w-5xl text-4xl font-semibold normal-case leading-[1.02] tracking-[-.045em] text-[#10233f] sm:text-5xl md:text-6xl">The Personality Behind the Success Story of Supun Group of Companies</h2></div>
+          <div className="mb-10"><p className="section-kicker">Chairman’s Message</p><h2 className="mt-5 max-w-4xl text-4xl font-semibold normal-case leading-[1.04] tracking-[-.04em] text-[#10233f] sm:text-5xl">A message from our Chairman.</h2></div>
         </AnimatedSection>
 
         <div className="grid gap-8 lg:grid-cols-[.7fr_1.3fr] lg:items-stretch">
@@ -89,8 +85,7 @@ const About = () => (
           </AnimatedSection>
 
           <AnimatedSection animation="slide-left" delay={100} duration={850} triggerOnce={false}>
-            <article className="relative h-full overflow-hidden rounded-[2rem] bg-[#fbfaf6] p-7 shadow-[0_22px_60px_rgba(42,45,39,.08)] sm:p-10 lg:p-12">
-              <span className="absolute right-10 top-5 text-[9rem] font-serif leading-none text-[#78be43]/10">“</span>
+            <article className="h-full rounded-[1.5rem] border border-[#10233f]/10 bg-white p-7 sm:p-10 lg:p-12">
               <div className="relative max-w-4xl space-y-6 leading-relaxed text-[#62695f]">
                 <p className="pr-10 text-xl font-medium leading-relaxed text-[#10233f]">Since the company was established in 1999, Supun Group of Companies has cultivated its status as a pioneer in the manufacturing and the trading business. Guided by our corporate creed of “Innovation &amp; Creativity”, we have continued to challenge ourselves to provide a wide range of products and services locally and internationally through technology transfers, human commitment and professionalism.</p>
                 <div className="h-px w-20 bg-[#78be43]/55" />
@@ -112,21 +107,16 @@ const About = () => (
 
         <div className="grid gap-6 lg:grid-cols-2 lg:items-start">
           <AnimatedSection animation="slide-right" duration={850} triggerOnce={false}>
-            <article className="relative min-h-[430px] overflow-hidden rounded-[2.25rem] bg-[#faf9f5] p-8 text-[#20251f] shadow-[0_22px_60px_rgba(42,45,39,.10)] sm:p-11">
-              <div className="flex h-14 w-14 items-center justify-center rounded-full bg-[#dfead6] text-[#527f32]"><Lightbulb size={25} strokeWidth={1.5} /></div>
-              <div className="mt-20"><p className="text-xs font-semibold uppercase tracking-[.22em] text-[#657060]">Our vision</p><h2 className="mt-5 max-w-xl text-4xl font-semibold normal-case leading-[1.05] tracking-[-.04em] md:text-5xl">Innovate. Unleash and Excel.</h2><p className="mt-7 max-w-xl leading-relaxed text-[#697064]">To unleash the potential within us to transform the markets through innovation and exceed people’s expectations for a better tomorrow, through the goods and services which empower and enrich the lives of Sri Lankans.</p></div>
+            <article className="min-h-[360px] rounded-[1.25rem] border border-[#10233f]/10 bg-[#f7f8fa] p-8 text-[#20251f] sm:p-10">
+              <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-[#10233f] text-white"><Lightbulb size={22} strokeWidth={1.5} /></div>
+              <div className="mt-10"><p className="text-xs font-semibold uppercase tracking-[.22em] text-[#65758a]">Our vision</p><h2 className="mt-4 max-w-xl text-4xl font-semibold normal-case leading-[1.05] tracking-[-.04em]">Innovate. Unleash and Excel.</h2><p className="mt-6 max-w-xl leading-relaxed text-[#697486]">To unleash the potential within us to transform the markets through innovation and exceed people’s expectations for a better tomorrow, through the goods and services which empower and enrich the lives of Sri Lankans.</p></div>
             </article>
           </AnimatedSection>
 
-          <AnimatedSection animation="slide-left" delay={100} duration={850} triggerOnce={false} className="lg:mt-16">
-            <article className="relative min-h-[430px] overflow-hidden rounded-[2.25rem] bg-[#10233f] p-8 text-white shadow-[0_24px_65px_rgba(16,35,63,.22)] sm:p-11">
-              <div aria-hidden="true" className="pointer-events-none absolute -right-16 -top-16 h-52 w-52 rounded-full border border-white/10">
-                <span className="absolute inset-8 rounded-full border border-[#78be43]/25" />
-                <span className="absolute inset-[4.25rem] rounded-full border border-white/15" />
-                <span className="absolute left-1/2 top-1/2 h-3 w-3 -translate-x-1/2 -translate-y-1/2 rounded-full bg-[#78be43] shadow-[0_0_22px_rgba(120,190,67,.7)]" />
-              </div>
-              <div className="flex h-14 w-14 items-center justify-center rounded-full border border-[#78be43]/30 bg-[#78be43]/10 text-[#91ca67]"><Target size={25} strokeWidth={1.5} /></div>
-              <div className="mt-20"><p className="text-xs font-semibold uppercase tracking-[.22em] text-white/45">Our mission</p><h2 className="mt-5 max-w-xl text-4xl font-semibold normal-case leading-[1.05] tracking-[-.04em] md:text-5xl">Superior thinking. Sustainable value.</h2><p className="mt-7 max-w-xl leading-relaxed text-white/58">To harness superior thinking in the creation of products and services that functionally enhance the livelihood of people, while remaining cautious in reducing our carbon footprint. We integrate sustainable practices across our operations while delivering exceptional value to our stakeholders.</p></div>
+          <AnimatedSection animation="slide-left" delay={100} duration={850} triggerOnce={false}>
+            <article className="min-h-[360px] rounded-[1.25rem] bg-[#10233f] p-8 text-white sm:p-10">
+              <div className="flex h-12 w-12 items-center justify-center rounded-xl border border-white/15 bg-white/10 text-white"><Target size={22} strokeWidth={1.5} /></div>
+              <div className="mt-10"><p className="text-xs font-semibold uppercase tracking-[.22em] text-white/50">Our mission</p><h2 className="mt-4 max-w-xl text-4xl font-semibold normal-case leading-[1.05] tracking-[-.04em]">Superior thinking. Sustainable value.</h2><p className="mt-6 max-w-xl leading-relaxed text-white/65">To harness superior thinking in the creation of products and services that functionally enhance the livelihood of people, while remaining cautious in reducing our carbon footprint. We integrate sustainable practices across our operations while delivering exceptional value to our stakeholders.</p></div>
             </article>
           </AnimatedSection>
         </div>

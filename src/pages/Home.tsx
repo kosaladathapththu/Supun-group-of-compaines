@@ -265,7 +265,7 @@ const Home = () => {
               <p className="mt-3 line-clamp-2 leading-relaxed text-[#667388]">{company.description}</p>
               <div className="mt-auto flex items-center justify-between border-t border-primary/10 pt-5">
                 <span className="font-semibold text-primary">View company</span>
-                <span className="flex h-12 w-12 items-center justify-center rounded-full bg-[#10233f] text-white shadow-[0_8px_20px_rgba(16,35,63,.18)] transition duration-300 group-hover:rotate-[-35deg] group-hover:bg-[#78be43]"><ArrowRight size={18} /></span>
+                <span className="flex h-12 w-12 items-center justify-center rounded-full bg-[#10233f] text-white shadow-[0_8px_20px_rgba(16,35,63,.18)] transition duration-300 group-hover:translate-x-1 group-hover:bg-[#315f9f]"><ArrowRight size={18} /></span>
               </div>
             </div>
           </Link>

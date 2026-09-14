@@ -52,8 +52,10 @@ const Navigation = () => {
 
           <div className="hidden items-center gap-0.5 xl:flex">
             <Link to="/"><Button variant="ghost" className={isActive("/") ? activeLinkClass : navLinkClass}>Home</Button></Link>
-            <DropdownMenu>
-              <DropdownMenuTrigger asChild><Button variant="ghost" className={isActive("/about") ? activeLinkClass : navLinkClass}>About Us <ChevronDown className="ml-1" size={16} /></Button></DropdownMenuTrigger>
+            <div className={`flex items-center overflow-hidden rounded-md ${isActive("/about") ? activeLinkClass : ""}`}>
+              <Link to="/about"><Button variant="ghost" className={`${isActive("/about") ? "text-white hover:bg-white/10" : navLinkClass} rounded-r-none pr-2`}>About Us</Button></Link>
+              <DropdownMenu>
+              <DropdownMenuTrigger asChild><Button variant="ghost" aria-label="Open About Us menu" className={`${isActive("/about") ? "text-white hover:bg-white/10" : navLinkClass} rounded-l-none px-2`}><ChevronDown size={16} /></Button></DropdownMenuTrigger>
               <DropdownMenuContent className="w-60" align="center">
                 <Link to="/about#story"><DropdownMenuItem className="cursor-pointer py-2.5">Our Story</DropdownMenuItem></Link>
                 <Link to="/about#chairman"><DropdownMenuItem className="cursor-pointer py-2.5">Chairman&rsquo;s Message</DropdownMenuItem></Link>
@@ -61,7 +63,8 @@ const Navigation = () => {
                 <Link to="/about#journey"><DropdownMenuItem className="cursor-pointer py-2.5">Our Journey</DropdownMenuItem></Link>
                 <Link to="/about#leadership"><DropdownMenuItem className="cursor-pointer py-2.5">Leadership Team</DropdownMenuItem></Link>
               </DropdownMenuContent>
-            </DropdownMenu>
+              </DropdownMenu>
+            </div>
             <DropdownMenu>
               <DropdownMenuTrigger asChild><Button variant="ghost" className={isActive("/companies") ? activeLinkClass : navLinkClass}>Our Companies <ChevronDown className="ml-1" size={16} /></Button></DropdownMenuTrigger>
               <DropdownMenuContent className="max-h-[70vh] w-80 overflow-y-auto" align="center">
