@@ -20,7 +20,7 @@ const Navigation = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const location = useLocation();
   const isHome = location.pathname === "/";
-  const overlaysHero = isHome || location.pathname === "/about" || location.pathname.startsWith("/companies") || location.pathname === "/news";
+  const overlaysHero = isHome || location.pathname === "/about" || location.pathname.startsWith("/companies") || location.pathname === "/contact" || location.pathname === "/news";
   const isActive = (path: string) => path === "/"
     ? location.pathname === "/"
     : location.pathname === path || location.pathname.startsWith(`${path}/`);
