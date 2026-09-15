@@ -191,7 +191,7 @@ const Home = () => {
           <AnimatedSection animation="slide-left" delay={140} duration={950} triggerOnce={false}>
             <div className="legacy-story-card relative flex h-full min-h-[430px] flex-col overflow-hidden rounded-[2rem] p-7 sm:p-10 lg:p-12">
               <div className="legacy-corner-mark" aria-hidden="true" />
-              <div className="relative"><span className="mb-6 inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.2em] text-[#a66d0d]"><span className="h-2 w-2 rounded-full bg-[#d99a24]" /> Built across generations</span><h2 className="max-w-4xl text-4xl font-semibold normal-case leading-[1.04] tracking-[-0.04em] text-[#10233f] sm:text-5xl lg:text-6xl">A family business with the courage to <span className="text-[#315f9f]">keep building.</span></h2></div>
+              <div className="relative"><span className="mb-6 inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.2em] text-[#a66d0d]"><span className="h-2 w-2 rounded-full bg-[#d99a24]" /> Built across generations</span><h2 className="max-w-4xl text-4xl font-semibold normal-case leading-[1.04] tracking-[-0.04em] text-[#164f96] sm:text-5xl lg:text-6xl">A family business with the courage to <span className="text-[#2872bd]">keep building.</span></h2></div>
               <div className="relative mt-auto pt-10"><div className="grid gap-6 border-t border-primary/10 pt-7 md:grid-cols-2"><p className="leading-relaxed text-[#526278]">What began as a Colombo trading business has grown into a connected group spanning manufacturing, retail, distribution and hospitality.</p><p className="leading-relaxed text-[#526278]">Through every new chapter, one standard remains: create lasting value for our customers, our people and our country.</p></div><Link to="/about" className="legacy-link group mt-8 inline-flex items-center gap-4 font-semibold text-primary">Read our story <span className="flex h-11 w-11 items-center justify-center rounded-full border border-primary/20 bg-primary/5 text-primary transition duration-300 group-hover:translate-x-1 group-hover:border-[#78be43] group-hover:bg-[#78be43] group-hover:text-white"><ArrowRight size={18} /></span></Link></div>
             </div>
           </AnimatedSection>
@@ -220,7 +220,7 @@ const Home = () => {
           <div>
             <AnimatedSection animation="slide-up" duration={800} triggerOnce={false}>
               <p className="section-kicker text-primary before:bg-[#d99a24]">What we do</p>
-              <h2 className="mt-5 max-w-3xl text-4xl font-semibold normal-case leading-[1.05] tracking-[-0.04em] text-[#10233f] sm:text-5xl md:text-6xl">A Sri Lankan group built on making things well.</h2>
+              <h2 className="mt-5 max-w-3xl text-4xl font-semibold normal-case leading-[1.05] tracking-[-0.04em] text-[#164f96] sm:text-5xl md:text-6xl">A Sri Lankan group built on making things well.</h2>
               <p className="mt-6 max-w-2xl text-base leading-relaxed text-[#526278]">From our Colombo trading roots to manufacturing, retail, hospitality and homegrown consumer products, every capability strengthens the next.</p>
             </AnimatedSection>
 
@@ -232,7 +232,7 @@ const Home = () => {
                     <article className="group h-full rounded-xl border border-[#10233f]/10 bg-[#f7f9fc] p-5 transition duration-300 hover:-translate-y-1 hover:border-[#315f9f]/35 hover:shadow-[0_14px_32px_rgba(16,35,63,.08)]">
                       <span className="mb-5 flex h-11 w-11 items-center justify-center rounded-lg bg-[#e8eef6] text-[#315f9f]"><Icon size={20} strokeWidth={1.7} /></span>
                       <div>
-                        <h3 className="text-xl font-semibold normal-case text-[#10233f]">{sector.title}</h3>
+                        <h3 className="text-xl font-semibold normal-case text-[#164f96]">{sector.title}</h3>
                         <p className="mt-2 text-sm leading-relaxed text-[#667388]">{sector.description}</p>
                       </div>
                     </article>
@@ -252,7 +252,7 @@ const Home = () => {
     <section className="py-12 sm:py-14 md:py-20"><div className="container mx-auto px-4">
       <AnimatedSection animation="slide-up" duration={800} triggerOnce={false}>
         <div className="flex flex-col justify-between gap-6 md:flex-row md:items-end">
-          <div><p className="section-kicker">Inside the group</p><h2 className="mt-5 text-4xl font-semibold normal-case tracking-[-0.035em] text-[#10233f] md:text-6xl">Businesses built for impact.</h2></div>
+          <div><p className="section-kicker">Inside the group</p><h2 className="mt-5 text-4xl font-semibold normal-case tracking-[-0.035em] text-[#164f96] md:text-6xl">Businesses built for impact.</h2></div>
           <div className="flex items-center gap-3">
             <Link to="/companies" className="mr-2 hidden font-semibold text-primary transition hover:text-[#315f9f] sm:inline">Meet all 11</Link>
             <button type="button" onClick={() => scrollCompanies(-1)} aria-label="Previous companies" className="flex h-12 w-12 items-center justify-center rounded-full border border-primary/20 bg-white text-primary transition hover:border-[#78be43] hover:bg-[#78be43] hover:text-white"><ArrowRight className="rotate-180" size={19} /></button>
@@ -270,7 +270,7 @@ const Home = () => {
             </div>
             <div className="relative flex flex-1 flex-col px-2 pb-1 pt-7">
               <div className="mb-4 flex items-center gap-3 text-[10px] font-bold uppercase tracking-[.16em] text-[#738197]"><span className="h-2 w-2 rounded-full bg-[#d99a24]" />{company.established ? `Established ${company.established}` : 'Supun Group company'}</div>
-              <h3 className="text-3xl font-semibold normal-case tracking-[-0.03em] text-[#10233f]">{company.shortName}</h3>
+              <h3 className="text-3xl font-semibold normal-case tracking-[-0.03em] text-[#164f96]">{company.shortName}</h3>
               <p className="mt-3 line-clamp-2 leading-relaxed text-[#667388]">{company.description}</p>
               <div className="mt-auto flex items-center justify-between border-t border-primary/10 pt-5">
                 <span className="font-semibold text-primary">View company</span>
