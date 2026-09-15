@@ -65,13 +65,16 @@ const Navigation = () => {
               </DropdownMenuContent>
               </DropdownMenu>
             </div>
-            <DropdownMenu>
-              <DropdownMenuTrigger asChild><Button variant="ghost" className={isActive("/companies") ? activeLinkClass : navLinkClass}>Our Companies <ChevronDown className="ml-1" size={16} /></Button></DropdownMenuTrigger>
-              <DropdownMenuContent className="max-h-[70vh] w-80 overflow-y-auto" align="center">
-                <Link to="/companies"><DropdownMenuItem className="cursor-pointer font-semibold text-primary">View All Companies →</DropdownMenuItem></Link>
-                {companies.map((company) => <Link key={company.id} to={`/companies/${company.id}`}><DropdownMenuItem className="cursor-pointer py-2.5"><div><div className="text-sm font-semibold">{company.shortName}</div><div className="text-xs text-muted-foreground">{company.industry}</div></div></DropdownMenuItem></Link>)}
-              </DropdownMenuContent>
-            </DropdownMenu>
+            <div className={`flex items-center overflow-hidden rounded-md ${isActive("/companies") ? activeLinkClass : ""}`}>
+              <Link to="/companies"><Button variant="ghost" className={`${isActive("/companies") ? "text-white hover:bg-white/10" : navLinkClass} rounded-r-none pr-2`}>Our Companies</Button></Link>
+              <DropdownMenu>
+                <DropdownMenuTrigger asChild><Button variant="ghost" aria-label="Open Our Companies menu" className={`${isActive("/companies") ? "text-white hover:bg-white/10" : navLinkClass} rounded-l-none px-2`}><ChevronDown size={16} /></Button></DropdownMenuTrigger>
+                <DropdownMenuContent className="max-h-[70vh] w-80 overflow-y-auto" align="center">
+                  <Link to="/companies"><DropdownMenuItem className="cursor-pointer font-semibold text-primary">View All Companies →</DropdownMenuItem></Link>
+                  {companies.map((company) => <Link key={company.id} to={`/companies/${company.id}`}><DropdownMenuItem className="cursor-pointer py-2.5"><div><div className="text-sm font-semibold">{company.shortName}</div><div className="text-xs text-muted-foreground">{company.industry}</div></div></DropdownMenuItem></Link>)}
+                </DropdownMenuContent>
+              </DropdownMenu>
+            </div>
             {primaryLinks.slice(2).map((link) => <Link key={link.path} to={link.path}><Button variant="ghost" className={isActive(link.path) ? activeLinkClass : navLinkClass}>{link.name}</Button></Link>)}
           </div>
 
