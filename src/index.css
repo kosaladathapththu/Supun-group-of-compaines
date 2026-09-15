@@ -166,8 +166,8 @@ All colors MUST be HSL.
 
   .hero-title-blue,
   .hero-stat-blue {
-    color: #4b9bea;
-    text-shadow: 0 8px 34px rgb(31 105 185 / .28);
+    color: #fff;
+    text-shadow: 0 8px 34px rgb(0 0 0 / .38);
   }
 
   .hero-legacy-feature {
