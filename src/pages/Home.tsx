@@ -116,7 +116,7 @@ const Home = () => {
           <div className="hero-copy max-w-5xl">
             <p className="mb-5 inline-flex items-center gap-2 rounded-full border border-[#e8aa3a]/30 bg-[#e8aa3a]/10 px-4 py-2 text-[10px] font-bold uppercase tracking-[0.22em] text-[#f4bd59] backdrop-blur-md sm:mb-7 sm:text-xs"><Sparkles size={13} /> One group. Many possibilities.</p>
             <h1 className="hero-title max-w-5xl text-[clamp(3.5rem,9vw,7.6rem)] font-semibold normal-case leading-[0.88] tracking-[-0.055em] text-white">
-              Built in <span className="hero-title-accent">Sri Lanka.</span><br />Built to last.
+              <span className="hero-title-blue">Built in</span> <span className="hero-title-accent">Sri Lanka.</span><br /><span className="hero-title-blue">Built to last.</span>
             </h1>
             <p className="mt-6 max-w-xl border-l border-[#e8aa3a]/70 pl-5 text-base leading-relaxed text-white/68 sm:mt-8 sm:text-lg">A family-led group shaping everyday life through <span className="text-white">manufacturing, retail, distribution and hospitality.</span></p>
             <div className="mt-8 flex flex-col gap-3 sm:mt-10 sm:flex-row">
@@ -128,7 +128,7 @@ const Home = () => {
           <div className="hero-legacy-feature hidden self-end lg:block">
             <div className="flex items-center gap-3 text-[10px] font-bold uppercase tracking-[0.25em] text-[#f4bd59]"><span className="h-px w-10 bg-[#f4bd59]" /> Established 1978</div>
             <div className="mt-5 flex items-end gap-3">
-              <strong className="text-[6.5rem] font-semibold leading-[.8] tracking-[-0.09em] text-white">46</strong>
+              <strong className="hero-stat-blue text-[6.5rem] font-semibold leading-[.8] tracking-[-0.09em]">46</strong>
               <span className="mb-1 text-2xl font-light text-[#f4bd59]">+</span>
             </div>
             <p className="mt-5 max-w-[13rem] text-sm leading-relaxed text-white/60"><span className="font-semibold text-white">Years of enterprise.</span><br />One vision, built across generations.</p>
