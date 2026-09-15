@@ -89,10 +89,10 @@ const Home = () => {
       }}
     />
 
-    <section className="premium-hero relative isolate min-h-screen bg-[#101311] text-white">
+    <section className="premium-hero relative isolate min-h-[760px] overflow-hidden bg-[#07110d] text-white lg:min-h-screen">
       <div className={`absolute inset-0 bg-[radial-gradient(circle_at_75%_25%,#252927_0%,#171a18_34%,#0d100e_74%)] transition-opacity duration-1000 ${heroVideoReady ? "opacity-0" : "opacity-100"}`} aria-hidden="true" />
       <video
-        className={`absolute inset-0 h-full w-full object-cover transition-opacity duration-1000 ${heroVideoReady ? "opacity-100" : "opacity-0"}`}
+        className={`absolute inset-0 h-full w-full object-cover object-[62%_center] transition-opacity duration-1000 ${heroVideoReady ? "opacity-100" : "opacity-0"}`}
         autoPlay
         muted
         loop
@@ -103,31 +103,42 @@ const Home = () => {
       >
         <source src={heroVideo} type="video/mp4" />
       </video>
-      <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(8,10,9,.96)_0%,rgba(19,24,21,.74)_48%,rgba(18,23,20,.22)_100%)]" />
-      <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(10,12,11,.04)_25%,rgba(8,11,9,.94)_100%)]" />
-      <div className="hero-orb hero-orb-two" aria-hidden="true" />
+      <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(3,12,8,.97)_0%,rgba(5,18,12,.89)_38%,rgba(5,17,12,.4)_72%,rgba(3,12,8,.25)_100%)]" />
+      <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(3,10,7,.25)_0%,transparent_36%,rgba(3,10,7,.92)_100%)]" />
 
-      <div className="container relative z-10 mx-auto flex min-h-screen flex-col justify-between px-4 pb-6 pt-28 sm:pb-8 sm:pt-32 md:pb-12 md:pt-36">
-        <div className="flex items-center justify-between gap-5 border-b border-white/20 pb-5 text-[11px] font-semibold uppercase tracking-[0.22em] text-white/70">
-          <span>Independent. Sri Lankan. Since 1978.</span>
-          <span className="hidden items-center gap-2 sm:flex"><span className="h-2 w-2 rounded-full bg-[#f5a623]" /> Colombo, Sri Lanka</span>
+      <div className="container relative z-10 mx-auto flex min-h-[760px] flex-col px-5 pb-7 pt-28 sm:px-6 sm:pt-32 lg:min-h-screen lg:px-8 lg:pb-9 lg:pt-36">
+        <div className="hero-topline flex items-center justify-between gap-5 pb-5 text-[10px] font-semibold uppercase tracking-[0.24em] text-white/58 sm:text-[11px]">
+          <span className="flex items-center gap-3"><span className="h-px w-8 bg-[#e8aa3a]" /> Independent. Sri Lankan. Since 1978.</span>
+          <span className="hidden items-center gap-2 sm:flex"><span className="hero-live-dot" /> Colombo, Sri Lanka</span>
         </div>
 
-        <div className="hero-copy max-w-5xl py-12 sm:py-16 md:py-24">
-          <p className="mb-5 flex items-center gap-3 text-xs font-semibold uppercase tracking-[0.22em] text-[#f5a623] sm:mb-6 sm:text-sm sm:tracking-[0.28em]"><span className="h-px w-8 bg-current sm:w-10" /> One group. Many possibilities.</p>
-          <h1 className="max-w-5xl text-[clamp(3rem,14vw,8.4rem)] font-semibold normal-case leading-[0.88] tracking-[-0.045em] text-white md:leading-[0.84]">
-            Built in Sri Lanka.<br /><span className="text-white/55">Built to Last.</span>
-          </h1>
-          <p className="mt-6 max-w-2xl text-base leading-relaxed text-white/75 sm:mt-8 sm:text-lg md:text-xl">One Sri Lankan Group, built across four industries since 1978.</p>
-          <div className="mt-8 flex flex-col gap-3 sm:mt-10 sm:flex-row">
-            <Link to="/companies" className="premium-button group inline-flex min-h-14 items-center justify-center gap-3 px-7 font-semibold text-white">Explore our companies <ArrowRight className="transition duration-300 group-hover:translate-x-1 group-hover:text-[#78be43]" size={19} /></Link>
-            <Link to="/contact" className="glass-button group inline-flex min-h-14 items-center justify-center gap-3 px-7 font-semibold text-white">Get In Touch <ArrowRight className="transition duration-300 group-hover:translate-x-1 group-hover:text-[#78be43]" size={18} /></Link>
+        <div className="grid flex-1 items-center gap-10 py-10 lg:grid-cols-[minmax(0,1fr)_18rem] lg:gap-16 lg:py-14 xl:grid-cols-[minmax(0,1fr)_21rem]">
+          <div className="hero-copy max-w-5xl">
+            <p className="mb-5 inline-flex items-center gap-2 rounded-full border border-[#e8aa3a]/30 bg-[#e8aa3a]/10 px-4 py-2 text-[10px] font-bold uppercase tracking-[0.22em] text-[#f4bd59] backdrop-blur-md sm:mb-7 sm:text-xs"><Sparkles size={13} /> One group. Many possibilities.</p>
+            <h1 className="hero-title max-w-5xl text-[clamp(3.5rem,9vw,7.6rem)] font-semibold normal-case leading-[0.88] tracking-[-0.055em] text-white">
+              Built in <span className="hero-title-accent">Sri Lanka.</span><br />Built to last.
+            </h1>
+            <p className="mt-6 max-w-xl border-l border-[#e8aa3a]/70 pl-5 text-base leading-relaxed text-white/68 sm:mt-8 sm:text-lg">A family-led group shaping everyday life through <span className="text-white">manufacturing, retail, distribution and hospitality.</span></p>
+            <div className="mt-8 flex flex-col gap-3 sm:mt-10 sm:flex-row">
+              <Link to="/companies" className="hero-primary-button group inline-flex min-h-14 items-center justify-center gap-4 rounded-full px-7 font-semibold text-[#0b1b13]">Explore our companies <span className="flex h-8 w-8 items-center justify-center rounded-full bg-[#0b1b13] text-white transition duration-300 group-hover:translate-x-1"><ArrowRight size={16} /></span></Link>
+              <Link to="/about" className="hero-ghost-button group inline-flex min-h-14 items-center justify-center gap-3 rounded-full px-7 font-semibold text-white">Discover our story <ArrowRight className="transition duration-300 group-hover:translate-x-1 group-hover:text-[#f4bd59]" size={18} /></Link>
+            </div>
+          </div>
+
+          <div className="hero-legacy-feature hidden self-end lg:block">
+            <div className="flex items-center gap-3 text-[10px] font-bold uppercase tracking-[0.25em] text-[#f4bd59]"><span className="h-px w-10 bg-[#f4bd59]" /> Established 1978</div>
+            <div className="mt-5 flex items-end gap-3">
+              <strong className="text-[6.5rem] font-semibold leading-[.8] tracking-[-0.09em] text-white">46</strong>
+              <span className="mb-1 text-2xl font-light text-[#f4bd59]">+</span>
+            </div>
+            <p className="mt-5 max-w-[13rem] text-sm leading-relaxed text-white/60"><span className="font-semibold text-white">Years of enterprise.</span><br />One vision, built across generations.</p>
+            <Link to="/about#journey" className="group mt-5 inline-flex items-center gap-3 text-[10px] font-bold uppercase tracking-[0.18em] text-white/70 transition hover:text-[#f4bd59]">Explore our journey <ArrowRight className="transition group-hover:translate-x-1" size={14} /></Link>
           </div>
         </div>
 
-        <div className="flex items-end justify-between gap-6">
-          <a href="#legacy" className="group hidden items-center gap-3 text-xs font-semibold uppercase tracking-[0.2em] text-white/60 transition hover:text-white md:flex"><span className="flex h-10 w-10 items-center justify-center rounded-full border border-white/25 transition duration-300 group-hover:border-[#78be43] group-hover:bg-[#78be43] group-hover:text-white"><ArrowDown size={16} /></span>Scroll to discover</a>
-          <div className="ml-auto grid w-full max-w-2xl grid-cols-2 gap-x-7 gap-y-4 sm:grid-cols-4 sm:gap-6">
+        <div className="hero-bottom-rail flex items-end justify-between gap-6 pt-5">
+          <a href="#legacy" className="group hidden items-center gap-3 text-[10px] font-semibold uppercase tracking-[0.2em] text-white/55 transition hover:text-white md:flex"><span className="flex h-10 w-10 items-center justify-center rounded-full border border-white/20 transition duration-300 group-hover:border-[#e8aa3a] group-hover:bg-[#e8aa3a] group-hover:text-[#102016]"><ArrowDown size={16} /></span>Scroll to discover</a>
+          <div className="ml-auto grid w-full max-w-2xl grid-cols-2 gap-x-7 gap-y-3 sm:grid-cols-4 sm:gap-6">
             {siteStats.map((stat, index) => <CountUpStat key={stat.label} value={stat.value} label={stat.label} index={index} />)}
           </div>
         </div>
