@@ -135,7 +135,7 @@ const Home = () => {
     </section>
 
     <section className="company-marquee relative z-20 overflow-hidden bg-white" aria-label="Supun Group companies">
-      <div className="company-marquee-track py-5 sm:py-6">
+      <div className="company-marquee-track py-3 sm:py-4">
         {[0, 1].map((group) => (
           <div className="company-marquee-group" key={group} aria-hidden={group === 1 ? "true" : undefined}>
             {logoCompanies.map((company) => (
@@ -159,12 +159,12 @@ const Home = () => {
       </div>
     </section>
 
-    <section id="legacy" className="legacy-premium relative isolate overflow-hidden py-16 sm:py-20 md:py-32">
+    <section id="legacy" className="legacy-premium relative isolate overflow-hidden py-12 sm:py-14 md:py-20">
       <div className="legacy-aurora legacy-aurora-blue" aria-hidden="true" />
       <div className="legacy-lines absolute inset-0 opacity-50" aria-hidden="true" />
       <div className="container relative z-10 mx-auto px-4">
         <AnimatedSection animation="slide-up" duration={850} triggerOnce={false}>
-          <div className="mb-10 flex items-center justify-between gap-5 md:mb-14">
+          <div className="mb-8 flex items-center justify-between gap-5 md:mb-10">
             <p className="section-kicker text-primary before:bg-[#d99a24]">Our legacy</p>
             <div className="hidden items-center gap-3 text-[10px] font-semibold uppercase tracking-[0.22em] text-primary/45 sm:flex"><span>1978</span><span className="h-px w-14 bg-gradient-to-r from-[#d99a24] to-primary/30" /><span>Today</span></div>
           </div>
@@ -188,9 +188,9 @@ const Home = () => {
       </div>
     </section>
 
-    <section className="relative overflow-hidden bg-white py-16 text-[#10233f] sm:py-20 md:py-28">
+    <section className="relative overflow-hidden bg-white py-12 text-[#10233f] sm:py-14 md:py-20">
       <div className="container relative z-10 mx-auto px-4">
-        <div className="grid gap-12 lg:grid-cols-[0.82fr_1.18fr] lg:items-center lg:gap-20">
+        <div className="grid gap-9 lg:grid-cols-[0.82fr_1.18fr] lg:items-center lg:gap-14">
           <AnimatedSection animation="slide-right" duration={900} triggerOnce={false}>
             <div className="relative min-h-[480px] overflow-hidden rounded-[1.5rem] bg-[#10233f] shadow-[0_24px_60px_rgba(16,35,63,.18)] sm:min-h-[570px]">
               <img src={manufacturingImage} alt="Supun Group manufacturing operations in Sri Lanka" className="absolute inset-0 h-full w-full object-cover" />
@@ -238,7 +238,7 @@ const Home = () => {
       </div>
     </section>
 
-    <section className="py-16 sm:py-20 md:py-32"><div className="container mx-auto px-4">
+    <section className="py-12 sm:py-14 md:py-20"><div className="container mx-auto px-4">
       <AnimatedSection animation="slide-up" duration={800} triggerOnce={false}>
         <div className="flex flex-col justify-between gap-6 md:flex-row md:items-end">
           <div><p className="section-kicker">Inside the group</p><h2 className="mt-5 text-4xl font-semibold normal-case tracking-[-0.035em] text-[#10233f] md:text-6xl">Businesses built for impact.</h2></div>
@@ -249,7 +249,7 @@ const Home = () => {
           </div>
         </div>
       </AnimatedSection>
-      <div ref={companyCarouselRef} className="mt-14 flex snap-x snap-mandatory gap-5 overflow-x-auto scroll-smooth pb-6 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+      <div ref={companyCarouselRef} className="mt-9 flex snap-x snap-mandatory gap-5 overflow-x-auto scroll-smooth pb-4 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
         {companies.map((company, index) => (
           <AnimatedSection key={company.id} animation="slide-up" delay={(index % 3) * 130} duration={850} triggerOnce={false} className="h-full w-[88%] flex-none snap-start sm:w-[calc(50%_-_0.625rem)] lg:w-[calc(33.333%_-_0.833rem)]">
           <Link to={`/companies/${company.id}`} className="company-glass group relative flex h-full min-h-[450px] flex-col overflow-hidden rounded-[1.5rem] p-5 transition duration-500 hover:-translate-y-2 md:p-6">
@@ -272,7 +272,7 @@ const Home = () => {
       </div>
     </div></section>
 
-    <section className="relative overflow-hidden bg-[#f3f7fb] px-4 pb-16 sm:pb-20 md:pb-28">
+    <section className="relative overflow-hidden bg-[#f3f7fb] px-4 pb-12 sm:pb-14 md:pb-20">
       <AnimatedSection animation="scale" duration={900} triggerOnce={false} className="container mx-auto">
         <div className="relative isolate overflow-hidden rounded-[2rem] bg-[#071b2d] px-7 py-12 text-white shadow-[0_30px_80px_rgba(7,27,45,.20)] sm:px-12 sm:py-16 md:rounded-[3rem] lg:px-20 lg:py-20">
           <div className="absolute inset-y-0 right-0 -z-10 w-full bg-[radial-gradient(circle_at_85%_35%,rgba(217,154,36,.16),transparent_30%),linear-gradient(115deg,transparent_45%,rgba(25,83,132,.38))] lg:w-2/3" />
