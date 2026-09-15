@@ -667,6 +667,20 @@ All colors MUST be HSL.
   }
 }
 
+@media (min-width: 1024px) {
+  .company-detail-hero-grid {
+    grid-template-columns: minmax(0, 1fr) 250px;
+  }
+
+  .company-detail-hero-logo {
+    justify-self: end;
+  }
+
+  .company-detail-content-grid {
+    grid-template-columns: minmax(0, 1fr) 340px;
+  }
+}
+
 @keyframes company-marquee {
   from { transform: translate3d(0, 0, 0); }
   to { transform: translate3d(-50%, 0, 0); }

@@ -1,32 +1,71 @@
 import { Link, useParams } from "react-router-dom";
-import { ArrowLeft, Award, Calendar, CheckCircle2, ExternalLink, Mail, MapPin, Phone } from "lucide-react";
-import { Button } from "@/components/ui/button";
-import { Card, CardContent } from "@/components/ui/card";
+import { ArrowLeft, ArrowRight, Award, BriefcaseBusiness, CalendarDays, Check, ExternalLink, Mail, MapPin, Phone } from "lucide-react";
 import { CompanyLogo } from "@/components/CompanyLogo";
 import Seo, { SITE_URL } from "@/components/Seo";
 import { companyById } from "@/data/companies";
-import heroCorporate from "@/assets/hero-corporate.jpg";
+import retailImage from "@/assets/retail-store.jpg";
+import hospitalityImage from "@/assets/sector-hospitality-v2.jpg";
+import hotelImage from "@/assets/hotel-interior.jpg";
+import manufacturingImage from "@/assets/sector-manufacturing-v2.jpg";
+import footwearImage from "@/assets/automotive-design.jpg";
+import chromeImage from "@/assets/chrome-manufacturing.jpg";
+import helmetImage from "@/assets/helmet-manufacturing.jpg";
+import cookwareImage from "@/assets/cookware-manufacturing.jpg";
+import coolingImage from "@/assets/products/camy-air-conditioners.png";
+
+const companyImages: Record<string, string> = {
+  "supun-traders": retailImage, "supun-super-center": retailImage,
+  "supun-arcade-residency": hotelImage, "area-56": hospitalityImage,
+  "supun-aerosoft": footwearImage, "aerostar-home-appliances": chromeImage,
+  "camy-smart": helmetImage, rodsons: manufacturingImage,
+  "new-camy-smart": cookwareImage, "fuji-industries": coolingImage,
+  "camy-global": retailImage,
+};
 
 const CompanyDetail = () => {
   const { id } = useParams();
   const company = companyById(id);
 
-  if (!company) {
-    return <section className="min-h-[60vh] flex items-center"><div className="container mx-auto px-4 text-center"><h1 className="text-4xl normal-case mb-4">Company not found</h1><p className="text-muted-foreground mb-7">The company page you requested is not available.</p><Link to="/companies"><Button>Back to Our Companies</Button></Link></div></section>;
-  }
+  if (!company) return <section className="flex min-h-[70vh] items-center bg-[#f3f6f8]"><div className="container mx-auto px-4 text-center"><h1 className="text-4xl font-semibold normal-case text-[#102746]">Company not found</h1><p className="mt-4 text-[#637186]">The company page you requested is unavailable.</p><Link to="/companies" className="mt-7 inline-flex items-center gap-2 rounded-full bg-[#102746] px-6 py-3 font-semibold text-white"><ArrowLeft size={17} />Our Companies</Link></div></section>;
 
   const canonicalPath = `/companies/${company.id}`;
-  const hasContact = company.phone || company.email || company.location;
+  const heroImage = companyImages[company.id] || manufacturingImage;
+  const hasContact = company.phone || company.email || company.location || company.website;
 
-  return <div className="min-h-screen">
-    <Seo title={`${company.shortName} | Supun Group of Companies`} description={company.description} keywords={`${company.shortName}, ${company.industry}, Supun Group of Companies, Sri Lanka`} path={canonicalPath} jsonLd={{"@context":"https://schema.org","@graph":[{"@type":"Organization",name:company.name,url:`${SITE_URL}${canonicalPath}`,description:company.description,foundingDate:company.established,parentOrganization:{"@type":"Organization",name:"Supun Group of Companies",url:SITE_URL},...(company.website ? { sameAs: [company.website] } : {})},{"@type":"BreadcrumbList",itemListElement:[{"@type":"ListItem",position:1,name:"Home",item:SITE_URL},{"@type":"ListItem",position:2,name:"Our Companies",item:`${SITE_URL}/companies`},{"@type":"ListItem",position:3,name:company.shortName,item:`${SITE_URL}${canonicalPath}`}]}]}} />
+  return <div className="min-h-screen bg-[#f3f6f8] text-[#102746]">
+    <Seo title={`${company.shortName} | Supun Group of Companies`} description={company.description} keywords={`${company.shortName}, ${company.industry}, Supun Group of Companies, Sri Lanka`} path={canonicalPath} jsonLd={{ "@context": "https://schema.org", "@graph": [{ "@type": "Organization", name: company.name, url: `${SITE_URL}${canonicalPath}`, description: company.description, foundingDate: company.established, parentOrganization: { "@type": "Organization", name: "Supun Group of Companies", url: SITE_URL }, ...(company.website ? { sameAs: [company.website] } : {}) }, { "@type": "BreadcrumbList", itemListElement: [{ "@type": "ListItem", position: 1, name: "Home", item: SITE_URL }, { "@type": "ListItem", position: 2, name: "Our Companies", item: `${SITE_URL}/companies` }, { "@type": "ListItem", position: 3, name: company.shortName, item: `${SITE_URL}${canonicalPath}` }] }] }} />
 
-    <section className="relative py-20 md:py-28 overflow-hidden"><div className="absolute inset-0 bg-cover bg-center" style={{ backgroundImage: `url(${heroCorporate})` }} /><div className="absolute inset-0 bg-primary-dark/90" /><div className="container mx-auto px-4 relative z-10 text-white"><Link to="/companies" className="inline-flex items-center text-white/80 hover:text-white mb-8"><ArrowLeft size={17} className="mr-2" /> Our Companies</Link><div className="grid items-center gap-8 lg:grid-cols-[1fr_280px]"><div className="max-w-4xl"><div className="flex flex-wrap items-center gap-3 mb-5"><span className="px-3 py-1 rounded-full bg-accent text-accent-foreground text-xs font-bold">{company.industry}</span>{company.established && <span className="text-white/75 inline-flex items-center text-sm"><Calendar size={15} className="mr-1.5" /> Established {company.established}</span>}</div><p className="text-accent font-semibold mb-3 text-lg">{company.tagline}</p><h1 className="text-4xl md:text-6xl normal-case mb-6">{company.name}</h1><p className="text-xl text-white/85 max-w-3xl">{company.description}</p></div><CompanyLogo companyId={company.id} companyName={company.shortName} className="h-40 w-full rounded-2xl border border-white/20 p-5 shadow-2xl lg:h-48" imageClassName="max-h-32 lg:max-h-40" /></div></div></section>
+    <section className="relative isolate min-h-[520px] overflow-hidden pb-14 pt-32 text-white md:flex md:items-end md:pb-16 md:pt-40">
+      <img src={heroImage} alt={`${company.shortName} business`} className="absolute inset-0 -z-20 h-full w-full object-cover" />
+      <div className="absolute inset-0 -z-10 bg-gradient-to-r from-[#041426]/95 via-[#071d37]/84 to-[#071d37]/62" />
+      <div className="absolute inset-0 -z-10 bg-gradient-to-t from-[#041426]/55 via-transparent to-[#041426]/15" />
+      <div className="container mx-auto px-4"><Link to="/companies" className="mb-7 inline-flex items-center gap-2 text-sm font-semibold text-white/75 transition hover:text-[#efbd55]"><ArrowLeft size={16} />All Group Companies</Link><div className="company-detail-hero-grid grid items-end gap-7">
+        <div className="company-detail-hero-copy max-w-4xl"><div className="mb-5 flex flex-wrap gap-3"><span className="inline-flex items-center gap-2 rounded-full border border-white/20 bg-[#071d37]/45 px-4 py-2 text-xs font-semibold backdrop-blur"><BriefcaseBusiness size={15} className="text-[#efbd55]" />{company.industry}</span>{company.established && <span className="inline-flex items-center gap-2 rounded-full border border-white/20 bg-[#071d37]/45 px-4 py-2 text-xs font-semibold backdrop-blur"><CalendarDays size={15} className="text-[#efbd55]" />Established {company.established}</span>}</div><p className="text-sm font-bold uppercase tracking-[.18em] text-[#efbd55]">{company.tagline}</p><h1 className="mt-4 text-4xl font-semibold normal-case leading-[1.04] tracking-[-.04em] sm:text-5xl">{company.name}</h1><p className="mt-5 max-w-2xl text-lg leading-8 text-white/80">{company.description}</p></div>
+        <CompanyLogo companyId={company.id} companyName={company.shortName} className="company-detail-hero-logo h-28 w-full max-w-[250px] justify-self-start rounded-xl border border-white/40 p-4 shadow-2xl" imageClassName="h-full w-full object-contain" />
+      </div></div>
+    </section>
 
-    <section className="py-20"><div className="container mx-auto px-4 grid lg:grid-cols-[1fr_360px] gap-10 max-w-7xl"><div><p className="text-accent font-semibold uppercase tracking-wider mb-3">About the Company</p><h2 className="text-3xl md:text-4xl normal-case mb-6">{company.tagline}</h2><p className="text-lg leading-relaxed text-muted-foreground">{company.fullDescription}</p>
-      <div className="mt-12"><h2 className="text-3xl normal-case mb-6">Key Features</h2><div className="grid sm:grid-cols-2 gap-4">{company.features.map((feature) => <div key={feature} className="flex gap-3 p-4 rounded-lg border bg-card"><CheckCircle2 className="text-primary shrink-0 mt-0.5" size={20} /><span>{feature}</span></div>)}</div></div>
-      {company.awards && company.awards.length > 0 && <div className="mt-12"><h2 className="text-3xl normal-case mb-6">Awards & Recognition</h2><div className="space-y-3">{company.awards.map((award) => <div key={award} className="flex items-start gap-3 p-5 rounded-lg bg-accent/5 border border-accent/20"><Award className="text-accent shrink-0 mt-0.5" size={21} /><span>{award}</span></div>)}</div></div>}
-    </div><aside><Card className="shadow-elegant sticky top-28"><CardContent className="p-6"><h2 className="text-2xl normal-case mb-5">Company Information</h2><div className="space-y-5">{company.established && <div><div className="text-xs uppercase tracking-wider text-muted-foreground mb-1">Established</div><div className="font-semibold">{company.established}</div></div>}<div><div className="text-xs uppercase tracking-wider text-muted-foreground mb-1">Industry</div><div className="font-semibold">{company.industry}</div></div>{company.phone && <a href={`tel:${company.phone.replace(/[^+\d]/g, "")}`} className="flex items-start gap-3 text-primary hover:underline"><Phone size={18} className="mt-0.5 shrink-0" /><span>{company.phone}</span></a>}{company.email && <a href={`mailto:${company.email}`} className="flex items-start gap-3 text-primary hover:underline break-all"><Mail size={18} className="mt-0.5 shrink-0" /><span>{company.email}</span></a>}{company.location && <div className="flex items-start gap-3"><MapPin size={18} className="mt-0.5 shrink-0 text-primary" /><span>{company.location}</span></div>}{company.website && <a href={company.website} target="_blank" rel="noopener noreferrer" className="inline-flex items-center text-primary font-semibold hover:underline">Visit website <ExternalLink size={15} className="ml-1.5" /></a>}{!hasContact && <p className="text-sm text-muted-foreground">Additional contact details will be published when confirmed.</p>}</div></CardContent></Card></aside></div></section>
+    <section className="py-12 md:py-16"><div className="company-detail-content-grid container mx-auto grid max-w-7xl gap-8 px-4">
+      <div className="company-detail-primary min-w-0 space-y-8">
+        <article className="rounded-2xl border border-[#102746]/10 bg-white p-7 shadow-[0_10px_30px_rgba(16,39,70,.06)] sm:p-9"><p className="text-xs font-bold uppercase tracking-[.18em] text-[#315f9f]">About the company</p><h2 className="mt-3 text-3xl font-semibold normal-case tracking-[-.03em] md:text-4xl">{company.tagline}</h2><div className="mt-5 h-0.5 w-14 bg-[#d79a22]" /><p className="mt-6 text-base font-medium leading-8 text-[#405268]">{company.fullDescription}</p></article>
+
+        <article className="rounded-2xl border border-[#102746]/10 bg-white p-7 shadow-[0_10px_30px_rgba(16,39,70,.06)] sm:p-9"><div className="flex items-center justify-between"><div><p className="text-xs font-bold uppercase tracking-[.18em] text-[#315f9f]">Capabilities</p><h2 className="mt-2 text-3xl font-semibold normal-case">Key Features</h2></div><span className="text-5xl font-semibold text-[#102746]/10">{String(company.features.length).padStart(2, "0")}</span></div><div className="mt-7 grid gap-3 sm:grid-cols-2">{company.features.map((feature) => <div key={feature} className="flex gap-3 rounded-xl border border-[#102746]/10 bg-[#f7f9fb] p-4 text-sm font-medium leading-6 text-[#405268]"><span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-[#fff3d4] text-[#b9780b]"><Check size={16} strokeWidth={2.5} /></span>{feature}</div>)}</div></article>
+
+        {company.awards && company.awards.length > 0 && <article className="rounded-2xl border border-[#d79a22]/25 bg-[#fffaf0] p-7 sm:p-9"><div><p className="text-xs font-bold uppercase tracking-[.16em] text-[#a66d0d]">Awards &amp; recognition</p><h2 className="mt-1 text-2xl font-semibold normal-case">Recognised for excellence</h2></div><div className="mt-7 space-y-5">{company.awards.map((award) => { const isSilver = award.toLowerCase().includes("silver"); return <div key={award} className="flex items-center gap-5 rounded-xl border border-[#102746]/10 bg-white p-5 shadow-sm"><div className="relative h-20 w-14 shrink-0" aria-hidden="true"><span className="absolute left-2 top-0 h-11 w-5 -skew-x-6 bg-[#173b68] [clip-path:polygon(0_0,100%_0,82%_100%,18%_100%)]" /><span className="absolute right-2 top-0 h-11 w-5 skew-x-6 bg-[#c93636] [clip-path:polygon(0_0,100%_0,82%_100%,18%_100%)]" /><span className={`absolute bottom-0 left-1/2 flex h-12 w-12 -translate-x-1/2 items-center justify-center rounded-full border-[3px] shadow-[0_4px_10px_rgba(0,0,0,.22)] ${isSilver ? "border-slate-500 bg-gradient-to-br from-white via-slate-200 to-slate-500 text-slate-700" : "border-amber-600 bg-gradient-to-br from-yellow-100 via-amber-300 to-amber-600 text-amber-900"}`}><Award size={23} strokeWidth={2} /></span></div><div><span className={`inline-flex rounded-full px-2.5 py-1 text-[9px] font-extrabold uppercase tracking-[.16em] ${isSilver ? "bg-slate-200 text-slate-700" : "bg-amber-200 text-amber-900"}`}>{isSilver ? "Silver Medal" : "Gold Medal"}</span><p className="mt-2 font-semibold leading-7 text-[#34465b]">{award}</p></div></div>; })}</div></article>}
+      </div>
+
+      <aside className="company-detail-aside min-w-0"><div className="sticky top-28 overflow-hidden rounded-2xl bg-[#0b2747] text-white shadow-[0_18px_45px_rgba(11,39,71,.18)]"><div className="border-b border-white/10 p-7"><p className="text-xs font-bold uppercase tracking-[.16em] text-[#efbd55]">Company information</p><h2 className="mt-2 text-2xl font-semibold normal-case">Connect with us</h2></div><div className="space-y-5 p-7 text-sm">
+        {company.established && <div className="flex gap-3"><CalendarDays size={19} className="shrink-0 text-[#efbd55]" /><div><p className="text-xs uppercase tracking-wider text-white/45">Established</p><p className="mt-1 font-semibold">{company.established}</p></div></div>}
+        <div className="flex gap-3"><BriefcaseBusiness size={19} className="shrink-0 text-[#efbd55]" /><div><p className="text-xs uppercase tracking-wider text-white/45">Industry</p><p className="mt-1 font-semibold">{company.industry}</p></div></div>
+        {company.phone && <a href={`tel:${company.phone.replace(/[^+\d]/g, "")}`} className="flex gap-3 transition hover:text-[#efbd55]"><Phone size={19} className="shrink-0 text-[#efbd55]" /><span>{company.phone}</span></a>}
+        {company.email && <a href={`mailto:${company.email}`} className="flex gap-3 break-all transition hover:text-[#efbd55]"><Mail size={19} className="shrink-0 text-[#efbd55]" /><span>{company.email}</span></a>}
+        {company.location && <div className="flex gap-3"><MapPin size={19} className="shrink-0 text-[#efbd55]" /><span className="leading-6">{company.location}</span></div>}
+        {company.website && <a href={company.website} target="_blank" rel="noopener noreferrer" className="flex items-center justify-between rounded-xl bg-[#efbd55] px-5 py-4 font-bold text-[#071d37] transition hover:bg-white">Visit website <ExternalLink size={17} /></a>}
+        {!hasContact && <p className="leading-6 text-white/60">Additional contact details will be published when confirmed.</p>}
+      </div></div></aside>
+    </div></section>
+
+    <section className="bg-white px-4 pb-14"><div className="container mx-auto flex flex-col items-start justify-between gap-5 rounded-2xl bg-[#e8eef3] px-7 py-8 sm:flex-row sm:items-center"><div><p className="text-xs font-bold uppercase tracking-[.16em] text-[#315f9f]">Explore the Group</p><h2 className="mt-2 text-2xl font-semibold normal-case">Discover our other companies</h2></div><Link to="/companies" className="inline-flex items-center gap-3 rounded-full bg-[#0b2747] px-6 py-3 font-semibold text-white transition hover:bg-[#78be43]">All companies <ArrowRight size={17} /></Link></div></section>
   </div>;
 };
 
