@@ -65,7 +65,7 @@ const CompanyDetail = () => {
       </div></div></aside>
     </div></section>
 
-    <section className="bg-white px-4 pb-14"><div className="container mx-auto flex flex-col items-start justify-between gap-5 rounded-2xl bg-[#e8eef3] px-7 py-8 sm:flex-row sm:items-center"><div><p className="text-xs font-bold uppercase tracking-[.16em] text-[#315f9f]">Explore the Group</p><h2 className="mt-2 text-2xl font-semibold normal-case">Discover our other companies</h2></div><Link to="/companies" className="inline-flex items-center gap-3 rounded-full bg-[#0b2747] px-6 py-3 font-semibold text-white transition hover:bg-[#78be43]">All companies <ArrowRight size={17} /></Link></div></section>
+    <section className="bg-white px-4 pb-14"><div className="container relative mx-auto isolate flex flex-col items-start justify-between gap-5 overflow-hidden rounded-2xl bg-gradient-to-r from-[#102f55] via-[#184f75] to-[#4d7c42] px-7 py-9 text-white shadow-[0_16px_40px_rgba(16,47,85,.16)] sm:flex-row sm:items-center"><span className="absolute -right-10 -top-20 -z-10 h-52 w-52 rounded-full bg-[#efbd55]/25 blur-2xl" /><span className="absolute -bottom-20 left-1/3 -z-10 h-40 w-40 rounded-full bg-[#78be43]/20 blur-2xl" /><div><p className="text-xs font-bold uppercase tracking-[.16em] text-[#efbd55]">Explore the Group</p><h2 className="mt-2 text-2xl font-semibold normal-case text-white">Discover our other companies</h2></div><Link to="/companies" className="inline-flex items-center gap-3 rounded-full border border-white/30 bg-white px-6 py-3 font-semibold text-[#0b2747] shadow-md transition hover:border-[#efbd55] hover:bg-[#efbd55]">All companies <ArrowRight size={17} /></Link></div></section>
   </div>;
 };
 
