@@ -242,6 +242,7 @@ All colors MUST be HSL.
   .company-marquee-track {
     display: flex;
     width: max-content;
+    background: transparent;
     will-change: transform;
     animation: company-marquee 34s linear infinite;
   }
@@ -261,9 +262,16 @@ All colors MUST be HSL.
   .company-marquee-item {
     display: block;
     overflow: hidden;
+    background: transparent;
     opacity: 1;
     filter: saturate(1) contrast(1.06);
     transition: opacity 300ms ease, filter 300ms ease, transform 300ms ease;
+  }
+
+  .company-marquee-item > div {
+    background: transparent !important;
+    border: 0;
+    box-shadow: none;
   }
 
   .company-marquee-item:hover {

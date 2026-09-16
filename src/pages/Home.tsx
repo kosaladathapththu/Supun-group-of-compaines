@@ -116,7 +116,7 @@ const Home = () => {
           <div className="hero-copy max-w-5xl">
             <p className="mb-5 inline-flex items-center gap-2 rounded-full border border-[#e8aa3a]/30 bg-[#e8aa3a]/10 px-4 py-2 text-[10px] font-bold uppercase tracking-[0.22em] text-[#f4bd59] backdrop-blur-md sm:mb-7 sm:text-xs"><Sparkles size={13} /> One group. Many possibilities.</p>
             <h1 className="hero-title max-w-5xl text-[clamp(3.5rem,9vw,7.6rem)] font-semibold normal-case leading-[0.88] tracking-[-0.055em] text-white">
-              <span className="hero-title-blue">Built in</span> <span className="hero-title-accent">Sri Lanka.</span><br /><span className="hero-title-blue">Built to last.</span>
+              <span className="hero-title-blue">Built in</span> <span className="hero-title-accent">Sri Lanka.</span><br /><span className="hero-title-blue">Built to </span><span className="hero-title-accent">last.</span>
             </h1>
             <p className="mt-6 max-w-xl border-l border-[#e8aa3a]/70 pl-5 text-base leading-relaxed text-white/68 sm:mt-8 sm:text-lg">A family-led group shaping everyday life through <span className="text-white">manufacturing, retail, distribution and hospitality.</span></p>
             <div className="mt-8 flex flex-col gap-3 sm:mt-10 sm:flex-row">
@@ -145,7 +145,7 @@ const Home = () => {
       </div>
     </section>
 
-    <section className="company-marquee relative z-20 overflow-hidden bg-white" aria-label="Supun Group companies">
+    <section className="company-marquee relative z-20 overflow-hidden bg-transparent" aria-label="Supun Group companies">
       <div className="company-marquee-track py-3 sm:py-4">
         {[0, 1].map((group) => (
           <div className="company-marquee-group" key={group} aria-hidden={group === 1 ? "true" : undefined}>
