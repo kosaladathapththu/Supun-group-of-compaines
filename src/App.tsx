@@ -24,6 +24,7 @@ import Contact from "./pages/Contact";
 import CookiePolicy from "./pages/CookiePolicy";
 import NotFound from "./pages/NotFound";
 import Login from "./pages/admin/Login";
+import Dashboard from "./pages/admin/Dashboard";
 import CompanyList from "./pages/admin/CompanyList";
 import CompanyForm from "./pages/admin/CompanyForm";
 import PasswordReset from "./pages/admin/PasswordReset";
@@ -53,6 +54,7 @@ const App = () => <QueryClientProvider client={queryClient}><TooltipProvider><To
   <Route path="/shop" element={<Navigate to="/camy-products" replace />} /><Route path="/shop/:id" element={<Navigate to="/camy-products" replace />} />
   <Route path="/admin/login" element={<PageTransition><Login /></PageTransition>} />
   <Route path="/admin" element={<ProtectedRoute><AdminLayout /></ProtectedRoute>}>
+    <Route index element={<PageTransition><Dashboard /></PageTransition>} />
     <Route path="companies" element={<PageTransition><CompanyList /></PageTransition>} /><Route path="companies/new" element={<PageTransition><CompanyForm /></PageTransition>} /><Route path="companies/:id/edit" element={<PageTransition><CompanyForm /></PageTransition>} />
     <Route path="brands" element={<PageTransition><BrandList /></PageTransition>} /><Route path="brands/new" element={<PageTransition><BrandForm /></PageTransition>} /><Route path="brands/:id/edit" element={<PageTransition><BrandForm /></PageTransition>} />
     <Route path="categories" element={<PageTransition><CategoryList /></PageTransition>} /><Route path="categories/new" element={<PageTransition><CategoryForm /></PageTransition>} /><Route path="categories/:id/edit" element={<PageTransition><CategoryForm /></PageTransition>} />

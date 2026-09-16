@@ -10,6 +10,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import Seo from "@/components/Seo";
+import "./Admin.css";
 
 const logo = "/supun-group-of-companies-logo.png";
 const loginSchema = z.object({
@@ -30,7 +31,7 @@ export default function Login() {
       const response = await authAPI.login(credentials);
       localStorage.setItem("admin_token", response.token);
       localStorage.setItem("admin_user", JSON.stringify(response.user));
-      navigate("/admin/companies");
+      navigate("/admin");
     } catch (loginError) {
       setError(getErrorMessage(loginError));
     } finally {
@@ -41,7 +42,7 @@ export default function Login() {
   return (
     <main className="min-h-screen bg-[#eef2f4] p-4 sm:p-7 lg:p-10">
       <Seo title="Admin Login | Supun Group of Companies" noindex />
-      <div className="mx-auto grid min-h-[calc(100vh-2rem)] max-w-6xl overflow-hidden rounded-[2rem] bg-white shadow-[0_30px_90px_rgba(7,27,45,0.18)] sm:min-h-[calc(100vh-3.5rem)] lg:grid-cols-[1.08fr_0.92fr]">
+      <div className="admin-login-shell mx-auto min-h-[calc(100vh-2rem)] max-w-6xl overflow-hidden rounded-[2rem] bg-white shadow-[0_30px_90px_rgba(7,27,45,0.18)] sm:min-h-[calc(100vh-3.5rem)]">
         <section className="relative hidden overflow-hidden bg-[linear-gradient(145deg,#061927,#0b3153)] p-12 text-white lg:flex lg:flex-col lg:justify-between">
           <div className="absolute -right-28 -top-24 h-80 w-80 rounded-full border border-white/10" />
           <div className="absolute -right-12 -top-8 h-48 w-48 rounded-full border border-[#efbd55]/20" />
