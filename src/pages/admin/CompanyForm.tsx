@@ -18,9 +18,12 @@ const companySchema = z.object({
   shortName: z.string().min(1, 'Short name is required'),
   description: z.string().min(1, 'Description is required'),
   fullDescription: z.string().min(1, 'Full description is required'),
+  tagline: z.string().optional().or(z.literal('')),
   industry: z.string().min(1, 'Industry is required'),
   established: z.string().regex(/^\d{4}$/, 'Must be a valid year').optional().or(z.literal('')),
   website: z.string().url('Must be a valid URL').or(z.literal('')),
+  location: z.string().optional().or(z.literal('')),
+  awards: z.string().optional().or(z.literal('')),
   features: z.string().min(1, 'At least one feature is required'),
   phone: z.string().optional().or(z.literal('')),
   hotline: z.string().optional().or(z.literal('')),
@@ -67,9 +70,12 @@ export default function CompanyForm() {
       shortName: '',
       description: '',
       fullDescription: '',
+      tagline: '',
       industry: '',
       established: '',
       website: '',
+      location: '',
+      awards: '',
       features: '',
       phone: '',
       hotline: '',
@@ -114,9 +120,12 @@ export default function CompanyForm() {
         shortName: company.shortName || '',
         description: company.description || '',
         fullDescription: company.fullDescription || '',
+        tagline: company.tagline || '',
         industry: company.industry || '',
         established: establishedYear,
         website: company.website || '',
+        location: company.location || '',
+        awards: Array.isArray(company.awards) ? company.awards.join('\n') : '',
         features: featuresList.join('\n'),
         phone: company.phone || '',
         hotline: company.hotline || '',
@@ -330,9 +339,20 @@ export default function CompanyForm() {
       formData.append('shortName', data.shortName);
       formData.append('description', data.description);
       formData.append('fullDescription', data.fullDescription);
+      formData.append('tagline', data.tagline || '');
       formData.append('industry', data.industry);
       formData.append('established', data.established);
       formData.append('website', data.website);
+      formData.append('location', data.location || '');
+      formData.append(
+        'awards',
+        JSON.stringify(
+          (data.awards || '')
+            .split('\n')
+            .map((award) => award.trim())
+            .filter(Boolean),
+        ),
+      );
       formData.append('features', JSON.stringify(featuresList));
       
       // Add new fields
@@ -462,6 +482,15 @@ export default function CompanyForm() {
               {errors.name && <p className="text-sm text-destructive">{errors.name.message}</p>}
             </div>
 
+            <div className="space-y-2">
+              <Label htmlFor="tagline">Tagline</Label>
+              <Input
+                id="tagline"
+                {...register('tagline')}
+                placeholder="A short phrase used on the public website"
+              />
+            </div>
+
             <div className="grid gap-4 sm:grid-cols-2">
               <div className="space-y-2">
                 <Label htmlFor="industry">Industry *</Label>
@@ -500,6 +529,18 @@ export default function CompanyForm() {
               {errors.website && (
                 <p className="text-sm text-destructive">{errors.website.message}</p>
               )}
+            </div>
+
+            <div className="space-y-2">
+              <Label htmlFor="location">Display Location</Label>
+              <Input
+                id="location"
+                {...register('location')}
+                placeholder="e.g., Colombo, Sri Lanka"
+              />
+              <p className="text-xs text-muted-foreground">
+                Human-readable location shown to website visitors
+              </p>
             </div>
 
             <div className="space-y-2">
@@ -629,6 +670,19 @@ export default function CompanyForm() {
               {errors.fullDescription && (
                 <p className="text-sm text-destructive">{errors.fullDescription.message}</p>
               )}
+            </div>
+
+            <div className="space-y-2">
+              <Label htmlFor="awards">Awards and Recognition</Label>
+              <Textarea
+                id="awards"
+                {...register('awards')}
+                placeholder={'Enter one award per line'}
+                rows={4}
+              />
+              <p className="text-xs text-muted-foreground">
+                Enter one award or certification per line.
+              </p>
             </div>
           </CardContent>
         </Card>

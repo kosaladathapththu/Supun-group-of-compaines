@@ -61,6 +61,7 @@ router.get("/", (req, res) => {
     const formattedCompanies = companies.map((company) => ({
       ...company,
       features: JSON.parse(company.features),
+      awards: company.awards ? JSON.parse(company.awards) : [],
       gallery: company.gallery ? JSON.parse(company.gallery) : [],
       socialLinks: company.socialLinks ? JSON.parse(company.socialLinks) : [],
     }));
@@ -86,6 +87,7 @@ router.get("/:id", (req, res) => {
     res.json({
       ...company,
       features: JSON.parse(company.features),
+      awards: company.awards ? JSON.parse(company.awards) : [],
       gallery: company.gallery ? JSON.parse(company.gallery) : [],
       socialLinks: company.socialLinks ? JSON.parse(company.socialLinks) : [],
     });
@@ -113,10 +115,13 @@ router.post(
         shortName,
         description,
         fullDescription,
+        tagline,
         industry,
         established,
         website,
+        location,
         features,
+        awards,
         phone,
         hotline,
         email,
@@ -156,10 +161,12 @@ router.post(
         typeof socialLinks === "string"
           ? socialLinks
           : JSON.stringify(socialLinks || []);
+      const awardsJson =
+        typeof awards === "string" ? awards : JSON.stringify(awards || []);
 
       const stmt = db.prepare(`
-      INSERT INTO companies (id, name, shortName, description, fullDescription, industry, established, website, features, imageUrl, catalogPdf, phone, hotline, email, faxNumber, gallery, sequence, socialLinks, googleMapsLink)
-      VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+      INSERT INTO companies (id, name, shortName, description, fullDescription, tagline, industry, established, website, location, features, awards, imageUrl, catalogPdf, phone, hotline, email, faxNumber, gallery, sequence, socialLinks, googleMapsLink)
+      VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
     `);
 
       stmt.run(
@@ -168,10 +175,13 @@ router.post(
         shortName,
         description,
         fullDescription,
+        tagline || null,
         industry,
         established,
         website,
+        location || null,
         featuresJson,
+        awardsJson,
         imageUrl,
         catalogPdf,
         phone || null,
@@ -191,6 +201,7 @@ router.post(
       res.status(201).json({
         ...newCompany,
         features: JSON.parse(newCompany.features),
+        awards: newCompany.awards ? JSON.parse(newCompany.awards) : [],
         gallery: newCompany.gallery ? JSON.parse(newCompany.gallery) : [],
         socialLinks: newCompany.socialLinks
           ? JSON.parse(newCompany.socialLinks)
@@ -220,10 +231,13 @@ router.put(
         shortName,
         description,
         fullDescription,
+        tagline,
         industry,
         established,
         website,
+        location,
         features,
+        awards,
         phone,
         hotline,
         email,
@@ -286,11 +300,15 @@ router.put(
         typeof socialLinks === "string"
           ? socialLinks
           : JSON.stringify(socialLinks || []);
+      const awardsJson =
+        typeof awards === "string"
+          ? awards
+          : JSON.stringify(awards || JSON.parse(existingCompany.awards || "[]"));
 
       const stmt = db.prepare(`
       UPDATE companies 
-      SET name = ?, shortName = ?, description = ?, fullDescription = ?, industry = ?, 
-          established = ?, website = ?, features = ?, imageUrl = ?, catalogPdf = ?, 
+      SET name = ?, shortName = ?, description = ?, fullDescription = ?, tagline = ?, industry = ?, 
+          established = ?, website = ?, location = ?, features = ?, awards = ?, imageUrl = ?, catalogPdf = ?, 
           phone = ?, hotline = ?, email = ?, faxNumber = ?, gallery = ?, sequence = ?, 
           socialLinks = ?, googleMapsLink = ?, updatedAt = CURRENT_TIMESTAMP
       WHERE id = ?
@@ -301,10 +319,13 @@ router.put(
         shortName,
         description,
         fullDescription,
+        tagline || null,
         industry,
         established,
         website,
+        location || null,
         featuresJson,
+        awardsJson,
         imageUrl,
         catalogPdf,
         phone || null,
@@ -325,6 +346,7 @@ router.put(
       res.json({
         ...updatedCompany,
         features: JSON.parse(updatedCompany.features),
+        awards: updatedCompany.awards ? JSON.parse(updatedCompany.awards) : [],
         gallery: updatedCompany.gallery
           ? JSON.parse(updatedCompany.gallery)
           : [],

@@ -49,10 +49,13 @@ export interface Company {
   shortName: string;
   description: string;
   fullDescription: string;
+  tagline?: string;
   industry: string;
   established: number;
   website: string;
+  location?: string;
   features: string[];
+  awards?: string[];
   imageUrl?: string;
   catalogPdf?: string;
   phone?: string;
