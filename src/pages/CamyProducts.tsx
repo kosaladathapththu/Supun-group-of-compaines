@@ -1,6 +1,8 @@
 import { ArrowRight, ExternalLink, Factory, ShieldCheck } from "lucide-react";
+import { useQuery } from "@tanstack/react-query";
 import Seo from "@/components/Seo";
 import { camyProducts } from "@/data/siteContent";
+import { getFileUrl, productsAPI, type Product } from "@/services/api";
 import camyLogo from "@/assets/camy-brand-logo.png";
 import anythingAtSupunLogo from "@/assets/anything-at-supun-logo.png";
 import helmetImage from "@/assets/helmet-manufacturing.jpg";
@@ -49,7 +51,31 @@ const categoryLinks: Record<string, string> = {
   "Gas Cookers": "https://www.anythingatsupun.lk/product-category/kitchenware/gas-cookers/",
 };
 
-const CamyProducts = () => (
+const CamyProducts = () => {
+  const { data: databaseProducts = [] } = useQuery({
+    queryKey: ["public-products"],
+    queryFn: () => productsAPI.getAll(),
+    staleTime: 30_000,
+  });
+
+  const displayProducts = databaseProducts.length > 0
+    ? databaseProducts.map((product: Product) => {
+        const original = camyProducts.find((item) => item.name === product.title);
+        return {
+          id: product.id,
+          name: product.title,
+          madeBy: original?.madeBy || "Supun Group",
+          note: original?.note || product.categoryName || "Camy Product",
+          image: getFileUrl(product.imageUrl) || productImages[product.title] || manufacturingImage,
+        };
+      })
+    : camyProducts.map((product) => ({
+        ...product,
+        id: product.name,
+        image: productImages[product.name] || manufacturingImage,
+      }));
+
+  return (
   <main className="min-h-screen bg-[#f7f6f3] text-[#111]">
     <Seo
       title="Camy Products | Made in Sri Lanka | Supun Group"
@@ -152,8 +178,8 @@ const CamyProducts = () => (
         </div>
 
         <div className="camy-catalog">
-          {camyProducts.map((product) => (
-            <article key={product.name} className="camy-card">
+          {displayProducts.map((product) => (
+            <article key={product.id} className="camy-card">
               <a
                 href={categoryLinks[product.name] || shopUrl}
                 target="_blank"
@@ -161,7 +187,7 @@ const CamyProducts = () => (
                 className="camy-media"
                 aria-label={`Shop ${product.name} at Anything at Supun`}
               >
-                <img src={productImages[product.name] || manufacturingImage} alt={`${product.name} by Camy`} loading="lazy" />
+                <img src={product.image} alt={`${product.name} by Camy`} loading="lazy" />
                 <span className="camy-hover-brand" aria-hidden="true">
                   <img src={camyLogo} alt="" />
                   <strong>CAMY</strong>
@@ -187,6 +213,7 @@ const CamyProducts = () => (
       </div>
     </section>
   </main>
-);
+  );
+};
 
 export default CamyProducts;
