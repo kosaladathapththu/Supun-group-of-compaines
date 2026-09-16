@@ -12,11 +12,34 @@ import manufacturingImage from "@/assets/sector-manufacturing-v2.jpg";
 import hospitalityImage from "@/assets/sector-hospitality-v2.jpg";
 import sriLankaMap from "@/assets/sri-lanka-watercolor-map.png";
 import { awards, coreValues, journey, leadership } from "@/data/siteContent";
+import { getCompanyLogo } from "@/data/companyLogos";
 
 const stats = [["11", "Group companies"], ["300+", "Employees"], ["250+", "Distributors"]];
 const valueIcons = [Gem, Users, Lightbulb, Flag];
 const Label = ({ children }: { children: React.ReactNode }) => <p className="text-xs font-bold uppercase tracking-[.18em] text-[#315f9f]">{children}</p>;
 const Rule = () => <div className="mt-4 h-0.5 w-12 bg-[#d79a22]" />;
+
+// Keep the timeline tied to the same logo assets used across the company pages.
+const journeyCompanyLogos: Record<string, { id: string; name: string }[]> = {
+  "1978": [{ id: "supun-traders", name: "Supun Traders" }],
+  "1999": [{ id: "group", name: "Supun Group of Companies" }],
+  "2003": [{ id: "supun-super-center", name: "Supun Super Center" }],
+  "2010": [
+    { id: "supun-arcade-residency", name: "Supun Arcade Residency" },
+    { id: "area-56", name: "Area 56" },
+  ],
+  "2011": [{ id: "supun-aerosoft", name: "Supun Aerosoft" }],
+  "2016": [{ id: "aerostar-home-appliances", name: "Aero Star" }],
+  "2017": [
+    { id: "camy-smart", name: "Camy Smart" },
+    { id: "rodsons", name: "Rodsons" },
+  ],
+  "2018": [{ id: "new-camy-smart", name: "New Camy Smart" }],
+  "2023": [{ id: "fuji-industries", name: "Fuji Industries" }],
+};
+
+const journeyLogoSource = (id: string) =>
+  id === "group" ? "/supun-group-of-companies-logo.png" : getCompanyLogo(id);
 
 const About = () => (
   <div className="min-h-screen overflow-hidden bg-[#fbfaf7] text-[#102746]">
@@ -46,7 +69,46 @@ const About = () => (
 
     <section id="direction" className="w-full scroll-mt-24 bg-white"><div className="grid w-full lg:grid-cols-[1.35fr_.65fr]"><div className="grid gap-px bg-[#d9d7d1] sm:grid-cols-2"><article className="bg-white px-6 py-10 sm:px-10 lg:px-16 xl:px-20"><Eye className="text-[#d79a22]" size={34} strokeWidth={1.6} /><Label>Vision</Label><h2 className="mt-3 text-2xl font-semibold normal-case">Innovate. Unleash and Excel.</h2><p className="mt-4 text-sm leading-6 text-[#637186]">To unleash the potential within us to transform the markets through innovation and exceed people’s expectations for a better tomorrow, through the goods and services which empower and enrich the lives of Sri Lankans.</p></article><article className="bg-white px-6 py-10 sm:px-10 lg:px-12 xl:px-16"><Target className="text-[#d79a22]" size={34} strokeWidth={1.6} /><Label>Mission</Label><h2 className="mt-3 text-2xl font-semibold normal-case">Superior thinking. Sustainable value.</h2><p className="mt-4 text-sm leading-6 text-[#637186]">To harness superior thinking in the creation of products and services that functionally enhance the livelihood of people, while remaining cautious in reducing our carbon footprint. We integrate sustainable practices across our operations while delivering exceptional value to our stakeholders.</p></article></div><div className="relative min-h-[360px]"><img src={manufacturingImage} alt="Sustainable local manufacturing" className="absolute inset-0 h-full w-full object-cover" /><div className="absolute inset-0 bg-gradient-to-t from-[#102746]/90 to-[#102746]/10" /><p className="absolute bottom-8 left-8 max-w-[230px] text-2xl font-medium leading-snug text-white">Sustainable solutions for generations.</p></div></div></section>
 
-    <section id="journey" className="scroll-mt-24 bg-white py-14 md:py-16"><div className="container mx-auto px-4"><Label>Our journey</Label><h2 className="mt-3 text-4xl font-semibold normal-case tracking-[-.04em]">Progress through the years.</h2><Rule /><p className="mt-3 hidden text-xs text-[#788496] lg:block">Move over a year to read its story.</p><div className="relative mt-9 grid grid-cols-2 gap-x-4 gap-y-7 sm:grid-cols-3 md:grid-cols-5 lg:grid-cols-10 lg:gap-0 lg:before:absolute lg:before:left-2 lg:before:right-2 lg:before:top-[7px] lg:before:h-px lg:before:bg-[#d79a22]">{journey.map(([year, text], index) => <article key={year} tabIndex={0} className="group relative pr-3 outline-none"><span className="relative z-10 block h-[15px] w-[15px] rounded-full border-[4px] border-white bg-[#d79a22] shadow-[0_0_0_1px_rgba(215,154,34,.25)] transition group-hover:scale-125 group-focus:scale-125" /><strong className="mt-3 block text-base font-semibold tracking-[-.02em] text-[#102746]">{year}</strong><p className="mt-1.5 text-[10px] leading-4 text-[#637186]">{text}</p><div className={`pointer-events-none absolute bottom-[calc(100%+14px)] z-40 hidden w-64 border border-[#102746]/10 bg-white p-5 text-left shadow-[0_18px_45px_rgba(16,39,70,.16)] lg:group-hover:block lg:group-focus:block ${index === 0 ? "left-0" : index === journey.length - 1 ? "right-0" : "left-1/2 -translate-x-1/2"}`}><span className="text-[10px] font-bold uppercase tracking-[.16em] text-[#a87417]">Milestone</span><strong className="mt-2 block text-2xl text-[#102746]">{year}</strong><p className="mt-3 text-sm leading-6 text-[#53647a]">{text}</p><span className={`absolute -bottom-2 h-4 w-4 rotate-45 border-b border-r border-[#102746]/10 bg-white ${index === 0 ? "left-2" : index === journey.length - 1 ? "right-2" : "left-1/2 -translate-x-1/2"}`} /></div></article>)}</div></div></section>
+    <section id="journey" className="scroll-mt-24 bg-white py-14 md:py-16">
+      <div className="container mx-auto px-4">
+        <Label>Our journey</Label>
+        <h2 className="mt-3 text-4xl font-semibold normal-case tracking-[-.04em]">Progress through the years.</h2>
+        <Rule />
+        <p className="mt-3 hidden text-xs text-[#788496] lg:block">Move over a year to read its story.</p>
+        <div className="relative mt-9 grid grid-cols-2 gap-x-4 gap-y-7 sm:grid-cols-3 md:grid-cols-5 lg:grid-cols-10 lg:gap-0 lg:before:absolute lg:before:left-2 lg:before:right-2 lg:before:top-[63px] lg:before:h-px lg:before:bg-[#d79a22]">
+          {journey.map(([year, description], index) => {
+            const logos = journeyCompanyLogos[year] ?? [];
+
+            return (
+              <article key={year} tabIndex={0} aria-label={`${year}: ${description}`} className="group relative min-w-0 pr-3 outline-none focus-visible:ring-2 focus-visible:ring-[#315f9f]">
+                <div className="flex h-14 items-center gap-1 pb-2">
+                  {logos.map(({ id, name }) => (
+                    <span key={id} className="flex h-11 w-11 shrink-0 items-center justify-center rounded-lg border border-[#102746]/10 bg-white p-1 shadow-sm transition-transform group-hover:-translate-y-1 group-focus:-translate-y-1">
+                      <img src={journeyLogoSource(id)} alt={name} className="max-h-full max-w-full object-contain" loading="lazy" />
+                    </span>
+                  ))}
+                </div>
+                <span className="relative z-10 block h-[15px] w-[15px] rounded-full border-[4px] border-white bg-[#d79a22] shadow-[0_0_0_1px_rgba(215,154,34,.25)] transition group-hover:scale-125 group-focus:scale-125" />
+                <strong className="mt-3 block text-base font-semibold tracking-[-.02em] text-[#102746]">{year}</strong>
+                <p className="mt-1.5 text-[10px] leading-4 text-[#637186]">{description}</p>
+                <div className={`pointer-events-none absolute bottom-[calc(100%+12px)] z-40 hidden w-72 rounded-xl border border-[#102746]/10 bg-white p-5 text-left shadow-[0_18px_45px_rgba(16,39,70,.16)] lg:group-hover:block lg:group-focus:block ${index === 0 ? "left-0" : index === journey.length - 1 ? "right-0" : "left-1/2 -translate-x-1/2"}`}>
+                  <div className="flex items-center gap-3">
+                    {logos.map(({ id, name }) => (
+                      <span key={id} className="flex h-14 w-14 items-center justify-center rounded-lg border border-[#102746]/10 bg-white p-1.5">
+                        <img src={journeyLogoSource(id)} alt={name} className="max-h-full max-w-full object-contain" />
+                      </span>
+                    ))}
+                    <div><span className="text-[10px] font-bold uppercase tracking-[.16em] text-[#a87417]">Milestone</span><strong className="mt-1 block text-xl text-[#102746]">{year}</strong></div>
+                  </div>
+                  <p className="mt-3 text-sm leading-6 text-[#53647a]">{description}</p>
+                  <span className={`absolute -bottom-2 h-4 w-4 rotate-45 border-b border-r border-[#102746]/10 bg-white ${index === 0 ? "left-2" : index === journey.length - 1 ? "right-2" : "left-1/2 -translate-x-1/2"}`} />
+                </div>
+              </article>
+            );
+          })}
+        </div>
+      </div>
+    </section>
 
     <section className="bg-[#f4f2ed] py-14 md:py-20"><div className="container mx-auto px-4"><Label>Core values</Label><h2 className="mt-3 text-4xl font-semibold normal-case tracking-[-.04em]">What guides us.</h2><Rule /><div className="mt-8 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">{coreValues.map((value, index) => { const Icon = valueIcons[index % valueIcons.length]; return <article key={value.title} className="min-h-[210px] bg-white p-6 text-center"><Icon className="mx-auto text-[#d79a22]" size={35} strokeWidth={1.5} /><h3 className="mt-5 text-xl font-semibold normal-case">{value.title}</h3><p className="mt-3 text-sm leading-6 text-[#657286]">{value.description}</p></article>; })}</div></div></section>
 
