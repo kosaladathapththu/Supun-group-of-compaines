@@ -42,6 +42,26 @@ const slugify = (value = "") =>
 const normalizeStatus = (value) => (value === "published" ? "published" : "draft");
 const nullIfEmpty = (value) => (typeof value === "string" && value.trim() ? value.trim() : null);
 
+// Older admin forms saved browser-local Sri Lanka times without a timezone.
+// New forms save UTC ISO strings. Interpret both correctly when deciding if an
+// article is visible, without changing any existing publication dates.
+const isPublishedNow = `
+  status = 'published' AND (
+    publishedDate IS NULL OR
+    datetime(
+      publishedDate,
+      CASE
+        WHEN publishedDate LIKE '%Z' OR substr(publishedDate, -6, 1) IN ('+', '-') THEN '+0 minutes'
+        ELSE '-5 hours'
+      END,
+      CASE
+        WHEN publishedDate LIKE '%Z' OR substr(publishedDate, -6, 1) IN ('+', '-') THEN '+0 minutes'
+        ELSE '-30 minutes'
+      END
+    ) <= datetime('now')
+  )
+`;
+
 function uniqueSlug(requested, excludeId = null) {
   const base = slugify(requested) || `news-${Date.now()}`;
   let slug = base;
@@ -61,8 +81,7 @@ router.get("/", (req, res) => {
     const category = nullIfEmpty(req.query.category);
     const baseSql = `
       SELECT * FROM news
-      WHERE status = 'published'
-        AND (publishedDate IS NULL OR datetime(publishedDate) <= datetime('now'))
+      WHERE ${isPublishedNow}
     `;
     const rows = category
       ? db.prepare(`${baseSql} AND category = ? ORDER BY datetime(COALESCE(publishedDate, createdAt)) DESC, id DESC`).all(category)
@@ -100,8 +119,7 @@ router.get("/:slug", (req, res) => {
     const article = db
       .prepare(`
         SELECT * FROM news
-        WHERE slug = ? AND status = 'published'
-          AND (publishedDate IS NULL OR datetime(publishedDate) <= datetime('now'))
+        WHERE slug = ? AND ${isPublishedNow}
       `)
       .get(req.params.slug);
     if (!article) return res.status(404).json({ error: "News article not found" });
