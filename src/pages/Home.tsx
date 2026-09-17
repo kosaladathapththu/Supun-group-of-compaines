@@ -56,7 +56,7 @@ const CountUpStat = ({ value, label, index }: { value: string; label: string; in
     <div ref={ref} className="hero-stat group relative py-2 md:py-3" style={{ animationDelay: `${index * 100}ms` }}>
       <div className="flex items-start gap-2">
         <span className="text-3xl font-semibold tracking-[-0.04em] text-white tabular-nums sm:text-4xl">{count}{suffix}</span>
-        <span className="mt-1 h-1.5 w-1.5 rounded-full bg-[#5b9cdb] shadow-[0_0_12px_rgba(91,156,219,.65)]" />
+        <span className="mt-1 h-1.5 w-1.5 rounded-full bg-[#d99a24] shadow-[0_0_12px_rgba(217,154,36,.65)]" />
       </div>
       <div className="mt-1.5 max-w-[9rem] text-[9px] font-semibold uppercase leading-snug tracking-[0.14em] text-white/50 sm:text-[10px]">{label}</div>
     </div>
@@ -110,36 +110,36 @@ const Home = () => {
 
       <div className="container relative z-10 mx-auto flex min-h-[760px] flex-col px-5 pb-7 pt-28 sm:px-6 sm:pt-32 lg:min-h-screen lg:px-8 lg:pb-9 lg:pt-36">
         <div className="hero-topline flex items-center justify-between gap-5 pb-5 text-[10px] font-semibold uppercase tracking-[0.24em] text-white/58 sm:text-[11px]">
-          <span className="flex items-center gap-3"><span className="h-px w-8 bg-[#5b9cdb]" /> Independent. Sri Lankan. Since 1978.</span>
+          <span className="flex items-center gap-3"><span className="h-px w-8 bg-[#e8aa3a]" /> Independent. Sri Lankan. Since 1978.</span>
           <span className="hidden items-center gap-2 sm:flex"><span className="hero-live-dot" /> Colombo, Sri Lanka</span>
         </div>
 
         <div className="grid flex-1 items-center gap-10 py-10 lg:grid-cols-[minmax(0,1fr)_18rem] lg:gap-16 lg:py-14 xl:grid-cols-[minmax(0,1fr)_21rem]">
           <div className="hero-copy max-w-5xl">
-            <p className="mb-5 inline-flex items-center gap-2 rounded-full border border-[#5b9cdb]/30 bg-[#5b9cdb]/10 px-4 py-2 text-[10px] font-bold uppercase tracking-[0.22em] text-[#91bdec] backdrop-blur-md sm:mb-7 sm:text-[11px]"><Sparkles size={13} /> One group. Many possibilities.</p>
+            <p className="mb-5 inline-flex items-center gap-2 rounded-full border border-[#e8aa3a]/30 bg-[#e8aa3a]/10 px-4 py-2 text-[10px] font-bold uppercase tracking-[0.22em] text-[#f4bd59] backdrop-blur-md sm:mb-7 sm:text-[11px]"><Sparkles size={13} /> One group. Many possibilities.</p>
             <h1 className="hero-title max-w-5xl text-[clamp(3rem,8vw,6.6rem)] font-semibold normal-case leading-[0.92] tracking-[-0.055em] text-white">
               <span className="hero-title-blue">Built in</span> <span className="hero-title-accent">Sri Lanka.</span><br /><span className="hero-title-blue">Built to </span><span className="hero-title-accent">last.</span>
             </h1>
-            <p className="mt-6 max-w-xl border-l border-[#5b9cdb]/70 pl-5 text-sm leading-relaxed text-white/80 sm:mt-8 sm:text-base">A family-led group shaping everyday life through <span className="text-white">manufacturing, retail, distribution and hospitality.</span></p>
+            <p className="mt-6 max-w-xl border-l border-[#e8aa3a]/70 pl-5 text-sm leading-relaxed text-white/80 sm:mt-8 sm:text-base">A family-led group shaping everyday life through <span className="text-white">manufacturing, retail, distribution and hospitality.</span></p>
             <div className="mt-8 flex flex-col gap-3 sm:mt-10 sm:flex-row">
-              <Link to="/companies" className="hero-primary-button group inline-flex min-h-14 items-center justify-center gap-4 rounded-full px-7 text-sm font-semibold text-white">Explore our companies <span className="flex h-8 w-8 items-center justify-center rounded-full bg-[#10233f] text-white transition duration-300 group-hover:translate-x-1"><ArrowRight size={16} /></span></Link>
-              <Link to="/about" className="hero-ghost-button group inline-flex min-h-14 items-center justify-center gap-3 rounded-full px-7 text-sm font-semibold text-white">Discover our story <ArrowRight className="transition duration-300 group-hover:translate-x-1 group-hover:text-[#91bdec]" size={18} /></Link>
+              <Link to="/companies" className="hero-primary-button group inline-flex min-h-14 items-center justify-center gap-4 rounded-full px-7 text-sm font-semibold text-[#0b1b13]">Explore our companies <span className="flex h-8 w-8 items-center justify-center rounded-full bg-[#0b1b13] text-white transition duration-300 group-hover:translate-x-1"><ArrowRight size={16} /></span></Link>
+              <Link to="/about" className="hero-ghost-button group inline-flex min-h-14 items-center justify-center gap-3 rounded-full px-7 text-sm font-semibold text-white">Discover our story <ArrowRight className="transition duration-300 group-hover:translate-x-1 group-hover:text-[#f4bd59]" size={18} /></Link>
             </div>
           </div>
 
           <div className="hero-legacy-feature hidden self-end lg:block">
-            <div className="flex items-center gap-3 text-[10px] font-bold uppercase tracking-[0.25em] text-[#91bdec]"><span className="h-px w-10 bg-[#5b9cdb]" /> Established 1978</div>
+            <div className="flex items-center gap-3 text-[10px] font-bold uppercase tracking-[0.25em] text-[#f4bd59]"><span className="h-px w-10 bg-[#f4bd59]" /> Established 1978</div>
             <div className="mt-5 flex items-end gap-3">
               <strong className="hero-stat-blue text-[5.75rem] font-semibold leading-[.8] tracking-[-0.09em]">46</strong>
-              <span className="mb-1 text-xl font-light text-[#91bdec]">+</span>
+              <span className="mb-1 text-xl font-light text-[#f4bd59]">+</span>
             </div>
             <p className="mt-5 max-w-[13rem] text-sm leading-relaxed text-white/60"><span className="font-semibold text-white">Years of enterprise.</span><br />One vision, built across generations.</p>
-            <Link to="/about#journey" className="group mt-5 inline-flex items-center gap-3 text-[10px] font-bold uppercase tracking-[0.18em] text-white/70 transition hover:text-[#91bdec]">Explore our journey <ArrowRight className="transition group-hover:translate-x-1" size={14} /></Link>
+            <Link to="/about#journey" className="group mt-5 inline-flex items-center gap-3 text-[10px] font-bold uppercase tracking-[0.18em] text-white/70 transition hover:text-[#f4bd59]">Explore our journey <ArrowRight className="transition group-hover:translate-x-1" size={14} /></Link>
           </div>
         </div>
 
         <div className="hero-bottom-rail flex items-end justify-between gap-6 pt-5">
-          <a href="#legacy" className="group hidden items-center gap-3 text-[10px] font-semibold uppercase tracking-[0.2em] text-white/55 transition hover:text-white md:flex"><span className="flex h-10 w-10 items-center justify-center rounded-full border border-white/20 transition duration-300 group-hover:border-[#5b9cdb] group-hover:bg-[#5b9cdb] group-hover:text-[#10233f]"><ArrowDown size={16} /></span>Scroll to discover</a>
+          <a href="#legacy" className="group hidden items-center gap-3 text-[10px] font-semibold uppercase tracking-[0.2em] text-white/55 transition hover:text-white md:flex"><span className="flex h-10 w-10 items-center justify-center rounded-full border border-white/20 transition duration-300 group-hover:border-[#e8aa3a] group-hover:bg-[#e8aa3a] group-hover:text-[#102016]"><ArrowDown size={16} /></span>Scroll to discover</a>
           <div className="ml-auto grid w-full max-w-2xl grid-cols-2 gap-x-7 gap-y-3 sm:grid-cols-4 sm:gap-6">
             {siteStats.map((stat, index) => <CountUpStat key={stat.label} value={stat.value} label={stat.label} index={index} />)}
           </div>
