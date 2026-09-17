@@ -3,6 +3,7 @@ import { useQuery } from "@tanstack/react-query";
 import Seo from "@/components/Seo";
 import { camyProducts } from "@/data/siteContent";
 import { getFileUrl, productsAPI, type Product } from "@/services/api";
+import camyBlackLogo from "@/assets/camy-brand-logo.png";
 import anythingAtSupunLogo from "@/assets/anything-at-supun-logo.png";
 import helmetImage from "@/assets/helmet-manufacturing.jpg";
 import manufacturingImage from "@/assets/hero-manufacturing.jpg";
@@ -189,7 +190,7 @@ const CamyProducts = () => {
               >
                 <img src={product.image} alt={`${product.name} by Camy`} loading="lazy" />
                 <span className="camy-hover-brand" aria-hidden="true">
-                  <img src={camyLogo} alt="" />
+                  <img src={camyBlackLogo} alt="" />
                   <strong>CAMY</strong>
                 </span>
               </a>
