@@ -17,6 +17,10 @@ const sectorMeta = [
 ];
 
 const keepOriginalLogoSize = (companyId: string) => companyId === "fuji-industries" || companyId === "area-56";
+const homeCompanies = [
+  ...companies.filter((company) => company.id === "camy-smart"),
+  ...companies.filter((company) => company.id !== "camy-smart"),
+];
 
 const CountUpStat = ({ value, label, index }: { value: string; label: string; index: number }) => {
   const target = Number.parseInt(value, 10);
@@ -234,7 +238,7 @@ const Home = () => {
         </div>
       </AnimatedSection>
       <div ref={companyCarouselRef} className="mt-9 flex snap-x snap-mandatory gap-5 overflow-x-auto scroll-smooth pb-4 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
-        {companies.map((company, index) => (
+        {homeCompanies.map((company, index) => (
           <AnimatedSection key={company.id} animation="slide-up" delay={(index % 4) * 130} duration={850} triggerOnce={false} className="h-full w-[88%] flex-none snap-start sm:w-[calc(50%_-_0.625rem)] lg:w-[calc(33.333%_-_0.833rem)] xl:w-[calc(25%_-_0.9375rem)]">
           <Link to={`/companies/${company.id}`} className="company-glass group relative flex h-full min-h-[450px] flex-col overflow-hidden rounded-[1.5rem] p-5 transition duration-500 hover:-translate-y-2 md:p-6">
             <div className="company-card-visual relative flex min-h-[178px] items-center justify-center overflow-hidden rounded-[1.15rem] border border-primary/10 bg-white/80 px-7 py-6">
