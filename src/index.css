@@ -141,7 +141,7 @@ All colors MUST be HSL.
 
   .premium-hero video {
     animation: hero-zoom 18s ease-in-out infinite alternate;
-    filter: saturate(.68) contrast(1.06);
+    filter: brightness(1.18) saturate(1.05) contrast(1.02);
   }
 
   .hero-bottom-rail {
@@ -155,13 +155,13 @@ All colors MUST be HSL.
     width: .45rem;
     height: .45rem;
     border-radius: 9999px;
-    background: #e8aa3a;
-    box-shadow: 0 0 0 5px rgb(232 170 58 / .12), 0 0 18px rgb(232 170 58 / .5);
+    background: #5b9cdb;
+    box-shadow: 0 0 0 5px rgb(91 156 219 / .12), 0 0 18px rgb(91 156 219 / .5);
   }
 
   .hero-title-accent {
-    color: #f0b84e;
-    text-shadow: 0 8px 38px rgb(226 157 37 / .18);
+    color: #071b2d;
+    text-shadow: 0 1px 10px rgb(255 255 255 / .4);
   }
 
   .hero-title-blue,
@@ -178,16 +178,16 @@ All colors MUST be HSL.
   }
 
   .hero-primary-button {
-    border: 1px solid rgb(255 232 177 / .45);
-    background: linear-gradient(135deg, #f6c563, #d99525);
-    box-shadow: 0 14px 38px rgb(201 132 24 / .25), inset 0 1px 0 rgb(255 255 255 / .5);
+    border: 1px solid rgb(122 169 220 / .55);
+    background: linear-gradient(135deg, #315f9f, #1b477c);
+    box-shadow: 0 14px 38px rgb(27 71 124 / .3), inset 0 1px 0 rgb(255 255 255 / .2);
     transition: transform .3s ease, box-shadow .3s ease, filter .3s ease;
   }
 
   .hero-primary-button:hover {
     transform: translateY(-2px);
     filter: brightness(1.06);
-    box-shadow: 0 20px 48px rgb(201 132 24 / .34);
+    box-shadow: 0 20px 48px rgb(27 71 124 / .4);
   }
 
   .hero-ghost-button {
@@ -199,7 +199,7 @@ All colors MUST be HSL.
 
   .hero-ghost-button:hover {
     transform: translateY(-2px);
-    border-color: rgb(244 189 89 / .55);
+    border-color: rgb(91 156 219 / .55);
     background: rgb(255 255 255 / .1);
   }
 
