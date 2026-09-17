@@ -18,8 +18,8 @@ const sectorMeta = [
 
 const keepOriginalLogoSize = (companyId: string) => companyId === "fuji-industries" || companyId === "area-56";
 const homeCompanies = [
-  ...companies.filter((company) => company.id === "camy-smart"),
-  ...companies.filter((company) => company.id !== "camy-smart"),
+  ...companies.filter((company) => company.id === "new-camy-smart"),
+  ...companies.filter((company) => company.id !== "new-camy-smart"),
 ];
 
 const CountUpStat = ({ value, label, index }: { value: string; label: string; index: number }) => {
