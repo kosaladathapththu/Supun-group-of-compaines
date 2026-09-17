@@ -3,7 +3,6 @@ import { useQuery } from "@tanstack/react-query";
 import Seo from "@/components/Seo";
 import { camyProducts } from "@/data/siteContent";
 import { getFileUrl, productsAPI, type Product } from "@/services/api";
-import camyLogo from "@/assets/camy-brand-logo.png";
 import anythingAtSupunLogo from "@/assets/anything-at-supun-logo.png";
 import helmetImage from "@/assets/helmet-manufacturing.jpg";
 import manufacturingImage from "@/assets/hero-manufacturing.jpg";
@@ -21,6 +20,7 @@ import wallClockImage from "@/assets/products/camy-wall-clock.png";
 import waterFilterImage from "@/assets/products/camy-water-filter.png";
 
 const shopUrl = "https://www.anythingatsupun.lk/";
+const camyLogo = "/logos/new-camy-smart.png";
 
 const productImages: Record<string, string> = {
   "Motorcycle Helmets": motorcycleHelmetImage,
