@@ -5,7 +5,6 @@ import Seo, { DEFAULT_IMAGE, SITE_NAME, SITE_URL } from "@/components/Seo";
 import { AnimatedSection } from "@/components/AnimatedSection";
 import { CompanyLogo } from "@/components/CompanyLogo";
 import { companies } from "@/data/companies";
-import { getCompanyLogo } from "@/data/companyLogos";
 import { sectorHighlights, siteStats } from "@/data/siteContent";
 import heroVideo from "@/assets/supun-group-hero-optimized.mp4";
 import manufacturingImage from "@/assets/sector-manufacturing-v2.jpg";
@@ -17,7 +16,6 @@ const sectorMeta = [
   { icon: ShieldCheck },
 ];
 
-const logoCompanies = companies.filter((company) => getCompanyLogo(company.id));
 const keepOriginalLogoSize = (companyId: string) => companyId === "fuji-industries" || companyId === "area-56";
 
 const CountUpStat = ({ value, label, index }: { value: string; label: string; index: number }) => {
@@ -142,31 +140,6 @@ const Home = () => {
             {siteStats.map((stat, index) => <CountUpStat key={stat.label} value={stat.value} label={stat.label} index={index} />)}
           </div>
         </div>
-      </div>
-    </section>
-
-    <section className="company-marquee relative z-20 overflow-hidden bg-transparent" aria-label="Supun Group companies">
-      <div className="company-marquee-track py-3 sm:py-4">
-        {[0, 1].map((group) => (
-          <div className="company-marquee-group" key={group} aria-hidden={group === 1 ? "true" : undefined}>
-            {logoCompanies.map((company) => (
-              <Link
-                to={`/companies/${company.id}`}
-                className="company-marquee-item group"
-                key={`${group}-${company.id}`}
-                aria-label={group === 0 ? `View ${company.shortName}` : undefined}
-                tabIndex={group === 1 ? -1 : undefined}
-              >
-                <CompanyLogo
-                  companyId={company.id}
-                  companyName={company.name}
-                  className="h-24 w-52 shrink-0 overflow-hidden bg-transparent sm:h-28 sm:w-64"
-                  imageClassName={`h-full w-full transition duration-300 ${keepOriginalLogoSize(company.id) ? "group-hover:scale-[1.05]" : "scale-[1.2] group-hover:scale-[1.25]"}`}
-                />
-              </Link>
-            ))}
-          </div>
-        ))}
       </div>
     </section>
 

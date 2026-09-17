@@ -239,54 +239,6 @@ All colors MUST be HSL.
     transition: width .45s cubic-bezier(.22, 1, .36, 1);
   }
 
-  .company-marquee-track {
-    display: flex;
-    width: max-content;
-    background: transparent;
-    will-change: transform;
-    animation: company-marquee 34s linear infinite;
-  }
-
-  .company-marquee:hover .company-marquee-track {
-    animation-play-state: paused;
-  }
-
-  .company-marquee-group {
-    display: flex;
-    flex-shrink: 0;
-    align-items: center;
-    gap: 3rem;
-    padding-right: 3rem;
-  }
-
-  .company-marquee-item {
-    display: block;
-    overflow: hidden;
-    background: transparent;
-    opacity: 1;
-    filter: saturate(1) contrast(1.06);
-    transition: opacity 300ms ease, filter 300ms ease, transform 300ms ease;
-  }
-
-  .company-marquee-item > div {
-    background: transparent !important;
-    border: 0;
-    box-shadow: none;
-  }
-
-  .company-marquee-item:hover {
-    opacity: 1;
-    filter: saturate(1.08) contrast(1.08);
-    transform: translateY(-2px);
-  }
-
-  @media (min-width: 640px) {
-    .company-marquee-group {
-      gap: 5rem;
-      padding-right: 5rem;
-    }
-  }
-
   .hero-stat:hover::before { width: 70%; }
 
   .premium-button {
@@ -748,11 +700,6 @@ All colors MUST be HSL.
   .company-detail-content-grid {
     grid-template-columns: minmax(0, 1fr) 340px;
   }
-}
-
-@keyframes company-marquee {
-  from { transform: translate3d(0, 0, 0); }
-  to { transform: translate3d(-50%, 0, 0); }
 }
 
 @keyframes hero-zoom {
