@@ -20,10 +20,13 @@ export function initDatabase() {
       shortName TEXT NOT NULL,
       description TEXT NOT NULL,
       fullDescription TEXT NOT NULL,
+      tagline TEXT,
       industry TEXT NOT NULL,
       established TEXT,
       website TEXT,
+      location TEXT,
       features TEXT NOT NULL,
+      awards TEXT,
       imageUrl TEXT,
       catalogPdf TEXT,
       phone TEXT,
@@ -103,6 +106,21 @@ export function initDatabase() {
     const hasGoogleMapsLink = tableInfo.some(
       (col) => col.name === "googleMapsLink"
     );
+    const hasTagline = tableInfo.some((col) => col.name === "tagline");
+    const hasLocation = tableInfo.some((col) => col.name === "location");
+    const hasAwards = tableInfo.some((col) => col.name === "awards");
+
+    if (!hasTagline) {
+      db.exec(`ALTER TABLE companies ADD COLUMN tagline TEXT`);
+    }
+
+    if (!hasLocation) {
+      db.exec(`ALTER TABLE companies ADD COLUMN location TEXT`);
+    }
+
+    if (!hasAwards) {
+      db.exec(`ALTER TABLE companies ADD COLUMN awards TEXT`);
+    }
     if (!hasGoogleMapsLink) {
       console.log("📦 Running migration: Adding googleMapsLink column...");
       db.exec(`ALTER TABLE companies ADD COLUMN googleMapsLink TEXT`);
@@ -187,6 +205,14 @@ export function initDatabase() {
       updatedAt DATETIME DEFAULT CURRENT_TIMESTAMP,
       FOREIGN KEY (productId) REFERENCES products(id)
     )
+  `);
+
+  // Indexes used by the public site and admin listing screens.
+  db.exec(`
+    CREATE INDEX IF NOT EXISTS idx_companies_sequence ON companies(sequence, createdAt DESC);
+    CREATE INDEX IF NOT EXISTS idx_brands_active_order ON brands(isActive, displayOrder);
+    CREATE INDEX IF NOT EXISTS idx_categories_active ON categories(isActive, name);
+    CREATE INDEX IF NOT EXISTS idx_products_active_category ON products(isActive, categoryId);
   `);
 
   // Migration: Ensure categories schema has expected columns
