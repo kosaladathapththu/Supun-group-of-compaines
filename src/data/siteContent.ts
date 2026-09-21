@@ -28,24 +28,24 @@ export const sectorHighlights: Array<{
     title: "Hospitality & Dining",
     sector: "Hospitality",
     description:
-      "Delivering luxury serviced living and first-class rooftop dining in central Colombo, at Supun Arcade Residency and Area 56.",
+      "Supun Arcade Residency and Area 56 bring hospitality to central Colombo, from luxury serviced apartments to first-class rooftop dining above the city.",
   },
   {
     title: "The Camy Brand",
     sector: "The Camy Brand",
     description:
-      "Manufacturing Sri Lanka's own consumer durables brand, from motorcycle helmets to home appliances, all designed and built in-house.",
+      "Camy is Supun Group's own consumer durables brand, designed and manufactured in Sri Lanka for Sri Lankan homes, spanning household appliances and everyday electronics.",
   },
 ];
 
 export const leadership = [
   { name: "Rizna Kaleel", title: "Non-Executive Director", description: "—" },
   { name: "Khalid Kaleel", title: "Director", description: "Oversees Fuji Industries" },
-  { name: "Raiza Kaleel", title: "Director", description: "Oversees Camy brands and Group marketing" },
+  { name: "Raiza Kaleel", title: "Director", description: "Oversees the Camy brand and Group marketing." },
   {
     name: "Lasitha Samarasinghe",
     title: "Group Chief Financial Officer",
-    description: "Oversees financial strategy, treasury, compliance, and financial governance across all Supun Group companies",
+    description: "Oversees financial strategy, treasury, compliance, and governance across the Supun Group.",
   },
   {
     name: "Mohamed Riaz Farouk",
@@ -54,10 +54,10 @@ export const leadership = [
   },
   {
     name: "Jeewantha Perera",
-    title: "General Manager, Supun Arcade Residency & Area 56",
-    description: "Hospitality executive with expertise in hotel operations, sales & marketing, business development, and strategic project management",
+    title: "Head of Hospitality & Business Development",
+    description: "Oversees hotel operations, guest experience, and business development across Supun Arcade Residency and Area 56.",
   },
-  { name: "Eranga Rodrigo", title: "Director, Rodsons", description: "Oversees Rodsons" },
+  { name: "Eranga Rodrigo", title: "Director, Rodsons", description: "Oversees plastic injection moulding and manufacturing operations at Rodsons." },
 ];
 
 export const journey = [
@@ -84,11 +84,11 @@ export const coreValues = [
 ];
 
 export const awards = [
+  { award: "\"Made in Sri Lanka\" National Certification", awardedTo: "Camy Smart", givenBy: "Ministry of Industries & NEDA" },
+  { award: "\"Made in Sri Lanka\" National Certification", awardedTo: "Aero Star (Aerostar Home Appliances)", givenBy: "Ministry of Industries & NEDA" },
   { award: "Silver Sponsor, eIndustry 2024 International Industry Expo", awardedTo: "Supun Group of Companies", givenBy: "Industrial Development Board of Sri Lanka" },
   { award: "VIP Award, 2024 TCL AC Global Partners Conference", awardedTo: "Fuji Industries", givenBy: "TCL" },
   { award: "Outstanding Hotel Partner Award", awardedTo: "Supun Arcade Residency", givenBy: "Booking.com" },
-  { award: "\"Made in Sri Lanka\" National Certification", awardedTo: "Camy Smart", givenBy: "Ministry of Industries & NEDA" },
-  { award: "\"Made in Sri Lanka\" National Certification", awardedTo: "Aero Star (Aerostar Home Appliances)", givenBy: "Ministry of Industries & NEDA" },
 ];
 
 export const camyProducts = [

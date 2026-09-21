@@ -55,7 +55,7 @@ const About = () => (
     </section>
 
     <section id="story" className="scroll-mt-24 bg-white py-14 md:py-20"><div className="container mx-auto grid gap-10 px-4 lg:grid-cols-[.9fr_1.1fr] lg:items-center">
-      <AnimatedSection animation="fade" duration={500} triggerOnce={false}><Label>Our story</Label><h2 className="mt-3 text-4xl font-semibold normal-case tracking-[-.04em] md:text-5xl">From trading goods to making them.</h2><Rule /><div className="mt-6 space-y-4 text-sm leading-7 text-[#53647a] md:text-base"><p>A family-run business since 1978, Supun Group of Companies began when Mr. Mohamed Fareed founded Supun Traders in Colombo, trading household goods for Sri Lankan homes. In 1999, his son, current Chairman Mr. M.F.M. Kaleel, took over the business and formalized it as the Supun Group of Companies, setting the Group on a new course: from trading goods to manufacturing them.</p><p>Through structured growth, the Group is now involved in manufacturing, retail, distribution, and hospitality, each held to the same standard of quality and Sri Lankan craftsmanship. Under the Camy name, Supun manufactures SLS-certified motorcycle helmets, non-stick cookware, air conditioners, and fans entirely in its own factories, reaching homes across the island through Supun Super Center and a network of 250+ distributors.</p><p>Supun Arcade Residency extends the Group into hospitality with luxury serviced apartments in central Colombo, alongside Area 56, its rooftop dining venue.</p><p>With an eye on the future and a continued focus on Sri Lankan manufacturing, the Group credits its growth to two generations of family leadership and a shared commitment to quality, innovation, and Sri Lankan pride, in everything it builds.</p></div><div className="mt-7 grid grid-cols-3 gap-3">{stats.map(([value, label]) => <div key={label} className="border-l-2 border-[#d79a22] pl-3"><strong className="text-2xl font-semibold md:text-3xl">{value}</strong><p className="mt-1 text-[10px] uppercase tracking-wide text-[#6a788a]">{label}</p></div>)}</div></AnimatedSection>
+      <AnimatedSection animation="fade" duration={500} triggerOnce={false}><Label>Our story</Label><h2 className="mt-3 text-4xl font-semibold normal-case tracking-[-.04em] md:text-5xl">From trading goods to making them.</h2><Rule /><div className="mt-6 space-y-4 text-sm leading-7 text-[#53647a] md:text-base"><p>A family-run business since 1978, Supun Group of Companies began when Mr. Mohamed Fareed founded Supun Traders in Colombo, trading household appliances and electronics for Sri Lankan homes. In 1999, his son, current Chairman Mr. M.F.M. Kaleel, took over the business and formalized it as the Supun Group of Companies, setting the Group on a new course: from trading goods to manufacturing them.</p><p>Through structured growth, the Group is now involved in manufacturing, retail, distribution, and hospitality, each held to the same standard of quality and Sri Lankan craftsmanship. Under the Camy name, Supun manufactures SLS-certified motorcycle helmets, non-stick cookware, air conditioners, and fans entirely in its own factories, reaching homes across the island through Supun Super Center and a network of 250+ distributors.</p><p>Supun Arcade Residency extends the Group into hospitality with luxury serviced apartments in central Colombo, alongside Area 56, its rooftop dining venue.</p><p>With an eye on the future and a continued focus on Sri Lankan manufacturing, the Group credits its growth to two generations of family leadership and a shared commitment to quality, innovation, and Sri Lankan pride, in everything it builds.</p></div><div className="mt-7 grid grid-cols-3 gap-3">{stats.map(([value, label]) => <div key={label} className="border-l-2 border-[#d79a22] pl-3"><strong className="text-2xl font-semibold md:text-3xl">{value}</strong><p className="mt-1 text-[10px] uppercase tracking-wide text-[#6a788a]">{label}</p></div>)}</div></AnimatedSection>
       <AnimatedSection animation="fade" duration={550} triggerOnce={false}><div className="relative mx-auto min-h-[500px] max-w-2xl"><img src={sriLankaMap} alt="" aria-hidden="true" className="absolute -right-[3%] -top-[3%] h-[106%] w-[48%] object-contain opacity-45 mix-blend-multiply" /><img src={retailStore} alt="The Group's retail beginnings" className="absolute left-0 top-5 z-10 h-[285px] w-[67%] -rotate-2 border-[8px] border-white object-cover shadow-xl grayscale" /><img src={heroCorporate} alt="Supun Group today" className="absolute bottom-4 left-[27%] z-20 h-[235px] w-[62%] rotate-3 border-[8px] border-white object-cover shadow-xl" /><div className="absolute right-[2%] top-[25%] z-30 w-[34%] text-center text-[10px] font-bold uppercase leading-5 tracking-[.14em] text-[#75561f]">Local Roots.<br />Lasting Impact.
 </div></div></AnimatedSection>
     </div></section>
@@ -121,31 +121,30 @@ const About = () => (
             <Rule />
             <p className="mt-6 max-w-md text-base leading-7 text-[#637186]">Independent recognition of the quality, partnerships and Sri Lankan standards upheld across our businesses.</p>
           </div>
-          <div className="border-t border-[#102746]/15">
+          <div className="grid gap-4 sm:grid-cols-2">
             {awards.map((item, index) => {
-              const isSilver = index === 0;
+              const isSilver = item.award.toLowerCase().includes("silver");
               const isCertification = item.award.toLowerCase().includes("made in sri lanka");
               const Icon = isSilver ? Award : Trophy;
 
               return (
-                <article key={`${item.award}-${item.awardedTo}`} className={`group grid gap-5 border-b py-7 transition-colors sm:grid-cols-[88px_1fr_220px] sm:items-center sm:px-4 ${isSilver ? "border-slate-300 hover:bg-slate-50" : "border-amber-200/80 hover:bg-amber-50/40"}`}>
-                  <div className="flex flex-col items-center gap-2">
+                <article key={`${item.award}-${item.awardedTo}`} className={`group relative overflow-hidden rounded-2xl border p-6 transition duration-300 hover:-translate-y-1 hover:shadow-[0_18px_42px_rgba(16,39,70,.10)] ${isCertification ? "border-[#d79a22]/35 bg-[#fffaf0] sm:col-span-1" : "border-[#102746]/10 bg-white"}`}>
+                  <span className={`absolute inset-x-0 top-0 h-1 ${isCertification ? "bg-[#d79a22]" : isSilver ? "bg-slate-400" : "bg-[#315f9f]"}`} />
+                  <div className="flex items-start justify-between gap-4">
                     {isCertification ? (
                       <img src="/made-in-sri-lanka-logo.png" alt="Made in Sri Lanka logo" className="h-24 w-20 object-contain" />
                     ) : (
-                      <span className={`flex h-14 w-14 items-center justify-center rounded-full border-2 shadow-sm ${isSilver ? "border-slate-400 bg-gradient-to-br from-white via-slate-100 to-slate-300 text-slate-600" : "border-amber-500 bg-gradient-to-br from-yellow-50 via-amber-200 to-amber-400 text-amber-800"}`}>
+                      <span className={`flex h-14 w-14 items-center justify-center rounded-full border-2 shadow-sm ${isSilver ? "border-slate-400 bg-gradient-to-br from-white via-slate-100 to-slate-300 text-slate-600" : "border-[#315f9f]/30 bg-[#eaf1f8] text-[#315f9f]"}`}>
                         <Icon size={28} strokeWidth={1.8} />
                       </span>
                     )}
-                    <span className={`rounded-full px-2.5 py-1 text-[9px] font-extrabold uppercase tracking-[.16em] ${isSilver ? "bg-slate-200 text-slate-700" : "bg-amber-200 text-amber-900"}`}>
+                    <span className={`rounded-full px-2.5 py-1 text-[9px] font-extrabold uppercase tracking-[.16em] ${isCertification ? "bg-amber-200 text-amber-900" : isSilver ? "bg-slate-200 text-slate-700" : "bg-[#eaf1f8] text-[#315f9f]"}`}>
                       {isCertification ? "Certification" : isSilver ? "Silver" : "Award"}
                     </span>
                   </div>
-                  <div>
-                    <h3 className="text-lg font-semibold normal-case leading-snug text-[#102746]">{item.award}</h3>
-                    <p className="mt-2 text-sm text-[#728093]">Awarded by {item.givenBy}</p>
-                  </div>
-                  <p className={`border-l-2 pl-4 text-sm font-semibold leading-6 text-[#315f9f] ${isSilver ? "border-slate-400" : "border-amber-500"}`}>{item.awardedTo}</p>
+                  <h3 className="mt-5 text-xl font-semibold normal-case leading-snug text-[#102746]">{item.award}</h3>
+                  <p className="mt-3 text-sm leading-6 text-[#728093]">Awarded by {item.givenBy}</p>
+                  <p className={`mt-5 border-l-2 pl-4 text-sm font-semibold leading-6 text-[#315f9f] ${isSilver ? "border-slate-400" : "border-amber-500"}`}>{item.awardedTo}</p>
                 </article>
               );
             })}

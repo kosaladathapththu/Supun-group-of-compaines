@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import { Mail, MapPin, Phone } from "lucide-react";
-import logo from "@/assets/supun-group-of-companies-logo.png";
+import logo from "@/assets/supun-group-logo-transparent.png";
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
@@ -11,13 +11,9 @@ const Footer = () => {
       <div className="container mx-auto px-4 py-14">
         <div className="grid gap-10 md:grid-cols-2 lg:grid-cols-4">
           <div className="lg:col-span-2">
-            <Link to="/" className="mb-5 inline-block rounded-lg bg-white p-3">
-              <img src={logo} alt="Supun Group of Companies" className="h-14 w-auto" />
+            <Link to="/" className="mb-5 inline-block">
+              <img src={logo} alt="Supun Group of Companies" className="h-20 w-auto drop-shadow-[0_2px_8px_rgba(0,0,0,.25)]" />
             </Link>
-            <p className="max-w-xl leading-relaxed text-white/75">
-              A family-run Sri Lankan group with roots dating to 1978, operating across manufacturing,
-              retail, distribution and hospitality.
-            </p>
             <div className="mt-5 space-y-2 text-sm">
               <a href="mailto:info@supungroup.lk" className="flex items-center gap-2 hover:text-accent">
                 <Mail size={16} /> info@supungroup.lk

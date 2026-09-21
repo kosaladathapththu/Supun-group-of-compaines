@@ -4,7 +4,7 @@ import { Link, useLocation } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
 import { companies } from "@/data/companies";
-import logo from "@/assets/supun-group-of-companies-logo.png";
+import logo from "@/assets/supun-group-logo-transparent.png";
 
 const primaryLinks = [
   { name: "Home", path: "/" },
@@ -45,9 +45,7 @@ const Navigation = () => {
       <div className={`${transparentHome ? "nav-soft-glass" : "nav-dark-glass"} mx-auto max-w-[1180px] rounded-[1.35rem] px-3 transition-all duration-500 sm:px-5`}>
         <div className="flex min-h-[3.75rem] items-center justify-between gap-3 md:min-h-[4.25rem]">
           <Link to="/" className="flex items-center py-2" aria-label="Supun Group of Companies home" onClick={() => setIsOpen(false)}>
-            <div className={`${transparentHome ? "bg-white/90" : "bg-white/95"} rounded-xl px-2 py-1 shadow-sm ring-1 ring-white/20 transition-all duration-500`}>
-              <img src={logo} alt="Supun Group of Companies" className="h-10 w-auto md:h-12" />
-            </div>
+            <img src={logo} alt="Supun Group of Companies" className="h-12 w-auto drop-shadow-[0_2px_8px_rgba(0,0,0,.25)] md:h-14" />
           </Link>
 
           <div className="hidden items-center gap-0.5 xl:flex">

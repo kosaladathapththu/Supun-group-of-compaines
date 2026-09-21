@@ -4,6 +4,7 @@ import Seo from "@/components/Seo";
 import { camyProducts } from "@/data/siteContent";
 import { getFileUrl, productsAPI, type Product } from "@/services/api";
 import camyBlackLogo from "@/assets/camy-brand-logo.png";
+import camyRedLogo from "@/assets/camy-logo-red-transparent.png";
 import anythingAtSupunLogo from "@/assets/anything-at-supun-logo.png";
 import helmetImage from "@/assets/helmet-manufacturing.jpg";
 import manufacturingImage from "@/assets/hero-manufacturing.jpg";
@@ -21,7 +22,6 @@ import wallClockImage from "@/assets/products/camy-wall-clock.png";
 import waterFilterImage from "@/assets/products/camy-water-filter.png";
 
 const shopUrl = "https://www.anythingatsupun.lk/";
-const camyLogo = "/logos/new-camy-smart.png";
 
 const productImages: Record<string, string> = {
   "Motorcycle Helmets": motorcycleHelmetImage,
@@ -85,13 +85,13 @@ const CamyProducts = () => {
     />
 
     <style>{`
-      .camy-hero { display:grid; grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr); align-items:center; gap:3rem; }
+      .camy-hero { display:grid; grid-template-columns:minmax(0,1fr) minmax(0,1fr); align-items:center; gap:3rem; }
       .camy-actions { display:flex; flex-wrap:wrap; gap:.75rem; margin-top:2rem; }
       .camy-button { display:inline-flex; min-height:54px; align-items:center; justify-content:center; gap:.7rem; border-radius:999px; padding:.9rem 1.65rem; color:#fff!important; font-size:.875rem; font-weight:800; transition:.3s ease; }
       .camy-button:hover { transform:translateY(-2px); }
       .camy-button-dark { background:#111; }
       .camy-button-red { background:#ed1c24; box-shadow:0 10px 28px rgba(237,28,36,.24); }
-      .camy-visual { position:relative; min-height:550px; overflow:hidden; border-radius:2rem; background:#111; }
+      .camy-visual { position:relative; min-height:600px; overflow:hidden; border-radius:2rem; background:#111; }
       .camy-visual>img { position:absolute; inset:0; width:100%; height:100%; object-fit:cover; filter:grayscale(25%); }
       .camy-proof { position:absolute; inset-inline:0; bottom:0; display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); border-top:1px solid rgba(255,255,255,.2); background:linear-gradient(110deg,rgba(15,15,15,.98),rgba(38,38,38,.96)); color:#fff; }
       .camy-proof-item { padding:1.65rem; }
@@ -131,22 +131,21 @@ const CamyProducts = () => {
     <section className="border-b border-black/10 bg-white pb-14 pt-6 md:pb-20 md:pt-8">
       <div className="camy-hero container mx-auto px-6 lg:px-12">
         <div className="max-w-2xl">
-          <div className="mb-8 flex items-center gap-5">
-            <img src={camyLogo} alt="Camy" className="h-20 w-20 object-contain md:h-24 md:w-24" />
-            <div>
-              <p className="text-xs font-bold uppercase tracking-[.22em] text-[#ed1c24]">A Supun Group brand</p>
-              <p className="mt-1 text-sm font-medium text-black/55">Sri Lankan-made consumer products</p>
-            </div>
-          </div>
+          <img src={camyRedLogo} alt="Camy" className="mb-7 h-32 w-64 object-contain object-left md:h-40 md:w-80" />
+          <p className="text-xs font-bold uppercase tracking-[.22em] text-[#ed1c24]">A Supun Group brand</p>
           <h1
-            className="max-w-xl font-bold"
-            style={{ fontSize: "clamp(3.25rem,5.5vw,5.5rem)", lineHeight: ".96", letterSpacing: "-.045em" }}
+            className="mt-5 max-w-xl font-bold uppercase"
+            style={{ fontSize: "clamp(3rem,5.2vw,5.1rem)", lineHeight: ".94", letterSpacing: "-.045em" }}
           >
-            Made here.<span className="block" style={{ color: "#ed1c24" }}>Made for every day.</span>
+            Products for <span style={{ color: "#ed1c24" }}>everyday life.</span>
           </h1>
           <p className="mt-7 max-w-xl text-lg leading-8 text-black/60 md:text-xl">
-            Protective, practical and dependable products designed for Sri Lankan life and manufactured within the Supun Group.
+            Camy brings together a growing range of products for the home, the road and everything in between. Designed with purpose and shaped by an understanding of everyday needs, each product is backed by the manufacturing experience of the Supun Group.
           </p>
+          <div className="mt-8 grid gap-4 sm:grid-cols-2">
+            <article className="border-l-2 border-[#ed1c24] pl-4"><h2 className="text-xs font-extrabold uppercase tracking-[.16em] text-[#111]">Designed with purpose</h2><p className="mt-2 text-sm leading-6 text-black/55">We focus on the details that make a product useful, how it fits into your routine, how it performs and how it feels to live with.</p></article>
+            <article className="border-l-2 border-[#ed1c24] pl-4"><h2 className="text-xs font-extrabold uppercase tracking-[.16em] text-[#111]">Backed by experience</h2><p className="mt-2 text-sm leading-6 text-black/55">CAMY is backed by the manufacturing experience of the Supun Group, bringing local knowledge and hands-on expertise to everything we make.</p></article>
+          </div>
           <div className="camy-actions">
             <a href="#camy-range" className="camy-button camy-button-dark">Explore the range <ArrowRight size={18} /></a>
             <a href={shopUrl} className="camy-button camy-button-red" target="_blank" rel="noopener noreferrer"><ExternalLink size={17} /> Shop online</a>
@@ -158,13 +157,13 @@ const CamyProducts = () => {
           <div className="camy-proof">
             <div className="camy-proof-item">
               <ShieldCheck className="camy-proof-icon" size={24} />
-              <strong className="camy-proof-title">Quality-led</strong>
-              <p className="camy-proof-text">Made for dependable everyday use.</p>
+              <strong className="camy-proof-title">Designed with purpose</strong>
+              <p className="camy-proof-text">Made around the details of everyday life.</p>
             </div>
             <div className="camy-proof-item">
               <Factory className="camy-proof-icon" size={24} />
-              <strong className="camy-proof-title">Made locally</strong>
-              <p className="camy-proof-text">Produced by specialist Group companies.</p>
+              <strong className="camy-proof-title">Backed by experience</strong>
+              <p className="camy-proof-text">Built on the Group's hands-on manufacturing expertise.</p>
             </div>
           </div>
         </div>
@@ -174,8 +173,8 @@ const CamyProducts = () => {
     <section id="camy-range" className="py-20 md:py-28">
       <div className="container mx-auto px-6 lg:px-12">
         <div className="mb-12 flex flex-col justify-between gap-5 border-b border-black/15 pb-8 md:flex-row md:items-end">
-          <div><p className="text-xs font-bold uppercase tracking-[.24em] text-[#ed1c24]">The Camy range</p><h2 className="mt-4 text-4xl font-bold tracking-[-.035em] md:text-6xl">Products for real life.</h2></div>
-          <p className="max-w-md text-base leading-7 text-black/55">A considered collection of locally manufactured products, connected by one trusted Sri Lankan brand.</p>
+          <div><p className="text-xs font-bold uppercase tracking-[.24em] text-[#ed1c24]">The Camy range</p><h2 className="mt-4 max-w-3xl text-4xl font-bold uppercase tracking-[-.035em] md:text-6xl">Everything you need, in one place.</h2></div>
+          <p className="max-w-md text-base leading-7 text-black/55">From the road to the kitchen and from cooling to home entertainment, explore the CAMY range.</p>
         </div>
 
         <div className="camy-catalog">
