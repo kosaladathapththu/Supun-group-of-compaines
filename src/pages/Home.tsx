@@ -77,6 +77,10 @@ const Home = () => {
     }
   };
 
+  const skipOutdatedShoeDisplay = (video: HTMLVideoElement) => {
+    if (video.currentTime >= 16.5 && video.currentTime < 22) video.currentTime = 22;
+  };
+
   return (
   <div className="min-h-screen overflow-hidden bg-[#edf3fb]">
     <Seo
@@ -102,6 +106,7 @@ const Home = () => {
         playsInline
         preload="auto"
         onCanPlay={() => setHeroVideoReady(true)}
+        onTimeUpdate={(event) => skipOutdatedShoeDisplay(event.currentTarget)}
         aria-hidden="true"
       >
         <source src={heroVideo} type="video/mp4" />
