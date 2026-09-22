@@ -60,6 +60,7 @@ const Navigation = () => {
                 <Link to="/about#direction"><DropdownMenuItem className="cursor-pointer py-2.5">Vision &amp; Mission</DropdownMenuItem></Link>
                 <Link to="/about#journey"><DropdownMenuItem className="cursor-pointer py-2.5">Our Journey</DropdownMenuItem></Link>
                 <Link to="/about#leadership"><DropdownMenuItem className="cursor-pointer py-2.5">Leadership Team</DropdownMenuItem></Link>
+                <Link to="/about#awards"><DropdownMenuItem className="cursor-pointer py-2.5">Awards &amp; Recognition</DropdownMenuItem></Link>
               </DropdownMenuContent>
               </DropdownMenu>
             </div>
@@ -86,7 +87,7 @@ const Navigation = () => {
             <div className="grid gap-1">
               <Link to="/" onClick={() => setIsOpen(false)}><Button variant="ghost" className={`w-full justify-start ${isActive("/") ? activeLinkClass : navLinkClass}`}>Home</Button></Link>
               <Link to="/about" onClick={() => setIsOpen(false)}><Button variant="ghost" className={`w-full justify-start ${isActive("/about") ? activeLinkClass : navLinkClass}`}>About Us</Button></Link>
-              <div className="grid grid-cols-2 gap-1 border-l border-white/15 pl-3 text-xs text-white/60"><Link to="/about#story" onClick={() => setIsOpen(false)} className="py-2">Our Story</Link><Link to="/about#chairman" onClick={() => setIsOpen(false)} className="py-2">Chairman</Link><Link to="/about#journey" onClick={() => setIsOpen(false)} className="py-2">Our Journey</Link><Link to="/about#leadership" onClick={() => setIsOpen(false)} className="py-2">Leadership</Link></div>
+              <div className="grid grid-cols-2 gap-1 border-l border-white/15 pl-3 text-xs text-white/60"><Link to="/about#story" onClick={() => setIsOpen(false)} className="py-2">Our Story</Link><Link to="/about#chairman" onClick={() => setIsOpen(false)} className="py-2">Chairman</Link><Link to="/about#journey" onClick={() => setIsOpen(false)} className="py-2">Our Journey</Link><Link to="/about#leadership" onClick={() => setIsOpen(false)} className="py-2">Leadership</Link><Link to="/about#awards" onClick={() => setIsOpen(false)} className="py-2">Awards &amp; Recognition</Link></div>
               <Link to="/companies" onClick={() => setIsOpen(false)}><Button variant="ghost" className={`w-full justify-start ${isActive("/companies") ? activeLinkClass : navLinkClass}`}>Our Companies</Button></Link>
               {primaryLinks.slice(2).map((link) => <Link key={link.path} to={link.path} onClick={() => setIsOpen(false)}><Button variant="ghost" className={`w-full justify-start ${isActive(link.path) ? activeLinkClass : navLinkClass}`}>{link.name}</Button></Link>)}
             </div>

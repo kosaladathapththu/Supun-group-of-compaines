@@ -112,7 +112,7 @@ const About = () => (
 
     <section className="bg-[#f4f2ed] py-14 md:py-20"><div className="container mx-auto px-4"><Label>Core values</Label><h2 className="mt-3 text-4xl font-semibold normal-case tracking-[-.04em]">What guides us.</h2><Rule /><div className="mt-8 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">{coreValues.map((value, index) => { const Icon = valueIcons[index % valueIcons.length]; return <article key={value.title} className="min-h-[210px] bg-white p-6 text-center"><Icon className="mx-auto text-[#d79a22]" size={35} strokeWidth={1.5} /><h3 className="mt-5 text-xl font-semibold normal-case">{value.title}</h3><p className="mt-3 text-sm leading-6 text-[#657286]">{value.description}</p></article>; })}</div></div></section>
 
-    <section className="bg-white py-14 md:py-20">
+    <section id="awards" className="scroll-mt-24 bg-white py-14 md:py-20">
       <div className="container mx-auto px-4">
         <div className="grid gap-10 lg:grid-cols-[.72fr_1.28fr] lg:gap-20">
           <div className="lg:sticky lg:top-32 lg:self-start">
