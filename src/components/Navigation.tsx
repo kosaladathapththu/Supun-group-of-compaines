@@ -36,8 +36,8 @@ const Navigation = () => {
   const navLinkClass = transparentHome
     ? "text-white hover:bg-[#315f9f]/25 hover:text-[#9fd0ff]"
     : "text-white/80 hover:bg-[#315f9f]/25 hover:text-[#9fd0ff]";
-  const activeLinkClass = "bg-[#315f9f] text-white ring-1 ring-[#79b8f2]/70 shadow-[0_6px_18px_rgba(49,95,159,.28)]";
-  const activeSplitLinkClass = "text-white hover:bg-[#315f9f] hover:text-white";
+  const activeLinkClass = "bg-white/20 text-white ring-1 ring-white/35 shadow-[0_8px_22px_rgba(0,0,0,.14)] backdrop-blur-xl";
+  const activeSplitLinkClass = "text-white hover:bg-white/10 hover:text-white";
   const dropdownGlassClass = "border-white/70 bg-white/80 shadow-[0_18px_45px_rgba(16,35,63,.18)] backdrop-blur-xl";
   const dropdownItemClass = "cursor-pointer rounded-md py-2.5 focus:bg-[#e8f1fb]/90 focus:text-[#10233f] focus:ring-1 focus:ring-[#315f9f]/20";
 
