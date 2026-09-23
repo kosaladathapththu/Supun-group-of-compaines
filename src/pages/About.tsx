@@ -16,6 +16,8 @@ import { getCompanyLogo } from "@/data/companyLogos";
 
 const stats = [["11", "Group companies"], ["300+", "Employees"], ["250+", "Distributors"]];
 const valueIcons = [Gem, Users, Lightbulb, Flag];
+const certificationAwards = awards.filter((item) => item.award.toLowerCase().includes("made in sri lanka"));
+const otherAwards = awards.filter((item) => !item.award.toLowerCase().includes("made in sri lanka"));
 const Label = ({ children }: { children: React.ReactNode }) => <p className="text-xs font-bold uppercase tracking-[.18em] text-[#315f9f]">{children}</p>;
 const Rule = () => <div className="mt-4 h-0.5 w-12 bg-[#d79a22]" />;
 
@@ -110,46 +112,34 @@ const About = () => (
       </div>
     </section>
 
-    <section className="bg-[#f4f2ed] py-14 md:py-20"><div className="container mx-auto px-4"><Label>Core values</Label><h2 className="mt-3 text-4xl font-semibold normal-case tracking-[-.04em]">What guides us.</h2><Rule /><div className="mt-8 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">{coreValues.map((value, index) => { const Icon = valueIcons[index % valueIcons.length]; return <article key={value.title} className="min-h-[210px] bg-white p-6 text-center"><Icon className="mx-auto text-[#d79a22]" size={35} strokeWidth={1.5} /><h3 className="mt-5 text-xl font-semibold normal-case">{value.title}</h3><p className="mt-3 text-sm leading-6 text-[#657286]">{value.description}</p></article>; })}</div></div></section>
+    <section className="bg-[#f2f5f8] py-14 md:py-20">
+      <div className="container mx-auto px-4">
+        <div className="relative isolate overflow-hidden rounded-[2rem] bg-[#0b2238] px-6 py-10 text-white shadow-[0_28px_70px_rgba(16,39,70,.16)] sm:px-9 md:rounded-[2.5rem] lg:grid lg:grid-cols-[.72fr_1.28fr] lg:gap-12 lg:px-12 lg:py-14">
+          <div className="absolute -left-24 -top-28 -z-10 h-80 w-80 rounded-full bg-[#315f9f]/25 blur-3xl" />
+          <div className="absolute -bottom-32 right-0 -z-10 h-80 w-80 rounded-full bg-[#78be43]/15 blur-3xl" />
+          <div className="flex flex-col justify-between pb-9 lg:pb-0 lg:pr-4">
+            <div><p className="text-xs font-bold uppercase tracking-[.2em] text-[#efbd55]">Core values</p><h2 className="mt-4 max-w-md text-4xl font-semibold normal-case leading-[1.03] tracking-[-.04em] sm:text-5xl">What guides every part of our Group.</h2></div>
+            <p className="mt-6 max-w-sm border-l border-[#efbd55]/60 pl-4 text-sm leading-6 text-white/60">Four principles shape how we build products, serve people and invest in Sri Lanka.</p>
+          </div>
+          <div className="grid gap-3 sm:grid-cols-2">
+            {coreValues.map((value, index) => { const Icon = valueIcons[index % valueIcons.length]; return <article key={value.title} className="group rounded-2xl border border-white/10 bg-white/[.07] p-6 backdrop-blur-sm transition duration-300 hover:-translate-y-1 hover:border-[#efbd55]/45 hover:bg-white/[.11]"><div className="flex items-start justify-between"><span className="flex h-12 w-12 items-center justify-center rounded-xl bg-[#efbd55] text-[#0b2238]"><Icon size={23} strokeWidth={1.7} /></span><span className="text-xs font-semibold tracking-[.18em] text-white/25">0{index + 1}</span></div><h3 className="mt-7 text-xl font-semibold normal-case text-white">{value.title}</h3><p className="mt-3 text-sm leading-6 text-white/60">{value.description}</p></article>; })}
+          </div>
+        </div>
+      </div>
+    </section>
 
     <section id="awards" className="scroll-mt-24 bg-white py-14 md:py-20">
       <div className="container mx-auto px-4">
-        <div className="grid gap-10 lg:grid-cols-[.72fr_1.28fr] lg:gap-20">
-          <div className="lg:sticky lg:top-32 lg:self-start">
-            <Label>Awards &amp; recognition</Label>
-            <h2 className="mt-3 max-w-lg text-4xl font-semibold normal-case leading-tight tracking-[-.04em] md:text-5xl">Recognition earned across the Group.</h2>
-            <Rule />
-            <p className="mt-6 max-w-md text-base leading-7 text-[#637186]">Independent recognition of the quality, partnerships and Sri Lankan standards upheld across our businesses.</p>
-          </div>
-          <div className="grid gap-4 sm:grid-cols-2">
-            {awards.map((item, index) => {
-              const isSilver = item.award.toLowerCase().includes("silver");
-              const isCertification = item.award.toLowerCase().includes("made in sri lanka");
-              const Icon = isSilver ? Award : Trophy;
-
-              return (
-                <article key={`${item.award}-${item.awardedTo}`} className={`group relative overflow-hidden rounded-2xl border p-6 transition duration-300 hover:-translate-y-1 hover:shadow-[0_18px_42px_rgba(16,39,70,.10)] ${isCertification ? "border-[#d79a22]/35 bg-[#fffaf0] sm:col-span-1" : "border-[#102746]/10 bg-white"}`}>
-                  <span className={`absolute inset-x-0 top-0 h-1 ${isCertification ? "bg-[#d79a22]" : isSilver ? "bg-slate-400" : "bg-[#315f9f]"}`} />
-                  <div className="flex items-start justify-between gap-4">
-                    {isCertification ? (
-                      <img src="/made-in-sri-lanka-logo.png" alt="Made in Sri Lanka logo" className="h-24 w-20 object-contain" />
-                    ) : (
-                      <span className={`flex h-14 w-14 items-center justify-center rounded-full border-2 shadow-sm ${isSilver ? "border-slate-400 bg-gradient-to-br from-white via-slate-100 to-slate-300 text-slate-600" : "border-[#315f9f]/30 bg-[#eaf1f8] text-[#315f9f]"}`}>
-                        <Icon size={28} strokeWidth={1.8} />
-                      </span>
-                    )}
-                    <span className={`rounded-full px-2.5 py-1 text-[9px] font-extrabold uppercase tracking-[.16em] ${isCertification ? "bg-amber-200 text-amber-900" : isSilver ? "bg-slate-200 text-slate-700" : "bg-[#eaf1f8] text-[#315f9f]"}`}>
-                      {isCertification ? "Certification" : isSilver ? "Silver" : "Award"}
-                    </span>
-                  </div>
-                  <h3 className="mt-5 text-xl font-semibold normal-case leading-snug text-[#102746]">{item.award}</h3>
-                  <p className="mt-3 text-sm leading-6 text-[#728093]">Awarded by {item.givenBy}</p>
-                  <p className={`mt-5 border-l-2 pl-4 text-sm font-semibold leading-6 text-[#315f9f] ${isSilver ? "border-slate-400" : "border-amber-500"}`}>{item.awardedTo}</p>
-                </article>
-              );
-            })}
+        <div className="flex flex-col gap-5 md:flex-row md:items-end md:justify-between"><div><Label>Awards &amp; recognition</Label><h2 className="mt-3 max-w-2xl text-4xl font-semibold normal-case leading-tight tracking-[-.04em] md:text-5xl">Recognition earned across the Group.</h2></div><p className="max-w-md text-sm leading-6 text-[#637186] md:text-right">Independent recognition of our local manufacturing, trusted partnerships and industry standards.</p></div>
+        <div className="mt-10 overflow-hidden rounded-[2rem] border border-[#d79a22]/25 bg-[#fff9ed] p-5 sm:p-7 lg:p-9">
+          <div className="mb-6 flex items-center gap-3"><span className="h-px w-10 bg-[#d79a22]" /><p className="text-xs font-bold uppercase tracking-[.18em] text-[#9a6913]">Featured national certifications</p></div>
+          <div className="grid gap-4 md:grid-cols-2">
+            {certificationAwards.map((item) => <article key={`${item.award}-${item.awardedTo}`} className="group flex min-h-[210px] flex-col rounded-2xl border border-[#d79a22]/20 bg-white p-6 shadow-sm transition duration-300 hover:-translate-y-1 hover:shadow-[0_16px_36px_rgba(122,83,18,.12)] sm:flex-row sm:items-center sm:gap-7"><div className="flex h-28 w-24 shrink-0 items-center justify-center rounded-2xl bg-[#fff7e3]"><img src="/made-in-sri-lanka-logo.png" alt="Made in Sri Lanka logo" className="h-24 w-20 object-contain" /></div><div><span className="inline-flex rounded-full bg-[#efbd55]/25 px-3 py-1 text-[9px] font-extrabold uppercase tracking-[.16em] text-[#85590e]">National certification</span><h3 className="mt-4 text-xl font-semibold normal-case leading-snug text-[#102746]">{item.award}</h3><p className="mt-2 text-sm leading-6 text-[#728093]">{item.givenBy}</p><p className="mt-4 font-semibold text-[#315f9f]">{item.awardedTo}</p></div></article>)}
           </div>
         </div>
+        <div className="mt-5 grid gap-4 md:grid-cols-3">
+          {otherAwards.map((item) => { const isSilver = item.award.toLowerCase().includes("silver"); const Icon = isSilver ? Award : Trophy; return <article key={`${item.award}-${item.awardedTo}`} className="group relative overflow-hidden rounded-2xl border border-[#102746]/10 bg-[#f7f9fc] p-6 transition duration-300 hover:-translate-y-1 hover:border-[#315f9f]/30 hover:shadow-[0_18px_42px_rgba(16,39,70,.10)]"><span className={`absolute inset-x-0 top-0 h-1 ${isSilver ? "bg-slate-400" : "bg-[#315f9f]"}`} /><span className={`flex h-12 w-12 items-center justify-center rounded-xl ${isSilver ? "bg-slate-200 text-slate-600" : "bg-[#e5eef9] text-[#315f9f]"}`}><Icon size={24} strokeWidth={1.8} /></span><h3 className="mt-6 text-lg font-semibold normal-case leading-snug text-[#102746]">{item.award}</h3><p className="mt-3 text-sm leading-6 text-[#728093]">Awarded by {item.givenBy}</p><p className="mt-5 border-l-2 border-[#d79a22] pl-3 text-sm font-semibold leading-6 text-[#315f9f]">{item.awardedTo}</p></article>; })}
+          </div>
       </div>
     </section>
 
