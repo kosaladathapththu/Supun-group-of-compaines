@@ -33,11 +33,12 @@ const Navigation = () => {
   }, []);
 
   const transparentHome = isHome && !isScrolled && !isOpen;
-  const navLinkClass = "text-white/85 hover:bg-[#efbd55]/15 hover:text-[#ffd77d]";
-  const activeLinkClass = "bg-[#efbd55] text-[#071b2d] ring-1 ring-[#ffd77d]/70 shadow-[0_6px_18px_rgba(239,189,85,.2)]";
-  const activeSplitLinkClass = "text-[#071b2d] hover:bg-[#efbd55] hover:text-[#071b2d]";
-  const dropdownContentClass = "border-[#efbd55]/25 bg-[#071b2d]/[.98] p-1.5 text-white shadow-[0_18px_45px_rgba(2,11,19,.4)] backdrop-blur-xl";
-  const dropdownItemClass = "cursor-pointer rounded-md py-2.5 text-white/80 focus:bg-[#efbd55] focus:text-[#071b2d]";
+  const navLinkClass = transparentHome
+    ? "text-white hover:bg-white/10 hover:text-white"
+    : "text-white/80 hover:bg-white/10 hover:text-white";
+  const activeLinkClass = transparentHome
+    ? "bg-white/10 text-white ring-1 ring-white/15"
+    : "bg-[#78be43]/15 text-white ring-1 ring-[#78be43]/25";
 
   return (
     <nav className={`${overlaysHero ? "fixed" : "sticky"} left-0 right-0 top-0 z-50 bg-transparent px-3 py-2.5 transition-all duration-500 sm:px-4 sm:py-3`}>
@@ -50,26 +51,26 @@ const Navigation = () => {
           <div className="hidden items-center gap-0.5 xl:flex">
             <Link to="/"><Button variant="ghost" className={isActive("/") ? activeLinkClass : navLinkClass}>Home</Button></Link>
             <div className={`flex items-center overflow-hidden rounded-md ${isActive("/about") ? activeLinkClass : ""}`}>
-              <Link to="/about"><Button variant="ghost" className={`${isActive("/about") ? activeSplitLinkClass : navLinkClass} rounded-r-none pr-2`}>About Us</Button></Link>
+              <Link to="/about"><Button variant="ghost" className={`${isActive("/about") ? "text-white hover:bg-white/10" : navLinkClass} rounded-r-none pr-2`}>About Us</Button></Link>
               <DropdownMenu>
-              <DropdownMenuTrigger asChild><Button variant="ghost" aria-label="Open About Us menu" className={`${isActive("/about") ? activeSplitLinkClass : navLinkClass} rounded-l-none px-2`}><ChevronDown size={16} /></Button></DropdownMenuTrigger>
-              <DropdownMenuContent className={`w-60 ${dropdownContentClass}`} align="center">
-                <Link to="/about#story"><DropdownMenuItem className={dropdownItemClass}>Our Story</DropdownMenuItem></Link>
-                <Link to="/about#chairman"><DropdownMenuItem className={dropdownItemClass}>Chairman&rsquo;s Message</DropdownMenuItem></Link>
-                <Link to="/about#direction"><DropdownMenuItem className={dropdownItemClass}>Vision &amp; Mission</DropdownMenuItem></Link>
-                <Link to="/about#journey"><DropdownMenuItem className={dropdownItemClass}>Our Journey</DropdownMenuItem></Link>
-                <Link to="/about#leadership"><DropdownMenuItem className={dropdownItemClass}>Leadership Team</DropdownMenuItem></Link>
-                <Link to="/about#awards"><DropdownMenuItem className={dropdownItemClass}>Awards &amp; Recognition</DropdownMenuItem></Link>
+              <DropdownMenuTrigger asChild><Button variant="ghost" aria-label="Open About Us menu" className={`${isActive("/about") ? "text-white hover:bg-white/10" : navLinkClass} rounded-l-none px-2`}><ChevronDown size={16} /></Button></DropdownMenuTrigger>
+              <DropdownMenuContent className="w-60" align="center">
+                <Link to="/about#story"><DropdownMenuItem className="cursor-pointer py-2.5">Our Story</DropdownMenuItem></Link>
+                <Link to="/about#chairman"><DropdownMenuItem className="cursor-pointer py-2.5">Chairman&rsquo;s Message</DropdownMenuItem></Link>
+                <Link to="/about#direction"><DropdownMenuItem className="cursor-pointer py-2.5">Vision &amp; Mission</DropdownMenuItem></Link>
+                <Link to="/about#journey"><DropdownMenuItem className="cursor-pointer py-2.5">Our Journey</DropdownMenuItem></Link>
+                <Link to="/about#leadership"><DropdownMenuItem className="cursor-pointer py-2.5">Leadership Team</DropdownMenuItem></Link>
+                <Link to="/about#awards"><DropdownMenuItem className="cursor-pointer py-2.5">Awards &amp; Recognition</DropdownMenuItem></Link>
               </DropdownMenuContent>
               </DropdownMenu>
             </div>
             <div className={`flex items-center overflow-hidden rounded-md ${isActive("/companies") ? activeLinkClass : ""}`}>
-              <Link to="/companies"><Button variant="ghost" className={`${isActive("/companies") ? activeSplitLinkClass : navLinkClass} rounded-r-none pr-2`}>Our Companies</Button></Link>
+              <Link to="/companies"><Button variant="ghost" className={`${isActive("/companies") ? "text-white hover:bg-white/10" : navLinkClass} rounded-r-none pr-2`}>Our Companies</Button></Link>
               <DropdownMenu>
-                <DropdownMenuTrigger asChild><Button variant="ghost" aria-label="Open Our Companies menu" className={`${isActive("/companies") ? activeSplitLinkClass : navLinkClass} rounded-l-none px-2`}><ChevronDown size={16} /></Button></DropdownMenuTrigger>
-                <DropdownMenuContent className={`max-h-[70vh] w-80 overflow-y-auto ${dropdownContentClass}`} align="center">
-                  <Link to="/companies"><DropdownMenuItem className={`${dropdownItemClass} font-semibold text-[#efbd55]`}>View All Companies →</DropdownMenuItem></Link>
-                  {companies.map((company) => <Link key={company.id} to={`/companies/${company.id}`}><DropdownMenuItem className={dropdownItemClass}><div><div className="text-sm font-semibold">{company.shortName}</div><div className="text-xs text-white/45">{company.industry}</div></div></DropdownMenuItem></Link>)}
+                <DropdownMenuTrigger asChild><Button variant="ghost" aria-label="Open Our Companies menu" className={`${isActive("/companies") ? "text-white hover:bg-white/10" : navLinkClass} rounded-l-none px-2`}><ChevronDown size={16} /></Button></DropdownMenuTrigger>
+                <DropdownMenuContent className="max-h-[70vh] w-80 overflow-y-auto" align="center">
+                  <Link to="/companies"><DropdownMenuItem className="cursor-pointer font-semibold text-primary">View All Companies →</DropdownMenuItem></Link>
+                  {companies.map((company) => <Link key={company.id} to={`/companies/${company.id}`}><DropdownMenuItem className="cursor-pointer py-2.5"><div><div className="text-sm font-semibold">{company.shortName}</div><div className="text-xs text-muted-foreground">{company.industry}</div></div></DropdownMenuItem></Link>)}
                 </DropdownMenuContent>
               </DropdownMenu>
             </div>
