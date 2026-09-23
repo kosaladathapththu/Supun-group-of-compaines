@@ -66,11 +66,11 @@ const CompanyDetail = () => {
     </div></section>
 
     <section className="relative overflow-hidden bg-[#f3f7fb] px-4 pb-12 sm:pb-14 md:pb-20">
-      <div className="container relative mx-auto isolate overflow-hidden rounded-[2rem] bg-[#071b2d] px-7 py-12 text-white shadow-[0_30px_80px_rgba(7,27,45,.20)] sm:px-12 sm:py-16 md:rounded-[3rem] lg:px-20 lg:py-20">
+      <div className="container relative mx-auto isolate overflow-hidden rounded-[2rem] bg-[#071b2d] px-7 py-10 text-white shadow-[0_30px_80px_rgba(7,27,45,.20)] sm:px-12 sm:py-12 md:rounded-[3rem] lg:px-20 lg:py-14">
         <div className="absolute inset-y-0 right-0 -z-10 w-full bg-[radial-gradient(circle_at_85%_35%,rgba(217,154,36,.16),transparent_30%),linear-gradient(115deg,transparent_45%,rgba(25,83,132,.38))] lg:w-2/3" />
         <Globe2 className="absolute -bottom-28 -right-24 -z-10 h-[28rem] w-[28rem] text-white/[.06]" strokeWidth={0.65} aria-hidden="true" />
         <div className="flex flex-col gap-8 sm:flex-row sm:items-center sm:justify-between">
-          <p className="text-xs font-bold uppercase tracking-[0.22em] text-[#efbd55]">Explore the Group</p>
+          <h2 className="text-4xl font-semibold normal-case leading-none tracking-[-0.04em] text-[#efbd55] sm:text-5xl">Explore the Group</h2>
           <Link to="/companies" className="group inline-flex w-fit items-center gap-7 rounded-full bg-[#efbd55] px-6 py-4 font-semibold text-[#071b2d] transition duration-300 hover:bg-white">All companies <span className="flex h-10 w-10 items-center justify-center rounded-full bg-[#071b2d] text-white transition duration-300 group-hover:translate-x-1 group-hover:bg-[#78be43]"><ArrowRight size={18} /></span></Link>
         </div>
       </div>
