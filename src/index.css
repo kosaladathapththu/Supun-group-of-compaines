@@ -124,17 +124,17 @@ All colors MUST be HSL.
 
 @layer utilities {
   .nav-soft-glass {
-    border: 1px solid rgb(255 255 255 / 0.13);
-    background: rgb(9 17 13 / 0.24);
-    box-shadow: 0 10px 30px rgb(0 0 0 / 0.08);
-    backdrop-filter: blur(6px);
-    -webkit-backdrop-filter: blur(6px);
+    border: 1px solid rgb(239 189 85 / 0.22);
+    background: linear-gradient(135deg, rgb(7 27 45 / 0.88), rgb(12 42 65 / 0.82));
+    box-shadow: 0 14px 38px rgb(2 11 19 / 0.3), inset 0 1px 0 rgb(255 255 255 / 0.08);
+    backdrop-filter: blur(12px) saturate(120%);
+    -webkit-backdrop-filter: blur(12px) saturate(120%);
   }
 
   .nav-dark-glass {
-    border: 1px solid rgb(255 255 255 / 0.12);
-    background: linear-gradient(135deg, rgb(8 18 15 / 0.78), rgb(16 35 27 / 0.68));
-    box-shadow: 0 18px 50px rgb(2 10 7 / 0.28), inset 0 1px 0 rgb(255 255 255 / 0.1);
+    border: 1px solid rgb(239 189 85 / 0.18);
+    background: linear-gradient(135deg, rgb(7 27 45 / 0.96), rgb(12 42 65 / 0.92));
+    box-shadow: 0 18px 50px rgb(2 11 19 / 0.32), inset 0 1px 0 rgb(255 255 255 / 0.08);
     backdrop-filter: blur(10px) saturate(125%);
     -webkit-backdrop-filter: blur(10px) saturate(125%);
   }
