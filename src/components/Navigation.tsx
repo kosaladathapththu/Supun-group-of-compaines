@@ -34,10 +34,10 @@ const Navigation = () => {
 
   const transparentHome = isHome && !isScrolled && !isOpen;
   const navLinkClass = transparentHome
-    ? "text-white hover:bg-[#efbd55]/15 hover:text-[#ffd77d]"
-    : "text-white/80 hover:bg-[#efbd55]/15 hover:text-[#ffd77d]";
-  const activeLinkClass = "bg-[#efbd55] text-[#071b2d] ring-1 ring-[#ffd77d]/70 shadow-[0_6px_18px_rgba(239,189,85,.2)]";
-  const activeSplitLinkClass = "text-[#071b2d] hover:bg-[#efbd55] hover:text-[#071b2d]";
+    ? "text-white hover:bg-[#315f9f]/25 hover:text-[#9fd0ff]"
+    : "text-white/80 hover:bg-[#315f9f]/25 hover:text-[#9fd0ff]";
+  const activeLinkClass = "bg-[#315f9f] text-white ring-1 ring-[#79b8f2]/70 shadow-[0_6px_18px_rgba(49,95,159,.28)]";
+  const activeSplitLinkClass = "text-white hover:bg-[#315f9f] hover:text-white";
 
   return (
     <nav className={`${overlaysHero ? "fixed" : "sticky"} left-0 right-0 top-0 z-50 bg-transparent px-3 py-2.5 transition-all duration-500 sm:px-4 sm:py-3`}>
