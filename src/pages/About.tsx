@@ -11,6 +11,7 @@ import retailStore from "@/assets/retail-store.jpg";
 import manufacturingImage from "@/assets/sector-manufacturing-v2.jpg";
 import hospitalityImage from "@/assets/sector-hospitality-v2.jpg";
 import sriLankaMap from "@/assets/sri-lanka-watercolor-map.png";
+import coreValuesTeam from "@/assets/about-core-values-team.png";
 import { awards, coreValues, journey, leadership } from "@/data/siteContent";
 import { getCompanyLogo } from "@/data/companyLogos";
 
@@ -110,11 +111,24 @@ const About = () => (
       </div>
     </section>
 
-    <section className="bg-[#f5f4f0] py-14 md:py-20">
-      <div className="container mx-auto px-4">
-        <div className="flex flex-col gap-4 md:flex-row md:items-end md:justify-between"><div><Label>Core values</Label><h2 className="mt-3 text-4xl font-semibold normal-case tracking-[-.04em] md:text-5xl">What guides us.</h2></div><p className="max-w-md text-sm leading-6 text-[#637186] md:text-right">The principles behind how we build, serve and grow across the Group.</p></div>
-        <div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-          {coreValues.map((value, index) => { const Icon = valueIcons[index % valueIcons.length]; return <article key={value.title} className="group rounded-2xl border border-[#102746]/10 bg-white p-6 transition duration-300 hover:-translate-y-1 hover:border-[#315f9f]/30 hover:shadow-[0_14px_30px_rgba(16,39,70,.08)]"><div className="flex items-center justify-between"><span className="flex h-11 w-11 items-center justify-center rounded-xl bg-[#eef3f9] text-[#315f9f]"><Icon size={21} strokeWidth={1.7} /></span><span className="text-[10px] font-bold tracking-[.18em] text-[#102746]/20">0{index + 1}</span></div><h3 className="mt-6 text-xl font-semibold normal-case">{value.title}</h3><p className="mt-3 text-sm leading-6 text-[#657286]">{value.description}</p><div className="mt-6 h-0.5 w-8 bg-[#d79a22] transition-all duration-300 group-hover:w-14" /></article>; })}
+    <section className="bg-white py-14 md:py-20">
+      <div className="container mx-auto grid gap-10 px-4 lg:grid-cols-[.82fr_1.18fr] lg:items-center lg:gap-14">
+        <div className="relative min-h-[520px] overflow-hidden rounded-[1.75rem] bg-[#102746] shadow-[0_24px_60px_rgba(16,39,70,.16)] sm:min-h-[620px]">
+          <img src={coreValuesTeam} alt="Sri Lankan product development team working together" className="absolute inset-0 h-full w-full object-cover" />
+          <div className="absolute inset-0 bg-gradient-to-t from-[#071b2d] via-[#071b2d]/15 to-transparent" />
+          <div className="absolute inset-x-0 bottom-0 p-7 text-white sm:p-9">
+            <p className="text-xs font-bold uppercase tracking-[.22em] text-[#efbd55]">Values in action</p>
+            <h2 className="mt-3 text-3xl font-semibold normal-case leading-tight tracking-[-.03em] sm:text-4xl">Built with purpose.<br />Led by people.</h2>
+            <div className="mt-6 flex items-center gap-5 border-t border-white/25 pt-5"><strong className="text-4xl font-semibold tracking-[-.05em]">04</strong><p className="max-w-[10rem] text-[10px] font-semibold uppercase leading-5 tracking-[.16em] text-white/65">Principles that guide our Group</p></div>
+          </div>
+        </div>
+        <div>
+          <Label>Core values</Label>
+          <h2 className="mt-4 max-w-2xl text-4xl font-semibold normal-case leading-[1.05] tracking-[-.04em] md:text-5xl">What guides us.</h2>
+          <p className="mt-5 max-w-xl text-base leading-7 text-[#637186]">The principles behind how we build, serve and grow across every company in the Group.</p>
+          <div className="mt-8 grid gap-3 sm:grid-cols-2">
+            {coreValues.map((value, index) => { const Icon = valueIcons[index % valueIcons.length]; return <article key={value.title} className="group rounded-xl border border-[#102746]/10 bg-[#f7f9fc] p-5 transition duration-300 hover:-translate-y-1 hover:border-[#315f9f]/35 hover:shadow-[0_14px_30px_rgba(16,39,70,.08)]"><span className="flex h-11 w-11 items-center justify-center rounded-lg bg-[#e8eef6] text-[#315f9f]"><Icon size={21} strokeWidth={1.7} /></span><h3 className="mt-5 text-xl font-semibold normal-case">{value.title}</h3><p className="mt-2 text-sm leading-6 text-[#657286]">{value.description}</p></article>; })}
+          </div>
         </div>
       </div>
     </section>
