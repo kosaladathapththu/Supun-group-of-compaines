@@ -8,6 +8,7 @@ import { companies } from "@/data/companies";
 import { sectorHighlights, siteStats } from "@/data/siteContent";
 import heroVideo from "@/assets/supun-group-hero-optimized.mp4";
 import manufacturingImage from "@/assets/sector-manufacturing-v2.jpg";
+import camyBrandLogo from "@/assets/camy-brand-logo.png";
 
 const sectorMeta = [
   { icon: Factory },
@@ -207,7 +208,9 @@ const Home = () => {
                 return (
                   <AnimatedSection key={sector.title} animation="slide-left" delay={index * 90} duration={750} triggerOnce={false}>
                     <article className="group h-full rounded-xl border border-[#10233f]/10 bg-[#f7f9fc] p-5 transition duration-300 hover:-translate-y-1 hover:border-[#315f9f]/35 hover:shadow-[0_14px_32px_rgba(16,35,63,.08)]">
-                      <span className="mb-5 flex h-11 w-11 items-center justify-center rounded-lg bg-[#e8eef6] text-[#315f9f]"><Icon size={20} strokeWidth={1.7} /></span>
+                      <span className="mb-5 flex h-11 w-11 items-center justify-center overflow-hidden rounded-lg bg-[#e8eef6] text-[#315f9f]">
+                        {sector.sector === "The Camy Brand" ? <img src={camyBrandLogo} alt="Camy" className="h-10 w-10 object-contain mix-blend-multiply" /> : <Icon size={20} strokeWidth={1.7} />}
+                      </span>
                       <div>
                         <h3 className="text-xl font-semibold normal-case text-[#071b2d]">{sector.title}</h3>
                         <p className="mt-2 text-sm leading-relaxed text-[#667388]">{sector.description}</p>
