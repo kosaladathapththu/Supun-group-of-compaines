@@ -1,5 +1,5 @@
 import { Link, useParams } from "react-router-dom";
-import { ArrowLeft, ArrowRight, Award, BriefcaseBusiness, CalendarDays, Check, ExternalLink, Globe2, Mail, MapPin, Phone } from "lucide-react";
+import { ArrowLeft, ArrowRight, Award, BriefcaseBusiness, CalendarDays, Check, ExternalLink, Mail, MapPin, Phone } from "lucide-react";
 import { CompanyLogo } from "@/components/CompanyLogo";
 import Seo, { SITE_URL } from "@/components/Seo";
 import { companyById } from "@/data/companies";
@@ -65,19 +65,10 @@ const CompanyDetail = () => {
       </div></div></aside>
     </div></section>
 
-    <section className="relative overflow-hidden bg-[#f3f7fb] px-4 pb-12 sm:pb-14 md:pb-20">
-      <div className="container relative mx-auto isolate overflow-hidden rounded-[2rem] bg-[#071b2d] px-7 py-12 text-white shadow-[0_30px_80px_rgba(7,27,45,.20)] sm:px-12 sm:py-16 md:rounded-[3rem] lg:px-20 lg:py-20">
-        <div className="absolute inset-y-0 right-0 -z-10 w-full bg-[radial-gradient(circle_at_85%_35%,rgba(217,154,36,.16),transparent_30%),linear-gradient(115deg,transparent_45%,rgba(25,83,132,.38))] lg:w-2/3" />
-        <Globe2 className="absolute -bottom-28 -right-24 -z-10 h-[28rem] w-[28rem] text-white/[.06]" strokeWidth={0.65} aria-hidden="true" />
-        <div className="grid gap-10 lg:grid-cols-[1fr_18rem] lg:items-end lg:gap-20">
-          <div>
-            <h2 className="max-w-4xl text-4xl font-semibold normal-case leading-[1.02] tracking-[-0.04em] text-[#efbd55] sm:text-5xl md:text-6xl">Explore the Group</h2>
-          </div>
-          <div className="border-t border-white/15 pt-7 lg:border-l lg:border-t-0 lg:pl-10 lg:pt-0">
-            <p className="mb-6 text-sm leading-relaxed text-white/55">Explore all eleven companies across manufacturing, retail, distribution and hospitality.</p>
-            <Link to="/companies" className="group inline-flex w-full items-center justify-between rounded-full bg-[#efbd55] px-6 py-4 font-semibold text-[#071b2d] transition duration-300 hover:bg-white">All companies <span className="flex h-10 w-10 items-center justify-center rounded-full bg-[#071b2d] text-white transition duration-300 group-hover:translate-x-1 group-hover:bg-[#78be43]"><ArrowRight size={18} /></span></Link>
-          </div>
-        </div>
+    <section className="bg-[#f3f7fb] px-4 pb-12 sm:pb-14 md:pb-20">
+      <div className="container mx-auto overflow-hidden rounded-[1.5rem] bg-gradient-to-r from-[#12365f] via-[#17647a] to-[#718f40] px-7 py-8 text-white shadow-[0_24px_60px_rgba(7,27,45,.16)] sm:flex sm:items-center sm:justify-between sm:px-10 md:rounded-[2rem] md:px-12 md:py-10">
+        <p className="text-xs font-bold uppercase tracking-[0.22em] text-[#efbd55]">Explore the Group</p>
+        <Link to="/companies" className="group mt-6 inline-flex items-center gap-7 rounded-full bg-white px-6 py-3.5 font-semibold text-[#071b2d] shadow-lg transition duration-300 hover:bg-[#edf5ff] sm:mt-0">All companies <ArrowRight className="transition-transform duration-300 group-hover:translate-x-1" size={19} /></Link>
       </div>
     </section>
   </div>;
