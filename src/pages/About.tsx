@@ -1,4 +1,4 @@
-import { ArrowRight, Award, Eye, Flag, Gem, Lightbulb, Target, Trophy, UserRound, Users } from "lucide-react";
+import { ArrowRight, Eye, Flag, Gem, Lightbulb, Target, UserRound, Users } from "lucide-react";
 import { Link } from "react-router-dom";
 import Seo from "@/components/Seo";
 import { AnimatedSection } from "@/components/AnimatedSection";
@@ -21,6 +21,11 @@ const certificationAwards = awards.filter((item) => item.award.toLowerCase().inc
 const otherAwards = awards.filter((item) => !item.award.toLowerCase().includes("made in sri lanka"));
 const Label = ({ children }: { children: React.ReactNode }) => <p className="text-xs font-bold uppercase tracking-[.18em] text-[#315f9f]">{children}</p>;
 const Rule = () => <div className="mt-4 h-0.5 w-12 bg-[#d79a22]" />;
+const AwardIssuerMark = ({ issuer }: { issuer: string }) => {
+  if (issuer === "TCL") return <span className="inline-flex rounded-md bg-[#e60012] px-4 py-2 text-xl font-black tracking-[-.06em] text-white">TCL</span>;
+  if (issuer === "Booking.com") return <span className="text-lg font-bold tracking-[-.04em] text-[#003b95]">Booking<span className="text-[#009fe3]">.com</span></span>;
+  return <span className="inline-flex flex-col leading-none"><strong className="text-2xl font-black tracking-[-.06em] text-[#143f78]">IDB</strong><small className="mt-1 text-[8px] font-bold uppercase tracking-[.12em] text-[#67809d]">Sri Lanka</small></span>;
+};
 
 // Keep the timeline tied to the same logo assets used across the company pages.
 const journeyCompanyLogos: Record<string, { id: string; name: string }[]> = {
@@ -146,7 +151,7 @@ const About = () => (
             </div>
           </div>
           <div className="divide-y divide-[#102746]/10 px-6 sm:px-8 lg:px-10">
-            {otherAwards.map((item, index) => { const isSilver = item.award.toLowerCase().includes("silver"); const Icon = isSilver ? Award : Trophy; return <article key={`${item.award}-${item.awardedTo}`} className="group grid gap-4 py-7 sm:grid-cols-[3rem_1fr_auto] sm:items-center"><span className={`flex h-11 w-11 items-center justify-center rounded-full ${isSilver ? "bg-slate-100 text-slate-600" : "bg-[#edf3fa] text-[#315f9f]"}`}><Icon size={21} strokeWidth={1.7} /></span><div><p className="text-[9px] font-bold uppercase tracking-[.18em] text-[#102746]/35">Recognition 0{index + 3}</p><h3 className="mt-2 text-lg font-semibold normal-case leading-snug text-[#102746]">{item.award}</h3><p className="mt-1.5 text-xs leading-5 text-[#728093]">{item.givenBy}</p></div><p className="text-sm font-semibold text-[#315f9f] sm:max-w-[10rem] sm:text-right">{item.awardedTo}</p></article>; })}
+            {otherAwards.map((item, index) => <article key={`${item.award}-${item.awardedTo}`} className="group grid gap-4 py-7 sm:grid-cols-[6.5rem_1fr_auto] sm:items-center"><span className="flex h-14 w-24 items-center justify-center rounded-xl border border-[#102746]/8 bg-[#f7f9fc] px-3"><AwardIssuerMark issuer={item.givenBy} /></span><div><p className="text-[9px] font-bold uppercase tracking-[.18em] text-[#102746]/35">Recognition 0{index + 3}</p><h3 className="mt-2 text-lg font-semibold normal-case leading-snug text-[#102746]">{item.award}</h3><p className="mt-1.5 text-xs leading-5 text-[#728093]">{item.givenBy}</p></div><p className="text-sm font-semibold text-[#315f9f] sm:max-w-[10rem] sm:text-right">{item.awardedTo}</p></article>)}
           </div>
         </div>
       </div>
