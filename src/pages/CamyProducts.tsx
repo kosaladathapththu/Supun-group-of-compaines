@@ -14,6 +14,7 @@ import electricKettlesImage from "@/assets/products/camy-electric-kettles.png";
 import fanImage from "@/assets/products/camy-fan.png";
 import gasCookerImage from "@/assets/products/camy-gas-cooker.png";
 import miniRefrigeratorImage from "@/assets/products/camy-mini-refrigerator.jpeg";
+import mixerGrinderImage from "@/assets/products/camy-mixer-grinder.png";
 import motorcycleHelmetImage from "@/assets/products/camy-motorcycle-helmet.png";
 import nonStickCookwareImage from "@/assets/products/camy-non-stick-cookware.png";
 import pressureCookerImage from "@/assets/products/camy-pressure-cooker.png";
@@ -27,7 +28,7 @@ const productImages: Record<string, string> = {
   "Motorcycle Helmets": motorcycleHelmetImage,
   "Non-Stick Cookware": nonStickCookwareImage,
   "Water Filters": waterFilterImage,
-  "Mixer Grinders": manufacturingImage,
+  "Mixer Grinders": mixerGrinderImage,
   "Air Conditioners": airConditionerImage,
   "Fans": fanImage,
   "TVs": televisionImage,
@@ -67,7 +68,9 @@ const CamyProducts = () => {
           name: product.title,
           madeBy: original?.madeBy || "Supun Group",
           note: original?.note || product.categoryName || "Camy Product",
-          image: getFileUrl(product.imageUrl) || productImages[product.title] || manufacturingImage,
+          image: product.title === "Mixer Grinders"
+            ? mixerGrinderImage
+            : getFileUrl(product.imageUrl) || productImages[product.title] || manufacturingImage,
         };
       })
     : camyProducts.map((product) => ({
