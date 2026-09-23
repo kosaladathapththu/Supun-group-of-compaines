@@ -17,14 +17,12 @@ import { getCompanyLogo } from "@/data/companyLogos";
 
 const stats = [["11", "Group companies"], ["300+", "Employees"], ["250+", "Distributors"]];
 const valueIcons = [Gem, Users, Lightbulb, Flag];
-const certificationAwards = awards.filter((item) => item.award.toLowerCase().includes("made in sri lanka"));
-const otherAwards = awards.filter((item) => !item.award.toLowerCase().includes("made in sri lanka"));
 const Label = ({ children }: { children: React.ReactNode }) => <p className="text-xs font-bold uppercase tracking-[.18em] text-[#315f9f]">{children}</p>;
 const Rule = () => <div className="mt-4 h-0.5 w-12 bg-[#d79a22]" />;
 const AwardIssuerMark = ({ issuer }: { issuer: string }) => {
-  if (issuer === "TCL") return <span className="inline-flex rounded-md bg-[#e60012] px-4 py-2 text-xl font-black tracking-[-.06em] text-white">TCL</span>;
-  if (issuer === "Booking.com") return <span className="text-lg font-bold tracking-[-.04em] text-[#003b95]">Booking<span className="text-[#009fe3]">.com</span></span>;
-  return <span className="inline-flex flex-col leading-none"><strong className="text-2xl font-black tracking-[-.06em] text-[#143f78]">IDB</strong><small className="mt-1 text-[8px] font-bold uppercase tracking-[.12em] text-[#67809d]">Sri Lanka</small></span>;
+  if (issuer === "TCL") return <span className="inline-flex rounded-lg bg-[#e60012] px-6 py-3 text-3xl font-black tracking-[-.06em] text-white">TCL</span>;
+  if (issuer === "Booking.com") return <span className="text-2xl font-bold tracking-[-.05em] text-[#003b95]">Booking<span className="text-[#009fe3]">.com</span></span>;
+  return <span className="inline-flex flex-col leading-none"><strong className="text-4xl font-black tracking-[-.07em] text-[#143f78]">IDB</strong><small className="mt-1.5 text-[9px] font-bold uppercase tracking-[.16em] text-[#67809d]">Sri Lanka</small></span>;
 };
 
 // Keep the timeline tied to the same logo assets used across the company pages.
@@ -143,16 +141,8 @@ const About = () => (
     <section id="awards" className="scroll-mt-24 bg-[#f5f7fa] py-14 md:py-20">
       <div className="container mx-auto px-4">
         <div className="grid gap-7 lg:grid-cols-[.72fr_1.28fr] lg:items-end lg:gap-14"><div><Label>Awards &amp; recognition</Label><h2 className="mt-3 max-w-xl text-4xl font-semibold normal-case leading-tight tracking-[-.04em] md:text-5xl">Recognition earned across the Group.</h2></div><p className="max-w-xl text-base leading-7 text-[#637186]">Independent recognition of our local manufacturing, trusted partnerships and industry standards.</p></div>
-        <div className="mt-10 grid overflow-hidden rounded-[1.75rem] border border-[#102746]/10 bg-white shadow-[0_20px_50px_rgba(16,39,70,.07)] lg:grid-cols-[.88fr_1.12fr]">
-          <div className="bg-[#fff8e9] p-6 sm:p-8 lg:p-10">
-            <p className="text-[10px] font-bold uppercase tracking-[.2em] text-[#99670e]">Made in Sri Lanka</p>
-            <div className="mt-6 divide-y divide-[#d79a22]/20">
-              {certificationAwards.map((item) => <article key={`${item.award}-${item.awardedTo}`} className="grid grid-cols-[4.5rem_1fr] gap-5 py-6 first:pt-0 last:pb-0"><div className="flex h-[4.5rem] w-[4.5rem] items-center justify-center rounded-full bg-white shadow-sm"><img src="/made-in-sri-lanka-logo.png" alt="Made in Sri Lanka logo" className="h-14 w-12 object-contain" /></div><div><h3 className="text-lg font-semibold normal-case leading-snug text-[#102746]">{item.award}</h3><p className="mt-2 text-xs leading-5 text-[#728093]">{item.givenBy}</p><p className="mt-3 text-sm font-semibold text-[#315f9f]">{item.awardedTo}</p></div></article>)}
-            </div>
-          </div>
-          <div className="divide-y divide-[#102746]/10 px-6 sm:px-8 lg:px-10">
-            {otherAwards.map((item, index) => <article key={`${item.award}-${item.awardedTo}`} className="group grid gap-4 py-7 sm:grid-cols-[6.5rem_1fr_auto] sm:items-center"><span className="flex h-14 w-24 items-center justify-center rounded-xl border border-[#102746]/8 bg-[#f7f9fc] px-3"><AwardIssuerMark issuer={item.givenBy} /></span><div><p className="text-[9px] font-bold uppercase tracking-[.18em] text-[#102746]/35">Recognition 0{index + 3}</p><h3 className="mt-2 text-lg font-semibold normal-case leading-snug text-[#102746]">{item.award}</h3><p className="mt-1.5 text-xs leading-5 text-[#728093]">{item.givenBy}</p></div><p className="text-sm font-semibold text-[#315f9f] sm:max-w-[10rem] sm:text-right">{item.awardedTo}</p></article>)}
-          </div>
+        <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-5">
+          {awards.map((item, index) => { const isCertification = item.award.toLowerCase().includes("made in sri lanka"); return <article key={`${item.award}-${item.awardedTo}`} className={`group flex min-h-[310px] flex-col rounded-[1.5rem] border p-6 transition duration-300 hover:-translate-y-1 hover:shadow-[0_18px_40px_rgba(16,39,70,.10)] ${isCertification ? "border-[#d79a22]/30 bg-[#fff8e9]" : "border-[#102746]/10 bg-white"}`}><div className="flex h-24 items-center justify-center">{isCertification ? <img src="/made-in-sri-lanka-logo.png" alt="Made in Sri Lanka logo" className="h-24 w-20 object-contain" /> : <AwardIssuerMark issuer={item.givenBy} />}</div><p className="mt-6 text-[9px] font-bold uppercase tracking-[.18em] text-[#102746]/35">Recognition 0{index + 1}</p><h3 className="mt-3 text-base font-semibold normal-case leading-snug text-[#102746]">{item.award}</h3><p className="mt-2 text-xs leading-5 text-[#728093]">{item.givenBy}</p><p className="mt-auto border-t border-[#102746]/10 pt-4 text-sm font-semibold leading-5 text-[#315f9f]">{item.awardedTo}</p></article>; })}
         </div>
       </div>
     </section>
