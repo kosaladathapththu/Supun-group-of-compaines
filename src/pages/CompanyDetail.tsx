@@ -1,5 +1,5 @@
 import { Link, useParams } from "react-router-dom";
-import { ArrowLeft, ArrowRight, Award, BriefcaseBusiness, CalendarDays, Check, ExternalLink, Globe2, Mail, MapPin, Phone, Sparkles } from "lucide-react";
+import { ArrowLeft, ArrowRight, Award, BriefcaseBusiness, CalendarDays, Check, ExternalLink, Globe2, Mail, MapPin, Phone } from "lucide-react";
 import { CompanyLogo } from "@/components/CompanyLogo";
 import Seo, { SITE_URL } from "@/components/Seo";
 import { companyById } from "@/data/companies";
@@ -71,8 +71,7 @@ const CompanyDetail = () => {
         <Globe2 className="absolute -bottom-28 -right-24 -z-10 h-[28rem] w-[28rem] text-white/[.06]" strokeWidth={0.65} aria-hidden="true" />
         <div className="grid gap-10 lg:grid-cols-[1fr_18rem] lg:items-end lg:gap-20">
           <div>
-            <p className="mb-6 flex items-center gap-3 text-xs font-bold uppercase tracking-[0.24em] text-[#efbd55]"><Sparkles size={15} /> Explore the Group</p>
-            <h2 className="max-w-4xl text-4xl font-semibold normal-case leading-[1.02] tracking-[-0.04em] sm:text-5xl md:text-6xl">Discover the businesses behind <span className="text-[#efbd55]">Supun Group.</span></h2>
+            <h2 className="max-w-4xl text-4xl font-semibold normal-case leading-[1.02] tracking-[-0.04em] text-[#efbd55] sm:text-5xl md:text-6xl">Explore the Group</h2>
           </div>
           <div className="border-t border-white/15 pt-7 lg:border-l lg:border-t-0 lg:pl-10 lg:pt-0">
             <p className="mb-6 text-sm leading-relaxed text-white/55">Explore all eleven companies across manufacturing, retail, distribution and hospitality.</p>
