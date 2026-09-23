@@ -2,6 +2,7 @@ import { ArrowRight, Eye, Flag, Gem, Lightbulb, Target, UserRound, Users } from 
 import { Link } from "react-router-dom";
 import Seo from "@/components/Seo";
 import { AnimatedSection } from "@/components/AnimatedSection";
+import { AwardIssuerMark } from "@/components/AwardIssuerMark";
 import chairmanImage from "@/assets/Chairman.png";
 import lasithaImage from "@/assets/lasitha-samarasinghe.png";
 import riazImage from "@/assets/mohamed-riaz-farouk.png";
@@ -17,13 +18,15 @@ import { getCompanyLogo } from "@/data/companyLogos";
 
 const stats = [["11", "Group companies"], ["300+", "Employees"], ["250+", "Distributors"]];
 const valueIcons = [Gem, Users, Lightbulb, Flag];
+const awardCompanyPaths: Record<string, string> = {
+  "Camy Smart": "/companies/camy-smart",
+  "Aero Star (Aerostar Home Appliances)": "/companies/aerostar-home-appliances",
+  "Supun Group of Companies": "/about",
+  "Fuji Industries": "/companies/fuji-industries",
+  "Supun Arcade Residency": "/companies/supun-arcade-residency",
+};
 const Label = ({ children }: { children: React.ReactNode }) => <p className="text-xs font-bold uppercase tracking-[.18em] text-[#315f9f]">{children}</p>;
 const Rule = () => <div className="mt-4 h-0.5 w-12 bg-[#d79a22]" />;
-const AwardIssuerMark = ({ issuer }: { issuer: string }) => {
-  if (issuer === "TCL") return <span className="inline-flex rounded-lg bg-[#e60012] px-6 py-3 text-3xl font-black tracking-[-.06em] text-white">TCL</span>;
-  if (issuer === "Booking.com") return <span className="text-2xl font-bold tracking-[-.05em] text-[#003b95]">Booking<span className="text-[#009fe3]">.com</span></span>;
-  return <span className="inline-flex flex-col leading-none"><strong className="text-4xl font-black tracking-[-.07em] text-[#143f78]">IDB</strong><small className="mt-1.5 text-[9px] font-bold uppercase tracking-[.16em] text-[#67809d]">Sri Lanka</small></span>;
-};
 
 // Keep the timeline tied to the same logo assets used across the company pages.
 const journeyCompanyLogos: Record<string, { id: string; name: string }[]> = {
@@ -142,7 +145,7 @@ const About = () => (
       <div className="container mx-auto px-4">
         <div className="grid gap-7 lg:grid-cols-[.72fr_1.28fr] lg:items-end lg:gap-14"><div><Label>Awards &amp; recognition</Label><h2 className="mt-3 max-w-xl text-4xl font-semibold normal-case leading-tight tracking-[-.04em] md:text-5xl">Recognition earned across the Group.</h2></div><p className="max-w-xl text-base leading-7 text-[#637186]">Independent recognition of our local manufacturing, trusted partnerships and industry standards.</p></div>
         <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-5">
-          {awards.map((item, index) => { const isCertification = item.award.toLowerCase().includes("made in sri lanka"); return <article key={`${item.award}-${item.awardedTo}`} className={`group flex min-h-[310px] flex-col rounded-[1.5rem] border p-6 transition duration-300 hover:-translate-y-1 hover:shadow-[0_18px_40px_rgba(16,39,70,.10)] ${isCertification ? "border-[#d79a22]/30 bg-[#fff8e9]" : "border-[#102746]/10 bg-white"}`}><div className="flex h-24 items-center justify-center">{isCertification ? <img src="/made-in-sri-lanka-logo.png" alt="Made in Sri Lanka logo" className="h-24 w-20 object-contain" /> : <AwardIssuerMark issuer={item.givenBy} />}</div><p className="mt-6 text-[9px] font-bold uppercase tracking-[.18em] text-[#102746]/35">Recognition 0{index + 1}</p><h3 className="mt-3 text-base font-semibold normal-case leading-snug text-[#102746]">{item.award}</h3><p className="mt-2 text-xs leading-5 text-[#728093]">{item.givenBy}</p><p className="mt-auto border-t border-[#102746]/10 pt-4 text-sm font-semibold leading-5 text-[#315f9f]">{item.awardedTo}</p></article>; })}
+          {awards.map((item, index) => { const isCertification = item.award.toLowerCase().includes("made in sri lanka"); return <Link to={awardCompanyPaths[item.awardedTo] ?? "/companies"} key={`${item.award}-${item.awardedTo}`} className={`group flex min-h-[310px] flex-col rounded-[1.5rem] border p-6 transition duration-300 hover:-translate-y-1 hover:shadow-[0_18px_40px_rgba(16,39,70,.10)] ${isCertification ? "border-[#d79a22]/30 bg-[#fff8e9]" : "border-[#102746]/10 bg-white"}`} aria-label={`View ${item.awardedTo}`}><div className="flex h-24 items-center justify-center"><AwardIssuerMark issuer={item.givenBy} certification={isCertification} /></div><p className="mt-6 text-[9px] font-bold uppercase tracking-[.18em] text-[#102746]/35">Recognition 0{index + 1}</p><h3 className="mt-3 text-base font-semibold normal-case leading-snug text-[#102746]">{item.award}</h3><p className="mt-2 text-xs leading-5 text-[#728093]">{item.givenBy}</p><p className="mt-auto flex items-center justify-between gap-3 border-t border-[#102746]/10 pt-4 text-sm font-semibold leading-5 text-[#315f9f]">{item.awardedTo}<ArrowRight className="shrink-0 transition-transform group-hover:translate-x-1" size={16} /></p></Link>; })}
         </div>
       </div>
     </section>
