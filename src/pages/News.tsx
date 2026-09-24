@@ -95,41 +95,60 @@ export default function News() {
         <div className="mx-auto max-w-7xl">
           <div className="flex flex-col justify-between gap-5 md:flex-row md:items-end">
             <div>
-              <p className="text-xs font-bold uppercase tracking-[.22em] text-[#a66d0d]">
-                Awards &amp; recognition
+              <p className="text-xs font-bold uppercase tracking-[.22em] text-[#315f9f]">
+                Latest updates
               </p>
               <h2 className="mt-3 text-4xl font-bold tracking-[-.04em] md:text-5xl">
-                Achievements across the Group.
+                News and achievements from across the Group.
               </h2>
             </div>
             <p className="max-w-xl leading-7 text-[#68788d]">
-              National certifications and industry recognition earned by companies across Supun
-              Group.
+              Company milestones, industry recognition and official developments from our
+              businesses.
             </p>
           </div>
 
-          <div className="mt-9 grid gap-4 sm:grid-cols-2 lg:grid-cols-5">
-            {awards.map((item) => {
+          <div className="mt-9 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
+            {awards.map((item, index) => {
               const isCertification = item.award.toLowerCase().includes('made in sri lanka');
 
               return (
                 <Link
                   key={`${item.award}-${item.awardedTo}`}
                   to={awardCompanyPaths[item.awardedTo] ?? '/companies'}
-                  className={`group flex min-h-72 flex-col rounded-2xl border p-5 transition duration-300 hover:-translate-y-1 hover:shadow-[0_16px_38px_rgba(16,35,63,.10)] ${isCertification ? 'border-[#d79a22]/30 bg-[#fff9ec]' : 'border-[#10233f]/10 bg-[#f7f9fb]'}`}
+                  className={`group overflow-hidden rounded-3xl border border-[#10233f]/10 bg-[#f7f9fb] transition duration-300 hover:-translate-y-1 hover:shadow-[0_18px_42px_rgba(16,35,63,.12)] ${index === 0 ? 'md:col-span-2 lg:grid lg:grid-cols-[.82fr_1.18fr]' : ''}`}
                 >
-                  <div className="flex h-20 items-center justify-center rounded-xl bg-white px-3 ring-1 ring-[#10233f]/8">
-                    <AwardIssuerMark issuer={item.givenBy} certification={isCertification} />
+                  <div
+                    className={`flex min-h-52 items-center justify-center px-8 py-10 ${isCertification ? 'bg-[#fff5dc]' : 'bg-[#eaf0f7]'}`}
+                  >
+                    <div className="flex h-28 w-full max-w-56 items-center justify-center rounded-2xl bg-white px-5 shadow-sm ring-1 ring-[#10233f]/8 transition duration-500 group-hover:scale-[1.03]">
+                      <AwardIssuerMark issuer={item.givenBy} certification={isCertification} />
+                    </div>
                   </div>
-                  <h3 className="mt-5 text-lg font-bold leading-6">{item.award}</h3>
-                  <p className="mt-2 text-sm leading-6 text-[#68788d]">{item.givenBy}</p>
-                  <span className="mt-auto flex items-center justify-between gap-3 border-t border-[#10233f]/10 pt-4 text-sm font-bold text-[#315f9f]">
-                    {item.awardedTo}
-                    <ArrowRight
-                      size={16}
-                      className="shrink-0 transition group-hover:translate-x-1"
-                    />
-                  </span>
+
+                  <div className="flex min-h-64 flex-col bg-white p-6 md:p-7">
+                    <div className="flex flex-wrap items-center gap-3 text-[10px] font-bold uppercase tracking-[.16em] text-[#315f9f]">
+                      <span>Company news</span>
+                      <span className="h-1 w-1 rounded-full bg-[#d79a22]" />
+                      <span className="text-[#68788d]">Recognition</span>
+                    </div>
+                    <h3
+                      className={`mt-4 font-bold leading-tight tracking-[-.025em] ${index === 0 ? 'text-3xl' : 'text-2xl'}`}
+                    >
+                      {item.awardedTo} recognised with {item.award}
+                    </h3>
+                    <p className="mt-3 text-sm leading-6 text-[#68788d]">
+                      Recognition presented by {item.givenBy}, marking another achievement for{' '}
+                      {item.awardedTo}.
+                    </p>
+                    <span className="mt-auto inline-flex items-center gap-2 pt-6 text-sm font-bold text-[#10233f]">
+                      Read update
+                      <ArrowRight
+                        size={16}
+                        className="transition-transform group-hover:translate-x-1"
+                      />
+                    </span>
+                  </div>
                 </Link>
               );
             })}
@@ -139,17 +158,25 @@ export default function News() {
 
       <section className="px-5 py-16 md:px-8 md:py-24">
         <div className="mx-auto max-w-7xl">
-          <div className="flex gap-2 overflow-x-auto pb-3">
-            {filters.map((filter) => (
-              <button
-                key={filter}
-                type="button"
-                onClick={() => setActiveFilter(filter)}
-                className={`flex-none rounded-full border px-5 py-3 text-xs font-bold transition ${activeFilter === filter ? 'border-[#10233f] bg-[#10233f] text-white' : 'border-[#10233f]/15 bg-white hover:border-[#78be43]'}`}
-              >
-                {filter}
-              </button>
-            ))}
+          <div className="flex flex-col justify-between gap-6 md:flex-row md:items-end">
+            <div>
+              <p className="text-xs font-bold uppercase tracking-[.2em] text-[#315f9f]">Newsroom</p>
+              <h2 className="mt-2 text-3xl font-bold tracking-[-.035em] md:text-4xl">
+                Press releases &amp; stories
+              </h2>
+            </div>
+            <div className="flex gap-2 overflow-x-auto pb-1">
+              {filters.map((filter) => (
+                <button
+                  key={filter}
+                  type="button"
+                  onClick={() => setActiveFilter(filter)}
+                  className={`flex-none rounded-full border px-5 py-3 text-xs font-bold transition ${activeFilter === filter ? 'border-[#10233f] bg-[#10233f] text-white' : 'border-[#10233f]/15 bg-white hover:border-[#78be43]'}`}
+                >
+                  {filter}
+                </button>
+              ))}
+            </div>
           </div>
 
           {isLoading ? (
