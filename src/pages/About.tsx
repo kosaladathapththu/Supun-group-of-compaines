@@ -481,7 +481,7 @@ const About = () => (
           </p>
         </div>
         <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-5">
-          {awards.map((item, index) => {
+          {awards.map((item) => {
             const isCertification = item.award.toLowerCase().includes('made in sri lanka');
             return (
               <Link
@@ -493,10 +493,7 @@ const About = () => (
                 <div className="flex h-24 items-center justify-center">
                   <AwardIssuerMark issuer={item.givenBy} certification={isCertification} />
                 </div>
-                <p className="mt-6 text-[9px] font-bold uppercase tracking-[.18em] text-[#102746]/35">
-                  Recognition 0{index + 1}
-                </p>
-                <h3 className="mt-3 text-base font-semibold normal-case leading-snug text-[#102746]">
+                <h3 className="mt-6 text-base font-semibold normal-case leading-snug text-[#102746]">
                   {item.award}
                 </h3>
                 <p className="mt-2 text-xs leading-5 text-[#728093]">{item.givenBy}</p>
