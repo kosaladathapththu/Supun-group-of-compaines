@@ -204,68 +204,65 @@ const CompanyDetail = () => {
               </p>
             </article>
 
-            <article className="relative overflow-hidden rounded-2xl bg-[#0b2747] p-7 text-white shadow-[0_18px_45px_rgba(11,39,71,.14)] sm:p-9">
-              <div className="absolute -right-16 -top-20 h-56 w-56 rounded-full border-[42px] border-white/[.035]" />
-              <div className="relative flex items-end justify-between gap-6">
+            <article className="rounded-2xl border border-[#102746]/10 bg-white p-7 shadow-[0_10px_30px_rgba(16,39,70,.06)] sm:p-9">
+              <div className="flex items-center justify-between">
                 <div>
-                  <p className="text-xs font-bold uppercase tracking-[.18em] text-[#efbd55]">
+                  <p className="text-xs font-bold uppercase tracking-[.18em] text-[#315f9f]">
                     Capabilities
                   </p>
-                  <h2 className="mt-2 text-3xl font-semibold normal-case tracking-[-.025em]">
-                    What we deliver
-                  </h2>
+                  <h2 className="mt-2 text-3xl font-semibold normal-case">Key Features</h2>
                 </div>
-                <span className="text-5xl font-semibold leading-none text-white/10">
+                <span className="text-5xl font-semibold text-[#102746]/10">
                   {String(company.features.length).padStart(2, '0')}
                 </span>
               </div>
-              <div className="relative mt-7 grid gap-3 sm:grid-cols-2">
-                {company.features.map((feature, index) => (
+              <div className="mt-7 grid gap-3 sm:grid-cols-2">
+                {company.features.map((feature) => (
                   <div
                     key={feature}
-                    className="group flex min-h-24 gap-4 rounded-xl border border-white/10 bg-white/[.065] p-5 text-sm font-medium leading-6 text-white/75 transition duration-300 hover:-translate-y-0.5 hover:border-[#efbd55]/45 hover:bg-white/[.10] hover:text-white"
+                    className="flex gap-3 rounded-xl border border-[#102746]/10 bg-[#f7f9fb] p-4 text-sm font-medium leading-6 text-[#405268]"
                   >
-                    <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-[#efbd55] text-[#071d37] shadow-[0_7px_18px_rgba(239,189,85,.18)]">
+                    <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-[#fff3d4] text-[#b9780b]">
                       <Check size={16} strokeWidth={2.5} />
                     </span>
-                    <div>
-                      <span className="mb-1 block text-[9px] font-bold uppercase tracking-[.18em] text-white/30">
-                        Feature {String(index + 1).padStart(2, '0')}
-                      </span>
-                      <span>{feature}</span>
-                    </div>
+                    {feature}
                   </div>
                 ))}
               </div>
             </article>
 
             {company.awards && company.awards.length > 0 && (
-              <article className="overflow-hidden rounded-2xl border border-[#dca334]/30 bg-[#fffaf0] p-5 shadow-[0_14px_38px_rgba(16,39,70,.08)] sm:p-6">
-                <div className={`grid gap-4 ${company.awards.length > 1 ? 'md:grid-cols-2' : ''}`}>
+              <article className="overflow-hidden rounded-2xl border border-[#102746]/10 bg-white shadow-[0_10px_30px_rgba(16,39,70,.06)]">
+                <div className="px-6 pb-4 pt-5 sm:px-7 sm:pt-6">
+                  <p className="text-[10px] font-bold uppercase tracking-[.16em] text-[#315f9f]">
+                    Awards &amp; recognition
+                  </p>
+                  <h2 className="mt-1.5 text-xl font-semibold normal-case">
+                    Recognised for excellence
+                  </h2>
+                </div>
+                <div
+                  className={`grid gap-px bg-[#102746]/10 ${company.awards.length > 1 ? 'md:grid-cols-2' : ''}`}
+                >
                   {company.awards.map((award) => {
                     const [awardName, issuer = 'Industry recognition'] = award.split(' — ');
                     const isCertification = awardName.toLowerCase().includes('made in sri lanka');
                     return (
                       <div
                         key={award}
-                        className="grid items-center gap-5 rounded-xl border border-[#102746]/8 bg-white p-5 shadow-sm sm:grid-cols-[9.5rem_1fr] sm:p-6"
+                        className={`grid min-h-[165px] items-center gap-5 p-5 sm:grid-cols-[8.5rem_1fr] sm:px-7 ${isCertification ? 'bg-[#fffaf0]' : 'bg-white'}`}
                       >
-                        <div className="flex h-24 items-center justify-center rounded-lg bg-[#f5f7fa] px-4 ring-1 ring-[#102746]/8">
+                        <div className="flex h-24 items-center justify-center rounded-xl border border-[#102746]/8 bg-white px-3 shadow-sm">
                           <AwardIssuerMark issuer={issuer} certification={isCertification} />
                         </div>
                         <div>
-                          <div className="mb-2 flex items-center gap-2">
-                            <span className="h-px w-7 bg-[#d79a22]" />
-                            <span className="text-[9px] font-bold uppercase tracking-[.18em] text-[#a66d0d]">
-                              {isCertification ? 'National certification' : 'Industry recognition'}
-                            </span>
-                          </div>
-                          <h3 className="text-xl font-semibold normal-case leading-7 text-[#102746]">
+                          <span className="text-[8px] font-bold uppercase tracking-[.18em] text-[#102746]/35">
+                            {isCertification ? 'National certification' : 'Industry recognition'}
+                          </span>
+                          <h3 className="mt-2 text-lg font-semibold normal-case leading-6 text-[#102746]">
                             {awardName}
                           </h3>
-                          <p className="mt-2 text-sm font-medium text-[#728093]">
-                            Awarded by {issuer}
-                          </p>
+                          <p className="mt-2.5 text-sm text-[#728093]">Awarded by {issuer}</p>
                         </div>
                       </div>
                     );
