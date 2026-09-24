@@ -1,10 +1,10 @@
-import express from "express";
-import multer from "multer";
-import { fileURLToPath } from "url";
-import { dirname, join } from "path";
-import { existsSync, mkdirSync } from "fs";
-import db from "../database/init.js";
-import { authenticateToken, isAdmin } from "../middleware/auth.js";
+import express from 'express';
+import multer from 'multer';
+import { fileURLToPath } from 'url';
+import { dirname, join } from 'path';
+import { existsSync, mkdirSync } from 'fs';
+import db from '../database/init.js';
+import { authenticateToken, isAdmin } from '../middleware/auth.js';
 
 const router = express.Router();
 
@@ -12,7 +12,7 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
 // Configure multer for file uploads
-const uploadDir = join(__dirname, "..", "uploads");
+const uploadDir = join(__dirname, '..', 'uploads');
 if (!existsSync(uploadDir)) {
   mkdirSync(uploadDir, { recursive: true });
 }
@@ -22,8 +22,8 @@ const storage = multer.diskStorage({
     cb(null, uploadDir);
   },
   filename: (req, file, cb) => {
-    const uniqueSuffix = Date.now() + "-" + Math.round(Math.random() * 1e9);
-    cb(null, uniqueSuffix + "-" + file.originalname);
+    const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1e9);
+    cb(null, uniqueSuffix + '-' + file.originalname);
   },
 });
 
@@ -31,30 +31,20 @@ const upload = multer({
   storage,
   limits: { fileSize: 10 * 1024 * 1024 }, // 10MB limit for images and PDFs
   fileFilter: (req, file, cb) => {
-    const allowedTypes = [
-      "image/jpeg",
-      "image/jpg",
-      "image/png",
-      "image/webp",
-      "application/pdf",
-    ];
+    const allowedTypes = ['image/jpeg', 'image/jpg', 'image/png', 'image/webp', 'application/pdf'];
     if (allowedTypes.includes(file.mimetype)) {
       cb(null, true);
     } else {
-      cb(
-        new Error(
-          "Invalid file type. Only JPEG, PNG, WebP images and PDF files are allowed."
-        )
-      );
+      cb(new Error('Invalid file type. Only JPEG, PNG, WebP images and PDF files are allowed.'));
     }
   },
 });
 
 // Get all companies (public)
-router.get("/", (req, res) => {
+router.get('/', (req, res) => {
   try {
     const companies = db
-      .prepare("SELECT * FROM companies ORDER BY sequence ASC, createdAt DESC")
+      .prepare('SELECT * FROM companies ORDER BY sequence ASC, createdAt DESC')
       .all();
 
     // Parse JSON fields
@@ -68,20 +58,18 @@ router.get("/", (req, res) => {
 
     res.json(formattedCompanies);
   } catch (error) {
-    console.error("Get companies error:", error);
-    res.status(500).json({ error: "Failed to fetch companies" });
+    console.error('Get companies error:', error);
+    res.status(500).json({ error: 'Failed to fetch companies' });
   }
 });
 
 // Get single company (public)
-router.get("/:id", (req, res) => {
+router.get('/:id', (req, res) => {
   try {
-    const company = db
-      .prepare("SELECT * FROM companies WHERE id = ?")
-      .get(req.params.id);
+    const company = db.prepare('SELECT * FROM companies WHERE id = ?').get(req.params.id);
 
     if (!company) {
-      return res.status(404).json({ error: "Company not found" });
+      return res.status(404).json({ error: 'Company not found' });
     }
 
     res.json({
@@ -92,20 +80,20 @@ router.get("/:id", (req, res) => {
       socialLinks: company.socialLinks ? JSON.parse(company.socialLinks) : [],
     });
   } catch (error) {
-    console.error("Get company error:", error);
-    res.status(500).json({ error: "Failed to fetch company" });
+    console.error('Get company error:', error);
+    res.status(500).json({ error: 'Failed to fetch company' });
   }
 });
 
 // Create company (admin only)
 router.post(
-  "/",
+  '/',
   authenticateToken,
   isAdmin,
   upload.fields([
-    { name: "image", maxCount: 1 },
-    { name: "catalogPdf", maxCount: 1 },
-    { name: "gallery", maxCount: 10 },
+    { name: 'image', maxCount: 1 },
+    { name: 'catalogPdf', maxCount: 1 },
+    { name: 'gallery', maxCount: 10 },
   ]),
   (req, res) => {
     try {
@@ -131,20 +119,11 @@ router.post(
         googleMapsLink,
       } = req.body;
 
-      if (
-        !id ||
-        !name ||
-        !shortName ||
-        !description ||
-        !fullDescription ||
-        !industry
-      ) {
-        return res.status(400).json({ error: "Missing required fields" });
+      if (!id || !name || !shortName || !description || !fullDescription || !industry) {
+        return res.status(400).json({ error: 'Missing required fields' });
       }
 
-      const imageUrl = req.files?.image
-        ? `/uploads/${req.files.image[0].filename}`
-        : null;
+      const imageUrl = req.files?.image ? `/uploads/${req.files.image[0].filename}` : null;
       const catalogPdf = req.files?.catalogPdf
         ? `/uploads/${req.files.catalogPdf[0].filename}`
         : null;
@@ -155,14 +134,10 @@ router.post(
         : [];
       const galleryJson = JSON.stringify(galleryUrls);
 
-      const featuresJson =
-        typeof features === "string" ? features : JSON.stringify(features);
+      const featuresJson = typeof features === 'string' ? features : JSON.stringify(features);
       const socialLinksJson =
-        typeof socialLinks === "string"
-          ? socialLinks
-          : JSON.stringify(socialLinks || []);
-      const awardsJson =
-        typeof awards === "string" ? awards : JSON.stringify(awards || []);
+        typeof socialLinks === 'string' ? socialLinks : JSON.stringify(socialLinks || []);
+      const awardsJson = typeof awards === 'string' ? awards : JSON.stringify(awards || []);
 
       const stmt = db.prepare(`
       INSERT INTO companies (id, name, shortName, description, fullDescription, tagline, industry, established, website, location, features, awards, imageUrl, catalogPdf, phone, hotline, email, faxNumber, gallery, sequence, socialLinks, googleMapsLink)
@@ -191,38 +166,34 @@ router.post(
         galleryJson,
         sequence || 0,
         socialLinksJson,
-        googleMapsLink || null
+        googleMapsLink || null,
       );
 
-      const newCompany = db
-        .prepare("SELECT * FROM companies WHERE id = ?")
-        .get(id);
+      const newCompany = db.prepare('SELECT * FROM companies WHERE id = ?').get(id);
 
       res.status(201).json({
         ...newCompany,
         features: JSON.parse(newCompany.features),
         awards: newCompany.awards ? JSON.parse(newCompany.awards) : [],
         gallery: newCompany.gallery ? JSON.parse(newCompany.gallery) : [],
-        socialLinks: newCompany.socialLinks
-          ? JSON.parse(newCompany.socialLinks)
-          : [],
+        socialLinks: newCompany.socialLinks ? JSON.parse(newCompany.socialLinks) : [],
       });
     } catch (error) {
-      console.error("Create company error:", error);
-      res.status(500).json({ error: "Failed to create company" });
+      console.error('Create company error:', error);
+      res.status(500).json({ error: 'Failed to create company' });
     }
-  }
+  },
 );
 
 // Update company (admin only)
 router.put(
-  "/:id",
+  '/:id',
   authenticateToken,
   isAdmin,
   upload.fields([
-    { name: "image", maxCount: 1 },
-    { name: "catalogPdf", maxCount: 1 },
-    { name: "gallery", maxCount: 10 },
+    { name: 'image', maxCount: 1 },
+    { name: 'catalogPdf', maxCount: 1 },
+    { name: 'gallery', maxCount: 10 },
   ]),
   (req, res) => {
     try {
@@ -248,12 +219,10 @@ router.put(
         googleMapsLink,
       } = req.body;
 
-      const existingCompany = db
-        .prepare("SELECT * FROM companies WHERE id = ?")
-        .get(req.params.id);
+      const existingCompany = db.prepare('SELECT * FROM companies WHERE id = ?').get(req.params.id);
 
       if (!existingCompany) {
-        return res.status(404).json({ error: "Company not found" });
+        return res.status(404).json({ error: 'Company not found' });
       }
 
       const imageUrl = req.files?.image
@@ -267,18 +236,14 @@ router.put(
       let galleryUrls = [];
 
       // Parse existing gallery from database
-      const currentGallery = existingCompany.gallery
-        ? JSON.parse(existingCompany.gallery)
-        : [];
+      const currentGallery = existingCompany.gallery ? JSON.parse(existingCompany.gallery) : [];
 
       // Parse existing gallery from frontend (preserved images)
-      const preservedGallery = existingGallery
-        ? JSON.parse(existingGallery)
-        : currentGallery;
+      const preservedGallery = existingGallery ? JSON.parse(existingGallery) : currentGallery;
 
       // Convert full URLs back to relative paths for preserved images
       const preservedPaths = preservedGallery.map((url) => {
-        if (url.startsWith("http")) {
+        if (url.startsWith('http')) {
           const urlObj = new URL(url);
           return urlObj.pathname;
         }
@@ -294,16 +259,13 @@ router.put(
       galleryUrls = [...preservedPaths, ...newGalleryUrls];
       const galleryJson = JSON.stringify(galleryUrls);
 
-      const featuresJson =
-        typeof features === "string" ? features : JSON.stringify(features);
+      const featuresJson = typeof features === 'string' ? features : JSON.stringify(features);
       const socialLinksJson =
-        typeof socialLinks === "string"
-          ? socialLinks
-          : JSON.stringify(socialLinks || []);
+        typeof socialLinks === 'string' ? socialLinks : JSON.stringify(socialLinks || []);
       const awardsJson =
-        typeof awards === "string"
+        typeof awards === 'string'
           ? awards
-          : JSON.stringify(awards || JSON.parse(existingCompany.awards || "[]"));
+          : JSON.stringify(awards || JSON.parse(existingCompany.awards || '[]'));
 
       const stmt = db.prepare(`
       UPDATE companies 
@@ -336,48 +298,40 @@ router.put(
         sequence || 0,
         socialLinksJson,
         googleMapsLink || null,
-        req.params.id
+        req.params.id,
       );
 
-      const updatedCompany = db
-        .prepare("SELECT * FROM companies WHERE id = ?")
-        .get(req.params.id);
+      const updatedCompany = db.prepare('SELECT * FROM companies WHERE id = ?').get(req.params.id);
 
       res.json({
         ...updatedCompany,
         features: JSON.parse(updatedCompany.features),
         awards: updatedCompany.awards ? JSON.parse(updatedCompany.awards) : [],
-        gallery: updatedCompany.gallery
-          ? JSON.parse(updatedCompany.gallery)
-          : [],
-        socialLinks: updatedCompany.socialLinks
-          ? JSON.parse(updatedCompany.socialLinks)
-          : [],
+        gallery: updatedCompany.gallery ? JSON.parse(updatedCompany.gallery) : [],
+        socialLinks: updatedCompany.socialLinks ? JSON.parse(updatedCompany.socialLinks) : [],
       });
     } catch (error) {
-      console.error("Update company error:", error);
-      res.status(500).json({ error: "Failed to update company" });
+      console.error('Update company error:', error);
+      res.status(500).json({ error: 'Failed to update company' });
     }
-  }
+  },
 );
 
 // Delete company (admin only)
-router.delete("/:id", authenticateToken, isAdmin, (req, res) => {
+router.delete('/:id', authenticateToken, isAdmin, (req, res) => {
   try {
-    const company = db
-      .prepare("SELECT * FROM companies WHERE id = ?")
-      .get(req.params.id);
+    const company = db.prepare('SELECT * FROM companies WHERE id = ?').get(req.params.id);
 
     if (!company) {
-      return res.status(404).json({ error: "Company not found" });
+      return res.status(404).json({ error: 'Company not found' });
     }
 
-    db.prepare("DELETE FROM companies WHERE id = ?").run(req.params.id);
+    db.prepare('DELETE FROM companies WHERE id = ?').run(req.params.id);
 
-    res.json({ message: "Company deleted successfully" });
+    res.json({ message: 'Company deleted successfully' });
   } catch (error) {
-    console.error("Delete company error:", error);
-    res.status(500).json({ error: "Failed to delete company" });
+    console.error('Delete company error:', error);
+    res.status(500).json({ error: 'Failed to delete company' });
   }
 });
 

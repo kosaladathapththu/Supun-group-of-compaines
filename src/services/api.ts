@@ -23,7 +23,7 @@ api.interceptors.request.use(
   },
   (error) => {
     return Promise.reject(error);
-  }
+  },
 );
 
 // Handle response errors
@@ -34,12 +34,15 @@ api.interceptors.response.use(
       // Token expired or invalid, clear storage and redirect to login
       localStorage.removeItem('admin_token');
       localStorage.removeItem('admin_user');
-      if (window.location.pathname.startsWith('/admin') && window.location.pathname !== '/admin/login') {
+      if (
+        window.location.pathname.startsWith('/admin') &&
+        window.location.pathname !== '/admin/login'
+      ) {
         window.location.href = '/admin/login';
       }
     }
     return Promise.reject(error);
-  }
+  },
 );
 
 // Types
@@ -366,6 +369,5 @@ export const getFileUrl = (path: string | undefined): string | null => {
   // Otherwise, construct full URL with backend server
   return `${BASE_URL}${path}`;
 };
-
 
 export default api;

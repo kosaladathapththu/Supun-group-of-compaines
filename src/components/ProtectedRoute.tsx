@@ -14,7 +14,7 @@ export default function ProtectedRoute({ children }: ProtectedRouteProps) {
   useEffect(() => {
     const verifyToken = async () => {
       const token = localStorage.getItem('admin_token');
-      
+
       if (!token) {
         setIsAuthenticated(false);
         return;

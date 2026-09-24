@@ -7,7 +7,11 @@ interface ParallaxSectionProps {
   className?: string;
 }
 
-export const ParallaxSection = ({ children, speed = 0.5, className = '' }: ParallaxSectionProps) => {
+export const ParallaxSection = ({
+  children,
+  speed = 0.5,
+  className = '',
+}: ParallaxSectionProps) => {
   const { ref, offset } = useParallax(speed);
 
   return (

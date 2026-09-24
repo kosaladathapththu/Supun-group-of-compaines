@@ -1,5 +1,5 @@
-import { Building2, ImageIcon } from "lucide-react";
-import { getFileUrl } from "@/services/api";
+import { Building2, ImageIcon } from 'lucide-react';
+import { getFileUrl } from '@/services/api';
 
 interface ImagePlaceholderProps {
   companyName?: string;
@@ -9,9 +9,9 @@ interface ImagePlaceholderProps {
 }
 
 export const ImagePlaceholder = ({
-  companyName = "Company",
+  companyName = 'Company',
   industry,
-  className = "h-48",
+  className = 'h-48',
   showIcon = true,
 }: ImagePlaceholderProps) => {
   return (
@@ -23,14 +23,8 @@ export const ImagePlaceholder = ({
           <Building2 className="text-primary/30" size={48} />
         </div>
       )}
-      <p className="text-sm text-muted-foreground text-center font-medium">
-        {companyName}
-      </p>
-      {industry && (
-        <p className="text-xs text-muted-foreground/70 text-center mt-1">
-          {industry}
-        </p>
-      )}
+      <p className="text-sm text-muted-foreground text-center font-medium">{companyName}</p>
+      {industry && <p className="text-xs text-muted-foreground/70 text-center mt-1">{industry}</p>}
     </div>
   );
 };
@@ -47,19 +41,13 @@ export const CompanyImage = ({
   imageUrl,
   companyName,
   industry,
-  className = "h-48",
+  className = 'h-48',
   alt,
 }: CompanyImageProps) => {
   const fullImageUrl = getFileUrl(imageUrl);
 
   if (!fullImageUrl) {
-    return (
-      <ImagePlaceholder
-        companyName={companyName}
-        industry={industry}
-        className={className}
-      />
-    );
+    return <ImagePlaceholder companyName={companyName} industry={industry} className={className} />;
   }
 
   return (
@@ -72,8 +60,8 @@ export const CompanyImage = ({
           // Replace with placeholder on error
           const parent = e.currentTarget.parentElement;
           if (parent) {
-            e.currentTarget.style.display = "none";
-            const placeholder = document.createElement("div");
+            e.currentTarget.style.display = 'none';
+            const placeholder = document.createElement('div');
             placeholder.className = `absolute inset-0 bg-gradient-to-br from-primary/10 via-primary/5 to-accent/10 flex flex-col items-center justify-center p-6`;
             placeholder.innerHTML = `
               <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-primary/30 mb-2">

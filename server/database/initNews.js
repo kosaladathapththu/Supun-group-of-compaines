@@ -1,4 +1,4 @@
-import db from "./init.js";
+import db from './init.js';
 
 export function initNewsDatabase() {
   db.exec(`

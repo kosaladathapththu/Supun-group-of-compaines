@@ -17,7 +17,6 @@ export interface NewsArticle {
   seoDescription?: string | null;
   createdAt?: string;
   updatedAt?: string;
-  isDummy?: boolean;
 }
 
 export const newsAPI = {
@@ -38,11 +37,15 @@ export const newsAPI = {
     return data;
   },
   create: async (formData: FormData): Promise<NewsArticle> => {
-    const { data } = await api.post('/news', formData, { headers: { 'Content-Type': 'multipart/form-data' } });
+    const { data } = await api.post('/news', formData, {
+      headers: { 'Content-Type': 'multipart/form-data' },
+    });
     return data;
   },
   update: async (id: number, formData: FormData): Promise<NewsArticle> => {
-    const { data } = await api.put(`/news/${id}`, formData, { headers: { 'Content-Type': 'multipart/form-data' } });
+    const { data } = await api.put(`/news/${id}`, formData, {
+      headers: { 'Content-Type': 'multipart/form-data' },
+    });
     return data;
   },
   delete: async (id: number): Promise<{ message: string }> => {

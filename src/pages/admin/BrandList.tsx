@@ -38,9 +38,8 @@ export default function BrandList() {
   }, []);
 
   useEffect(() => {
-    const filtered = brands.filter(
-      (brand) =>
-        brand.name.toLowerCase().includes(searchTerm.toLowerCase())
+    const filtered = brands.filter((brand) =>
+      brand.name.toLowerCase().includes(searchTerm.toLowerCase()),
     );
     setFilteredBrands(filtered);
   }, [searchTerm, brands]);
@@ -102,9 +101,7 @@ export default function BrandList() {
 
           {/* Loading State */}
           {isLoading && (
-            <div className="text-center py-8 text-muted-foreground">
-              Loading brands...
-            </div>
+            <div className="text-center py-8 text-muted-foreground">Loading brands...</div>
           )}
 
           {/* Empty State */}
@@ -166,9 +163,7 @@ export default function BrandList() {
                             rel="noopener noreferrer"
                             className="text-primary hover:underline flex items-center gap-1"
                           >
-                            <span className="max-w-[200px] truncate">
-                              {brand.website}
-                            </span>
+                            <span className="max-w-[200px] truncate">{brand.website}</span>
                             <ExternalLink className="h-3 w-3" />
                           </a>
                         ) : (
@@ -226,7 +221,10 @@ export default function BrandList() {
           </AlertDialogHeader>
           <AlertDialogFooter>
             <AlertDialogCancel>Cancel</AlertDialogCancel>
-            <AlertDialogAction onClick={handleDelete} className="bg-destructive text-destructive-foreground hover:bg-destructive/90">
+            <AlertDialogAction
+              onClick={handleDelete}
+              className="bg-destructive text-destructive-foreground hover:bg-destructive/90"
+            >
               Delete
             </AlertDialogAction>
           </AlertDialogFooter>

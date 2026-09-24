@@ -8,18 +8,18 @@
   "theme_color": "#1e3a8a",
   "icons": [
     {
-      "src": "/supun-group-of-companies-logo.png",
+      "src": "/supun-group-logo-transparent.png",
       "sizes": "512x512",
       "type": "image/png",
       "purpose": "any maskable"
     },
     {
-      "src": "/supun-group-of-companies-logo.png",
+      "src": "/supun-group-logo-transparent.png",
       "sizes": "192x192",
       "type": "image/png"
     },
     {
-      "src": "/supun-group-of-companies-logo.png",
+      "src": "/supun-group-logo-transparent.png",
       "sizes": "180x180",
       "type": "image/png"
     }

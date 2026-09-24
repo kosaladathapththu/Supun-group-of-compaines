@@ -1,68 +1,311 @@
-import { Suspense, type ReactNode } from "react";
-import { Navigate, BrowserRouter, Route, Routes } from "react-router-dom";
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { TooltipProvider } from "@/components/ui/tooltip";
-import { Toaster } from "@/components/ui/toaster";
-import { Toaster as Sonner } from "@/components/ui/sonner";
-import Navigation from "./components/Navigation";
-import Footer from "./components/Footer";
-import CookieConsent from "./components/CookieConsent";
-import ScrollToTop from "./components/ScrollToTop";
-import ProtectedRoute from "./components/ProtectedRoute";
-import AdminLayout from "./components/AdminLayout";
-import { PageTransition } from "./components/PageTransition";
-import { RouteLoader } from "./components/RouteLoader";
-import Home from "./pages/Home";
-import About from "./pages/About";
-import Companies from "./pages/Companies";
-import CompanyDetail from "./pages/CompanyDetail";
-import CamyProducts from "./pages/CamyProducts";
-import Careers from "./pages/Careers";
-import News from "./pages/News";
-import NewsDetail from "./pages/NewsDetail";
-import Contact from "./pages/Contact";
-import CookiePolicy from "./pages/CookiePolicy";
-import NotFound from "./pages/NotFound";
-import Login from "./pages/admin/Login";
-import Dashboard from "./pages/admin/Dashboard";
-import CompanyList from "./pages/admin/CompanyList";
-import CompanyForm from "./pages/admin/CompanyForm";
-import PasswordReset from "./pages/admin/PasswordReset";
-import BrandList from "./pages/admin/BrandList";
-import BrandForm from "./pages/admin/BrandForm";
-import CategoryList from "./pages/admin/CategoryList";
-import CategoryForm from "./pages/admin/CategoryForm";
-import ProductList from "./pages/admin/ProductList";
-import ProductForm from "./pages/admin/ProductForm";
-import NewsList from "./pages/admin/NewsList";
-import NewsForm from "./pages/admin/NewsForm";
+import { Suspense, type ReactNode } from 'react';
+import { Navigate, BrowserRouter, Route, Routes } from 'react-router-dom';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { TooltipProvider } from '@/components/ui/tooltip';
+import { Toaster } from '@/components/ui/toaster';
+import { Toaster as Sonner } from '@/components/ui/sonner';
+import Navigation from './components/Navigation';
+import Footer from './components/Footer';
+import CookieConsent from './components/CookieConsent';
+import ScrollToTop from './components/ScrollToTop';
+import ProtectedRoute from './components/ProtectedRoute';
+import AdminLayout from './components/AdminLayout';
+import { PageTransition } from './components/PageTransition';
+import { RouteLoader } from './components/RouteLoader';
+import Home from './pages/Home';
+import About from './pages/About';
+import Companies from './pages/Companies';
+import CompanyDetail from './pages/CompanyDetail';
+import CamyProducts from './pages/CamyProducts';
+import Careers from './pages/Careers';
+import News from './pages/News';
+import NewsDetail from './pages/NewsDetail';
+import Contact from './pages/Contact';
+import CookiePolicy from './pages/CookiePolicy';
+import NotFound from './pages/NotFound';
+import Login from './pages/admin/Login';
+import Dashboard from './pages/admin/Dashboard';
+import CompanyList from './pages/admin/CompanyList';
+import CompanyForm from './pages/admin/CompanyForm';
+import PasswordReset from './pages/admin/PasswordReset';
+import BrandList from './pages/admin/BrandList';
+import BrandForm from './pages/admin/BrandForm';
+import CategoryList from './pages/admin/CategoryList';
+import CategoryForm from './pages/admin/CategoryForm';
+import ProductList from './pages/admin/ProductList';
+import ProductForm from './pages/admin/ProductForm';
+import NewsList from './pages/admin/NewsList';
+import NewsForm from './pages/admin/NewsForm';
 
 const queryClient = new QueryClient();
-const PublicPage = ({ children }: { children: ReactNode }) => <div className="min-h-screen"><Navigation /><PageTransition><main>{children}</main><Footer /></PageTransition><CookieConsent /></div>;
+const PublicPage = ({ children }: { children: ReactNode }) => (
+  <div className="min-h-screen">
+    <Navigation />
+    <PageTransition>
+      <main>{children}</main>
+      <Footer />
+    </PageTransition>
+    <CookieConsent />
+  </div>
+);
 
-const App = () => <QueryClientProvider client={queryClient}><TooltipProvider><Toaster /><Sonner /><BrowserRouter><ScrollToTop /><Suspense fallback={<RouteLoader />}><Routes>
-  <Route path="/" element={<PublicPage><Home /></PublicPage>} />
-  <Route path="/about" element={<PublicPage><About /></PublicPage>} />
-  <Route path="/companies" element={<PublicPage><Companies /></PublicPage>} />
-  <Route path="/companies/:id" element={<PublicPage><CompanyDetail /></PublicPage>} />
-  <Route path="/camy-products" element={<PublicPage><CamyProducts /></PublicPage>} />
-  <Route path="/careers" element={<PublicPage><Careers /></PublicPage>} />
-  <Route path="/news" element={<PublicPage><News /></PublicPage>} />
-  <Route path="/news/:slug" element={<PublicPage><NewsDetail /></PublicPage>} />
-  <Route path="/contact" element={<PublicPage><Contact /></PublicPage>} />
-  <Route path="/cookie-policy" element={<PublicPage><CookiePolicy /></PublicPage>} />
-  <Route path="/shop" element={<Navigate to="/camy-products" replace />} /><Route path="/shop/:id" element={<Navigate to="/camy-products" replace />} />
-  <Route path="/admin/login" element={<PageTransition><Login /></PageTransition>} />
-  <Route path="/admin" element={<ProtectedRoute><AdminLayout /></ProtectedRoute>}>
-    <Route index element={<PageTransition><Dashboard /></PageTransition>} />
-    <Route path="companies" element={<PageTransition><CompanyList /></PageTransition>} /><Route path="companies/new" element={<PageTransition><CompanyForm /></PageTransition>} /><Route path="companies/:id/edit" element={<PageTransition><CompanyForm /></PageTransition>} />
-    <Route path="brands" element={<PageTransition><BrandList /></PageTransition>} /><Route path="brands/new" element={<PageTransition><BrandForm /></PageTransition>} /><Route path="brands/:id/edit" element={<PageTransition><BrandForm /></PageTransition>} />
-    <Route path="categories" element={<PageTransition><CategoryList /></PageTransition>} /><Route path="categories/new" element={<PageTransition><CategoryForm /></PageTransition>} /><Route path="categories/:id/edit" element={<PageTransition><CategoryForm /></PageTransition>} />
-    <Route path="products" element={<PageTransition><ProductList /></PageTransition>} /><Route path="products/new" element={<PageTransition><ProductForm /></PageTransition>} /><Route path="products/:id/edit" element={<PageTransition><ProductForm /></PageTransition>} />
-    <Route path="news" element={<PageTransition><NewsList /></PageTransition>} /><Route path="news/new" element={<PageTransition><NewsForm /></PageTransition>} /><Route path="news/:id/edit" element={<PageTransition><NewsForm /></PageTransition>} />
-    <Route path="password-reset" element={<PageTransition><PasswordReset /></PageTransition>} />
-  </Route>
-  <Route path="*" element={<PublicPage><NotFound /></PublicPage>} />
-</Routes></Suspense></BrowserRouter></TooltipProvider></QueryClientProvider>;
+const App = () => (
+  <QueryClientProvider client={queryClient}>
+    <TooltipProvider>
+      <Toaster />
+      <Sonner />
+      <BrowserRouter>
+        <ScrollToTop />
+        <Suspense fallback={<RouteLoader />}>
+          <Routes>
+            <Route
+              path="/"
+              element={
+                <PublicPage>
+                  <Home />
+                </PublicPage>
+              }
+            />
+            <Route
+              path="/about"
+              element={
+                <PublicPage>
+                  <About />
+                </PublicPage>
+              }
+            />
+            <Route
+              path="/companies"
+              element={
+                <PublicPage>
+                  <Companies />
+                </PublicPage>
+              }
+            />
+            <Route
+              path="/companies/:id"
+              element={
+                <PublicPage>
+                  <CompanyDetail />
+                </PublicPage>
+              }
+            />
+            <Route
+              path="/camy-products"
+              element={
+                <PublicPage>
+                  <CamyProducts />
+                </PublicPage>
+              }
+            />
+            <Route
+              path="/careers"
+              element={
+                <PublicPage>
+                  <Careers />
+                </PublicPage>
+              }
+            />
+            <Route
+              path="/news"
+              element={
+                <PublicPage>
+                  <News />
+                </PublicPage>
+              }
+            />
+            <Route
+              path="/news/:slug"
+              element={
+                <PublicPage>
+                  <NewsDetail />
+                </PublicPage>
+              }
+            />
+            <Route
+              path="/contact"
+              element={
+                <PublicPage>
+                  <Contact />
+                </PublicPage>
+              }
+            />
+            <Route
+              path="/cookie-policy"
+              element={
+                <PublicPage>
+                  <CookiePolicy />
+                </PublicPage>
+              }
+            />
+            <Route path="/shop" element={<Navigate to="/camy-products" replace />} />
+            <Route path="/shop/:id" element={<Navigate to="/camy-products" replace />} />
+            <Route
+              path="/admin/login"
+              element={
+                <PageTransition>
+                  <Login />
+                </PageTransition>
+              }
+            />
+            <Route
+              path="/admin"
+              element={
+                <ProtectedRoute>
+                  <AdminLayout />
+                </ProtectedRoute>
+              }
+            >
+              <Route
+                index
+                element={
+                  <PageTransition>
+                    <Dashboard />
+                  </PageTransition>
+                }
+              />
+              <Route
+                path="companies"
+                element={
+                  <PageTransition>
+                    <CompanyList />
+                  </PageTransition>
+                }
+              />
+              <Route
+                path="companies/new"
+                element={
+                  <PageTransition>
+                    <CompanyForm />
+                  </PageTransition>
+                }
+              />
+              <Route
+                path="companies/:id/edit"
+                element={
+                  <PageTransition>
+                    <CompanyForm />
+                  </PageTransition>
+                }
+              />
+              <Route
+                path="brands"
+                element={
+                  <PageTransition>
+                    <BrandList />
+                  </PageTransition>
+                }
+              />
+              <Route
+                path="brands/new"
+                element={
+                  <PageTransition>
+                    <BrandForm />
+                  </PageTransition>
+                }
+              />
+              <Route
+                path="brands/:id/edit"
+                element={
+                  <PageTransition>
+                    <BrandForm />
+                  </PageTransition>
+                }
+              />
+              <Route
+                path="categories"
+                element={
+                  <PageTransition>
+                    <CategoryList />
+                  </PageTransition>
+                }
+              />
+              <Route
+                path="categories/new"
+                element={
+                  <PageTransition>
+                    <CategoryForm />
+                  </PageTransition>
+                }
+              />
+              <Route
+                path="categories/:id/edit"
+                element={
+                  <PageTransition>
+                    <CategoryForm />
+                  </PageTransition>
+                }
+              />
+              <Route
+                path="products"
+                element={
+                  <PageTransition>
+                    <ProductList />
+                  </PageTransition>
+                }
+              />
+              <Route
+                path="products/new"
+                element={
+                  <PageTransition>
+                    <ProductForm />
+                  </PageTransition>
+                }
+              />
+              <Route
+                path="products/:id/edit"
+                element={
+                  <PageTransition>
+                    <ProductForm />
+                  </PageTransition>
+                }
+              />
+              <Route
+                path="news"
+                element={
+                  <PageTransition>
+                    <NewsList />
+                  </PageTransition>
+                }
+              />
+              <Route
+                path="news/new"
+                element={
+                  <PageTransition>
+                    <NewsForm />
+                  </PageTransition>
+                }
+              />
+              <Route
+                path="news/:id/edit"
+                element={
+                  <PageTransition>
+                    <NewsForm />
+                  </PageTransition>
+                }
+              />
+              <Route
+                path="password-reset"
+                element={
+                  <PageTransition>
+                    <PasswordReset />
+                  </PageTransition>
+                }
+              />
+            </Route>
+            <Route
+              path="*"
+              element={
+                <PublicPage>
+                  <NotFound />
+                </PublicPage>
+              }
+            />
+          </Routes>
+        </Suspense>
+      </BrowserRouter>
+    </TooltipProvider>
+  </QueryClientProvider>
+);
 
 export default App;
