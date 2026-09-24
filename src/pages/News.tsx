@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { ArrowRight, CalendarDays, Newspaper } from 'lucide-react';
 import { AwardIssuerMark } from '@/components/AwardIssuerMark';
 import Seo from '@/components/Seo';
-import { getErrorMessage, getFileUrl } from '@/services/api';
+import { getFileUrl } from '@/services/api';
 import { newsAPI, type NewsArticle } from '@/services/newsApi';
 import newsHeroEditorial from '@/assets/news-hero-editorial.png';
 import { awards } from '@/data/siteContent';
@@ -33,15 +33,13 @@ export default function News() {
   const [articles, setArticles] = useState<NewsArticle[]>([]);
   const [activeFilter, setActiveFilter] = useState('All updates');
   const [isLoading, setIsLoading] = useState(true);
-  const [loadError, setLoadError] = useState('');
 
   useEffect(() => {
     (async () => {
       try {
         const published = await newsAPI.getPublished();
         setArticles(published);
-      } catch (error) {
-        setLoadError(getErrorMessage(error));
+      } catch {
         setArticles([]);
       } finally {
         setIsLoading(false);
@@ -96,10 +94,10 @@ export default function News() {
           <div className="flex flex-col justify-between gap-5 md:flex-row md:items-end">
             <div>
               <p className="text-xs font-bold uppercase tracking-[.22em] text-[#315f9f]">
-                Latest updates
+                Official updates
               </p>
               <h2 className="mt-3 text-4xl font-bold tracking-[-.04em] md:text-5xl">
-                News and achievements from across the Group.
+                News &amp; Media
               </h2>
             </div>
             <p className="max-w-xl leading-7 text-[#68788d]">
@@ -156,127 +154,125 @@ export default function News() {
         </div>
       </section>
 
-      <section className="px-5 py-16 md:px-8 md:py-24">
-        <div className="mx-auto max-w-7xl">
-          <div className="flex flex-col justify-between gap-6 md:flex-row md:items-end">
-            <div>
-              <p className="text-xs font-bold uppercase tracking-[.2em] text-[#315f9f]">Newsroom</p>
-              <h2 className="mt-2 text-3xl font-bold tracking-[-.035em] md:text-4xl">
-                Press releases &amp; stories
-              </h2>
+      {(isLoading || articles.length > 0) && (
+        <section className="px-5 py-16 md:px-8 md:py-24">
+          <div className="mx-auto max-w-7xl">
+            <div className="flex flex-col justify-between gap-6 md:flex-row md:items-end">
+              <div>
+                <p className="text-xs font-bold uppercase tracking-[.2em] text-[#315f9f]">
+                  More News &amp; Media
+                </p>
+                <h2 className="mt-2 text-3xl font-bold tracking-[-.035em] md:text-4xl">
+                  Latest published stories
+                </h2>
+              </div>
+              <div className="flex gap-2 overflow-x-auto pb-1">
+                {filters.map((filter) => (
+                  <button
+                    key={filter}
+                    type="button"
+                    onClick={() => setActiveFilter(filter)}
+                    className={`flex-none rounded-full border px-5 py-3 text-xs font-bold transition ${activeFilter === filter ? 'border-[#10233f] bg-[#10233f] text-white' : 'border-[#10233f]/15 bg-white hover:border-[#78be43]'}`}
+                  >
+                    {filter}
+                  </button>
+                ))}
+              </div>
             </div>
-            <div className="flex gap-2 overflow-x-auto pb-1">
-              {filters.map((filter) => (
-                <button
-                  key={filter}
-                  type="button"
-                  onClick={() => setActiveFilter(filter)}
-                  className={`flex-none rounded-full border px-5 py-3 text-xs font-bold transition ${activeFilter === filter ? 'border-[#10233f] bg-[#10233f] text-white' : 'border-[#10233f]/15 bg-white hover:border-[#78be43]'}`}
-                >
-                  {filter}
-                </button>
-              ))}
-            </div>
-          </div>
 
-          {isLoading ? (
-            <div className="py-20 text-center text-[#68788d]">Loading latest updates...</div>
-          ) : visible.length === 0 ? (
-            <div className="mt-8 rounded-3xl border border-[#10233f]/10 bg-white p-12 text-center">
-              <Newspaper className="mx-auto text-[#78be43]" size={34} />
-              <h2 className="mt-5 text-2xl font-bold">No approved articles published yet.</h2>
-              <p className="mt-3 text-[#68788d]">
-                {loadError
-                  ? 'News updates are temporarily unavailable. Please check again soon.'
-                  : 'Approved Group news and media updates will appear here.'}
+            {isLoading ? (
+              <div className="py-20 text-center text-[#68788d]">Loading latest updates...</div>
+            ) : visible.length === 0 ? (
+              <p className="mt-8 rounded-2xl border border-[#10233f]/10 bg-white px-6 py-8 text-center text-[#68788d]">
+                No stories are available in this category.
               </p>
-            </div>
-          ) : (
-            <div className="mt-8 space-y-6">
-              {featured && (
-                <Link
-                  to={`/news/${featured.slug}`}
-                  className="group grid overflow-hidden rounded-[2rem] border border-[#10233f]/10 bg-white shadow-sm lg:grid-cols-[1.15fr_.85fr]"
-                >
-                  <div className="relative min-h-[300px] bg-[#dfe6ed] lg:min-h-[430px]">
-                    {featured.featuredImage ? (
-                      <img
-                        src={getArticleImage(featured)}
-                        alt={featured.title}
-                        className="h-full w-full object-cover transition duration-700 group-hover:scale-[1.02]"
-                      />
-                    ) : (
-                      <div className="flex h-full items-center justify-center">
-                        <Newspaper size={52} className="text-[#315f9f]/35" />
-                      </div>
-                    )}
-                  </div>
-                  <div className="flex flex-col p-8 md:p-12">
-                    <div className="flex flex-wrap items-center gap-3 text-xs font-bold uppercase tracking-[.16em] text-[#315f9f]">
-                      <span>{featured.category}</span>
-                      {featured.publishedDate && (
-                        <span className="inline-flex items-center gap-1.5 text-[#68788d]">
-                          <CalendarDays size={14} />
-                          {formatDate(featured.publishedDate)}
-                        </span>
+            ) : (
+              <div className="mt-8 space-y-6">
+                {featured && (
+                  <Link
+                    to={`/news/${featured.slug}`}
+                    className="group grid overflow-hidden rounded-[2rem] border border-[#10233f]/10 bg-white shadow-sm lg:grid-cols-[1.15fr_.85fr]"
+                  >
+                    <div className="relative min-h-[300px] bg-[#dfe6ed] lg:min-h-[430px]">
+                      {featured.featuredImage ? (
+                        <img
+                          src={getArticleImage(featured)}
+                          alt={featured.title}
+                          className="h-full w-full object-cover transition duration-700 group-hover:scale-[1.02]"
+                        />
+                      ) : (
+                        <div className="flex h-full items-center justify-center">
+                          <Newspaper size={52} className="text-[#315f9f]/35" />
+                        </div>
                       )}
                     </div>
-                    <h2 className="mt-6 text-3xl font-bold leading-tight tracking-[-.035em] md:text-5xl">
-                      {featured.title}
-                    </h2>
-                    <p className="mt-5 text-base leading-7 text-[#68788d]">{featured.summary}</p>
-                    <span className="mt-auto pt-9 inline-flex items-center gap-2 font-bold">
-                      Read full story{' '}
-                      <ArrowRight className="transition group-hover:translate-x-1" size={18} />
-                    </span>
-                  </div>
-                </Link>
-              )}
-
-              {rest.length > 0 && (
-                <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-3">
-                  {rest.map((article) => (
-                    <Link
-                      key={article.id}
-                      to={`/news/${article.slug}`}
-                      className="group overflow-hidden rounded-3xl border border-[#10233f]/10 bg-white transition hover:-translate-y-1 hover:shadow-xl"
-                    >
-                      <div className="relative h-52 bg-[#dfe6ed]">
-                        {article.featuredImage ? (
-                          <img
-                            src={getArticleImage(article)}
-                            alt={article.title}
-                            className="h-full w-full object-cover"
-                          />
-                        ) : (
-                          <div className="flex h-full items-center justify-center">
-                            <Newspaper className="text-[#315f9f]/35" size={38} />
-                          </div>
+                    <div className="flex flex-col p-8 md:p-12">
+                      <div className="flex flex-wrap items-center gap-3 text-xs font-bold uppercase tracking-[.16em] text-[#315f9f]">
+                        <span>{featured.category}</span>
+                        {featured.publishedDate && (
+                          <span className="inline-flex items-center gap-1.5 text-[#68788d]">
+                            <CalendarDays size={14} />
+                            {formatDate(featured.publishedDate)}
+                          </span>
                         )}
                       </div>
-                      <div className="p-6">
-                        <div className="flex items-center justify-between gap-3 text-[11px] font-bold uppercase tracking-[.14em] text-[#315f9f]">
-                          <span>{article.category}</span>
-                          <span className="text-[#68788d]">
-                            {formatDate(article.publishedDate)}
+                      <h2 className="mt-6 text-3xl font-bold leading-tight tracking-[-.035em] md:text-5xl">
+                        {featured.title}
+                      </h2>
+                      <p className="mt-5 text-base leading-7 text-[#68788d]">{featured.summary}</p>
+                      <span className="mt-auto pt-9 inline-flex items-center gap-2 font-bold">
+                        Read full story{' '}
+                        <ArrowRight className="transition group-hover:translate-x-1" size={18} />
+                      </span>
+                    </div>
+                  </Link>
+                )}
+
+                {rest.length > 0 && (
+                  <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-3">
+                    {rest.map((article) => (
+                      <Link
+                        key={article.id}
+                        to={`/news/${article.slug}`}
+                        className="group overflow-hidden rounded-3xl border border-[#10233f]/10 bg-white transition hover:-translate-y-1 hover:shadow-xl"
+                      >
+                        <div className="relative h-52 bg-[#dfe6ed]">
+                          {article.featuredImage ? (
+                            <img
+                              src={getArticleImage(article)}
+                              alt={article.title}
+                              className="h-full w-full object-cover"
+                            />
+                          ) : (
+                            <div className="flex h-full items-center justify-center">
+                              <Newspaper className="text-[#315f9f]/35" size={38} />
+                            </div>
+                          )}
+                        </div>
+                        <div className="p-6">
+                          <div className="flex items-center justify-between gap-3 text-[11px] font-bold uppercase tracking-[.14em] text-[#315f9f]">
+                            <span>{article.category}</span>
+                            <span className="text-[#68788d]">
+                              {formatDate(article.publishedDate)}
+                            </span>
+                          </div>
+                          <h2 className="mt-4 text-2xl font-bold leading-tight">{article.title}</h2>
+                          <p className="mt-3 line-clamp-3 text-sm leading-6 text-[#68788d]">
+                            {article.summary}
+                          </p>
+                          <span className="mt-6 inline-flex items-center gap-2 text-sm font-bold">
+                            Read more <ArrowRight size={15} />
                           </span>
                         </div>
-                        <h2 className="mt-4 text-2xl font-bold leading-tight">{article.title}</h2>
-                        <p className="mt-3 line-clamp-3 text-sm leading-6 text-[#68788d]">
-                          {article.summary}
-                        </p>
-                        <span className="mt-6 inline-flex items-center gap-2 text-sm font-bold">
-                          Read more <ArrowRight size={15} />
-                        </span>
-                      </div>
-                    </Link>
-                  ))}
-                </div>
-              )}
-            </div>
-          )}
-        </div>
-      </section>
+                      </Link>
+                    ))}
+                  </div>
+                )}
+              </div>
+            )}
+          </div>
+        </section>
+      )}
     </main>
   );
 }
