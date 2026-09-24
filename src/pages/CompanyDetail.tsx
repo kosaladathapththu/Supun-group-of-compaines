@@ -210,39 +210,50 @@ const CompanyDetail = () => {
                   <p className="text-xs font-bold uppercase tracking-[.18em] text-[#315f9f]">
                     Capabilities
                   </p>
-                  <h2 className="mt-2 text-3xl font-semibold normal-case">Key Features</h2>
+                  <h2 className="mt-2 text-3xl font-semibold normal-case tracking-[-.025em]">
+                    What we do best
+                  </h2>
                 </div>
-                <span className="text-5xl font-semibold text-[#102746]/10">
+                <span className="text-4xl font-semibold text-[#102746]/10">
                   {String(company.features.length).padStart(2, '0')}
                 </span>
               </div>
+
               <div className="mt-7 grid gap-3 sm:grid-cols-2">
-                {company.features.map((feature) => (
+                {company.features.map((feature, index) => (
                   <div
                     key={feature}
-                    className="flex gap-3 rounded-xl border border-[#102746]/10 bg-[#f7f9fb] p-4 text-sm font-medium leading-6 text-[#405268]"
+                    className={`relative flex min-h-24 gap-4 overflow-hidden rounded-xl border border-[#102746]/10 bg-[#f7f9fb] p-5 text-sm font-medium leading-6 text-[#405268] transition duration-300 hover:border-[#315f9f]/30 hover:bg-white hover:shadow-[0_10px_24px_rgba(16,39,70,.07)] ${company.features.length % 2 === 1 && index === company.features.length - 1 ? 'sm:col-span-2' : ''}`}
                   >
-                    <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-[#fff3d4] text-[#b9780b]">
+                    <span className="absolute inset-y-0 left-0 w-1 bg-[#efbd55]" />
+                    <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-[#fff0c8] text-[#9a650c]">
                       <Check size={16} strokeWidth={2.5} />
                     </span>
-                    {feature}
+                    <div>
+                      <span className="mb-1 block text-[9px] font-bold uppercase tracking-[.16em] text-[#315f9f]/50">
+                        Capability {String(index + 1).padStart(2, '0')}
+                      </span>
+                      {feature}
+                    </div>
                   </div>
                 ))}
               </div>
             </article>
 
             {company.awards && company.awards.length > 0 && (
-              <article className="overflow-hidden rounded-2xl border border-[#102746]/10 bg-white shadow-[0_10px_30px_rgba(16,39,70,.06)]">
-                <div className="px-6 pb-4 pt-5 sm:px-7 sm:pt-6">
-                  <p className="text-[10px] font-bold uppercase tracking-[.16em] text-[#315f9f]">
+              <article className="grid overflow-hidden rounded-2xl border border-[#102746]/10 bg-white shadow-[0_10px_30px_rgba(16,39,70,.06)] md:grid-cols-[14rem_1fr]">
+                <div className="flex flex-col justify-center border-b border-[#dca334]/20 bg-[#fff8e8] p-6 md:border-b-0 md:border-r sm:p-7">
+                  <span className="mb-4 h-1 w-10 rounded-full bg-[#d79a22]" />
+                  <p className="text-[10px] font-bold uppercase tracking-[.16em] text-[#a66d0d]">
                     Awards &amp; recognition
                   </p>
-                  <h2 className="mt-1.5 text-xl font-semibold normal-case">
-                    Recognised for excellence
+                  <h2 className="mt-2 text-2xl font-semibold normal-case leading-tight text-[#102746]">
+                    Recognised for excellence.
                   </h2>
                 </div>
+
                 <div
-                  className={`grid gap-px bg-[#102746]/10 ${company.awards.length > 1 ? 'md:grid-cols-2' : ''}`}
+                  className={`grid gap-px bg-[#102746]/10 ${company.awards.length > 1 ? 'lg:grid-cols-2' : ''}`}
                 >
                   {company.awards.map((award) => {
                     const [awardName, issuer = 'Industry recognition'] = award.split(' — ');
@@ -250,19 +261,19 @@ const CompanyDetail = () => {
                     return (
                       <div
                         key={award}
-                        className={`grid min-h-[165px] items-center gap-5 p-5 sm:grid-cols-[8.5rem_1fr] sm:px-7 ${isCertification ? 'bg-[#fffaf0]' : 'bg-white'}`}
+                        className="grid items-center gap-5 bg-white p-5 sm:grid-cols-[8rem_1fr] sm:p-6"
                       >
-                        <div className="flex h-24 items-center justify-center rounded-xl border border-[#102746]/8 bg-white px-3 shadow-sm">
+                        <div className="flex h-20 items-center justify-center rounded-lg border border-[#102746]/8 bg-[#f7f9fb] px-3">
                           <AwardIssuerMark issuer={issuer} certification={isCertification} />
                         </div>
                         <div>
-                          <span className="text-[8px] font-bold uppercase tracking-[.18em] text-[#102746]/35">
+                          <span className="text-[8px] font-bold uppercase tracking-[.18em] text-[#a66d0d]">
                             {isCertification ? 'National certification' : 'Industry recognition'}
                           </span>
-                          <h3 className="mt-2 text-lg font-semibold normal-case leading-6 text-[#102746]">
+                          <h3 className="mt-1.5 text-lg font-semibold normal-case leading-6 text-[#102746]">
                             {awardName}
                           </h3>
-                          <p className="mt-2.5 text-sm text-[#728093]">Awarded by {issuer}</p>
+                          <p className="mt-2 text-sm text-[#728093]">Awarded by {issuer}</p>
                         </div>
                       </div>
                     );
