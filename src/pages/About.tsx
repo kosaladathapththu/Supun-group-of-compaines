@@ -1,6 +1,6 @@
 import { ArrowRight, Eye, Flag, Gem, Lightbulb, Target, UserRound, Users } from 'lucide-react';
 import { Link } from 'react-router-dom';
-import Seo from '@/components/Seo';
+import Seo, { DEFAULT_IMAGE, SITE_NAME, SITE_URL } from '@/components/Seo';
 import { AnimatedSection } from '@/components/AnimatedSection';
 import { AwardIssuerMark } from '@/components/AwardIssuerMark';
 import chairmanImage from '@/assets/Chairman.png';
@@ -59,9 +59,75 @@ const journeyLogoSource = (id: string) =>
 const About = () => (
   <div className="min-h-screen overflow-hidden bg-[#fbfaf7] text-[#102746]">
     <Seo
-      title="About Supun Group of Companies | Our Story Since 1978"
-      description="Discover the story, leadership, vision, journey and values of Supun Group of Companies, a Sri Lankan family-run group with roots dating to 1978."
-      keywords="Supun Group history, Mohamed Fareed, M.F.M. Kaleel, Sri Lanka manufacturing group, Supun Group leadership"
+      title="About Supun Group of Companies | Sri Lanka Since 1978"
+      description="Learn about Supun Group of Companies, a Sri Lankan family business operating 11 companies across manufacturing, retail, distribution and hospitality since 1978."
+      keywords="Supun Group of Companies, Sri Lankan companies, Sri Lanka manufacturing, retail and distribution Sri Lanka, hospitality Colombo, Supun Group history"
+      path="/about"
+      image={DEFAULT_IMAGE}
+      jsonLd={{
+        '@context': 'https://schema.org',
+        '@graph': [
+          {
+            '@type': 'AboutPage',
+            '@id': `${SITE_URL}/about#about-page`,
+            url: `${SITE_URL}/about`,
+            name: 'About Supun Group of Companies',
+            description:
+              'The story, leadership, values, companies and achievements of Supun Group of Companies in Sri Lanka since 1978.',
+            isPartOf: {
+              '@type': 'WebSite',
+              '@id': `${SITE_URL}/#website`,
+              name: SITE_NAME,
+              url: SITE_URL,
+            },
+            about: {
+              '@id': `${SITE_URL}/#organization`,
+            },
+            primaryImageOfPage: {
+              '@type': 'ImageObject',
+              url: DEFAULT_IMAGE,
+            },
+          },
+          {
+            '@type': 'Organization',
+            '@id': `${SITE_URL}/#organization`,
+            name: SITE_NAME,
+            url: SITE_URL,
+            logo: {
+              '@type': 'ImageObject',
+              url: DEFAULT_IMAGE,
+            },
+            foundingDate: '1978',
+            foundingLocation: {
+              '@type': 'Place',
+              name: 'Colombo, Sri Lanka',
+            },
+            numberOfEmployees: {
+              '@type': 'QuantitativeValue',
+              minValue: 300,
+            },
+            description:
+              'A Sri Lankan family-run group operating across manufacturing, retail, distribution and hospitality.',
+          },
+          {
+            '@type': 'BreadcrumbList',
+            itemListElement: [
+              {
+                '@type': 'ListItem',
+                position: 1,
+                name: 'Home',
+                item: SITE_URL,
+              },
+              {
+                '@type': 'ListItem',
+                position: 2,
+                name: 'About Us',
+                item: `${SITE_URL}/about`,
+              },
+            ],
+          },
+        ],
+      }}
     />
 
     <section className="relative isolate min-h-[620px] overflow-hidden bg-[#102746] md:min-h-[690px]">
