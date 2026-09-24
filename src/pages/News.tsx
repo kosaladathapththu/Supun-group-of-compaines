@@ -18,6 +18,14 @@ const awardCompanyPaths: Record<string, string> = {
   'Supun Arcade Residency': '/companies/supun-arcade-residency',
 };
 
+const storyPalettes = [
+  { soft: '#fff1cf', accent: '#d88a13', text: '#8a5708', glow: 'rgba(216,138,19,.18)' },
+  { soft: '#e8f5ee', accent: '#2f9566', text: '#1f6c49', glow: 'rgba(47,149,102,.18)' },
+  { soft: '#e9f1ff', accent: '#4078c8', text: '#285b9f', glow: 'rgba(64,120,200,.18)' },
+  { soft: '#fff0f1', accent: '#d95562', text: '#a63643', glow: 'rgba(217,85,98,.18)' },
+  { soft: '#f1ebff', accent: '#7b5bc7', text: '#5b3da6', glow: 'rgba(123,91,199,.18)' },
+];
+
 const formatDate = (value?: string | null) => {
   if (!value) return '';
   const date = new Date(value.replace(' ', 'T'));
@@ -89,7 +97,7 @@ export default function News() {
         </div>
       </section>
 
-      <section className="border-b border-[#10233f]/10 bg-white px-5 py-16 md:px-8 md:py-20">
+      <section className="border-b border-[#10233f]/10 bg-[linear-gradient(135deg,#fff_0%,#f5f9ff_46%,#fff8ed_100%)] px-5 py-16 md:px-8 md:py-20">
         <div className="mx-auto max-w-7xl">
           <div className="flex flex-col justify-between gap-5 md:flex-row md:items-end">
             <div>
@@ -109,25 +117,51 @@ export default function News() {
           <div className="mt-9 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
             {awards.map((item, index) => {
               const isCertification = item.award.toLowerCase().includes('made in sri lanka');
+              const palette = storyPalettes[index % storyPalettes.length];
 
               return (
                 <Link
                   key={`${item.award}-${item.awardedTo}`}
                   to={awardCompanyPaths[item.awardedTo] ?? '/companies'}
-                  className={`group overflow-hidden rounded-3xl border border-[#10233f]/10 bg-[#f7f9fb] transition duration-300 hover:-translate-y-1 hover:shadow-[0_18px_42px_rgba(16,35,63,.12)] ${index === 0 ? 'md:col-span-2 lg:grid lg:grid-cols-[.82fr_1.18fr]' : ''}`}
+                  className={`group relative overflow-hidden rounded-3xl border border-[#10233f]/10 bg-white transition duration-300 hover:-translate-y-1 ${index === 0 ? 'md:col-span-2 lg:grid lg:grid-cols-[.82fr_1.18fr]' : ''}`}
+                  style={{ boxShadow: `0 16px 38px ${palette.glow}` }}
                 >
+                  <span
+                    className="absolute inset-x-0 top-0 z-10 h-1.5"
+                    style={{ backgroundColor: palette.accent }}
+                  />
                   <div
-                    className={`flex min-h-52 items-center justify-center px-8 py-10 ${isCertification ? 'bg-[#fff5dc]' : 'bg-[#eaf0f7]'}`}
+                    className="relative flex min-h-52 items-center justify-center overflow-hidden px-8 py-10"
+                    style={{ backgroundColor: palette.soft }}
                   >
+                    <span
+                      className="absolute -right-10 -top-12 h-36 w-36 rounded-full opacity-20"
+                      style={{ backgroundColor: palette.accent }}
+                    />
+                    <span
+                      className="absolute -bottom-14 -left-10 h-32 w-32 rounded-full border-[24px] opacity-15"
+                      style={{ borderColor: palette.accent }}
+                    />
                     <div className="flex h-28 w-full max-w-56 items-center justify-center rounded-2xl bg-white px-5 shadow-sm ring-1 ring-[#10233f]/8 transition duration-500 group-hover:scale-[1.03]">
                       <AwardIssuerMark issuer={item.givenBy} certification={isCertification} />
                     </div>
                   </div>
 
                   <div className="flex min-h-64 flex-col bg-white p-6 md:p-7">
-                    <div className="flex flex-wrap items-center gap-3 text-[10px] font-bold uppercase tracking-[.16em] text-[#315f9f]">
-                      <span>Company news</span>
-                      <span className="h-1 w-1 rounded-full bg-[#d79a22]" />
+                    <div
+                      className="flex flex-wrap items-center gap-3 text-[10px] font-bold uppercase tracking-[.16em]"
+                      style={{ color: palette.text }}
+                    >
+                      <span
+                        className="rounded-full px-3 py-1.5"
+                        style={{ backgroundColor: palette.soft }}
+                      >
+                        Company news
+                      </span>
+                      <span
+                        className="h-1.5 w-1.5 rounded-full"
+                        style={{ backgroundColor: palette.accent }}
+                      />
                       <span className="text-[#68788d]">Recognition</span>
                     </div>
                     <h3
@@ -139,7 +173,10 @@ export default function News() {
                       Recognition presented by {item.givenBy}, marking another achievement for{' '}
                       {item.awardedTo}.
                     </p>
-                    <span className="mt-auto inline-flex items-center gap-2 pt-6 text-sm font-bold text-[#10233f]">
+                    <span
+                      className="mt-auto inline-flex items-center gap-2 pt-6 text-sm font-bold"
+                      style={{ color: palette.text }}
+                    >
                       Read update
                       <ArrowRight
                         size={16}
