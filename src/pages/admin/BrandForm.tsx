@@ -58,7 +58,7 @@ export default function BrandForm() {
         setValue('website', brand.website || '');
         setValue('displayOrder', String(brand.displayOrder));
         setValue('isActive', brand.isActive === 1);
-        
+
         if (brand.logoUrl) {
           const imageUrl = getFileUrl(brand.logoUrl);
           setLogoPreview(imageUrl);
@@ -123,20 +123,14 @@ export default function BrandForm() {
 
   return (
     <div className="container mx-auto px-4 py-8 max-w-3xl">
-      <Button
-        variant="ghost"
-        onClick={() => navigate('/admin/brands')}
-        className="mb-6"
-      >
+      <Button variant="ghost" onClick={() => navigate('/admin/brands')} className="mb-6">
         <ArrowLeft className="mr-2 h-4 w-4" />
         Back to Brands
       </Button>
 
       <Card>
         <CardHeader>
-          <CardTitle className="text-2xl">
-            {id ? 'Edit Brand' : 'Add New Brand'}
-          </CardTitle>
+          <CardTitle className="text-2xl">{id ? 'Edit Brand' : 'Add New Brand'}</CardTitle>
         </CardHeader>
         <CardContent>
           {error && (
@@ -177,9 +171,7 @@ export default function BrandForm() {
                     Recommended: PNG or SVG with transparent background. Max file size: 5MB
                   </p>
                   {!id && (
-                    <p className="text-xs text-destructive">
-                      Logo is required for new brands
-                    </p>
+                    <p className="text-xs text-destructive">Logo is required for new brands</p>
                   )}
                 </div>
               </div>
@@ -194,9 +186,7 @@ export default function BrandForm() {
                 placeholder="Enter brand name"
                 disabled={isLoading}
               />
-              {errors.name && (
-                <p className="text-sm text-destructive">{errors.name.message}</p>
-              )}
+              {errors.name && <p className="text-sm text-destructive">{errors.name.message}</p>}
             </div>
 
             {/* Website URL */}

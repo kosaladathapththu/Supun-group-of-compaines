@@ -3,7 +3,13 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import * as z from 'zod';
-import { companiesAPI, type Company, type SocialLink, getErrorMessage, getFileUrl } from '@/services/api';
+import {
+  companiesAPI,
+  type Company,
+  type SocialLink,
+  getErrorMessage,
+  getFileUrl,
+} from '@/services/api';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
@@ -13,14 +19,21 @@ import { useToast } from '@/hooks/use-toast';
 import { Loader2, ArrowLeft, Upload, X, Plus } from 'lucide-react';
 
 const companySchema = z.object({
-  id: z.string().min(1, 'ID is required').regex(/^[a-z0-9-]+$/, 'ID must be lowercase letters, numbers, and hyphens only'),
+  id: z
+    .string()
+    .min(1, 'ID is required')
+    .regex(/^[a-z0-9-]+$/, 'ID must be lowercase letters, numbers, and hyphens only'),
   name: z.string().min(1, 'Name is required'),
   shortName: z.string().min(1, 'Short name is required'),
   description: z.string().min(1, 'Description is required'),
   fullDescription: z.string().min(1, 'Full description is required'),
   tagline: z.string().optional().or(z.literal('')),
   industry: z.string().min(1, 'Industry is required'),
-  established: z.string().regex(/^\d{4}$/, 'Must be a valid year').optional().or(z.literal('')),
+  established: z
+    .string()
+    .regex(/^\d{4}$/, 'Must be a valid year')
+    .optional()
+    .or(z.literal('')),
   website: z.string().url('Must be a valid URL').or(z.literal('')),
   location: z.string().optional().or(z.literal('')),
   awards: z.string().optional().or(z.literal('')),
@@ -98,22 +111,16 @@ export default function CompanyForm() {
     try {
       const company = await companiesAPI.getById(companyId);
       console.log('Loaded company data:', company);
-      
+
       // Safely handle established year
-      const establishedYear = company.established 
-        ? String(company.established) 
-        : '';
-      
+      const establishedYear = company.established ? String(company.established) : '';
+
       // Safely handle features array
-      const featuresList = Array.isArray(company.features) 
-        ? company.features 
-        : [];
-      
+      const featuresList = Array.isArray(company.features) ? company.features : [];
+
       // Safely handle sequence
-      const sequence = company.sequence !== undefined 
-        ? String(company.sequence) 
-        : '0';
-      
+      const sequence = company.sequence !== undefined ? String(company.sequence) : '0';
+
       reset({
         id: company.id || '',
         name: company.name || '',
@@ -134,27 +141,27 @@ export default function CompanyForm() {
         sequence: sequence,
         googleMapsLink: company.googleMapsLink || '',
       });
-      
+
       setFeaturesList(featuresList);
       setValue('features', featuresList.join('\n'));
-      
+
       // Handle gallery
       if (company.gallery && Array.isArray(company.gallery)) {
-        const galleryUrls = company.gallery.map(img => getFileUrl(img));
+        const galleryUrls = company.gallery.map((img) => getFileUrl(img));
         setExistingGallery(galleryUrls);
       }
-      
+
       // Handle social links
       if (company.socialLinks && Array.isArray(company.socialLinks)) {
         setSocialLinks(company.socialLinks);
       }
-      
+
       if (company.imageUrl) {
         // Check if it's a full URL or relative path
         const imageUrl = getFileUrl(company.imageUrl);
         setImagePreview(imageUrl);
       }
-      
+
       if (company.catalogPdf) {
         const catalogPdfUrl = getFileUrl(company.catalogPdf);
         setExistingCatalogPdf(catalogPdfUrl);
@@ -272,10 +279,10 @@ export default function CompanyForm() {
     setGalleryFiles(newGalleryFiles);
 
     // Generate previews
-    files.forEach(file => {
+    files.forEach((file) => {
       const reader = new FileReader();
       reader.onloadend = () => {
-        setGalleryPreviews(prev => [...prev, reader.result as string]);
+        setGalleryPreviews((prev) => [...prev, reader.result as string]);
       };
       reader.readAsDataURL(file);
     });
@@ -288,10 +295,10 @@ export default function CompanyForm() {
 
   const handleRemoveGalleryImage = (index: number, isExisting: boolean) => {
     if (isExisting) {
-      setExistingGallery(prev => prev.filter((_, i) => i !== index));
+      setExistingGallery((prev) => prev.filter((_, i) => i !== index));
     } else {
-      setGalleryFiles(prev => prev.filter((_, i) => i !== index));
-      setGalleryPreviews(prev => prev.filter((_, i) => i !== index));
+      setGalleryFiles((prev) => prev.filter((_, i) => i !== index));
+      setGalleryPreviews((prev) => prev.filter((_, i) => i !== index));
     }
   };
 
@@ -309,7 +316,10 @@ export default function CompanyForm() {
         return;
       }
 
-      const newSocialLinks = [...socialLinks, { name: socialLinkName.trim(), url: socialLinkUrl.trim() }];
+      const newSocialLinks = [
+        ...socialLinks,
+        { name: socialLinkName.trim(), url: socialLinkUrl.trim() },
+      ];
       setSocialLinks(newSocialLinks);
       setSocialLinkName('');
       setSocialLinkUrl('');
@@ -317,7 +327,7 @@ export default function CompanyForm() {
   };
 
   const handleRemoveSocialLink = (index: number) => {
-    setSocialLinks(prev => prev.filter((_, i) => i !== index));
+    setSocialLinks((prev) => prev.filter((_, i) => i !== index));
   };
 
   const onSubmit = async (data: CompanyFormData) => {
@@ -354,7 +364,7 @@ export default function CompanyForm() {
         ),
       );
       formData.append('features', JSON.stringify(featuresList));
-      
+
       // Add new fields
       formData.append('phone', data.phone || '');
       formData.append('hotline', data.hotline || '');
@@ -428,9 +438,7 @@ export default function CompanyForm() {
           <ArrowLeft className="h-5 w-5" />
         </Button>
         <div>
-          <h1 className="text-3xl font-bold">
-            {isEditMode ? 'Edit Company' : 'Add New Company'}
-          </h1>
+          <h1 className="text-3xl font-bold">{isEditMode ? 'Edit Company' : 'Add New Company'}</h1>
           <p className="text-muted-foreground mt-1">
             {isEditMode
               ? 'Update company information and details'
@@ -494,11 +502,7 @@ export default function CompanyForm() {
             <div className="grid gap-4 sm:grid-cols-2">
               <div className="space-y-2">
                 <Label htmlFor="industry">Industry *</Label>
-                <Input
-                  id="industry"
-                  {...register('industry')}
-                  placeholder="e.g., Manufacturing"
-                />
+                <Input id="industry" {...register('industry')} placeholder="e.g., Manufacturing" />
                 {errors.industry && (
                   <p className="text-sm text-destructive">{errors.industry.message}</p>
                 )}
@@ -561,12 +565,7 @@ export default function CompanyForm() {
 
             <div className="space-y-2">
               <Label htmlFor="sequence">Display Order (Sequence)</Label>
-              <Input
-                id="sequence"
-                {...register('sequence')}
-                placeholder="e.g., 1"
-                type="number"
-              />
+              <Input id="sequence" {...register('sequence')} placeholder="e.g., 1" type="number" />
               {errors.sequence && (
                 <p className="text-sm text-destructive">{errors.sequence.message}</p>
               )}
@@ -587,23 +586,13 @@ export default function CompanyForm() {
             <div className="grid gap-4 sm:grid-cols-2">
               <div className="space-y-2">
                 <Label htmlFor="phone">Phone Number</Label>
-                <Input
-                  id="phone"
-                  {...register('phone')}
-                  placeholder="e.g., +94 11 123 4567"
-                />
-                {errors.phone && (
-                  <p className="text-sm text-destructive">{errors.phone.message}</p>
-                )}
+                <Input id="phone" {...register('phone')} placeholder="e.g., +94 11 123 4567" />
+                {errors.phone && <p className="text-sm text-destructive">{errors.phone.message}</p>}
               </div>
 
               <div className="space-y-2">
                 <Label htmlFor="hotline">Hotline</Label>
-                <Input
-                  id="hotline"
-                  {...register('hotline')}
-                  placeholder="e.g., +94 77 123 4567"
-                />
+                <Input id="hotline" {...register('hotline')} placeholder="e.g., +94 77 123 4567" />
                 {errors.hotline && (
                   <p className="text-sm text-destructive">{errors.hotline.message}</p>
                 )}
@@ -619,9 +608,7 @@ export default function CompanyForm() {
                   placeholder="e.g., info@company.com"
                   type="email"
                 />
-                {errors.email && (
-                  <p className="text-sm text-destructive">{errors.email.message}</p>
-                )}
+                {errors.email && <p className="text-sm text-destructive">{errors.email.message}</p>}
               </div>
 
               <div className="space-y-2">

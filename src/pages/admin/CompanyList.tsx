@@ -24,7 +24,16 @@ import {
 import { Badge } from '@/components/ui/badge';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { useToast } from '@/hooks/use-toast';
-import { Loader2, Plus, Pencil, Trash2, Search, Building2, FileText, CheckCircle } from 'lucide-react';
+import {
+  Loader2,
+  Plus,
+  Pencil,
+  Trash2,
+  Search,
+  Building2,
+  FileText,
+  CheckCircle,
+} from 'lucide-react';
 
 export default function CompanyList() {
   const { toast } = useToast();
@@ -70,7 +79,7 @@ export default function CompanyList() {
           company.name.toLowerCase().includes(query) ||
           company.shortName.toLowerCase().includes(query) ||
           company.industry.toLowerCase().includes(query) ||
-          company.description.toLowerCase().includes(query)
+          company.description.toLowerCase().includes(query),
       );
       setFilteredCompanies(filtered);
     }
@@ -208,9 +217,7 @@ export default function CompanyList() {
                       <TableCell className="font-medium">
                         <div>
                           <div className="font-semibold">{company.name}</div>
-                          <div className="text-sm text-muted-foreground">
-                            {company.shortName}
-                          </div>
+                          <div className="text-sm text-muted-foreground">{company.shortName}</div>
                         </div>
                       </TableCell>
                       <TableCell>

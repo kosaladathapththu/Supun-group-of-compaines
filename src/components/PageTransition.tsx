@@ -44,13 +44,16 @@ export const PageTransition = ({ children }: PageTransitionProps) => {
       section.style.setProperty('--page-section-delay', `${Math.min(index, 3) * 55}ms`);
     });
 
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach((entry) => {
-        if (!entry.isIntersecting) return;
-        entry.target.classList.add('page-section-visible');
-        observer.unobserve(entry.target);
-      });
-    }, { threshold: 0.08, rootMargin: '0px 0px -7% 0px' });
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting) return;
+          entry.target.classList.add('page-section-visible');
+          observer.unobserve(entry.target);
+        });
+      },
+      { threshold: 0.08, rootMargin: '0px 0px -7% 0px' },
+    );
 
     sections.forEach((section) => observer.observe(section));
     return () => observer.disconnect();
@@ -83,9 +86,7 @@ export const PageTransition = ({ children }: PageTransitionProps) => {
       <div
         ref={contentRef}
         className={`transition-all duration-500 ease-out ${
-          isLoaded
-            ? 'opacity-100 translate-y-0'
-            : 'opacity-0 translate-y-4'
+          isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
         }`}
       >
         {children}

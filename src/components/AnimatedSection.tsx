@@ -3,7 +3,17 @@ import { useScrollAnimation } from '@/hooks/use-scroll-animation';
 
 interface AnimatedSectionProps {
   children: ReactNode;
-  animation?: 'fade' | 'slide-up' | 'slide-down' | 'slide-left' | 'slide-right' | 'scale' | 'scale-in' | 'flip' | 'bounce' | 'zoom';
+  animation?:
+    | 'fade'
+    | 'slide-up'
+    | 'slide-down'
+    | 'slide-left'
+    | 'slide-right'
+    | 'scale'
+    | 'scale-in'
+    | 'flip'
+    | 'bounce'
+    | 'zoom';
   delay?: number;
   className?: string;
   threshold?: number;

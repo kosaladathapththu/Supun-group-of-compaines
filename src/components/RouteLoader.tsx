@@ -1,4 +1,4 @@
-import { Loader2 } from "lucide-react";
+import { Loader2 } from 'lucide-react';
 
 export const RouteLoader = () => {
   return (
@@ -11,19 +11,17 @@ export const RouteLoader = () => {
             <Loader2 className="h-16 w-16 text-primary" />
           </div>
         </div>
-        
+
         {/* Loading text */}
         <div className="flex items-center gap-2">
-          <span className="text-lg font-medium text-muted-foreground">
-            Loading
-          </span>
+          <span className="text-lg font-medium text-muted-foreground">Loading</span>
           <span className="flex gap-1">
             <span className="animate-bounce delay-0">.</span>
             <span className="animate-bounce delay-100">.</span>
             <span className="animate-bounce delay-200">.</span>
           </span>
         </div>
-        
+
         {/* Progress bar */}
         <div className="w-64 h-1 bg-muted rounded-full overflow-hidden">
           <div className="h-full bg-gradient-to-r from-primary via-accent to-primary animate-progress-bar" />

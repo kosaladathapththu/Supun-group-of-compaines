@@ -86,7 +86,7 @@ export const BrandShowcase = ({ brands }: BrandShowcaseProps) => {
           </div>
         ))}
       </div>
-      
+
       <style>{`
         div::-webkit-scrollbar {
           display: none;

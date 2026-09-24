@@ -1,24 +1,26 @@
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
-import * as z from "zod";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import { Alert, AlertDescription } from "@/components/ui/alert";
-import { KeyRound, AlertCircle, CheckCircle2, Eye, EyeOff } from "lucide-react";
-import { authAPI, getErrorMessage } from "@/services/api";
+import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { useForm } from 'react-hook-form';
+import { zodResolver } from '@hookform/resolvers/zod';
+import * as z from 'zod';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
+import { Alert, AlertDescription } from '@/components/ui/alert';
+import { KeyRound, AlertCircle, CheckCircle2, Eye, EyeOff } from 'lucide-react';
+import { authAPI, getErrorMessage } from '@/services/api';
 
-const passwordResetSchema = z.object({
-  currentPassword: z.string().min(1, "Current password is required"),
-  newPassword: z.string().min(6, "Password must be at least 6 characters"),
-  confirmPassword: z.string().min(1, "Please confirm your password"),
-}).refine((data) => data.newPassword === data.confirmPassword, {
-  message: "Passwords don't match",
-  path: ["confirmPassword"],
-});
+const passwordResetSchema = z
+  .object({
+    currentPassword: z.string().min(1, 'Current password is required'),
+    newPassword: z.string().min(6, 'Password must be at least 6 characters'),
+    confirmPassword: z.string().min(1, 'Please confirm your password'),
+  })
+  .refine((data) => data.newPassword === data.confirmPassword, {
+    message: "Passwords don't match",
+    path: ['confirmPassword'],
+  });
 
 type PasswordResetForm = z.infer<typeof passwordResetSchema>;
 
@@ -43,15 +45,15 @@ const PasswordReset = () => {
     try {
       setError(null);
       setSuccess(false);
-      
+
       await authAPI.changePassword({
         currentPassword: data.currentPassword,
         newPassword: data.newPassword,
       });
-      
+
       setSuccess(true);
       reset();
-      
+
       // Redirect to login after 2 seconds
       setTimeout(() => {
         localStorage.removeItem('admin_token');
@@ -101,8 +103,8 @@ const PasswordReset = () => {
               <div className="relative">
                 <Input
                   id="currentPassword"
-                  type={showCurrentPassword ? "text" : "password"}
-                  {...register("currentPassword")}
+                  type={showCurrentPassword ? 'text' : 'password'}
+                  {...register('currentPassword')}
                   className="pr-10"
                   disabled={isSubmitting || success}
                 />
@@ -126,8 +128,8 @@ const PasswordReset = () => {
               <div className="relative">
                 <Input
                   id="newPassword"
-                  type={showNewPassword ? "text" : "password"}
-                  {...register("newPassword")}
+                  type={showNewPassword ? 'text' : 'password'}
+                  {...register('newPassword')}
                   className="pr-10"
                   disabled={isSubmitting || success}
                 />
@@ -154,8 +156,8 @@ const PasswordReset = () => {
               <div className="relative">
                 <Input
                   id="confirmPassword"
-                  type={showConfirmPassword ? "text" : "password"}
-                  {...register("confirmPassword")}
+                  type={showConfirmPassword ? 'text' : 'password'}
+                  {...register('confirmPassword')}
                   className="pr-10"
                   disabled={isSubmitting || success}
                 />
@@ -174,17 +176,13 @@ const PasswordReset = () => {
             </div>
 
             <div className="flex gap-4 pt-4">
-              <Button
-                type="submit"
-                disabled={isSubmitting || success}
-                className="flex-1"
-              >
-                {isSubmitting ? "Changing Password..." : "Change Password"}
+              <Button type="submit" disabled={isSubmitting || success} className="flex-1">
+                {isSubmitting ? 'Changing Password...' : 'Change Password'}
               </Button>
               <Button
                 type="button"
                 variant="outline"
-                onClick={() => navigate("/admin")}
+                onClick={() => navigate('/admin')}
                 disabled={isSubmitting}
               >
                 Cancel
