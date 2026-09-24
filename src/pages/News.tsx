@@ -6,30 +6,9 @@ import Seo from '@/components/Seo';
 import { getFileUrl } from '@/services/api';
 import { newsAPI, type NewsArticle } from '@/services/newsApi';
 import newsHeroEditorial from '@/assets/news-hero-editorial.png';
-import helmetManufacturing from '@/assets/helmet-manufacturing.jpg';
-import chromeManufacturing from '@/assets/chrome-manufacturing.jpg';
-import heroCorporate from '@/assets/hero-corporate.jpg';
-import coolingProducts from '@/assets/products/camy-air-conditioners.png';
-import hotelInterior from '@/assets/hotel-interior.jpg';
-import { awards } from '@/data/siteContent';
+import { awardNewsStories } from '@/data/awardNews';
 
 const filters = ['All updates', 'Corporate', 'Manufacturing', 'Retail', 'Hospitality'];
-
-const awardCompanyPaths: Record<string, string> = {
-  'Camy Smart': '/companies/camy-smart',
-  'Aero Star (Aerostar Home Appliances)': '/companies/aerostar-home-appliances',
-  'Supun Group of Companies': '/about',
-  'Fuji Industries': '/companies/fuji-industries',
-  'Supun Arcade Residency': '/companies/supun-arcade-residency',
-};
-
-const awardStoryImages = [
-  helmetManufacturing,
-  chromeManufacturing,
-  heroCorporate,
-  coolingProducts,
-  hotelInterior,
-];
 
 const formatDate = (value?: string | null) => {
   if (!value) return '';
@@ -116,13 +95,11 @@ export default function News() {
               <p className="mb-3 text-xs font-bold uppercase tracking-[.2em] text-[#e53d63]">
                 Recent stories
               </p>
-              {awards.slice(1, 3).map((item, offset) => {
-                const index = offset + 1;
-
+              {awardNewsStories.slice(1, 3).map((item) => {
                 return (
                   <Link
                     key={`${item.award}-${item.awardedTo}`}
-                    to={awardCompanyPaths[item.awardedTo] ?? '/companies'}
+                    to={`/news/${item.slug}`}
                     className="group grid grid-cols-[1fr_6.5rem] gap-4 border-b border-[#10233f]/12 py-6 first:pt-3"
                   >
                     <div>
@@ -137,7 +114,7 @@ export default function News() {
                       </span>
                     </div>
                     <img
-                      src={awardStoryImages[index]}
+                      src={item.image}
                       alt={`${item.awardedTo} news`}
                       className="mt-7 h-28 w-full rounded-lg object-cover transition duration-500 group-hover:scale-[1.03]"
                     />
@@ -147,18 +124,18 @@ export default function News() {
             </div>
 
             <Link
-              to={awardCompanyPaths[awards[0].awardedTo] ?? '/companies'}
+              to={`/news/${awardNewsStories[0].slug}`}
               className="group overflow-hidden rounded-2xl bg-[#f5f6f4]"
             >
               <div className="relative h-[26rem] overflow-hidden md:h-[34rem]">
                 <img
-                  src={awardStoryImages[0]}
-                  alt={`${awards[0].awardedTo} featured news`}
+                  src={awardNewsStories[0].image}
+                  alt={`${awardNewsStories[0].awardedTo} featured news`}
                   className="h-full w-full object-cover transition duration-700 group-hover:scale-[1.025]"
                 />
                 <div className="absolute inset-x-0 bottom-0 h-40 bg-gradient-to-t from-black/70 to-transparent" />
                 <div className="absolute bottom-5 left-5 rounded-xl bg-white/95 p-3 shadow-lg backdrop-blur">
-                  <AwardIssuerMark issuer={awards[0].givenBy} certification />
+                  <AwardIssuerMark issuer={awardNewsStories[0].givenBy} certification />
                 </div>
               </div>
               <div className="p-6 md:p-8">
@@ -166,28 +143,23 @@ export default function News() {
                   Featured story
                 </span>
                 <h3 className="mt-3 text-3xl font-semibold leading-tight tracking-[-.03em]">
-                  {awards[0].awardedTo} receives {awards[0].award}
+                  {awardNewsStories[0].title}
                 </h3>
-                <p className="mt-4 leading-7 text-[#68788d]">
-                  Recognition presented by {awards[0].givenBy}, marking an important achievement for{' '}
-                  {awards[0].awardedTo}.
-                </p>
+                <p className="mt-4 leading-7 text-[#68788d]">{awardNewsStories[0].summary}</p>
               </div>
             </Link>
 
             <div className="space-y-5">
-              {awards.slice(3).map((item, offset) => {
-                const index = offset + 3;
-
+              {awardNewsStories.slice(3).map((item) => {
                 return (
                   <Link
                     key={`${item.award}-${item.awardedTo}`}
-                    to={awardCompanyPaths[item.awardedTo] ?? '/companies'}
+                    to={`/news/${item.slug}`}
                     className="group block overflow-hidden rounded-2xl bg-[#10233f] text-white shadow-[0_14px_32px_rgba(16,35,63,.16)]"
                   >
                     <div className="relative h-48 overflow-hidden">
                       <img
-                        src={awardStoryImages[index]}
+                        src={item.image}
                         alt={`${item.awardedTo} news`}
                         className="h-full w-full object-cover transition duration-500 group-hover:scale-[1.04]"
                       />

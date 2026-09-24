@@ -4,6 +4,12 @@ import { ArrowLeft, CalendarDays, Newspaper, UserRound } from 'lucide-react';
 import Seo, { SITE_NAME, SITE_URL } from '@/components/Seo';
 import { getFileUrl } from '@/services/api';
 import { newsAPI, type NewsArticle } from '@/services/newsApi';
+import { getAwardNewsBySlug } from '@/data/awardNews';
+
+type DisplayArticle = NewsArticle & {
+  localImage?: string;
+  companyPath?: string;
+};
 
 const formatDate = (value?: string | null) => {
   if (!value) return '';
@@ -15,12 +21,31 @@ const formatDate = (value?: string | null) => {
 
 export default function NewsDetail() {
   const { slug } = useParams();
-  const [article, setArticle] = useState<NewsArticle | null>(null);
+  const [article, setArticle] = useState<DisplayArticle | null>(null);
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     if (!slug) return;
     (async () => {
+      const awardStory = getAwardNewsBySlug(slug);
+
+      if (awardStory) {
+        setArticle({
+          id: -1,
+          slug: awardStory.slug,
+          title: awardStory.title,
+          summary: awardStory.summary,
+          content: awardStory.content,
+          category: 'Recognition',
+          author: 'Supun Group of Companies',
+          status: 'published',
+          localImage: awardStory.image,
+          companyPath: awardStory.companyPath,
+        });
+        setIsLoading(false);
+        return;
+      }
+
       try {
         setArticle(await newsAPI.getBySlug(slug));
       } catch {
@@ -51,7 +76,7 @@ export default function NewsDetail() {
       </section>
     );
 
-  const image = getFileUrl(article.featuredImage || undefined) || undefined;
+  const image = article.localImage || getFileUrl(article.featuredImage || undefined) || undefined;
   const canonicalPath = `/news/${article.slug}`;
   const paragraphs = article.content
     .split(/\n{2,}/)
@@ -127,6 +152,14 @@ export default function NewsDetail() {
               {paragraph}
             </p>
           ))}
+          {article.companyPath && (
+            <Link
+              to={article.companyPath}
+              className="mt-10 inline-flex items-center gap-2 rounded-full bg-[#10233f] px-6 py-3 text-sm font-bold text-white transition hover:bg-[#315f9f]"
+            >
+              View company <ArrowLeft className="rotate-180" size={16} />
+            </Link>
+          )}
         </div>
       </article>
     </main>
