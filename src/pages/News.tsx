@@ -1,13 +1,22 @@
 import { useEffect, useMemo, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowRight, CalendarDays, Newspaper } from 'lucide-react';
+import { AwardIssuerMark } from '@/components/AwardIssuerMark';
 import Seo from '@/components/Seo';
 import { getErrorMessage, getFileUrl } from '@/services/api';
 import { newsAPI, type NewsArticle } from '@/services/newsApi';
 import newsHeroEditorial from '@/assets/news-hero-editorial.png';
-import { DUMMY_NEWS_NOTICE, dummyNewsArticles } from '@/data/dummyNews';
+import { awards } from '@/data/siteContent';
 
 const filters = ['All updates', 'Corporate', 'Manufacturing', 'Retail', 'Hospitality'];
+
+const awardCompanyPaths: Record<string, string> = {
+  'Camy Smart': '/companies/camy-smart',
+  'Aero Star (Aerostar Home Appliances)': '/companies/aerostar-home-appliances',
+  'Supun Group of Companies': '/about',
+  'Fuji Industries': '/companies/fuji-industries',
+  'Supun Arcade Residency': '/companies/supun-arcade-residency',
+};
 
 const formatDate = (value?: string | null) => {
   if (!value) return '';
@@ -18,9 +27,7 @@ const formatDate = (value?: string | null) => {
 };
 
 const getArticleImage = (article: NewsArticle) =>
-  article.isDummy
-    ? article.featuredImage || ''
-    : getFileUrl(article.featuredImage || undefined) || '';
+  getFileUrl(article.featuredImage || undefined) || '';
 
 export default function News() {
   const [articles, setArticles] = useState<NewsArticle[]>([]);
@@ -32,10 +39,10 @@ export default function News() {
     (async () => {
       try {
         const published = await newsAPI.getPublished();
-        setArticles([...published, ...dummyNewsArticles]);
+        setArticles(published);
       } catch (error) {
         setLoadError(getErrorMessage(error));
-        setArticles(dummyNewsArticles);
+        setArticles([]);
       } finally {
         setIsLoading(false);
       }
@@ -84,6 +91,52 @@ export default function News() {
         </div>
       </section>
 
+      <section className="border-b border-[#10233f]/10 bg-white px-5 py-16 md:px-8 md:py-20">
+        <div className="mx-auto max-w-7xl">
+          <div className="flex flex-col justify-between gap-5 md:flex-row md:items-end">
+            <div>
+              <p className="text-xs font-bold uppercase tracking-[.22em] text-[#a66d0d]">
+                Awards &amp; recognition
+              </p>
+              <h2 className="mt-3 text-4xl font-bold tracking-[-.04em] md:text-5xl">
+                Achievements across the Group.
+              </h2>
+            </div>
+            <p className="max-w-xl leading-7 text-[#68788d]">
+              National certifications and industry recognition earned by companies across Supun
+              Group.
+            </p>
+          </div>
+
+          <div className="mt-9 grid gap-4 sm:grid-cols-2 lg:grid-cols-5">
+            {awards.map((item) => {
+              const isCertification = item.award.toLowerCase().includes('made in sri lanka');
+
+              return (
+                <Link
+                  key={`${item.award}-${item.awardedTo}`}
+                  to={awardCompanyPaths[item.awardedTo] ?? '/companies'}
+                  className={`group flex min-h-72 flex-col rounded-2xl border p-5 transition duration-300 hover:-translate-y-1 hover:shadow-[0_16px_38px_rgba(16,35,63,.10)] ${isCertification ? 'border-[#d79a22]/30 bg-[#fff9ec]' : 'border-[#10233f]/10 bg-[#f7f9fb]'}`}
+                >
+                  <div className="flex h-20 items-center justify-center rounded-xl bg-white px-3 ring-1 ring-[#10233f]/8">
+                    <AwardIssuerMark issuer={item.givenBy} certification={isCertification} />
+                  </div>
+                  <h3 className="mt-5 text-lg font-bold leading-6">{item.award}</h3>
+                  <p className="mt-2 text-sm leading-6 text-[#68788d]">{item.givenBy}</p>
+                  <span className="mt-auto flex items-center justify-between gap-3 border-t border-[#10233f]/10 pt-4 text-sm font-bold text-[#315f9f]">
+                    {item.awardedTo}
+                    <ArrowRight
+                      size={16}
+                      className="shrink-0 transition group-hover:translate-x-1"
+                    />
+                  </span>
+                </Link>
+              );
+            })}
+          </div>
+        </div>
+      </section>
+
       <section className="px-5 py-16 md:px-8 md:py-24">
         <div className="mx-auto max-w-7xl">
           <div className="flex gap-2 overflow-x-auto pb-3">
@@ -106,18 +159,13 @@ export default function News() {
               <Newspaper className="mx-auto text-[#78be43]" size={34} />
               <h2 className="mt-5 text-2xl font-bold">No approved articles published yet.</h2>
               <p className="mt-3 text-[#68788d]">
-                Create an article in Admin → News and publish it when approved.
+                {loadError
+                  ? 'News updates are temporarily unavailable. Please check again soon.'
+                  : 'Approved Group news and media updates will appear here.'}
               </p>
             </div>
           ) : (
             <div className="mt-8 space-y-6">
-              <div className="flex flex-col gap-2 rounded-2xl border border-amber-300 bg-amber-50 px-5 py-4 text-sm text-amber-950 sm:flex-row sm:items-center sm:justify-between">
-                <span className="font-bold uppercase tracking-[.16em]">Dummy preview stories</span>
-                <span>
-                  {DUMMY_NEWS_NOTICE}
-                  {loadError ? ' Live news could not be loaded.' : ''}
-                </span>
-              </div>
               {featured && (
                 <Link
                   to={`/news/${featured.slug}`}
@@ -134,11 +182,6 @@ export default function News() {
                       <div className="flex h-full items-center justify-center">
                         <Newspaper size={52} className="text-[#315f9f]/35" />
                       </div>
-                    )}
-                    {featured.isDummy && (
-                      <span className="absolute left-5 top-5 rounded-full border-2 border-white bg-amber-500 px-4 py-2 text-xs font-black uppercase tracking-[.2em] text-[#10233f] shadow-lg">
-                        Dummy
-                      </span>
                     )}
                   </div>
                   <div className="flex flex-col p-8 md:p-12">
@@ -182,11 +225,6 @@ export default function News() {
                           <div className="flex h-full items-center justify-center">
                             <Newspaper className="text-[#315f9f]/35" size={38} />
                           </div>
-                        )}
-                        {article.isDummy && (
-                          <span className="absolute left-4 top-4 rounded-full border-2 border-white bg-amber-500 px-3 py-1.5 text-[10px] font-black uppercase tracking-[.18em] text-[#10233f] shadow-lg">
-                            Dummy
-                          </span>
                         )}
                       </div>
                       <div className="p-6">

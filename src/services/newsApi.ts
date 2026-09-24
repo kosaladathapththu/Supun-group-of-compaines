@@ -17,7 +17,6 @@ export interface NewsArticle {
   seoDescription?: string | null;
   createdAt?: string;
   updatedAt?: string;
-  isDummy?: boolean;
 }
 
 export const newsAPI = {
