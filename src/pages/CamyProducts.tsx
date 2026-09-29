@@ -1,6 +1,6 @@
 import { ArrowRight, ExternalLink, Factory, ShieldCheck } from 'lucide-react';
 import { useQuery } from '@tanstack/react-query';
-import Seo from '@/components/Seo';
+import Seo, { SITE_URL } from '@/components/Seo';
 import { camyProducts } from '@/data/siteContent';
 import { getFileUrl, productsAPI, type Product } from '@/services/api';
 import camyBlackLogo from '@/assets/camy-brand-logo.png';
@@ -90,6 +90,40 @@ const CamyProducts = () => {
         title="Camy Products | Made in Sri Lanka | Supun Group"
         description="Explore Camy products made in Sri Lanka, from SLS-certified motorcycle helmets and cookware to dependable home appliances."
         keywords="Camy products Sri Lanka, Camy helmets, Camy cookware, Camy appliances, Made in Sri Lanka"
+        path="/camy-products"
+        jsonLd={{
+          '@context': 'https://schema.org',
+          '@graph': [
+            {
+              '@type': 'CollectionPage',
+              name: 'Camy Products',
+              url: `${SITE_URL}/camy-products`,
+              description:
+                'Camy products made in Sri Lanka, including motorcycle helmets, cookware and home appliances.',
+              mainEntity: {
+                '@type': 'ItemList',
+                numberOfItems: displayProducts.length,
+                itemListElement: displayProducts.map((product, index) => ({
+                  '@type': 'ListItem',
+                  position: index + 1,
+                  name: product.name,
+                })),
+              },
+            },
+            {
+              '@type': 'BreadcrumbList',
+              itemListElement: [
+                { '@type': 'ListItem', position: 1, name: 'Home', item: SITE_URL },
+                {
+                  '@type': 'ListItem',
+                  position: 2,
+                  name: 'Camy Products',
+                  item: `${SITE_URL}/camy-products`,
+                },
+              ],
+            },
+          ],
+        }}
       />
 
       <style>{`

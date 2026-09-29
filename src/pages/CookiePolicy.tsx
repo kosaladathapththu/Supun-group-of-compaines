@@ -1,4 +1,4 @@
-import Seo from '@/components/Seo';
+import Seo, { SITE_URL } from '@/components/Seo';
 
 const CookiePolicy = () => (
   <main className="min-h-screen bg-[#f5f6f4] text-[#10233f]">
@@ -6,6 +6,30 @@ const CookiePolicy = () => (
       title="Cookie Policy | Supun Group of Companies"
       description="Learn how Supun Group of Companies uses necessary and optional cookies and how you can manage your preferences."
       path="/cookie-policy"
+      jsonLd={{
+        '@context': 'https://schema.org',
+        '@graph': [
+          {
+            '@type': 'WebPage',
+            name: 'Cookie Policy',
+            url: `${SITE_URL}/cookie-policy`,
+            description:
+              'How Supun Group of Companies uses cookies and how visitors can manage their preferences.',
+          },
+          {
+            '@type': 'BreadcrumbList',
+            itemListElement: [
+              { '@type': 'ListItem', position: 1, name: 'Home', item: SITE_URL },
+              {
+                '@type': 'ListItem',
+                position: 2,
+                name: 'Cookie Policy',
+                item: `${SITE_URL}/cookie-policy`,
+              },
+            ],
+          },
+        ],
+      }}
     />
     <section className="border-b border-[#10233f]/10 bg-white px-5 pb-16 pt-32 md:px-8 md:pb-20 md:pt-40">
       <div className="mx-auto max-w-5xl">

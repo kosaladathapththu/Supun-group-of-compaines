@@ -46,6 +46,11 @@ const CompanyDetail = () => {
   if (!company)
     return (
       <section className="flex min-h-[70vh] items-center bg-[#f3f6f8]">
+        <Seo
+          title="Company Not Found | Supun Group of Companies"
+          description="The requested Supun Group company page is unavailable."
+          noindex
+        />
         <div className="container mx-auto px-4 text-center">
           <h1 className="text-4xl font-semibold normal-case text-[#102746]">Company not found</h1>
           <p className="mt-4 text-[#637186]">The company page you requested is unavailable.</p>
@@ -71,6 +76,7 @@ const CompanyDetail = () => {
         description={company.description}
         keywords={`${company.shortName}, ${company.industry}, Supun Group of Companies, Sri Lanka`}
         path={canonicalPath}
+        image={heroImage}
         jsonLd={{
           '@context': 'https://schema.org',
           '@graph': [

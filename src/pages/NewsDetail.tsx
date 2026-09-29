@@ -59,12 +59,18 @@ export default function NewsDetail() {
   if (isLoading)
     return (
       <div className="min-h-[60vh] bg-[#f5f6f4] py-32 text-center text-muted-foreground">
+        <Seo title="Loading News | Supun Group of Companies" noindex />
         Loading article...
       </div>
     );
   if (!article)
     return (
       <section className="min-h-[60vh] bg-[#f5f6f4] px-5 py-32 text-center">
+        <Seo
+          title="Article Not Found | Supun Group of Companies"
+          description="The requested Supun Group news article is unavailable."
+          noindex
+        />
         <Newspaper className="mx-auto text-[#78be43]" size={42} />
         <h1 className="mt-5 text-4xl font-bold">Article not found</h1>
         <p className="mt-3 text-[#68788d]">
@@ -93,15 +99,45 @@ export default function NewsDetail() {
         type="article"
         jsonLd={{
           '@context': 'https://schema.org',
-          '@type': 'NewsArticle',
-          headline: article.title,
-          description: article.seoDescription || article.summary,
-          datePublished: article.publishedDate || article.createdAt,
-          dateModified: article.updatedAt || article.createdAt,
-          author: { '@type': 'Organization', name: article.author || SITE_NAME },
-          publisher: { '@type': 'Organization', name: SITE_NAME, url: SITE_URL },
-          mainEntityOfPage: `${SITE_URL}${canonicalPath}`,
-          ...(image ? { image: [image] } : {}),
+          '@graph': [
+            {
+              '@type': 'NewsArticle',
+              headline: article.title,
+              description: article.seoDescription || article.summary,
+              datePublished: article.publishedDate || article.createdAt,
+              dateModified: article.updatedAt || article.createdAt,
+              author: { '@type': 'Organization', name: article.author || SITE_NAME },
+              publisher: {
+                '@type': 'Organization',
+                name: SITE_NAME,
+                url: SITE_URL,
+                logo: {
+                  '@type': 'ImageObject',
+                  url: `${SITE_URL}/supun-group-of-companies-logo.png`,
+                },
+              },
+              mainEntityOfPage: `${SITE_URL}${canonicalPath}`,
+              ...(image ? { image: [image.startsWith('http') ? image : `${SITE_URL}${image}`] } : {}),
+            },
+            {
+              '@type': 'BreadcrumbList',
+              itemListElement: [
+                { '@type': 'ListItem', position: 1, name: 'Home', item: SITE_URL },
+                {
+                  '@type': 'ListItem',
+                  position: 2,
+                  name: 'News & Media',
+                  item: `${SITE_URL}/news`,
+                },
+                {
+                  '@type': 'ListItem',
+                  position: 3,
+                  name: article.title,
+                  item: `${SITE_URL}${canonicalPath}`,
+                },
+              ],
+            },
+          ],
         }}
       />
 

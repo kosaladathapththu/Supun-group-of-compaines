@@ -18,6 +18,7 @@ import {
   X,
 } from 'lucide-react';
 import { authAPI, type User } from '@/services/api';
+import Seo from '@/components/Seo';
 import { Button } from '@/components/ui/button';
 import {
   DropdownMenu,
@@ -168,6 +169,7 @@ export default function AdminLayout() {
 
   return (
     <div className="min-h-screen bg-[#f3f6f8] text-[#10233f]">
+      <Seo title="Website Administration | Supun Group of Companies" noindex />
       <aside className="fixed inset-y-0 left-0 z-40 hidden w-72 flex-col bg-[linear-gradient(180deg,#071b2d,#0b3153)] lg:flex">
         {sidebarContent}
       </aside>

@@ -59,15 +59,40 @@ const Companies = () => {
         title="Our Companies | Supun Group of Companies"
         description="Explore 11 Supun Group companies across manufacturing, retail, distribution and hospitality in Sri Lanka."
         keywords="Supun Group companies, Camy Smart, Supun Traders, Supun Super Center, Fuji Industries, Sri Lanka manufacturing"
+        path="/companies"
         jsonLd={{
           '@context': 'https://schema.org',
-          '@type': 'ItemList',
-          itemListElement: companies.map((company, index) => ({
-            '@type': 'ListItem',
-            position: index + 1,
-            name: company.name,
-            url: `${SITE_URL}/companies/${company.id}`,
-          })),
+          '@graph': [
+            {
+              '@type': 'CollectionPage',
+              name: 'Supun Group Companies',
+              url: `${SITE_URL}/companies`,
+              description:
+                'Supun Group companies across manufacturing, retail, distribution and hospitality in Sri Lanka.',
+              mainEntity: {
+                '@type': 'ItemList',
+                numberOfItems: companies.length,
+                itemListElement: companies.map((company, index) => ({
+                  '@type': 'ListItem',
+                  position: index + 1,
+                  name: company.name,
+                  url: `${SITE_URL}/companies/${company.id}`,
+                })),
+              },
+            },
+            {
+              '@type': 'BreadcrumbList',
+              itemListElement: [
+                { '@type': 'ListItem', position: 1, name: 'Home', item: SITE_URL },
+                {
+                  '@type': 'ListItem',
+                  position: 2,
+                  name: 'Our Companies',
+                  item: `${SITE_URL}/companies`,
+                },
+              ],
+            },
+          ],
         }}
       />
 

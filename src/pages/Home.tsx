@@ -111,22 +111,39 @@ const Home = () => {
         title="Supun Group of Companies | Built in Sri Lanka. Built to Last."
         description="Supun Group of Companies is a Sri Lankan family-run group with 11 companies across manufacturing, retail, distribution and hospitality, with roots going back to 1978."
         keywords="Supun Group of Companies, Sri Lanka manufacturing, Camy, Supun Traders, Supun Super Center, Sri Lankan conglomerate"
+        path="/"
         jsonLd={{
           '@context': 'https://schema.org',
-          '@type': 'Organization',
-          name: SITE_NAME,
-          url: SITE_URL,
-          logo: DEFAULT_IMAGE,
-          foundingDate: '1978',
-          description:
-            'A Sri Lankan family-run group operating across manufacturing, retail, distribution and hospitality.',
-          address: { '@type': 'PostalAddress', addressLocality: 'Colombo', addressCountry: 'LK' },
-          contactPoint: {
-            '@type': 'ContactPoint',
-            telephone: '+94-112-055-026',
-            contactType: 'general enquiries',
-            email: 'info@supungroup.lk',
-          },
+          '@graph': [
+            {
+              '@type': 'WebSite',
+              '@id': `${SITE_URL}/#website`,
+              name: SITE_NAME,
+              url: SITE_URL,
+              inLanguage: 'en-LK',
+            },
+            {
+              '@type': 'Organization',
+              '@id': `${SITE_URL}/#organization`,
+              name: SITE_NAME,
+              url: SITE_URL,
+              logo: { '@type': 'ImageObject', url: DEFAULT_IMAGE },
+              foundingDate: '1978',
+              description:
+                'A Sri Lankan family-run group operating across manufacturing, retail, distribution and hospitality.',
+              address: {
+                '@type': 'PostalAddress',
+                addressLocality: 'Colombo',
+                addressCountry: 'LK',
+              },
+              contactPoint: {
+                '@type': 'ContactPoint',
+                telephone: '+94-112-055-026',
+                contactType: 'general enquiries',
+                email: 'info@supungroup.lk',
+              },
+            },
+          ],
         }}
       />
 

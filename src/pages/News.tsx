@@ -2,7 +2,7 @@ import { useEffect, useMemo, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowRight, CalendarDays, Newspaper } from 'lucide-react';
 import { AwardIssuerMark } from '@/components/AwardIssuerMark';
-import Seo from '@/components/Seo';
+import Seo, { SITE_NAME, SITE_URL } from '@/components/Seo';
 import { getFileUrl } from '@/services/api';
 import { newsAPI, type NewsArticle } from '@/services/newsApi';
 import newsHeroEditorial from '@/assets/news-hero-editorial.png';
@@ -55,6 +55,41 @@ export default function News() {
         title="News & Media | Supun Group of Companies"
         description="Official news, announcements and media updates from Supun Group of Companies in Sri Lanka."
         keywords="Supun Group news, Supun Group media, Camy news, Sri Lanka manufacturing news"
+        path="/news"
+        jsonLd={{
+          '@context': 'https://schema.org',
+          '@graph': [
+            {
+              '@type': 'CollectionPage',
+              name: `News & Media | ${SITE_NAME}`,
+              url: `${SITE_URL}/news`,
+              description:
+                'Official news, announcements and media updates from Supun Group of Companies.',
+              mainEntity: {
+                '@type': 'ItemList',
+                numberOfItems: awardNewsStories.length,
+                itemListElement: awardNewsStories.map((story, index) => ({
+                  '@type': 'ListItem',
+                  position: index + 1,
+                  name: story.title,
+                  url: `${SITE_URL}/news/${story.slug}`,
+                })),
+              },
+            },
+            {
+              '@type': 'BreadcrumbList',
+              itemListElement: [
+                { '@type': 'ListItem', position: 1, name: 'Home', item: SITE_URL },
+                {
+                  '@type': 'ListItem',
+                  position: 2,
+                  name: 'News & Media',
+                  item: `${SITE_URL}/news`,
+                },
+              ],
+            },
+          ],
+        }}
       />
 
       <section className="relative isolate flex min-h-[620px] items-end overflow-hidden border-b border-black/20 px-5 pb-16 pt-32 text-white md:px-8 md:pb-24 md:pt-40">
