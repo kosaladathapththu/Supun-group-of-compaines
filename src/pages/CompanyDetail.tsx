@@ -193,7 +193,9 @@ const CompanyDetail = () => {
         className="group fixed left-4 top-1/2 z-40 hidden -translate-y-1/2 flex-col items-center gap-2 text-center text-[#0b2747] xl:flex"
       >
         <span className="flex h-14 w-14 items-center justify-center rounded-full border border-[#0b2747]/10 bg-white text-[#0b2747] shadow-[0_12px_32px_rgba(11,39,71,.18)] transition duration-300 group-hover:-translate-x-1 group-hover:border-[#78be43] group-hover:bg-[#78be43] group-hover:text-white group-focus-visible:ring-2 group-focus-visible:ring-[#315f9f] group-focus-visible:ring-offset-2">
-          <ArrowLeft size={23} strokeWidth={2.2} />
+          <span className="-mt-0.5 text-[2rem] font-light leading-none" aria-hidden="true">
+            &lt;
+          </span>
         </span>
         <span className="max-w-[6.5rem] text-[10px] font-bold uppercase leading-4 tracking-[0.12em] transition group-hover:text-[#315f9f]">
           Back to all groups
