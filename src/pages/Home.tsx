@@ -441,7 +441,6 @@ const Home = () => {
         />
         <div className="container mx-auto px-4">
           <div className="relative overflow-hidden rounded-[2rem] border border-[#10233f]/10 bg-white shadow-[0_28px_80px_rgba(16,35,63,.14)] md:rounded-[3rem]">
-            <div className="absolute inset-x-0 top-0 z-20 h-1 bg-gradient-to-r from-[#315f9f] via-[#78be43] to-[#d99a24]" />
             <div className="grid lg:grid-cols-[.88fr_1.12fr]">
               <AnimatedSection animation="slide-right" duration={900} triggerOnce={false}>
                 <div className="relative h-full min-h-[440px] overflow-hidden bg-[#efe8da] lg:min-h-[720px]">
@@ -451,9 +450,6 @@ const Home = () => {
                     className="absolute inset-0 h-full w-full object-cover object-center"
                   />
                   <div className="absolute inset-0 ring-1 ring-inset ring-black/5" />
-                  <div className="absolute bottom-5 left-5 rounded-full border border-white/25 bg-[#071b2d]/90 px-4 py-2 text-[10px] font-bold uppercase tracking-[0.18em] text-white shadow-lg backdrop-blur-md sm:bottom-7 sm:left-7">
-                    Three companies certified
-                  </div>
                 </div>
               </AnimatedSection>
 
@@ -523,21 +519,32 @@ const Home = () => {
                     </p>
                   </div>
 
-                  <div className="mt-auto grid grid-cols-3 gap-3 border-t border-[#10233f]/10 pt-8">
-                    {[
-                      ['03', 'Companies'],
-                      ['100%', 'Sri Lankan'],
-                      ['01', 'Shared belief'],
-                    ].map(([value, label]) => (
-                      <div key={label}>
-                        <strong className="block text-2xl font-semibold tracking-[-0.04em] text-[#10233f] sm:text-3xl">
-                          {value}
-                        </strong>
-                        <span className="mt-1 block text-[9px] font-bold uppercase tracking-[0.15em] text-[#667388] sm:text-[10px]">
-                          {label}
+                  <div className="mt-auto border-t border-[#10233f]/10 pt-8">
+                    <div className="relative overflow-hidden rounded-2xl bg-[#071b2d] px-6 py-5 text-white shadow-[0_16px_38px_rgba(7,27,45,.18)] sm:px-7 sm:py-6">
+                      <div
+                        className="absolute inset-0 bg-[radial-gradient(circle_at_92%_20%,rgba(120,190,67,.28),transparent_32%),linear-gradient(110deg,transparent_45%,rgba(49,95,159,.28))]"
+                        aria-hidden="true"
+                      />
+                      <div className="relative flex items-center justify-between gap-6">
+                        <div className="flex items-center gap-5">
+                          <strong className="text-4xl font-semibold leading-none tracking-[-0.06em] text-[#efbd55] sm:text-5xl">
+                            100%
+                          </strong>
+                          <span className="h-11 w-px bg-white/20" />
+                          <div>
+                            <span className="block text-lg font-semibold tracking-[-0.02em] sm:text-xl">
+                              Sri Lankan
+                            </span>
+                            <span className="mt-1 block text-[9px] font-bold uppercase tracking-[0.2em] text-white/50 sm:text-[10px]">
+                              Proudly made here
+                            </span>
+                          </div>
+                        </div>
+                        <span className="hidden h-11 w-11 items-center justify-center rounded-full border border-white/15 bg-white/10 text-[#78be43] sm:flex">
+                          <Sparkles size={20} strokeWidth={1.7} />
                         </span>
                       </div>
-                    ))}
+                    </div>
                   </div>
                 </div>
               </AnimatedSection>
