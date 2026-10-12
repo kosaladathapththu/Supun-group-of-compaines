@@ -4,7 +4,6 @@ import {
   ArrowDown,
   ArrowRight,
   Factory,
-  Globe2,
   Hotel,
   ShieldCheck,
   ShoppingBag,
@@ -218,7 +217,7 @@ const Home = () => {
               </div>
               <div className="mt-5 flex items-end gap-3">
                 <strong className="hero-stat-blue text-[5.75rem] font-semibold leading-[.8] tracking-[-0.09em]">
-                  46
+                  48
                 </strong>
                 <span className="mb-1 text-xl font-light text-[#f4bd59]">+</span>
               </div>
@@ -360,7 +359,7 @@ const Home = () => {
                     Local capability. Lasting value.
                   </h3>
                   <div className="mt-6 flex items-center gap-5 border-t border-white/25 pt-5">
-                    <strong className="text-4xl font-semibold tracking-[-0.05em]">46+</strong>
+                    <strong className="text-4xl font-semibold tracking-[-0.05em]">48+</strong>
                     <span className="max-w-[9rem] text-xs font-semibold uppercase leading-relaxed tracking-[0.14em] text-white/70">
                       Years of trusted enterprise
                     </span>
@@ -534,12 +533,6 @@ const Home = () => {
         >
           <div className="relative isolate overflow-hidden rounded-[2rem] bg-[#071b2d] px-7 py-12 text-white shadow-[0_30px_80px_rgba(7,27,45,.20)] sm:px-12 sm:py-16 md:rounded-[3rem] lg:px-20 lg:py-20">
             <div className="absolute inset-y-0 right-0 -z-10 w-full bg-[radial-gradient(circle_at_85%_35%,rgba(217,154,36,.16),transparent_30%),linear-gradient(115deg,transparent_45%,rgba(25,83,132,.38))] lg:w-2/3" />
-            <Globe2
-              className="absolute -bottom-28 -right-24 -z-10 h-[28rem] w-[28rem] text-white/[.06]"
-              strokeWidth={0.65}
-              aria-hidden="true"
-            />
-
             <div className="grid gap-12 lg:grid-cols-[1fr_18rem] lg:items-end lg:gap-20">
               <div>
                 <p className="mb-6 flex items-center gap-3 text-xs font-bold uppercase tracking-[0.24em] text-[#efbd55]">
