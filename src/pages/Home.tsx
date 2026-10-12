@@ -475,7 +475,7 @@ const Home = () => {
                       We are proud to hold the official “Made in Sri Lanka” certification, awarded
                       by the{' '}
                       <a
-                        href="https://www.linkedin.com/company/ministry-of-industries-sri-lanka/"
+                        href="https://www.industry.gov.lk/"
                         target="_blank"
                         rel="noreferrer"
                         className="font-semibold text-[#315f9f] transition hover:text-[#78be43]"
@@ -484,7 +484,7 @@ const Home = () => {
                       </a>{' '}
                       and the{' '}
                       <a
-                        href="https://www.linkedin.com/company/neda-enterprise-development-authority/"
+                        href="https://neda.gov.lk/"
                         target="_blank"
                         rel="noreferrer"
                         className="font-semibold text-[#315f9f] transition hover:text-[#78be43]"
