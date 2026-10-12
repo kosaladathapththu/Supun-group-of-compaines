@@ -187,23 +187,24 @@ const CompanyDetail = () => {
         </div>
       </section>
 
-      <Link
-        to="/companies"
-        aria-label="Back to all group companies"
-        className="group fixed left-4 top-1/2 z-40 hidden -translate-y-1/2 flex-col items-center gap-2 text-center text-[#0b2747] xl:flex"
-      >
-        <span className="flex h-14 w-14 items-center justify-center rounded-full border border-[#0b2747]/10 bg-white text-[#0b2747] shadow-[0_12px_32px_rgba(11,39,71,.18)] transition duration-300 group-hover:-translate-x-1 group-hover:border-[#78be43] group-hover:bg-[#78be43] group-hover:text-white group-focus-visible:ring-2 group-focus-visible:ring-[#315f9f] group-focus-visible:ring-offset-2">
-          <span className="-mt-0.5 text-[2rem] font-light leading-none" aria-hidden="true">
-            &lt;
-          </span>
-        </span>
-        <span className="max-w-[6.5rem] text-[10px] font-bold uppercase leading-4 tracking-[0.12em] transition group-hover:text-[#315f9f]">
-          Back to all groups
-        </span>
-      </Link>
-
       <section className="py-12 md:py-16">
-        <div className="company-detail-content-grid container mx-auto grid max-w-7xl gap-8 px-4">
+        <div className="company-detail-content-grid container relative mx-auto grid max-w-7xl gap-8 px-4">
+          <aside className="absolute -left-28 top-0 hidden h-full w-24 xl:block">
+            <Link
+              to="/companies"
+              aria-label="Back to all group companies"
+              className="group sticky top-28 flex flex-col items-center gap-2 text-center text-[#0b2747]"
+            >
+              <span className="flex h-14 w-14 items-center justify-center text-[#041426] transition duration-300 group-hover:-translate-x-1 group-hover:text-[#315f9f] group-focus-visible:ring-2 group-focus-visible:ring-[#315f9f] group-focus-visible:ring-offset-2">
+                <span className="-mt-1 text-[3.25rem] font-black leading-none" aria-hidden="true">
+                  &lt;
+                </span>
+              </span>
+              <span className="max-w-[6.5rem] text-[11px] font-black uppercase leading-4 tracking-[0.1em] text-[#041426] transition group-hover:text-[#315f9f]">
+                Back to all groups
+              </span>
+            </Link>
+          </aside>
           <div className="company-detail-primary min-w-0 space-y-8">
             <article className="rounded-2xl border border-[#102746]/10 bg-white p-7 shadow-[0_10px_30px_rgba(16,39,70,.06)] sm:p-9">
               <p className="text-xs font-bold uppercase tracking-[.18em] text-[#315f9f]">
