@@ -603,7 +603,13 @@ const Home = () => {
                       companyId={company.id}
                       companyName={company.shortName}
                       className="h-44 w-full max-w-[350px] !overflow-visible !bg-transparent transition duration-500"
-                      imageClassName={`h-full w-full mix-blend-multiply transition-transform duration-500 ${keepOriginalLogoSize(company.id) ? 'scale-[1.2] group-hover:scale-[1.25]' : 'scale-[1.45] group-hover:scale-[1.5]'}`}
+                      imageClassName={`h-full w-full mix-blend-multiply transition-transform duration-500 ${
+                        company.id === 'new-camy-smart'
+                          ? 'scale-[1.9] [filter:brightness(0)_saturate(100%)_invert(18%)_sepia(97%)_saturate(4591%)_hue-rotate(351deg)_brightness(101%)_contrast(87%)] group-hover:scale-[1.96]'
+                          : keepOriginalLogoSize(company.id)
+                            ? 'scale-[1.35] group-hover:scale-[1.41]'
+                            : 'scale-[1.62] group-hover:scale-[1.68]'
+                      }`}
                     />
                   </div>
                   <div className="relative flex flex-1 flex-col px-2 pb-1 pt-7">
