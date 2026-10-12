@@ -434,13 +434,14 @@ const Home = () => {
         </div>
       </section>
 
-      <section className="relative isolate overflow-hidden bg-[#f7f1e5] py-12 text-[#071b2d] sm:py-16 md:py-24">
+      <section className="relative isolate overflow-hidden bg-[#edf3fb] py-12 text-[#071b2d] sm:py-16 md:py-24">
         <div
-          className="absolute inset-0 -z-10 bg-[radial-gradient(circle_at_12%_18%,rgba(217,154,36,.16),transparent_28%),radial-gradient(circle_at_88%_80%,rgba(120,190,67,.12),transparent_30%)]"
+          className="absolute inset-0 -z-10 bg-[radial-gradient(circle_at_10%_16%,rgba(49,95,159,.14),transparent_30%),radial-gradient(circle_at_90%_82%,rgba(120,190,67,.16),transparent_32%)]"
           aria-hidden="true"
         />
         <div className="container mx-auto px-4">
-          <div className="overflow-hidden rounded-[2rem] border border-[#8a1930]/10 bg-[#fffdf8] shadow-[0_28px_80px_rgba(63,39,20,.13)] md:rounded-[3rem]">
+          <div className="relative overflow-hidden rounded-[2rem] border border-[#10233f]/10 bg-white shadow-[0_28px_80px_rgba(16,35,63,.14)] md:rounded-[3rem]">
+            <div className="absolute inset-x-0 top-0 z-20 h-1 bg-gradient-to-r from-[#315f9f] via-[#78be43] to-[#d99a24]" />
             <div className="grid lg:grid-cols-[.88fr_1.12fr]">
               <AnimatedSection animation="slide-right" duration={900} triggerOnce={false}>
                 <div className="relative h-full min-h-[440px] overflow-hidden bg-[#efe8da] lg:min-h-[720px]">
@@ -450,7 +451,7 @@ const Home = () => {
                     className="absolute inset-0 h-full w-full object-cover object-center"
                   />
                   <div className="absolute inset-0 ring-1 ring-inset ring-black/5" />
-                  <div className="absolute bottom-5 left-5 rounded-full border border-white/60 bg-white/90 px-4 py-2 text-[10px] font-bold uppercase tracking-[0.18em] text-[#73172b] shadow-lg backdrop-blur-md sm:bottom-7 sm:left-7">
+                  <div className="absolute bottom-5 left-5 rounded-full border border-white/25 bg-[#071b2d]/90 px-4 py-2 text-[10px] font-bold uppercase tracking-[0.18em] text-white shadow-lg backdrop-blur-md sm:bottom-7 sm:left-7">
                     Three companies certified
                   </div>
                 </div>
@@ -458,18 +459,18 @@ const Home = () => {
 
               <AnimatedSection animation="slide-left" delay={120} duration={950} triggerOnce={false}>
                 <div className="flex h-full flex-col p-7 sm:p-10 lg:p-14 xl:p-16">
-                  <div className="flex items-center gap-3 text-[11px] font-bold uppercase tracking-[0.24em] text-[#a66d0d]">
-                    <span className="flex h-10 w-10 items-center justify-center rounded-full bg-[#f6e7bd] text-[#8a1930]">
+                  <div className="flex items-center gap-3 text-[11px] font-bold uppercase tracking-[0.24em] text-[#315f9f]">
+                    <span className="flex h-10 w-10 items-center justify-center rounded-full bg-[#e8eef6] text-[#315f9f] ring-1 ring-[#315f9f]/10">
                       <ShieldCheck size={20} strokeWidth={1.8} />
                     </span>
                     Officially certified
                   </div>
 
-                  <h2 className="mt-7 max-w-2xl text-4xl font-semibold normal-case leading-[1.02] tracking-[-0.045em] text-[#73172b] sm:text-5xl xl:text-6xl">
-                    Proudly Made in Sri Lanka.
+                  <h2 className="mt-7 max-w-2xl text-4xl font-semibold normal-case leading-[1.02] tracking-[-0.045em] text-[#071b2d] sm:text-5xl xl:text-6xl">
+                    Proudly Made in <span className="text-[#d99a24]">Sri Lanka.</span>
                   </h2>
 
-                  <div className="mt-8 space-y-5 text-base leading-8 text-[#5d5a55]">
+                  <div className="mt-8 space-y-5 text-base leading-8 text-[#526278]">
                     <p>
                       We are proud to hold the official “Made in Sri Lanka” certification, awarded
                       by the{' '}
@@ -477,7 +478,7 @@ const Home = () => {
                         href="https://www.linkedin.com/company/ministry-of-industries-sri-lanka/"
                         target="_blank"
                         rel="noreferrer"
-                        className="font-semibold text-[#73172b] underline decoration-[#d99a24] decoration-2 underline-offset-4 transition hover:text-[#a66d0d]"
+                        className="font-semibold text-[#315f9f] transition hover:text-[#78be43]"
                       >
                         Ministry of Industries – Sri Lanka
                       </a>{' '}
@@ -486,7 +487,7 @@ const Home = () => {
                         href="https://www.linkedin.com/company/neda-enterprise-development-authority/"
                         target="_blank"
                         rel="noreferrer"
-                        className="font-semibold text-[#73172b] underline decoration-[#d99a24] decoration-2 underline-offset-4 transition hover:text-[#a66d0d]"
+                        className="font-semibold text-[#315f9f] transition hover:text-[#78be43]"
                       >
                         National Enterprise Development Authority
                       </a>{' '}
@@ -495,7 +496,7 @@ const Home = () => {
                         href="https://www.linkedin.com/showcase/camy-sri-lanka/"
                         target="_blank"
                         rel="noreferrer"
-                        className="font-semibold text-[#73172b] underline decoration-[#d99a24] decoration-2 underline-offset-4 transition hover:text-[#a66d0d]"
+                        className="font-semibold text-[#315f9f] transition hover:text-[#78be43]"
                       >
                         Camy Sri Lanka
                       </a>{' '}
@@ -507,7 +508,7 @@ const Home = () => {
                         href="https://www.linkedin.com/company/supun-group-of-companies/"
                         target="_blank"
                         rel="noreferrer"
-                        className="font-semibold text-[#73172b] underline decoration-[#d99a24] decoration-2 underline-offset-4 transition hover:text-[#a66d0d]"
+                        className="font-semibold text-[#315f9f] transition hover:text-[#78be43]"
                       >
                         Supun Group of Companies
                       </a>
@@ -515,24 +516,24 @@ const Home = () => {
                       commitment to manufacturing here, creating livelihoods for Sri Lankans and
                       keeping value within our economy.
                     </p>
-                    <p className="border-l-2 border-[#d99a24] pl-5 font-medium text-[#302c27]">
+                    <p className="rounded-r-2xl border-l-2 border-[#78be43] bg-[#f3f8f0] py-4 pl-5 pr-4 font-medium text-[#23364e]">
                       We believe Sri Lanka can. Every product we make is proof of that belief, and
                       our promise to keep investing in the people, skills and industry that will
                       move our nation forward.
                     </p>
                   </div>
 
-                  <div className="mt-auto grid grid-cols-3 gap-3 border-t border-[#73172b]/10 pt-8">
+                  <div className="mt-auto grid grid-cols-3 gap-3 border-t border-[#10233f]/10 pt-8">
                     {[
                       ['03', 'Companies'],
                       ['100%', 'Sri Lankan'],
                       ['01', 'Shared belief'],
                     ].map(([value, label]) => (
                       <div key={label}>
-                        <strong className="block text-2xl font-semibold tracking-[-0.04em] text-[#73172b] sm:text-3xl">
+                        <strong className="block text-2xl font-semibold tracking-[-0.04em] text-[#10233f] sm:text-3xl">
                           {value}
                         </strong>
-                        <span className="mt-1 block text-[9px] font-bold uppercase tracking-[0.15em] text-[#7b756d] sm:text-[10px]">
+                        <span className="mt-1 block text-[9px] font-bold uppercase tracking-[0.15em] text-[#667388] sm:text-[10px]">
                           {label}
                         </span>
                       </div>
