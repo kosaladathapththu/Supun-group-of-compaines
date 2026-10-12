@@ -598,16 +598,13 @@ const Home = () => {
                   to={`/companies/${company.id}`}
                   className="company-glass group relative flex min-h-[450px] w-full flex-col overflow-hidden rounded-[1.5rem] p-5 transition duration-500 hover:-translate-y-2 md:p-6"
                 >
-                  <div className="company-card-visual relative flex min-h-[178px] items-center justify-center overflow-hidden rounded-[1.15rem] border border-primary/10 bg-white/80 px-7 py-6">
+                  <div className="relative flex min-h-[190px] items-center justify-center px-2 py-4">
                     <CompanyLogo
                       companyId={company.id}
                       companyName={company.shortName}
-                      className="h-36 w-full max-w-[310px] bg-transparent transition duration-500"
-                      imageClassName={`h-full w-full transition-transform duration-500 ${keepOriginalLogoSize(company.id) ? 'group-hover:scale-[1.05]' : 'scale-[1.2] group-hover:scale-[1.25]'}`}
+                      className="h-44 w-full max-w-[350px] !overflow-visible !bg-transparent transition duration-500"
+                      imageClassName={`h-full w-full mix-blend-multiply transition-transform duration-500 ${keepOriginalLogoSize(company.id) ? 'scale-[1.2] group-hover:scale-[1.25]' : 'scale-[1.45] group-hover:scale-[1.5]'}`}
                     />
-                    <span className="absolute bottom-4 right-4 inline-flex rounded-full border border-white bg-[#eef4fb]/95 px-3 py-1.5 text-[9px] font-bold uppercase tracking-[0.15em] text-primary shadow-sm">
-                      {company.industry}
-                    </span>
                   </div>
                   <div className="relative flex flex-1 flex-col px-2 pb-1 pt-7">
                     <div className="mb-4 flex items-center gap-3 text-[10px] font-bold uppercase tracking-[.16em] text-[#738197]">
