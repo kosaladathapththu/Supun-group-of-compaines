@@ -6,7 +6,6 @@ import {
   CalendarDays,
   Check,
   ExternalLink,
-  Globe2,
   Mail,
   MapPin,
   Phone,
@@ -46,6 +45,11 @@ const CompanyDetail = () => {
   if (!company)
     return (
       <section className="flex min-h-[70vh] items-center bg-[#f3f6f8]">
+        <Seo
+          title="Company Not Found | Supun Group of Companies"
+          description="The requested Supun Group company page is unavailable."
+          noindex
+        />
         <div className="container mx-auto px-4 text-center">
           <h1 className="text-4xl font-semibold normal-case text-[#102746]">Company not found</h1>
           <p className="mt-4 text-[#637186]">The company page you requested is unavailable.</p>
@@ -71,6 +75,7 @@ const CompanyDetail = () => {
         description={company.description}
         keywords={`${company.shortName}, ${company.industry}, Supun Group of Companies, Sri Lanka`}
         path={canonicalPath}
+        image={heroImage}
         jsonLd={{
           '@context': 'https://schema.org',
           '@graph': [
@@ -119,13 +124,6 @@ const CompanyDetail = () => {
         <div className="absolute inset-0 -z-10 bg-gradient-to-t from-[#041426]/55 via-transparent to-[#041426]/15" />
         <div className="container mx-auto px-4">
           <div className="mb-7 flex flex-wrap items-center gap-4">
-            <Link
-              to="/companies"
-              className="inline-flex items-center gap-2 text-sm font-semibold text-white/75 transition hover:text-[#efbd55]"
-            >
-              <ArrowLeft size={16} />
-              All Group Companies
-            </Link>
             {company.website && (
               <a
                 href={company.website}
@@ -189,7 +187,23 @@ const CompanyDetail = () => {
       </section>
 
       <section className="py-12 md:py-16">
-        <div className="company-detail-content-grid container mx-auto grid max-w-7xl gap-8 px-4">
+        <div className="company-detail-content-grid container relative mx-auto grid max-w-7xl gap-8 px-4">
+          <aside className="absolute -left-28 top-0 hidden h-full w-24 xl:block">
+            <Link
+              to="/companies"
+              aria-label="Back to all group companies"
+              className="group sticky top-28 flex flex-col items-center gap-2 text-center text-[#0b2747]"
+            >
+              <span className="flex h-14 w-14 items-center justify-center text-[#041426] transition duration-300 group-hover:-translate-x-1 group-hover:text-[#315f9f] group-focus-visible:ring-2 group-focus-visible:ring-[#315f9f] group-focus-visible:ring-offset-2">
+                <span className="-mt-1 text-[3.25rem] font-black leading-none" aria-hidden="true">
+                  &lt;
+                </span>
+              </span>
+              <span className="max-w-[6.5rem] text-[11px] font-black uppercase leading-4 tracking-[0.1em] text-[#041426] transition group-hover:text-[#315f9f]">
+                Back to all groups
+              </span>
+            </Link>
+          </aside>
           <div className="company-detail-primary min-w-0 space-y-8">
             <article className="rounded-2xl border border-[#102746]/10 bg-white p-7 shadow-[0_10px_30px_rgba(16,39,70,.06)] sm:p-9">
               <p className="text-xs font-bold uppercase tracking-[.18em] text-[#315f9f]">
@@ -356,11 +370,6 @@ const CompanyDetail = () => {
       <section className="relative overflow-hidden bg-[#f3f7fb] px-4 pb-12 sm:pb-14 md:pb-20">
         <div className="relative mx-auto max-w-7xl isolate overflow-hidden rounded-[2rem] bg-[#071b2d] px-7 py-10 text-white shadow-[0_30px_80px_rgba(7,27,45,.20)] sm:px-12 sm:py-12 md:rounded-[3rem] lg:px-20 lg:py-14">
           <div className="absolute inset-y-0 right-0 -z-10 w-full bg-[radial-gradient(circle_at_85%_35%,rgba(217,154,36,.16),transparent_30%),linear-gradient(115deg,transparent_45%,rgba(25,83,132,.38))] lg:w-2/3" />
-          <Globe2
-            className="absolute -bottom-28 -right-24 -z-10 h-[28rem] w-[28rem] text-white/[.06]"
-            strokeWidth={0.65}
-            aria-hidden="true"
-          />
           <div className="flex flex-col gap-8 sm:flex-row sm:items-center sm:justify-between">
             <h2 className="text-4xl font-semibold normal-case leading-none tracking-[-0.04em] text-[#efbd55] sm:text-5xl">
               Explore the Group

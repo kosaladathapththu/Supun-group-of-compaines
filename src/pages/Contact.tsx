@@ -77,15 +77,44 @@ const Contact = () => {
     <div className="min-h-screen bg-[#f4efe5] text-[#10233f]">
       <Seo
         title="Contact Supun Group of Companies | Colombo, Sri Lanka"
-        description="Contact Supun Group of Companies in Colombo, Sri Lanka."
+        description="Contact Supun Group of Companies in Colombo for corporate, manufacturing, retail, distribution and hospitality enquiries."
         keywords="Contact Supun Group, Supun Group Colombo, info@supungroup.lk"
+        path="/contact"
         jsonLd={{
           '@context': 'https://schema.org',
-          '@type': 'Organization',
-          name: SITE_NAME,
-          url: SITE_URL,
-          email: 'info@supungroup.lk',
-          telephone: '+94 112 055 026',
+          '@graph': [
+            {
+              '@type': 'ContactPage',
+              name: `Contact ${SITE_NAME}`,
+              url: `${SITE_URL}/contact`,
+              about: { '@id': `${SITE_URL}/#organization` },
+            },
+            {
+              '@type': 'Organization',
+              '@id': `${SITE_URL}/#organization`,
+              name: SITE_NAME,
+              url: SITE_URL,
+              email: 'info@supungroup.lk',
+              telephone: '+94 112 055 026',
+              address: {
+                '@type': 'PostalAddress',
+                addressLocality: 'Colombo',
+                addressCountry: 'LK',
+              },
+            },
+            {
+              '@type': 'BreadcrumbList',
+              itemListElement: [
+                { '@type': 'ListItem', position: 1, name: 'Home', item: SITE_URL },
+                {
+                  '@type': 'ListItem',
+                  position: 2,
+                  name: 'Contact',
+                  item: `${SITE_URL}/contact`,
+                },
+              ],
+            },
+          ],
         }}
       />
 

@@ -4,7 +4,6 @@ import {
   ArrowDown,
   ArrowRight,
   Factory,
-  Globe2,
   Hotel,
   ShieldCheck,
   ShoppingBag,
@@ -18,6 +17,8 @@ import { sectorHighlights, siteStats } from '@/data/siteContent';
 import heroVideo from '@/assets/supun-group-hero-optimized.mp4';
 import manufacturingImage from '@/assets/sector-manufacturing-v2.jpg';
 import camyBrandLogo from '@/assets/camy-brand-logo.png';
+import certificationImage from '@/assets/made-in-sri-lanka-certification.jpg';
+import camyRedLogo from '@/assets/camy-logo-red-transparent.png';
 
 const sectorMeta = [
   { icon: Factory },
@@ -111,22 +112,39 @@ const Home = () => {
         title="Supun Group of Companies | Built in Sri Lanka. Built to Last."
         description="Supun Group of Companies is a Sri Lankan family-run group with 11 companies across manufacturing, retail, distribution and hospitality, with roots going back to 1978."
         keywords="Supun Group of Companies, Sri Lanka manufacturing, Camy, Supun Traders, Supun Super Center, Sri Lankan conglomerate"
+        path="/"
         jsonLd={{
           '@context': 'https://schema.org',
-          '@type': 'Organization',
-          name: SITE_NAME,
-          url: SITE_URL,
-          logo: DEFAULT_IMAGE,
-          foundingDate: '1978',
-          description:
-            'A Sri Lankan family-run group operating across manufacturing, retail, distribution and hospitality.',
-          address: { '@type': 'PostalAddress', addressLocality: 'Colombo', addressCountry: 'LK' },
-          contactPoint: {
-            '@type': 'ContactPoint',
-            telephone: '+94-112-055-026',
-            contactType: 'general enquiries',
-            email: 'info@supungroup.lk',
-          },
+          '@graph': [
+            {
+              '@type': 'WebSite',
+              '@id': `${SITE_URL}/#website`,
+              name: SITE_NAME,
+              url: SITE_URL,
+              inLanguage: 'en-LK',
+            },
+            {
+              '@type': 'Organization',
+              '@id': `${SITE_URL}/#organization`,
+              name: SITE_NAME,
+              url: SITE_URL,
+              logo: { '@type': 'ImageObject', url: DEFAULT_IMAGE },
+              foundingDate: '1978',
+              description:
+                'A Sri Lankan family-run group operating across manufacturing, retail, distribution and hospitality.',
+              address: {
+                '@type': 'PostalAddress',
+                addressLocality: 'Colombo',
+                addressCountry: 'LK',
+              },
+              contactPoint: {
+                '@type': 'ContactPoint',
+                telephone: '+94-112-055-026',
+                contactType: 'general enquiries',
+                email: 'info@supungroup.lk',
+              },
+            },
+          ],
         }}
       />
 
@@ -201,7 +219,7 @@ const Home = () => {
               </div>
               <div className="mt-5 flex items-end gap-3">
                 <strong className="hero-stat-blue text-[5.75rem] font-semibold leading-[.8] tracking-[-0.09em]">
-                  46
+                  48
                 </strong>
                 <span className="mb-1 text-xl font-light text-[#f4bd59]">+</span>
               </div>
@@ -343,7 +361,7 @@ const Home = () => {
                     Local capability. Lasting value.
                   </h3>
                   <div className="mt-6 flex items-center gap-5 border-t border-white/25 pt-5">
-                    <strong className="text-4xl font-semibold tracking-[-0.05em]">46+</strong>
+                    <strong className="text-4xl font-semibold tracking-[-0.05em]">48+</strong>
                     <span className="max-w-[9rem] text-xs font-semibold uppercase leading-relaxed tracking-[0.14em] text-white/70">
                       Years of trusted enterprise
                     </span>
@@ -417,6 +435,117 @@ const Home = () => {
         </div>
       </section>
 
+      <section className="relative isolate overflow-hidden bg-[#edf3fb] py-12 text-[#071b2d] sm:py-16 md:py-24">
+        <div
+          className="absolute inset-0 -z-10 bg-[radial-gradient(circle_at_10%_16%,rgba(49,95,159,.14),transparent_30%),radial-gradient(circle_at_90%_82%,rgba(120,190,67,.16),transparent_32%)]"
+          aria-hidden="true"
+        />
+        <div className="container mx-auto px-4">
+          <div className="relative overflow-hidden rounded-[2rem] border border-[#10233f]/10 bg-white shadow-[0_28px_80px_rgba(16,35,63,.14)] md:rounded-[3rem]">
+            <div className="grid lg:grid-cols-[.88fr_1.12fr]">
+              <AnimatedSection animation="slide-right" duration={900} triggerOnce={false}>
+                <div className="relative h-full min-h-[440px] overflow-hidden bg-[#efe8da] lg:min-h-[720px]">
+                  <img
+                    src={certificationImage}
+                    alt="Made in Sri Lanka certifications awarded to Camy Smart, New Camy Smart and Aerostar Home Appliances"
+                    className="absolute inset-0 h-full w-full object-cover object-center"
+                  />
+                  <div className="absolute inset-0 ring-1 ring-inset ring-black/5" />
+                </div>
+              </AnimatedSection>
+
+              <AnimatedSection animation="slide-left" delay={120} duration={950} triggerOnce={false}>
+                <div className="flex h-full flex-col p-7 sm:p-10 lg:p-14 xl:p-16">
+                  <div className="flex items-center gap-3 text-[11px] font-bold uppercase tracking-[0.24em] text-[#315f9f]">
+                    <span className="flex h-10 w-10 items-center justify-center rounded-full bg-[#e8eef6] text-[#315f9f] ring-1 ring-[#315f9f]/10">
+                      <ShieldCheck size={20} strokeWidth={1.8} />
+                    </span>
+                    Officially certified
+                  </div>
+
+                  <h2 className="mt-7 max-w-2xl text-4xl font-semibold normal-case leading-[1.02] tracking-[-0.045em] text-[#071b2d] sm:text-5xl xl:text-6xl">
+                    Proudly Made in <span className="text-[#d99a24]">Sri Lanka.</span>
+                  </h2>
+
+                  <div className="mt-8 space-y-5 text-base leading-8 text-[#526278]">
+                    <p>
+                      We are proud to hold the official “Made in Sri Lanka” certification, awarded
+                      by the{' '}
+                      <a
+                        href="https://www.industry.gov.lk/"
+                        target="_blank"
+                        rel="noreferrer"
+                        className="font-semibold text-[#315f9f] transition hover:text-[#78be43]"
+                      >
+                        Ministry of Industries – Sri Lanka
+                      </a>{' '}
+                      and the{' '}
+                      <a
+                        href="https://neda.gov.lk/"
+                        target="_blank"
+                        rel="noreferrer"
+                        className="font-semibold text-[#315f9f] transition hover:text-[#78be43]"
+                      >
+                        National Enterprise Development Authority
+                      </a>{' '}
+                      to three of our companies behind the{' '}
+                      <a
+                        href="https://www.linkedin.com/showcase/camy-sri-lanka/"
+                        target="_blank"
+                        rel="noreferrer"
+                        className="font-semibold text-[#315f9f] transition hover:text-[#78be43]"
+                      >
+                        Camy Sri Lanka
+                      </a>{' '}
+                      brand 🇱🇰
+                    </p>
+                    <p>
+                      For the{' '}
+                      <a
+                        href="https://www.linkedin.com/company/supun-group-of-companies/"
+                        target="_blank"
+                        rel="noreferrer"
+                        className="font-semibold text-[#315f9f] transition hover:text-[#78be43]"
+                      >
+                        Supun Group of Companies
+                      </a>
+                      , this represents something bigger than a certificate. It reflects our
+                      commitment to manufacturing here, creating livelihoods for Sri Lankans and
+                      keeping value within our economy.
+                    </p>
+                    <p className="rounded-r-2xl border-l-2 border-[#78be43] bg-[#f3f8f0] py-4 pl-5 pr-4 font-medium text-[#23364e]">
+                      We believe Sri Lanka can. Every product we make is proof of that belief, and
+                      our promise to keep investing in the people, skills and industry that will
+                      move our nation forward.
+                    </p>
+                  </div>
+
+                  <div className="mt-auto border-t border-[#10233f]/10 pt-8">
+                    <div className="flex items-center gap-5 sm:gap-7">
+                      <span className="h-14 w-1 shrink-0 rounded-full bg-gradient-to-b from-[#d99a24] to-[#78be43]" />
+                      <div className="flex flex-wrap items-baseline gap-x-4 gap-y-1">
+                        <strong className="text-5xl font-semibold leading-none tracking-[-0.07em] text-[#78be43] sm:text-6xl">
+                          100%
+                        </strong>
+                        <div>
+                          <span className="block text-2xl font-semibold leading-none tracking-[-0.035em] text-[#071b2d] sm:text-3xl">
+                            Sri Lankan
+                          </span>
+                          <span className="mt-2 flex items-center gap-2 text-[9px] font-bold uppercase tracking-[0.22em] text-[#667388] sm:text-[10px]">
+                            <span className="h-1.5 w-1.5 rounded-full bg-[#d99a24]" />
+                            Proudly made here
+                          </span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </AnimatedSection>
+            </div>
+          </div>
+        </div>
+      </section>
+
       <section className="py-12 sm:py-14 md:py-20">
         <div className="container mx-auto px-4">
           <AnimatedSection animation="slide-up" duration={800} triggerOnce={false}>
@@ -470,16 +599,34 @@ const Home = () => {
                   to={`/companies/${company.id}`}
                   className="company-glass group relative flex min-h-[450px] w-full flex-col overflow-hidden rounded-[1.5rem] p-5 transition duration-500 hover:-translate-y-2 md:p-6"
                 >
-                  <div className="company-card-visual relative flex min-h-[178px] items-center justify-center overflow-hidden rounded-[1.15rem] border border-primary/10 bg-white/80 px-7 py-6">
-                    <CompanyLogo
-                      companyId={company.id}
-                      companyName={company.shortName}
-                      className="h-36 w-full max-w-[310px] bg-transparent transition duration-500"
-                      imageClassName={`h-full w-full transition-transform duration-500 ${keepOriginalLogoSize(company.id) ? 'group-hover:scale-[1.05]' : 'scale-[1.2] group-hover:scale-[1.25]'}`}
-                    />
-                    <span className="absolute bottom-4 right-4 inline-flex rounded-full border border-white bg-[#eef4fb]/95 px-3 py-1.5 text-[9px] font-bold uppercase tracking-[0.15em] text-primary shadow-sm">
-                      {company.industry}
-                    </span>
+                  <div className="relative flex min-h-[190px] items-center justify-center px-2 py-4">
+                    {company.id === 'new-camy-smart' ? (
+                      <img
+                        src={camyRedLogo}
+                        alt="Camy logo"
+                        className="h-44 w-full max-w-[330px] object-contain transition-transform duration-500 group-hover:scale-105"
+                        loading="lazy"
+                      />
+                    ) : (
+                      <CompanyLogo
+                        companyId={company.id}
+                        companyName={company.shortName}
+                        className="h-44 w-full max-w-[350px] !overflow-visible !bg-transparent transition duration-500"
+                        imageClassName={`h-full w-full mix-blend-multiply transition-transform duration-500 ${
+                          company.id === 'aerostar-home-appliances'
+                            ? 'scale-[2.75] [filter:contrast(1.18)_saturate(1.12)] group-hover:scale-[2.85]'
+                            : company.id === 'camy-smart'
+                              ? 'scale-[2.15] group-hover:scale-[2.23]'
+                              : company.id === 'rodsons'
+                                ? 'scale-[2.3] group-hover:scale-[2.38]'
+                                : company.id === 'camy-global'
+                                  ? 'scale-[2.15] group-hover:scale-[2.23]'
+                            : keepOriginalLogoSize(company.id)
+                            ? 'scale-[1.35] group-hover:scale-[1.41]'
+                            : 'scale-[1.62] group-hover:scale-[1.68]'
+                        }`}
+                      />
+                    )}
                   </div>
                   <div className="relative flex flex-1 flex-col px-2 pb-1 pt-7">
                     <div className="mb-4 flex items-center gap-3 text-[10px] font-bold uppercase tracking-[.16em] text-[#738197]">
@@ -517,12 +664,6 @@ const Home = () => {
         >
           <div className="relative isolate overflow-hidden rounded-[2rem] bg-[#071b2d] px-7 py-12 text-white shadow-[0_30px_80px_rgba(7,27,45,.20)] sm:px-12 sm:py-16 md:rounded-[3rem] lg:px-20 lg:py-20">
             <div className="absolute inset-y-0 right-0 -z-10 w-full bg-[radial-gradient(circle_at_85%_35%,rgba(217,154,36,.16),transparent_30%),linear-gradient(115deg,transparent_45%,rgba(25,83,132,.38))] lg:w-2/3" />
-            <Globe2
-              className="absolute -bottom-28 -right-24 -z-10 h-[28rem] w-[28rem] text-white/[.06]"
-              strokeWidth={0.65}
-              aria-hidden="true"
-            />
-
             <div className="grid gap-12 lg:grid-cols-[1fr_18rem] lg:items-end lg:gap-20">
               <div>
                 <p className="mb-6 flex items-center gap-3 text-xs font-bold uppercase tracking-[0.24em] text-[#efbd55]">
