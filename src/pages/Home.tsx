@@ -18,6 +18,7 @@ import heroVideo from '@/assets/supun-group-hero-optimized.mp4';
 import manufacturingImage from '@/assets/sector-manufacturing-v2.jpg';
 import camyBrandLogo from '@/assets/camy-brand-logo.png';
 import certificationImage from '@/assets/made-in-sri-lanka-certification.jpg';
+import camyRedLogo from '@/assets/camy-logo-red-transparent.png';
 
 const sectorMeta = [
   { icon: Factory },
@@ -599,18 +600,27 @@ const Home = () => {
                   className="company-glass group relative flex min-h-[450px] w-full flex-col overflow-hidden rounded-[1.5rem] p-5 transition duration-500 hover:-translate-y-2 md:p-6"
                 >
                   <div className="relative flex min-h-[190px] items-center justify-center px-2 py-4">
-                    <CompanyLogo
-                      companyId={company.id}
-                      companyName={company.shortName}
-                      className="h-44 w-full max-w-[350px] !overflow-visible !bg-transparent transition duration-500"
-                      imageClassName={`h-full w-full mix-blend-multiply transition-transform duration-500 ${
-                        company.id === 'new-camy-smart'
-                          ? 'scale-[1.9] [filter:brightness(0)_saturate(100%)_invert(18%)_sepia(97%)_saturate(4591%)_hue-rotate(351deg)_brightness(101%)_contrast(87%)] group-hover:scale-[1.96]'
-                          : keepOriginalLogoSize(company.id)
+                    {company.id === 'new-camy-smart' ? (
+                      <img
+                        src={camyRedLogo}
+                        alt="Camy logo"
+                        className="h-44 w-full max-w-[330px] object-contain transition-transform duration-500 group-hover:scale-105"
+                        loading="lazy"
+                      />
+                    ) : (
+                      <CompanyLogo
+                        companyId={company.id}
+                        companyName={company.shortName}
+                        className="h-44 w-full max-w-[350px] !overflow-visible !bg-transparent transition duration-500"
+                        imageClassName={`h-full w-full mix-blend-multiply transition-transform duration-500 ${
+                          company.id === 'aerostar-home-appliances'
+                            ? 'scale-[1.9] [filter:contrast(1.18)_saturate(1.12)] group-hover:scale-[1.97]'
+                            : keepOriginalLogoSize(company.id)
                             ? 'scale-[1.35] group-hover:scale-[1.41]'
                             : 'scale-[1.62] group-hover:scale-[1.68]'
-                      }`}
-                    />
+                        }`}
+                      />
+                    )}
                   </div>
                   <div className="relative flex flex-1 flex-col px-2 pb-1 pt-7">
                     <div className="mb-4 flex items-center gap-3 text-[10px] font-bold uppercase tracking-[.16em] text-[#738197]">
