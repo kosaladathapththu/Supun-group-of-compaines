@@ -125,13 +125,6 @@ const CompanyDetail = () => {
         <div className="absolute inset-0 -z-10 bg-gradient-to-t from-[#041426]/55 via-transparent to-[#041426]/15" />
         <div className="container mx-auto px-4">
           <div className="mb-7 flex flex-wrap items-center gap-4">
-            <Link
-              to="/companies"
-              className="group inline-flex items-center gap-3 rounded-full border border-white/80 bg-white px-5 py-3 text-sm font-bold text-[#0b2747] shadow-[0_10px_28px_rgba(3,15,29,.22)] transition duration-300 hover:-translate-y-0.5 hover:border-[#efbd55] hover:bg-[#efbd55] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#efbd55] focus-visible:ring-offset-2 focus-visible:ring-offset-[#071d37]"
-            >
-              <ArrowLeft className="transition-transform group-hover:-translate-x-1" size={17} />
-              Back to all group companies
-            </Link>
             {company.website && (
               <a
                 href={company.website}
@@ -193,6 +186,19 @@ const CompanyDetail = () => {
           </div>
         </div>
       </section>
+
+      <Link
+        to="/companies"
+        aria-label="Back to all group companies"
+        className="group fixed left-4 top-1/2 z-40 hidden -translate-y-1/2 flex-col items-center gap-2 text-center text-[#0b2747] xl:flex"
+      >
+        <span className="flex h-14 w-14 items-center justify-center rounded-full border border-[#0b2747]/10 bg-white text-[#0b2747] shadow-[0_12px_32px_rgba(11,39,71,.18)] transition duration-300 group-hover:-translate-x-1 group-hover:border-[#78be43] group-hover:bg-[#78be43] group-hover:text-white group-focus-visible:ring-2 group-focus-visible:ring-[#315f9f] group-focus-visible:ring-offset-2">
+          <ArrowLeft size={23} strokeWidth={2.2} />
+        </span>
+        <span className="max-w-[6.5rem] text-[10px] font-bold uppercase leading-4 tracking-[0.12em] transition group-hover:text-[#315f9f]">
+          Back to all groups
+        </span>
+      </Link>
 
       <section className="py-12 md:py-16">
         <div className="company-detail-content-grid container mx-auto grid max-w-7xl gap-8 px-4">
