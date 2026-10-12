@@ -30,12 +30,6 @@ export const CompanyLogo = ({
       ) : (
         <Building2 className="text-primary/45" size={28} aria-hidden="true" />
       )}
-      {companyId === 'supun-arcade-residency' && (
-        <span
-          className="pointer-events-none absolute bottom-[12%] left-0 h-[43%] w-[7%] bg-white"
-          aria-hidden="true"
-        />
-      )}
     </div>
   );
 };

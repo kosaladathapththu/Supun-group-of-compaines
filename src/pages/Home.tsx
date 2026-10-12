@@ -615,6 +615,12 @@ const Home = () => {
                         imageClassName={`h-full w-full mix-blend-multiply transition-transform duration-500 ${
                           company.id === 'aerostar-home-appliances'
                             ? 'scale-[2.75] [filter:contrast(1.18)_saturate(1.12)] group-hover:scale-[2.85]'
+                            : company.id === 'camy-smart'
+                              ? 'scale-[2.15] group-hover:scale-[2.23]'
+                              : company.id === 'rodsons'
+                                ? 'scale-[2.3] group-hover:scale-[2.38]'
+                                : company.id === 'camy-global'
+                                  ? 'scale-[2.15] group-hover:scale-[2.23]'
                             : keepOriginalLogoSize(company.id)
                             ? 'scale-[1.35] group-hover:scale-[1.41]'
                             : 'scale-[1.62] group-hover:scale-[1.68]'
