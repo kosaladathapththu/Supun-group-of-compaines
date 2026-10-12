@@ -127,10 +127,10 @@ const CompanyDetail = () => {
           <div className="mb-7 flex flex-wrap items-center gap-4">
             <Link
               to="/companies"
-              className="inline-flex items-center gap-2 text-sm font-semibold text-white/75 transition hover:text-[#efbd55]"
+              className="group inline-flex items-center gap-3 rounded-full border border-white/80 bg-white px-5 py-3 text-sm font-bold text-[#0b2747] shadow-[0_10px_28px_rgba(3,15,29,.22)] transition duration-300 hover:-translate-y-0.5 hover:border-[#efbd55] hover:bg-[#efbd55] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#efbd55] focus-visible:ring-offset-2 focus-visible:ring-offset-[#071d37]"
             >
-              <ArrowLeft size={16} />
-              All Group Companies
+              <ArrowLeft className="transition-transform group-hover:-translate-x-1" size={17} />
+              Back to all group companies
             </Link>
             {company.website && (
               <a
