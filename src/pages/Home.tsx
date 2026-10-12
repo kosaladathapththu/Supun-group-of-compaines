@@ -614,7 +614,7 @@ const Home = () => {
                         className="h-44 w-full max-w-[350px] !overflow-visible !bg-transparent transition duration-500"
                         imageClassName={`h-full w-full mix-blend-multiply transition-transform duration-500 ${
                           company.id === 'aerostar-home-appliances'
-                            ? 'scale-[1.9] [filter:contrast(1.18)_saturate(1.12)] group-hover:scale-[1.97]'
+                            ? 'scale-[2.75] [filter:contrast(1.18)_saturate(1.12)] group-hover:scale-[2.85]'
                             : keepOriginalLogoSize(company.id)
                             ? 'scale-[1.35] group-hover:scale-[1.41]'
                             : 'scale-[1.62] group-hover:scale-[1.68]'
