@@ -520,29 +520,21 @@ const Home = () => {
                   </div>
 
                   <div className="mt-auto border-t border-[#10233f]/10 pt-8">
-                    <div className="relative overflow-hidden rounded-2xl bg-[#071b2d] px-6 py-5 text-white shadow-[0_16px_38px_rgba(7,27,45,.18)] sm:px-7 sm:py-6">
-                      <div
-                        className="absolute inset-0 bg-[radial-gradient(circle_at_92%_20%,rgba(120,190,67,.28),transparent_32%),linear-gradient(110deg,transparent_45%,rgba(49,95,159,.28))]"
-                        aria-hidden="true"
-                      />
-                      <div className="relative flex items-center justify-between gap-6">
-                        <div className="flex items-center gap-5">
-                          <strong className="text-4xl font-semibold leading-none tracking-[-0.06em] text-[#efbd55] sm:text-5xl">
-                            100%
-                          </strong>
-                          <span className="h-11 w-px bg-white/20" />
-                          <div>
-                            <span className="block text-lg font-semibold tracking-[-0.02em] sm:text-xl">
-                              Sri Lankan
-                            </span>
-                            <span className="mt-1 block text-[9px] font-bold uppercase tracking-[0.2em] text-white/50 sm:text-[10px]">
-                              Proudly made here
-                            </span>
-                          </div>
+                    <div className="flex items-center gap-5 sm:gap-7">
+                      <span className="h-14 w-1 shrink-0 rounded-full bg-gradient-to-b from-[#d99a24] to-[#78be43]" />
+                      <div className="flex flex-wrap items-baseline gap-x-4 gap-y-1">
+                        <strong className="text-5xl font-semibold leading-none tracking-[-0.07em] text-[#78be43] sm:text-6xl">
+                          100%
+                        </strong>
+                        <div>
+                          <span className="block text-2xl font-semibold leading-none tracking-[-0.035em] text-[#071b2d] sm:text-3xl">
+                            Sri Lankan
+                          </span>
+                          <span className="mt-2 flex items-center gap-2 text-[9px] font-bold uppercase tracking-[0.22em] text-[#667388] sm:text-[10px]">
+                            <span className="h-1.5 w-1.5 rounded-full bg-[#d99a24]" />
+                            Proudly made here
+                          </span>
                         </div>
-                        <span className="hidden h-11 w-11 items-center justify-center rounded-full border border-white/15 bg-white/10 text-[#78be43] sm:flex">
-                          <Sparkles size={20} strokeWidth={1.7} />
-                        </span>
                       </div>
                     </div>
                   </div>
