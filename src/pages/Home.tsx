@@ -18,7 +18,7 @@ import heroVideo from '@/assets/supun-group-hero-optimized.mp4';
 import heroMobilePoster from '@/assets/hero-corporate.jpg';
 import manufacturingImage from '@/assets/sector-manufacturing-v2.jpg';
 import camyBrandLogo from '@/assets/camy-brand-logo.png';
-import certificationImage from '@/assets/made-in-sri-lanka-certification.jpg';
+import certificationImage from '@/assets/made-in-sri-lanka-certificates-v2.png';
 import camyRedLogo from '@/assets/camy-logo-red-transparent.png';
 
 const sectorMeta = [
@@ -101,7 +101,6 @@ const Home = () => {
   const companyCarouselRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    const desktopViewport = window.matchMedia('(min-width: 768px)');
     const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
     const connection = (
       navigator as Navigator & {
@@ -112,17 +111,15 @@ const Home = () => {
     const updateVideoPreference = () => {
       const constrainedConnection =
         connection?.saveData || connection?.effectiveType === 'slow-2g' || connection?.effectiveType === '2g';
-      const enabled = desktopViewport.matches && !reducedMotion.matches && !constrainedConnection;
+      const enabled = !reducedMotion.matches && !constrainedConnection;
       setHeroVideoReady(false);
       setShouldPlayHeroVideo(enabled);
     };
 
     updateVideoPreference();
-    desktopViewport.addEventListener('change', updateVideoPreference);
     reducedMotion.addEventListener('change', updateVideoPreference);
 
     return () => {
-      desktopViewport.removeEventListener('change', updateVideoPreference);
       reducedMotion.removeEventListener('change', updateVideoPreference);
     };
   }, []);
@@ -491,114 +488,68 @@ const Home = () => {
         </div>
       </section>
 
-      <section className="relative isolate overflow-hidden bg-[#edf3fb] py-12 text-[#071b2d] sm:py-16 md:py-24">
+      <section className="relative isolate overflow-hidden bg-[#07182b] py-14 text-white sm:py-20 md:py-28">
         <div
-          className="absolute inset-0 -z-10 bg-[radial-gradient(circle_at_10%_16%,rgba(49,95,159,.14),transparent_30%),radial-gradient(circle_at_90%_82%,rgba(120,190,67,.16),transparent_32%)]"
+          className="absolute inset-0 -z-10 bg-[radial-gradient(circle_at_8%_12%,rgba(217,154,36,.2),transparent_27%),radial-gradient(circle_at_92%_82%,rgba(120,190,67,.13),transparent_30%),linear-gradient(135deg,#061322_0%,#0b213a_54%,#07182b_100%)]"
           aria-hidden="true"
         />
-        <div className="container mx-auto px-4">
-          <div className="relative overflow-hidden rounded-[2rem] border border-[#10233f]/10 bg-white shadow-[0_28px_80px_rgba(16,35,63,.14)] md:rounded-[3rem]">
-            <div className="grid lg:grid-cols-[.88fr_1.12fr]">
-              <AnimatedSection animation="slide-right" duration={900} triggerOnce={false}>
-                <div className="relative h-full min-h-[440px] overflow-hidden bg-[#efe8da] lg:min-h-[720px]">
+        <div className="absolute inset-0 -z-10 opacity-[.055] [background-image:linear-gradient(rgba(255,255,255,.8)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,.8)_1px,transparent_1px)] [background-size:64px_64px]" />
+        <div className="container mx-auto px-4 sm:px-6">
+          <AnimatedSection animation="slide-up" duration={850} triggerOnce={false}>
+            <div className="mx-auto max-w-4xl text-center">
+              <div className="inline-flex items-center gap-3 rounded-full border border-[#efbd55]/25 bg-[#efbd55]/10 px-4 py-2 text-[10px] font-bold uppercase tracking-[0.24em] text-[#f2c66e]">
+                <ShieldCheck size={16} strokeWidth={1.8} /> Official national recognition
+              </div>
+              <h2 className="mt-7 text-4xl font-semibold normal-case leading-[1.02] tracking-[-0.045em] sm:text-5xl lg:text-7xl">
+                Made here. Trusted <span className="text-[#efbd55]">everywhere.</span>
+              </h2>
+              <p className="mx-auto mt-6 max-w-3xl text-base leading-8 text-white/68 sm:text-lg">
+                Three Supun Group companies have earned the official Made in Sri Lanka
+                certification—recognising local ingenuity, responsible manufacturing and our
+                contribution to the nation’s industrial future.
+              </p>
+            </div>
+          </AnimatedSection>
+
+          <AnimatedSection animation="scale" delay={100} duration={950} triggerOnce={false}>
+            <div className="relative mx-auto mt-10 max-w-6xl overflow-hidden rounded-[1.75rem] border border-white/15 bg-white/5 p-2 shadow-[0_35px_100px_rgba(0,0,0,.42)] sm:mt-14 sm:rounded-[2.5rem] sm:p-3">
+              <div className="overflow-hidden rounded-[1.3rem] sm:rounded-[2rem]">
                   <img
                     src={certificationImage}
                     alt="Made in Sri Lanka certifications awarded to Camy Smart, New Camy Smart and Aerostar Home Appliances"
-                    className="absolute inset-0 h-full w-full object-cover object-center"
+                    className="aspect-[3/2] h-full w-full object-cover object-center"
+                    loading="lazy"
                   />
-                  <div className="absolute inset-0 ring-1 ring-inset ring-black/5" />
-                </div>
-              </AnimatedSection>
-
-              <AnimatedSection animation="slide-left" delay={120} duration={950} triggerOnce={false}>
-                <div className="flex h-full flex-col p-7 sm:p-10 lg:p-14 xl:p-16">
-                  <div className="flex items-center gap-3 text-[11px] font-bold uppercase tracking-[0.24em] text-[#315f9f]">
-                    <span className="flex h-10 w-10 items-center justify-center rounded-full bg-[#e8eef6] text-[#315f9f] ring-1 ring-[#315f9f]/10">
-                      <ShieldCheck size={20} strokeWidth={1.8} />
-                    </span>
-                    Officially certified
-                  </div>
-
-                  <h2 className="mt-7 max-w-2xl text-4xl font-semibold normal-case leading-[1.02] tracking-[-0.045em] text-[#071b2d] sm:text-5xl xl:text-6xl">
-                    Proudly Made in <span className="text-[#d99a24]">Sri Lanka.</span>
-                  </h2>
-
-                  <div className="mt-8 space-y-5 text-base leading-8 text-[#526278]">
-                    <p>
-                      We are proud to hold the official “Made in Sri Lanka” certification, awarded
-                      by the{' '}
-                      <a
-                        href="https://www.industry.gov.lk/"
-                        target="_blank"
-                        rel="noreferrer"
-                        className="font-semibold text-[#315f9f] transition hover:text-[#78be43]"
-                      >
-                        Ministry of Industries – Sri Lanka
-                      </a>{' '}
-                      and the{' '}
-                      <a
-                        href="https://neda.gov.lk/"
-                        target="_blank"
-                        rel="noreferrer"
-                        className="font-semibold text-[#315f9f] transition hover:text-[#78be43]"
-                      >
-                        National Enterprise Development Authority
-                      </a>{' '}
-                      to three of our companies behind the{' '}
-                      <a
-                        href="https://www.linkedin.com/showcase/camy-sri-lanka/"
-                        target="_blank"
-                        rel="noreferrer"
-                        className="font-semibold text-[#315f9f] transition hover:text-[#78be43]"
-                      >
-                        Camy Sri Lanka
-                      </a>{' '}
-                      brand 🇱🇰
-                    </p>
-                    <p>
-                      For the{' '}
-                      <a
-                        href="https://www.linkedin.com/company/supun-group-of-companies/"
-                        target="_blank"
-                        rel="noreferrer"
-                        className="font-semibold text-[#315f9f] transition hover:text-[#78be43]"
-                      >
-                        Supun Group of Companies
-                      </a>
-                      , this represents something bigger than a certificate. It reflects our
-                      commitment to manufacturing here, creating livelihoods for Sri Lankans and
-                      keeping value within our economy.
-                    </p>
-                    <p className="rounded-r-2xl border-l-2 border-[#78be43] bg-[#f3f8f0] py-4 pl-5 pr-4 font-medium text-[#23364e]">
-                      We believe Sri Lanka can. Every product we make is proof of that belief, and
-                      our promise to keep investing in the people, skills and industry that will
-                      move our nation forward.
-                    </p>
-                  </div>
-
-                  <div className="mt-auto border-t border-[#10233f]/10 pt-8">
-                    <div className="flex items-center gap-5 sm:gap-7">
-                      <span className="h-14 w-1 shrink-0 rounded-full bg-gradient-to-b from-[#d99a24] to-[#78be43]" />
-                      <div className="flex flex-wrap items-baseline gap-x-4 gap-y-1">
-                        <strong className="text-5xl font-semibold leading-none tracking-[-0.07em] text-[#78be43] sm:text-6xl">
-                          100%
-                        </strong>
-                        <div>
-                          <span className="block text-2xl font-semibold leading-none tracking-[-0.035em] text-[#071b2d] sm:text-3xl">
-                            Sri Lankan
-                          </span>
-                          <span className="mt-2 flex items-center gap-2 text-[9px] font-bold uppercase tracking-[0.22em] text-[#667388] sm:text-[10px]">
-                            <span className="h-1.5 w-1.5 rounded-full bg-[#d99a24]" />
-                            Proudly made here
-                          </span>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </AnimatedSection>
+              </div>
+              <div className="pointer-events-none absolute inset-2 rounded-[1.3rem] ring-1 ring-inset ring-white/10 sm:inset-3 sm:rounded-[2rem]" />
             </div>
-          </div>
+          </AnimatedSection>
+
+          <AnimatedSection animation="fade" delay={180} duration={700} triggerOnce={false}>
+            <div className="mx-auto mt-8 grid max-w-5xl gap-3 sm:grid-cols-3">
+              {['Camy Smart (Pvt) Ltd', 'New Camy Smart (Pvt) Ltd', 'Aerostar Home Appliances'].map(
+                (company, index) => (
+                  <div
+                    key={company}
+                    className="flex items-center gap-4 rounded-2xl border border-white/10 bg-white/[.055] px-5 py-4 backdrop-blur-sm"
+                  >
+                    <span className="text-2xl font-semibold text-[#efbd55]">0{index + 1}</span>
+                    <span className="text-sm font-semibold leading-snug text-white/85">{company}</span>
+                  </div>
+                ),
+              )}
+            </div>
+            <div className="mx-auto mt-8 flex max-w-4xl flex-col items-center justify-between gap-5 border-t border-white/10 pt-7 text-center sm:flex-row sm:text-left">
+              <p className="max-w-2xl text-sm leading-7 text-white/60">
+                Certified by the Ministry of Industries and the National Enterprise Development
+                Authority—an achievement that reflects our continued investment in Sri Lankan
+                people, skills and manufacturing.
+              </p>
+              <span className="shrink-0 text-xs font-bold uppercase tracking-[0.22em] text-[#8fc968]">
+                100% Sri Lankan
+              </span>
+            </div>
+          </AnimatedSection>
         </div>
       </section>
 
