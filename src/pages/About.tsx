@@ -167,7 +167,7 @@ const About = () => (
       <div className="container mx-auto grid gap-10 px-4 lg:grid-cols-[.9fr_1.1fr] lg:items-center">
         <AnimatedSection animation="fade" duration={500} triggerOnce={false}>
           <Label>Our story</Label>
-          <h2 className="mt-3 text-4xl font-semibold normal-case tracking-[-.04em] md:text-5xl">
+          <h2 className="mt-3 text-4xl font-semibold normal-case tracking-[-.04em] text-[#28271f] md:text-5xl">
             From trading goods to making them.
           </h2>
           <Rule />
@@ -298,76 +298,76 @@ const About = () => (
       </div>
     </section>
 
-    <section id="leadership" className="scroll-mt-24 overflow-hidden bg-[#f4f7fb] py-14 md:py-24">
+    <section id="leadership" className="scroll-mt-24 overflow-hidden bg-[#faf8f2] py-12 md:py-16">
       <div className="container mx-auto px-4">
         <div className="mx-auto max-w-3xl text-center">
-          <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-[#102746] text-white shadow-[0_10px_25px_rgba(16,39,70,.18)]">
+          <div className="mx-auto flex h-11 w-11 items-center justify-center rounded-full bg-[#214a36] text-white shadow-[0_10px_25px_rgba(33,74,54,.16)]">
             <Users size={22} strokeWidth={1.7} />
           </div>
-          <p className="mt-5 text-xs font-bold uppercase tracking-[.2em] text-[#315f9f]">
+          <p className="mt-4 text-xs font-bold uppercase tracking-[.2em] text-[#9a6a16]">
             Leadership structure
           </p>
           <h2 className="mt-3 text-4xl font-semibold normal-case tracking-[-.04em] md:text-5xl">
             One vision. Clear leadership.
           </h2>
-          <p className="mx-auto mt-5 max-w-2xl text-sm leading-7 text-[#637186] md:text-base">
+          <p className="mx-auto mt-4 max-w-2xl text-sm leading-6 text-[#69665e] md:text-base">
             A connected leadership structure guiding Group strategy, operational excellence and
             the growth of every Supun business.
           </p>
         </div>
 
-        <div className="relative mx-auto mt-12 max-w-6xl md:mt-16">
-          <div className="mx-auto mb-5 w-fit rounded-full border border-[#d79a22]/25 bg-[#fff8e9] px-4 py-2 text-[10px] font-bold uppercase tracking-[.18em] text-[#947027]">
+        <div className="relative mx-auto mt-9 max-w-6xl md:mt-11">
+          <div className="mx-auto mb-3 w-fit rounded-full border border-[#d79a22]/25 bg-[#fff3d7] px-4 py-1.5 text-[9px] font-bold uppercase tracking-[.18em] text-[#8b5d10]">
             Board leadership
           </div>
           <div className="grid gap-4 md:grid-cols-3">
             {leadership.slice(0, 3).map((person, index) => (
               <AnimatedSection key={person.name} animation="fade" delay={index * 60} duration={450} triggerOnce={false}>
-                <article className="h-full rounded-2xl border border-[#d79a22]/20 bg-white p-6 text-center shadow-[0_12px_35px_rgba(16,39,70,.07)] transition duration-300 hover:-translate-y-1 hover:border-[#d79a22]/45">
+                <article className="h-full rounded-xl border border-[#d79a22]/25 bg-white p-4 text-center shadow-[0_8px_24px_rgba(74,55,20,.06)] transition duration-300 hover:-translate-y-1 hover:border-[#d79a22]/50">
                   <span className="mx-auto block h-1 w-10 rounded-full bg-[#d79a22]" />
-                  <h3 className="mt-5 text-xl font-semibold normal-case text-[#102746]">{person.name}</h3>
+                  <h3 className="mt-3 text-lg font-semibold normal-case text-[#28271f]">{person.name}</h3>
                   <p className="mt-2 text-[11px] font-bold uppercase leading-5 tracking-[.12em] text-[#947027]">{person.title}</p>
                   {person.description && person.description !== '—' && (
-                    <p className="mt-4 text-xs leading-5 text-[#68778a]">{person.description}</p>
+                    <p className="mt-2 text-xs leading-5 text-[#777267]">{person.description}</p>
                   )}
                 </article>
               </AnimatedSection>
             ))}
           </div>
 
-          <div className="mx-auto h-12 w-px bg-gradient-to-b from-[#d79a22] to-[#315f9f]" aria-hidden="true" />
-          <div className="mx-auto mb-5 w-fit rounded-full border border-[#315f9f]/20 bg-[#e8eef6] px-4 py-2 text-[10px] font-bold uppercase tracking-[.18em] text-[#315f9f]">
+          <div className="mx-auto h-7 w-px bg-gradient-to-b from-[#d79a22] to-[#4e7c47]" aria-hidden="true" />
+          <div className="mx-auto mb-3 w-fit rounded-full border border-[#4e7c47]/20 bg-[#edf5e8] px-4 py-1.5 text-[9px] font-bold uppercase tracking-[.18em] text-[#3f6c39]">
             Group executive leadership
           </div>
           <div className="mx-auto grid max-w-4xl gap-4 md:grid-cols-2">
             {leadership.slice(3, 5).map((person, index) => (
               <AnimatedSection key={person.name} animation="fade" delay={index * 60} duration={450} triggerOnce={false}>
-                <article className="h-full rounded-2xl bg-[#102746] p-7 text-white shadow-[0_16px_40px_rgba(16,39,70,.16)] transition duration-300 hover:-translate-y-1">
-                  <p className="text-[10px] font-bold uppercase tracking-[.18em] text-[#efbd55]">Group executive</p>
-                  <h3 className="mt-4 text-2xl font-semibold normal-case">{person.name}</h3>
-                  <p className="mt-2 text-xs font-semibold uppercase leading-5 tracking-[.08em] text-white/65">{person.title}</p>
-                  <p className="mt-5 border-t border-white/15 pt-5 text-sm leading-6 text-white/65">{person.description}</p>
+                <article className="h-full rounded-xl bg-[#214a36] p-5 text-white shadow-[0_12px_32px_rgba(33,74,54,.15)] transition duration-300 hover:-translate-y-1">
+                  <p className="text-[9px] font-bold uppercase tracking-[.18em] text-[#f1c663]">Group executive</p>
+                  <h3 className="mt-2.5 text-xl font-semibold normal-case">{person.name}</h3>
+                  <p className="mt-1.5 text-[11px] font-semibold uppercase leading-5 tracking-[.08em] text-white/70">{person.title}</p>
+                  <p className="mt-3 border-t border-white/15 pt-3 text-xs leading-5 text-white/70">{person.description}</p>
                 </article>
               </AnimatedSection>
             ))}
           </div>
 
-          <div className="mx-auto h-12 w-px bg-[#315f9f]/45" aria-hidden="true" />
-          <div className="mx-auto mb-5 w-fit rounded-full border border-[#78be43]/25 bg-[#eff8e9] px-4 py-2 text-[10px] font-bold uppercase tracking-[.18em] text-[#4f852c]">
+          <div className="mx-auto h-7 w-px bg-[#4e7c47]/45" aria-hidden="true" />
+          <div className="mx-auto mb-3 w-fit rounded-full border border-[#78be43]/25 bg-[#eff8e9] px-4 py-1.5 text-[9px] font-bold uppercase tracking-[.18em] text-[#4f852c]">
             Business leadership
           </div>
           <div className="mx-auto grid max-w-4xl gap-4 md:grid-cols-2">
             {leadership.slice(5).map((person, index) => (
               <AnimatedSection key={person.name} animation="fade" delay={index * 60} duration={450} triggerOnce={false}>
-                <article className="h-full rounded-2xl border border-[#102746]/10 bg-white p-6 transition duration-300 hover:-translate-y-1 hover:shadow-[0_14px_32px_rgba(16,39,70,.08)]">
+                <article className="h-full rounded-xl border border-[#4e7c47]/15 bg-white p-4 transition duration-300 hover:-translate-y-1 hover:shadow-[0_10px_26px_rgba(45,82,54,.08)]">
                   <div className="flex items-start gap-4">
                     <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-[#eff8e9] text-sm font-bold text-[#4f852c]">{String(index + 1).padStart(2, '0')}</span>
                     <div>
-                      <h3 className="text-xl font-semibold normal-case text-[#102746]">{person.name}</h3>
+                      <h3 className="text-lg font-semibold normal-case text-[#28271f]">{person.name}</h3>
                       <p className="mt-1.5 text-[11px] font-bold uppercase leading-5 tracking-[.08em] text-[#4f852c]">{person.title}</p>
                     </div>
                   </div>
-                  <p className="mt-5 border-t border-[#102746]/10 pt-4 text-sm leading-6 text-[#68778a]">{person.description}</p>
+                  <p className="mt-3 border-t border-[#4e7c47]/10 pt-3 text-xs leading-5 text-[#777267]">{person.description}</p>
                 </article>
               </AnimatedSection>
             ))}
