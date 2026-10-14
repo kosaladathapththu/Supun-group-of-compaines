@@ -15,7 +15,7 @@ import { CompanyLogo } from '@/components/CompanyLogo';
 import { companies } from '@/data/companies';
 import { sectorHighlights, siteStats } from '@/data/siteContent';
 import heroVideo from '@/assets/supun-group-hero-optimized.mp4';
-import heroMobilePoster from '@/assets/hero-corporate.jpg';
+import heroMobileVideo from '@/assets/supun-group-hero-mobile.mp4';
 import manufacturingImage from '@/assets/sector-manufacturing-v2.jpg';
 import camyBrandLogo from '@/assets/camy-brand-logo.png';
 import certificationImage from '@/assets/made-in-sri-lanka-certification.jpg';
@@ -192,15 +192,8 @@ const Home = () => {
       />
 
       <section className="premium-hero relative isolate min-h-[760px] overflow-hidden bg-[#07110d] text-white lg:min-h-screen">
-        <img
-          src={heroMobilePoster}
-          alt=""
-          className="absolute inset-0 h-full w-full object-cover object-center md:hidden"
-          aria-hidden="true"
-          fetchPriority="high"
-        />
         <div
-          className={`absolute inset-0 hidden bg-[radial-gradient(circle_at_75%_25%,#252927_0%,#171a18_34%,#0d100e_74%)] transition-opacity duration-1000 md:block ${heroVideoReady ? 'opacity-0' : 'opacity-100'}`}
+          className={`absolute inset-0 bg-[radial-gradient(circle_at_75%_25%,#252927_0%,#171a18_34%,#0d100e_74%)] transition-opacity duration-500 ${heroVideoReady ? 'opacity-0' : 'opacity-100'}`}
           aria-hidden="true"
         />
         {shouldPlayHeroVideo && (
@@ -211,10 +204,11 @@ const Home = () => {
             muted
             loop
             playsInline
-            preload="metadata"
+            preload="auto"
             onCanPlay={() => setHeroVideoReady(true)}
             aria-hidden="true"
           >
+            <source media="(max-width: 767px)" src={heroMobileVideo} type="video/mp4" />
             <source src={heroVideo} type="video/mp4" />
           </video>
         )}
