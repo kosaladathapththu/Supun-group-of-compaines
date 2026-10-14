@@ -339,14 +339,14 @@ const About = () => (
           <div className="mx-auto mb-3 w-fit rounded-full border border-[#4e7c47]/20 bg-[#edf5e8] px-4 py-1.5 text-[9px] font-bold uppercase tracking-[.18em] text-[#3f6c39]">
             Group executive leadership
           </div>
-          <div className="mx-auto grid max-w-4xl gap-4 md:grid-cols-2">
-            {leadership.slice(3, 5).map((person, index) => (
+          <div className="mx-auto grid max-w-6xl gap-4 md:grid-cols-3">
+            {leadership.slice(3, 6).map((person, index) => (
               <AnimatedSection key={person.name} animation="fade" delay={index * 60} duration={450} triggerOnce={false}>
-                <article className="h-full rounded-xl bg-[#214a36] p-5 text-white shadow-[0_12px_32px_rgba(33,74,54,.15)] transition duration-300 hover:-translate-y-1">
-                  <p className="text-[9px] font-bold uppercase tracking-[.18em] text-[#f1c663]">Group executive</p>
-                  <h3 className="mt-2.5 text-xl font-semibold normal-case">{person.name}</h3>
-                  <p className="mt-1.5 text-[11px] font-semibold uppercase leading-5 tracking-[.08em] text-white/70">{person.title}</p>
-                  <p className="mt-3 border-t border-white/15 pt-3 text-xs leading-5 text-white/70">{person.description}</p>
+                <article className="h-full rounded-xl border border-[#4e7c47]/20 bg-white p-5 shadow-[0_8px_24px_rgba(45,82,54,.06)] transition duration-300 hover:-translate-y-1 hover:border-[#4e7c47]/45">
+                  <p className="text-[9px] font-bold uppercase tracking-[.18em] text-[#9a6a16]">Group executive</p>
+                  <h3 className="mt-2.5 text-xl font-semibold normal-case text-[#28271f]">{person.name}</h3>
+                  <p className="mt-1.5 text-[11px] font-semibold uppercase leading-5 tracking-[.08em] text-[#4f852c]">{person.title}</p>
+                  <p className="mt-3 border-t border-[#4e7c47]/10 pt-3 text-xs leading-5 text-[#777267]">{person.description}</p>
                 </article>
               </AnimatedSection>
             ))}
@@ -356,8 +356,8 @@ const About = () => (
           <div className="mx-auto mb-3 w-fit rounded-full border border-[#78be43]/25 bg-[#eff8e9] px-4 py-1.5 text-[9px] font-bold uppercase tracking-[.18em] text-[#4f852c]">
             Business leadership
           </div>
-          <div className="mx-auto grid max-w-4xl gap-4 md:grid-cols-2">
-            {leadership.slice(5).map((person, index) => (
+          <div className="mx-auto grid max-w-xl gap-4">
+            {leadership.slice(6).map((person, index) => (
               <AnimatedSection key={person.name} animation="fade" delay={index * 60} duration={450} triggerOnce={false}>
                 <article className="h-full rounded-xl border border-[#4e7c47]/15 bg-white p-4 transition duration-300 hover:-translate-y-1 hover:shadow-[0_10px_26px_rgba(45,82,54,.08)]">
                   <div className="flex items-start gap-4">
