@@ -34,7 +34,15 @@ export const PageTransition = ({ children }: PageTransitionProps) => {
     if (!content || location.pathname === '/') return;
 
     const sections = Array.from(content.querySelectorAll<HTMLElement>('main section'));
-    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    const prefersReducedMotion = window.matchMedia(
+      '(prefers-reduced-motion: reduce)',
+    ).matches;
+    const isMobileViewport = window.matchMedia('(max-width: 767px)').matches;
+
+    // Long directory sections can fail to trigger reliably in some mobile
+    // browsers. Show all page sections immediately on phones so primary page
+    // content is never left transparent.
+    if (prefersReducedMotion || isMobileViewport) {
       sections.forEach((section) => section.classList.add('page-section-visible'));
       return;
     }
