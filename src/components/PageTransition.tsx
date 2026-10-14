@@ -52,7 +52,11 @@ export const PageTransition = ({ children }: PageTransitionProps) => {
           observer.unobserve(entry.target);
         });
       },
-      { threshold: 0.08, rootMargin: '0px 0px -7% 0px' },
+      // A zero threshold is important for directory/list sections that can be many
+      // times taller than a mobile viewport. Percentage thresholds can otherwise
+      // keep the whole section permanently hidden because enough of it can never
+      // fit on screen at once.
+      { threshold: 0, rootMargin: '0px 0px -4% 0px' },
     );
 
     sections.forEach((section) => observer.observe(section));

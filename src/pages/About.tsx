@@ -429,7 +429,7 @@ const About = () => (
         <p className="mt-3 hidden text-xs text-[#788496] lg:block">
           Move over a year to read its story.
         </p>
-        <div className="relative mt-9 grid grid-cols-2 gap-x-4 gap-y-7 sm:grid-cols-3 md:grid-cols-5 lg:grid-cols-10 lg:gap-0 lg:before:absolute lg:before:left-2 lg:before:right-2 lg:before:top-[63px] lg:before:h-px lg:before:bg-[#d79a22]">
+        <div className="relative mt-9 grid grid-cols-2 gap-x-4 gap-y-7 sm:grid-cols-3 md:grid-cols-5 lg:grid-cols-10 lg:gap-0 lg:before:absolute lg:before:left-2 lg:before:right-2 lg:before:top-[87px] lg:before:h-px lg:before:bg-[#d79a22]">
           {journey.map(([year, description], index) => {
             const logos = journeyCompanyLogos[year] ?? [];
 
@@ -440,11 +440,11 @@ const About = () => (
                 aria-label={`${year}: ${description}`}
                 className="group relative min-w-0 pr-3 outline-none focus-visible:ring-2 focus-visible:ring-[#315f9f]"
               >
-                <div className="flex h-14 items-center gap-1 pb-2">
+                <div className="flex h-20 items-center gap-1.5 pb-2">
                   {logos.map(({ id, name }) => (
                     <span
                       key={id}
-                      className="flex h-11 w-11 shrink-0 items-center justify-center rounded-lg border border-[#102746]/10 bg-white p-1 shadow-sm transition-transform group-hover:-translate-y-1 group-focus:-translate-y-1"
+                      className="flex h-16 w-16 shrink-0 items-center justify-center rounded-xl border border-[#102746]/10 bg-white p-1.5 shadow-sm transition-transform group-hover:-translate-y-1 group-focus:-translate-y-1"
                     >
                       <img
                         src={journeyLogoSource(id)}
