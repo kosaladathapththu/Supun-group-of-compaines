@@ -15,6 +15,7 @@ import { CompanyLogo } from '@/components/CompanyLogo';
 import { companies } from '@/data/companies';
 import { sectorHighlights, siteStats } from '@/data/siteContent';
 import heroVideo from '@/assets/supun-group-hero-optimized.mp4';
+import heroMobilePoster from '@/assets/hero-corporate.jpg';
 import manufacturingImage from '@/assets/sector-manufacturing-v2.jpg';
 import camyBrandLogo from '@/assets/camy-brand-logo.png';
 import certificationImage from '@/assets/made-in-sri-lanka-certification.jpg';
@@ -95,7 +96,52 @@ const CountUpStat = ({ value, label, index }: { value: string; label: string; in
 
 const Home = () => {
   const [heroVideoReady, setHeroVideoReady] = useState(false);
+  const [shouldPlayHeroVideo, setShouldPlayHeroVideo] = useState(false);
+  const heroVideoRef = useRef<HTMLVideoElement>(null);
   const companyCarouselRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const desktopViewport = window.matchMedia('(min-width: 768px)');
+    const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+    const connection = (
+      navigator as Navigator & {
+        connection?: { saveData?: boolean; effectiveType?: string };
+      }
+    ).connection;
+
+    const updateVideoPreference = () => {
+      const constrainedConnection =
+        connection?.saveData || connection?.effectiveType === 'slow-2g' || connection?.effectiveType === '2g';
+      const enabled = desktopViewport.matches && !reducedMotion.matches && !constrainedConnection;
+      setHeroVideoReady(false);
+      setShouldPlayHeroVideo(enabled);
+    };
+
+    updateVideoPreference();
+    desktopViewport.addEventListener('change', updateVideoPreference);
+    reducedMotion.addEventListener('change', updateVideoPreference);
+
+    return () => {
+      desktopViewport.removeEventListener('change', updateVideoPreference);
+      reducedMotion.removeEventListener('change', updateVideoPreference);
+    };
+  }, []);
+
+  useEffect(() => {
+    const video = heroVideoRef.current;
+    if (!video) return;
+
+    const handleVisibilityChange = () => {
+      if (document.hidden) {
+        video.pause();
+      } else {
+        void video.play().catch(() => undefined);
+      }
+    };
+
+    document.addEventListener('visibilitychange', handleVisibilityChange);
+    return () => document.removeEventListener('visibilitychange', handleVisibilityChange);
+  }, [shouldPlayHeroVideo]);
 
   const scrollCompanies = (direction: -1 | 1) => {
     const carousel = companyCarouselRef.current;
@@ -149,22 +195,32 @@ const Home = () => {
       />
 
       <section className="premium-hero relative isolate min-h-[760px] overflow-hidden bg-[#07110d] text-white lg:min-h-screen">
+        <img
+          src={heroMobilePoster}
+          alt=""
+          className="absolute inset-0 h-full w-full object-cover object-center md:hidden"
+          aria-hidden="true"
+          fetchPriority="high"
+        />
         <div
-          className={`absolute inset-0 bg-[radial-gradient(circle_at_75%_25%,#252927_0%,#171a18_34%,#0d100e_74%)] transition-opacity duration-1000 ${heroVideoReady ? 'opacity-0' : 'opacity-100'}`}
+          className={`absolute inset-0 hidden bg-[radial-gradient(circle_at_75%_25%,#252927_0%,#171a18_34%,#0d100e_74%)] transition-opacity duration-1000 md:block ${heroVideoReady ? 'opacity-0' : 'opacity-100'}`}
           aria-hidden="true"
         />
-        <video
-          className={`absolute inset-0 h-full w-full object-cover object-[62%_center] transition-opacity duration-1000 ${heroVideoReady ? 'opacity-100' : 'opacity-0'}`}
-          autoPlay
-          muted
-          loop
-          playsInline
-          preload="auto"
-          onCanPlay={() => setHeroVideoReady(true)}
-          aria-hidden="true"
-        >
-          <source src={heroVideo} type="video/mp4" />
-        </video>
+        {shouldPlayHeroVideo && (
+          <video
+            ref={heroVideoRef}
+            className={`absolute inset-0 h-full w-full object-cover object-[62%_center] transition-opacity duration-1000 ${heroVideoReady ? 'opacity-100' : 'opacity-0'}`}
+            autoPlay
+            muted
+            loop
+            playsInline
+            preload="metadata"
+            onCanPlay={() => setHeroVideoReady(true)}
+            aria-hidden="true"
+          >
+            <source src={heroVideo} type="video/mp4" />
+          </video>
+        )}
         <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(3,12,8,.55)_0%,rgba(5,18,12,.32)_38%,rgba(5,17,12,.1)_72%,rgba(3,12,8,.04)_100%)]" />
         <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(3,10,7,.08)_0%,transparent_36%,rgba(3,10,7,.42)_100%)]" />
 
