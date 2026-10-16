@@ -15,7 +15,7 @@ import { AwardIssuerMark } from '@/components/AwardIssuerMark';
 import Seo, { SITE_URL } from '@/components/Seo';
 import { companyById } from '@/data/companies';
 import retailImage from '@/assets/retail-store.jpg';
-import supunTradersImage from '@/assets/supun-traders-storefront-v2.png';
+import supunTradersImage from '@/assets/supun-traders-storefront-v4.png';
 import hospitalityImage from '@/assets/sector-hospitality-v2.jpg';
 import hotelImage from '@/assets/hotel-interior.jpg';
 import manufacturingImage from '@/assets/sector-manufacturing-v2.jpg';

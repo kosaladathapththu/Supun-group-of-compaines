@@ -20,7 +20,7 @@ export const CompanyLogo = ({
   return (
     <div
       className={`relative flex items-center justify-center overflow-hidden ${
-        hasTransparentLogo ? 'bg-transparent' : 'bg-white'
+        hasTransparentLogo ? '' : 'bg-white'
       } ${className}`}
     >
       {logo ? (
