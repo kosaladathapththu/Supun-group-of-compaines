@@ -14,6 +14,7 @@ import Seo, { SITE_URL } from '@/components/Seo';
 import { companies, type CompanySector } from '@/data/companies';
 import heroImage from '@/assets/about-hero-sri-lanka-v3.png';
 import retailImage from '@/assets/retail-store.jpg';
+import supunTradersImage from '@/assets/supun-traders-storefront.jpg';
 import hospitalityImage from '@/assets/sector-hospitality-v2.jpg';
 import hotelImage from '@/assets/hotel-interior.jpg';
 import manufacturingImage from '@/assets/sector-manufacturing-v2.jpg';
@@ -30,7 +31,7 @@ const filters: Array<'All' | CompanySector> = [
   'Hospitality',
 ];
 const companyImages: Record<string, string> = {
-  'supun-traders': retailImage,
+  'supun-traders': supunTradersImage,
   'supun-super-center': retailImage,
   'supun-arcade-residency': hotelImage,
   'area-56': hospitalityImage,
