@@ -6,7 +6,7 @@ import { AwardIssuerMark } from '@/components/AwardIssuerMark';
 import chairmanImage from '@/assets/Chairman.png';
 import heroCorporate from '@/assets/hero-corporate.jpg';
 import aboutHeroSriLanka from '@/assets/about-hero-sri-lanka-v3.png';
-import retailStore from '@/assets/retail-store.jpg';
+import supunTradersHeritage from '@/assets/supun-traders-heritage.png';
 import manufacturingImage from '@/assets/sector-manufacturing-v2.jpg';
 import hospitalityImage from '@/assets/sector-hospitality-v2.jpg';
 import sriLankaMap from '@/assets/sri-lanka-watercolor-map.png';
@@ -215,9 +215,9 @@ const About = () => (
               className="absolute -right-[3%] -top-[3%] h-[106%] w-[48%] object-contain opacity-45 mix-blend-multiply"
             />
             <img
-              src={retailStore}
-              alt="The Group's retail beginnings"
-              className="absolute left-0 top-5 z-10 h-[285px] w-[67%] -rotate-2 border-[8px] border-white object-cover shadow-xl grayscale"
+              src={supunTradersHeritage}
+              alt="Historic Supun Traders storefront in Colombo"
+              className="absolute left-0 top-5 z-10 h-[285px] w-[67%] -rotate-2 border-[8px] border-white object-cover shadow-xl"
             />
             <img
               src={heroCorporate}
