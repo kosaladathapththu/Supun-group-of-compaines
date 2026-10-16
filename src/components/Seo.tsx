@@ -64,6 +64,11 @@ const Seo = ({
   const rawPath = path ?? location.pathname;
   const cleanPath = rawPath === '/' ? '/' : rawPath.replace(/\/$/, '');
   const canonicalUrl = `${SITE_URL}${cleanPath}`;
+  const socialImage = !image
+    ? DEFAULT_IMAGE
+    : image.startsWith('http')
+      ? image
+      : `${SITE_URL}${image}`;
   const jsonLdString = jsonLd ? JSON.stringify(jsonLd) : '';
 
   useEffect(() => {
@@ -71,7 +76,7 @@ const Seo = ({
     const isProductionHost =
       hostname === 'supuncompanies.com' || hostname === 'www.supuncompanies.com';
     const shouldNoIndex = noindex || !isProductionHost;
-    document.documentElement.lang = 'en';
+    document.documentElement.lang = 'en-LK';
     document.title = title;
     upsertMeta('name', 'title', title);
     upsertMeta('name', 'description', description);
@@ -91,15 +96,18 @@ const Seo = ({
     upsertMeta('property', 'og:url', canonicalUrl);
     upsertMeta('property', 'og:title', title);
     upsertMeta('property', 'og:description', description);
-    upsertMeta('property', 'og:image', image);
+    upsertMeta('property', 'og:image', socialImage);
+    upsertMeta('property', 'og:image:secure_url', socialImage);
+    upsertMeta('property', 'og:image:alt', `${title} — ${SITE_NAME}`);
     upsertMeta('property', 'og:site_name', SITE_NAME);
     upsertMeta('property', 'og:locale', 'en_LK');
     upsertMeta('name', 'twitter:card', 'summary_large_image');
     upsertMeta('name', 'twitter:title', title);
     upsertMeta('name', 'twitter:description', description);
-    upsertMeta('name', 'twitter:image', image);
+    upsertMeta('name', 'twitter:image', socialImage);
+    upsertMeta('name', 'twitter:image:alt', `${title} — ${SITE_NAME}`);
     upsertJsonLd(jsonLdString ? JSON.parse(jsonLdString) : null);
-  }, [title, description, keywords, canonicalUrl, image, type, noindex, jsonLdString]);
+  }, [title, description, keywords, canonicalUrl, socialImage, type, noindex, jsonLdString]);
   return null;
 };
 

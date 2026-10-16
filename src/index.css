@@ -145,6 +145,13 @@ All colors MUST be HSL.
     filter: brightness(1.18) saturate(1.05) contrast(1.02);
   }
 
+  @media (max-width: 767px) {
+    .premium-hero video {
+      animation: none;
+      filter: none;
+    }
+  }
+
   .hero-bottom-rail {
     border-color: rgb(255 255 255 / 0.14);
     border-style: solid;
@@ -820,6 +827,14 @@ All colors MUST be HSL.
 .page-section-visible {
   opacity: 1;
   transform: none;
+}
+
+@media (max-width: 767px) {
+  .page-section-reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
 }
 
 .about-hero {

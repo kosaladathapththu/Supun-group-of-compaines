@@ -1,5 +1,5 @@
 import { useMemo, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import {
   ArrowRight,
   BriefcaseBusiness,
@@ -14,6 +14,7 @@ import Seo, { SITE_URL } from '@/components/Seo';
 import { companies, type CompanySector } from '@/data/companies';
 import heroImage from '@/assets/about-hero-sri-lanka-v3.png';
 import retailImage from '@/assets/retail-store.jpg';
+import supunTradersImage from '@/assets/supun-traders-storefront-v4.png';
 import hospitalityImage from '@/assets/sector-hospitality-v2.jpg';
 import hotelImage from '@/assets/hotel-interior.jpg';
 import manufacturingImage from '@/assets/sector-manufacturing-v2.jpg';
@@ -30,7 +31,7 @@ const filters: Array<'All' | CompanySector> = [
   'Hospitality',
 ];
 const companyImages: Record<string, string> = {
-  'supun-traders': retailImage,
+  'supun-traders': supunTradersImage,
   'supun-super-center': retailImage,
   'supun-arcade-residency': hotelImage,
   'area-56': hospitalityImage,
@@ -44,6 +45,7 @@ const companyImages: Record<string, string> = {
 };
 
 const Companies = () => {
+  const navigate = useNavigate();
   const [activeFilter, setActiveFilter] = useState<(typeof filters)[number]>('All');
   const visibleCompanies = useMemo(
     () =>
@@ -59,15 +61,40 @@ const Companies = () => {
         title="Our Companies | Supun Group of Companies"
         description="Explore 11 Supun Group companies across manufacturing, retail, distribution and hospitality in Sri Lanka."
         keywords="Supun Group companies, Camy Smart, Supun Traders, Supun Super Center, Fuji Industries, Sri Lanka manufacturing"
+        path="/companies"
         jsonLd={{
           '@context': 'https://schema.org',
-          '@type': 'ItemList',
-          itemListElement: companies.map((company, index) => ({
-            '@type': 'ListItem',
-            position: index + 1,
-            name: company.name,
-            url: `${SITE_URL}/companies/${company.id}`,
-          })),
+          '@graph': [
+            {
+              '@type': 'CollectionPage',
+              name: 'Supun Group Companies',
+              url: `${SITE_URL}/companies`,
+              description:
+                'Supun Group companies across manufacturing, retail, distribution and hospitality in Sri Lanka.',
+              mainEntity: {
+                '@type': 'ItemList',
+                numberOfItems: companies.length,
+                itemListElement: companies.map((company, index) => ({
+                  '@type': 'ListItem',
+                  position: index + 1,
+                  name: company.name,
+                  url: `${SITE_URL}/companies/${company.id}`,
+                })),
+              },
+            },
+            {
+              '@type': 'BreadcrumbList',
+              itemListElement: [
+                { '@type': 'ListItem', position: 1, name: 'Home', item: SITE_URL },
+                {
+                  '@type': 'ListItem',
+                  position: 2,
+                  name: 'Our Companies',
+                  item: `${SITE_URL}/companies`,
+                },
+              ],
+            },
+          ],
         }}
       />
 
@@ -133,7 +160,21 @@ const Companies = () => {
               return (
                 <article
                   key={company.id}
-                  className="group overflow-hidden rounded-2xl border border-[#0b2747]/10 bg-white shadow-[0_10px_32px_rgba(11,39,71,.07)] transition duration-300 hover:-translate-y-0.5 hover:shadow-[0_18px_45px_rgba(11,39,71,.12)]"
+                  role="link"
+                  tabIndex={0}
+                  aria-label={`View ${company.shortName}`}
+                  onClick={(event) => {
+                    if ((event.target as HTMLElement).closest('a, button')) return;
+                    navigate(`/companies/${company.id}`);
+                  }}
+                  onKeyDown={(event) => {
+                    if (event.target !== event.currentTarget) return;
+                    if (event.key === 'Enter' || event.key === ' ') {
+                      event.preventDefault();
+                      navigate(`/companies/${company.id}`);
+                    }
+                  }}
+                  className="group cursor-pointer overflow-hidden rounded-2xl border border-[#0b2747]/10 bg-white shadow-[0_10px_32px_rgba(11,39,71,.07)] transition duration-300 hover:-translate-y-0.5 hover:border-[#315f9f]/25 hover:shadow-[0_18px_45px_rgba(11,39,71,.12)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#315f9f] focus-visible:ring-offset-4"
                 >
                   <div className="grid lg:grid-cols-3">
                     <div
@@ -148,7 +189,7 @@ const Companies = () => {
                       <CompanyLogo
                         companyId={company.id}
                         companyName={company.shortName}
-                        className="absolute left-5 top-5 h-20 w-44 rounded-xl border border-white/70 p-3 shadow-lg"
+                        className="absolute left-5 top-5 h-20 w-44 rounded-xl border border-white/70 bg-white/90 p-2 shadow-lg"
                         imageClassName="h-full w-full object-contain"
                       />
                       <p className="absolute bottom-5 left-5 right-5 text-xs font-bold uppercase tracking-[.16em] text-white">

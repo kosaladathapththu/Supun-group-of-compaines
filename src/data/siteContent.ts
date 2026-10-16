@@ -1,7 +1,7 @@
 import type { CompanySector } from './companies';
 
 export const siteStats = [
-  { value: '46+', label: 'Years of Excellence' },
+  { value: '48+', label: 'Years of Excellence' },
   { value: '11', label: 'Subsidiary Companies' },
   { value: '300+', label: 'Employees' },
   { value: '250+', label: 'Island-Wide Distributors' },
@@ -60,7 +60,7 @@ export const leadership = [
   },
   {
     name: 'Jeewantha Perera',
-    title: 'Head of Hospitality & Business Development',
+    title: 'General Manager',
     description:
       'Oversees hotel operations, guest experience, and business development across Supun Arcade Residency and Area 56.',
   },

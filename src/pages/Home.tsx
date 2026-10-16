@@ -4,7 +4,6 @@ import {
   ArrowDown,
   ArrowRight,
   Factory,
-  Globe2,
   Hotel,
   ShieldCheck,
   ShoppingBag,
@@ -16,8 +15,11 @@ import { CompanyLogo } from '@/components/CompanyLogo';
 import { companies } from '@/data/companies';
 import { sectorHighlights, siteStats } from '@/data/siteContent';
 import heroVideo from '@/assets/supun-group-hero-optimized.mp4';
+import heroMobileVideo from '@/assets/supun-group-hero-mobile.mp4';
 import manufacturingImage from '@/assets/sector-manufacturing-v2.jpg';
 import camyBrandLogo from '@/assets/camy-brand-logo.png';
+import certificationImage from '@/assets/made-in-sri-lanka-certification.jpg';
+import camyRedLogo from '@/assets/camy-logo-red-transparent.png';
 
 const sectorMeta = [
   { icon: Factory },
@@ -94,7 +96,49 @@ const CountUpStat = ({ value, label, index }: { value: string; label: string; in
 
 const Home = () => {
   const [heroVideoReady, setHeroVideoReady] = useState(false);
+  const [shouldPlayHeroVideo, setShouldPlayHeroVideo] = useState(false);
+  const heroVideoRef = useRef<HTMLVideoElement>(null);
   const companyCarouselRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+    const connection = (
+      navigator as Navigator & {
+        connection?: { saveData?: boolean; effectiveType?: string };
+      }
+    ).connection;
+
+    const updateVideoPreference = () => {
+      const constrainedConnection =
+        connection?.saveData || connection?.effectiveType === 'slow-2g' || connection?.effectiveType === '2g';
+      const enabled = !reducedMotion.matches && !constrainedConnection;
+      setHeroVideoReady(false);
+      setShouldPlayHeroVideo(enabled);
+    };
+
+    updateVideoPreference();
+    reducedMotion.addEventListener('change', updateVideoPreference);
+
+    return () => {
+      reducedMotion.removeEventListener('change', updateVideoPreference);
+    };
+  }, []);
+
+  useEffect(() => {
+    const video = heroVideoRef.current;
+    if (!video) return;
+
+    const handleVisibilityChange = () => {
+      if (document.hidden) {
+        video.pause();
+      } else {
+        void video.play().catch(() => undefined);
+      }
+    };
+
+    document.addEventListener('visibilitychange', handleVisibilityChange);
+    return () => document.removeEventListener('visibilitychange', handleVisibilityChange);
+  }, [shouldPlayHeroVideo]);
 
   const scrollCompanies = (direction: -1 | 1) => {
     const carousel = companyCarouselRef.current;
@@ -111,47 +155,68 @@ const Home = () => {
         title="Supun Group of Companies | Built in Sri Lanka. Built to Last."
         description="Supun Group of Companies is a Sri Lankan family-run group with 11 companies across manufacturing, retail, distribution and hospitality, with roots going back to 1978."
         keywords="Supun Group of Companies, Sri Lanka manufacturing, Camy, Supun Traders, Supun Super Center, Sri Lankan conglomerate"
+        path="/"
         jsonLd={{
           '@context': 'https://schema.org',
-          '@type': 'Organization',
-          name: SITE_NAME,
-          url: SITE_URL,
-          logo: DEFAULT_IMAGE,
-          foundingDate: '1978',
-          description:
-            'A Sri Lankan family-run group operating across manufacturing, retail, distribution and hospitality.',
-          address: { '@type': 'PostalAddress', addressLocality: 'Colombo', addressCountry: 'LK' },
-          contactPoint: {
-            '@type': 'ContactPoint',
-            telephone: '+94-112-055-026',
-            contactType: 'general enquiries',
-            email: 'info@supungroup.lk',
-          },
+          '@graph': [
+            {
+              '@type': 'WebSite',
+              '@id': `${SITE_URL}/#website`,
+              name: SITE_NAME,
+              url: SITE_URL,
+              inLanguage: 'en-LK',
+            },
+            {
+              '@type': 'Organization',
+              '@id': `${SITE_URL}/#organization`,
+              name: SITE_NAME,
+              url: SITE_URL,
+              logo: { '@type': 'ImageObject', url: DEFAULT_IMAGE },
+              foundingDate: '1978',
+              description:
+                'A Sri Lankan family-run group operating across manufacturing, retail, distribution and hospitality.',
+              address: {
+                '@type': 'PostalAddress',
+                addressLocality: 'Colombo',
+                addressCountry: 'LK',
+              },
+              contactPoint: {
+                '@type': 'ContactPoint',
+                telephone: '+94-112-055-026',
+                contactType: 'general enquiries',
+                email: 'info@supungroup.lk',
+              },
+            },
+          ],
         }}
       />
 
-      <section className="premium-hero relative isolate min-h-[760px] overflow-hidden bg-[#07110d] text-white lg:min-h-screen">
+      <section className="premium-hero relative isolate min-h-[100svh] overflow-hidden bg-[#07110d] text-white md:min-h-[760px] lg:min-h-screen">
         <div
-          className={`absolute inset-0 bg-[radial-gradient(circle_at_75%_25%,#252927_0%,#171a18_34%,#0d100e_74%)] transition-opacity duration-1000 ${heroVideoReady ? 'opacity-0' : 'opacity-100'}`}
+          className={`absolute inset-0 bg-[radial-gradient(circle_at_75%_25%,#252927_0%,#171a18_34%,#0d100e_74%)] transition-opacity duration-500 ${heroVideoReady ? 'opacity-0' : 'opacity-100'}`}
           aria-hidden="true"
         />
-        <video
-          className={`absolute inset-0 h-full w-full object-cover object-[62%_center] transition-opacity duration-1000 ${heroVideoReady ? 'opacity-100' : 'opacity-0'}`}
-          autoPlay
-          muted
-          loop
-          playsInline
-          preload="auto"
-          onCanPlay={() => setHeroVideoReady(true)}
-          aria-hidden="true"
-        >
-          <source src={heroVideo} type="video/mp4" />
-        </video>
+        {shouldPlayHeroVideo && (
+          <video
+            ref={heroVideoRef}
+            className={`absolute inset-0 h-full w-full object-cover object-[62%_center] transition-opacity duration-1000 ${heroVideoReady ? 'opacity-100' : 'opacity-0'}`}
+            autoPlay
+            muted
+            loop
+            playsInline
+            preload="auto"
+            onCanPlay={() => setHeroVideoReady(true)}
+            aria-hidden="true"
+          >
+            <source media="(max-width: 767px)" src={heroMobileVideo} type="video/mp4" />
+            <source src={heroVideo} type="video/mp4" />
+          </video>
+        )}
         <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(3,12,8,.55)_0%,rgba(5,18,12,.32)_38%,rgba(5,17,12,.1)_72%,rgba(3,12,8,.04)_100%)]" />
         <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(3,10,7,.08)_0%,transparent_36%,rgba(3,10,7,.42)_100%)]" />
 
-        <div className="container relative z-10 mx-auto flex min-h-[760px] flex-col px-5 pb-7 pt-28 sm:px-6 sm:pt-32 lg:min-h-screen lg:px-8 lg:pb-9 lg:pt-36">
-          <div className="hero-topline flex items-center justify-between gap-5 pb-5 text-[10px] font-semibold uppercase tracking-[0.24em] text-white/58 sm:text-[11px]">
+        <div className="container relative z-10 mx-auto flex min-h-[100svh] flex-col px-5 pb-6 pt-24 sm:min-h-[760px] sm:px-6 sm:pt-32 lg:min-h-screen lg:px-8 lg:pb-9 lg:pt-36">
+          <div className="hero-topline flex items-center justify-between gap-5 pb-3 text-[9px] font-semibold uppercase tracking-[0.2em] text-white/58 sm:pb-5 sm:text-[11px] sm:tracking-[0.24em]">
             <span className="flex items-center gap-3">
               <span className="h-px w-8 bg-[#e8aa3a]" /> Independent. Sri Lankan. Since 1978.
             </span>
@@ -160,22 +225,23 @@ const Home = () => {
             </span>
           </div>
 
-          <div className="grid flex-1 items-center gap-10 py-10 lg:grid-cols-[minmax(0,1fr)_18rem] lg:gap-16 lg:py-14 xl:grid-cols-[minmax(0,1fr)_21rem]">
+          <div className="grid flex-1 items-center gap-6 py-5 sm:gap-10 sm:py-10 lg:grid-cols-[minmax(0,1fr)_18rem] lg:gap-16 lg:py-14 xl:grid-cols-[minmax(0,1fr)_21rem]">
             <div className="hero-copy max-w-5xl">
-              <h1 className="hero-title max-w-5xl text-[clamp(3rem,8vw,6.6rem)] font-semibold normal-case leading-[0.92] tracking-[-0.055em] text-white">
+              <h1 className="hero-title max-w-5xl text-[clamp(2.55rem,13vw,3.3rem)] font-semibold normal-case leading-[0.94] tracking-[-0.055em] text-white sm:text-[clamp(3rem,8vw,6.6rem)] sm:leading-[0.92]">
                 <span className="hero-title-blue">Built in</span>{' '}
                 <span className="hero-title-accent">Sri Lanka.</span>
                 <br />
                 <span className="hero-title-blue">Built to </span>
                 <span className="hero-title-accent">last.</span>
               </h1>
-              <p className="mt-6 max-w-xl border-l border-[#e8aa3a]/70 pl-5 text-sm leading-relaxed text-white/80 sm:mt-8 sm:text-base">
+              <p className="mt-5 max-w-xl border-l border-[#e8aa3a]/70 pl-4 text-sm leading-relaxed text-white/80 sm:mt-8 sm:pl-5 sm:text-base">
                 One Sri Lankan Group, built across four industries since 1978.
               </p>
-              <div className="mt-8 flex flex-col gap-3 sm:mt-10 sm:flex-row">
+              <div className="relative z-20 mt-6 flex flex-col gap-2.5 sm:mt-10 sm:flex-row sm:gap-3">
                 <Link
                   to="/companies"
-                  className="hero-primary-button group inline-flex min-h-14 items-center justify-center gap-4 rounded-full px-7 text-sm font-semibold text-[#0b1b13]"
+                  aria-label="Explore all Supun Group companies"
+                  className="hero-primary-button group relative z-20 inline-flex min-h-14 w-full items-center justify-center gap-4 rounded-full bg-[#efbd55] px-6 text-sm font-bold text-[#0b1b13] sm:w-auto sm:px-7"
                 >
                   Explore our companies{' '}
                   <span className="flex h-8 w-8 items-center justify-center rounded-full bg-[#0b1b13] text-white transition duration-300 group-hover:translate-x-1">
@@ -201,7 +267,7 @@ const Home = () => {
               </div>
               <div className="mt-5 flex items-end gap-3">
                 <strong className="hero-stat-blue text-[5.75rem] font-semibold leading-[.8] tracking-[-0.09em]">
-                  46
+                  48
                 </strong>
                 <span className="mb-1 text-xl font-light text-[#f4bd59]">+</span>
               </div>
@@ -220,7 +286,7 @@ const Home = () => {
             </div>
           </div>
 
-          <div className="hero-bottom-rail flex items-end justify-between gap-6 pt-5">
+          <div className="hero-bottom-rail hidden items-end justify-between gap-6 pt-5 sm:flex">
             <a
               href="#legacy"
               className="group hidden items-center gap-3 text-[10px] font-semibold uppercase tracking-[0.2em] text-white/55 transition hover:text-white md:flex"
@@ -343,7 +409,7 @@ const Home = () => {
                     Local capability. Lasting value.
                   </h3>
                   <div className="mt-6 flex items-center gap-5 border-t border-white/25 pt-5">
-                    <strong className="text-4xl font-semibold tracking-[-0.05em]">46+</strong>
+                    <strong className="text-4xl font-semibold tracking-[-0.05em]">48+</strong>
                     <span className="max-w-[9rem] text-xs font-semibold uppercase leading-relaxed tracking-[0.14em] text-white/70">
                       Years of trusted enterprise
                     </span>
@@ -417,6 +483,92 @@ const Home = () => {
         </div>
       </section>
 
+      <section className="relative isolate overflow-hidden bg-[#edf3fb] py-12 text-[#071b2d] sm:py-16 md:py-24">
+        <div
+          className="absolute inset-0 -z-10 bg-[radial-gradient(circle_at_10%_16%,rgba(49,95,159,.14),transparent_30%),radial-gradient(circle_at_90%_82%,rgba(120,190,67,.16),transparent_32%)]"
+          aria-hidden="true"
+        />
+        <div className="container mx-auto px-4">
+          <div className="relative overflow-hidden rounded-[2rem] border border-[#10233f]/10 bg-white shadow-[0_28px_80px_rgba(16,35,63,.14)] md:rounded-[3rem]">
+            <div className="grid lg:grid-cols-[.88fr_1.12fr]">
+              <AnimatedSection animation="slide-right" duration={900} triggerOnce={false}>
+                <div className="relative h-full min-h-[440px] overflow-hidden bg-[#efe8da] lg:min-h-[720px]">
+                  <img
+                    src={certificationImage}
+                    alt="Made in Sri Lanka certifications awarded to Camy Smart, New Camy Smart and Aerostar Home Appliances"
+                    className="absolute inset-0 h-full w-full object-cover object-center"
+                  />
+                  <div className="absolute inset-0 ring-1 ring-inset ring-black/5" />
+                </div>
+              </AnimatedSection>
+
+              <AnimatedSection animation="slide-left" delay={120} duration={950} triggerOnce={false}>
+                <div className="flex h-full flex-col p-7 sm:p-10 lg:p-14 xl:p-16">
+                  <div className="flex items-center gap-3 text-[11px] font-bold uppercase tracking-[0.24em] text-[#315f9f]">
+                    <span className="flex h-10 w-10 items-center justify-center rounded-full bg-[#e8eef6] text-[#315f9f] ring-1 ring-[#315f9f]/10">
+                      <ShieldCheck size={20} strokeWidth={1.8} />
+                    </span>
+                    Officially certified
+                  </div>
+
+                  <h2 className="mt-7 max-w-2xl text-4xl font-semibold normal-case leading-[1.02] tracking-[-0.045em] text-[#071b2d] sm:text-5xl xl:text-6xl">
+                    Proudly Made in <span className="text-[#d99a24]">Sri Lanka.</span>
+                  </h2>
+
+                  <div className="mt-8 space-y-5 text-base leading-8 text-[#526278]">
+                    <p>
+                      We are proud to hold the official “Made in Sri Lanka” certification, awarded
+                      by the{' '}
+                      <a href="https://www.industry.gov.lk/" target="_blank" rel="noreferrer" className="font-semibold text-[#315f9f] transition hover:text-[#78be43]">
+                        Ministry of Industries – Sri Lanka
+                      </a>{' '}
+                      and the{' '}
+                      <a href="https://neda.gov.lk/" target="_blank" rel="noreferrer" className="font-semibold text-[#315f9f] transition hover:text-[#78be43]">
+                        National Enterprise Development Authority
+                      </a>{' '}
+                      to three of our companies behind the{' '}
+                      <a href="https://www.linkedin.com/showcase/camy-sri-lanka/" target="_blank" rel="noreferrer" className="font-semibold text-[#315f9f] transition hover:text-[#78be43]">
+                        Camy Sri Lanka
+                      </a>{' '}
+                      brand 🇱🇰
+                    </p>
+                    <p>
+                      For the{' '}
+                      <a href="https://www.linkedin.com/company/supun-group-of-companies/" target="_blank" rel="noreferrer" className="font-semibold text-[#315f9f] transition hover:text-[#78be43]">
+                        Supun Group of Companies
+                      </a>
+                      , this represents something bigger than a certificate. It reflects our
+                      commitment to manufacturing here, creating livelihoods for Sri Lankans and
+                      keeping value within our economy.
+                    </p>
+                    <p className="rounded-r-2xl border-l-2 border-[#78be43] bg-[#f3f8f0] py-4 pl-5 pr-4 font-medium text-[#23364e]">
+                      We believe Sri Lanka can. Every product we make is proof of that belief, and
+                      our promise to keep investing in the people, skills and industry that will
+                      move our nation forward.
+                    </p>
+                  </div>
+
+                  <div className="mt-auto border-t border-[#10233f]/10 pt-8">
+                    <div className="flex items-center gap-5 sm:gap-7">
+                      <span className="h-14 w-1 shrink-0 rounded-full bg-gradient-to-b from-[#d99a24] to-[#78be43]" />
+                      <div className="flex flex-wrap items-baseline gap-x-4 gap-y-1">
+                        <strong className="text-5xl font-semibold leading-none tracking-[-0.07em] text-[#78be43] sm:text-6xl">100%</strong>
+                        <div>
+                          <span className="block text-2xl font-semibold leading-none tracking-[-0.035em] text-[#071b2d] sm:text-3xl">Sri Lankan</span>
+                          <span className="mt-2 flex items-center gap-2 text-[9px] font-bold uppercase tracking-[0.22em] text-[#667388] sm:text-[10px]">
+                            <span className="h-1.5 w-1.5 rounded-full bg-[#d99a24]" /> Proudly made here
+                          </span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </AnimatedSection>
+            </div>
+          </div>
+        </div>
+      </section>
+
       <section className="py-12 sm:py-14 md:py-20">
         <div className="container mx-auto px-4">
           <AnimatedSection animation="slide-up" duration={800} triggerOnce={false}>
@@ -470,16 +622,34 @@ const Home = () => {
                   to={`/companies/${company.id}`}
                   className="company-glass group relative flex min-h-[450px] w-full flex-col overflow-hidden rounded-[1.5rem] p-5 transition duration-500 hover:-translate-y-2 md:p-6"
                 >
-                  <div className="company-card-visual relative flex min-h-[178px] items-center justify-center overflow-hidden rounded-[1.15rem] border border-primary/10 bg-white/80 px-7 py-6">
-                    <CompanyLogo
-                      companyId={company.id}
-                      companyName={company.shortName}
-                      className="h-36 w-full max-w-[310px] bg-transparent transition duration-500"
-                      imageClassName={`h-full w-full transition-transform duration-500 ${keepOriginalLogoSize(company.id) ? 'group-hover:scale-[1.05]' : 'scale-[1.2] group-hover:scale-[1.25]'}`}
-                    />
-                    <span className="absolute bottom-4 right-4 inline-flex rounded-full border border-white bg-[#eef4fb]/95 px-3 py-1.5 text-[9px] font-bold uppercase tracking-[0.15em] text-primary shadow-sm">
-                      {company.industry}
-                    </span>
+                  <div className="relative flex min-h-[190px] items-center justify-center px-2 py-4">
+                    {company.id === 'new-camy-smart' ? (
+                      <img
+                        src={camyRedLogo}
+                        alt="Camy logo"
+                        className="h-44 w-full max-w-[330px] object-contain transition-transform duration-500 group-hover:scale-105"
+                        loading="lazy"
+                      />
+                    ) : (
+                      <CompanyLogo
+                        companyId={company.id}
+                        companyName={company.shortName}
+                        className="h-44 w-full max-w-[350px] !overflow-visible !bg-transparent transition duration-500"
+                        imageClassName={`h-full w-full mix-blend-multiply transition-transform duration-500 ${
+                          company.id === 'aerostar-home-appliances'
+                            ? 'scale-[2.75] [filter:contrast(1.18)_saturate(1.12)] group-hover:scale-[2.85]'
+                            : company.id === 'camy-smart'
+                              ? 'scale-[2.15] group-hover:scale-[2.23]'
+                              : company.id === 'rodsons'
+                                ? 'scale-[2.3] group-hover:scale-[2.38]'
+                                : company.id === 'camy-global'
+                                  ? 'scale-[2.15] group-hover:scale-[2.23]'
+                            : keepOriginalLogoSize(company.id)
+                            ? 'scale-[1.35] group-hover:scale-[1.41]'
+                            : 'scale-[1.62] group-hover:scale-[1.68]'
+                        }`}
+                      />
+                    )}
                   </div>
                   <div className="relative flex flex-1 flex-col px-2 pb-1 pt-7">
                     <div className="mb-4 flex items-center gap-3 text-[10px] font-bold uppercase tracking-[.16em] text-[#738197]">
@@ -517,12 +687,6 @@ const Home = () => {
         >
           <div className="relative isolate overflow-hidden rounded-[2rem] bg-[#071b2d] px-7 py-12 text-white shadow-[0_30px_80px_rgba(7,27,45,.20)] sm:px-12 sm:py-16 md:rounded-[3rem] lg:px-20 lg:py-20">
             <div className="absolute inset-y-0 right-0 -z-10 w-full bg-[radial-gradient(circle_at_85%_35%,rgba(217,154,36,.16),transparent_30%),linear-gradient(115deg,transparent_45%,rgba(25,83,132,.38))] lg:w-2/3" />
-            <Globe2
-              className="absolute -bottom-28 -right-24 -z-10 h-[28rem] w-[28rem] text-white/[.06]"
-              strokeWidth={0.65}
-              aria-hidden="true"
-            />
-
             <div className="grid gap-12 lg:grid-cols-[1fr_18rem] lg:items-end lg:gap-20">
               <div>
                 <p className="mb-6 flex items-center gap-3 text-xs font-bold uppercase tracking-[0.24em] text-[#efbd55]">
