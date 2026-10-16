@@ -15,10 +15,13 @@ export const CompanyLogo = ({
   imageClassName = '',
 }: CompanyLogoProps) => {
   const logo = getCompanyLogo(companyId);
+  const hasTransparentLogo = companyId === 'supun-traders';
 
   return (
     <div
-      className={`relative flex items-center justify-center overflow-hidden bg-white ${className}`}
+      className={`relative flex items-center justify-center overflow-hidden ${
+        hasTransparentLogo ? 'bg-transparent' : 'bg-white'
+      } ${className}`}
     >
       {logo ? (
         <img
