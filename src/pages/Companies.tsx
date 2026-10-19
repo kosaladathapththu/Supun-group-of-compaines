@@ -14,7 +14,8 @@ import Seo, { SITE_URL } from '@/components/Seo';
 import { companies, type CompanySector } from '@/data/companies';
 import heroImage from '@/assets/about-hero-sri-lanka-v3.png';
 import retailImage from '@/assets/retail-store.jpg';
-import supunTradersImage from '@/assets/supun-traders-storefront-v4.png';
+import supunTradersImage from '@/assets/supun-traders-pettah.png';
+import distributorsImage from '@/assets/supun-traders-storefront-v4.png';
 import hospitalityImage from '@/assets/sector-hospitality-v2.jpg';
 import hotelImage from '@/assets/hotel-interior.jpg';
 import manufacturingImage from '@/assets/sector-manufacturing-v2.jpg';
@@ -32,6 +33,7 @@ const filters: Array<'All' | CompanySector> = [
 ];
 const companyImages: Record<string, string> = {
   'supun-traders': supunTradersImage,
+  'supun-traders-distributors': distributorsImage,
   'supun-super-center': retailImage,
   'supun-arcade-residency': hotelImage,
   'area-56': hospitalityImage,
@@ -189,7 +191,8 @@ const Companies = () => {
                       <CompanyLogo
                         companyId={company.id}
                         companyName={company.shortName}
-                        className="absolute left-5 top-5 h-20 w-44 rounded-xl border border-white/70 bg-white/90 p-2 shadow-lg"
+                        placement="listing"
+                        className="absolute left-5 top-5 h-28 w-60 max-w-[calc(100%-2.5rem)] rounded-xl border border-white/70 bg-white p-3 shadow-lg"
                         imageClassName="h-full w-full object-contain"
                       />
                       <p className="absolute bottom-5 left-5 right-5 text-xs font-bold uppercase tracking-[.16em] text-white">

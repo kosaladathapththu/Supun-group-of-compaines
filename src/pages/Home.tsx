@@ -28,8 +28,6 @@ const sectorMeta = [
   { icon: ShieldCheck },
 ];
 
-const keepOriginalLogoSize = (companyId: string) =>
-  companyId === 'fuji-industries' || companyId === 'area-56';
 const featuredCompanyIds = [
   'supun-traders',
   'supun-super-center',
@@ -110,7 +108,9 @@ const Home = () => {
 
     const updateVideoPreference = () => {
       const constrainedConnection =
-        connection?.saveData || connection?.effectiveType === 'slow-2g' || connection?.effectiveType === '2g';
+        connection?.saveData ||
+        connection?.effectiveType === 'slow-2g' ||
+        connection?.effectiveType === '2g';
       const enabled = !reducedMotion.matches && !constrainedConnection;
       setHeroVideoReady(false);
       setShouldPlayHeroVideo(enabled);
@@ -153,7 +153,7 @@ const Home = () => {
     <div className="min-h-screen overflow-hidden bg-[#edf3fb]">
       <Seo
         title="Supun Group of Companies | Built in Sri Lanka. Built to Last."
-        description="Supun Group of Companies is a Sri Lankan family-run group with 11 companies across manufacturing, retail, distribution and hospitality, with roots going back to 1978."
+        description="Supun Group of Companies is a Sri Lankan family-run group with 12 companies across manufacturing, retail, distribution and hospitality, with roots going back to 1978."
         keywords="Supun Group of Companies, Sri Lanka manufacturing, Camy, Supun Traders, Supun Super Center, Sri Lankan conglomerate"
         path="/"
         jsonLd={{
@@ -502,7 +502,12 @@ const Home = () => {
                 </div>
               </AnimatedSection>
 
-              <AnimatedSection animation="slide-left" delay={120} duration={950} triggerOnce={false}>
+              <AnimatedSection
+                animation="slide-left"
+                delay={120}
+                duration={950}
+                triggerOnce={false}
+              >
                 <div className="flex h-full flex-col p-7 sm:p-10 lg:p-14 xl:p-16">
                   <div className="flex items-center gap-3 text-[11px] font-bold uppercase tracking-[0.24em] text-[#315f9f]">
                     <span className="flex h-10 w-10 items-center justify-center rounded-full bg-[#e8eef6] text-[#315f9f] ring-1 ring-[#315f9f]/10">
@@ -519,22 +524,42 @@ const Home = () => {
                     <p>
                       We are proud to hold the official “Made in Sri Lanka” certification, awarded
                       by the{' '}
-                      <a href="https://www.industry.gov.lk/" target="_blank" rel="noreferrer" className="font-semibold text-[#315f9f] transition hover:text-[#78be43]">
+                      <a
+                        href="https://www.industry.gov.lk/"
+                        target="_blank"
+                        rel="noreferrer"
+                        className="font-semibold text-[#315f9f] transition hover:text-[#78be43]"
+                      >
                         Ministry of Industries – Sri Lanka
                       </a>{' '}
                       and the{' '}
-                      <a href="https://neda.gov.lk/" target="_blank" rel="noreferrer" className="font-semibold text-[#315f9f] transition hover:text-[#78be43]">
+                      <a
+                        href="https://neda.gov.lk/"
+                        target="_blank"
+                        rel="noreferrer"
+                        className="font-semibold text-[#315f9f] transition hover:text-[#78be43]"
+                      >
                         National Enterprise Development Authority
                       </a>{' '}
                       to three of our companies behind the{' '}
-                      <a href="https://www.linkedin.com/showcase/camy-sri-lanka/" target="_blank" rel="noreferrer" className="font-semibold text-[#315f9f] transition hover:text-[#78be43]">
+                      <a
+                        href="https://www.linkedin.com/showcase/camy-sri-lanka/"
+                        target="_blank"
+                        rel="noreferrer"
+                        className="font-semibold text-[#315f9f] transition hover:text-[#78be43]"
+                      >
                         Camy Sri Lanka
                       </a>{' '}
                       brand 🇱🇰
                     </p>
                     <p>
                       For the{' '}
-                      <a href="https://www.linkedin.com/company/supun-group-of-companies/" target="_blank" rel="noreferrer" className="font-semibold text-[#315f9f] transition hover:text-[#78be43]">
+                      <a
+                        href="https://www.linkedin.com/company/supun-group-of-companies/"
+                        target="_blank"
+                        rel="noreferrer"
+                        className="font-semibold text-[#315f9f] transition hover:text-[#78be43]"
+                      >
                         Supun Group of Companies
                       </a>
                       , this represents something bigger than a certificate. It reflects our
@@ -552,11 +577,16 @@ const Home = () => {
                     <div className="flex items-center gap-5 sm:gap-7">
                       <span className="h-14 w-1 shrink-0 rounded-full bg-gradient-to-b from-[#d99a24] to-[#78be43]" />
                       <div className="flex flex-wrap items-baseline gap-x-4 gap-y-1">
-                        <strong className="text-5xl font-semibold leading-none tracking-[-0.07em] text-[#78be43] sm:text-6xl">100%</strong>
+                        <strong className="text-5xl font-semibold leading-none tracking-[-0.07em] text-[#78be43] sm:text-6xl">
+                          100%
+                        </strong>
                         <div>
-                          <span className="block text-2xl font-semibold leading-none tracking-[-0.035em] text-[#071b2d] sm:text-3xl">Sri Lankan</span>
+                          <span className="block text-2xl font-semibold leading-none tracking-[-0.035em] text-[#071b2d] sm:text-3xl">
+                            Sri Lankan
+                          </span>
                           <span className="mt-2 flex items-center gap-2 text-[9px] font-bold uppercase tracking-[0.22em] text-[#667388] sm:text-[10px]">
-                            <span className="h-1.5 w-1.5 rounded-full bg-[#d99a24]" /> Proudly made here
+                            <span className="h-1.5 w-1.5 rounded-full bg-[#d99a24]" /> Proudly made
+                            here
                           </span>
                         </div>
                       </div>
@@ -623,33 +653,12 @@ const Home = () => {
                   className="company-glass group relative flex min-h-[450px] w-full flex-col overflow-hidden rounded-[1.5rem] p-5 transition duration-500 hover:-translate-y-2 md:p-6"
                 >
                   <div className="relative flex min-h-[190px] items-center justify-center px-2 py-4">
-                    {company.id === 'new-camy-smart' ? (
-                      <img
-                        src={camyRedLogo}
-                        alt="Camy logo"
-                        className="h-44 w-full max-w-[330px] object-contain transition-transform duration-500 group-hover:scale-105"
-                        loading="lazy"
-                      />
-                    ) : (
-                      <CompanyLogo
-                        companyId={company.id}
-                        companyName={company.shortName}
-                        className="h-44 w-full max-w-[350px] !overflow-visible !bg-transparent transition duration-500"
-                        imageClassName={`h-full w-full mix-blend-multiply transition-transform duration-500 ${
-                          company.id === 'aerostar-home-appliances'
-                            ? 'scale-[2.75] [filter:contrast(1.18)_saturate(1.12)] group-hover:scale-[2.85]'
-                            : company.id === 'camy-smart'
-                              ? 'scale-[2.15] group-hover:scale-[2.23]'
-                              : company.id === 'rodsons'
-                                ? 'scale-[2.3] group-hover:scale-[2.38]'
-                                : company.id === 'camy-global'
-                                  ? 'scale-[2.15] group-hover:scale-[2.23]'
-                            : keepOriginalLogoSize(company.id)
-                            ? 'scale-[1.35] group-hover:scale-[1.41]'
-                            : 'scale-[1.62] group-hover:scale-[1.68]'
-                        }`}
-                      />
-                    )}
+                    <CompanyLogo
+                      companyId={company.id}
+                      companyName={company.shortName}
+                      placement="home"
+                      className="h-44 w-full bg-transparent"
+                    />
                   </div>
                   <div className="relative flex flex-1 flex-col px-2 pb-1 pt-7">
                     <div className="mb-4 flex items-center gap-3 text-[10px] font-bold uppercase tracking-[.16em] text-[#738197]">

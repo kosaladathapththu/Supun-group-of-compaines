@@ -862,7 +862,7 @@ All colors MUST be HSL.
 
 @media (min-width: 1024px) {
   .company-detail-hero-grid {
-    grid-template-columns: minmax(0, 1fr) 250px;
+    grid-template-columns: minmax(0, 1fr) 320px;
   }
 
   .company-detail-hero-logo {

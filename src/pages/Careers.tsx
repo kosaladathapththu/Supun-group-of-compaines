@@ -26,7 +26,7 @@ const reasons = [
   },
   {
     title: 'Grow across a Group',
-    reveal: 'Connect your potential to eleven businesses.',
+    reveal: 'Connect your potential to twelve businesses.',
     icon: Users,
     image: growthImage,
   },
@@ -160,7 +160,7 @@ const Careers = () => {
             </div>
             <div className="career-stat">
               <Building2 className="text-[#efc66f]" />
-              <strong className="mt-8 block text-4xl">11</strong>
+              <strong className="mt-8 block text-4xl">12</strong>
               <span className="mt-2 block text-sm text-white/55">Connected companies</span>
             </div>
           </div>

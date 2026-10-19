@@ -15,7 +15,8 @@ import { AwardIssuerMark } from '@/components/AwardIssuerMark';
 import Seo, { SITE_URL } from '@/components/Seo';
 import { companyById } from '@/data/companies';
 import retailImage from '@/assets/retail-store.jpg';
-import supunTradersImage from '@/assets/supun-traders-storefront-v4.png';
+import supunTradersImage from '@/assets/supun-traders-pettah.png';
+import distributorsImage from '@/assets/supun-traders-storefront-v4.png';
 import hospitalityImage from '@/assets/sector-hospitality-v2.jpg';
 import hotelImage from '@/assets/hotel-interior.jpg';
 import manufacturingImage from '@/assets/sector-manufacturing-v2.jpg';
@@ -27,6 +28,7 @@ import coolingImage from '@/assets/products/camy-air-conditioners.png';
 
 const companyImages: Record<string, string> = {
   'supun-traders': supunTradersImage,
+  'supun-traders-distributors': distributorsImage,
   'supun-super-center': retailImage,
   'supun-arcade-residency': hotelImage,
   'area-56': hospitalityImage,
@@ -171,7 +173,8 @@ const CompanyDetail = () => {
                 <CompanyLogo
                   companyId={company.id}
                   companyName={company.shortName}
-                  className="company-detail-hero-logo h-28 w-full max-w-[250px] rounded-xl border border-white/40 p-4 shadow-2xl transition duration-300 group-hover:-translate-y-1 group-hover:border-[#efbd55]"
+                  placement="detail"
+                  className="company-detail-hero-logo h-40 w-[min(320px,100%)] max-w-full rounded-xl border border-white/40 p-4 shadow-2xl transition duration-300 group-hover:-translate-y-1 group-hover:border-[#efbd55]"
                   imageClassName="h-full w-full object-contain"
                 />
               </a>
@@ -179,7 +182,8 @@ const CompanyDetail = () => {
               <CompanyLogo
                 companyId={company.id}
                 companyName={company.shortName}
-                className="company-detail-hero-logo h-28 w-full max-w-[250px] justify-self-start rounded-xl border border-white/40 p-4 shadow-2xl"
+                placement="detail"
+                className="company-detail-hero-logo h-40 w-[min(320px,100%)] max-w-full justify-self-start rounded-xl border border-white/40 p-4 shadow-2xl"
                 imageClassName="h-full w-full object-contain"
               />
             )}

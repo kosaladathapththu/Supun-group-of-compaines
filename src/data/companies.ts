@@ -20,7 +20,7 @@ export interface Company {
 export const companies: Company[] = [
   {
     id: 'supun-traders',
-    name: 'Supun Traders & Distributors (Pvt) Ltd',
+    name: 'Supun Traders',
     shortName: 'Supun Traders',
     tagline: "The Group's original wholesale and retail business, trusted since 1978.",
     description: "The Group's original wholesale and retail business, trusted since 1978.",
@@ -34,7 +34,7 @@ export const companies: Company[] = [
       'Wide range of household goods, appliances and electronics',
     ],
     phone: '0112 433 784',
-    location: '2nd Cross Street, Colombo 11',
+    location: '418, 2nd Cross Street, Pettah',
   },
   {
     id: 'supun-super-center',
@@ -201,12 +201,12 @@ export const companies: Company[] = [
   },
   {
     id: 'camy-global',
-    name: 'Camy Global',
-    shortName: 'Camy Global',
+    name: 'Camy Global Marketing (Pvt) Ltd',
+    shortName: 'Camy Global Marketing',
     tagline: 'Distributing Camy Across Sri Lanka',
     description: 'Getting Camy products to every corner of the island.',
     fullDescription:
-      'Camy Global is the distribution engine that gets Camy products, from helmets and cookware to clocks, appliances, air conditioners, and fans, from the factory floor to retail shelves island-wide.',
+      'Camy Global Marketing (Pvt) Ltd is the distribution engine that gets Camy products, from helmets and cookware to clocks, appliances, air conditioners, and fans, from the factory floor to retail shelves island-wide.',
     industry: 'Retail & Distribution',
     features: [
       'Islandwide distribution network',
@@ -215,5 +215,19 @@ export const companies: Company[] = [
     ],
   },
 ];
+
+// A separate business from the original Supun Traders shop in Pettah.
+companies.push({
+  id: 'supun-traders-distributors',
+  name: 'Supun Traders & Distributors (Pvt) Ltd',
+  shortName: 'Supun Traders & Distributors',
+  tagline: 'Household Appliances & Electronics',
+  description: 'Household appliances and electronics at Wolfendhal Street, Colombo 12.',
+  fullDescription:
+    'Supun Traders & Distributors (Pvt) Ltd is a separate Supun Group company located at No. 64, Wolfendhal Street, Colombo 12, offering household appliances and electronics.',
+  industry: 'Retail & Distribution',
+  location: '64, Wolfendhal Street, Colombo 12',
+  features: ['Household appliances', 'Electronics'],
+});
 
 export const companyById = (id?: string) => companies.find((company) => company.id === id);

@@ -15,7 +15,7 @@ import { awards, coreValues, journey, leadership } from '@/data/siteContent';
 import { getCompanyLogo } from '@/data/companyLogos';
 
 const stats = [
-  ['11', 'Group companies'],
+  ['12', 'Group companies'],
   ['300+', 'Employees'],
   ['250+', 'Distributors'],
 ];
@@ -58,7 +58,7 @@ const About = () => (
   <div className="min-h-screen overflow-hidden bg-[#fbfaf7] text-[#102746]">
     <Seo
       title="About Supun Group of Companies | Sri Lanka Since 1978"
-      description="Learn about Supun Group of Companies, a Sri Lankan family business operating 11 companies across manufacturing, retail, distribution and hospitality since 1978."
+      description="Learn about Supun Group of Companies, a Sri Lankan family business operating 12 companies across manufacturing, retail, distribution and hospitality since 1978."
       keywords="Supun Group of Companies, Sri Lankan companies, Sri Lanka manufacturing, retail and distribution Sri Lanka, hospitality Colombo, Supun Group history"
       path="/about"
       image={DEFAULT_IMAGE}
@@ -311,8 +311,8 @@ const About = () => (
             One vision. Clear leadership.
           </h2>
           <p className="mx-auto mt-4 max-w-2xl text-sm leading-6 text-[#69665e] md:text-base">
-            A connected leadership structure guiding Group strategy, operational excellence and
-            the growth of every Supun business.
+            A connected leadership structure guiding Group strategy, operational excellence and the
+            growth of every Supun business.
           </p>
         </div>
 
@@ -322,11 +322,21 @@ const About = () => (
           </div>
           <div className="grid gap-4 md:grid-cols-3">
             {leadership.slice(0, 3).map((person, index) => (
-              <AnimatedSection key={person.name} animation="fade" delay={index * 60} duration={450} triggerOnce={false}>
+              <AnimatedSection
+                key={person.name}
+                animation="fade"
+                delay={index * 60}
+                duration={450}
+                triggerOnce={false}
+              >
                 <article className="h-full rounded-xl border border-[#d79a22]/25 bg-white p-4 text-center shadow-[0_8px_24px_rgba(74,55,20,.06)] transition duration-300 hover:-translate-y-1 hover:border-[#d79a22]/50">
                   <span className="mx-auto block h-1 w-10 rounded-full bg-[#d79a22]" />
-                  <h3 className="mt-3 text-lg font-semibold normal-case text-[#28271f]">{person.name}</h3>
-                  <p className="mt-2 text-[11px] font-bold uppercase leading-5 tracking-[.12em] text-[#947027]">{person.title}</p>
+                  <h3 className="mt-3 text-lg font-semibold normal-case text-[#28271f]">
+                    {person.name}
+                  </h3>
+                  <p className="mt-2 text-[11px] font-bold uppercase leading-5 tracking-[.12em] text-[#947027]">
+                    {person.title}
+                  </p>
                   {person.description && person.description !== '—' && (
                     <p className="mt-2 text-xs leading-5 text-[#777267]">{person.description}</p>
                   )}
@@ -335,18 +345,35 @@ const About = () => (
             ))}
           </div>
 
-          <div className="mx-auto h-7 w-px bg-gradient-to-b from-[#d79a22] to-[#4e7c47]" aria-hidden="true" />
+          <div
+            className="mx-auto h-7 w-px bg-gradient-to-b from-[#d79a22] to-[#4e7c47]"
+            aria-hidden="true"
+          />
           <div className="mx-auto mb-3 w-fit rounded-full border border-[#4e7c47]/20 bg-[#edf5e8] px-4 py-1.5 text-[9px] font-bold uppercase tracking-[.18em] text-[#3f6c39]">
             Group executive leadership
           </div>
           <div className="mx-auto grid max-w-4xl gap-4 md:grid-cols-2">
             {leadership.slice(3, 5).map((person, index) => (
-              <AnimatedSection key={person.name} animation="fade" delay={index * 60} duration={450} triggerOnce={false}>
+              <AnimatedSection
+                key={person.name}
+                animation="fade"
+                delay={index * 60}
+                duration={450}
+                triggerOnce={false}
+              >
                 <article className="h-full rounded-xl border border-[#4e7c47]/20 bg-white p-5 shadow-[0_8px_24px_rgba(45,82,54,.06)] transition duration-300 hover:-translate-y-1 hover:border-[#4e7c47]/45">
-                  <p className="text-[9px] font-bold uppercase tracking-[.18em] text-[#9a6a16]">Group executive</p>
-                  <h3 className="mt-2.5 text-xl font-semibold normal-case text-[#28271f]">{person.name}</h3>
-                  <p className="mt-1.5 text-[11px] font-semibold uppercase leading-5 tracking-[.08em] text-[#4f852c]">{person.title}</p>
-                  <p className="mt-3 border-t border-[#4e7c47]/10 pt-3 text-xs leading-5 text-[#777267]">{person.description}</p>
+                  <p className="text-[9px] font-bold uppercase tracking-[.18em] text-[#9a6a16]">
+                    Group executive
+                  </p>
+                  <h3 className="mt-2.5 text-xl font-semibold normal-case text-[#28271f]">
+                    {person.name}
+                  </h3>
+                  <p className="mt-1.5 text-[11px] font-semibold uppercase leading-5 tracking-[.08em] text-[#4f852c]">
+                    {person.title}
+                  </p>
+                  <p className="mt-3 border-t border-[#4e7c47]/10 pt-3 text-xs leading-5 text-[#777267]">
+                    {person.description}
+                  </p>
                 </article>
               </AnimatedSection>
             ))}
@@ -358,16 +385,30 @@ const About = () => (
           </div>
           <div className="mx-auto grid max-w-4xl gap-4 md:grid-cols-2">
             {leadership.slice(5).map((person, index) => (
-              <AnimatedSection key={person.name} animation="fade" delay={index * 60} duration={450} triggerOnce={false}>
+              <AnimatedSection
+                key={person.name}
+                animation="fade"
+                delay={index * 60}
+                duration={450}
+                triggerOnce={false}
+              >
                 <article className="h-full rounded-xl border border-[#4e7c47]/15 bg-white p-4 transition duration-300 hover:-translate-y-1 hover:shadow-[0_10px_26px_rgba(45,82,54,.08)]">
                   <div className="flex items-start gap-4">
-                    <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-[#eff8e9] text-sm font-bold text-[#4f852c]">{String(index + 1).padStart(2, '0')}</span>
+                    <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-[#eff8e9] text-sm font-bold text-[#4f852c]">
+                      {String(index + 1).padStart(2, '0')}
+                    </span>
                     <div>
-                      <h3 className="text-lg font-semibold normal-case text-[#28271f]">{person.name}</h3>
-                      <p className="mt-1.5 text-[11px] font-bold uppercase leading-5 tracking-[.08em] text-[#4f852c]">{person.title}</p>
+                      <h3 className="text-lg font-semibold normal-case text-[#28271f]">
+                        {person.name}
+                      </h3>
+                      <p className="mt-1.5 text-[11px] font-bold uppercase leading-5 tracking-[.08em] text-[#4f852c]">
+                        {person.title}
+                      </p>
                     </div>
                   </div>
-                  <p className="mt-3 border-t border-[#4e7c47]/10 pt-3 text-xs leading-5 text-[#777267]">{person.description}</p>
+                  <p className="mt-3 border-t border-[#4e7c47]/10 pt-3 text-xs leading-5 text-[#777267]">
+                    {person.description}
+                  </p>
                 </article>
               </AnimatedSection>
             ))}
