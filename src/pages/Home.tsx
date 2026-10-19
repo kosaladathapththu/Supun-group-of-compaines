@@ -191,7 +191,7 @@ const Home = () => {
         }}
       />
 
-      <section className="premium-hero relative isolate min-h-[100svh] overflow-hidden bg-[#07110d] text-white md:min-h-[760px] lg:min-h-screen">
+      <section className="premium-hero relative isolate h-[58svh] min-h-[520px] max-h-[640px] overflow-hidden bg-[#07110d] text-white md:h-auto md:max-h-none md:min-h-[760px] lg:min-h-screen">
         <div
           className={`absolute inset-0 bg-[radial-gradient(circle_at_75%_25%,#252927_0%,#171a18_34%,#0d100e_74%)] transition-opacity duration-500 ${heroVideoReady ? 'opacity-0' : 'opacity-100'}`}
           aria-hidden="true"
@@ -215,8 +215,8 @@ const Home = () => {
         <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(3,12,8,.55)_0%,rgba(5,18,12,.32)_38%,rgba(5,17,12,.1)_72%,rgba(3,12,8,.04)_100%)]" />
         <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(3,10,7,.08)_0%,transparent_36%,rgba(3,10,7,.42)_100%)]" />
 
-        <div className="container relative z-10 mx-auto flex min-h-[100svh] flex-col px-5 pb-6 pt-24 sm:min-h-[760px] sm:px-6 sm:pt-32 lg:min-h-screen lg:px-8 lg:pb-9 lg:pt-36">
-          <div className="hero-topline flex items-center justify-between gap-5 pb-3 text-[9px] font-semibold uppercase tracking-[0.2em] text-white/58 sm:pb-5 sm:text-[11px] sm:tracking-[0.24em]">
+        <div className="container relative z-10 mx-auto flex h-full min-h-0 flex-col px-5 pb-5 pt-20 sm:h-auto sm:min-h-[760px] sm:px-6 sm:pb-6 sm:pt-32 lg:min-h-screen lg:px-8 lg:pb-9 lg:pt-36">
+          <div className="hero-topline flex items-center justify-between gap-5 pb-1 text-[8px] font-semibold uppercase tracking-[0.16em] text-white/58 sm:pb-5 sm:text-[11px] sm:tracking-[0.24em]">
             <span className="flex items-center gap-3">
               <span className="h-px w-8 bg-[#e8aa3a]" /> Independent. Sri Lankan. Since 1978.
             </span>
@@ -225,23 +225,23 @@ const Home = () => {
             </span>
           </div>
 
-          <div className="grid flex-1 items-center gap-6 py-5 sm:gap-10 sm:py-10 lg:grid-cols-[minmax(0,1fr)_18rem] lg:gap-16 lg:py-14 xl:grid-cols-[minmax(0,1fr)_21rem]">
+          <div className="grid flex-1 items-center gap-4 py-2 sm:gap-10 sm:py-10 lg:grid-cols-[minmax(0,1fr)_18rem] lg:gap-16 lg:py-14 xl:grid-cols-[minmax(0,1fr)_21rem]">
             <div className="hero-copy max-w-5xl">
-              <h1 className="hero-title max-w-5xl text-[clamp(2.55rem,13vw,3.3rem)] font-semibold normal-case leading-[0.94] tracking-[-0.055em] text-white sm:text-[clamp(3rem,8vw,6.6rem)] sm:leading-[0.92]">
+              <h1 className="hero-title max-w-5xl text-[clamp(2.15rem,10.5vw,2.8rem)] font-semibold normal-case leading-[0.94] tracking-[-0.055em] text-white sm:text-[clamp(3rem,8vw,6.6rem)] sm:leading-[0.92]">
                 <span className="hero-title-blue">Built in</span>{' '}
                 <span className="hero-title-accent">Sri Lanka.</span>
                 <br />
                 <span className="hero-title-blue">Built to </span>
                 <span className="hero-title-accent">last.</span>
               </h1>
-              <p className="mt-5 max-w-xl border-l border-[#e8aa3a]/70 pl-4 text-sm leading-relaxed text-white/80 sm:mt-8 sm:pl-5 sm:text-base">
+              <p className="mt-3 max-w-xl border-l border-[#e8aa3a]/70 pl-3 text-xs leading-relaxed text-white/80 sm:mt-8 sm:pl-5 sm:text-base">
                 One Sri Lankan Group, built across four industries since 1978.
               </p>
-              <div className="relative z-20 mt-6 flex flex-col gap-2.5 sm:mt-10 sm:flex-row sm:gap-3">
+              <div className="relative z-20 mt-4 flex gap-2.5 sm:mt-10 sm:flex-row sm:gap-3">
                 <Link
                   to="/companies"
                   aria-label="Explore all Supun Group companies"
-                  className="hero-primary-button group relative z-20 inline-flex min-h-14 w-full items-center justify-center gap-4 rounded-full bg-[#efbd55] px-6 text-sm font-bold text-[#0b1b13] sm:w-auto sm:px-7"
+                  className="hero-primary-button group relative z-20 inline-flex min-h-12 flex-1 items-center justify-center gap-2 rounded-full bg-[#efbd55] px-4 text-xs font-bold text-[#0b1b13] sm:min-h-14 sm:flex-none sm:px-7 sm:text-sm"
                 >
                   Explore our companies{' '}
                   <span className="flex h-8 w-8 items-center justify-center rounded-full bg-[#0b1b13] text-white transition duration-300 group-hover:translate-x-1">
@@ -250,7 +250,7 @@ const Home = () => {
                 </Link>
                 <Link
                   to="/about"
-                  className="hero-ghost-button group inline-flex min-h-14 items-center justify-center gap-3 rounded-full px-7 text-sm font-semibold text-white"
+                  className="hero-ghost-button group inline-flex min-h-12 flex-1 items-center justify-center gap-2 rounded-full px-4 text-xs font-semibold text-white sm:min-h-14 sm:flex-none sm:px-7 sm:text-sm"
                 >
                   Discover our story{' '}
                   <ArrowRight
