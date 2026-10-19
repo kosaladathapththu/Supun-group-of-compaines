@@ -1,5 +1,6 @@
 import { Building2 } from 'lucide-react';
 import { getCompanyLogo } from '@/data/companyLogos';
+import camyRedLogo from '@/assets/camy-logo-red-transparent.png';
 
 interface CompanyLogoProps {
   companyId: string;
@@ -14,8 +15,8 @@ export const CompanyLogo = ({
   className = '',
   imageClassName = '',
 }: CompanyLogoProps) => {
-  const logo = getCompanyLogo(companyId);
-  const hasTransparentLogo = companyId === 'supun-traders';
+  const logo = companyId === 'new-camy-smart' ? camyRedLogo : getCompanyLogo(companyId);
+  const hasTransparentLogo = companyId === 'supun-traders' || companyId === 'new-camy-smart';
 
   return (
     <div
