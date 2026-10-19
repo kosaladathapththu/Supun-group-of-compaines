@@ -60,7 +60,7 @@ export const leadership = [
   },
   {
     name: 'Jeewantha Perera',
-    title: 'General Manager',
+    title: 'Head of Hospitality & Business Development',
     description:
       'Oversees hotel operations, guest experience, and business development across Supun Arcade Residency and Area 56.',
   },

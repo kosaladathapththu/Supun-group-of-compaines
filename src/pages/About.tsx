@@ -339,8 +339,8 @@ const About = () => (
           <div className="mx-auto mb-3 w-fit rounded-full border border-[#4e7c47]/20 bg-[#edf5e8] px-4 py-1.5 text-[9px] font-bold uppercase tracking-[.18em] text-[#3f6c39]">
             Group executive leadership
           </div>
-          <div className="mx-auto grid max-w-6xl gap-4 md:grid-cols-3">
-            {leadership.slice(3, 6).map((person, index) => (
+          <div className="mx-auto grid max-w-4xl gap-4 md:grid-cols-2">
+            {leadership.slice(3, 5).map((person, index) => (
               <AnimatedSection key={person.name} animation="fade" delay={index * 60} duration={450} triggerOnce={false}>
                 <article className="h-full rounded-xl border border-[#4e7c47]/20 bg-white p-5 shadow-[0_8px_24px_rgba(45,82,54,.06)] transition duration-300 hover:-translate-y-1 hover:border-[#4e7c47]/45">
                   <p className="text-[9px] font-bold uppercase tracking-[.18em] text-[#9a6a16]">Group executive</p>
@@ -356,8 +356,8 @@ const About = () => (
           <div className="mx-auto mb-3 w-fit rounded-full border border-[#78be43]/25 bg-[#eff8e9] px-4 py-1.5 text-[9px] font-bold uppercase tracking-[.18em] text-[#4f852c]">
             Business leadership
           </div>
-          <div className="mx-auto grid max-w-xl gap-4">
-            {leadership.slice(6).map((person, index) => (
+          <div className="mx-auto grid max-w-4xl gap-4 md:grid-cols-2">
+            {leadership.slice(5).map((person, index) => (
               <AnimatedSection key={person.name} animation="fade" delay={index * 60} duration={450} triggerOnce={false}>
                 <article className="h-full rounded-xl border border-[#4e7c47]/15 bg-white p-4 transition duration-300 hover:-translate-y-1 hover:shadow-[0_10px_26px_rgba(45,82,54,.08)]">
                   <div className="flex items-start gap-4">
