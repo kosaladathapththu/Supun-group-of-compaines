@@ -16,7 +16,7 @@ import { companies } from '@/data/companies';
 import { sectorHighlights, siteStats } from '@/data/siteContent';
 import heroVideo from '@/assets/supun-group-hero-optimized.mp4';
 import heroMobileVideo from '@/assets/supun-group-hero-mobile.mp4';
-import manufacturingImage from '@/assets/sector-manufacturing-v2.jpg';
+import manufacturingImage from '@/assets/camy-factory-technician.jpeg';
 import camyBrandLogo from '@/assets/camy-brand-logo.png';
 import certificationImage from '@/assets/made-in-sri-lanka-certification.jpg';
 import camyRedLogo from '@/assets/camy-logo-red-transparent.png';
@@ -397,8 +397,9 @@ const Home = () => {
               <div className="relative min-h-[480px] overflow-hidden rounded-[1.5rem] bg-[#10233f] shadow-[0_24px_60px_rgba(16,35,63,.18)] sm:min-h-[570px]">
                 <img
                   src={manufacturingImage}
-                  alt="Supun Group manufacturing operations in Sri Lanka"
-                  className="absolute inset-0 h-full w-full object-cover"
+                  alt="A technician brazing copper tubing on a Camy air-conditioning unit"
+                  className="absolute inset-0 h-full w-full object-cover object-[50%_38%]"
+                  loading="lazy"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-[#081a32] via-[#10233f]/25 to-transparent" />
                 <div className="absolute inset-x-0 bottom-0 p-7 text-white sm:p-9">
@@ -483,118 +484,65 @@ const Home = () => {
         </div>
       </section>
 
-      <section className="relative isolate overflow-hidden bg-[#edf3fb] py-12 text-[#071b2d] sm:py-16 md:py-24">
-        <div
-          className="absolute inset-0 -z-10 bg-[radial-gradient(circle_at_10%_16%,rgba(49,95,159,.14),transparent_30%),radial-gradient(circle_at_90%_82%,rgba(120,190,67,.16),transparent_32%)]"
-          aria-hidden="true"
-        />
-        <div className="container mx-auto px-4">
-          <div className="relative overflow-hidden rounded-[2rem] border border-[#10233f]/10 bg-white shadow-[0_28px_80px_rgba(16,35,63,.14)] md:rounded-[3rem]">
-            <div className="grid lg:grid-cols-[.88fr_1.12fr]">
-              <AnimatedSection animation="slide-right" duration={900} triggerOnce={false}>
-                <div className="relative h-full min-h-[440px] overflow-hidden bg-[#efe8da] lg:min-h-[720px]">
-                  <img
-                    src={certificationImage}
-                    alt="Made in Sri Lanka certifications awarded to Camy Smart, New Camy Smart and Aerostar Home Appliances"
-                    className="absolute inset-0 h-full w-full object-cover object-center"
-                  />
-                  <div className="absolute inset-0 ring-1 ring-inset ring-black/5" />
-                </div>
-              </AnimatedSection>
-
-              <AnimatedSection
-                animation="slide-left"
-                delay={120}
-                duration={950}
-                triggerOnce={false}
-              >
-                <div className="flex h-full flex-col p-7 sm:p-10 lg:p-14 xl:p-16">
-                  <div className="flex items-center gap-3 text-[11px] font-bold uppercase tracking-[0.24em] text-[#315f9f]">
-                    <span className="flex h-10 w-10 items-center justify-center rounded-full bg-[#e8eef6] text-[#315f9f] ring-1 ring-[#315f9f]/10">
-                      <ShieldCheck size={20} strokeWidth={1.8} />
-                    </span>
-                    Officially certified
-                  </div>
-
-                  <h2 className="mt-7 max-w-2xl text-4xl font-semibold normal-case leading-[1.02] tracking-[-0.045em] text-[#071b2d] sm:text-5xl xl:text-6xl">
-                    Proudly Made in <span className="text-[#d99a24]">Sri Lanka.</span>
-                  </h2>
-
-                  <div className="mt-8 space-y-5 text-base leading-8 text-[#526278]">
-                    <p>
-                      We are proud to hold the official “Made in Sri Lanka” certification, awarded
-                      by the{' '}
-                      <a
-                        href="https://www.industry.gov.lk/"
-                        target="_blank"
-                        rel="noreferrer"
-                        className="font-semibold text-[#315f9f] transition hover:text-[#78be43]"
-                      >
-                        Ministry of Industries – Sri Lanka
-                      </a>{' '}
-                      and the{' '}
-                      <a
-                        href="https://neda.gov.lk/"
-                        target="_blank"
-                        rel="noreferrer"
-                        className="font-semibold text-[#315f9f] transition hover:text-[#78be43]"
-                      >
-                        National Enterprise Development Authority
-                      </a>{' '}
-                      to three of our companies behind the{' '}
-                      <a
-                        href="https://www.linkedin.com/showcase/camy-sri-lanka/"
-                        target="_blank"
-                        rel="noreferrer"
-                        className="font-semibold text-[#315f9f] transition hover:text-[#78be43]"
-                      >
-                        Camy Sri Lanka
-                      </a>{' '}
-                      brand 🇱🇰
-                    </p>
-                    <p>
-                      For the{' '}
-                      <a
-                        href="https://www.linkedin.com/company/supun-group-of-companies/"
-                        target="_blank"
-                        rel="noreferrer"
-                        className="font-semibold text-[#315f9f] transition hover:text-[#78be43]"
-                      >
-                        Supun Group of Companies
-                      </a>
-                      , this represents something bigger than a certificate. It reflects our
-                      commitment to manufacturing here, creating livelihoods for Sri Lankans and
-                      keeping value within our economy.
-                    </p>
-                    <p className="rounded-r-2xl border-l-2 border-[#78be43] bg-[#f3f8f0] py-4 pl-5 pr-4 font-medium text-[#23364e]">
-                      We believe Sri Lanka can. Every product we make is proof of that belief, and
-                      our promise to keep investing in the people, skills and industry that will
-                      move our nation forward.
-                    </p>
-                  </div>
-
-                  <div className="mt-auto border-t border-[#10233f]/10 pt-8">
-                    <div className="flex items-center gap-5 sm:gap-7">
-                      <span className="h-14 w-1 shrink-0 rounded-full bg-gradient-to-b from-[#d99a24] to-[#78be43]" />
-                      <div className="flex flex-wrap items-baseline gap-x-4 gap-y-1">
-                        <strong className="text-5xl font-semibold leading-none tracking-[-0.07em] text-[#78be43] sm:text-6xl">
-                          100%
-                        </strong>
-                        <div>
-                          <span className="block text-2xl font-semibold leading-none tracking-[-0.035em] text-[#071b2d] sm:text-3xl">
-                            Sri Lankan
-                          </span>
-                          <span className="mt-2 flex items-center gap-2 text-[9px] font-bold uppercase tracking-[0.22em] text-[#667388] sm:text-[10px]">
-                            <span className="h-1.5 w-1.5 rounded-full bg-[#d99a24]" /> Proudly made
-                            here
-                          </span>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </AnimatedSection>
-            </div>
+      <section
+        aria-labelledby="certification-heading"
+        className="border-y border-border bg-background py-12 md:py-20"
+      >
+        <div className="container mx-auto grid max-w-6xl items-center gap-8 px-4 md:grid-cols-2 md:gap-14">
+          <figure className="m-0">
+            <img
+              src={certificationImage}
+              alt="Made in Sri Lanka certificates for Camy Smart, New Camy Smart and Aerostar Home Appliances"
+              className="mx-auto block h-auto w-full max-w-[470px]"
+              loading="lazy"
+            />
+            <figcaption className="mx-auto mt-3 max-w-[470px] text-xs leading-5 text-muted-foreground">
+              Certificates awarded to three Supun Group manufacturing companies.
+            </figcaption>
+          </figure>
+          <div className="py-2 md:py-6">
+            <p className="text-xs font-semibold uppercase tracking-[.12em] text-primary">
+              Manufacturing
+            </p>
+            <h2
+              id="certification-heading"
+              className="mt-4 text-3xl font-semibold normal-case leading-tight tracking-[-.025em] text-foreground md:text-4xl"
+            >
+              Made in Sri Lanka certification
+            </h2>
+            <p className="mt-6 text-base leading-7 text-muted-foreground">
+              Three Supun Group companies have received Made in Sri Lanka certification from the
+              Ministry of Industries and the National Enterprise Development Authority (NEDA).
+            </p>
+            <ul className="mt-7 divide-y divide-border border-y border-border">
+              <li className="py-4">
+                <Link
+                  to="/companies/camy-smart"
+                  className="inline-flex items-center gap-3 font-medium text-primary underline-offset-4 hover:underline"
+                >
+                  Camy Smart <ArrowRight size={16} aria-hidden="true" />
+                </Link>
+              </li>
+              <li className="py-4">
+                <Link
+                  to="/companies/new-camy-smart"
+                  className="inline-flex items-center gap-3 font-medium text-primary underline-offset-4 hover:underline"
+                >
+                  New Camy Smart <ArrowRight size={16} aria-hidden="true" />
+                </Link>
+              </li>
+              <li className="py-4">
+                <Link
+                  to="/companies/aerostar-home-appliances"
+                  className="inline-flex items-center gap-3 font-medium text-primary underline-offset-4 hover:underline"
+                >
+                  Aerostar Home Appliances <ArrowRight size={16} aria-hidden="true" />
+                </Link>
+              </li>
+            </ul>
+            <p className="mt-5 text-sm leading-6 text-muted-foreground">
+              These companies manufacture Camy products in Sri Lanka.
+            </p>
           </div>
         </div>
       </section>

@@ -7,7 +7,7 @@ import chairmanImage from '@/assets/Chairman.png';
 import heroCorporate from '@/assets/hero-corporate.jpg';
 import aboutHeroSriLanka from '@/assets/about-hero-sri-lanka-v3.png';
 import supunTradersHeritage from '@/assets/supun-traders-heritage.png';
-import manufacturingImage from '@/assets/sector-manufacturing-v2.jpg';
+import manufacturingImage from '@/assets/camy-air-conditioning-assembly.jpg';
 import hospitalityImage from '@/assets/sector-hospitality-v2.jpg';
 import sriLankaMap from '@/assets/sri-lanka-watercolor-map.png';
 import coreValuesTeam from '@/assets/about-core-values-team.png';
@@ -449,7 +449,7 @@ const About = () => (
         <div className="relative min-h-[360px]">
           <img
             src={manufacturingImage}
-            alt="Sustainable local manufacturing"
+            alt="A Camy technician assembling air-conditioning units on the factory production line"
             className="absolute inset-0 h-full w-full object-cover"
           />
           <div className="absolute inset-0 bg-gradient-to-t from-[#102746]/90 to-[#102746]/10" />
