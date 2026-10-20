@@ -446,17 +446,17 @@ const About = () => (
             </p>
           </article>
         </div>
-        <div className="relative min-h-[360px]">
+        <figure className="m-0 flex flex-col bg-[#f3f6f8]">
           <img
             src={manufacturingImage}
             alt="A Camy technician brazing copper tubing on an air-conditioning unit"
-            className="absolute inset-0 h-full w-full object-cover"
+            className="mx-auto block h-auto w-full max-w-[480px]"
+            loading="lazy"
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-[#102746]/90 to-[#102746]/10" />
-          <p className="absolute bottom-8 left-8 max-w-[230px] text-2xl font-medium leading-snug text-white">
+          <figcaption className="bg-[#102746] px-7 py-5 text-xl font-medium leading-snug text-white">
             Sustainable solutions for generations.
-          </p>
-        </div>
+          </figcaption>
+        </figure>
       </div>
     </section>
 
