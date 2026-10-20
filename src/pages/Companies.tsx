@@ -62,7 +62,7 @@ const Companies = () => {
       <Seo
         title="Our Companies | Supun Group of Companies"
         description="Explore 11 Supun Group companies across manufacturing, retail, distribution and hospitality in Sri Lanka."
-        keywords="Supun Group companies, Camy Smart, Supun Traders, Supun Super Center, Fuji Industries, Sri Lanka manufacturing"
+        keywords="Supun Group companies, Camy Smart, Supun Traders, Supun Super Center, Air Condition and Fans manufacturing, Sri Lanka manufacturing"
         path="/companies"
         jsonLd={{
           '@context': 'https://schema.org',

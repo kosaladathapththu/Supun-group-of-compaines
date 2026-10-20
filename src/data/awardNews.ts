@@ -58,12 +58,12 @@ export const awardNewsStories: AwardNewsStory[] = [
   },
   {
     slug: 'fuji-industries-tcl-global-partners-vip-award',
-    title: 'Fuji Industries receives VIP Award at TCL Global Partners Conference',
-    summary: 'Fuji Industries was recognised at the 2024 TCL AC Global Partners Conference.',
+    title: 'Air Condition and Fans manufacturing receives VIP Award at TCL Global Partners Conference',
+    summary: 'Air Condition and Fans manufacturing was recognised at the 2024 TCL AC Global Partners Conference.',
     content:
-      'Fuji Industries received a VIP Award at the 2024 TCL AC Global Partners Conference.\n\nThe award recognises the company’s partnership with TCL and its work in the cooling and home appliance sector. It represents another international industry milestone for a Supun Group company.',
+      'Air Condition and Fans manufacturing received a VIP Award at the 2024 TCL AC Global Partners Conference.\n\nThe award recognises the company’s partnership with TCL and its work in the cooling and home appliance sector. It represents another international industry milestone for a Supun Group company.',
     award: 'VIP Award, 2024 TCL AC Global Partners Conference',
-    awardedTo: 'Fuji Industries',
+    awardedTo: 'Air Condition and Fans manufacturing',
     givenBy: 'TCL',
     companyPath: '/companies/fuji-industries',
     image: coolingProducts,

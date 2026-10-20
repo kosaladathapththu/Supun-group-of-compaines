@@ -184,12 +184,12 @@ export const companies: Company[] = [
   },
   {
     id: 'fuji-industries',
-    name: 'Fuji Industries (Pvt) Ltd',
-    shortName: 'Fuji Industries',
+    name: 'Air Condition and Fans manufacturing',
+    shortName: 'Air Condition and Fans manufacturing',
     tagline: 'Camy Air Conditioners and Fans',
     description: 'Camy air conditioners and fans, made in Sri Lanka.',
     fullDescription:
-      "The Group's newest venture, Fuji Industries produces Camy air conditioners and Camy fans for residential and commercial customers, made in Sri Lanka.",
+      "The Group's newest venture, the air conditioning and fan manufacturing business produces Camy air conditioners and Camy fans for residential and commercial customers, made in Sri Lanka.",
     industry: 'Manufacturing',
     established: '2023',
     features: [

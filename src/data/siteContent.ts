@@ -94,7 +94,7 @@ export const journey = [
   ['2018', 'New Camy Smart founded, adding non-stick cookware manufacturing'],
   [
     '2023',
-    "Fuji Industries founded, the Group's newest venture, manufacturing air conditioners and fans",
+    "Air Condition and Fans manufacturing founded, the Group's newest venture, manufacturing air conditioners and fans",
   ],
   [
     'Today',
@@ -141,7 +141,7 @@ export const awards = [
   },
   {
     award: 'VIP Award, 2024 TCL AC Global Partners Conference',
-    awardedTo: 'Fuji Industries',
+    awardedTo: 'Air Condition and Fans manufacturing',
     givenBy: 'TCL',
   },
   {
@@ -156,9 +156,9 @@ export const camyProducts = [
   { name: 'Water Filters', madeBy: 'Aero Star', note: 'Made in Sri Lanka' },
   { name: 'Mixer Grinders', madeBy: 'Aero Star', note: 'Made in Sri Lanka' },
   { name: 'Non-Stick Cookware', madeBy: 'New Camy Smart', note: 'Made in Sri Lanka' },
-  { name: 'Air Conditioners', madeBy: 'Fuji Industries', note: 'Made in Sri Lanka' },
-  { name: 'Fans', madeBy: 'Fuji Industries', note: 'Made in Sri Lanka' },
-  { name: 'TVs', madeBy: 'Fuji Industries', note: 'Made in Sri Lanka' },
+  { name: 'Air Conditioners', madeBy: 'Air Condition and Fans manufacturing', note: 'Made in Sri Lanka' },
+  { name: 'Fans', madeBy: 'Air Condition and Fans manufacturing', note: 'Made in Sri Lanka' },
+  { name: 'TVs', madeBy: 'Air Condition and Fans manufacturing', note: 'Made in Sri Lanka' },
   { name: 'Wall Clocks', madeBy: 'Aero Star', note: 'Made in Sri Lanka' },
   { name: 'Electric Kettles', madeBy: 'Group factories', note: 'Made in Sri Lanka' },
   { name: 'Gas Cookers', madeBy: 'Group factories', note: 'Made in Sri Lanka' },

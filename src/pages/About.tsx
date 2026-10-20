@@ -24,7 +24,7 @@ const awardCompanyPaths: Record<string, string> = {
   'Camy Smart': '/companies/camy-smart',
   'Aero Star (Aerostar Home Appliances)': '/companies/aerostar-home-appliances',
   'Supun Group of Companies': '/about',
-  'Fuji Industries': '/companies/fuji-industries',
+  'Air Condition and Fans manufacturing': '/companies/fuji-industries',
   'Supun Arcade Residency': '/companies/supun-arcade-residency',
 };
 const Label = ({ children }: { children: React.ReactNode }) => (
@@ -48,7 +48,7 @@ const journeyCompanyLogos: Record<string, { id: string; name: string }[]> = {
     { id: 'rodsons', name: 'Rodsons' },
   ],
   '2018': [{ id: 'new-camy-smart', name: 'New Camy Smart' }],
-  '2023': [{ id: 'fuji-industries', name: 'Fuji Industries' }],
+  '2023': [{ id: 'fuji-industries', name: 'Air Condition and Fans manufacturing' }],
 };
 
 const JourneyLogo = ({ id, name }: { id: string; name: string }) =>
