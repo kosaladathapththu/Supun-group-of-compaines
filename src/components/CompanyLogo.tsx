@@ -2,7 +2,7 @@ import { Building2 } from 'lucide-react';
 import { getCompanyLogo } from '@/data/companyLogos';
 import camyRedLogo from '@/assets/camy-logo-red-transparent.png';
 
-type Placement = 'home' | 'listing' | 'detail';
+type Placement = 'home' | 'listing' | 'detail' | 'timeline';
 interface CompanyLogoProps {
   companyId: string;
   companyName: string;
@@ -27,6 +27,18 @@ const artwork: Record<
 
 // Independent art direction for every company in each page context.
 const sizes: Record<Placement, Record<string, [number, number]>> = {
+  timeline: {
+    'supun-traders': [82, 66],
+    'supun-super-center': [92, 48],
+    'supun-arcade-residency': [94, 48],
+    'area-56': [86, 45],
+    'supun-aerosoft': [94, 56],
+    'aerostar-home-appliances': [76, 64],
+    'camy-smart': [88, 60],
+    rodsons: [88, 58],
+    'new-camy-smart': [88, 52],
+    'fuji-industries': [92, 58],
+  },
   home: {
     'supun-traders': [190, 150],
     'supun-traders-distributors': [190, 150],

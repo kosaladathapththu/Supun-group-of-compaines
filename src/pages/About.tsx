@@ -7,12 +7,12 @@ import chairmanImage from '@/assets/Chairman.png';
 import heroCorporate from '@/assets/hero-corporate.jpg';
 import aboutHeroSriLanka from '@/assets/about-hero-sri-lanka-v3.png';
 import supunTradersHeritage from '@/assets/supun-traders-heritage.png';
-import manufacturingImage from '@/assets/camy-air-conditioning-assembly.jpg';
-import hospitalityImage from '@/assets/sector-hospitality-v2.jpg';
+import manufacturingImage from '@/assets/camy-factory-technician.jpeg';
+import industryBanner from '@/assets/sri-lanka-industry-banner.png';
 import sriLankaMap from '@/assets/sri-lanka-watercolor-map.png';
-import coreValuesTeam from '@/assets/about-core-values-team.png';
+import coreValuesTeam from '@/assets/camy-factory-team.jpg';
 import { awards, coreValues, journey, leadership } from '@/data/siteContent';
-import { getCompanyLogo } from '@/data/companyLogos';
+import { CompanyLogo } from '@/components/CompanyLogo';
 
 const stats = [
   ['12', 'Group companies'],
@@ -51,8 +51,17 @@ const journeyCompanyLogos: Record<string, { id: string; name: string }[]> = {
   '2023': [{ id: 'fuji-industries', name: 'Fuji Industries' }],
 };
 
-const journeyLogoSource = (id: string) =>
-  id === 'group' ? '/supun-group-of-companies-logo.png' : getCompanyLogo(id);
+const JourneyLogo = ({ id, name }: { id: string; name: string }) =>
+  id === 'group' ? (
+    <img
+      src="/supun-group-of-companies-logo.png"
+      alt={name}
+      className="h-16 w-20 object-contain"
+      loading="lazy"
+    />
+  ) : (
+    <CompanyLogo companyId={id} companyName={name} placement="timeline" className="h-20 w-24" />
+  );
 
 const About = () => (
   <div className="min-h-screen overflow-hidden bg-[#fbfaf7] text-[#102746]">
@@ -345,11 +354,7 @@ const About = () => (
             ))}
           </div>
 
-          <div
-            className="mx-auto h-7 w-px bg-gradient-to-b from-[#d79a22] to-[#4e7c47]"
-            aria-hidden="true"
-          />
-          <div className="mx-auto mb-3 w-fit rounded-full border border-[#4e7c47]/20 bg-[#edf5e8] px-4 py-1.5 text-[9px] font-bold uppercase tracking-[.18em] text-[#3f6c39]">
+          <div className="mx-auto mb-3 mt-8 w-fit rounded-full border border-[#4e7c47]/20 bg-[#edf5e8] px-4 py-1.5 text-[9px] font-bold uppercase tracking-[.18em] text-[#3f6c39]">
             Group executive leadership
           </div>
           <div className="mx-auto grid max-w-4xl gap-4 md:grid-cols-2">
@@ -361,10 +366,8 @@ const About = () => (
                 duration={450}
                 triggerOnce={false}
               >
-                <article className="h-full rounded-xl border border-[#4e7c47]/20 bg-white p-5 shadow-[0_8px_24px_rgba(45,82,54,.06)] transition duration-300 hover:-translate-y-1 hover:border-[#4e7c47]/45">
-                  <p className="text-[9px] font-bold uppercase tracking-[.18em] text-[#9a6a16]">
-                    Group executive
-                  </p>
+                <article className="h-full rounded-xl border border-[#4e7c47]/20 bg-white p-5 text-center shadow-[0_8px_24px_rgba(45,82,54,.06)] transition duration-300 hover:-translate-y-1 hover:border-[#4e7c47]/45">
+                  <span className="mx-auto block h-1 w-10 rounded-full bg-[#4e7c47]" />
                   <h3 className="mt-2.5 text-xl font-semibold normal-case text-[#28271f]">
                     {person.name}
                   </h3>
@@ -379,8 +382,7 @@ const About = () => (
             ))}
           </div>
 
-          <div className="mx-auto h-7 w-px bg-[#4e7c47]/45" aria-hidden="true" />
-          <div className="mx-auto mb-3 w-fit rounded-full border border-[#78be43]/25 bg-[#eff8e9] px-4 py-1.5 text-[9px] font-bold uppercase tracking-[.18em] text-[#4f852c]">
+          <div className="mx-auto mb-3 mt-8 w-fit rounded-full border border-[#78be43]/25 bg-[#eff8e9] px-4 py-1.5 text-[9px] font-bold uppercase tracking-[.18em] text-[#4f852c]">
             Business leadership
           </div>
           <div className="mx-auto grid max-w-4xl gap-4 md:grid-cols-2">
@@ -392,11 +394,9 @@ const About = () => (
                 duration={450}
                 triggerOnce={false}
               >
-                <article className="h-full rounded-xl border border-[#4e7c47]/15 bg-white p-4 transition duration-300 hover:-translate-y-1 hover:shadow-[0_10px_26px_rgba(45,82,54,.08)]">
-                  <div className="flex items-start gap-4">
-                    <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-[#eff8e9] text-sm font-bold text-[#4f852c]">
-                      {String(index + 1).padStart(2, '0')}
-                    </span>
+                <article className="h-full rounded-xl border border-[#4e7c47]/15 bg-white p-5 text-center transition duration-300 hover:-translate-y-1 hover:shadow-[0_10px_26px_rgba(45,82,54,.08)]">
+                  <div className="text-center">
+                    <span className="mx-auto mb-3 block h-1 w-10 rounded-full bg-[#4e7c47]" />
                     <div>
                       <h3 className="text-lg font-semibold normal-case text-[#28271f]">
                         {person.name}
@@ -449,7 +449,7 @@ const About = () => (
         <div className="relative min-h-[360px]">
           <img
             src={manufacturingImage}
-            alt="A Camy technician assembling air-conditioning units on the factory production line"
+            alt="A Camy technician brazing copper tubing on an air-conditioning unit"
             className="absolute inset-0 h-full w-full object-cover"
           />
           <div className="absolute inset-0 bg-gradient-to-t from-[#102746]/90 to-[#102746]/10" />
@@ -468,10 +468,10 @@ const About = () => (
         </h2>
         <Rule />
         <p className="mt-3 hidden text-xs text-[#788496] lg:block">
-          Move over a year to read its story.
+          Scroll through the years to read our story.
         </p>
-        <div className="relative mt-9 grid grid-cols-2 gap-x-4 gap-y-7 sm:grid-cols-3 md:grid-cols-5 lg:grid-cols-10 lg:gap-0 lg:before:absolute lg:before:left-2 lg:before:right-2 lg:before:top-[87px] lg:before:h-px lg:before:bg-[#d79a22]">
-          {journey.map(([year, description], index) => {
+        <div className="relative mt-9 flex gap-6 overflow-x-auto pb-8 snap-x snap-proximity">
+          {journey.map(([year, description]) => {
             const logos = journeyCompanyLogos[year] ?? [];
 
             return (
@@ -479,20 +479,15 @@ const About = () => (
                 key={year}
                 tabIndex={0}
                 aria-label={`${year}: ${description}`}
-                className="group relative min-w-0 pr-3 outline-none focus-visible:ring-2 focus-visible:ring-[#315f9f]"
+                className="group relative w-[230px] shrink-0 snap-start pr-3 outline-none focus-visible:ring-2 focus-visible:ring-[#315f9f]"
               >
-                <div className="flex h-20 items-center gap-1.5 pb-2">
+                <div className="flex h-28 items-center gap-2 pb-3">
                   {logos.map(({ id, name }) => (
                     <span
                       key={id}
-                      className="flex h-16 w-16 shrink-0 items-center justify-center rounded-xl border border-[#102746]/10 bg-white p-1.5 shadow-sm transition-transform group-hover:-translate-y-1 group-focus:-translate-y-1"
+                      className="flex h-24 w-[104px] shrink-0 items-center justify-center overflow-hidden rounded-xl border border-[#102746]/10 bg-white p-1 shadow-sm transition-transform group-hover:-translate-y-1 group-focus:-translate-y-1"
                     >
-                      <img
-                        src={journeyLogoSource(id)}
-                        alt={name}
-                        className="max-h-full max-w-full object-contain"
-                        loading="lazy"
-                      />
+                      <JourneyLogo id={id} name={name} />
                     </span>
                   ))}
                 </div>
@@ -500,35 +495,7 @@ const About = () => (
                 <strong className="mt-3 block text-base font-semibold tracking-[-.02em] text-[#102746]">
                   {year}
                 </strong>
-                <p className="mt-1.5 text-[10px] leading-4 text-[#637186]">{description}</p>
-                <div
-                  className={`pointer-events-none absolute bottom-[calc(100%+12px)] z-40 hidden w-72 rounded-xl border border-[#102746]/10 bg-white p-5 text-left shadow-[0_18px_45px_rgba(16,39,70,.16)] lg:group-hover:block lg:group-focus:block ${index === 0 ? 'left-0' : index === journey.length - 1 ? 'right-0' : 'left-1/2 -translate-x-1/2'}`}
-                >
-                  <div className="flex items-center gap-3">
-                    {logos.map(({ id, name }) => (
-                      <span
-                        key={id}
-                        className="flex h-14 w-14 items-center justify-center rounded-lg border border-[#102746]/10 bg-white p-1.5"
-                      >
-                        <img
-                          src={journeyLogoSource(id)}
-                          alt={name}
-                          className="max-h-full max-w-full object-contain"
-                        />
-                      </span>
-                    ))}
-                    <div>
-                      <span className="text-[10px] font-bold uppercase tracking-[.16em] text-[#a87417]">
-                        Milestone
-                      </span>
-                      <strong className="mt-1 block text-xl text-[#102746]">{year}</strong>
-                    </div>
-                  </div>
-                  <p className="mt-3 text-sm leading-6 text-[#53647a]">{description}</p>
-                  <span
-                    className={`absolute -bottom-2 h-4 w-4 rotate-45 border-b border-r border-[#102746]/10 bg-white ${index === 0 ? 'left-2' : index === journey.length - 1 ? 'right-2' : 'left-1/2 -translate-x-1/2'}`}
-                  />
-                </div>
+                <p className="mt-1.5 text-xs leading-5 text-[#637186]">{description}</p>
               </article>
             );
           })}
@@ -541,7 +508,7 @@ const About = () => (
         <div className="relative min-h-[520px] overflow-hidden rounded-[1.75rem] bg-[#102746] shadow-[0_24px_60px_rgba(16,39,70,.16)] sm:min-h-[620px]">
           <img
             src={coreValuesTeam}
-            alt="Sri Lankan product development team working together"
+            alt="Supun Group factory team assembling Camy air-conditioning units"
             className="absolute inset-0 h-full w-full object-cover"
           />
           <div className="absolute inset-0 bg-gradient-to-t from-[#071b2d] via-[#071b2d]/15 to-transparent" />
@@ -639,8 +606,8 @@ const About = () => (
     <section className="bg-white px-4 pb-14 pt-4 md:pb-20 md:pt-8">
       <div className="container relative isolate mx-auto overflow-hidden rounded-[2rem] py-20 text-white shadow-[0_24px_60px_rgba(16,39,70,.16)] md:py-24">
         <img
-          src={hospitalityImage}
-          alt="Sri Lanka at sunset"
+          src={industryBanner}
+          alt="Illustration of a Sri Lankan manufacturing and distribution facility"
           className="absolute inset-0 -z-20 h-full w-full object-cover"
         />
         <div className="absolute inset-0 -z-10 bg-[#102746]/78" />

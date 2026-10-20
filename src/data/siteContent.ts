@@ -40,11 +40,11 @@ export const sectorHighlights: Array<{
 
 export const leadership = [
   { name: 'Rizna Kaleel', title: 'Non-Executive Director', description: '—' },
-  { name: 'Khalid Kaleel', title: 'Director', description: 'Oversees Fuji Industries' },
+  { name: 'Khalid Kaleel', title: 'Director', description: '' },
   {
     name: 'Raiza Kaleel',
     title: 'Director',
-    description: 'Oversees the Camy brand and Group marketing.',
+    description: '',
   },
   {
     name: 'Lasitha Samarasinghe',

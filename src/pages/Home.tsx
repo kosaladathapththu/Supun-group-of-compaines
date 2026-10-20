@@ -16,7 +16,7 @@ import { companies } from '@/data/companies';
 import { sectorHighlights, siteStats } from '@/data/siteContent';
 import heroVideo from '@/assets/supun-group-hero-optimized.mp4';
 import heroMobileVideo from '@/assets/supun-group-hero-mobile.mp4';
-import manufacturingImage from '@/assets/camy-factory-technician.jpeg';
+import manufacturingImage from '@/assets/camy-cookware-production.jpg';
 import camyBrandLogo from '@/assets/camy-brand-logo.png';
 import certificationImage from '@/assets/made-in-sri-lanka-certification.jpg';
 import camyRedLogo from '@/assets/camy-logo-red-transparent.png';
@@ -397,12 +397,12 @@ const Home = () => {
               <div className="relative min-h-[480px] overflow-hidden rounded-[1.5rem] bg-[#10233f] shadow-[0_24px_60px_rgba(16,35,63,.18)] sm:min-h-[570px]">
                 <img
                   src={manufacturingImage}
-                  alt="A technician brazing copper tubing on a Camy air-conditioning unit"
-                  className="absolute inset-0 h-full w-full object-cover object-[50%_38%]"
+                  alt="A Camy factory employee handling cookware on the production line"
+                  className="absolute inset-0 h-full w-full origin-[45%_85%] scale-[1.25] object-cover object-[50%_75%]"
                   loading="lazy"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-[#081a32] via-[#10233f]/25 to-transparent" />
-                <div className="absolute inset-x-0 bottom-0 p-7 text-white sm:p-9">
+                <div className="absolute inset-0 bg-gradient-to-b from-[#081a32]/80 via-transparent to-transparent" />
+                <div className="absolute inset-x-0 top-0 p-7 text-white sm:p-9">
                   <p className="text-xs font-semibold uppercase tracking-[0.22em] text-[#efbd55]">
                     Built in Sri Lanka
                   </p>
