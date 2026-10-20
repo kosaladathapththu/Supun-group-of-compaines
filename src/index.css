@@ -960,3 +960,14 @@ All colors MUST be HSL.
     transform: scale(1.8);
   }
 }
+
+@media (max-width: 767px) {
+  .company-list-logo > div {
+    max-width: 65% !important;
+  }
+  .company-list-logo > img {
+    width: auto !important;
+    max-width: 100% !important;
+    max-height: 100% !important;
+  }
+}

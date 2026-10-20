@@ -525,7 +525,6 @@ const About = () => (
               Led by people.
             </h2>
             <div className="mt-6 flex items-center gap-5 border-t border-white/25 pt-5">
-              <strong className="text-4xl font-semibold tracking-[-.05em]">04</strong>
               <p className="max-w-[10rem] text-[10px] font-semibold uppercase leading-5 tracking-[.16em] text-white/65">
                 Principles that guide our Group
               </p>

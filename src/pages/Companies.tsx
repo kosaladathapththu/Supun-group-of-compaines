@@ -192,10 +192,10 @@ const Companies = () => {
                         companyId={company.id}
                         companyName={company.shortName}
                         placement="listing"
-                        className="absolute left-5 top-5 h-28 w-60 max-w-[calc(100%-2.5rem)] rounded-xl border border-white/70 bg-white p-3 shadow-lg"
+                        className="company-list-logo absolute bottom-3 right-3 h-14 w-[88px] rounded-lg border border-white/70 bg-white p-1.5 shadow-lg md:bottom-auto md:left-5 md:right-auto md:top-5 md:h-28 md:w-60 md:max-w-[calc(100%-2.5rem)] md:rounded-xl md:p-3"
                         imageClassName="h-full w-full object-contain"
                       />
-                      <p className="absolute bottom-5 left-5 right-5 text-xs font-bold uppercase tracking-[.16em] text-white">
+                      <p className="absolute bottom-4 left-4 right-28 text-[10px] font-bold uppercase tracking-[.12em] text-white md:bottom-5 md:left-5 md:right-5 md:text-xs md:tracking-[.16em]">
                         {company.tagline}
                       </p>
                     </div>
