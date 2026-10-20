@@ -153,7 +153,7 @@ const Home = () => {
     <div className="min-h-screen overflow-hidden bg-[#edf3fb]">
       <Seo
         title="Supun Group of Companies | Built in Sri Lanka. Built to Last."
-        description="Supun Group of Companies is a Sri Lankan family-run group with 12 companies across manufacturing, retail, distribution and hospitality, with roots going back to 1978."
+        description="Supun Group of Companies is a Sri Lankan family-run group with 13 companies across manufacturing, retail, distribution and hospitality, with roots going back to 1978."
         keywords="Supun Group of Companies, Sri Lanka manufacturing, Camy, Supun Traders, Supun Super Center, Sri Lankan conglomerate"
         path="/"
         jsonLd={{

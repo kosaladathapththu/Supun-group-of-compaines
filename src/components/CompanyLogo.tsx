@@ -40,6 +40,7 @@ const sizes: Record<Placement, Record<string, [number, number]>> = {
     'fuji-industries': [92, 58],
   },
   home: {
+    ecotemp: [270, 110],
     'supun-traders': [190, 150],
     'supun-traders-distributors': [190, 150],
     'supun-super-center': [245, 105],
@@ -54,6 +55,7 @@ const sizes: Record<Placement, Record<string, [number, number]>> = {
     'camy-global': [260, 110],
   },
   listing: {
+    ecotemp: [210, 80],
     'supun-traders': [115, 88],
     'supun-traders-distributors': [115, 88],
     'supun-super-center': [205, 78],
@@ -68,6 +70,7 @@ const sizes: Record<Placement, Record<string, [number, number]>> = {
     'camy-global': [210, 80],
   },
   detail: {
+    ecotemp: [280, 115],
     'supun-traders': [155, 125],
     'supun-traders-distributors': [155, 125],
     'supun-super-center': [270, 105],

@@ -15,7 +15,7 @@ import { awards, coreValues, journey, leadership } from '@/data/siteContent';
 import { CompanyLogo } from '@/components/CompanyLogo';
 
 const stats = [
-  ['12', 'Group companies'],
+  ['13', 'Group companies'],
   ['300+', 'Employees'],
   ['250+', 'Distributors'],
 ];
@@ -67,7 +67,7 @@ const About = () => (
   <div className="min-h-screen overflow-hidden bg-[#fbfaf7] text-[#102746]">
     <Seo
       title="About Supun Group of Companies | Sri Lanka Since 1978"
-      description="Learn about Supun Group of Companies, a Sri Lankan family business operating 12 companies across manufacturing, retail, distribution and hospitality since 1978."
+      description="Learn about Supun Group of Companies, a Sri Lankan family business operating 13 companies across manufacturing, retail, distribution and hospitality since 1978."
       keywords="Supun Group of Companies, Sri Lankan companies, Sri Lanka manufacturing, retail and distribution Sri Lanka, hospitality Colombo, Supun Group history"
       path="/about"
       image={DEFAULT_IMAGE}

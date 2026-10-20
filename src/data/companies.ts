@@ -1,4 +1,5 @@
-export type CompanySector = 'Manufacturing' | 'Retail & Distribution' | 'Hospitality';
+export type CompanySector =
+  'Manufacturing' | 'Retail & Distribution' | 'Hospitality' | 'Engineering Services';
 
 export interface Company {
   id: string;
@@ -78,7 +79,7 @@ export const companies: Company[] = [
   },
   {
     id: 'area-56',
-    name: 'Area 56 (Pvt) Ltd',
+    name: 'Area 56',
     shortName: 'Area 56',
     tagline: 'Rooftop Dining in the Heart of the City',
     description: 'Rooftop dining atop Supun Arcade Residency.',
@@ -228,6 +229,23 @@ companies.push({
   industry: 'Retail & Distribution',
   location: '64, Wolfendhal Street, Colombo 12',
   features: ['Household appliances', 'Electronics'],
+});
+
+companies.push({
+  id: 'ecotemp',
+  name: 'Ecotemp',
+  shortName: 'Ecotemp',
+  tagline: 'Commercial Ventilation & Air Conditioning',
+  description: 'Mechanical ventilation and air-conditioning solutions for commercial buildings.',
+  fullDescription:
+    'Ecotemp provides commercial mechanical ventilation and air-conditioning solutions. The business focuses on airflow and cooling requirements for commercial spaces, helping create comfortable indoor environments. Contact the team to discuss your ventilation or air-conditioning requirements.',
+  industry: 'Engineering Services',
+  features: [
+    'Commercial mechanical ventilation',
+    'Commercial air conditioning',
+    'Airflow and indoor comfort solutions',
+  ],
+  phone: '076 605 1243',
 });
 
 export const companyById = (id?: string) => companies.find((company) => company.id === id);

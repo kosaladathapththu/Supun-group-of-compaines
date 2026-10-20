@@ -2,7 +2,7 @@ import type { CompanySector } from './companies';
 
 export const siteStats = [
   { value: '48+', label: 'Years of Excellence' },
-  { value: '12', label: 'Subsidiary Companies' },
+  { value: '13', label: 'Subsidiary Companies' },
   { value: '300+', label: 'Employees' },
   { value: '250+', label: 'Island-Wide Distributors' },
 ];
@@ -98,7 +98,7 @@ export const journey = [
   ],
   [
     'Today',
-    '12 companies across manufacturing, retail, distribution, and hospitality, employing 300+ people',
+    '13 companies across manufacturing, retail, distribution, and hospitality, employing 300+ people',
   ],
 ] as const;
 

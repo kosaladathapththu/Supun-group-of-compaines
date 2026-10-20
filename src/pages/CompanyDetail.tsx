@@ -25,6 +25,7 @@ import chromeImage from '@/assets/chrome-manufacturing.jpg';
 import helmetImage from '@/assets/helmet-manufacturing.jpg';
 import cookwareImage from '@/assets/cookware-manufacturing.jpg';
 import coolingImage from '@/assets/products/camy-air-conditioners.png';
+import ecotempImage from '@/assets/camy-factory-technician.jpeg';
 
 const companyImages: Record<string, string> = {
   'supun-traders': supunTradersImage,
@@ -38,6 +39,7 @@ const companyImages: Record<string, string> = {
   rodsons: manufacturingImage,
   'new-camy-smart': cookwareImage,
   'fuji-industries': coolingImage,
+  ecotemp: ecotempImage,
   'camy-global': retailImage,
 };
 
