@@ -812,7 +812,7 @@ All colors MUST be HSL.
 
 .page-section-reveal {
   opacity: 0;
-  transform: translateY(24px);
+  transform: translateY(16px);
   transition:
     opacity 550ms ease-out var(--page-section-delay, 0ms),
     transform 550ms ease-out var(--page-section-delay, 0ms);
@@ -829,7 +829,7 @@ All colors MUST be HSL.
   transform: none;
 }
 
-@media (max-width: 767px) {
+@media (prefers-reduced-motion: reduce) {
   .page-section-reveal {
     opacity: 1;
     transform: none;

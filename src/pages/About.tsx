@@ -10,7 +10,7 @@ import supunTradersHeritage from '@/assets/supun-traders-heritage.png';
 import manufacturingImage from '@/assets/camy-factory-technician.jpeg';
 import industryBanner from '@/assets/sri-lanka-industry-banner.png';
 import sriLankaMap from '@/assets/sri-lanka-watercolor-map.png';
-import coreValuesTeam from '@/assets/camy-factory-team.jpg';
+import coreValuesTeam from '@/assets/camy-factory-team-supervisor.png';
 import { awards, coreValues, journey, leadership } from '@/data/siteContent';
 import { CompanyLogo } from '@/components/CompanyLogo';
 
@@ -417,10 +417,10 @@ const About = () => (
       </div>
     </section>
 
-    <section id="direction" className="w-full scroll-mt-24 bg-white">
-      <div className="grid w-full lg:grid-cols-[1.35fr_.65fr]">
-        <div className="grid gap-px bg-[#d9d7d1] sm:grid-cols-2">
-          <article className="bg-white px-6 py-10 sm:px-10 lg:px-16 xl:px-20">
+    <section id="direction" className="scroll-mt-24 bg-white py-12 md:py-16">
+      <div className="container mx-auto grid items-stretch gap-8 px-4 lg:grid-cols-[1.6fr_1fr] lg:gap-12">
+        <div className="grid gap-8 sm:grid-cols-2 sm:gap-10">
+          <article className="border-t border-border py-7">
             <Eye className="text-[#d79a22]" size={34} strokeWidth={1.6} />
             <Label>Vision</Label>
             <h2 className="mt-3 text-2xl font-semibold normal-case">
@@ -432,7 +432,7 @@ const About = () => (
               which empower and enrich the lives of Sri Lankans.
             </p>
           </article>
-          <article className="bg-white px-6 py-10 sm:px-10 lg:px-12 xl:px-16">
+          <article className="border-t border-border py-7">
             <Target className="text-[#d79a22]" size={34} strokeWidth={1.6} />
             <Label>Mission</Label>
             <h2 className="mt-3 text-2xl font-semibold normal-case">
@@ -446,17 +446,20 @@ const About = () => (
             </p>
           </article>
         </div>
-        <figure className="m-0 flex flex-col bg-[#f3f6f8]">
+        <div className="relative min-h-[400px] overflow-hidden rounded-2xl sm:min-h-[440px]">
           <img
             src={manufacturingImage}
             alt="A Camy technician brazing copper tubing on an air-conditioning unit"
-            className="mx-auto block h-auto w-full max-w-[480px]"
+            className="absolute inset-0 h-full w-full origin-[left_25%] scale-[1.15] object-cover object-[0%_25%]"
             loading="lazy"
           />
-          <figcaption className="bg-[#102746] px-7 py-5 text-xl font-medium leading-snug text-white">
-            Sustainable solutions for generations.
-          </figcaption>
-        </figure>
+          <div className="absolute inset-0 bg-[linear-gradient(0deg,rgba(6,24,40,.92)_0%,rgba(6,24,40,.45)_20%,transparent_48%)]" />
+          <p className="absolute bottom-6 left-6 right-6 text-2xl font-semibold normal-case leading-[1.2] tracking-[-.02em] text-white sm:bottom-7 sm:left-7 sm:right-7">
+            Sustainable solutions.
+            <br />
+            For generations.
+          </p>
+        </div>
       </div>
     </section>
 
@@ -610,9 +613,9 @@ const About = () => (
           alt="Illustration of a Sri Lankan manufacturing and distribution facility"
           className="absolute inset-0 -z-20 h-full w-full object-cover"
         />
-        <div className="absolute inset-0 -z-10 bg-[#102746]/78" />
+        <div className="absolute inset-0 -z-10 bg-[linear-gradient(90deg,rgba(4,16,28,0.9)_0%,rgba(4,16,28,0.76)_52%,rgba(4,16,28,0.25)_100%)]" />
         <div className="flex flex-col items-start justify-between gap-7 px-7 sm:px-10 md:flex-row md:items-center lg:px-14">
-          <h2 className="max-w-2xl text-4xl font-semibold normal-case leading-tight tracking-[-.04em] md:text-5xl">
+          <h2 className="max-w-2xl text-4xl font-semibold normal-case leading-tight tracking-[-.04em] text-white [text-shadow:0_2px_8px_rgba(0,0,0,0.6)] md:text-5xl">
             Building a stronger Sri Lanka, together.
           </h2>
           <Link

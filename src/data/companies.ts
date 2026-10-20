@@ -34,7 +34,7 @@ export const companies: Company[] = [
       'Wide range of household goods, appliances and electronics',
     ],
     phone: '0112 433 784',
-    location: '418, 2nd Cross Street, Pettah',
+    location: 'No. 114, 2nd Cross Street, Colombo 11',
   },
   {
     id: 'supun-super-center',
