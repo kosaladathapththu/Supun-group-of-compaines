@@ -12,6 +12,13 @@ import {
 import Seo, { DEFAULT_IMAGE, SITE_NAME, SITE_URL } from '@/components/Seo';
 import { AnimatedSection } from '@/components/AnimatedSection';
 import { CompanyLogo } from '@/components/CompanyLogo';
+import {
+  Dialog,
+  DialogContent,
+  DialogTitle,
+  DialogDescription,
+  DialogTrigger,
+} from '@/components/ui/dialog';
 import { companies } from '@/data/companies';
 import { sectorHighlights, siteStats } from '@/data/siteContent';
 import heroVideo from '@/assets/supun-group-hero-optimized.mp4';
@@ -486,63 +493,108 @@ const Home = () => {
 
       <section
         aria-labelledby="certification-heading"
-        className="border-y border-border bg-background py-12 md:py-20"
+        className="border-y border-border bg-[#f6f8fb] py-12 md:py-20"
       >
-        <div className="container mx-auto grid max-w-6xl items-center gap-8 px-4 md:grid-cols-2 md:gap-14">
-          <figure className="m-0">
-            <img
-              src={certificationImage}
-              alt="Made in Sri Lanka certificates for Camy Smart, New Camy Smart and Aerostar Home Appliances"
-              className="mx-auto block h-auto w-full max-w-[470px]"
-              loading="lazy"
-            />
-            <figcaption className="mx-auto mt-3 max-w-[470px] text-xs leading-5 text-muted-foreground">
-              Certificates awarded to three Supun Group manufacturing companies.
-            </figcaption>
-          </figure>
-          <div className="py-2 md:py-6">
-            <p className="text-xs font-semibold uppercase tracking-[.12em] text-primary">
-              Manufacturing
-            </p>
+        <div className="container mx-auto max-w-6xl px-4">
+          <div className="max-w-2xl">
+            <p className="section-kicker">Manufacturing</p>
             <h2
               id="certification-heading"
-              className="mt-4 text-3xl font-semibold normal-case leading-tight tracking-[-.025em] text-foreground md:text-4xl"
+              className="mt-4 text-3xl font-semibold normal-case tracking-[-.025em] text-foreground md:text-4xl"
             >
               Made in Sri Lanka certification
             </h2>
-            <p className="mt-6 text-base leading-7 text-muted-foreground">
+            <p className="mt-4 text-base leading-7 text-muted-foreground">
               Three Supun Group companies have received Made in Sri Lanka certification from the
               Ministry of Industries and the National Enterprise Development Authority (NEDA).
             </p>
-            <ul className="mt-7 divide-y divide-border border-y border-border">
-              <li className="py-4">
-                <Link
-                  to="/companies/camy-smart"
-                  className="inline-flex items-center gap-3 font-medium text-primary underline-offset-4 hover:underline"
+          </div>
+          <div className="mt-9 grid gap-6 md:grid-cols-3">
+            {[
+              { name: 'Camy Smart', id: 'camy-smart', x: 0, y: 370, width: 228, height: 390 },
+              {
+                name: 'New Camy Smart',
+                id: 'new-camy-smart',
+                x: 228,
+                y: 319,
+                width: 343,
+                height: 492,
+              },
+              {
+                name: 'Aerostar Home Appliances',
+                id: 'aerostar-home-appliances',
+                x: 572,
+                y: 370,
+                width: 228,
+                height: 390,
+              },
+            ].map((certificate, index) => {
+              const paper = () => (
+                <div
+                  className="relative mx-auto w-full overflow-hidden bg-white"
+                  style={{ aspectRatio: certificate.width / certificate.height }}
                 >
-                  Camy Smart <ArrowRight size={16} aria-hidden="true" />
-                </Link>
-              </li>
-              <li className="py-4">
-                <Link
-                  to="/companies/new-camy-smart"
-                  className="inline-flex items-center gap-3 font-medium text-primary underline-offset-4 hover:underline"
+                  <img
+                    src={certificationImage}
+                    alt={certificate.name + ' Made in Sri Lanka certificate'}
+                    loading="lazy"
+                    className="absolute !max-w-none"
+                    style={{
+                      width: (800 / certificate.width) * 100 + '%',
+                      height: 'auto',
+                      left: (-certificate.x / certificate.width) * 100 + '%',
+                      top: (-certificate.y / certificate.height) * 100 + '%',
+                    }}
+                  />
+                </div>
+              );
+              return (
+                <AnimatedSection
+                  key={certificate.id}
+                  animation="slide-up"
+                  delay={index * 70}
+                  className="h-full"
                 >
-                  New Camy Smart <ArrowRight size={16} aria-hidden="true" />
-                </Link>
-              </li>
-              <li className="py-4">
-                <Link
-                  to="/companies/aerostar-home-appliances"
-                  className="inline-flex items-center gap-3 font-medium text-primary underline-offset-4 hover:underline"
-                >
-                  Aerostar Home Appliances <ArrowRight size={16} aria-hidden="true" />
-                </Link>
-              </li>
-            </ul>
-            <p className="mt-5 text-sm leading-6 text-muted-foreground">
-              These companies manufacture Camy products in Sri Lanka.
-            </p>
+                  <article className="flex h-full flex-col overflow-hidden rounded-xl border border-border bg-white">
+                    <Dialog>
+                      <DialogTrigger asChild>
+                        <button
+                          type="button"
+                          className="group flex w-full flex-1 flex-col items-center justify-center bg-[#edf1f6] px-7 pb-4 pt-7 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-primary"
+                          aria-label={'Enlarge ' + certificate.name + ' certificate'}
+                        >
+                          <div className="w-full max-w-[245px] overflow-hidden border border-black/10 shadow-sm transition-transform duration-300 group-hover:-translate-y-1">
+                            {paper()}
+                          </div>
+                          <span className="mt-4 text-xs font-medium text-primary">
+                            View certificate
+                          </span>
+                        </button>
+                      </DialogTrigger>
+                      <DialogContent className="max-h-[92vh] max-w-lg overflow-y-auto">
+                        <DialogTitle>{certificate.name}</DialogTitle>
+                        <DialogDescription>
+                          Made in Sri Lanka certificate preview.
+                        </DialogDescription>
+                        <div className="mx-auto w-full max-w-[310px]">{paper()}</div>
+                      </DialogContent>
+                    </Dialog>
+                    <div className="border-t border-border px-6 py-5">
+                      <p className="text-[10px] font-semibold uppercase tracking-[.14em] text-muted-foreground">
+                        Made in Sri Lanka
+                      </p>
+                      <Link
+                        to={'/companies/' + certificate.id}
+                        className="mt-2 flex items-center justify-between gap-3 text-lg font-semibold text-primary hover:underline"
+                      >
+                        <span>{certificate.name}</span>
+                        <ArrowRight size={18} className="shrink-0" aria-hidden="true" />
+                      </Link>
+                    </div>
+                  </article>
+                </AnimatedSection>
+              );
+            })}
           </div>
         </div>
       </section>
