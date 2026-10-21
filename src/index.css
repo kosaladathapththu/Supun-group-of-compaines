@@ -145,6 +145,13 @@ All colors MUST be HSL.
     filter: brightness(1.18) saturate(1.05) contrast(1.02);
   }
 
+  @media (max-width: 767px) {
+    .premium-hero video {
+      animation: none;
+      filter: none;
+    }
+  }
+
   .hero-bottom-rail {
     border-color: rgb(255 255 255 / 0.14);
     border-style: solid;
@@ -805,7 +812,7 @@ All colors MUST be HSL.
 
 .page-section-reveal {
   opacity: 0;
-  transform: translateY(24px);
+  transform: translateY(16px);
   transition:
     opacity 550ms ease-out var(--page-section-delay, 0ms),
     transform 550ms ease-out var(--page-section-delay, 0ms);
@@ -820,6 +827,14 @@ All colors MUST be HSL.
 .page-section-visible {
   opacity: 1;
   transform: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .page-section-reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
 }
 
 .about-hero {
@@ -847,7 +862,7 @@ All colors MUST be HSL.
 
 @media (min-width: 1024px) {
   .company-detail-hero-grid {
-    grid-template-columns: minmax(0, 1fr) 250px;
+    grid-template-columns: minmax(0, 1fr) 320px;
   }
 
   .company-detail-hero-logo {
@@ -943,5 +958,23 @@ All colors MUST be HSL.
   to {
     opacity: 0;
     transform: scale(1.8);
+  }
+}
+
+@media (max-width: 767px) {
+  .company-list-logo {
+    position: absolute;
+    top: auto;
+    left: auto;
+    right: 12px;
+    bottom: 12px;
+  }
+  .company-list-logo > div {
+    max-width: 65% !important;
+  }
+  .company-list-logo > img {
+    width: auto !important;
+    max-width: 100% !important;
+    max-height: 100% !important;
   }
 }

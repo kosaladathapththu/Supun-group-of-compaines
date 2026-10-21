@@ -4,9 +4,7 @@ import {
   ArrowRight,
   BriefcaseBusiness,
   CalendarDays,
-  Check,
   ExternalLink,
-  Globe2,
   Mail,
   MapPin,
   Phone,
@@ -15,18 +13,22 @@ import { CompanyLogo } from '@/components/CompanyLogo';
 import { AwardIssuerMark } from '@/components/AwardIssuerMark';
 import Seo, { SITE_URL } from '@/components/Seo';
 import { companyById } from '@/data/companies';
-import retailImage from '@/assets/retail-store.jpg';
-import hospitalityImage from '@/assets/sector-hospitality-v2.jpg';
-import hotelImage from '@/assets/hotel-interior.jpg';
-import manufacturingImage from '@/assets/sector-manufacturing-v2.jpg';
-import footwearImage from '@/assets/automotive-design.jpg';
-import chromeImage from '@/assets/chrome-manufacturing.jpg';
-import helmetImage from '@/assets/helmet-manufacturing.jpg';
-import cookwareImage from '@/assets/cookware-manufacturing.jpg';
+import retailImage from '@/assets/optimized/retail-store.jpg';
+import supunTradersImage from '@/assets/optimized/supun-traders-real-storefront.jpg';
+import distributorsImage from '@/assets/optimized/supun-traders-storefront-v4.jpg';
+import hospitalityImage from '@/assets/optimized/sector-hospitality-v2.jpg';
+import hotelImage from '@/assets/optimized/hotel-interior.jpg';
+import manufacturingImage from '@/assets/optimized/sector-manufacturing-v2.jpg';
+import footwearImage from '@/assets/optimized/automotive-design.jpg';
+import chromeImage from '@/assets/optimized/chrome-manufacturing.jpg';
+import helmetImage from '@/assets/optimized/helmet-manufacturing.jpg';
+import cookwareImage from '@/assets/optimized/cookware-manufacturing.jpg';
 import coolingImage from '@/assets/products/camy-air-conditioners.png';
+import ecotempImage from '@/assets/optimized/camy-factory-technician.jpg';
 
 const companyImages: Record<string, string> = {
-  'supun-traders': retailImage,
+  'supun-traders': supunTradersImage,
+  'supun-traders-distributors': distributorsImage,
   'supun-super-center': retailImage,
   'supun-arcade-residency': hotelImage,
   'area-56': hospitalityImage,
@@ -36,6 +38,7 @@ const companyImages: Record<string, string> = {
   rodsons: manufacturingImage,
   'new-camy-smart': cookwareImage,
   'fuji-industries': coolingImage,
+  ecotemp: ecotempImage,
   'camy-global': retailImage,
 };
 
@@ -46,6 +49,11 @@ const CompanyDetail = () => {
   if (!company)
     return (
       <section className="flex min-h-[70vh] items-center bg-[#f3f6f8]">
+        <Seo
+          title="Company Not Found | Supun Group of Companies"
+          description="The requested Supun Group company page is unavailable."
+          noindex
+        />
         <div className="container mx-auto px-4 text-center">
           <h1 className="text-4xl font-semibold normal-case text-[#102746]">Company not found</h1>
           <p className="mt-4 text-[#637186]">The company page you requested is unavailable.</p>
@@ -71,6 +79,7 @@ const CompanyDetail = () => {
         description={company.description}
         keywords={`${company.shortName}, ${company.industry}, Supun Group of Companies, Sri Lanka`}
         path={canonicalPath}
+        image={heroImage}
         jsonLd={{
           '@context': 'https://schema.org',
           '@graph': [
@@ -119,13 +128,6 @@ const CompanyDetail = () => {
         <div className="absolute inset-0 -z-10 bg-gradient-to-t from-[#041426]/55 via-transparent to-[#041426]/15" />
         <div className="container mx-auto px-4">
           <div className="mb-7 flex flex-wrap items-center gap-4">
-            <Link
-              to="/companies"
-              className="inline-flex items-center gap-2 text-sm font-semibold text-white/75 transition hover:text-[#efbd55]"
-            >
-              <ArrowLeft size={16} />
-              All Group Companies
-            </Link>
             {company.website && (
               <a
                 href={company.website}
@@ -172,7 +174,8 @@ const CompanyDetail = () => {
                 <CompanyLogo
                   companyId={company.id}
                   companyName={company.shortName}
-                  className="company-detail-hero-logo h-28 w-full max-w-[250px] rounded-xl border border-white/40 p-4 shadow-2xl transition duration-300 group-hover:-translate-y-1 group-hover:border-[#efbd55]"
+                  placement="detail"
+                  className="company-detail-hero-logo h-40 w-[min(320px,100%)] max-w-full rounded-xl border border-white/40 p-4 shadow-2xl transition duration-300 group-hover:-translate-y-1 group-hover:border-[#efbd55]"
                   imageClassName="h-full w-full object-contain"
                 />
               </a>
@@ -180,7 +183,8 @@ const CompanyDetail = () => {
               <CompanyLogo
                 companyId={company.id}
                 companyName={company.shortName}
-                className="company-detail-hero-logo h-28 w-full max-w-[250px] justify-self-start rounded-xl border border-white/40 p-4 shadow-2xl"
+                placement="detail"
+                className="company-detail-hero-logo h-40 w-[min(320px,100%)] max-w-full justify-self-start rounded-xl border border-white/40 p-4 shadow-2xl"
                 imageClassName="h-full w-full object-contain"
               />
             )}
@@ -189,7 +193,7 @@ const CompanyDetail = () => {
       </section>
 
       <section className="py-12 md:py-16">
-        <div className="company-detail-content-grid container mx-auto grid max-w-7xl gap-8 px-4">
+        <div className="company-detail-content-grid container relative mx-auto grid max-w-7xl items-start gap-8 px-4">
           <div className="company-detail-primary min-w-0 space-y-8">
             <article className="rounded-2xl border border-[#102746]/10 bg-white p-7 shadow-[0_10px_30px_rgba(16,39,70,.06)] sm:p-9">
               <p className="text-xs font-bold uppercase tracking-[.18em] text-[#315f9f]">
@@ -204,40 +208,20 @@ const CompanyDetail = () => {
               </p>
             </article>
 
-            <article className="rounded-2xl border border-[#102746]/10 bg-white p-7 shadow-[0_10px_30px_rgba(16,39,70,.06)] sm:p-9">
-              <div className="flex items-center justify-between">
-                <div>
-                  <p className="text-xs font-bold uppercase tracking-[.18em] text-[#315f9f]">
-                    Capabilities
-                  </p>
-                  <h2 className="mt-2 text-3xl font-semibold normal-case tracking-[-.025em]">
-                    What we do best
-                  </h2>
-                </div>
-                <span className="text-4xl font-semibold text-[#102746]/10">
-                  {String(company.features.length).padStart(2, '0')}
-                </span>
-              </div>
-
-              <div className="mt-7 grid gap-3 sm:grid-cols-2">
-                {company.features.map((feature, index) => (
-                  <div
-                    key={feature}
-                    className={`relative flex min-h-24 gap-4 overflow-hidden rounded-xl border border-[#102746]/10 bg-[#f7f9fb] p-5 text-sm font-medium leading-6 text-[#405268] transition duration-300 hover:border-[#315f9f]/30 hover:bg-white hover:shadow-[0_10px_24px_rgba(16,39,70,.07)] ${company.features.length % 2 === 1 && index === company.features.length - 1 ? 'sm:col-span-2' : ''}`}
-                  >
-                    <span className="absolute inset-y-0 left-0 w-1 bg-[#efbd55]" />
-                    <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-[#fff0c8] text-[#9a650c]">
-                      <Check size={16} strokeWidth={2.5} />
-                    </span>
-                    <div>
-                      <span className="mb-1 block text-[9px] font-bold uppercase tracking-[.16em] text-[#315f9f]/50">
-                        Capability {String(index + 1).padStart(2, '0')}
-                      </span>
-                      {feature}
-                    </div>
-                  </div>
+            <article className="rounded-2xl border border-[#102746]/10 bg-white p-7 sm:p-9">
+              <p className="text-xs font-bold uppercase tracking-[.18em] text-[#315f9f]">
+                Capabilities
+              </p>
+              <h2 className="mt-3 text-3xl font-semibold normal-case tracking-[-.025em]">
+                Key features
+              </h2>
+              <ul className="mt-6 divide-y divide-[#102746]/10 border-y border-[#102746]/10">
+                {company.features.map((feature) => (
+                  <li key={feature} className="py-4 text-base leading-7 text-[#405268]">
+                    {feature}
+                  </li>
                 ))}
-              </div>
+              </ul>
             </article>
 
             {company.awards && company.awards.length > 0 && (
@@ -356,11 +340,6 @@ const CompanyDetail = () => {
       <section className="relative overflow-hidden bg-[#f3f7fb] px-4 pb-12 sm:pb-14 md:pb-20">
         <div className="relative mx-auto max-w-7xl isolate overflow-hidden rounded-[2rem] bg-[#071b2d] px-7 py-10 text-white shadow-[0_30px_80px_rgba(7,27,45,.20)] sm:px-12 sm:py-12 md:rounded-[3rem] lg:px-20 lg:py-14">
           <div className="absolute inset-y-0 right-0 -z-10 w-full bg-[radial-gradient(circle_at_85%_35%,rgba(217,154,36,.16),transparent_30%),linear-gradient(115deg,transparent_45%,rgba(25,83,132,.38))] lg:w-2/3" />
-          <Globe2
-            className="absolute -bottom-28 -right-24 -z-10 h-[28rem] w-[28rem] text-white/[.06]"
-            strokeWidth={0.65}
-            aria-hidden="true"
-          />
           <div className="flex flex-col gap-8 sm:flex-row sm:items-center sm:justify-between">
             <h2 className="text-4xl font-semibold normal-case leading-none tracking-[-0.04em] text-[#efbd55] sm:text-5xl">
               Explore the Group

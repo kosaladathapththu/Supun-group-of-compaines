@@ -80,7 +80,8 @@ export const AnimatedSection = ({
   return (
     <div
       ref={ref}
-      className={`transition-all ease-out ${
+      data-scroll-animated="true"
+      className={`transition-all ease-out motion-reduce:!opacity-100 motion-reduce:!transform-none motion-reduce:!transition-none ${
         isVisible ? selected.animate : selected.initial
       } ${className}`}
       style={{

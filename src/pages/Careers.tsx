@@ -10,11 +10,11 @@ import {
   Sparkles,
   Users,
 } from 'lucide-react';
-import Seo from '@/components/Seo';
-import careersHero from '@/assets/careers-hero-team.png';
-import learningImage from '@/assets/careers-learn-through-work.png';
-import growthImage from '@/assets/careers-grow-across-group.png';
-import changeImage from '@/assets/careers-make-change.png';
+import Seo, { SITE_NAME, SITE_URL } from '@/components/Seo';
+import careersHero from '@/assets/optimized/careers-hero-team.jpg';
+import learningImage from '@/assets/optimized/careers-learn-through-work.jpg';
+import growthImage from '@/assets/optimized/careers-grow-across-group.jpg';
+import changeImage from '@/assets/optimized/careers-make-change.jpg';
 import './Careers.css';
 
 const reasons = [
@@ -26,7 +26,7 @@ const reasons = [
   },
   {
     title: 'Grow across a Group',
-    reveal: 'Connect your potential to eleven businesses.',
+    reveal: 'Connect your potential to thirteen businesses.',
     icon: Users,
     image: growthImage,
   },
@@ -91,6 +91,32 @@ const Careers = () => {
         title="Careers | Supun Group of Companies"
         description="Explore careers across Supun Group companies in manufacturing, retail, distribution and hospitality."
         keywords="Supun Group careers, jobs Sri Lanka, manufacturing jobs, retail jobs, hospitality jobs"
+        path="/careers"
+        jsonLd={{
+          '@context': 'https://schema.org',
+          '@graph': [
+            {
+              '@type': 'WebPage',
+              name: `Careers at ${SITE_NAME}`,
+              url: `${SITE_URL}/careers`,
+              description:
+                'Career opportunities across Supun Group companies in manufacturing, retail, distribution and hospitality in Sri Lanka.',
+              about: { '@id': `${SITE_URL}/#organization` },
+            },
+            {
+              '@type': 'BreadcrumbList',
+              itemListElement: [
+                { '@type': 'ListItem', position: 1, name: 'Home', item: SITE_URL },
+                {
+                  '@type': 'ListItem',
+                  position: 2,
+                  name: 'Careers',
+                  item: `${SITE_URL}/careers`,
+                },
+              ],
+            },
+          ],
+        }}
       />
       <section className="career-hero px-5 pt-0 md:px-8">
         <img
@@ -134,7 +160,7 @@ const Careers = () => {
             </div>
             <div className="career-stat">
               <Building2 className="text-[#efc66f]" />
-              <strong className="mt-8 block text-4xl">11</strong>
+              <strong className="mt-8 block text-4xl">13</strong>
               <span className="mt-2 block text-sm text-white/55">Connected companies</span>
             </div>
           </div>

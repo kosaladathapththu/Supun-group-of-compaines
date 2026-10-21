@@ -33,30 +33,79 @@ export const PageTransition = ({ children }: PageTransitionProps) => {
     const content = contentRef.current;
     if (!content || location.pathname === '/') return;
 
-    const sections = Array.from(content.querySelectorAll<HTMLElement>('main section'));
-    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-      sections.forEach((section) => section.classList.add('page-section-visible'));
-      return;
-    }
+    const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+    if (reducedMotion.matches || !('IntersectionObserver' in window)) return;
 
-    sections.forEach((section, index) => {
-      section.classList.add('page-section-reveal');
-      section.style.setProperty('--page-section-delay', `${Math.min(index, 3) * 55}ms`);
-    });
-
+    const targets = new Set<HTMLElement>();
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
-          if (!entry.isIntersecting) return;
-          entry.target.classList.add('page-section-visible');
-          observer.unobserve(entry.target);
+          if (entry.isIntersecting) {
+            entry.target.classList.add('page-section-visible');
+          } else if (
+            entry.boundingClientRect.top >= window.innerHeight ||
+            entry.boundingClientRect.bottom <= 0
+          ) {
+            entry.target.classList.remove('page-section-visible');
+          }
         });
       },
-      { threshold: 0.08, rootMargin: '0px 0px -7% 0px' },
+      { threshold: 0, rootMargin: '0px 0px -24px 0px' },
     );
 
-    sections.forEach((section) => observer.observe(section));
-    return () => observer.disconnect();
+    // Reveal content-sized blocks rather than hiding an entire long directory.
+    // Existing AnimatedSection wrappers keep their own animation.
+    const collect = (element: HTMLElement, depth = 0) => {
+      if (element.closest('[data-scroll-animated]') || targets.has(element)) return;
+      const rect = element.getBoundingClientRect();
+      if (!rect.width || !rect.height) return;
+      const children = Array.from(element.children).filter(
+        (child): child is HTMLElement =>
+          child instanceof HTMLElement && !['SCRIPT', 'STYLE'].includes(child.tagName),
+      );
+      const containsAnimation = element.querySelector('[data-scroll-animated]');
+      if (
+        (containsAnimation || rect.height > window.innerHeight * 0.85) &&
+        children.length &&
+        depth < 6
+      ) {
+        children.forEach((child) => collect(child, depth + 1));
+        return;
+      }
+      if (containsAnimation) return;
+      targets.add(element);
+      element.classList.add('page-section-reveal');
+      // Content already on screen stays visible when a route first loads.
+      if (rect.top < window.innerHeight && rect.bottom > 0)
+        element.classList.add('page-section-visible');
+      observer.observe(element);
+    };
+    const scan = () =>
+      content.querySelectorAll<HTMLElement>('main section').forEach((section) => {
+        if (!section.closest('.page-section-reveal')) collect(section);
+      });
+    scan();
+    const mutations = new MutationObserver(scan);
+    mutations.observe(content, { childList: true, subtree: true });
+    const showFocused = (event: FocusEvent) => {
+      if (!(event.target instanceof Element)) return;
+      event.target.closest('.page-section-reveal')?.classList.add('page-section-visible');
+    };
+    const showAll = () => {
+      if (reducedMotion.matches)
+        targets.forEach((target) => target.classList.add('page-section-visible'));
+    };
+    content.addEventListener('focusin', showFocused);
+    reducedMotion.addEventListener('change', showAll);
+    return () => {
+      observer.disconnect();
+      mutations.disconnect();
+      content.removeEventListener('focusin', showFocused);
+      reducedMotion.removeEventListener('change', showAll);
+      targets.forEach((target) =>
+        target.classList.remove('page-section-reveal', 'page-section-visible'),
+      );
+    };
   }, [location.pathname]);
 
   return (

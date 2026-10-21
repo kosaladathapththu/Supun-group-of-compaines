@@ -1,23 +1,21 @@
-import { ArrowRight, Eye, Flag, Gem, Lightbulb, Target, UserRound, Users } from 'lucide-react';
+import { ArrowRight, Eye, Flag, Gem, Lightbulb, Target, Users } from 'lucide-react';
 import { Link } from 'react-router-dom';
-import Seo from '@/components/Seo';
+import Seo, { DEFAULT_IMAGE, SITE_NAME, SITE_URL } from '@/components/Seo';
 import { AnimatedSection } from '@/components/AnimatedSection';
 import { AwardIssuerMark } from '@/components/AwardIssuerMark';
 import chairmanImage from '@/assets/Chairman.png';
-import lasithaImage from '@/assets/lasitha-samarasinghe.png';
-import riazImage from '@/assets/mohamed-riaz-farouk.png';
-import heroCorporate from '@/assets/hero-corporate.jpg';
-import aboutHeroSriLanka from '@/assets/about-hero-sri-lanka-v3.png';
-import retailStore from '@/assets/retail-store.jpg';
-import manufacturingImage from '@/assets/sector-manufacturing-v2.jpg';
-import hospitalityImage from '@/assets/sector-hospitality-v2.jpg';
+import heroCorporate from '@/assets/optimized/hero-corporate.jpg';
+import aboutHeroSriLanka from '@/assets/optimized/about-hero-sri-lanka-v3.jpg';
+import supunTradersHeritage from '@/assets/optimized/supun-traders-heritage.jpg';
+import manufacturingImage from '@/assets/optimized/camy-factory-technician.jpg';
+import industryBanner from '@/assets/optimized/sri-lanka-industry-banner.jpg';
 import sriLankaMap from '@/assets/sri-lanka-watercolor-map.png';
-import coreValuesTeam from '@/assets/about-core-values-team.png';
+import coreValuesTeam from '@/assets/optimized/camy-factory-team-supervisor.jpg';
 import { awards, coreValues, journey, leadership } from '@/data/siteContent';
-import { getCompanyLogo } from '@/data/companyLogos';
+import { CompanyLogo } from '@/components/CompanyLogo';
 
 const stats = [
-  ['11', 'Group companies'],
+  ['13', 'Group companies'],
   ['300+', 'Employees'],
   ['250+', 'Distributors'],
 ];
@@ -26,7 +24,7 @@ const awardCompanyPaths: Record<string, string> = {
   'Camy Smart': '/companies/camy-smart',
   'Aero Star (Aerostar Home Appliances)': '/companies/aerostar-home-appliances',
   'Supun Group of Companies': '/about',
-  'Fuji Industries': '/companies/fuji-industries',
+  'Air Condition and Fans manufacturing': '/companies/fuji-industries',
   'Supun Arcade Residency': '/companies/supun-arcade-residency',
 };
 const Label = ({ children }: { children: React.ReactNode }) => (
@@ -50,18 +48,92 @@ const journeyCompanyLogos: Record<string, { id: string; name: string }[]> = {
     { id: 'rodsons', name: 'Rodsons' },
   ],
   '2018': [{ id: 'new-camy-smart', name: 'New Camy Smart' }],
-  '2023': [{ id: 'fuji-industries', name: 'Fuji Industries' }],
 };
 
-const journeyLogoSource = (id: string) =>
-  id === 'group' ? '/supun-group-of-companies-logo.png' : getCompanyLogo(id);
+const JourneyLogo = ({ id, name }: { id: string; name: string }) =>
+  id === 'group' ? (
+    <img
+      src="/supun-group-of-companies-logo.png"
+      alt={name}
+      className="h-16 w-20 object-contain"
+      loading="lazy"
+    />
+  ) : (
+    <CompanyLogo companyId={id} companyName={name} placement="timeline" className="h-20 w-24" />
+  );
 
 const About = () => (
   <div className="min-h-screen overflow-hidden bg-[#fbfaf7] text-[#102746]">
     <Seo
-      title="About Supun Group of Companies | Our Story Since 1978"
-      description="Discover the story, leadership, vision, journey and values of Supun Group of Companies, a Sri Lankan family-run group with roots dating to 1978."
-      keywords="Supun Group history, Mohamed Fareed, M.F.M. Kaleel, Sri Lanka manufacturing group, Supun Group leadership"
+      title="About Supun Group of Companies | Sri Lanka Since 1978"
+      description="Learn about Supun Group of Companies, a Sri Lankan family business operating 13 companies across manufacturing, retail, distribution and hospitality since 1978."
+      keywords="Supun Group of Companies, Sri Lankan companies, Sri Lanka manufacturing, retail and distribution Sri Lanka, hospitality Colombo, Supun Group history"
+      path="/about"
+      image={DEFAULT_IMAGE}
+      jsonLd={{
+        '@context': 'https://schema.org',
+        '@graph': [
+          {
+            '@type': 'AboutPage',
+            '@id': `${SITE_URL}/about#about-page`,
+            url: `${SITE_URL}/about`,
+            name: 'About Supun Group of Companies',
+            description:
+              'The story, leadership, values, companies and achievements of Supun Group of Companies in Sri Lanka since 1978.',
+            isPartOf: {
+              '@type': 'WebSite',
+              '@id': `${SITE_URL}/#website`,
+              name: SITE_NAME,
+              url: SITE_URL,
+            },
+            about: {
+              '@id': `${SITE_URL}/#organization`,
+            },
+            primaryImageOfPage: {
+              '@type': 'ImageObject',
+              url: DEFAULT_IMAGE,
+            },
+          },
+          {
+            '@type': 'Organization',
+            '@id': `${SITE_URL}/#organization`,
+            name: SITE_NAME,
+            url: SITE_URL,
+            logo: {
+              '@type': 'ImageObject',
+              url: DEFAULT_IMAGE,
+            },
+            foundingDate: '1978',
+            foundingLocation: {
+              '@type': 'Place',
+              name: 'Colombo, Sri Lanka',
+            },
+            numberOfEmployees: {
+              '@type': 'QuantitativeValue',
+              minValue: 300,
+            },
+            description:
+              'A Sri Lankan family-run group operating across manufacturing, retail, distribution and hospitality.',
+          },
+          {
+            '@type': 'BreadcrumbList',
+            itemListElement: [
+              {
+                '@type': 'ListItem',
+                position: 1,
+                name: 'Home',
+                item: SITE_URL,
+              },
+              {
+                '@type': 'ListItem',
+                position: 2,
+                name: 'About Us',
+                item: `${SITE_URL}/about`,
+              },
+            ],
+          },
+        ],
+      }}
     />
 
     <section className="relative isolate min-h-[620px] overflow-hidden bg-[#102746] md:min-h-[690px]">
@@ -103,7 +175,7 @@ const About = () => (
       <div className="container mx-auto grid gap-10 px-4 lg:grid-cols-[.9fr_1.1fr] lg:items-center">
         <AnimatedSection animation="fade" duration={500} triggerOnce={false}>
           <Label>Our story</Label>
-          <h2 className="mt-3 text-4xl font-semibold normal-case tracking-[-.04em] md:text-5xl">
+          <h2 className="mt-3 text-4xl font-semibold normal-case tracking-[-.04em] text-[#28271f] md:text-5xl">
             From trading goods to making them.
           </h2>
           <Rule />
@@ -151,9 +223,9 @@ const About = () => (
               className="absolute -right-[3%] -top-[3%] h-[106%] w-[48%] object-contain opacity-45 mix-blend-multiply"
             />
             <img
-              src={retailStore}
-              alt="The Group's retail beginnings"
-              className="absolute left-0 top-5 z-10 h-[285px] w-[67%] -rotate-2 border-[8px] border-white object-cover shadow-xl grayscale"
+              src={supunTradersHeritage}
+              alt="Historic Supun Traders storefront in Colombo"
+              className="absolute left-0 top-5 z-10 h-[285px] w-[67%] -rotate-2 border-[8px] border-white object-cover shadow-xl"
             />
             <img
               src={heroCorporate}
@@ -234,68 +306,120 @@ const About = () => (
       </div>
     </section>
 
-    <section id="leadership" className="scroll-mt-24 bg-white py-14 md:py-20">
+    <section id="leadership" className="scroll-mt-24 overflow-hidden bg-[#faf8f2] py-12 md:py-16">
       <div className="container mx-auto px-4">
-        <Label>Leadership team</Label>
-        <h2 className="mt-3 text-4xl font-semibold normal-case tracking-[-.04em]">
-          Leading with experience.
-        </h2>
-        <Rule />
-        <div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-12">
-          {leadership.map((person, index) => (
-            <AnimatedSection
-              key={person.name}
-              animation="fade"
-              delay={(index % 4) * 40}
-              duration={450}
-              triggerOnce={false}
-              className={index < 3 ? 'lg:col-span-4' : 'lg:col-span-3'}
-            >
-              <article className="flex h-full flex-col overflow-hidden border border-[#102746]/10 bg-white transition duration-300 hover:-translate-y-1 hover:shadow-[0_14px_32px_rgba(16,39,70,.08)]">
-                {person.name === 'Lasitha Samarasinghe' ? (
-                  <img
-                    src={lasithaImage}
-                    alt="Lasitha Samarasinghe"
-                    className="aspect-[4/3] w-full bg-[#e9edf2] object-cover object-top"
-                  />
-                ) : person.name === 'Mohamed Riaz Farouk' ? (
-                  <img
-                    src={riazImage}
-                    alt="Mohamed Riaz Farouk"
-                    className="aspect-[4/3] w-full bg-[#e9edf2] object-cover object-top"
-                  />
-                ) : (
-                  <div className="flex aspect-[4/3] w-full flex-col items-center justify-center bg-[#e9edf2] text-[#8b98a8]">
-                    <span className="flex h-20 w-20 items-center justify-center rounded-full border border-[#102746]/10 bg-white/70">
-                      <UserRound size={38} strokeWidth={1.25} />
-                    </span>
-                    <span className="mt-3 text-[9px] font-bold uppercase tracking-[.16em]">
-                      Portrait placeholder
-                    </span>
-                  </div>
-                )}
-                <div className="flex flex-1 flex-col p-5">
-                  <h3 className="text-lg font-semibold normal-case leading-tight">{person.name}</h3>
-                  <p className="mt-2 text-xs font-semibold uppercase leading-5 tracking-[.08em] text-[#947027]">
+        <div className="mx-auto max-w-3xl text-center">
+          <div className="mx-auto flex h-11 w-11 items-center justify-center rounded-full bg-[#214a36] text-white shadow-[0_10px_25px_rgba(33,74,54,.16)]">
+            <Users size={22} strokeWidth={1.7} />
+          </div>
+          <p className="mt-4 text-xs font-bold uppercase tracking-[.2em] text-[#9a6a16]">
+            Leadership structure
+          </p>
+          <h2 className="mt-3 text-4xl font-semibold normal-case tracking-[-.04em] md:text-5xl">
+            One vision. Clear leadership.
+          </h2>
+          <p className="mx-auto mt-4 max-w-2xl text-sm leading-6 text-[#69665e] md:text-base">
+            A connected leadership structure guiding Group strategy, operational excellence and the
+            growth of every Supun business.
+          </p>
+        </div>
+
+        <div className="relative mx-auto mt-9 max-w-6xl md:mt-11">
+          <div className="mx-auto mb-3 w-fit rounded-full border border-[#d79a22]/25 bg-[#fff3d7] px-4 py-1.5 text-[9px] font-bold uppercase tracking-[.18em] text-[#8b5d10]">
+            Board leadership
+          </div>
+          <div className="grid gap-4 md:grid-cols-3">
+            {leadership.slice(0, 3).map((person, index) => (
+              <AnimatedSection
+                key={person.name}
+                animation="fade"
+                delay={index * 60}
+                duration={450}
+                triggerOnce={false}
+              >
+                <article className="h-full rounded-xl border border-[#d79a22]/25 bg-white p-4 text-center shadow-[0_8px_24px_rgba(74,55,20,.06)] transition duration-300 hover:-translate-y-1 hover:border-[#d79a22]/50">
+                  <span className="mx-auto block h-1 w-10 rounded-full bg-[#d79a22]" />
+                  <h3 className="mt-3 text-lg font-semibold normal-case text-[#28271f]">
+                    {person.name}
+                  </h3>
+                  <p className="mt-2 text-[11px] font-bold uppercase leading-5 tracking-[.12em] text-[#947027]">
                     {person.title}
                   </p>
                   {person.description && person.description !== '—' && (
-                    <p className="mt-4 border-t border-[#102746]/10 pt-4 text-xs leading-5 text-[#68778a]">
-                      {person.description}
-                    </p>
+                    <p className="mt-2 text-xs leading-5 text-[#777267]">{person.description}</p>
                   )}
-                </div>
-              </article>
-            </AnimatedSection>
-          ))}
+                </article>
+              </AnimatedSection>
+            ))}
+          </div>
+
+          <div className="mx-auto mb-3 mt-8 w-fit rounded-full border border-[#4e7c47]/20 bg-[#edf5e8] px-4 py-1.5 text-[9px] font-bold uppercase tracking-[.18em] text-[#3f6c39]">
+            Group executive leadership
+          </div>
+          <div className="mx-auto grid max-w-4xl gap-4 md:grid-cols-2">
+            {leadership.slice(3, 5).map((person, index) => (
+              <AnimatedSection
+                key={person.name}
+                animation="fade"
+                delay={index * 60}
+                duration={450}
+                triggerOnce={false}
+              >
+                <article className="h-full rounded-xl border border-[#4e7c47]/20 bg-white p-5 text-center shadow-[0_8px_24px_rgba(45,82,54,.06)] transition duration-300 hover:-translate-y-1 hover:border-[#4e7c47]/45">
+                  <span className="mx-auto block h-1 w-10 rounded-full bg-[#4e7c47]" />
+                  <h3 className="mt-2.5 text-xl font-semibold normal-case text-[#28271f]">
+                    {person.name}
+                  </h3>
+                  <p className="mt-1.5 text-[11px] font-semibold uppercase leading-5 tracking-[.08em] text-[#4f852c]">
+                    {person.title}
+                  </p>
+                  <p className="mt-3 border-t border-[#4e7c47]/10 pt-3 text-xs leading-5 text-[#777267]">
+                    {person.description}
+                  </p>
+                </article>
+              </AnimatedSection>
+            ))}
+          </div>
+
+          <div className="mx-auto mb-3 mt-8 w-fit rounded-full border border-[#78be43]/25 bg-[#eff8e9] px-4 py-1.5 text-[9px] font-bold uppercase tracking-[.18em] text-[#4f852c]">
+            Business leadership
+          </div>
+          <div className="mx-auto grid max-w-4xl gap-4 md:grid-cols-2">
+            {leadership.slice(5).map((person, index) => (
+              <AnimatedSection
+                key={person.name}
+                animation="fade"
+                delay={index * 60}
+                duration={450}
+                triggerOnce={false}
+              >
+                <article className="h-full rounded-xl border border-[#4e7c47]/15 bg-white p-5 text-center transition duration-300 hover:-translate-y-1 hover:shadow-[0_10px_26px_rgba(45,82,54,.08)]">
+                  <div className="text-center">
+                    <span className="mx-auto mb-3 block h-1 w-10 rounded-full bg-[#4e7c47]" />
+                    <div>
+                      <h3 className="text-lg font-semibold normal-case text-[#28271f]">
+                        {person.name}
+                      </h3>
+                      <p className="mt-1.5 text-[11px] font-bold uppercase leading-5 tracking-[.08em] text-[#4f852c]">
+                        {person.title}
+                      </p>
+                    </div>
+                  </div>
+                  <p className="mt-3 border-t border-[#4e7c47]/10 pt-3 text-xs leading-5 text-[#777267]">
+                    {person.description}
+                  </p>
+                </article>
+              </AnimatedSection>
+            ))}
+          </div>
         </div>
       </div>
     </section>
 
-    <section id="direction" className="w-full scroll-mt-24 bg-white">
-      <div className="grid w-full lg:grid-cols-[1.35fr_.65fr]">
-        <div className="grid gap-px bg-[#d9d7d1] sm:grid-cols-2">
-          <article className="bg-white px-6 py-10 sm:px-10 lg:px-16 xl:px-20">
+    <section id="direction" className="scroll-mt-24 bg-white py-12 md:py-16">
+      <div className="container mx-auto grid items-stretch gap-8 px-4 lg:grid-cols-[1.6fr_1fr] lg:gap-12">
+        <div className="grid gap-8 sm:grid-cols-2 sm:gap-10">
+          <article className="border-t border-border py-7">
             <Eye className="text-[#d79a22]" size={34} strokeWidth={1.6} />
             <Label>Vision</Label>
             <h2 className="mt-3 text-2xl font-semibold normal-case">
@@ -307,7 +431,7 @@ const About = () => (
               which empower and enrich the lives of Sri Lankans.
             </p>
           </article>
-          <article className="bg-white px-6 py-10 sm:px-10 lg:px-12 xl:px-16">
+          <article className="border-t border-border py-7">
             <Target className="text-[#d79a22]" size={34} strokeWidth={1.6} />
             <Label>Mission</Label>
             <h2 className="mt-3 text-2xl font-semibold normal-case">
@@ -321,15 +445,18 @@ const About = () => (
             </p>
           </article>
         </div>
-        <div className="relative min-h-[360px]">
+        <div className="relative min-h-[400px] overflow-hidden rounded-2xl sm:min-h-[440px]">
           <img
             src={manufacturingImage}
-            alt="Sustainable local manufacturing"
-            className="absolute inset-0 h-full w-full object-cover"
+            alt="A Camy technician brazing copper tubing on an air-conditioning unit"
+            className="absolute inset-0 h-full w-full origin-[left_25%] scale-[1.15] object-cover object-[0%_25%]"
+            loading="lazy"
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-[#102746]/90 to-[#102746]/10" />
-          <p className="absolute bottom-8 left-8 max-w-[230px] text-2xl font-medium leading-snug text-white">
-            Sustainable solutions for generations.
+          <div className="absolute inset-0 bg-[linear-gradient(0deg,rgba(6,24,40,.92)_0%,rgba(6,24,40,.45)_20%,transparent_48%)]" />
+          <p className="absolute bottom-6 left-6 right-6 text-2xl font-semibold normal-case leading-[1.2] tracking-[-.02em] text-white sm:bottom-7 sm:left-7 sm:right-7">
+            Sustainable solutions.
+            <br />
+            For generations.
           </p>
         </div>
       </div>
@@ -343,10 +470,10 @@ const About = () => (
         </h2>
         <Rule />
         <p className="mt-3 hidden text-xs text-[#788496] lg:block">
-          Move over a year to read its story.
+          Scroll through the years to read our story.
         </p>
-        <div className="relative mt-9 grid grid-cols-2 gap-x-4 gap-y-7 sm:grid-cols-3 md:grid-cols-5 lg:grid-cols-10 lg:gap-0 lg:before:absolute lg:before:left-2 lg:before:right-2 lg:before:top-[63px] lg:before:h-px lg:before:bg-[#d79a22]">
-          {journey.map(([year, description], index) => {
+        <div className="relative mt-9 flex gap-6 overflow-x-auto pb-8 snap-x snap-proximity">
+          {journey.map(([year, description]) => {
             const logos = journeyCompanyLogos[year] ?? [];
 
             return (
@@ -354,20 +481,15 @@ const About = () => (
                 key={year}
                 tabIndex={0}
                 aria-label={`${year}: ${description}`}
-                className="group relative min-w-0 pr-3 outline-none focus-visible:ring-2 focus-visible:ring-[#315f9f]"
+                className="group relative w-[230px] shrink-0 snap-start pr-3 outline-none focus-visible:ring-2 focus-visible:ring-[#315f9f]"
               >
-                <div className="flex h-14 items-center gap-1 pb-2">
+                <div className="flex h-28 items-center gap-2 pb-3">
                   {logos.map(({ id, name }) => (
                     <span
                       key={id}
-                      className="flex h-11 w-11 shrink-0 items-center justify-center rounded-lg border border-[#102746]/10 bg-white p-1 shadow-sm transition-transform group-hover:-translate-y-1 group-focus:-translate-y-1"
+                      className="flex h-24 w-[104px] shrink-0 items-center justify-center overflow-hidden rounded-xl border border-[#102746]/10 bg-white p-1 shadow-sm transition-transform group-hover:-translate-y-1 group-focus:-translate-y-1"
                     >
-                      <img
-                        src={journeyLogoSource(id)}
-                        alt={name}
-                        className="max-h-full max-w-full object-contain"
-                        loading="lazy"
-                      />
+                      <JourneyLogo id={id} name={name} />
                     </span>
                   ))}
                 </div>
@@ -375,35 +497,7 @@ const About = () => (
                 <strong className="mt-3 block text-base font-semibold tracking-[-.02em] text-[#102746]">
                   {year}
                 </strong>
-                <p className="mt-1.5 text-[10px] leading-4 text-[#637186]">{description}</p>
-                <div
-                  className={`pointer-events-none absolute bottom-[calc(100%+12px)] z-40 hidden w-72 rounded-xl border border-[#102746]/10 bg-white p-5 text-left shadow-[0_18px_45px_rgba(16,39,70,.16)] lg:group-hover:block lg:group-focus:block ${index === 0 ? 'left-0' : index === journey.length - 1 ? 'right-0' : 'left-1/2 -translate-x-1/2'}`}
-                >
-                  <div className="flex items-center gap-3">
-                    {logos.map(({ id, name }) => (
-                      <span
-                        key={id}
-                        className="flex h-14 w-14 items-center justify-center rounded-lg border border-[#102746]/10 bg-white p-1.5"
-                      >
-                        <img
-                          src={journeyLogoSource(id)}
-                          alt={name}
-                          className="max-h-full max-w-full object-contain"
-                        />
-                      </span>
-                    ))}
-                    <div>
-                      <span className="text-[10px] font-bold uppercase tracking-[.16em] text-[#a87417]">
-                        Milestone
-                      </span>
-                      <strong className="mt-1 block text-xl text-[#102746]">{year}</strong>
-                    </div>
-                  </div>
-                  <p className="mt-3 text-sm leading-6 text-[#53647a]">{description}</p>
-                  <span
-                    className={`absolute -bottom-2 h-4 w-4 rotate-45 border-b border-r border-[#102746]/10 bg-white ${index === 0 ? 'left-2' : index === journey.length - 1 ? 'right-2' : 'left-1/2 -translate-x-1/2'}`}
-                  />
-                </div>
+                <p className="mt-1.5 text-xs leading-5 text-[#637186]">{description}</p>
               </article>
             );
           })}
@@ -416,7 +510,7 @@ const About = () => (
         <div className="relative min-h-[520px] overflow-hidden rounded-[1.75rem] bg-[#102746] shadow-[0_24px_60px_rgba(16,39,70,.16)] sm:min-h-[620px]">
           <img
             src={coreValuesTeam}
-            alt="Sri Lankan product development team working together"
+            alt="Supun Group factory team assembling Camy air-conditioning units"
             className="absolute inset-0 h-full w-full object-cover"
           />
           <div className="absolute inset-0 bg-gradient-to-t from-[#071b2d] via-[#071b2d]/15 to-transparent" />
@@ -430,7 +524,6 @@ const About = () => (
               Led by people.
             </h2>
             <div className="mt-6 flex items-center gap-5 border-t border-white/25 pt-5">
-              <strong className="text-4xl font-semibold tracking-[-.05em]">04</strong>
               <p className="max-w-[10rem] text-[10px] font-semibold uppercase leading-5 tracking-[.16em] text-white/65">
                 Principles that guide our Group
               </p>
@@ -481,7 +574,7 @@ const About = () => (
           </p>
         </div>
         <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-5">
-          {awards.map((item, index) => {
+          {awards.map((item) => {
             const isCertification = item.award.toLowerCase().includes('made in sri lanka');
             return (
               <Link
@@ -493,10 +586,7 @@ const About = () => (
                 <div className="flex h-24 items-center justify-center">
                   <AwardIssuerMark issuer={item.givenBy} certification={isCertification} />
                 </div>
-                <p className="mt-6 text-[9px] font-bold uppercase tracking-[.18em] text-[#102746]/35">
-                  Recognition 0{index + 1}
-                </p>
-                <h3 className="mt-3 text-base font-semibold normal-case leading-snug text-[#102746]">
+                <h3 className="mt-6 text-base font-semibold normal-case leading-snug text-[#102746]">
                   {item.award}
                 </h3>
                 <p className="mt-2 text-xs leading-5 text-[#728093]">{item.givenBy}</p>
@@ -517,13 +607,13 @@ const About = () => (
     <section className="bg-white px-4 pb-14 pt-4 md:pb-20 md:pt-8">
       <div className="container relative isolate mx-auto overflow-hidden rounded-[2rem] py-20 text-white shadow-[0_24px_60px_rgba(16,39,70,.16)] md:py-24">
         <img
-          src={hospitalityImage}
-          alt="Sri Lanka at sunset"
+          src={industryBanner}
+          alt="Illustration of a Sri Lankan manufacturing and distribution facility"
           className="absolute inset-0 -z-20 h-full w-full object-cover"
         />
-        <div className="absolute inset-0 -z-10 bg-[#102746]/78" />
+        <div className="absolute inset-0 -z-10 bg-[linear-gradient(90deg,rgba(4,16,28,0.9)_0%,rgba(4,16,28,0.76)_52%,rgba(4,16,28,0.25)_100%)]" />
         <div className="flex flex-col items-start justify-between gap-7 px-7 sm:px-10 md:flex-row md:items-center lg:px-14">
-          <h2 className="max-w-2xl text-4xl font-semibold normal-case leading-tight tracking-[-.04em] md:text-5xl">
+          <h2 className="max-w-2xl text-4xl font-semibold normal-case leading-tight tracking-[-.04em] text-white [text-shadow:0_2px_8px_rgba(0,0,0,0.6)] md:text-5xl">
             Building a stronger Sri Lanka, together.
           </h2>
           <Link
