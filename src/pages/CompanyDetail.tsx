@@ -4,7 +4,6 @@ import {
   ArrowRight,
   BriefcaseBusiness,
   CalendarDays,
-  Check,
   ExternalLink,
   Mail,
   MapPin,
@@ -194,23 +193,7 @@ const CompanyDetail = () => {
       </section>
 
       <section className="py-12 md:py-16">
-        <div className="company-detail-content-grid container relative mx-auto grid max-w-7xl gap-8 px-4">
-          <aside className="absolute -left-28 top-0 hidden h-full w-24 xl:block">
-            <Link
-              to="/companies"
-              aria-label="Back to all group companies"
-              className="group sticky top-28 flex flex-col items-center gap-2 text-center text-[#0b2747]"
-            >
-              <span className="flex h-14 w-14 items-center justify-center text-[#041426] transition duration-300 group-hover:-translate-x-1 group-hover:text-[#315f9f] group-focus-visible:ring-2 group-focus-visible:ring-[#315f9f] group-focus-visible:ring-offset-2">
-                <span className="-mt-1 text-[3.25rem] font-black leading-none" aria-hidden="true">
-                  &lt;
-                </span>
-              </span>
-              <span className="max-w-[6.5rem] text-[11px] font-black uppercase leading-4 tracking-[0.1em] text-[#041426] transition group-hover:text-[#315f9f]">
-                Back to all groups
-              </span>
-            </Link>
-          </aside>
+        <div className="company-detail-content-grid container relative mx-auto grid max-w-7xl items-start gap-8 px-4">
           <div className="company-detail-primary min-w-0 space-y-8">
             <article className="rounded-2xl border border-[#102746]/10 bg-white p-7 shadow-[0_10px_30px_rgba(16,39,70,.06)] sm:p-9">
               <p className="text-xs font-bold uppercase tracking-[.18em] text-[#315f9f]">
@@ -225,40 +208,20 @@ const CompanyDetail = () => {
               </p>
             </article>
 
-            <article className="rounded-2xl border border-[#102746]/10 bg-white p-7 shadow-[0_10px_30px_rgba(16,39,70,.06)] sm:p-9">
-              <div className="flex items-center justify-between">
-                <div>
-                  <p className="text-xs font-bold uppercase tracking-[.18em] text-[#315f9f]">
-                    Capabilities
-                  </p>
-                  <h2 className="mt-2 text-3xl font-semibold normal-case tracking-[-.025em]">
-                    What we do best
-                  </h2>
-                </div>
-                <span className="text-4xl font-semibold text-[#102746]/10">
-                  {String(company.features.length).padStart(2, '0')}
-                </span>
-              </div>
-
-              <div className="mt-7 grid gap-3 sm:grid-cols-2">
-                {company.features.map((feature, index) => (
-                  <div
-                    key={feature}
-                    className={`relative flex min-h-24 gap-4 overflow-hidden rounded-xl border border-[#102746]/10 bg-[#f7f9fb] p-5 text-sm font-medium leading-6 text-[#405268] transition duration-300 hover:border-[#315f9f]/30 hover:bg-white hover:shadow-[0_10px_24px_rgba(16,39,70,.07)] ${company.features.length % 2 === 1 && index === company.features.length - 1 ? 'sm:col-span-2' : ''}`}
-                  >
-                    <span className="absolute inset-y-0 left-0 w-1 bg-[#efbd55]" />
-                    <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-[#fff0c8] text-[#9a650c]">
-                      <Check size={16} strokeWidth={2.5} />
-                    </span>
-                    <div>
-                      <span className="mb-1 block text-[9px] font-bold uppercase tracking-[.16em] text-[#315f9f]/50">
-                        Capability {String(index + 1).padStart(2, '0')}
-                      </span>
-                      {feature}
-                    </div>
-                  </div>
+            <article className="rounded-2xl border border-[#102746]/10 bg-white p-7 sm:p-9">
+              <p className="text-xs font-bold uppercase tracking-[.18em] text-[#315f9f]">
+                Capabilities
+              </p>
+              <h2 className="mt-3 text-3xl font-semibold normal-case tracking-[-.025em]">
+                Key features
+              </h2>
+              <ul className="mt-6 divide-y divide-[#102746]/10 border-y border-[#102746]/10">
+                {company.features.map((feature) => (
+                  <li key={feature} className="py-4 text-base leading-7 text-[#405268]">
+                    {feature}
+                  </li>
                 ))}
-              </div>
+              </ul>
             </article>
 
             {company.awards && company.awards.length > 0 && (

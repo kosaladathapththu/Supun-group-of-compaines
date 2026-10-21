@@ -401,8 +401,8 @@ const Home = () => {
                   className="absolute inset-0 h-full w-full origin-[45%_85%] scale-[1.25] object-cover object-[50%_75%]"
                   loading="lazy"
                 />
-                <div className="absolute inset-0 bg-gradient-to-b from-[#081a32]/80 via-transparent to-transparent" />
-                <div className="absolute inset-x-0 top-0 p-7 text-white sm:p-9">
+                <div className="absolute inset-0 bg-[linear-gradient(0deg,rgba(8,26,50,.95)_0%,rgba(8,26,50,.65)_24%,transparent_55%)]" />
+                <div className="absolute inset-x-0 bottom-0 p-7 text-white sm:p-9">
                   <p className="text-xs font-semibold uppercase tracking-[0.22em] text-[#efbd55]">
                     Built in Sri Lanka
                   </p>

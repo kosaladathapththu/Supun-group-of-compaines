@@ -93,6 +93,8 @@ export const CompanyLogo = ({
   className = '',
   imageClassName = '',
 }: CompanyLogoProps) => {
+  if (companyId === 'fuji-industries') return null;
+
   const sourceId = companyId === 'supun-traders-distributors' ? 'supun-traders' : companyId;
   const logo = sourceId === 'new-camy-smart' ? camyRedLogo : getCompanyLogo(sourceId);
   const bounds = artwork[sourceId];
@@ -101,7 +103,7 @@ export const CompanyLogo = ({
   const width = ratio ? Math.min(maxWidth, maxHeight * ratio) : maxWidth;
   return (
     <div
-      className={`relative flex items-center justify-center overflow-hidden bg-white ${className}`}
+      className={`${className.split(/\s+/).includes('absolute') ? 'absolute' : 'relative'} flex items-center justify-center overflow-hidden bg-white ${className}`}
     >
       {logo ? (
         bounds ? (

@@ -962,6 +962,13 @@ All colors MUST be HSL.
 }
 
 @media (max-width: 767px) {
+  .company-list-logo {
+    position: absolute;
+    top: auto;
+    left: auto;
+    right: 12px;
+    bottom: 12px;
+  }
   .company-list-logo > div {
     max-width: 65% !important;
   }

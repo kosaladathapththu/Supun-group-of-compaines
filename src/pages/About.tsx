@@ -48,7 +48,6 @@ const journeyCompanyLogos: Record<string, { id: string; name: string }[]> = {
     { id: 'rodsons', name: 'Rodsons' },
   ],
   '2018': [{ id: 'new-camy-smart', name: 'New Camy Smart' }],
-  '2023': [{ id: 'fuji-industries', name: 'Air Condition and Fans manufacturing' }],
 };
 
 const JourneyLogo = ({ id, name }: { id: string; name: string }) =>
