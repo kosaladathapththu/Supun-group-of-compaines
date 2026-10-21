@@ -12,19 +12,19 @@ import {
 import { CompanyLogo } from '@/components/CompanyLogo';
 import Seo, { SITE_URL } from '@/components/Seo';
 import { companies, type CompanySector } from '@/data/companies';
-import heroImage from '@/assets/about-hero-sri-lanka-v3.png';
-import retailImage from '@/assets/retail-store.jpg';
-import supunTradersImage from '@/assets/supun-traders-real-storefront.png';
-import distributorsImage from '@/assets/supun-traders-storefront-v4.png';
-import hospitalityImage from '@/assets/sector-hospitality-v2.jpg';
-import hotelImage from '@/assets/hotel-interior.jpg';
-import manufacturingImage from '@/assets/sector-manufacturing-v2.jpg';
-import footwearImage from '@/assets/automotive-design.jpg';
-import chromeImage from '@/assets/chrome-manufacturing.jpg';
-import helmetImage from '@/assets/helmet-manufacturing.jpg';
-import cookwareImage from '@/assets/cookware-manufacturing.jpg';
+import heroImage from '@/assets/optimized/about-hero-sri-lanka-v3.jpg';
+import retailImage from '@/assets/optimized/retail-store.jpg';
+import supunTradersImage from '@/assets/optimized/supun-traders-real-storefront.jpg';
+import distributorsImage from '@/assets/optimized/supun-traders-storefront-v4.jpg';
+import hospitalityImage from '@/assets/optimized/sector-hospitality-v2.jpg';
+import hotelImage from '@/assets/optimized/hotel-interior.jpg';
+import manufacturingImage from '@/assets/optimized/sector-manufacturing-v2.jpg';
+import footwearImage from '@/assets/optimized/automotive-design.jpg';
+import chromeImage from '@/assets/optimized/chrome-manufacturing.jpg';
+import helmetImage from '@/assets/optimized/helmet-manufacturing.jpg';
+import cookwareImage from '@/assets/optimized/cookware-manufacturing.jpg';
 import coolingImage from '@/assets/products/camy-air-conditioners.png';
-import ecotempImage from '@/assets/camy-factory-technician.jpeg';
+import ecotempImage from '@/assets/optimized/camy-factory-technician.jpg';
 
 const filters: Array<'All' | CompanySector> = [
   'All',
@@ -188,6 +188,8 @@ const Companies = () => {
                       <img
                         src={companyImages[company.id] || manufacturingImage}
                         alt={`${company.shortName} operations`}
+                        loading={index === 0 ? "eager" : "lazy"}
+                        decoding="async"
                         className="absolute inset-0 h-full w-full object-cover transition duration-700 group-hover:scale-105"
                       />
                       <div className="absolute inset-0 bg-gradient-to-t from-[#071d37]/70 via-transparent to-transparent" />

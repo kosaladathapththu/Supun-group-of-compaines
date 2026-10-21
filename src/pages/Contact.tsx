@@ -17,7 +17,7 @@ import { Textarea } from '@/components/ui/textarea';
 import { CompanyLogo } from '@/components/CompanyLogo';
 import Seo, { SITE_NAME, SITE_URL } from '@/components/Seo';
 import { companies } from '@/data/companies';
-import heroImage from '@/assets/contact-hero-v2.png';
+import heroImage from '@/assets/optimized/contact-hero-v2.jpg';
 
 const methods = [
   {

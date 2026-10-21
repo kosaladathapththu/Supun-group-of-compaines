@@ -11,10 +11,10 @@ import {
   Users,
 } from 'lucide-react';
 import Seo, { SITE_NAME, SITE_URL } from '@/components/Seo';
-import careersHero from '@/assets/careers-hero-team.png';
-import learningImage from '@/assets/careers-learn-through-work.png';
-import growthImage from '@/assets/careers-grow-across-group.png';
-import changeImage from '@/assets/careers-make-change.png';
+import careersHero from '@/assets/optimized/careers-hero-team.jpg';
+import learningImage from '@/assets/optimized/careers-learn-through-work.jpg';
+import growthImage from '@/assets/optimized/careers-grow-across-group.jpg';
+import changeImage from '@/assets/optimized/careers-make-change.jpg';
 import './Careers.css';
 
 const reasons = [

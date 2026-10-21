@@ -5,7 +5,7 @@ import { AwardIssuerMark } from '@/components/AwardIssuerMark';
 import Seo, { SITE_NAME, SITE_URL } from '@/components/Seo';
 import { getFileUrl } from '@/services/api';
 import { newsAPI, type NewsArticle } from '@/services/newsApi';
-import newsHeroEditorial from '@/assets/news-hero-editorial.png';
+import newsHeroEditorial from '@/assets/optimized/news-hero-editorial.jpg';
 import { awardNewsStories } from '@/data/awardNews';
 
 const filters = ['All updates', 'Corporate', 'Manufacturing', 'Retail', 'Hospitality'];

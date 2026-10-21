@@ -1,8 +1,8 @@
-import helmetManufacturing from '@/assets/helmet-manufacturing.jpg';
-import chromeManufacturing from '@/assets/chrome-manufacturing.jpg';
-import heroCorporate from '@/assets/hero-corporate.jpg';
+import helmetManufacturing from '@/assets/optimized/helmet-manufacturing.jpg';
+import chromeManufacturing from '@/assets/optimized/chrome-manufacturing.jpg';
+import heroCorporate from '@/assets/optimized/hero-corporate.jpg';
 import coolingProducts from '@/assets/products/camy-air-conditioners.png';
-import hotelInterior from '@/assets/hotel-interior.jpg';
+import hotelInterior from '@/assets/optimized/hotel-interior.jpg';
 
 export interface AwardNewsStory {
   slug: string;

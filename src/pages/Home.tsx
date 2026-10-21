@@ -16,7 +16,7 @@ import { companies } from '@/data/companies';
 import { sectorHighlights, siteStats } from '@/data/siteContent';
 import heroVideo from '@/assets/supun-group-hero-optimized.mp4';
 import heroMobileVideo from '@/assets/supun-group-hero-mobile.mp4';
-import manufacturingImage from '@/assets/camy-cookware-production.jpg';
+import manufacturingImage from '@/assets/optimized/camy-cookware-production.jpg';
 import camyBrandLogo from '@/assets/camy-brand-logo.png';
 import { CertificationSection } from '@/components/CertificationSection';
 import camyRedLogo from '@/assets/camy-logo-red-transparent.png';

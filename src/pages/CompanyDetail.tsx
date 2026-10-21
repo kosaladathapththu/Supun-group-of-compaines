@@ -13,18 +13,18 @@ import { CompanyLogo } from '@/components/CompanyLogo';
 import { AwardIssuerMark } from '@/components/AwardIssuerMark';
 import Seo, { SITE_URL } from '@/components/Seo';
 import { companyById } from '@/data/companies';
-import retailImage from '@/assets/retail-store.jpg';
-import supunTradersImage from '@/assets/supun-traders-real-storefront.png';
-import distributorsImage from '@/assets/supun-traders-storefront-v4.png';
-import hospitalityImage from '@/assets/sector-hospitality-v2.jpg';
-import hotelImage from '@/assets/hotel-interior.jpg';
-import manufacturingImage from '@/assets/sector-manufacturing-v2.jpg';
-import footwearImage from '@/assets/automotive-design.jpg';
-import chromeImage from '@/assets/chrome-manufacturing.jpg';
-import helmetImage from '@/assets/helmet-manufacturing.jpg';
-import cookwareImage from '@/assets/cookware-manufacturing.jpg';
+import retailImage from '@/assets/optimized/retail-store.jpg';
+import supunTradersImage from '@/assets/optimized/supun-traders-real-storefront.jpg';
+import distributorsImage from '@/assets/optimized/supun-traders-storefront-v4.jpg';
+import hospitalityImage from '@/assets/optimized/sector-hospitality-v2.jpg';
+import hotelImage from '@/assets/optimized/hotel-interior.jpg';
+import manufacturingImage from '@/assets/optimized/sector-manufacturing-v2.jpg';
+import footwearImage from '@/assets/optimized/automotive-design.jpg';
+import chromeImage from '@/assets/optimized/chrome-manufacturing.jpg';
+import helmetImage from '@/assets/optimized/helmet-manufacturing.jpg';
+import cookwareImage from '@/assets/optimized/cookware-manufacturing.jpg';
 import coolingImage from '@/assets/products/camy-air-conditioners.png';
-import ecotempImage from '@/assets/camy-factory-technician.jpeg';
+import ecotempImage from '@/assets/optimized/camy-factory-technician.jpg';
 
 const companyImages: Record<string, string> = {
   'supun-traders': supunTradersImage,
