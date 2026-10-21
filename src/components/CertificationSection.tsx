@@ -1,6 +1,5 @@
 import { Link } from 'react-router-dom';
-import { ArrowRight, Expand } from 'lucide-react';
-import { Tabs, TabsList, TabsTrigger, TabsContent } from '@/components/ui/tabs';
+import { Expand } from 'lucide-react';
 import {
   Dialog,
   DialogContent,
@@ -23,12 +22,12 @@ const certificates = [
 ];
 
 const CertificatePaper = ({ certificate }: { certificate: (typeof certificates)[number] }) => (
-  <div className="relative mx-auto flex h-[var(--paper-height,350px)] max-w-full items-center justify-center overflow-hidden bg-white">
+  <div className="relative mx-auto flex h-[var(--paper-height,350px)] max-w-full items-center justify-center bg-white">
     <img
       src={certificate.image}
       alt={`${certificate.name} Made in Sri Lanka certificate`}
       loading="lazy"
-      className="h-full w-auto max-w-full object-contain"
+      className="block max-h-full w-auto max-w-full object-contain"
     />
   </div>
 );
@@ -36,61 +35,33 @@ const CertificatePaper = ({ certificate }: { certificate: (typeof certificates)[
 export const CertificationSection = () => (
   <section
     aria-labelledby="certification-heading"
-    className="border-y border-border bg-white py-12 md:py-20"
+    className="border-y border-border bg-white py-12 text-foreground md:py-16"
   >
-    <Tabs
-      defaultValue="camy-smart"
-      className="container mx-auto grid max-w-6xl gap-8 px-4 md:grid-cols-2 md:items-center md:gap-16"
-    >
-      <div>
-        <p className="text-xs font-semibold uppercase tracking-[.16em] text-primary">
+    <div className="container mx-auto max-w-5xl px-5 sm:px-8">
+      <div className="mx-auto max-w-2xl text-center">
+        <p className="text-[10px] font-semibold uppercase tracking-[.2em] text-primary">
           Local manufacturing
         </p>
         <h2
           id="certification-heading"
-          className="mt-4 max-w-md text-3xl font-semibold normal-case leading-tight tracking-[-.025em] text-foreground md:text-4xl"
+          className="mt-3 text-3xl font-semibold normal-case leading-tight tracking-[-.025em] text-foreground md:text-4xl"
         >
-          Made in Sri Lanka.
-          <br />
-          Recognised in our work.
+          Made in Sri Lanka certification
         </h2>
-        <p className="mt-5 max-w-md text-base leading-7 text-muted-foreground">
+        <p className="mx-auto mt-4 max-w-xl text-sm leading-6 text-muted-foreground">
           Three of our manufacturing companies have received Made in Sri Lanka certification from
           the Ministry of Industries and NEDA.
         </p>
-        <TabsList
-          aria-label="Choose a company certificate"
-          className="mt-8 flex h-auto w-full max-w-md flex-col items-stretch justify-start gap-0 rounded-none border-y border-border bg-transparent p-0"
-        >
-          {certificates.map((certificate) => (
-            <TabsTrigger
-              key={certificate.id}
-              value={certificate.id}
-              className="group flex justify-between gap-4 whitespace-normal rounded-none border-b border-border px-0 py-4 text-left text-base font-medium text-muted-foreground shadow-none last:border-b-0 hover:text-primary data-[state=active]:bg-transparent data-[state=active]:text-primary data-[state=active]:shadow-none"
-            >
-              {certificate.name}
-              <ArrowRight
-                size={18}
-                className="shrink-0 opacity-0 transition-opacity group-data-[state=active]:opacity-100"
-                aria-hidden="true"
-              />
-            </TabsTrigger>
-          ))}
-        </TabsList>
       </div>
-      <div className="min-w-0 border-l-0 border-border md:border-l md:pl-12">
+      <div className="mt-9 grid min-w-0 grid-cols-3 items-start gap-3 border-t border-border pt-8 sm:gap-8">
         {certificates.map((certificate) => (
-          <TabsContent
-            key={certificate.id}
-            value={certificate.id}
-            className="mt-0 focus-visible:ring-offset-4"
-          >
-            <div className="flex min-h-[405px] flex-col items-center justify-center bg-[#f7f7f4] px-6 py-7">
+          <article key={certificate.id} className="min-w-0 text-center">
+            <div className="flex h-[160px] items-start justify-center [--paper-height:160px] sm:h-[320px] sm:[--paper-height:320px]">
               <Dialog>
                 <DialogTrigger asChild>
                   <button
                     type="button"
-                    className="group block border border-black/10 shadow-[0_6px_20px_rgba(16,35,63,.09)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-4"
+                    className="group relative block max-w-full bg-white p-1 shadow-[0_10px_24px_rgba(0,0,0,.18)] transition-transform duration-300 hover:-translate-y-1 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#efbd55] focus-visible:ring-offset-4 focus-visible:ring-offset-white"
                     aria-label={`Enlarge ${certificate.name} certificate`}
                   >
                     <CertificatePaper certificate={certificate} />
@@ -105,21 +76,21 @@ export const CertificationSection = () => (
                 </DialogContent>
               </Dialog>
             </div>
-            <div className="mt-4 flex items-center justify-between gap-4 text-sm">
+            <div className="mt-5 space-y-2 text-xs sm:text-base">
               <Link
                 to={`/companies/${certificate.id}`}
-                className="font-medium text-primary underline-offset-4 hover:underline"
+                className="font-medium leading-5 text-primary underline-offset-4 hover:underline"
               >
                 {certificate.name}
               </Link>
-              <span className="flex shrink-0 items-center gap-1.5 text-xs text-muted-foreground">
+              <span className="flex items-center justify-center gap-1.5 text-[10px] text-muted-foreground sm:text-xs">
                 <Expand size={13} aria-hidden="true" />
-                Click to enlarge
+                Enlarge
               </span>
             </div>
-          </TabsContent>
+          </article>
         ))}
       </div>
-    </Tabs>
+    </div>
   </section>
 );
