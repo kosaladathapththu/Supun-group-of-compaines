@@ -493,11 +493,13 @@ const Home = () => {
 
       <section
         aria-labelledby="certification-heading"
-        className="border-y border-border bg-[#f6f8fb] py-12 md:py-20"
+        className="border-y border-border bg-white py-12 md:py-16"
       >
-        <div className="container mx-auto max-w-6xl px-4">
-          <div className="max-w-2xl">
-            <p className="section-kicker">Manufacturing</p>
+        <div className="container mx-auto max-w-5xl px-4">
+          <div className="mx-auto max-w-2xl text-center">
+            <p className="text-xs font-semibold uppercase tracking-[.16em] text-primary">
+              Manufacturing
+            </p>
             <h2
               id="certification-heading"
               className="mt-4 text-3xl font-semibold normal-case tracking-[-.025em] text-foreground md:text-4xl"
@@ -509,7 +511,7 @@ const Home = () => {
               Ministry of Industries and the National Enterprise Development Authority (NEDA).
             </p>
           </div>
-          <div className="mt-9 grid gap-6 md:grid-cols-3">
+          <div className="mt-10 grid items-start gap-9 sm:grid-cols-3 sm:gap-5">
             {[
               { name: 'Camy Smart', id: 'camy-smart', x: 0, y: 370, width: 228, height: 390 },
               {
@@ -531,8 +533,12 @@ const Home = () => {
             ].map((certificate, index) => {
               const paper = () => (
                 <div
-                  className="relative mx-auto w-full overflow-hidden bg-white"
-                  style={{ aspectRatio: certificate.width / certificate.height }}
+                  className="relative mx-auto overflow-hidden bg-white"
+                  style={{
+                    width: `calc(var(--certificate-height, 300px) * ${certificate.width / certificate.height})`,
+                    height: 'var(--certificate-height, 300px)',
+                    maxWidth: '100%',
+                  }}
                 >
                   <img
                     src={certificationImage}
@@ -555,20 +561,18 @@ const Home = () => {
                   delay={index * 70}
                   className="h-full"
                 >
-                  <article className="flex h-full flex-col overflow-hidden rounded-xl border border-border bg-white">
+                  <article className="flex h-full flex-col items-center text-center">
                     <Dialog>
                       <DialogTrigger asChild>
                         <button
                           type="button"
-                          className="group flex w-full flex-1 flex-col items-center justify-center bg-[#edf1f6] px-7 pb-4 pt-7 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-primary"
+                          className="group flex w-full flex-col items-center focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-4"
                           aria-label={'Enlarge ' + certificate.name + ' certificate'}
                         >
-                          <div className="w-full max-w-[245px] overflow-hidden border border-black/10 shadow-sm transition-transform duration-300 group-hover:-translate-y-1">
+                          <div className="overflow-hidden border border-black/10 shadow-[0_4px_14px_rgba(16,35,63,.08)] transition-transform duration-300 group-hover:-translate-y-1">
                             {paper()}
                           </div>
-                          <span className="mt-4 text-xs font-medium text-primary">
-                            View certificate
-                          </span>
+                          <span className="sr-only">View certificate</span>
                         </button>
                       </DialogTrigger>
                       <DialogContent className="max-h-[92vh] max-w-lg overflow-y-auto">
@@ -576,19 +580,17 @@ const Home = () => {
                         <DialogDescription>
                           Made in Sri Lanka certificate preview.
                         </DialogDescription>
-                        <div className="mx-auto w-full max-w-[310px]">{paper()}</div>
+                        <div className="mx-auto w-full max-w-[310px] [--certificate-height:420px]">
+                          {paper()}
+                        </div>
                       </DialogContent>
                     </Dialog>
-                    <div className="border-t border-border px-6 py-5">
-                      <p className="text-[10px] font-semibold uppercase tracking-[.14em] text-muted-foreground">
-                        Made in Sri Lanka
-                      </p>
+                    <div className="w-full pt-5">
                       <Link
                         to={'/companies/' + certificate.id}
-                        className="mt-2 flex items-center justify-between gap-3 text-lg font-semibold text-primary hover:underline"
+                        className="inline-flex items-center justify-center gap-2 text-base font-semibold text-primary underline-offset-4 hover:underline"
                       >
                         <span>{certificate.name}</span>
-                        <ArrowRight size={18} className="shrink-0" aria-hidden="true" />
                       </Link>
                     </div>
                   </article>
