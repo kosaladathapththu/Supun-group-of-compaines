@@ -1,4 +1,4 @@
-import { ArrowRight, Eye, Flag, Gem, Lightbulb, Target, Users } from 'lucide-react';
+import { ArrowRight, Users } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import Seo, { DEFAULT_IMAGE, SITE_NAME, SITE_URL } from '@/components/Seo';
 import { AnimatedSection } from '@/components/AnimatedSection';
@@ -9,17 +9,18 @@ import aboutHeroSriLanka from '@/assets/optimized/about-hero-sri-lanka-v3.jpg';
 import supunTradersHeritage from '@/assets/optimized/supun-traders-heritage.jpg';
 import manufacturingImage from '@/assets/optimized/camy-factory-technician.jpg';
 import industryBanner from '@/assets/optimized/sri-lanka-industry-banner.jpg';
-import sriLankaMap from '@/assets/sri-lanka-watercolor-map.png';
-import coreValuesTeam from '@/assets/optimized/camy-factory-team-supervisor.jpg';
+import sriLankaMap from '@/assets/optimized/sri-lanka-watercolor-map.webp';
+import coreValuesTeam from '@/assets/optimized/camy-production-supervisor-team.jpg';
+import camyLogo from '@/assets/camy-logo-red-transparent.png';
 import { awards, coreValues, journey, leadership } from '@/data/siteContent';
 import { CompanyLogo } from '@/components/CompanyLogo';
+import { ResponsiveCopy } from '@/components/ResponsiveCopy';
 
 const stats = [
   ['13', 'Group companies'],
   ['300+', 'Employees'],
   ['250+', 'Distributors'],
 ];
-const valueIcons = [Gem, Users, Lightbulb, Flag];
 const awardCompanyPaths: Record<string, string> = {
   'Camy Smart': '/companies/camy-smart',
   'Aero Star (Aerostar Home Appliances)': '/companies/aerostar-home-appliances',
@@ -28,7 +29,7 @@ const awardCompanyPaths: Record<string, string> = {
   'Supun Arcade Residency': '/companies/supun-arcade-residency',
 };
 const Label = ({ children }: { children: React.ReactNode }) => (
-  <p className="text-xs font-bold uppercase tracking-[.18em] text-[#315f9f]">{children}</p>
+  <p className="section-eyebrow text-xs font-bold uppercase tracking-[.18em] text-[#315f9f]">{children}</p>
 );
 const Rule = () => <div className="mt-4 h-0.5 w-12 bg-[#d79a22]" />;
 
@@ -48,6 +49,7 @@ const journeyCompanyLogos: Record<string, { id: string; name: string }[]> = {
     { id: 'rodsons', name: 'Rodsons' },
   ],
   '2018': [{ id: 'new-camy-smart', name: 'New Camy Smart' }],
+  '2023': [{ id: 'camy-brand', name: 'Camy' }],
 };
 
 const JourneyLogo = ({ id, name }: { id: string; name: string }) =>
@@ -58,8 +60,10 @@ const JourneyLogo = ({ id, name }: { id: string; name: string }) =>
       className="h-16 w-20 object-contain"
       loading="lazy"
     />
+  ) : id === 'camy-brand' ? (
+    <img src={camyLogo} alt={name} className="h-full w-full object-contain p-2" loading="lazy" />
   ) : (
-    <CompanyLogo companyId={id} companyName={name} placement="timeline" className="h-20 w-24" />
+    <CompanyLogo companyId={id} companyName={name} placement="timeline" className="h-full w-full" />
   );
 
 const About = () => (
@@ -180,6 +184,7 @@ const About = () => (
           </h2>
           <Rule />
           <div className="mt-6 space-y-4 text-sm leading-7 text-[#53647a] md:text-base">
+            <ResponsiveCopy summary="Founded as Supun Traders in 1978, our family business now brings together 13 companies in manufacturing, retail, distribution and hospitality. Camy products are made in Sri Lanka and distributed island-wide.">
             <p>
               A family-run business since 1978, Supun Group of Companies began when Mr. Mohamed
               Fareed founded Supun Traders in Colombo, trading household appliances and electronics
@@ -204,6 +209,7 @@ const About = () => (
               credits its growth to two generations of family leadership and a shared commitment to
               quality, innovation, and Sri Lankan pride, in everything it builds.
             </p>
+            </ResponsiveCopy>
           </div>
           <div className="mt-7 grid grid-cols-3 gap-3">
             {stats.map(([value, label]) => (
@@ -215,7 +221,7 @@ const About = () => (
           </div>
         </AnimatedSection>
         <AnimatedSection animation="fade" duration={550} triggerOnce={false}>
-          <div className="relative mx-auto min-h-[500px] max-w-2xl">
+          <div className="about-story-collage relative mx-auto min-h-[500px] max-w-2xl">
             <img
               src={sriLankaMap}
               alt=""
@@ -268,6 +274,7 @@ const About = () => (
             </h2>
             <Rule />
             <div className="mt-7 space-y-4 text-sm leading-7 text-[#53647a]">
+              <ResponsiveCopy summary="Our growth is guided by innovation, creativity and a dedicated team. We continue to invest in Sri Lankan manufacturing and create lasting value for our customers, people and partners.">
               <p>
                 Since the company was established in 1999, Supun Group of Companies has cultivated
                 its status as a pioneer in the manufacturing and the trading business. Guided by our
@@ -296,6 +303,7 @@ const About = () => (
                 This has been the core of our success story and we strive to continue our journey in
                 nurturing business goals through various new products and services in the future.
               </p>
+              </ResponsiveCopy>
             </div>
             <p className="mt-7 border-t border-[#102746]/10 pt-5 font-semibold">
               M.F.M. Kaleel{' '}
@@ -420,44 +428,51 @@ const About = () => (
       <div className="container mx-auto grid items-stretch gap-8 px-4 lg:grid-cols-[1.6fr_1fr] lg:gap-12">
         <div className="grid gap-8 sm:grid-cols-2 sm:gap-10">
           <article className="border-t border-border py-7">
-            <Eye className="text-[#d79a22]" size={34} strokeWidth={1.6} />
             <Label>Vision</Label>
             <h2 className="mt-3 text-2xl font-semibold normal-case">
               Innovate. Unleash and Excel.
             </h2>
             <p className="mt-4 text-sm leading-6 text-[#637186]">
+              <ResponsiveCopy summary="Transforming Sri Lankan lives through innovation, quality products and services that exceed expectations.">
               To unleash the potential within us to transform the markets through innovation and
               exceed people’s expectations for a better tomorrow, through the goods and services
               which empower and enrich the lives of Sri Lankans.
+              </ResponsiveCopy>
             </p>
           </article>
           <article className="border-t border-border py-7">
-            <Target className="text-[#d79a22]" size={34} strokeWidth={1.6} />
             <Label>Mission</Label>
             <h2 className="mt-3 text-2xl font-semibold normal-case">
               Superior thinking. Sustainable value.
             </h2>
             <p className="mt-4 text-sm leading-6 text-[#637186]">
+              <ResponsiveCopy summary="Creating useful products and services through superior thinking, sustainable practices and a smaller carbon footprint.">
               To harness superior thinking in the creation of products and services that
               functionally enhance the livelihood of people, while remaining cautious in reducing
               our carbon footprint. We integrate sustainable practices across our operations while
               delivering exceptional value to our stakeholders.
+              </ResponsiveCopy>
             </p>
           </article>
         </div>
-        <div className="relative min-h-[400px] overflow-hidden rounded-2xl sm:min-h-[440px]">
+        <div className="about-welding-photo relative min-h-[400px] overflow-hidden rounded-2xl sm:min-h-[440px]">
           <img
             src={manufacturingImage}
             alt="A Camy technician brazing copper tubing on an air-conditioning unit"
-            className="absolute inset-0 h-full w-full origin-[left_25%] scale-[1.15] object-cover object-[0%_25%]"
+            className="absolute inset-0 h-full w-full origin-[55%_35%] scale-[1.28] object-cover object-[50%_25%]"
             loading="lazy"
           />
-          <div className="absolute inset-0 bg-[linear-gradient(0deg,rgba(6,24,40,.92)_0%,rgba(6,24,40,.45)_20%,transparent_48%)]" />
-          <p className="absolute bottom-6 left-6 right-6 text-2xl font-semibold normal-case leading-[1.2] tracking-[-.02em] text-white sm:bottom-7 sm:left-7 sm:right-7">
-            Sustainable solutions.
-            <br />
-            For generations.
-          </p>
+          <div className="absolute inset-0 bg-[linear-gradient(0deg,rgba(6,24,40,.92)_0%,rgba(6,24,40,.40)_18%,transparent_40%)]" />
+          <div className="absolute inset-x-0 bottom-0 p-6 text-white sm:p-7">
+            <p className="text-[10px] font-bold uppercase tracking-[.22em] text-[#efbd55]">
+              Purpose in practice
+            </p>
+            <h3 className="mt-2 text-2xl font-semibold normal-case leading-[1.15] tracking-[-.03em] sm:text-3xl">
+              Sustainable solutions.
+              <br />
+              For generations.
+            </h3>
+          </div>
         </div>
       </div>
     </section>
@@ -470,9 +485,9 @@ const About = () => (
         </h2>
         <Rule />
         <p className="mt-3 hidden text-xs text-[#788496] lg:block">
-          Scroll through the years to read our story.
+          Explore the milestones in our story.
         </p>
-        <div className="relative mt-9 flex gap-6 overflow-x-auto pb-8 snap-x snap-proximity">
+        <div className="relative mt-9 grid grid-cols-2 gap-x-4 gap-y-8 sm:grid-cols-3 md:grid-cols-5 xl:grid-cols-10 xl:gap-x-3 xl:before:absolute xl:before:left-2 xl:before:right-2 xl:before:top-[87px] xl:before:h-px xl:before:bg-[#d79a22]">
           {journey.map(([year, description]) => {
             const logos = journeyCompanyLogos[year] ?? [];
 
@@ -481,13 +496,13 @@ const About = () => (
                 key={year}
                 tabIndex={0}
                 aria-label={`${year}: ${description}`}
-                className="group relative w-[230px] shrink-0 snap-start pr-3 outline-none focus-visible:ring-2 focus-visible:ring-[#315f9f]"
+                className="group relative min-w-0 pr-2 outline-none focus-visible:ring-2 focus-visible:ring-[#315f9f]"
               >
-                <div className="flex h-28 items-center gap-2 pb-3">
+                <div className="flex h-20 items-center gap-1 pb-2">
                   {logos.map(({ id, name }) => (
                     <span
                       key={id}
-                      className="flex h-24 w-[104px] shrink-0 items-center justify-center overflow-hidden rounded-xl border border-[#102746]/10 bg-white p-1 shadow-sm transition-transform group-hover:-translate-y-1 group-focus:-translate-y-1"
+                      className="flex h-16 w-16 min-w-0 shrink items-center justify-center overflow-hidden rounded-xl border border-[#102746]/10 bg-white p-1 shadow-sm transition-transform group-hover:-translate-y-1 group-focus:-translate-y-1"
                     >
                       <JourneyLogo id={id} name={name} />
                     </span>
@@ -497,7 +512,7 @@ const About = () => (
                 <strong className="mt-3 block text-base font-semibold tracking-[-.02em] text-[#102746]">
                   {year}
                 </strong>
-                <p className="mt-1.5 text-xs leading-5 text-[#637186]">{description}</p>
+                <p className="mt-1.5 text-[10px] leading-4 text-[#637186]">{description}</p>
               </article>
             );
           })}
@@ -507,11 +522,13 @@ const About = () => (
 
     <section className="bg-white py-14 md:py-20">
       <div className="container mx-auto grid gap-10 px-4 lg:grid-cols-[.82fr_1.18fr] lg:items-center lg:gap-14">
-        <div className="relative min-h-[520px] overflow-hidden rounded-[1.75rem] bg-[#102746] shadow-[0_24px_60px_rgba(16,39,70,.16)] sm:min-h-[620px]">
+        <div className="about-team-photo relative min-h-[520px] overflow-hidden rounded-[1.75rem] bg-[#102746] shadow-[0_24px_60px_rgba(16,39,70,.16)] sm:min-h-[620px]">
           <img
             src={coreValuesTeam}
-            alt="Supun Group factory team assembling Camy air-conditioning units"
-            className="absolute inset-0 h-full w-full object-cover"
+            alt="A supervisor and two foreground workers assembling Camy air-conditioning units"
+            className="absolute inset-0 h-full w-full object-cover object-top"
+            loading="lazy"
+            decoding="async"
           />
           <div className="absolute inset-0 bg-gradient-to-t from-[#071b2d] via-[#071b2d]/15 to-transparent" />
           <div className="absolute inset-x-0 bottom-0 p-7 text-white sm:p-9">
@@ -539,17 +556,13 @@ const About = () => (
             The principles behind how we build, serve and grow across every company in the Group.
           </p>
           <div className="mt-8 grid gap-3 sm:grid-cols-2">
-            {coreValues.map((value, index) => {
-              const Icon = valueIcons[index % valueIcons.length];
+            {coreValues.map((value) => {
               return (
                 <article
                   key={value.title}
                   className="group rounded-xl border border-[#102746]/10 bg-[#f7f9fc] p-5 transition duration-300 hover:-translate-y-1 hover:border-[#315f9f]/35 hover:shadow-[0_14px_30px_rgba(16,39,70,.08)]"
                 >
-                  <span className="flex h-11 w-11 items-center justify-center rounded-lg bg-[#e8eef6] text-[#315f9f]">
-                    <Icon size={21} strokeWidth={1.7} />
-                  </span>
-                  <h3 className="mt-5 text-xl font-semibold normal-case">{value.title}</h3>
+                  <h3 className="text-xl font-semibold normal-case">{value.title}</h3>
                   <p className="mt-2 text-sm leading-6 text-[#657286]">{value.description}</p>
                 </article>
               );

@@ -978,3 +978,172 @@ All colors MUST be HSL.
     max-height: 100% !important;
   }
 }
+
+/* Keep public pages continuous, with only enough breathing room for reading. */
+.public-content section:not(:has(h1)):not(.premium-hero):not(.career-hero) {
+  padding-block: 20px !important;
+}
+.public-content .section-kicker,
+.public-content .section-eyebrow {
+  display: none;
+}
+.public-content .section-eyebrow + h2,
+.public-content .section-kicker + h2 {
+  margin-top: 0;
+}
+.public-content section {
+  scroll-margin-top: 100px;
+}
+
+@media (max-width: 767px) {
+  .public-content {
+    overflow-x: clip;
+  }
+  .public-content section:not(:has(h1)):not(.premium-hero):not(.career-hero) {
+    padding-block: 12px !important;
+  }
+  .public-content [data-scroll-animated] {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
+  .public-content h2 {
+    font-size: clamp(1.65rem, 7vw, 2.1rem);
+    line-height: 1.12;
+    overflow-wrap: break-word;
+  }
+  .public-content h3 {
+    overflow-wrap: break-word;
+  }
+  .public-content p {
+    overflow-wrap: break-word;
+  }
+  .public-content section > .container > .grid {
+    row-gap: 20px;
+  }
+  .public-content .legacy-year-card,
+  .public-content .legacy-story-card {
+    min-height: 0;
+    height: auto;
+    padding: 22px;
+  }
+  .public-content .legacy-year-card {
+    gap: 16px;
+  }
+  .public-content .legacy-year-ring,
+  .public-content .legacy-pulse,
+  .public-content .legacy-corner-mark {
+    display: none;
+  }
+  .public-content .legacy-story-card .pt-10 {
+    padding-top: 20px;
+  }
+  .public-content .legacy-story-card .mb-6 {
+    display: none;
+  }
+  .public-content .legacy-year {
+    font-size: 4.5rem;
+  }
+  .home-company-carousel {
+    /* Matching leading/trailing gutters keep first and last cards centered too. */
+    padding-inline: 6%;
+    scroll-padding-inline: 6%;
+  }
+  .home-company-slide {
+    width: 100%;
+    scroll-snap-align: center;
+    scroll-snap-stop: always;
+  }
+  .home-company-slide .company-glass {
+    text-align: center;
+    min-height: 340px;
+  }
+  .home-company-slide .company-glass .mb-4 {
+    justify-content: center;
+    margin-bottom: 10px;
+  }
+  .home-company-slide .company-glass .pt-7 {
+    padding-top: 12px;
+  }
+  .home-company-slide h3 {
+    font-size: 1.5rem;
+  }
+  .home-production-photo,
+  .about-welding-photo,
+  .about-team-photo {
+    min-height: 0 !important;
+    height: auto;
+    aspect-ratio: 4 / 5;
+  }
+  .about-team-photo {
+    aspect-ratio: 3 / 4;
+  }
+  .home-production-photo > img,
+  .about-welding-photo > img,
+  .about-team-photo > img {
+    transform: none;
+    object-fit: contain;
+    object-position: center top;
+  }
+  .about-story-collage {
+    min-height: 330px !important;
+  }
+  .about-story-collage > img:not([aria-hidden]) {
+    height: 205px;
+    object-fit: contain;
+    background: white;
+  }
+  .public-content #leadership article,
+  .public-content #awards a {
+    min-height: 0;
+  }
+  .public-content #direction article {
+    padding-block: 16px;
+  }
+  .public-content #direction p,
+  .public-content #story p,
+  .public-content #chairman p {
+    line-height: 1.65;
+  }
+  .public-content #journey .mt-9 {
+    margin-top: 20px;
+  }
+  .public-content #journey article p {
+    font-size: 12px;
+    line-height: 1.55;
+  }
+  .public-content .company-detail-primary {
+    display: grid;
+    gap: 16px;
+  }
+  .public-content .company-detail-primary > * {
+    margin-top: 0 !important;
+    padding: 20px;
+  }
+  .public-content .company-detail-primary li {
+    padding-block: 10px;
+  }
+  .public-content .camy-card .camy-media,
+  .public-content .camy-card:nth-child(n) .camy-media {
+    height: 230px;
+    clip-path: none;
+    transform: none;
+  }
+  .public-content .camy-card .camy-copy {
+    min-height: 0;
+    gap: 16px;
+    padding: 20px;
+  }
+  .public-content .camy-card .camy-media > img {
+    transform: none;
+    object-fit: contain;
+  }
+  .public-content .camy-card:hover .camy-media::after,
+  .public-content .camy-hover-brand {
+    display: none;
+  }
+  .public-content img.mobile-image-full {
+    object-fit: contain;
+    transform: none;
+  }
+}

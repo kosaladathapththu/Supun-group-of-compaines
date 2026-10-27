@@ -21,12 +21,20 @@ const certificates = [
   },
 ];
 
-const CertificatePaper = ({ certificate }: { certificate: (typeof certificates)[number] }) => (
+const CertificatePaper = ({
+  certificate,
+  enhanced = false,
+}: {
+  certificate: (typeof certificates)[number];
+  enhanced?: boolean;
+}) => (
   <div className="relative mx-auto flex h-[var(--paper-height,350px)] max-w-full items-center justify-center bg-white">
     <img
       src={certificate.image}
       alt={`${certificate.name} Made in Sri Lanka certificate`}
       loading="lazy"
+      decoding="async"
+      style={enhanced ? { filter: 'brightness(1.09) contrast(1.12) saturate(.94)' } : undefined}
       className="block max-h-full w-auto max-w-full object-contain"
     />
   </div>
@@ -56,18 +64,21 @@ export const CertificationSection = () => (
           the Ministry of Industries and NEDA.
         </p>
       </div>
-      <div className="mt-10 grid min-w-0 grid-cols-3 items-start gap-3 rounded-2xl border border-[#ebe7de] bg-[#faf9f6] px-3 py-6 sm:gap-8 sm:px-8 sm:py-9">
+      <div className="mt-10 grid min-w-0 grid-cols-3 items-start gap-3 sm:gap-8">
         {certificates.map((certificate) => (
-          <article key={certificate.id} className="min-w-0 text-center">
-            <div className="flex h-[150px] items-center justify-center [--paper-height:150px] sm:h-[340px] sm:[--paper-height:340px]">
+          <article
+            key={certificate.id}
+            className="min-w-0 border-t-2 border-[#b69a60] pt-4 text-center sm:pt-6"
+          >
+            <div className="flex h-[170px] items-center justify-center border border-[#e9e7e2] bg-[#f7f7f5] p-2 [--paper-height:150px] sm:h-[390px] sm:p-5 sm:[--paper-height:350px]">
               <Dialog>
                 <DialogTrigger asChild>
                   <button
                     type="button"
-                    className="group relative block max-w-full bg-white p-1 ring-1 ring-black/10 shadow-[0_6px_16px_rgba(30,39,46,.10)] transition-transform duration-300 hover:-translate-y-1 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-4"
+                    className="group relative block max-w-full bg-white shadow-[0_3px_10px_rgba(30,39,46,.12)] transition-transform duration-300 hover:-translate-y-1 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-4"
                     aria-label={`Enlarge ${certificate.name} certificate`}
                   >
-                    <CertificatePaper certificate={certificate} />
+                    <CertificatePaper certificate={certificate} enhanced />
                     <span className="absolute bottom-2 right-2 flex h-7 w-7 items-center justify-center rounded-full border border-border bg-white/95 text-primary shadow-sm transition-colors group-hover:bg-primary group-hover:text-white">
                       <Expand size={13} aria-hidden="true" />
                     </span>
@@ -75,14 +86,16 @@ export const CertificationSection = () => (
                 </DialogTrigger>
                 <DialogContent className="max-h-[92vh] max-w-lg overflow-y-auto">
                   <DialogTitle>{certificate.name}</DialogTitle>
-                  <DialogDescription>Made in Sri Lanka certificate preview.</DialogDescription>
+                  <DialogDescription>
+                    Original Made in Sri Lanka certificate photograph.
+                  </DialogDescription>
                   <div className="[--paper-height:420px]">
                     <CertificatePaper certificate={certificate} />
                   </div>
                 </DialogContent>
               </Dialog>
             </div>
-            <div className="mx-auto mt-6 max-w-[260px] border-t border-[#ded6c5] pt-4 text-xs sm:text-base">
+            <div className="mx-auto mt-4 max-w-[260px] text-xs sm:text-base">
               <Link
                 to={`/companies/${certificate.id}`}
                 className="font-semibold leading-5 text-[#102746] underline-offset-4 hover:underline"

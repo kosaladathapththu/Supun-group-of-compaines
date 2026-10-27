@@ -8,19 +8,19 @@ import camyRedLogo from '@/assets/camy-logo-red-transparent.png';
 import anythingAtSupunLogo from '@/assets/anything-at-supun-logo.png';
 import helmetImage from '@/assets/optimized/helmet-manufacturing.jpg';
 import manufacturingImage from '@/assets/optimized/hero-manufacturing.jpg';
-import airConditionerImage from '@/assets/products/camy-air-conditioners.png';
+import airConditionerImage from '@/assets/products/camy-air-conditioners.webp';
 import doubleDoorRefrigeratorImage from '@/assets/products/camy-double-door-refrigerator.jpeg';
-import electricKettlesImage from '@/assets/products/camy-electric-kettles.png';
-import fanImage from '@/assets/products/camy-fan.png';
-import gasCookerImage from '@/assets/products/camy-gas-cooker.png';
+import electricKettlesImage from '@/assets/products/camy-electric-kettles.webp';
+import fanImage from '@/assets/products/camy-fan.webp';
+import gasCookerImage from '@/assets/products/camy-gas-cooker.webp';
 import miniRefrigeratorImage from '@/assets/products/camy-mini-refrigerator.jpeg';
-import mixerGrinderImage from '@/assets/products/camy-mixer-grinder.png';
-import motorcycleHelmetImage from '@/assets/products/camy-motorcycle-helmet.png';
-import nonStickCookwareImage from '@/assets/products/camy-non-stick-cookware.png';
-import pressureCookerImage from '@/assets/products/camy-pressure-cooker.png';
-import televisionImage from '@/assets/products/camy-tv.png';
-import wallClockImage from '@/assets/products/camy-wall-clock.png';
-import waterFilterImage from '@/assets/products/camy-water-filter.png';
+import mixerGrinderImage from '@/assets/products/camy-mixer-grinder.webp';
+import motorcycleHelmetImage from '@/assets/products/camy-cs832-helmet.jpg';
+import nonStickCookwareImage from '@/assets/products/camy-non-stick-cookware.webp';
+import pressureCookerImage from '@/assets/products/camy-pressure-cooker.webp';
+import televisionImage from '@/assets/products/camy-tv.webp';
+import wallClockImage from '@/assets/products/camy-wall-clock.webp';
+import waterFilterImage from '@/assets/products/camy-water-filter.webp';
 
 const shopUrl = 'https://www.anythingatsupun.lk/';
 
@@ -191,31 +191,10 @@ const CamyProducts = () => {
             >
               Products for <span style={{ color: '#ed1c24' }}>everyday life.</span>
             </h1>
-            <p className="mt-7 max-w-xl text-lg leading-8 text-black/60 md:text-xl">
-              Camy brings together a growing range of products for the home, the road and everything
-              in between. Designed with purpose and shaped by an understanding of everyday needs,
-              each product is backed by the manufacturing experience of the Supun Group.
+            <p className="mt-6 max-w-lg text-lg leading-7 text-black/60">
+              Everyday essentials for your home and the road, backed by Supun Group's manufacturing
+              experience.
             </p>
-            <div className="mt-8 grid gap-4 sm:grid-cols-2">
-              <article className="border-l-2 border-[#ed1c24] pl-4">
-                <h2 className="text-xs font-extrabold uppercase tracking-[.16em] text-[#111]">
-                  Designed with purpose
-                </h2>
-                <p className="mt-2 text-sm leading-6 text-black/55">
-                  We focus on the details that make a product useful, how it fits into your routine,
-                  how it performs and how it feels to live with.
-                </p>
-              </article>
-              <article className="border-l-2 border-[#ed1c24] pl-4">
-                <h2 className="text-xs font-extrabold uppercase tracking-[.16em] text-[#111]">
-                  Backed by experience
-                </h2>
-                <p className="mt-2 text-sm leading-6 text-black/55">
-                  CAMY is backed by the manufacturing experience of the Supun Group, bringing local
-                  knowledge and hands-on expertise to everything we make.
-                </p>
-              </article>
-            </div>
             <div className="camy-actions">
               <a href="#camy-range" className="camy-button camy-button-dark">
                 Explore the range <ArrowRight size={18} />

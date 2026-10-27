@@ -16,7 +16,7 @@ foreach ($photoFile in $photoFiles) {
   try {
    $graphics.Clear([System.Drawing.Color]::White)
    $graphics.InterpolationMode = [System.Drawing.Drawing2D.InterpolationMode]::HighQualityBicubic
-   $graphics.DrawImage($original,0,0,$imageWidth,$imageHeight)
+   $graphics.DrawImage($original,[System.Drawing.Rectangle]::new(0,0,$imageWidth,$imageHeight),0,0,$original.Width,$original.Height,[System.Drawing.GraphicsUnit]::Pixel)
    $encoderParams = New-Object System.Drawing.Imaging.EncoderParameters(1)
    $encoderParams.Param[0] = New-Object System.Drawing.Imaging.EncoderParameter([System.Drawing.Imaging.Encoder]::Quality, [long]82)
    $targetName = $photoFile.BaseName + '.jpg'

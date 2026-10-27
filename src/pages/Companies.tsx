@@ -1,14 +1,6 @@
 import { useMemo, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import {
-  ArrowRight,
-  BriefcaseBusiness,
-  CalendarDays,
-  Check,
-  Globe2,
-  MapPin,
-  Phone,
-} from 'lucide-react';
+import { ArrowRight, BriefcaseBusiness, CalendarDays, Globe2, MapPin, Phone } from 'lucide-react';
 import { CompanyLogo } from '@/components/CompanyLogo';
 import Seo, { SITE_URL } from '@/components/Seo';
 import { companies, type CompanySector } from '@/data/companies';
@@ -23,7 +15,7 @@ import footwearImage from '@/assets/optimized/automotive-design.jpg';
 import chromeImage from '@/assets/optimized/chrome-manufacturing.jpg';
 import helmetImage from '@/assets/optimized/helmet-manufacturing.jpg';
 import cookwareImage from '@/assets/optimized/cookware-manufacturing.jpg';
-import coolingImage from '@/assets/products/camy-air-conditioners.png';
+import coolingImage from '@/assets/products/camy-air-conditioners.webp';
 import ecotempImage from '@/assets/optimized/camy-factory-technician.jpg';
 
 const filters: Array<'All' | CompanySector> = [
@@ -64,7 +56,7 @@ const Companies = () => {
     <div className="min-h-screen bg-[#f3f6f8]">
       <Seo
         title="Our Companies | Supun Group of Companies"
-        description="Explore 11 Supun Group companies across manufacturing, retail, distribution and hospitality in Sri Lanka."
+        description="Explore 13 Supun Group companies across manufacturing, retail, distribution and hospitality in Sri Lanka."
         keywords="Supun Group companies, Camy Smart, Supun Traders, Supun Super Center, Air Condition and Fans manufacturing, Sri Lanka manufacturing"
         path="/companies"
         jsonLd={{
@@ -159,9 +151,8 @@ const Companies = () => {
             ))}
           </div>
 
-          <div className="space-y-5">
+          <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
             {visibleCompanies.map((company, index) => {
-              const imageOnRight = index % 2 === 1;
               return (
                 <article
                   key={company.id}
@@ -179,16 +170,14 @@ const Companies = () => {
                       navigate(`/companies/${company.id}`);
                     }
                   }}
-                  className="group cursor-pointer overflow-hidden rounded-2xl border border-[#0b2747]/10 bg-white shadow-[0_10px_32px_rgba(11,39,71,.07)] transition duration-300 hover:-translate-y-0.5 hover:border-[#315f9f]/25 hover:shadow-[0_18px_45px_rgba(11,39,71,.12)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#315f9f] focus-visible:ring-offset-4"
+                  className="group flex h-full flex-col cursor-pointer overflow-hidden rounded-2xl border border-[#0b2747]/10 bg-white shadow-[0_10px_32px_rgba(11,39,71,.07)] transition duration-300 hover:-translate-y-0.5 hover:border-[#315f9f]/25 hover:shadow-[0_18px_45px_rgba(11,39,71,.12)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#315f9f] focus-visible:ring-offset-4"
                 >
-                  <div className="grid lg:grid-cols-3">
-                    <div
-                      className={`relative min-h-[240px] overflow-hidden lg:col-span-1 lg:min-h-[320px] lg:row-start-1 ${imageOnRight ? 'lg:col-start-3' : 'lg:col-start-1'}`}
-                    >
+                  <div className="flex h-full flex-col">
+                    <div className="relative aspect-[16/9] overflow-hidden">
                       <img
                         src={companyImages[company.id] || manufacturingImage}
                         alt={`${company.shortName} operations`}
-                        loading={index === 0 ? "eager" : "lazy"}
+                        loading={index === 0 ? 'eager' : 'lazy'}
                         decoding="async"
                         className="absolute inset-0 h-full w-full object-cover transition duration-700 group-hover:scale-105"
                       />
@@ -197,24 +186,16 @@ const Companies = () => {
                         companyId={company.id}
                         companyName={company.shortName}
                         placement="listing"
-                        className="company-list-logo absolute bottom-3 right-3 h-14 w-[88px] rounded-lg border border-white/70 bg-white p-1.5 shadow-lg md:bottom-auto md:left-5 md:right-auto md:top-5 md:h-28 md:w-60 md:max-w-[calc(100%-2.5rem)] md:rounded-xl md:p-3"
+                        className="company-list-logo absolute bottom-3 right-3 h-14 w-[88px] rounded-lg border border-white/70 bg-white p-1.5 shadow-lg md:bottom-auto md:left-5 md:right-auto md:top-5 md:h-20 md:w-40 md:max-w-[calc(100%-2.5rem)] md:rounded-xl md:p-3"
                         imageClassName="h-full w-full object-contain"
                       />
-                      <p className="absolute bottom-4 left-4 right-28 text-[10px] font-bold uppercase tracking-[.12em] text-white md:bottom-5 md:left-5 md:right-5 md:text-xs md:tracking-[.16em]">
-                        {company.tagline}
-                      </p>
                     </div>
-                    <div
-                      className={`flex flex-col p-6 sm:p-8 lg:col-span-2 lg:row-start-1 ${imageOnRight ? 'lg:col-start-1' : 'lg:col-start-2'}`}
-                    >
-                      <div className="flex flex-col justify-between gap-4 border-b border-[#0b2747]/10 pb-5 sm:flex-row sm:items-start">
+                    <div className="flex flex-1 flex-col gap-5 p-5 sm:p-6">
+                      <div className="flex flex-col justify-between gap-4">
                         <div>
-                          <h2 className="text-2xl font-semibold normal-case leading-tight tracking-[-.025em] text-[#123b70] md:text-3xl">
+                          <h2 className="text-2xl font-semibold normal-case leading-tight tracking-[-.025em] text-[#123b70] lg:text-3xl">
                             {company.name}
                           </h2>
-                          <p className="mt-2 font-medium italic text-[#b37814]">
-                            {company.tagline}
-                          </p>
                         </div>
                         <div className="flex shrink-0 flex-wrap gap-2 text-[10px] font-semibold uppercase tracking-[.08em] text-[#526278]">
                           <span className="inline-flex items-center gap-1.5 rounded-full bg-[#eef3f7] px-3 py-2">
@@ -227,35 +208,15 @@ const Companies = () => {
                           </span>
                         </div>
                       </div>
-                      <div className="grid flex-1 gap-6 py-5 md:grid-cols-[1.25fr_.75fr]">
-                        <p className="text-sm font-medium leading-6 text-[#34465b]">
-                          {company.fullDescription}
-                        </p>
-                        <div>
-                          <p className="mb-3 text-xs font-bold text-[#244f83]">Key Features</p>
-                          <ul className="space-y-2">
-                            {company.features.slice(0, 4).map((feature) => (
-                              <li
-                                key={feature}
-                                className="flex gap-2 text-xs font-medium leading-5 text-[#41546a]"
-                              >
-                                <Check
-                                  size={15}
-                                  className="mt-0.5 shrink-0 text-[#d79a22]"
-                                  strokeWidth={2.5}
-                                />
-                                {feature}
-                              </li>
-                            ))}
-                          </ul>
-                        </div>
-                      </div>
-                      <div className="flex flex-wrap items-center gap-x-6 gap-y-3 border-t border-[#0b2747]/15 pt-4 text-xs font-semibold text-[#244f83]">
+                      <div className="mt-auto flex flex-wrap items-center gap-x-5 gap-y-3 border-t border-[#0b2747]/15 pt-4 text-xs font-semibold text-[#244f83]">
                         {company.phone && (
-                          <span className="inline-flex items-center gap-2">
+                          <a
+                            href={`tel:${company.phone.replace(/[^+\d]/g, '')}`}
+                            className="inline-flex items-center gap-2 hover:underline"
+                          >
                             <Phone size={14} className="text-[#d79a22]" />
                             {company.phone}
-                          </span>
+                          </a>
                         )}
                         {company.location && (
                           <span className="inline-flex items-center gap-2">

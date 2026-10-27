@@ -200,7 +200,7 @@ const Navigation = () => {
         </div>
 
         {isOpen && (
-          <div className="mb-3 border-t border-white/10 py-3 xl:hidden">
+          <div className="mb-3 max-h-[calc(100dvh-100px)] overflow-y-auto overscroll-contain border-t border-white/10 py-3 xl:hidden">
             <div className="grid gap-1">
               <Link to="/" onClick={() => setIsOpen(false)}>
                 <Button

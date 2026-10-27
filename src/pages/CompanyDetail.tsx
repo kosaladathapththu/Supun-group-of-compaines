@@ -10,6 +10,7 @@ import {
   Phone,
 } from 'lucide-react';
 import { CompanyLogo } from '@/components/CompanyLogo';
+import { ResponsiveCopy } from '@/components/ResponsiveCopy';
 import { AwardIssuerMark } from '@/components/AwardIssuerMark';
 import Seo, { SITE_URL } from '@/components/Seo';
 import { companyById } from '@/data/companies';
@@ -23,7 +24,7 @@ import footwearImage from '@/assets/optimized/automotive-design.jpg';
 import chromeImage from '@/assets/optimized/chrome-manufacturing.jpg';
 import helmetImage from '@/assets/optimized/helmet-manufacturing.jpg';
 import cookwareImage from '@/assets/optimized/cookware-manufacturing.jpg';
-import coolingImage from '@/assets/products/camy-air-conditioners.png';
+import coolingImage from '@/assets/products/camy-air-conditioners.webp';
 import ecotempImage from '@/assets/optimized/camy-factory-technician.jpg';
 
 const companyImages: Record<string, string> = {
@@ -203,9 +204,11 @@ const CompanyDetail = () => {
                 Our story
               </h2>
               <div className="mt-5 h-0.5 w-14 bg-[#d79a22]" />
-              <p className="mt-6 text-base font-medium leading-8 text-[#405268]">
-                {company.fullDescription}
-              </p>
+              <div className="mt-4 text-base font-medium leading-7 text-[#405268]">
+                <ResponsiveCopy summary={company.description}>
+                  <p>{company.fullDescription}</p>
+                </ResponsiveCopy>
+              </div>
             </article>
 
             <article className="rounded-2xl border border-[#102746]/10 bg-white p-7 sm:p-9">

@@ -1,7 +1,7 @@
 import helmetManufacturing from '@/assets/optimized/helmet-manufacturing.jpg';
 import chromeManufacturing from '@/assets/optimized/chrome-manufacturing.jpg';
 import heroCorporate from '@/assets/optimized/hero-corporate.jpg';
-import coolingProducts from '@/assets/products/camy-air-conditioners.png';
+import coolingProducts from '@/assets/products/camy-air-conditioners.webp';
 import hotelInterior from '@/assets/optimized/hotel-interior.jpg';
 
 export interface AwardNewsStory {

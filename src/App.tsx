@@ -42,7 +42,7 @@ const PublicPage = ({ children }: { children: ReactNode }) => (
   <div className="min-h-screen">
     <Navigation />
     <PageTransition>
-      <main>{children}</main>
+      <main className="public-content">{children}</main>
       <Footer />
     </PageTransition>
     <CookieConsent />
