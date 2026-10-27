@@ -123,7 +123,8 @@ const Careers = () => {
           className="career-hero-image"
           src={careersHero}
           alt="A diverse team of Sri Lankan professionals in a modern workplace"
-         decoding="async" />
+          decoding="async"
+        />
         <div className="career-shell career-hero-grid relative z-10">
           <div className="pb-16 pr-6 md:pb-24 lg:pr-16">
             <p className="flex items-center gap-3 text-xs font-bold uppercase tracking-[.25em] text-[#efc66f]">
@@ -133,9 +134,8 @@ const Careers = () => {
               Build your future with Supun Group.
             </h1>
             <p className="mt-7 max-w-xl text-lg leading-8 text-white/80">
-              Join teams that manufacture, serve, distribute and create experiences across Sri
-              Lanka. Bring your skills, learn from real work and grow with a diverse group of
-              businesses.
+              Build your skills across manufacturing, retail, distribution and hospitality in Sri
+              Lanka.
             </p>
             <div className="mt-9 flex flex-wrap gap-3">
               <a
@@ -223,7 +223,7 @@ const Careers = () => {
           <div className="grid gap-4 md:grid-cols-3">
             {reasons.map(({ title, reveal, icon: Icon, image }) => (
               <article key={title} className="why-card" tabIndex={0}>
-                <img className="why-photo" src={image} alt="" loading="lazy"  decoding="async" />
+                <img className="why-photo" src={image} alt="" loading="lazy" decoding="async" />
                 <span className="why-shade" aria-hidden="true" />
                 <div className="why-content">
                   <span className="why-icon">

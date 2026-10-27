@@ -123,7 +123,8 @@ const Contact = () => {
           src={heroImage}
           alt="Supun Group corporate offices"
           className="absolute inset-0 -z-20 h-full w-full object-cover"
-         decoding="async" />
+          decoding="async"
+        />
         <div className="absolute inset-0 -z-10 bg-gradient-to-r from-[#031326]/92 via-[#071d37]/55 to-transparent" />
         <div className="container mx-auto px-4">
           <div className="max-w-4xl">

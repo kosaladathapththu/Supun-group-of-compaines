@@ -16,25 +16,25 @@ export const sectorHighlights: Array<{
     title: 'Manufacturing',
     sector: 'Manufacturing',
     description:
-      "Building Sri Lanka's own consumer durables, from SLS-certified motorcycle helmets to the country's first PU footwear, entirely in our own factories.",
+      'Sri Lankan manufacturing of helmets, footwear and household appliances in our own factories.',
   },
   {
     title: 'Retail & Distribution',
     sector: 'Retail & Distribution',
     description:
-      "Connecting Sri Lankan households to trusted products, from Supun Traders' wholesale roots to Supun Super Center's retail network across the island.",
+      'Trusted household products through Supun Traders, Supun Super Center and our island-wide network.',
   },
   {
     title: 'Hospitality & Dining',
     sector: 'Hospitality',
     description:
-      'Supun Arcade Residency and Area 56 bring hospitality to central Colombo, from luxury serviced apartments to first-class rooftop dining above the city.',
+      'Serviced apartments at Supun Arcade Residency and rooftop dining at Area 56 in Colombo.',
   },
   {
     title: 'The Camy Brand',
     sector: 'The Camy Brand',
     description:
-      "Camy is Supun Group's own consumer durables brand, designed and manufactured in Sri Lanka for Sri Lankan homes, spanning household appliances and everyday electronics.",
+      'Our own brand of household appliances and electronics, made for Sri Lankan homes.',
   },
 ];
 
@@ -156,7 +156,11 @@ export const camyProducts = [
   { name: 'Water Filters', madeBy: 'Aero Star', note: 'Made in Sri Lanka' },
   { name: 'Mixer Grinders', madeBy: 'Aero Star', note: 'Made in Sri Lanka' },
   { name: 'Non-Stick Cookware', madeBy: 'New Camy Smart', note: 'Made in Sri Lanka' },
-  { name: 'Air Conditioners', madeBy: 'Air Condition and Fans manufacturing', note: 'Made in Sri Lanka' },
+  {
+    name: 'Air Conditioners',
+    madeBy: 'Air Condition and Fans manufacturing',
+    note: 'Made in Sri Lanka',
+  },
   { name: 'Fans', madeBy: 'Air Condition and Fans manufacturing', note: 'Made in Sri Lanka' },
   { name: 'TVs', madeBy: 'Air Condition and Fans manufacturing', note: 'Made in Sri Lanka' },
   { name: 'Wall Clocks', madeBy: 'Aero Star', note: 'Made in Sri Lanka' },

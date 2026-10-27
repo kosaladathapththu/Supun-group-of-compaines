@@ -29,7 +29,9 @@ const awardCompanyPaths: Record<string, string> = {
   'Supun Arcade Residency': '/companies/supun-arcade-residency',
 };
 const Label = ({ children }: { children: React.ReactNode }) => (
-  <p className="section-eyebrow text-xs font-bold uppercase tracking-[.18em] text-[#315f9f]">{children}</p>
+  <p className="section-eyebrow text-xs font-bold uppercase tracking-[.18em] text-[#315f9f]">
+    {children}
+  </p>
 );
 const Rule = () => <div className="mt-4 h-0.5 w-12 bg-[#d79a22]" />;
 
@@ -59,9 +61,16 @@ const JourneyLogo = ({ id, name }: { id: string; name: string }) =>
       alt={name}
       className="h-16 w-20 object-contain"
       loading="lazy"
-     decoding="async" />
+      decoding="async"
+    />
   ) : id === 'camy-brand' ? (
-    <img src={camyLogo} alt={name} className="h-full w-full object-contain p-2" loading="lazy"  decoding="async" />
+    <img
+      src={camyLogo}
+      alt={name}
+      className="h-full w-full object-contain p-2"
+      loading="lazy"
+      decoding="async"
+    />
   ) : (
     <CompanyLogo companyId={id} companyName={name} placement="timeline" className="h-full w-full" />
   );
@@ -145,7 +154,8 @@ const About = () => (
         src={aboutHeroSriLanka}
         alt="Colombo skyline and a modern Sri Lankan business campus at sunrise"
         className="absolute inset-0 -z-20 h-full w-full object-cover object-center"
-       decoding="async" />
+        decoding="async"
+      />
       <div className="absolute inset-0 -z-10 bg-gradient-to-r from-[#071426]/90 via-[#071426]/45 to-transparent" />
       <div className="container mx-auto flex min-h-[620px] items-center px-4 pb-16 pt-36 md:min-h-[690px] md:pt-40">
         <AnimatedSection animation="fade" duration={550} triggerOnce={false}>
@@ -185,30 +195,30 @@ const About = () => (
           <Rule />
           <div className="mt-6 space-y-4 text-sm leading-7 text-[#53647a] md:text-base">
             <ResponsiveCopy summary="Founded as Supun Traders in 1978, our family business now brings together 13 companies in manufacturing, retail, distribution and hospitality. Camy products are made in Sri Lanka and distributed island-wide.">
-            <p>
-              A family-run business since 1978, Supun Group of Companies began when Mr. Mohamed
-              Fareed founded Supun Traders in Colombo, trading household appliances and electronics
-              for Sri Lankan homes. In 1999, his son, current Chairman Mr. M.F.M. Kaleel, took over
-              the business and formalized it as the Supun Group of Companies, setting the Group on a
-              new course: from trading goods to manufacturing them.
-            </p>
-            <p>
-              Through structured growth, the Group is now involved in manufacturing, retail,
-              distribution, and hospitality, each held to the same standard of quality and Sri
-              Lankan craftsmanship. Under the Camy name, Supun manufactures SLS-certified motorcycle
-              helmets, non-stick cookware, air conditioners, and fans entirely in its own factories,
-              reaching homes across the island through Supun Super Center and a network of 250+
-              distributors.
-            </p>
-            <p>
-              Supun Arcade Residency extends the Group into hospitality with luxury serviced
-              apartments in central Colombo, alongside Area 56, its rooftop dining venue.
-            </p>
-            <p>
-              With an eye on the future and a continued focus on Sri Lankan manufacturing, the Group
-              credits its growth to two generations of family leadership and a shared commitment to
-              quality, innovation, and Sri Lankan pride, in everything it builds.
-            </p>
+              <p>
+                A family-run business since 1978, Supun Group of Companies began when Mr. Mohamed
+                Fareed founded Supun Traders in Colombo, trading household appliances and
+                electronics for Sri Lankan homes. In 1999, his son, current Chairman Mr. M.F.M.
+                Kaleel, took over the business and formalized it as the Supun Group of Companies,
+                setting the Group on a new course: from trading goods to manufacturing them.
+              </p>
+              <p>
+                Through structured growth, the Group is now involved in manufacturing, retail,
+                distribution, and hospitality, each held to the same standard of quality and Sri
+                Lankan craftsmanship. Under the Camy name, Supun manufactures SLS-certified
+                motorcycle helmets, non-stick cookware, air conditioners, and fans entirely in its
+                own factories, reaching homes across the island through Supun Super Center and a
+                network of 250+ distributors.
+              </p>
+              <p>
+                Supun Arcade Residency extends the Group into hospitality with luxury serviced
+                apartments in central Colombo, alongside Area 56, its rooftop dining venue.
+              </p>
+              <p>
+                With an eye on the future and a continued focus on Sri Lankan manufacturing, the
+                Group credits its growth to two generations of family leadership and a shared
+                commitment to quality, innovation, and Sri Lankan pride, in everything it builds.
+              </p>
             </ResponsiveCopy>
           </div>
           <div className="mt-7 grid grid-cols-3 gap-3">
@@ -227,17 +237,20 @@ const About = () => (
               alt=""
               aria-hidden="true"
               className="absolute -right-[3%] -top-[3%] h-[106%] w-[48%] object-contain opacity-45 mix-blend-multiply"
-             decoding="async" />
+              decoding="async"
+            />
             <img
               src={supunTradersHeritage}
               alt="Historic Supun Traders storefront in Colombo"
               className="absolute left-0 top-5 z-10 h-[285px] w-[67%] -rotate-2 border-[8px] border-white object-cover shadow-xl"
-             decoding="async" />
+              decoding="async"
+            />
             <img
               src={heroCorporate}
               alt="Supun Group today"
               className="absolute bottom-4 left-[27%] z-20 h-[235px] w-[62%] rotate-3 border-[8px] border-white object-cover shadow-xl"
-             decoding="async" />
+              decoding="async"
+            />
             <div className="absolute right-[2%] top-[25%] z-30 w-[34%] text-center text-[10px] font-bold uppercase leading-5 tracking-[.14em] text-[#75561f]">
               Local Roots.
               <br />
@@ -256,7 +269,9 @@ const About = () => (
               src={chairmanImage}
               alt="M.F.M. Kaleel, Chairman"
               className="max-h-[500px] w-full max-w-[430px] object-contain object-center"
-             decoding="async"  loading="lazy" />
+              decoding="async"
+              loading="lazy"
+            />
             <div className="mt-5 w-full max-w-[430px] border-t border-[#102746]/10 pt-5">
               <p className="text-xl font-medium leading-snug text-[#102746]">
                 “Innovation and creativity for a better tomorrow.”
@@ -275,34 +290,36 @@ const About = () => (
             <Rule />
             <div className="mt-7 space-y-4 text-sm leading-7 text-[#53647a]">
               <ResponsiveCopy summary="Our growth is guided by innovation, creativity and a dedicated team. We continue to invest in Sri Lankan manufacturing and create lasting value for our customers, people and partners.">
-              <p>
-                Since the company was established in 1999, Supun Group of Companies has cultivated
-                its status as a pioneer in the manufacturing and the trading business. Guided by our
-                corporate creed of “Innovation &amp; Creativity”, we have continued to challenge
-                ourselves to provide a wide range of products and services locally and
-                internationally through technology transfers, human commitment and professionalism.
-              </p>
-              <p>
-                The business environment has experienced radical changes due to the rapid
-                advancement of technology and natural environmental distresses. This has helped
-                businesses to identify new opportunities and also challenged them with greater
-                pressures for change in their approach. As a result, businesses continually change
-                their conventional approach to a more agile, lean and forward-thinking structure in
-                the perpetually changing environment.
-              </p>
-              <p>
-                We too are constantly challenged by these competitive forces, be it natural or
-                man-made, facing them positively and proactively with our dedicated team is what we
-                always strive for.
-              </p>
-              <p>
-                At Supun, I am proud to be a part of an excellent team, that has dedicated
-                themselves to the success story of a proud Sri Lankan entity. We continue to
-                challenge ourselves to seize every opportunity within our reach enabling us to
-                enrich the lives of our stakeholders in our efforts to exceed their expectations.
-                This has been the core of our success story and we strive to continue our journey in
-                nurturing business goals through various new products and services in the future.
-              </p>
+                <p>
+                  Since the company was established in 1999, Supun Group of Companies has cultivated
+                  its status as a pioneer in the manufacturing and the trading business. Guided by
+                  our corporate creed of “Innovation &amp; Creativity”, we have continued to
+                  challenge ourselves to provide a wide range of products and services locally and
+                  internationally through technology transfers, human commitment and
+                  professionalism.
+                </p>
+                <p>
+                  The business environment has experienced radical changes due to the rapid
+                  advancement of technology and natural environmental distresses. This has helped
+                  businesses to identify new opportunities and also challenged them with greater
+                  pressures for change in their approach. As a result, businesses continually change
+                  their conventional approach to a more agile, lean and forward-thinking structure
+                  in the perpetually changing environment.
+                </p>
+                <p>
+                  We too are constantly challenged by these competitive forces, be it natural or
+                  man-made, facing them positively and proactively with our dedicated team is what
+                  we always strive for.
+                </p>
+                <p>
+                  At Supun, I am proud to be a part of an excellent team, that has dedicated
+                  themselves to the success story of a proud Sri Lankan entity. We continue to
+                  challenge ourselves to seize every opportunity within our reach enabling us to
+                  enrich the lives of our stakeholders in our efforts to exceed their expectations.
+                  This has been the core of our success story and we strive to continue our journey
+                  in nurturing business goals through various new products and services in the
+                  future.
+                </p>
               </ResponsiveCopy>
             </div>
             <p className="mt-7 border-t border-[#102746]/10 pt-5 font-semibold">
@@ -434,9 +451,9 @@ const About = () => (
             </h2>
             <div className="mt-4 text-sm leading-6 text-[#637186]">
               <ResponsiveCopy summary="Transforming Sri Lankan lives through innovation, quality products and services that exceed expectations.">
-              To unleash the potential within us to transform the markets through innovation and
-              exceed people’s expectations for a better tomorrow, through the goods and services
-              which empower and enrich the lives of Sri Lankans.
+                To unleash the potential within us to transform the markets through innovation and
+                exceed people’s expectations for a better tomorrow, through the goods and services
+                which empower and enrich the lives of Sri Lankans.
               </ResponsiveCopy>
             </div>
           </article>
@@ -447,10 +464,10 @@ const About = () => (
             </h2>
             <div className="mt-4 text-sm leading-6 text-[#637186]">
               <ResponsiveCopy summary="Creating useful products and services through superior thinking, sustainable practices and a smaller carbon footprint.">
-              To harness superior thinking in the creation of products and services that
-              functionally enhance the livelihood of people, while remaining cautious in reducing
-              our carbon footprint. We integrate sustainable practices across our operations while
-              delivering exceptional value to our stakeholders.
+                To harness superior thinking in the creation of products and services that
+                functionally enhance the livelihood of people, while remaining cautious in reducing
+                our carbon footprint. We integrate sustainable practices across our operations while
+                delivering exceptional value to our stakeholders.
               </ResponsiveCopy>
             </div>
           </article>
@@ -461,7 +478,8 @@ const About = () => (
             alt="A Camy technician brazing copper tubing on an air-conditioning unit"
             className="absolute inset-0 h-full w-full origin-[55%_35%] scale-[1.28] object-cover object-[50%_25%]"
             loading="lazy"
-           decoding="async" />
+            decoding="async"
+          />
           <div className="absolute inset-0 bg-[linear-gradient(0deg,rgba(6,24,40,.92)_0%,rgba(6,24,40,.40)_18%,transparent_40%)]" />
           <div className="absolute inset-x-0 bottom-0 p-6 text-white sm:p-7">
             <p className="text-[10px] font-bold uppercase tracking-[.22em] text-[#efbd55]">
@@ -623,7 +641,8 @@ const About = () => (
           src={industryBanner}
           alt="Illustration of a Sri Lankan manufacturing and distribution facility"
           className="absolute inset-0 -z-20 h-full w-full object-cover"
-         decoding="async" />
+          decoding="async"
+        />
         <div className="absolute inset-0 -z-10 bg-[linear-gradient(90deg,rgba(4,16,28,0.9)_0%,rgba(4,16,28,0.76)_52%,rgba(4,16,28,0.25)_100%)]" />
         <div className="flex flex-col items-start justify-between gap-7 px-7 sm:px-10 md:flex-row md:items-center lg:px-14">
           <h2 className="max-w-2xl text-4xl font-semibold normal-case leading-tight tracking-[-.04em] text-white [text-shadow:0_2px_8px_rgba(0,0,0,0.6)] md:text-5xl">

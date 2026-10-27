@@ -124,7 +124,8 @@ const CompanyDetail = () => {
           src={heroImage}
           alt={`${company.shortName} business`}
           className="absolute inset-0 -z-20 h-full w-full object-cover"
-         decoding="async" />
+          decoding="async"
+        />
         <div className="absolute inset-0 -z-10 bg-gradient-to-r from-[#041426]/95 via-[#071d37]/84 to-[#071d37]/62" />
         <div className="absolute inset-0 -z-10 bg-gradient-to-t from-[#041426]/55 via-transparent to-[#041426]/15" />
         <div className="container mx-auto px-4">

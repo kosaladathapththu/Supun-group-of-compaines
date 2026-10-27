@@ -117,7 +117,9 @@ export default function NewsDetail() {
                 },
               },
               mainEntityOfPage: `${SITE_URL}${canonicalPath}`,
-              ...(image ? { image: [image.startsWith('http') ? image : `${SITE_URL}${image}`] } : {}),
+              ...(image
+                ? { image: [image.startsWith('http') ? image : `${SITE_URL}${image}`] }
+                : {}),
             },
             {
               '@type': 'BreadcrumbList',
@@ -176,7 +178,13 @@ export default function NewsDetail() {
       {image && (
         <section className="px-5 pt-10 md:px-8 md:pt-14">
           <div className="mx-auto max-w-6xl overflow-hidden rounded-[2rem] bg-[#dfe6ed]">
-            <img src={image} alt={article.title} className="max-h-[680px] w-full object-cover"  decoding="async"  loading="lazy" />
+            <img
+              src={image}
+              alt={article.title}
+              className="mobile-image-full max-h-[680px] w-full object-cover"
+              decoding="async"
+              loading="lazy"
+            />
           </div>
         </section>
       )}

@@ -1146,4 +1146,71 @@ All colors MUST be HSL.
     object-fit: contain;
     transform: none;
   }
+  .public-content .camy-hero {
+    gap: 20px;
+  }
+  .public-content .camy-visual {
+    min-height: 0;
+    border-radius: 20px;
+  }
+  .public-content .camy-visual > img {
+    position: relative;
+    height: 260px;
+    object-fit: contain;
+  }
+  .public-content .camy-proof {
+    position: relative;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .public-content .camy-proof-item {
+    padding: 14px;
+  }
+  .public-content .camy-proof-title {
+    font-size: 12px;
+  }
+  .public-content .camy-proof-text,
+  .public-content .camy-proof-icon {
+    display: none;
+  }
+  .public-content .career-stats {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .public-content .career-stat {
+    padding: 18px;
+  }
+  .public-content .career-stat strong {
+    margin-top: 12px;
+    font-size: 2rem;
+  }
+  .public-content .why-card {
+    min-height: 0;
+    transform: none;
+  }
+  .public-content .why-photo {
+    position: relative;
+    height: 240px;
+    object-fit: contain;
+    transform: none;
+  }
+  .public-content .why-content {
+    position: relative;
+    padding: 20px;
+  }
+  .public-content .why-shade,
+  .public-content .why-reveal-label {
+    display: none;
+  }
+  .public-content .why-reveal {
+    max-height: none;
+    opacity: 1;
+    transform: none;
+  }
+  .public-content .company-directory-photo {
+    aspect-ratio: 4 / 3;
+    background: #eef1f3;
+  }
+  .public-content .company-directory-photo > img {
+    object-fit: contain;
+    transform: none;
+  }
 }

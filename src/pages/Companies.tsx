@@ -100,7 +100,8 @@ const Companies = () => {
           src={heroImage}
           alt="Colombo skyline representing Supun Group businesses"
           className="absolute inset-0 -z-20 h-full w-full object-cover object-center"
-         decoding="async" />
+          decoding="async"
+        />
         <div className="absolute inset-0 -z-10 bg-gradient-to-r from-[#071d37]/95 via-[#0b2747]/72 to-[#071d37]/35" />
         <div className="container mx-auto px-4">
           <div className="max-w-3xl">
@@ -173,7 +174,7 @@ const Companies = () => {
                   className="group flex h-full flex-col cursor-pointer overflow-hidden rounded-2xl border border-[#0b2747]/10 bg-white shadow-[0_10px_32px_rgba(11,39,71,.07)] transition duration-300 hover:-translate-y-0.5 hover:border-[#315f9f]/25 hover:shadow-[0_18px_45px_rgba(11,39,71,.12)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#315f9f] focus-visible:ring-offset-4"
                 >
                   <div className="flex h-full flex-col">
-                    <div className="relative aspect-[16/9] overflow-hidden">
+                    <div className="company-directory-photo relative aspect-[16/9] overflow-hidden">
                       <img
                         src={companyImages[company.id] || manufacturingImage}
                         alt={`${company.shortName} operations`}
