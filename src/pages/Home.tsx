@@ -9,7 +9,7 @@ import { sectorHighlights, siteStats } from '@/data/siteContent';
 import heroVideo from '@/assets/supun-group-hero-optimized.mp4';
 import heroMobileVideo from '@/assets/supun-group-hero-mobile.mp4';
 import heroPoster from '@/assets/optimized/hero-poster.jpg';
-import manufacturingImage from '@/assets/optimized/camy-cookware-production.jpg';
+import manufacturingImage from '@/assets/optimized/camy-cookware-production-focus-v2.jpg';
 import { CertificationSection } from '@/components/CertificationSection';
 import camyRedLogo from '@/assets/camy-logo-red-transparent.png';
 
@@ -372,24 +372,23 @@ const Home = () => {
         <div className="container relative z-10 mx-auto px-4">
           <div className="grid gap-9 lg:grid-cols-[0.82fr_1.18fr] lg:items-center lg:gap-14">
             <AnimatedSection animation="slide-right" duration={900} triggerOnce={false}>
-              <div className="home-production-photo relative min-h-[480px] overflow-hidden rounded-[1.5rem] bg-[#10233f] shadow-[0_24px_60px_rgba(16,35,63,.18)] sm:min-h-[570px]">
+              <div className="home-production-card overflow-hidden rounded-[1.5rem] bg-[#10233f] shadow-[0_24px_60px_rgba(16,35,63,.18)]">
                 <img
                   src={manufacturingImage}
                   alt="A Camy factory employee handling cookware on the production line"
-                  className="absolute inset-0 h-full w-full origin-[45%_55%] scale-[1.15] object-cover object-[50%_60%]"
+                  className="block h-auto w-full"
                   loading="lazy"
                   decoding="async"
                 />
-                <div className="absolute inset-0 bg-[linear-gradient(0deg,rgba(8,26,50,.95)_0%,rgba(8,26,50,.65)_24%,transparent_55%)]" />
-                <div className="absolute inset-x-0 bottom-0 p-7 text-white sm:p-9">
+                <div className="p-5 text-white sm:p-6">
                   <p className="text-xs font-semibold uppercase tracking-[0.22em] text-[#efbd55]">
                     Built in Sri Lanka
                   </p>
-                  <h3 className="mt-3 max-w-md text-3xl font-semibold normal-case leading-tight tracking-[-0.03em] sm:text-4xl">
+                  <h3 className="mt-2 max-w-md text-2xl font-semibold normal-case leading-tight tracking-[-0.03em] sm:text-3xl">
                     Local capability. Lasting value.
                   </h3>
-                  <div className="mt-6 flex items-center gap-5 border-t border-white/25 pt-5">
-                    <strong className="text-4xl font-semibold tracking-[-0.05em]">48</strong>
+                  <div className="mt-4 flex items-center gap-4 border-t border-white/25 pt-4">
+                    <strong className="text-3xl font-semibold tracking-[-0.05em]">48</strong>
                     <span className="max-w-[9rem] text-xs font-semibold uppercase leading-relaxed tracking-[0.14em] text-white/70">
                       Years of trusted enterprise
                     </span>

@@ -10,9 +10,8 @@ import supunTradersHeritage from '@/assets/optimized/supun-traders-heritage.jpg'
 import manufacturingImage from '@/assets/optimized/camy-factory-technician.jpg';
 import industryBanner from '@/assets/optimized/sri-lanka-industry-banner.jpg';
 import sriLankaMap from '@/assets/optimized/sri-lanka-watercolor-map.webp';
-import coreValuesTeam from '@/assets/optimized/camy-production-supervisor-team.jpg';
 import camyLogo from '@/assets/camy-logo-red-transparent.png';
-import { awards, coreValues, journey, leadership } from '@/data/siteContent';
+import { awards, journey, leadership } from '@/data/siteContent';
 import { CompanyLogo } from '@/components/CompanyLogo';
 import { ResponsiveCopy } from '@/components/ResponsiveCopy';
 
@@ -264,14 +263,16 @@ const About = () => (
     <section id="chairman" className="scroll-mt-24 bg-white">
       <div className="container mx-auto grid lg:grid-cols-[.72fr_1.28fr] lg:items-stretch">
         <AnimatedSection animation="fade" duration={500} triggerOnce={false}>
-          <div className="flex h-full flex-col items-center justify-center bg-white px-6 py-12 text-center lg:px-10">
-            <img
-              src={chairmanImage}
-              alt="M.F.M. Kaleel, Chairman"
-              className="max-h-[500px] w-full max-w-[430px] object-contain object-center"
-              decoding="async"
-              loading="lazy"
-            />
+          <div className="flex h-full flex-col items-center justify-center bg-white px-6 py-5 text-center sm:py-12 lg:px-10">
+            <div className="chairman-portrait w-full max-w-[430px] overflow-hidden">
+              <img
+                src={chairmanImage}
+                alt="M.F.M. Kaleel, Chairman"
+                className="max-h-[500px] w-full max-w-[430px] object-contain object-center"
+                decoding="async"
+                loading="lazy"
+              />
+            </div>
             <div className="mt-5 w-full max-w-[430px] border-t border-[#102746]/10 pt-5">
               <p className="text-xl font-medium leading-snug text-[#102746]">
                 “Innovation and creativity for a better tomorrow.”
@@ -441,60 +442,6 @@ const About = () => (
       </div>
     </section>
 
-    <section id="direction" className="scroll-mt-24 bg-white py-12 md:py-16">
-      <div className="container mx-auto grid items-stretch gap-8 px-4 lg:grid-cols-[1.6fr_1fr] lg:gap-12">
-        <div className="grid gap-8 sm:grid-cols-2 sm:gap-10">
-          <article className="border-t border-border py-7">
-            <Label>Vision</Label>
-            <h2 className="mt-3 text-2xl font-semibold normal-case">
-              Innovate. Unleash and Excel.
-            </h2>
-            <div className="mt-4 text-sm leading-6 text-[#637186]">
-              <ResponsiveCopy summary="Transforming Sri Lankan lives through innovation, quality products and services that exceed expectations.">
-                To unleash the potential within us to transform the markets through innovation and
-                exceed people’s expectations for a better tomorrow, through the goods and services
-                which empower and enrich the lives of Sri Lankans.
-              </ResponsiveCopy>
-            </div>
-          </article>
-          <article className="border-t border-border py-7">
-            <Label>Mission</Label>
-            <h2 className="mt-3 text-2xl font-semibold normal-case">
-              Superior thinking. Sustainable value.
-            </h2>
-            <div className="mt-4 text-sm leading-6 text-[#637186]">
-              <ResponsiveCopy summary="Creating useful products and services through superior thinking, sustainable practices and a smaller carbon footprint.">
-                To harness superior thinking in the creation of products and services that
-                functionally enhance the livelihood of people, while remaining cautious in reducing
-                our carbon footprint. We integrate sustainable practices across our operations while
-                delivering exceptional value to our stakeholders.
-              </ResponsiveCopy>
-            </div>
-          </article>
-        </div>
-        <div className="about-welding-photo relative min-h-[400px] overflow-hidden rounded-2xl sm:min-h-[440px]">
-          <img
-            src={manufacturingImage}
-            alt="A Camy technician brazing copper tubing on an air-conditioning unit"
-            className="absolute inset-0 h-full w-full origin-[55%_35%] scale-[1.28] object-cover object-[50%_25%]"
-            loading="lazy"
-            decoding="async"
-          />
-          <div className="absolute inset-0 bg-[linear-gradient(0deg,rgba(6,24,40,.92)_0%,rgba(6,24,40,.40)_18%,transparent_40%)]" />
-          <div className="absolute inset-x-0 bottom-0 p-6 text-white sm:p-7">
-            <p className="text-[10px] font-bold uppercase tracking-[.22em] text-[#efbd55]">
-              Purpose in practice
-            </p>
-            <h3 className="mt-2 text-2xl font-semibold normal-case leading-[1.15] tracking-[-.03em] sm:text-3xl">
-              Sustainable solutions.
-              <br />
-              For generations.
-            </h3>
-          </div>
-        </div>
-      </div>
-    </section>
-
     <section id="journey" className="scroll-mt-24 bg-white py-14 md:py-16">
       <div className="container mx-auto px-4">
         <Label>Our journey</Label>
@@ -538,53 +485,61 @@ const About = () => (
       </div>
     </section>
 
-    <section className="bg-white py-14 md:py-20">
-      <div className="container mx-auto grid gap-10 px-4 lg:grid-cols-[.82fr_1.18fr] lg:items-center lg:gap-14">
-        <div className="about-team-photo relative min-h-[520px] overflow-hidden rounded-[1.75rem] bg-[#102746] shadow-[0_24px_60px_rgba(16,39,70,.16)] sm:min-h-[620px]">
+    <section id="direction" className="scroll-mt-24 bg-white py-12 md:py-16">
+      <div className="container mx-auto grid items-stretch gap-8 px-4 lg:grid-cols-[1.6fr_1fr] lg:gap-12">
+        <div className="grid gap-4 sm:grid-cols-2 sm:gap-5">
+          <article className="rounded-2xl border border-[#e6e1d5] bg-[#faf9f5] p-6 sm:p-7">
+            <h2 className="text-3xl font-semibold normal-case tracking-[-.03em] text-[#102746]">
+              Vision
+            </h2>
+            <div className="my-5 h-0.5 w-10 bg-[#c39a42]" aria-hidden="true" />
+            <h3 className="text-xl font-semibold normal-case leading-tight text-[#354d66]">
+              Innovate. Unleash and Excel.
+            </h3>
+            <div className="mt-4 text-sm leading-6 text-[#637186]">
+              <ResponsiveCopy summary="Transforming Sri Lankan lives through innovation, quality products and services that exceed expectations.">
+                To unleash the potential within us to transform the markets through innovation and
+                exceed people’s expectations for a better tomorrow, through the goods and services
+                which empower and enrich the lives of Sri Lankans.
+              </ResponsiveCopy>
+            </div>
+          </article>
+          <article className="rounded-2xl border border-[#e6e1d5] bg-[#faf9f5] p-6 sm:p-7">
+            <h2 className="text-3xl font-semibold normal-case tracking-[-.03em] text-[#102746]">
+              Mission
+            </h2>
+            <div className="my-5 h-0.5 w-10 bg-[#c39a42]" aria-hidden="true" />
+            <h3 className="text-xl font-semibold normal-case leading-tight text-[#354d66]">
+              Superior thinking. Sustainable value.
+            </h3>
+            <div className="mt-4 text-sm leading-6 text-[#637186]">
+              <ResponsiveCopy summary="Creating useful products and services through superior thinking, sustainable practices and a smaller carbon footprint.">
+                To harness superior thinking in the creation of products and services that
+                functionally enhance the livelihood of people, while remaining cautious in reducing
+                our carbon footprint. We integrate sustainable practices across our operations while
+                delivering exceptional value to our stakeholders.
+              </ResponsiveCopy>
+            </div>
+          </article>
+        </div>
+        <div className="about-welding-photo relative min-h-[400px] overflow-hidden rounded-2xl sm:min-h-[440px]">
           <img
-            src={coreValuesTeam}
-            alt="A supervisor and two foreground workers assembling Camy air-conditioning units"
-            className="absolute inset-0 h-full w-full object-cover object-top"
+            src={manufacturingImage}
+            alt="A Camy technician brazing copper tubing on an air-conditioning unit"
+            className="absolute inset-0 h-full w-full origin-[55%_35%] scale-[1.28] object-cover object-[50%_25%]"
             loading="lazy"
             decoding="async"
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-[#071b2d] via-[#071b2d]/15 to-transparent" />
-          <div className="absolute inset-x-0 bottom-0 p-7 text-white sm:p-9">
-            <p className="text-xs font-bold uppercase tracking-[.22em] text-[#efbd55]">
-              Values in action
+          <div className="absolute inset-0 bg-[linear-gradient(0deg,rgba(6,24,40,.92)_0%,rgba(6,24,40,.40)_18%,transparent_40%)]" />
+          <div className="absolute inset-x-0 bottom-0 p-6 text-white sm:p-7">
+            <p className="text-[10px] font-bold uppercase tracking-[.22em] text-[#efbd55]">
+              Purpose in practice
             </p>
-            <h2 className="mt-3 text-3xl font-semibold normal-case leading-tight tracking-[-.03em] sm:text-4xl">
-              Built with purpose.
+            <h3 className="mt-2 text-2xl font-semibold normal-case leading-[1.15] tracking-[-.03em] sm:text-3xl">
+              Sustainable solutions.
               <br />
-              Led by people.
-            </h2>
-            <div className="mt-6 flex items-center gap-5 border-t border-white/25 pt-5">
-              <p className="max-w-[10rem] text-[10px] font-semibold uppercase leading-5 tracking-[.16em] text-white/65">
-                Principles that guide our Group
-              </p>
-            </div>
-          </div>
-        </div>
-        <div>
-          <Label>Core values</Label>
-          <h2 className="mt-4 max-w-2xl text-4xl font-semibold normal-case leading-[1.05] tracking-[-.04em] md:text-5xl">
-            What guides us.
-          </h2>
-          <p className="mt-5 max-w-xl text-base leading-7 text-[#637186]">
-            The principles behind how we build, serve and grow across every company in the Group.
-          </p>
-          <div className="mt-8 grid gap-3 sm:grid-cols-2">
-            {coreValues.map((value) => {
-              return (
-                <article
-                  key={value.title}
-                  className="group rounded-xl border border-[#102746]/10 bg-[#f7f9fc] p-5 transition duration-300 hover:-translate-y-1 hover:border-[#315f9f]/35 hover:shadow-[0_14px_30px_rgba(16,39,70,.08)]"
-                >
-                  <h3 className="text-xl font-semibold normal-case">{value.title}</h3>
-                  <p className="mt-2 text-sm leading-6 text-[#657286]">{value.description}</p>
-                </article>
-              );
-            })}
+              For generations.
+            </h3>
           </div>
         </div>
       </div>

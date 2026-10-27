@@ -7,7 +7,7 @@ export const companyLogos: Record<string, string> = {
   'supun-arcade-residency': '/logos/supun-arcade-residency.png',
   'area-56': '/logos/area-56.png',
   'supun-aerosoft': '/logos/supun-aerosoft.png',
-  'aerostar-home-appliances': '/logos/aerostar-home-appliances.png',
+  'aerostar-home-appliances': '/logos/aerostar-transparent.png',
   'camy-smart': '/logos/camy-smart.png',
   rodsons: '/logos/rodsons.png',
   'new-camy-smart': '/logos/new-camy-smart.png',

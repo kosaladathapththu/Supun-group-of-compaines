@@ -1213,4 +1213,23 @@ All colors MUST be HSL.
     object-fit: contain;
     transform: none;
   }
+  .public-content .company-logo-directory h2 {
+    font-size: 1rem;
+    line-height: 1.3;
+  }
+}
+
+@media (max-width: 639px) {
+  .public-content #chairman::before {
+    content: '';
+    display: block;
+    width: 112px;
+    height: 2px;
+    margin: 4px auto 20px;
+    background: linear-gradient(to right, transparent, #c39a42, transparent);
+  }
+  .chairman-portrait > img {
+    max-height: none;
+    margin-top: -35%;
+  }
 }

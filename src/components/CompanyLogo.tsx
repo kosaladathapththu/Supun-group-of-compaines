@@ -20,7 +20,6 @@ const artwork: Record<
   'supun-super-center': { width: 650, height: 225, x: 215, y: 427, canvasWidth: 1080 },
   'supun-arcade-residency': { width: 500, height: 190, x: 98, y: 178, canvasWidth: 721 },
   'camy-global': { width: 550, height: 190, x: 248, y: 437, canvasWidth: 1080 },
-  'aerostar-home-appliances': { width: 350, height: 280, x: 365, y: 400, canvasWidth: 1080 },
   'camy-smart': { width: 240, height: 155, x: 238, y: 210, canvasWidth: 717 },
   rodsons: { width: 340, height: 220, x: 362, y: 402, canvasWidth: 1080 },
 };
@@ -55,19 +54,19 @@ const sizes: Record<Placement, Record<string, [number, number]>> = {
     'camy-global': [260, 110],
   },
   listing: {
-    ecotemp: [210, 80],
-    'supun-traders': [115, 88],
-    'supun-traders-distributors': [115, 88],
-    'supun-super-center': [205, 78],
-    'supun-arcade-residency': [210, 83],
-    'area-56': [195, 78],
-    'supun-aerosoft': [175, 85],
-    'aerostar-home-appliances': [105, 86],
-    'camy-smart': [135, 85],
-    rodsons: [135, 85],
-    'new-camy-smart': [185, 82],
-    'fuji-industries': [175, 86],
-    'camy-global': [210, 80],
+    ecotemp: [315, 128],
+    'supun-traders': [173, 141],
+    'supun-traders-distributors': [173, 141],
+    'supun-super-center': [308, 125],
+    'supun-arcade-residency': [315, 133],
+    'area-56': [293, 125],
+    'supun-aerosoft': [263, 136],
+    'aerostar-home-appliances': [158, 138],
+    'camy-smart': [203, 136],
+    rodsons: [203, 136],
+    'new-camy-smart': [278, 131],
+    'fuji-industries': [263, 138],
+    'camy-global': [315, 128],
   },
   detail: {
     ecotemp: [280, 115],
@@ -93,17 +92,24 @@ export const CompanyLogo = ({
   className = '',
   imageClassName = '',
 }: CompanyLogoProps) => {
-  if (companyId === 'fuji-industries') return null;
+  if (companyId === 'fuji-industries' && placement !== 'home' && placement !== 'listing')
+    return null;
 
   const sourceId = companyId === 'supun-traders-distributors' ? 'supun-traders' : companyId;
-  const logo = sourceId === 'new-camy-smart' ? camyRedLogo : getCompanyLogo(sourceId);
-  const bounds = artwork[sourceId];
+  const logo =
+    sourceId === 'new-camy-smart' || sourceId === 'fuji-industries'
+      ? camyRedLogo
+      : getCompanyLogo(sourceId);
+  const bounds =
+    placement === 'listing' && sourceId === 'supun-aerosoft'
+      ? { width: 730, height: 280, x: 174, y: 402, canvasWidth: 1080 }
+      : artwork[sourceId];
   const [maxWidth, maxHeight] = sizes[placement][companyId] || [180, 90];
   const ratio = bounds ? bounds.width / bounds.height : undefined;
   const width = ratio ? Math.min(maxWidth, maxHeight * ratio) : maxWidth;
   return (
     <div
-      className={`${className.split(/\s+/).includes('absolute') ? 'absolute' : 'relative'} flex items-center justify-center overflow-hidden bg-white ${className}`}
+      className={`${className.split(/\s+/).includes('absolute') ? 'absolute' : 'relative'} flex items-center justify-center overflow-hidden ${sourceId === 'aerostar-home-appliances' ? 'bg-transparent' : 'bg-white'} ${className}`}
     >
       {logo ? (
         bounds ? (
@@ -130,7 +136,12 @@ export const CompanyLogo = ({
             alt={`${companyName} logo`}
             loading="lazy"
             className={`block object-contain ${imageClassName}`}
-            style={{ width: maxWidth, maxWidth: '100%', maxHeight, height: 'auto' }}
+            style={{
+              width: maxWidth,
+              maxWidth: '100%',
+              maxHeight: `min(${maxHeight}px, 100%)`,
+              height: 'auto',
+            }}
           />
         )
       ) : (
