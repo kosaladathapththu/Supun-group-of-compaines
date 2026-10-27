@@ -177,7 +177,7 @@ const CamyProducts = () => {
               src={camyRedLogo}
               alt="Camy"
               className="mb-7 h-32 w-64 object-contain object-left md:h-40 md:w-80"
-            />
+             decoding="async"  loading="lazy" />
             <p className="text-xs font-bold uppercase tracking-[.22em] text-[#ed1c24]">
               A Supun Group brand
             </p>
@@ -210,7 +210,7 @@ const CamyProducts = () => {
             </div>
           </div>
           <div className="camy-visual">
-            <img src={helmetImage} alt="Camy helmet manufacturing in Sri Lanka" />
+            <img src={helmetImage} alt="Camy helmet manufacturing in Sri Lanka"  decoding="async"  loading="lazy" />
             <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent" />
             <div className="camy-proof">
               <div className="camy-proof-item">
@@ -257,9 +257,9 @@ const CamyProducts = () => {
                   className="camy-media"
                   aria-label={`Shop ${product.name} at Anything at Supun`}
                 >
-                  <img src={product.image} alt={`${product.name} by Camy`} loading="lazy" />
+                  <img src={product.image} alt={`${product.name} by Camy`} loading="lazy"  decoding="async" />
                   <span className="camy-hover-brand" aria-hidden="true">
-                    <img src={camyBlackLogo} alt="" />
+                    <img src={camyBlackLogo} alt=""  decoding="async"  loading="lazy" />
                     <strong>CAMY</strong>
                   </span>
                 </a>
@@ -312,7 +312,7 @@ const CamyProducts = () => {
                   src={anythingAtSupunLogo}
                   alt="Anything at Supun"
                   className="h-14 w-auto object-contain"
-                />
+                 decoding="async"  loading="lazy" />
               </span>
               <div>
                 <p className="text-xs font-bold uppercase tracking-[.2em] text-[#ed1c24]">

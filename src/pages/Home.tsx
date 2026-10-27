@@ -183,7 +183,7 @@ const Home = () => {
           fetchPriority="high"
           className={`absolute inset-0 h-full w-full object-cover object-[62%_center] transition-opacity duration-500 ${heroVideoReady ? 'opacity-0' : 'opacity-100'}`}
           aria-hidden="true"
-        />
+         decoding="async" />
         {shouldPlayHeroVideo && (
           <video
             ref={heroVideoRef}
@@ -378,7 +378,7 @@ const Home = () => {
                   alt="A Camy factory employee handling cookware on the production line"
                   className="absolute inset-0 h-full w-full origin-[45%_55%] scale-[1.15] object-cover object-[50%_60%]"
                   loading="lazy"
-                />
+                 decoding="async" />
                 <div className="absolute inset-0 bg-[linear-gradient(0deg,rgba(8,26,50,.95)_0%,rgba(8,26,50,.65)_24%,transparent_55%)]" />
                 <div className="absolute inset-x-0 bottom-0 p-7 text-white sm:p-9">
                   <p className="text-xs font-semibold uppercase tracking-[0.22em] text-[#efbd55]">

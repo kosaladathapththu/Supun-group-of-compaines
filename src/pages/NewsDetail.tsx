@@ -176,7 +176,7 @@ export default function NewsDetail() {
       {image && (
         <section className="px-5 pt-10 md:px-8 md:pt-14">
           <div className="mx-auto max-w-6xl overflow-hidden rounded-[2rem] bg-[#dfe6ed]">
-            <img src={image} alt={article.title} className="max-h-[680px] w-full object-cover" />
+            <img src={image} alt={article.title} className="max-h-[680px] w-full object-cover"  decoding="async"  loading="lazy" />
           </div>
         </section>
       )}

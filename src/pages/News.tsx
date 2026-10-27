@@ -97,7 +97,7 @@ export default function News() {
           src={newsHeroEditorial}
           alt="Corporate editorial workspace overlooking Colombo"
           className="absolute inset-0 -z-20 h-full w-full object-cover object-center"
-        />
+         decoding="async" />
         <div className="absolute inset-0 -z-10 bg-[linear-gradient(90deg,rgba(13,12,10,.94)_0%,rgba(20,18,15,.82)_42%,rgba(24,21,17,.30)_72%,rgba(20,18,15,.18)_100%)]" />
         <div className="absolute inset-0 -z-10 bg-[linear-gradient(180deg,rgba(10,9,8,.20)_0%,rgba(10,9,8,.12)_48%,rgba(10,9,8,.72)_100%)]" />
         <div className="mx-auto w-full max-w-7xl">
@@ -152,7 +152,7 @@ export default function News() {
                       src={item.image}
                       alt={`${item.awardedTo} news`}
                       className="mt-7 h-28 w-full rounded-lg object-cover transition duration-500 group-hover:scale-[1.03]"
-                    />
+                     decoding="async"  loading="lazy" />
                   </Link>
                 );
               })}
@@ -167,7 +167,7 @@ export default function News() {
                   src={awardNewsStories[0].image}
                   alt={`${awardNewsStories[0].awardedTo} featured news`}
                   className="h-full w-full object-cover transition duration-700 group-hover:scale-[1.025]"
-                />
+                 decoding="async"  loading="lazy" />
                 <div className="absolute inset-x-0 bottom-0 h-40 bg-gradient-to-t from-black/70 to-transparent" />
                 <div className="absolute bottom-5 left-5 rounded-xl bg-white/95 p-3 shadow-lg backdrop-blur">
                   <AwardIssuerMark issuer={awardNewsStories[0].givenBy} certification />
@@ -197,7 +197,7 @@ export default function News() {
                         src={item.image}
                         alt={`${item.awardedTo} news`}
                         className="h-full w-full object-cover transition duration-500 group-hover:scale-[1.04]"
-                      />
+                       decoding="async"  loading="lazy" />
                       <div className="absolute inset-0 bg-gradient-to-t from-[#10233f]/80 to-transparent" />
                       <span className="absolute bottom-4 left-4 rounded-full bg-[#e53d63] px-3 py-1.5 text-[9px] font-bold uppercase tracking-[.14em]">
                         Latest update
@@ -264,7 +264,7 @@ export default function News() {
                           src={getArticleImage(featured)}
                           alt={featured.title}
                           className="h-full w-full object-cover transition duration-700 group-hover:scale-[1.02]"
-                        />
+                         decoding="async"  loading="lazy" />
                       ) : (
                         <div className="flex h-full items-center justify-center">
                           <Newspaper size={52} className="text-[#315f9f]/35" />
@@ -307,7 +307,7 @@ export default function News() {
                               src={getArticleImage(article)}
                               alt={article.title}
                               className="h-full w-full object-cover"
-                            />
+                             decoding="async"  loading="lazy" />
                           ) : (
                             <div className="flex h-full items-center justify-center">
                               <Newspaper className="text-[#315f9f]/35" size={38} />

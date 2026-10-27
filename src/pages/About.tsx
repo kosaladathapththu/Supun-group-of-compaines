@@ -59,9 +59,9 @@ const JourneyLogo = ({ id, name }: { id: string; name: string }) =>
       alt={name}
       className="h-16 w-20 object-contain"
       loading="lazy"
-    />
+     decoding="async" />
   ) : id === 'camy-brand' ? (
-    <img src={camyLogo} alt={name} className="h-full w-full object-contain p-2" loading="lazy" />
+    <img src={camyLogo} alt={name} className="h-full w-full object-contain p-2" loading="lazy"  decoding="async" />
   ) : (
     <CompanyLogo companyId={id} companyName={name} placement="timeline" className="h-full w-full" />
   );
@@ -145,7 +145,7 @@ const About = () => (
         src={aboutHeroSriLanka}
         alt="Colombo skyline and a modern Sri Lankan business campus at sunrise"
         className="absolute inset-0 -z-20 h-full w-full object-cover object-center"
-      />
+       decoding="async" />
       <div className="absolute inset-0 -z-10 bg-gradient-to-r from-[#071426]/90 via-[#071426]/45 to-transparent" />
       <div className="container mx-auto flex min-h-[620px] items-center px-4 pb-16 pt-36 md:min-h-[690px] md:pt-40">
         <AnimatedSection animation="fade" duration={550} triggerOnce={false}>
@@ -227,17 +227,17 @@ const About = () => (
               alt=""
               aria-hidden="true"
               className="absolute -right-[3%] -top-[3%] h-[106%] w-[48%] object-contain opacity-45 mix-blend-multiply"
-            />
+             decoding="async" />
             <img
               src={supunTradersHeritage}
               alt="Historic Supun Traders storefront in Colombo"
               className="absolute left-0 top-5 z-10 h-[285px] w-[67%] -rotate-2 border-[8px] border-white object-cover shadow-xl"
-            />
+             decoding="async" />
             <img
               src={heroCorporate}
               alt="Supun Group today"
               className="absolute bottom-4 left-[27%] z-20 h-[235px] w-[62%] rotate-3 border-[8px] border-white object-cover shadow-xl"
-            />
+             decoding="async" />
             <div className="absolute right-[2%] top-[25%] z-30 w-[34%] text-center text-[10px] font-bold uppercase leading-5 tracking-[.14em] text-[#75561f]">
               Local Roots.
               <br />
@@ -256,7 +256,7 @@ const About = () => (
               src={chairmanImage}
               alt="M.F.M. Kaleel, Chairman"
               className="max-h-[500px] w-full max-w-[430px] object-contain object-center"
-            />
+             decoding="async"  loading="lazy" />
             <div className="mt-5 w-full max-w-[430px] border-t border-[#102746]/10 pt-5">
               <p className="text-xl font-medium leading-snug text-[#102746]">
                 “Innovation and creativity for a better tomorrow.”
@@ -432,27 +432,27 @@ const About = () => (
             <h2 className="mt-3 text-2xl font-semibold normal-case">
               Innovate. Unleash and Excel.
             </h2>
-            <p className="mt-4 text-sm leading-6 text-[#637186]">
+            <div className="mt-4 text-sm leading-6 text-[#637186]">
               <ResponsiveCopy summary="Transforming Sri Lankan lives through innovation, quality products and services that exceed expectations.">
               To unleash the potential within us to transform the markets through innovation and
               exceed people’s expectations for a better tomorrow, through the goods and services
               which empower and enrich the lives of Sri Lankans.
               </ResponsiveCopy>
-            </p>
+            </div>
           </article>
           <article className="border-t border-border py-7">
             <Label>Mission</Label>
             <h2 className="mt-3 text-2xl font-semibold normal-case">
               Superior thinking. Sustainable value.
             </h2>
-            <p className="mt-4 text-sm leading-6 text-[#637186]">
+            <div className="mt-4 text-sm leading-6 text-[#637186]">
               <ResponsiveCopy summary="Creating useful products and services through superior thinking, sustainable practices and a smaller carbon footprint.">
               To harness superior thinking in the creation of products and services that
               functionally enhance the livelihood of people, while remaining cautious in reducing
               our carbon footprint. We integrate sustainable practices across our operations while
               delivering exceptional value to our stakeholders.
               </ResponsiveCopy>
-            </p>
+            </div>
           </article>
         </div>
         <div className="about-welding-photo relative min-h-[400px] overflow-hidden rounded-2xl sm:min-h-[440px]">
@@ -461,7 +461,7 @@ const About = () => (
             alt="A Camy technician brazing copper tubing on an air-conditioning unit"
             className="absolute inset-0 h-full w-full origin-[55%_35%] scale-[1.28] object-cover object-[50%_25%]"
             loading="lazy"
-          />
+           decoding="async" />
           <div className="absolute inset-0 bg-[linear-gradient(0deg,rgba(6,24,40,.92)_0%,rgba(6,24,40,.40)_18%,transparent_40%)]" />
           <div className="absolute inset-x-0 bottom-0 p-6 text-white sm:p-7">
             <p className="text-[10px] font-bold uppercase tracking-[.22em] text-[#efbd55]">
@@ -623,7 +623,7 @@ const About = () => (
           src={industryBanner}
           alt="Illustration of a Sri Lankan manufacturing and distribution facility"
           className="absolute inset-0 -z-20 h-full w-full object-cover"
-        />
+         decoding="async" />
         <div className="absolute inset-0 -z-10 bg-[linear-gradient(90deg,rgba(4,16,28,0.9)_0%,rgba(4,16,28,0.76)_52%,rgba(4,16,28,0.25)_100%)]" />
         <div className="flex flex-col items-start justify-between gap-7 px-7 sm:px-10 md:flex-row md:items-center lg:px-14">
           <h2 className="max-w-2xl text-4xl font-semibold normal-case leading-tight tracking-[-.04em] text-white [text-shadow:0_2px_8px_rgba(0,0,0,0.6)] md:text-5xl">

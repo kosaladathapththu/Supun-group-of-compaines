@@ -100,7 +100,7 @@ const Companies = () => {
           src={heroImage}
           alt="Colombo skyline representing Supun Group businesses"
           className="absolute inset-0 -z-20 h-full w-full object-cover object-center"
-        />
+         decoding="async" />
         <div className="absolute inset-0 -z-10 bg-gradient-to-r from-[#071d37]/95 via-[#0b2747]/72 to-[#071d37]/35" />
         <div className="container mx-auto px-4">
           <div className="max-w-3xl">
