@@ -429,3 +429,49 @@
     font-size: 1.45rem;
   }
 }
+
+/* A quieter careers page: one introduction, opportunities, then application. */
+.career-page .career-hero,
+.career-page .career-hero-grid {
+  min-height: 560px;
+}
+.career-page .career-hero-grid {
+  grid-template-columns: 1fr;
+  padding-top: 160px;
+}
+.career-page .career-hero h1 {
+  max-width: 750px;
+  font-size: clamp(2.6rem, 5vw, 4.5rem);
+  line-height: 1.04;
+}
+.career-page .career-shell {
+  max-width: 1200px;
+}
+.career-page .career-benefits h2 {
+  font-size: 1.125rem !important;
+}
+@media (max-width: 639px) {
+  .career-page .career-shell {
+    width: 100%;
+  }
+  .career-page .career-hero,
+  .career-page .career-hero-grid {
+    min-height: 520px;
+  }
+  .career-page .career-hero-grid {
+    padding-top: 140px;
+  }
+  .career-page .career-hero h1 {
+    margin-top: 20px;
+  }
+  .career-page .career-hero p {
+    font-size: 1rem;
+    line-height: 1.65;
+  }
+  .career-page .career-benefits .career-shell {
+    gap: 14px;
+  }
+  .career-page .career-benefits h2 {
+    line-height: 1.3;
+  }
+}

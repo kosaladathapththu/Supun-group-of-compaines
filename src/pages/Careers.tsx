@@ -1,64 +1,14 @@
 import { FormEvent, useState } from 'react';
-import {
-  ArrowRight,
-  Building2,
-  Factory,
-  GraduationCap,
-  Hotel,
-  Send,
-  ShoppingBag,
-  Sparkles,
-  Users,
-} from 'lucide-react';
+import { ArrowRight, Send, Sparkles } from 'lucide-react';
 import Seo, { SITE_NAME, SITE_URL } from '@/components/Seo';
 import careersHero from '@/assets/optimized/careers-hero-team.jpg';
-import learningImage from '@/assets/optimized/careers-learn-through-work.jpg';
-import growthImage from '@/assets/optimized/careers-grow-across-group.jpg';
-import changeImage from '@/assets/optimized/careers-make-change.jpg';
 import './Careers.css';
 
-const reasons = [
-  {
-    title: 'Learn through real work',
-    reveal: 'Build practical, career-ready experience.',
-    icon: GraduationCap,
-    image: learningImage,
-  },
-  {
-    title: 'Grow across a Group',
-    reveal: 'Connect your potential to thirteen businesses.',
-    icon: Users,
-    image: growthImage,
-  },
-  {
-    title: 'Make useful change',
-    reveal: 'Turn good ideas into visible improvements.',
-    icon: Sparkles,
-    image: changeImage,
-  },
-];
-
 const areas = [
-  {
-    name: 'Manufacturing',
-    text: 'Build practical experience in production, engineering, quality, maintenance and supply chain.',
-    icon: Factory,
-  },
-  {
-    name: 'Retail & Distribution',
-    text: 'Help serve customers through sales, store operations, logistics, merchandising and e-commerce.',
-    icon: ShoppingBag,
-  },
-  {
-    name: 'Hospitality',
-    text: 'Create memorable guest experiences across front office, operations, food and beverage and service.',
-    icon: Hotel,
-  },
-  {
-    name: 'Group Services',
-    text: 'Support every business through finance, people, marketing, administration and technology.',
-    icon: Building2,
-  },
+  { name: 'Manufacturing' },
+  { name: 'Retail & Distribution' },
+  { name: 'Hospitality' },
+  { name: 'Group Services' },
 ];
 
 const careerAreaNames = ['All areas', ...areas.map((area) => area.name)];
@@ -152,92 +102,21 @@ const Careers = () => {
               </a>
             </div>
           </div>
-          <div className="career-stats">
-            <div className="career-stat">
-              <Users className="text-[#efc66f]" />
-              <strong className="mt-8 block text-4xl">300+</strong>
-              <span className="mt-2 block text-sm text-white/55">People across the Group</span>
-            </div>
-            <div className="career-stat">
-              <Building2 className="text-[#efc66f]" />
-              <strong className="mt-8 block text-4xl">13</strong>
-              <span className="mt-2 block text-sm text-white/55">Connected companies</span>
-            </div>
-          </div>
         </div>
       </section>
 
-      <section className="px-5 py-20 md:px-8 md:py-28">
-        <div className="career-shell">
-          <p className="text-xs font-bold uppercase tracking-[.22em] text-[#9a6b16]">
-            Find your place
-          </p>
-          <div className="mt-4 grid gap-6 md:grid-cols-2 md:items-end">
-            <h2 className="text-4xl font-bold leading-none tracking-[-.04em] md:text-6xl">
-              One Group. Many ways to contribute.
-            </h2>
-            <p className="max-w-xl leading-7 text-[#526277] md:justify-self-end">
-              Choose an area that matches your experience or interests. Roles may be available
-              across different Supun Group companies and locations.
-            </p>
-          </div>
-          <div className="area-grid mt-12">
-            {areas.map(({ name, text, icon: Icon }) => (
-              <a
-                key={name}
-                href="#opportunities"
-                onClick={() => setSelected(name)}
-                className="area-card group"
-              >
-                <span className="grid h-14 w-14 place-items-center rounded-2xl bg-[#f8f0df] text-[#9a6b16]">
-                  <Icon />
-                </span>
-                <span className="mt-auto">
-                  <small className="font-bold uppercase tracking-[.15em] text-[#315f9f]">
-                    Career area
-                  </small>
-                  <h3 className="mt-3 text-2xl font-bold">{name}</h3>
-                  <p className="mt-3 text-sm leading-6 text-[#56677c]">{text}</p>
-                  <span className="mt-6 inline-flex items-center gap-2 text-sm font-bold">
-                    Explore <ArrowRight size={15} />
-                  </span>
-                </span>
-              </a>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <section className="border-y border-[#cdbd9e]/50 bg-[#fffaf0] px-5 py-20 md:px-8 md:py-28">
-        <div className="career-shell grid gap-12 lg:grid-cols-[.8fr_1.2fr] lg:items-start">
-          <div>
-            <p className="text-xs font-bold uppercase tracking-[.22em] text-[#9a6b16]">Why Supun</p>
-            <h2 className="mt-5 text-4xl font-bold leading-tight tracking-[-.04em] md:text-5xl">
-              A place to learn, contribute and progress.
-            </h2>
-            <p className="mt-5 max-w-md leading-7 text-[#56677c]">
-              We value practical thinking, teamwork and people who take pride in improving how work
-              gets done.
-            </p>
-          </div>
-          <div className="grid gap-4 md:grid-cols-3">
-            {reasons.map(({ title, reveal, icon: Icon, image }) => (
-              <article key={title} className="why-card" tabIndex={0}>
-                <img className="why-photo" src={image} alt="" loading="lazy" decoding="async" />
-                <span className="why-shade" aria-hidden="true" />
-                <div className="why-content">
-                  <span className="why-icon">
-                    <Icon size={21} />
-                  </span>
-                  <h3 className="mt-5 text-xl font-bold leading-snug text-white">{title}</h3>
-                  <div className="why-reveal">
-                    <span className="why-reveal-label">What you&rsquo;ll gain</span>
-                    <p className="mt-2 text-sm font-semibold leading-6 text-white">{reveal}</p>
-                  </div>
-                </div>
-              </article>
-            ))}
-          </div>
+      <section className="career-benefits px-5 md:px-8" aria-label="Working at Supun">
+        <div className="career-shell grid gap-5 border-b border-[#cdbd9e]/50 py-5 sm:grid-cols-3">
+          {[
+            ['Learn by doing', 'Build practical skills through real work.'],
+            ['Grow with us', 'Explore opportunities across 13 companies.'],
+            ['Make a difference', 'Bring your ideas to a team that values them.'],
+          ].map(([title, copy]) => (
+            <div key={title}>
+              <h2 className="!text-lg font-semibold">{title}</h2>
+              <p className="mt-1 text-sm text-[#56677c]">{copy}</p>
+            </div>
+          ))}
         </div>
       </section>
 
@@ -247,13 +126,12 @@ const Careers = () => {
             Current vacancies
           </p>
           <h2 className="mt-4 text-4xl font-bold tracking-[-.04em] md:text-5xl">
-            Explore available roles.
+            Find your next role.
           </h2>
           <p className="mt-4 max-w-2xl leading-7 text-[#56677c]">
-            Select a career area to check current openings. If no suitable role is listed, you can
-            still send us your profile for future consideration.
+            Choose an area or send your profile for future opportunities.
           </p>
-          <div className="jobs-layout mt-10">
+          <div className="jobs-layout mt-6">
             <div className="job-filters" aria-label="Filter vacancies by career area">
               {careerAreaNames.map((areaName) => (
                 <button
@@ -294,17 +172,15 @@ const Careers = () => {
               Register your interest
             </p>
             <h2 className="mt-5 text-4xl font-bold leading-tight tracking-[-.04em]">
-              Tell us where you could make a difference.
+              Join our talent pool.
             </h2>
             <p className="mt-5 leading-7 text-white/70">
-              Complete the form and we will prepare an email containing your details. You can review
-              it before sending it to our team.
+              Tell us about yourself and the work you?re interested in.
             </p>
-            <div className="mt-10 rounded-2xl border border-white/15 bg-white/10 p-5">
+            <div className="mt-6 border-t border-white/20 pt-5">
               <strong className="text-sm">Remember your CV</strong>
               <p className="mt-2 text-sm leading-6 text-white/65">
-                The form cannot attach files automatically. Add your latest CV to the prepared email
-                before you press send.
+                Attach your CV to the prepared email before sending.
               </p>
             </div>
           </div>

@@ -17,7 +17,7 @@ import { companyById } from '@/data/companies';
 import retailImage from '@/assets/optimized/retail-store.jpg';
 import supunTradersImage from '@/assets/optimized/supun-traders-real-storefront.jpg';
 import distributorsImage from '@/assets/optimized/supun-traders-storefront-v4.jpg';
-import hospitalityImage from '@/assets/optimized/sector-hospitality-v2.jpg';
+import area56Image from '@/assets/optimized/area-56-rooftop-night.jpg';
 import hotelImage from '@/assets/optimized/hotel-interior.jpg';
 import manufacturingImage from '@/assets/optimized/sector-manufacturing-v2.jpg';
 import footwearImage from '@/assets/optimized/automotive-design.jpg';
@@ -32,7 +32,7 @@ const companyImages: Record<string, string> = {
   'supun-traders-distributors': distributorsImage,
   'supun-super-center': retailImage,
   'supun-arcade-residency': hotelImage,
-  'area-56': hospitalityImage,
+  'area-56': area56Image,
   'supun-aerosoft': footwearImage,
   'aerostar-home-appliances': chromeImage,
   'camy-smart': helmetImage,
@@ -251,7 +251,7 @@ const CompanyDetail = () => {
                         key={award}
                         className="grid items-center gap-5 bg-white p-5 sm:grid-cols-[8rem_1fr] sm:p-6"
                       >
-                        <div className="flex h-20 items-center justify-center rounded-lg border border-[#102746]/8 bg-[#f7f9fb] px-3">
+                        <div className="flex h-20 min-w-0 items-center justify-center overflow-hidden rounded-lg border border-[#102746]/8 bg-[#f7f9fb] px-3">
                           <AwardIssuerMark issuer={issuer} certification={isCertification} />
                         </div>
                         <div>
