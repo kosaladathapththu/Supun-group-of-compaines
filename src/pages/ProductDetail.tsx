@@ -289,7 +289,13 @@ export default function ProductDetail() {
           <div className="rounded-2xl border border-primary/10 bg-white shadow-sm overflow-hidden">
             <div className="h-[320px] md:h-[460px] bg-slate-100">
               {imageUrl ? (
-                <img src={imageUrl} alt={product.title} className="h-full w-full object-cover" />
+                <img
+                  src={imageUrl}
+                  alt={product.title}
+                  className="h-full w-full object-cover"
+                  decoding="async"
+                  loading="lazy"
+                />
               ) : (
                 <div className="h-full w-full flex items-center justify-center text-muted-foreground">
                   No product image
@@ -457,6 +463,8 @@ export default function ProductDetail() {
                             src={relatedImage}
                             alt={item.title}
                             className="h-full w-full object-cover group-hover:scale-105 transition-smooth"
+                            decoding="async"
+                            loading="lazy"
                           />
                         ) : (
                           <div className="h-full w-full flex items-center justify-center text-muted-foreground text-sm">

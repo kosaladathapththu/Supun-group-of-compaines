@@ -4,37 +4,42 @@ import {
   ArrowRight,
   BriefcaseBusiness,
   CalendarDays,
-  Check,
   ExternalLink,
   Mail,
   MapPin,
   Phone,
 } from 'lucide-react';
 import { CompanyLogo } from '@/components/CompanyLogo';
+import { ResponsiveCopy } from '@/components/ResponsiveCopy';
 import { AwardIssuerMark } from '@/components/AwardIssuerMark';
 import Seo, { SITE_URL } from '@/components/Seo';
 import { companyById } from '@/data/companies';
-import retailImage from '@/assets/retail-store.jpg';
-import hospitalityImage from '@/assets/sector-hospitality-v2.jpg';
-import hotelImage from '@/assets/hotel-interior.jpg';
-import manufacturingImage from '@/assets/sector-manufacturing-v2.jpg';
-import footwearImage from '@/assets/automotive-design.jpg';
-import chromeImage from '@/assets/chrome-manufacturing.jpg';
-import helmetImage from '@/assets/helmet-manufacturing.jpg';
-import cookwareImage from '@/assets/cookware-manufacturing.jpg';
-import coolingImage from '@/assets/products/camy-air-conditioners.png';
+import retailImage from '@/assets/optimized/retail-store.jpg';
+import supunTradersImage from '@/assets/optimized/supun-traders-real-storefront.jpg';
+import distributorsImage from '@/assets/optimized/supun-traders-storefront-v4.jpg';
+import area56Image from '@/assets/optimized/area-56-rooftop-night.jpg';
+import hotelImage from '@/assets/optimized/hotel-interior.jpg';
+import manufacturingImage from '@/assets/optimized/sector-manufacturing-v2.jpg';
+import footwearImage from '@/assets/optimized/automotive-design.jpg';
+import chromeImage from '@/assets/optimized/chrome-manufacturing.jpg';
+import helmetImage from '@/assets/optimized/helmet-manufacturing.jpg';
+import cookwareImage from '@/assets/optimized/cookware-manufacturing.jpg';
+import coolingImage from '@/assets/products/camy-air-conditioners.webp';
+import ecotempImage from '@/assets/optimized/camy-factory-technician.jpg';
 
 const companyImages: Record<string, string> = {
-  'supun-traders': retailImage,
+  'supun-traders': supunTradersImage,
+  'supun-traders-distributors': distributorsImage,
   'supun-super-center': retailImage,
   'supun-arcade-residency': hotelImage,
-  'area-56': hospitalityImage,
+  'area-56': area56Image,
   'supun-aerosoft': footwearImage,
   'aerostar-home-appliances': chromeImage,
   'camy-smart': helmetImage,
   rodsons: manufacturingImage,
   'new-camy-smart': cookwareImage,
   'fuji-industries': coolingImage,
+  ecotemp: ecotempImage,
   'camy-global': retailImage,
 };
 
@@ -119,6 +124,7 @@ const CompanyDetail = () => {
           src={heroImage}
           alt={`${company.shortName} business`}
           className="absolute inset-0 -z-20 h-full w-full object-cover"
+          decoding="async"
         />
         <div className="absolute inset-0 -z-10 bg-gradient-to-r from-[#041426]/95 via-[#071d37]/84 to-[#071d37]/62" />
         <div className="absolute inset-0 -z-10 bg-gradient-to-t from-[#041426]/55 via-transparent to-[#041426]/15" />
@@ -170,7 +176,8 @@ const CompanyDetail = () => {
                 <CompanyLogo
                   companyId={company.id}
                   companyName={company.shortName}
-                  className="company-detail-hero-logo h-28 w-full max-w-[250px] rounded-xl border border-white/40 p-4 shadow-2xl transition duration-300 group-hover:-translate-y-1 group-hover:border-[#efbd55]"
+                  placement="detail"
+                  className="company-detail-hero-logo h-40 w-[min(320px,100%)] max-w-full rounded-xl border border-white/40 p-4 shadow-2xl transition duration-300 group-hover:-translate-y-1 group-hover:border-[#efbd55]"
                   imageClassName="h-full w-full object-contain"
                 />
               </a>
@@ -178,7 +185,8 @@ const CompanyDetail = () => {
               <CompanyLogo
                 companyId={company.id}
                 companyName={company.shortName}
-                className="company-detail-hero-logo h-28 w-full max-w-[250px] justify-self-start rounded-xl border border-white/40 p-4 shadow-2xl"
+                placement="detail"
+                className="company-detail-hero-logo h-40 w-[min(320px,100%)] max-w-full justify-self-start rounded-xl border border-white/40 p-4 shadow-2xl"
                 imageClassName="h-full w-full object-contain"
               />
             )}
@@ -187,23 +195,7 @@ const CompanyDetail = () => {
       </section>
 
       <section className="py-12 md:py-16">
-        <div className="company-detail-content-grid container relative mx-auto grid max-w-7xl gap-8 px-4">
-          <aside className="absolute -left-28 top-0 hidden h-full w-24 xl:block">
-            <Link
-              to="/companies"
-              aria-label="Back to all group companies"
-              className="group sticky top-28 flex flex-col items-center gap-2 text-center text-[#0b2747]"
-            >
-              <span className="flex h-14 w-14 items-center justify-center text-[#041426] transition duration-300 group-hover:-translate-x-1 group-hover:text-[#315f9f] group-focus-visible:ring-2 group-focus-visible:ring-[#315f9f] group-focus-visible:ring-offset-2">
-                <span className="-mt-1 text-[3.25rem] font-black leading-none" aria-hidden="true">
-                  &lt;
-                </span>
-              </span>
-              <span className="max-w-[6.5rem] text-[11px] font-black uppercase leading-4 tracking-[0.1em] text-[#041426] transition group-hover:text-[#315f9f]">
-                Back to all groups
-              </span>
-            </Link>
-          </aside>
+        <div className="company-detail-content-grid container relative mx-auto grid max-w-7xl items-start gap-8 px-4">
           <div className="company-detail-primary min-w-0 space-y-8">
             <article className="rounded-2xl border border-[#102746]/10 bg-white p-7 shadow-[0_10px_30px_rgba(16,39,70,.06)] sm:p-9">
               <p className="text-xs font-bold uppercase tracking-[.18em] text-[#315f9f]">
@@ -213,45 +205,27 @@ const CompanyDetail = () => {
                 Our story
               </h2>
               <div className="mt-5 h-0.5 w-14 bg-[#d79a22]" />
-              <p className="mt-6 text-base font-medium leading-8 text-[#405268]">
-                {company.fullDescription}
-              </p>
+              <div className="mt-4 text-base font-medium leading-7 text-[#405268]">
+                <ResponsiveCopy summary={company.description}>
+                  <p>{company.fullDescription}</p>
+                </ResponsiveCopy>
+              </div>
             </article>
 
-            <article className="rounded-2xl border border-[#102746]/10 bg-white p-7 shadow-[0_10px_30px_rgba(16,39,70,.06)] sm:p-9">
-              <div className="flex items-center justify-between">
-                <div>
-                  <p className="text-xs font-bold uppercase tracking-[.18em] text-[#315f9f]">
-                    Capabilities
-                  </p>
-                  <h2 className="mt-2 text-3xl font-semibold normal-case tracking-[-.025em]">
-                    What we do best
-                  </h2>
-                </div>
-                <span className="text-4xl font-semibold text-[#102746]/10">
-                  {String(company.features.length).padStart(2, '0')}
-                </span>
-              </div>
-
-              <div className="mt-7 grid gap-3 sm:grid-cols-2">
-                {company.features.map((feature, index) => (
-                  <div
-                    key={feature}
-                    className={`relative flex min-h-24 gap-4 overflow-hidden rounded-xl border border-[#102746]/10 bg-[#f7f9fb] p-5 text-sm font-medium leading-6 text-[#405268] transition duration-300 hover:border-[#315f9f]/30 hover:bg-white hover:shadow-[0_10px_24px_rgba(16,39,70,.07)] ${company.features.length % 2 === 1 && index === company.features.length - 1 ? 'sm:col-span-2' : ''}`}
-                  >
-                    <span className="absolute inset-y-0 left-0 w-1 bg-[#efbd55]" />
-                    <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-[#fff0c8] text-[#9a650c]">
-                      <Check size={16} strokeWidth={2.5} />
-                    </span>
-                    <div>
-                      <span className="mb-1 block text-[9px] font-bold uppercase tracking-[.16em] text-[#315f9f]/50">
-                        Capability {String(index + 1).padStart(2, '0')}
-                      </span>
-                      {feature}
-                    </div>
-                  </div>
+            <article className="rounded-2xl border border-[#102746]/10 bg-white p-7 sm:p-9">
+              <p className="text-xs font-bold uppercase tracking-[.18em] text-[#315f9f]">
+                Capabilities
+              </p>
+              <h2 className="mt-3 text-3xl font-semibold normal-case tracking-[-.025em]">
+                Key features
+              </h2>
+              <ul className="mt-6 divide-y divide-[#102746]/10 border-y border-[#102746]/10">
+                {company.features.map((feature) => (
+                  <li key={feature} className="py-4 text-base leading-7 text-[#405268]">
+                    {feature}
+                  </li>
                 ))}
-              </div>
+              </ul>
             </article>
 
             {company.awards && company.awards.length > 0 && (
@@ -277,7 +251,7 @@ const CompanyDetail = () => {
                         key={award}
                         className="grid items-center gap-5 bg-white p-5 sm:grid-cols-[8rem_1fr] sm:p-6"
                       >
-                        <div className="flex h-20 items-center justify-center rounded-lg border border-[#102746]/8 bg-[#f7f9fb] px-3">
+                        <div className="flex h-20 min-w-0 items-center justify-center overflow-hidden rounded-lg border border-[#102746]/8 bg-[#f7f9fb] px-3">
                           <AwardIssuerMark issuer={issuer} certification={isCertification} />
                         </div>
                         <div>

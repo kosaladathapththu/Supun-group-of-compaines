@@ -17,7 +17,7 @@ import { Textarea } from '@/components/ui/textarea';
 import { CompanyLogo } from '@/components/CompanyLogo';
 import Seo, { SITE_NAME, SITE_URL } from '@/components/Seo';
 import { companies } from '@/data/companies';
-import heroImage from '@/assets/contact-hero-v2.png';
+import heroImage from '@/assets/optimized/contact-hero-v2.jpg';
 
 const methods = [
   {
@@ -123,6 +123,7 @@ const Contact = () => {
           src={heroImage}
           alt="Supun Group corporate offices"
           className="absolute inset-0 -z-20 h-full w-full object-cover"
+          decoding="async"
         />
         <div className="absolute inset-0 -z-10 bg-gradient-to-r from-[#031326]/92 via-[#071d37]/55 to-transparent" />
         <div className="container mx-auto px-4">

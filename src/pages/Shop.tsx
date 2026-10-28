@@ -377,6 +377,7 @@ export default function Shop() {
                                 alt={product.title}
                                 className="h-full w-full object-cover"
                                 loading="lazy"
+                                decoding="async"
                               />
                             ) : (
                               <div className="h-full w-full flex items-center justify-center text-muted-foreground text-sm">

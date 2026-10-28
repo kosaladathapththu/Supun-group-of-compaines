@@ -1,34 +1,18 @@
 import { useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
-import {
-  ArrowDown,
-  ArrowRight,
-  Factory,
-  Hotel,
-  ShieldCheck,
-  ShoppingBag,
-  Sparkles,
-} from 'lucide-react';
+import { ArrowDown, ArrowRight, Sparkles } from 'lucide-react';
 import Seo, { DEFAULT_IMAGE, SITE_NAME, SITE_URL } from '@/components/Seo';
 import { AnimatedSection } from '@/components/AnimatedSection';
 import { CompanyLogo } from '@/components/CompanyLogo';
 import { companies } from '@/data/companies';
 import { sectorHighlights, siteStats } from '@/data/siteContent';
 import heroVideo from '@/assets/supun-group-hero-optimized.mp4';
-import manufacturingImage from '@/assets/sector-manufacturing-v2.jpg';
-import camyBrandLogo from '@/assets/camy-brand-logo.png';
-import certificationImage from '@/assets/made-in-sri-lanka-certification.jpg';
+import heroMobileVideo from '@/assets/supun-group-hero-mobile.mp4';
+import heroPoster from '@/assets/optimized/hero-poster.jpg';
+import manufacturingImage from '@/assets/optimized/camy-cookware-production-focus-v2.jpg';
+import { CertificationSection } from '@/components/CertificationSection';
 import camyRedLogo from '@/assets/camy-logo-red-transparent.png';
 
-const sectorMeta = [
-  { icon: Factory },
-  { icon: ShoppingBag },
-  { icon: Hotel },
-  { icon: ShieldCheck },
-];
-
-const keepOriginalLogoSize = (companyId: string) =>
-  companyId === 'fuji-industries' || companyId === 'area-56';
 const featuredCompanyIds = [
   'supun-traders',
   'supun-super-center',
@@ -95,7 +79,51 @@ const CountUpStat = ({ value, label, index }: { value: string; label: string; in
 
 const Home = () => {
   const [heroVideoReady, setHeroVideoReady] = useState(false);
+  const [shouldPlayHeroVideo, setShouldPlayHeroVideo] = useState(false);
+  const heroVideoRef = useRef<HTMLVideoElement>(null);
   const companyCarouselRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+    const connection = (
+      navigator as Navigator & {
+        connection?: { saveData?: boolean; effectiveType?: string };
+      }
+    ).connection;
+
+    const updateVideoPreference = () => {
+      const constrainedConnection =
+        connection?.saveData ||
+        connection?.effectiveType === 'slow-2g' ||
+        connection?.effectiveType === '2g';
+      const enabled = !reducedMotion.matches && !constrainedConnection;
+      setHeroVideoReady(false);
+      setShouldPlayHeroVideo(enabled);
+    };
+
+    updateVideoPreference();
+    reducedMotion.addEventListener('change', updateVideoPreference);
+
+    return () => {
+      reducedMotion.removeEventListener('change', updateVideoPreference);
+    };
+  }, []);
+
+  useEffect(() => {
+    const video = heroVideoRef.current;
+    if (!video) return;
+
+    const handleVisibilityChange = () => {
+      if (document.hidden) {
+        video.pause();
+      } else {
+        void video.play().catch(() => undefined);
+      }
+    };
+
+    document.addEventListener('visibilitychange', handleVisibilityChange);
+    return () => document.removeEventListener('visibilitychange', handleVisibilityChange);
+  }, [shouldPlayHeroVideo]);
 
   const scrollCompanies = (direction: -1 | 1) => {
     const carousel = companyCarouselRef.current;
@@ -110,7 +138,7 @@ const Home = () => {
     <div className="min-h-screen overflow-hidden bg-[#edf3fb]">
       <Seo
         title="Supun Group of Companies | Built in Sri Lanka. Built to Last."
-        description="Supun Group of Companies is a Sri Lankan family-run group with 11 companies across manufacturing, retail, distribution and hospitality, with roots going back to 1978."
+        description="Supun Group of Companies is a Sri Lankan family-run group with 13 companies across manufacturing, retail, distribution and hospitality, with roots going back to 1978."
         keywords="Supun Group of Companies, Sri Lanka manufacturing, Camy, Supun Traders, Supun Super Center, Sri Lankan conglomerate"
         path="/"
         jsonLd={{
@@ -148,28 +176,37 @@ const Home = () => {
         }}
       />
 
-      <section className="premium-hero relative isolate min-h-[760px] overflow-hidden bg-[#07110d] text-white lg:min-h-screen">
-        <div
-          className={`absolute inset-0 bg-[radial-gradient(circle_at_75%_25%,#252927_0%,#171a18_34%,#0d100e_74%)] transition-opacity duration-1000 ${heroVideoReady ? 'opacity-0' : 'opacity-100'}`}
+      <section className="premium-hero relative isolate h-[58svh] min-h-[520px] max-h-[640px] overflow-hidden bg-[#07110d] text-white md:h-auto md:max-h-none md:min-h-[760px] lg:min-h-screen">
+        <img
+          src={heroPoster}
+          alt=""
+          fetchPriority="high"
+          className={`absolute inset-0 h-full w-full object-cover object-[62%_center] transition-opacity duration-500 ${heroVideoReady ? 'opacity-0' : 'opacity-100'}`}
           aria-hidden="true"
+          decoding="async"
         />
-        <video
-          className={`absolute inset-0 h-full w-full object-cover object-[62%_center] transition-opacity duration-1000 ${heroVideoReady ? 'opacity-100' : 'opacity-0'}`}
-          autoPlay
-          muted
-          loop
-          playsInline
-          preload="auto"
-          onCanPlay={() => setHeroVideoReady(true)}
-          aria-hidden="true"
-        >
-          <source src={heroVideo} type="video/mp4" />
-        </video>
+        {shouldPlayHeroVideo && (
+          <video
+            ref={heroVideoRef}
+            className={`absolute inset-0 h-full w-full object-cover object-[62%_center] transition-opacity duration-200 ${heroVideoReady ? 'opacity-100' : 'opacity-0'}`}
+            autoPlay
+            muted
+            loop
+            playsInline
+            preload="auto"
+            poster={heroPoster}
+            onLoadedData={() => setHeroVideoReady(true)}
+            aria-hidden="true"
+          >
+            <source media="(max-width: 767px)" src={heroMobileVideo} type="video/mp4" />
+            <source src={heroVideo} type="video/mp4" />
+          </video>
+        )}
         <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(3,12,8,.55)_0%,rgba(5,18,12,.32)_38%,rgba(5,17,12,.1)_72%,rgba(3,12,8,.04)_100%)]" />
         <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(3,10,7,.08)_0%,transparent_36%,rgba(3,10,7,.42)_100%)]" />
 
-        <div className="container relative z-10 mx-auto flex min-h-[760px] flex-col px-5 pb-7 pt-28 sm:px-6 sm:pt-32 lg:min-h-screen lg:px-8 lg:pb-9 lg:pt-36">
-          <div className="hero-topline flex items-center justify-between gap-5 pb-5 text-[10px] font-semibold uppercase tracking-[0.24em] text-white/58 sm:text-[11px]">
+        <div className="container relative z-10 mx-auto flex h-full min-h-0 flex-col px-5 pb-5 pt-20 sm:h-auto sm:min-h-[760px] sm:px-6 sm:pb-6 sm:pt-32 lg:min-h-screen lg:px-8 lg:pb-9 lg:pt-36">
+          <div className="hero-topline flex items-center justify-between gap-5 pb-1 text-[8px] font-semibold uppercase tracking-[0.16em] text-white/58 sm:pb-5 sm:text-[11px] sm:tracking-[0.24em]">
             <span className="flex items-center gap-3">
               <span className="h-px w-8 bg-[#e8aa3a]" /> Independent. Sri Lankan. Since 1978.
             </span>
@@ -178,22 +215,23 @@ const Home = () => {
             </span>
           </div>
 
-          <div className="grid flex-1 items-center gap-10 py-10 lg:grid-cols-[minmax(0,1fr)_18rem] lg:gap-16 lg:py-14 xl:grid-cols-[minmax(0,1fr)_21rem]">
+          <div className="grid flex-1 items-center gap-4 py-2 sm:gap-10 sm:py-10 lg:grid-cols-[minmax(0,1fr)_18rem] lg:gap-16 lg:py-14 xl:grid-cols-[minmax(0,1fr)_21rem]">
             <div className="hero-copy max-w-5xl">
-              <h1 className="hero-title max-w-5xl text-[clamp(3rem,8vw,6.6rem)] font-semibold normal-case leading-[0.92] tracking-[-0.055em] text-white">
+              <h1 className="hero-title max-w-5xl text-[clamp(2.15rem,10.5vw,2.8rem)] font-semibold normal-case leading-[0.94] tracking-[-0.055em] text-white sm:text-[clamp(3rem,8vw,6.6rem)] sm:leading-[0.92]">
                 <span className="hero-title-blue">Built in</span>{' '}
                 <span className="hero-title-accent">Sri Lanka.</span>
                 <br />
                 <span className="hero-title-blue">Built to </span>
                 <span className="hero-title-accent">last.</span>
               </h1>
-              <p className="mt-6 max-w-xl border-l border-[#e8aa3a]/70 pl-5 text-sm leading-relaxed text-white/80 sm:mt-8 sm:text-base">
+              <p className="mt-3 max-w-xl border-l border-[#e8aa3a]/70 pl-3 text-xs leading-relaxed text-white/80 sm:mt-8 sm:pl-5 sm:text-base">
                 One Sri Lankan Group, built across four industries since 1978.
               </p>
-              <div className="mt-8 flex flex-col gap-3 sm:mt-10 sm:flex-row">
+              <div className="relative z-20 mt-4 flex gap-2.5 sm:mt-10 sm:flex-row sm:gap-3">
                 <Link
                   to="/companies"
-                  className="hero-primary-button group inline-flex min-h-14 items-center justify-center gap-4 rounded-full px-7 text-sm font-semibold text-[#0b1b13]"
+                  aria-label="Explore all Supun Group companies"
+                  className="hero-primary-button group relative z-20 inline-flex min-h-12 flex-1 items-center justify-center gap-2 rounded-full bg-[#efbd55] px-4 text-xs font-bold text-[#0b1b13] sm:min-h-14 sm:flex-none sm:px-7 sm:text-sm"
                 >
                   Explore our companies{' '}
                   <span className="flex h-8 w-8 items-center justify-center rounded-full bg-[#0b1b13] text-white transition duration-300 group-hover:translate-x-1">
@@ -202,7 +240,7 @@ const Home = () => {
                 </Link>
                 <Link
                   to="/about"
-                  className="hero-ghost-button group inline-flex min-h-14 items-center justify-center gap-3 rounded-full px-7 text-sm font-semibold text-white"
+                  className="hero-ghost-button group inline-flex min-h-12 flex-1 items-center justify-center gap-2 rounded-full px-4 text-xs font-semibold text-white sm:min-h-14 sm:flex-none sm:px-7 sm:text-sm"
                 >
                   Discover our story{' '}
                   <ArrowRight
@@ -221,7 +259,6 @@ const Home = () => {
                 <strong className="hero-stat-blue text-[5.75rem] font-semibold leading-[.8] tracking-[-0.09em]">
                   48
                 </strong>
-                <span className="mb-1 text-xl font-light text-[#f4bd59]">+</span>
               </div>
               <p className="mt-5 max-w-[13rem] text-sm leading-relaxed text-white/60">
                 <span className="font-semibold text-white">Years of enterprise.</span>
@@ -238,7 +275,7 @@ const Home = () => {
             </div>
           </div>
 
-          <div className="hero-bottom-rail flex items-end justify-between gap-6 pt-5">
+          <div className="hero-bottom-rail hidden items-end justify-between gap-6 pt-5 sm:flex">
             <a
               href="#legacy"
               className="group hidden items-center gap-3 text-[10px] font-semibold uppercase tracking-[0.2em] text-white/55 transition hover:text-white md:flex"
@@ -264,16 +301,6 @@ const Home = () => {
         <div className="legacy-aurora legacy-aurora-blue" aria-hidden="true" />
         <div className="legacy-lines absolute inset-0 opacity-50" aria-hidden="true" />
         <div className="container relative z-10 mx-auto px-4">
-          <AnimatedSection animation="slide-up" duration={850} triggerOnce={false}>
-            <div className="mb-8 flex items-center justify-between gap-5 md:mb-10">
-              <p className="section-kicker text-primary before:bg-[#d99a24]">Our legacy</p>
-              <div className="hidden items-center gap-3 text-[10px] font-semibold uppercase tracking-[0.22em] text-primary/45 sm:flex">
-                <span>1978</span>
-                <span className="h-px w-14 bg-gradient-to-r from-[#d99a24] to-primary/30" />
-                <span>Today</span>
-              </div>
-            </div>
-          </AnimatedSection>
           <div className="grid items-stretch gap-6 lg:grid-cols-[.72fr_1.28fr]">
             <AnimatedSection animation="slide-right" duration={900} triggerOnce={false}>
               <div className="legacy-year-card group relative flex h-full min-h-[350px] flex-col justify-between overflow-hidden rounded-[2rem] p-7 sm:min-h-[430px] sm:p-10">
@@ -318,12 +345,11 @@ const Home = () => {
                 <div className="relative mt-auto pt-10">
                   <div className="grid gap-6 border-t border-primary/10 pt-7 md:grid-cols-2">
                     <p className="leading-relaxed text-[#526278]">
-                      What began as a Colombo trading business has grown into a connected group
-                      spanning manufacturing, retail, distribution and hospitality.
+                      From Colombo trading roots to 13 companies in manufacturing, retail,
+                      distribution and hospitality.
                     </p>
                     <p className="leading-relaxed text-[#526278]">
-                      Through every new chapter, one standard remains: create lasting value for our
-                      customers, our people and our country.
+                      Creating lasting value for our customers, people and country since 1978.
                     </p>
                   </div>
                   <Link
@@ -346,22 +372,23 @@ const Home = () => {
         <div className="container relative z-10 mx-auto px-4">
           <div className="grid gap-9 lg:grid-cols-[0.82fr_1.18fr] lg:items-center lg:gap-14">
             <AnimatedSection animation="slide-right" duration={900} triggerOnce={false}>
-              <div className="relative min-h-[480px] overflow-hidden rounded-[1.5rem] bg-[#10233f] shadow-[0_24px_60px_rgba(16,35,63,.18)] sm:min-h-[570px]">
+              <div className="home-production-card overflow-hidden rounded-[1.5rem] bg-[#10233f] shadow-[0_24px_60px_rgba(16,35,63,.18)]">
                 <img
                   src={manufacturingImage}
-                  alt="Supun Group manufacturing operations in Sri Lanka"
-                  className="absolute inset-0 h-full w-full object-cover"
+                  alt="A Camy factory employee handling cookware on the production line"
+                  className="block h-auto w-full"
+                  loading="lazy"
+                  decoding="async"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-[#081a32] via-[#10233f]/25 to-transparent" />
-                <div className="absolute inset-x-0 bottom-0 p-7 text-white sm:p-9">
+                <div className="p-5 text-white sm:p-6">
                   <p className="text-xs font-semibold uppercase tracking-[0.22em] text-[#efbd55]">
                     Built in Sri Lanka
                   </p>
-                  <h3 className="mt-3 max-w-md text-3xl font-semibold normal-case leading-tight tracking-[-0.03em] sm:text-4xl">
+                  <h3 className="mt-2 max-w-md text-2xl font-semibold normal-case leading-tight tracking-[-0.03em] sm:text-3xl">
                     Local capability. Lasting value.
                   </h3>
-                  <div className="mt-6 flex items-center gap-5 border-t border-white/25 pt-5">
-                    <strong className="text-4xl font-semibold tracking-[-0.05em]">48+</strong>
+                  <div className="mt-4 flex items-center gap-4 border-t border-white/25 pt-4">
+                    <strong className="text-3xl font-semibold tracking-[-0.05em]">48</strong>
                     <span className="max-w-[9rem] text-xs font-semibold uppercase leading-relaxed tracking-[0.14em] text-white/70">
                       Years of trusted enterprise
                     </span>
@@ -384,7 +411,6 @@ const Home = () => {
 
               <div className="mt-9 grid gap-3 sm:grid-cols-2">
                 {sectorHighlights.map((sector, index) => {
-                  const Icon = sectorMeta[index].icon;
                   return (
                     <AnimatedSection
                       key={sector.title}
@@ -394,17 +420,6 @@ const Home = () => {
                       triggerOnce={false}
                     >
                       <article className="group h-full rounded-xl border border-[#10233f]/10 bg-[#f7f9fc] p-5 transition duration-300 hover:-translate-y-1 hover:border-[#315f9f]/35 hover:shadow-[0_14px_32px_rgba(16,35,63,.08)]">
-                        <span className="mb-5 flex h-11 w-11 items-center justify-center overflow-hidden rounded-lg bg-[#e8eef6] text-[#315f9f]">
-                          {sector.sector === 'The Camy Brand' ? (
-                            <img
-                              src={camyBrandLogo}
-                              alt="Camy"
-                              className="h-10 w-10 object-contain mix-blend-multiply"
-                            />
-                          ) : (
-                            <Icon size={20} strokeWidth={1.7} />
-                          )}
-                        </span>
                         <div>
                           <h3 className="text-xl font-semibold normal-case text-[#071b2d]">
                             {sector.title}
@@ -435,116 +450,7 @@ const Home = () => {
         </div>
       </section>
 
-      <section className="relative isolate overflow-hidden bg-[#edf3fb] py-12 text-[#071b2d] sm:py-16 md:py-24">
-        <div
-          className="absolute inset-0 -z-10 bg-[radial-gradient(circle_at_10%_16%,rgba(49,95,159,.14),transparent_30%),radial-gradient(circle_at_90%_82%,rgba(120,190,67,.16),transparent_32%)]"
-          aria-hidden="true"
-        />
-        <div className="container mx-auto px-4">
-          <div className="relative overflow-hidden rounded-[2rem] border border-[#10233f]/10 bg-white shadow-[0_28px_80px_rgba(16,35,63,.14)] md:rounded-[3rem]">
-            <div className="grid lg:grid-cols-[.88fr_1.12fr]">
-              <AnimatedSection animation="slide-right" duration={900} triggerOnce={false}>
-                <div className="relative h-full min-h-[440px] overflow-hidden bg-[#efe8da] lg:min-h-[720px]">
-                  <img
-                    src={certificationImage}
-                    alt="Made in Sri Lanka certifications awarded to Camy Smart, New Camy Smart and Aerostar Home Appliances"
-                    className="absolute inset-0 h-full w-full object-cover object-center"
-                  />
-                  <div className="absolute inset-0 ring-1 ring-inset ring-black/5" />
-                </div>
-              </AnimatedSection>
-
-              <AnimatedSection animation="slide-left" delay={120} duration={950} triggerOnce={false}>
-                <div className="flex h-full flex-col p-7 sm:p-10 lg:p-14 xl:p-16">
-                  <div className="flex items-center gap-3 text-[11px] font-bold uppercase tracking-[0.24em] text-[#315f9f]">
-                    <span className="flex h-10 w-10 items-center justify-center rounded-full bg-[#e8eef6] text-[#315f9f] ring-1 ring-[#315f9f]/10">
-                      <ShieldCheck size={20} strokeWidth={1.8} />
-                    </span>
-                    Officially certified
-                  </div>
-
-                  <h2 className="mt-7 max-w-2xl text-4xl font-semibold normal-case leading-[1.02] tracking-[-0.045em] text-[#071b2d] sm:text-5xl xl:text-6xl">
-                    Proudly Made in <span className="text-[#d99a24]">Sri Lanka.</span>
-                  </h2>
-
-                  <div className="mt-8 space-y-5 text-base leading-8 text-[#526278]">
-                    <p>
-                      We are proud to hold the official “Made in Sri Lanka” certification, awarded
-                      by the{' '}
-                      <a
-                        href="https://www.industry.gov.lk/"
-                        target="_blank"
-                        rel="noreferrer"
-                        className="font-semibold text-[#315f9f] transition hover:text-[#78be43]"
-                      >
-                        Ministry of Industries – Sri Lanka
-                      </a>{' '}
-                      and the{' '}
-                      <a
-                        href="https://neda.gov.lk/"
-                        target="_blank"
-                        rel="noreferrer"
-                        className="font-semibold text-[#315f9f] transition hover:text-[#78be43]"
-                      >
-                        National Enterprise Development Authority
-                      </a>{' '}
-                      to three of our companies behind the{' '}
-                      <a
-                        href="https://www.linkedin.com/showcase/camy-sri-lanka/"
-                        target="_blank"
-                        rel="noreferrer"
-                        className="font-semibold text-[#315f9f] transition hover:text-[#78be43]"
-                      >
-                        Camy Sri Lanka
-                      </a>{' '}
-                      brand 🇱🇰
-                    </p>
-                    <p>
-                      For the{' '}
-                      <a
-                        href="https://www.linkedin.com/company/supun-group-of-companies/"
-                        target="_blank"
-                        rel="noreferrer"
-                        className="font-semibold text-[#315f9f] transition hover:text-[#78be43]"
-                      >
-                        Supun Group of Companies
-                      </a>
-                      , this represents something bigger than a certificate. It reflects our
-                      commitment to manufacturing here, creating livelihoods for Sri Lankans and
-                      keeping value within our economy.
-                    </p>
-                    <p className="rounded-r-2xl border-l-2 border-[#78be43] bg-[#f3f8f0] py-4 pl-5 pr-4 font-medium text-[#23364e]">
-                      We believe Sri Lanka can. Every product we make is proof of that belief, and
-                      our promise to keep investing in the people, skills and industry that will
-                      move our nation forward.
-                    </p>
-                  </div>
-
-                  <div className="mt-auto border-t border-[#10233f]/10 pt-8">
-                    <div className="flex items-center gap-5 sm:gap-7">
-                      <span className="h-14 w-1 shrink-0 rounded-full bg-gradient-to-b from-[#d99a24] to-[#78be43]" />
-                      <div className="flex flex-wrap items-baseline gap-x-4 gap-y-1">
-                        <strong className="text-5xl font-semibold leading-none tracking-[-0.07em] text-[#78be43] sm:text-6xl">
-                          100%
-                        </strong>
-                        <div>
-                          <span className="block text-2xl font-semibold leading-none tracking-[-0.035em] text-[#071b2d] sm:text-3xl">
-                            Sri Lankan
-                          </span>
-                          <span className="mt-2 flex items-center gap-2 text-[9px] font-bold uppercase tracking-[0.22em] text-[#667388] sm:text-[10px]">
-                            <span className="h-1.5 w-1.5 rounded-full bg-[#d99a24]" />
-                            Proudly made here
-                          </span>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </AnimatedSection>
-            </div>
-          </div>
-        </div>
-      </section>
+      <CertificationSection />
 
       <section className="py-12 sm:py-14 md:py-20">
         <div className="container mx-auto px-4">
@@ -584,7 +490,7 @@ const Home = () => {
           </AnimatedSection>
           <div
             ref={companyCarouselRef}
-            className="mt-9 flex items-stretch snap-x snap-mandatory gap-5 overflow-x-auto scroll-smooth pb-4 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+            className="home-company-carousel mt-6 flex items-stretch snap-x snap-mandatory gap-5 overflow-x-auto scroll-smooth pb-4 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
           >
             {homeCompanies.map((company, index) => (
               <AnimatedSection
@@ -593,40 +499,19 @@ const Home = () => {
                 delay={(index % 4) * 130}
                 duration={850}
                 triggerOnce={false}
-                className="flex w-[88%] flex-none snap-start self-stretch sm:w-[calc(50%_-_0.625rem)] lg:w-[calc(33.333%_-_0.833rem)] xl:w-[calc(25%_-_0.9375rem)]"
+                className="home-company-slide flex w-[88%] flex-none snap-center self-stretch sm:w-[calc(50%_-_0.625rem)] sm:snap-start lg:w-[calc(33.333%_-_0.833rem)] xl:w-[calc(25%_-_0.9375rem)]"
               >
                 <Link
                   to={`/companies/${company.id}`}
-                  className="company-glass group relative flex min-h-[450px] w-full flex-col overflow-hidden rounded-[1.5rem] p-5 transition duration-500 hover:-translate-y-2 md:p-6"
+                  className="company-glass group relative flex min-h-[340px] w-full flex-col overflow-hidden rounded-[1.5rem] p-5 transition duration-300 hover:-translate-y-2 md:min-h-[420px] md:p-6"
                 >
-                  <div className="relative flex min-h-[190px] items-center justify-center px-2 py-4">
-                    {company.id === 'new-camy-smart' ? (
-                      <img
-                        src={camyRedLogo}
-                        alt="Camy logo"
-                        className="h-44 w-full max-w-[330px] object-contain transition-transform duration-500 group-hover:scale-105"
-                        loading="lazy"
-                      />
-                    ) : (
-                      <CompanyLogo
-                        companyId={company.id}
-                        companyName={company.shortName}
-                        className="h-44 w-full max-w-[350px] !overflow-visible !bg-transparent transition duration-500"
-                        imageClassName={`h-full w-full mix-blend-multiply transition-transform duration-500 ${
-                          company.id === 'aerostar-home-appliances'
-                            ? 'scale-[2.75] [filter:contrast(1.18)_saturate(1.12)] group-hover:scale-[2.85]'
-                            : company.id === 'camy-smart'
-                              ? 'scale-[2.15] group-hover:scale-[2.23]'
-                              : company.id === 'rodsons'
-                                ? 'scale-[2.3] group-hover:scale-[2.38]'
-                                : company.id === 'camy-global'
-                                  ? 'scale-[2.15] group-hover:scale-[2.23]'
-                            : keepOriginalLogoSize(company.id)
-                            ? 'scale-[1.35] group-hover:scale-[1.41]'
-                            : 'scale-[1.62] group-hover:scale-[1.68]'
-                        }`}
-                      />
-                    )}
+                  <div className="relative flex min-h-[130px] items-center justify-center px-2 py-2 md:min-h-[170px]">
+                    <CompanyLogo
+                      companyId={company.id}
+                      companyName={company.shortName}
+                      placement="home"
+                      className="h-28 w-full bg-transparent md:h-40"
+                    />
                   </div>
                   <div className="relative flex flex-1 flex-col px-2 pb-1 pt-7">
                     <div className="mb-4 flex items-center gap-3 text-[10px] font-bold uppercase tracking-[.16em] text-[#738197]">
@@ -638,7 +523,7 @@ const Home = () => {
                     <h3 className="text-3xl font-semibold normal-case tracking-[-0.03em] text-[#071b2d]">
                       {company.shortName}
                     </h3>
-                    <p className="mt-3 line-clamp-2 leading-relaxed text-[#667388]">
+                    <p className="mt-3 hidden line-clamp-2 leading-relaxed text-[#667388] sm:block">
                       {company.description}
                     </p>
                     <div className="mt-auto flex items-center justify-between border-t border-primary/10 pt-5">
@@ -664,13 +549,13 @@ const Home = () => {
         >
           <div className="relative isolate overflow-hidden rounded-[2rem] bg-[#071b2d] px-7 py-12 text-white shadow-[0_30px_80px_rgba(7,27,45,.20)] sm:px-12 sm:py-16 md:rounded-[3rem] lg:px-20 lg:py-20">
             <div className="absolute inset-y-0 right-0 -z-10 w-full bg-[radial-gradient(circle_at_85%_35%,rgba(217,154,36,.16),transparent_30%),linear-gradient(115deg,transparent_45%,rgba(25,83,132,.38))] lg:w-2/3" />
-            <div className="grid gap-12 lg:grid-cols-[1fr_18rem] lg:items-end lg:gap-20">
+            <div className="grid gap-12 lg:grid-cols-[minmax(0,1fr)_18rem] lg:items-end lg:gap-20">
               <div>
                 <p className="mb-6 flex items-center gap-3 text-xs font-bold uppercase tracking-[0.24em] text-[#efbd55]">
                   <Sparkles size={15} /> The next chapter
                 </p>
                 <h2 className="max-w-4xl text-4xl font-semibold normal-case leading-[1.02] tracking-[-0.04em] sm:text-5xl md:text-7xl">
-                  Let’s build something <span className="text-[#efbd55]">lasting.</span>
+                  Let&#39;s build something <span className="text-[#efbd55]">lasting.</span>
                 </h2>
                 <p className="mt-7 max-w-2xl text-base leading-relaxed text-white/65 sm:text-lg">
                   From ambitious ideas to trusted partnerships, we are ready to create what Sri

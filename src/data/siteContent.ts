@@ -1,8 +1,8 @@
 import type { CompanySector } from './companies';
 
 export const siteStats = [
-  { value: '48+', label: 'Years of Excellence' },
-  { value: '11', label: 'Subsidiary Companies' },
+  { value: '48', label: 'Years of Excellence' },
+  { value: '13', label: 'Subsidiary Companies' },
   { value: '300+', label: 'Employees' },
   { value: '250+', label: 'Island-Wide Distributors' },
 ];
@@ -16,35 +16,35 @@ export const sectorHighlights: Array<{
     title: 'Manufacturing',
     sector: 'Manufacturing',
     description:
-      "Building Sri Lanka's own consumer durables, from SLS-certified motorcycle helmets to the country's first PU footwear, entirely in our own factories.",
+      'Sri Lankan manufacturing of helmets, footwear and household appliances in our own factories.',
   },
   {
     title: 'Retail & Distribution',
     sector: 'Retail & Distribution',
     description:
-      "Connecting Sri Lankan households to trusted products, from Supun Traders' wholesale roots to Supun Super Center's retail network across the island.",
+      'Trusted household products through Supun Traders, Supun Super Center and our island-wide network.',
   },
   {
     title: 'Hospitality & Dining',
     sector: 'Hospitality',
     description:
-      'Supun Arcade Residency and Area 56 bring hospitality to central Colombo, from luxury serviced apartments to first-class rooftop dining above the city.',
+      'Serviced apartments at Supun Arcade Residency and rooftop dining at Area 56 in Colombo.',
   },
   {
     title: 'The Camy Brand',
     sector: 'The Camy Brand',
     description:
-      "Camy is Supun Group's own consumer durables brand, designed and manufactured in Sri Lanka for Sri Lankan homes, spanning household appliances and everyday electronics.",
+      'Our own brand of household appliances and electronics, made for Sri Lankan homes.',
   },
 ];
 
 export const leadership = [
   { name: 'Rizna Kaleel', title: 'Non-Executive Director', description: '—' },
-  { name: 'Khalid Kaleel', title: 'Director', description: 'Oversees Fuji Industries' },
+  { name: 'Khalid Kaleel', title: 'Director', description: '' },
   {
     name: 'Raiza Kaleel',
     title: 'Director',
-    description: 'Oversees the Camy brand and Group marketing.',
+    description: '',
   },
   {
     name: 'Lasitha Samarasinghe',
@@ -94,11 +94,11 @@ export const journey = [
   ['2018', 'New Camy Smart founded, adding non-stick cookware manufacturing'],
   [
     '2023',
-    "Fuji Industries founded, the Group's newest venture, manufacturing air conditioners and fans",
+    "Air Condition and Fans manufacturing founded, the Group's newest venture, manufacturing air conditioners and fans",
   ],
   [
     'Today',
-    '11 companies across manufacturing, retail, distribution, and hospitality, employing 300+ people',
+    '13 companies across manufacturing, retail, distribution, and hospitality, employing 300+ people',
   ],
 ] as const;
 
@@ -141,7 +141,7 @@ export const awards = [
   },
   {
     award: 'VIP Award, 2024 TCL AC Global Partners Conference',
-    awardedTo: 'Fuji Industries',
+    awardedTo: 'Air Condition and Fans manufacturing',
     givenBy: 'TCL',
   },
   {
@@ -156,9 +156,13 @@ export const camyProducts = [
   { name: 'Water Filters', madeBy: 'Aero Star', note: 'Made in Sri Lanka' },
   { name: 'Mixer Grinders', madeBy: 'Aero Star', note: 'Made in Sri Lanka' },
   { name: 'Non-Stick Cookware', madeBy: 'New Camy Smart', note: 'Made in Sri Lanka' },
-  { name: 'Air Conditioners', madeBy: 'Fuji Industries', note: 'Made in Sri Lanka' },
-  { name: 'Fans', madeBy: 'Fuji Industries', note: 'Made in Sri Lanka' },
-  { name: 'TVs', madeBy: 'Fuji Industries', note: 'Made in Sri Lanka' },
+  {
+    name: 'Air Conditioners',
+    madeBy: 'Air Condition and Fans manufacturing',
+    note: 'Made in Sri Lanka',
+  },
+  { name: 'Fans', madeBy: 'Air Condition and Fans manufacturing', note: 'Made in Sri Lanka' },
+  { name: 'TVs', madeBy: 'Air Condition and Fans manufacturing', note: 'Made in Sri Lanka' },
   { name: 'Wall Clocks', madeBy: 'Aero Star', note: 'Made in Sri Lanka' },
   { name: 'Electric Kettles', madeBy: 'Group factories', note: 'Made in Sri Lanka' },
   { name: 'Gas Cookers', madeBy: 'Group factories', note: 'Made in Sri Lanka' },

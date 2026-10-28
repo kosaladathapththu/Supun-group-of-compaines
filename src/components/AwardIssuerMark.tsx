@@ -30,7 +30,7 @@ export const AwardIssuerMark = ({ issuer, certification = false }: AwardIssuerMa
 
   if (normalized.includes('booking.com')) {
     return (
-      <span className="text-2xl font-bold tracking-[-.05em] text-[#003b95]">
+      <span className="inline-block max-w-full whitespace-nowrap text-base font-bold leading-none tracking-[-.05em] text-[#003b95]">
         Booking<span className="text-[#009fe3]">.com</span>
       </span>
     );

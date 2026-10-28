@@ -6,21 +6,21 @@ import { getFileUrl, productsAPI, type Product } from '@/services/api';
 import camyBlackLogo from '@/assets/camy-brand-logo.png';
 import camyRedLogo from '@/assets/camy-logo-red-transparent.png';
 import anythingAtSupunLogo from '@/assets/anything-at-supun-logo.png';
-import helmetImage from '@/assets/helmet-manufacturing.jpg';
-import manufacturingImage from '@/assets/hero-manufacturing.jpg';
-import airConditionerImage from '@/assets/products/camy-air-conditioners.png';
+import helmetImage from '@/assets/optimized/helmet-manufacturing.jpg';
+import manufacturingImage from '@/assets/optimized/hero-manufacturing.jpg';
+import airConditionerImage from '@/assets/products/camy-air-conditioners-cutout.png';
 import doubleDoorRefrigeratorImage from '@/assets/products/camy-double-door-refrigerator.jpeg';
-import electricKettlesImage from '@/assets/products/camy-electric-kettles.png';
-import fanImage from '@/assets/products/camy-fan.png';
-import gasCookerImage from '@/assets/products/camy-gas-cooker.png';
+import electricKettlesImage from '@/assets/products/camy-electric-kettles.webp';
+import fanImage from '@/assets/products/camy-fan.webp';
+import gasCookerImage from '@/assets/products/camy-gas-cooker.webp';
 import miniRefrigeratorImage from '@/assets/products/camy-mini-refrigerator.jpeg';
-import mixerGrinderImage from '@/assets/products/camy-mixer-grinder.png';
-import motorcycleHelmetImage from '@/assets/products/camy-motorcycle-helmet.png';
-import nonStickCookwareImage from '@/assets/products/camy-non-stick-cookware.png';
-import pressureCookerImage from '@/assets/products/camy-pressure-cooker.png';
-import televisionImage from '@/assets/products/camy-tv.png';
-import wallClockImage from '@/assets/products/camy-wall-clock.png';
-import waterFilterImage from '@/assets/products/camy-water-filter.png';
+import mixerGrinderImage from '@/assets/products/camy-mixer-grinder.webp';
+import motorcycleHelmetImage from '@/assets/products/camy-helmet-cutout.png';
+import nonStickCookwareImage from '@/assets/products/camy-non-stick-cookware.webp';
+import pressureCookerImage from '@/assets/products/camy-pressure-cooker.webp';
+import televisionImage from '@/assets/products/camy-tv-no-reflection.png';
+import wallClockImage from '@/assets/products/camy-wall-clock.webp';
+import waterFilterImage from '@/assets/products/camy-water-filter.webp';
 
 const shopUrl = 'https://www.anythingatsupun.lk/';
 
@@ -146,7 +146,7 @@ const CamyProducts = () => {
       .camy-card:hover { transform:translateY(-5px); border-color:rgba(237,28,36,.45); box-shadow:0 25px 60px rgba(17,17,17,.14); }
       .camy-card:nth-child(4n+2),.camy-card:nth-child(4n+3) { grid-template-columns:54% 46%; }
       .camy-card:nth-child(4n+2) .camy-media,.camy-card:nth-child(4n+3) .camy-media { order:2; }
-      .camy-media { position:relative; min-width:0; overflow:hidden; background:#f0efeb; clip-path:inset(0 round 0); transition:clip-path .65s cubic-bezier(.22,1,.36,1),transform .65s cubic-bezier(.22,1,.36,1); }
+      .camy-media { position:relative; min-width:0; overflow:hidden; background:#fff; clip-path:inset(0 round 0); transition:clip-path .65s cubic-bezier(.22,1,.36,1),transform .65s cubic-bezier(.22,1,.36,1); }
       .camy-media::after { content:""; position:absolute; inset:0; z-index:1; opacity:0; background:rgba(0,0,0,.48); transition:opacity .4s ease; pointer-events:none; }
       .camy-media>img { display:block; width:100%; height:100%; object-fit:contain; background:#fff; padding:1rem; transition:transform .75s cubic-bezier(.22,1,.36,1),filter .45s ease; }
       .camy-card:hover .camy-media { clip-path:inset(18px round 999px); transform:scale(.96); }
@@ -177,6 +177,8 @@ const CamyProducts = () => {
               src={camyRedLogo}
               alt="Camy"
               className="mb-7 h-32 w-64 object-contain object-left md:h-40 md:w-80"
+              decoding="async"
+              loading="lazy"
             />
             <p className="text-xs font-bold uppercase tracking-[.22em] text-[#ed1c24]">
               A Supun Group brand
@@ -191,31 +193,10 @@ const CamyProducts = () => {
             >
               Products for <span style={{ color: '#ed1c24' }}>everyday life.</span>
             </h1>
-            <p className="mt-7 max-w-xl text-lg leading-8 text-black/60 md:text-xl">
-              Camy brings together a growing range of products for the home, the road and everything
-              in between. Designed with purpose and shaped by an understanding of everyday needs,
-              each product is backed by the manufacturing experience of the Supun Group.
+            <p className="mt-6 max-w-lg text-lg leading-7 text-black/60">
+              Everyday essentials for your home and the road, backed by Supun Group's manufacturing
+              experience.
             </p>
-            <div className="mt-8 grid gap-4 sm:grid-cols-2">
-              <article className="border-l-2 border-[#ed1c24] pl-4">
-                <h2 className="text-xs font-extrabold uppercase tracking-[.16em] text-[#111]">
-                  Designed with purpose
-                </h2>
-                <p className="mt-2 text-sm leading-6 text-black/55">
-                  We focus on the details that make a product useful, how it fits into your routine,
-                  how it performs and how it feels to live with.
-                </p>
-              </article>
-              <article className="border-l-2 border-[#ed1c24] pl-4">
-                <h2 className="text-xs font-extrabold uppercase tracking-[.16em] text-[#111]">
-                  Backed by experience
-                </h2>
-                <p className="mt-2 text-sm leading-6 text-black/55">
-                  CAMY is backed by the manufacturing experience of the Supun Group, bringing local
-                  knowledge and hands-on expertise to everything we make.
-                </p>
-              </article>
-            </div>
             <div className="camy-actions">
               <a href="#camy-range" className="camy-button camy-button-dark">
                 Explore the range <ArrowRight size={18} />
@@ -231,7 +212,12 @@ const CamyProducts = () => {
             </div>
           </div>
           <div className="camy-visual">
-            <img src={helmetImage} alt="Camy helmet manufacturing in Sri Lanka" />
+            <img
+              src={helmetImage}
+              alt="Camy helmet manufacturing in Sri Lanka"
+              decoding="async"
+              loading="lazy"
+            />
             <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent" />
             <div className="camy-proof">
               <div className="camy-proof-item">
@@ -278,9 +264,14 @@ const CamyProducts = () => {
                   className="camy-media"
                   aria-label={`Shop ${product.name} at Anything at Supun`}
                 >
-                  <img src={product.image} alt={`${product.name} by Camy`} loading="lazy" />
+                  <img
+                    src={product.image}
+                    alt={`${product.name} by Camy`}
+                    loading="lazy"
+                    decoding="async"
+                  />
                   <span className="camy-hover-brand" aria-hidden="true">
-                    <img src={camyBlackLogo} alt="" />
+                    <img src={camyBlackLogo} alt="" decoding="async" loading="lazy" />
                     <strong>CAMY</strong>
                   </span>
                 </a>
@@ -333,6 +324,8 @@ const CamyProducts = () => {
                   src={anythingAtSupunLogo}
                   alt="Anything at Supun"
                   className="h-14 w-auto object-contain"
+                  decoding="async"
+                  loading="lazy"
                 />
               </span>
               <div>

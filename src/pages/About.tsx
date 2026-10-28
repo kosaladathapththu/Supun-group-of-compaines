@@ -1,36 +1,36 @@
-import { ArrowRight, Eye, Flag, Gem, Lightbulb, Target, UserRound, Users } from 'lucide-react';
+import { ArrowRight, Users } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import Seo, { DEFAULT_IMAGE, SITE_NAME, SITE_URL } from '@/components/Seo';
 import { AnimatedSection } from '@/components/AnimatedSection';
 import { AwardIssuerMark } from '@/components/AwardIssuerMark';
 import chairmanImage from '@/assets/Chairman.png';
-import lasithaImage from '@/assets/lasitha-samarasinghe.png';
-import riazImage from '@/assets/mohamed-riaz-farouk.png';
-import heroCorporate from '@/assets/hero-corporate.jpg';
-import aboutHeroSriLanka from '@/assets/about-hero-sri-lanka-v3.png';
-import retailStore from '@/assets/retail-store.jpg';
-import manufacturingImage from '@/assets/sector-manufacturing-v2.jpg';
-import hospitalityImage from '@/assets/sector-hospitality-v2.jpg';
-import sriLankaMap from '@/assets/sri-lanka-watercolor-map.png';
-import coreValuesTeam from '@/assets/about-core-values-team.png';
-import { awards, coreValues, journey, leadership } from '@/data/siteContent';
-import { getCompanyLogo } from '@/data/companyLogos';
+import heroCorporate from '@/assets/optimized/hero-corporate.jpg';
+import aboutHeroSriLanka from '@/assets/optimized/about-hero-sri-lanka-v3.jpg';
+import supunTradersHeritage from '@/assets/optimized/supun-traders-heritage.jpg';
+import manufacturingImage from '@/assets/optimized/camy-factory-technician.jpg';
+import industryBanner from '@/assets/optimized/sri-lanka-industry-banner.jpg';
+import sriLankaMap from '@/assets/optimized/sri-lanka-watercolor-map.webp';
+import camyLogo from '@/assets/camy-logo-red-transparent.png';
+import { awards, journey, leadership } from '@/data/siteContent';
+import { CompanyLogo } from '@/components/CompanyLogo';
+import { ResponsiveCopy } from '@/components/ResponsiveCopy';
 
 const stats = [
-  ['11', 'Group companies'],
+  ['13', 'Group companies'],
   ['300+', 'Employees'],
   ['250+', 'Distributors'],
 ];
-const valueIcons = [Gem, Users, Lightbulb, Flag];
 const awardCompanyPaths: Record<string, string> = {
   'Camy Smart': '/companies/camy-smart',
   'Aero Star (Aerostar Home Appliances)': '/companies/aerostar-home-appliances',
   'Supun Group of Companies': '/about',
-  'Fuji Industries': '/companies/fuji-industries',
+  'Air Condition and Fans manufacturing': '/companies/fuji-industries',
   'Supun Arcade Residency': '/companies/supun-arcade-residency',
 };
 const Label = ({ children }: { children: React.ReactNode }) => (
-  <p className="text-xs font-bold uppercase tracking-[.18em] text-[#315f9f]">{children}</p>
+  <p className="section-eyebrow text-xs font-bold uppercase tracking-[.18em] text-[#315f9f]">
+    {children}
+  </p>
 );
 const Rule = () => <div className="mt-4 h-0.5 w-12 bg-[#d79a22]" />;
 
@@ -50,17 +50,35 @@ const journeyCompanyLogos: Record<string, { id: string; name: string }[]> = {
     { id: 'rodsons', name: 'Rodsons' },
   ],
   '2018': [{ id: 'new-camy-smart', name: 'New Camy Smart' }],
-  '2023': [{ id: 'fuji-industries', name: 'Fuji Industries' }],
+  '2023': [{ id: 'camy-brand', name: 'Camy' }],
 };
 
-const journeyLogoSource = (id: string) =>
-  id === 'group' ? '/supun-group-of-companies-logo.png' : getCompanyLogo(id);
+const JourneyLogo = ({ id, name }: { id: string; name: string }) =>
+  id === 'group' ? (
+    <img
+      src="/supun-group-of-companies-logo.png"
+      alt={name}
+      className="h-16 w-20 object-contain"
+      loading="lazy"
+      decoding="async"
+    />
+  ) : id === 'camy-brand' ? (
+    <img
+      src={camyLogo}
+      alt={name}
+      className="h-full w-full object-contain p-2"
+      loading="lazy"
+      decoding="async"
+    />
+  ) : (
+    <CompanyLogo companyId={id} companyName={name} placement="timeline" className="h-full w-full" />
+  );
 
 const About = () => (
   <div className="min-h-screen overflow-hidden bg-[#fbfaf7] text-[#102746]">
     <Seo
       title="About Supun Group of Companies | Sri Lanka Since 1978"
-      description="Learn about Supun Group of Companies, a Sri Lankan family business operating 11 companies across manufacturing, retail, distribution and hospitality since 1978."
+      description="Learn about Supun Group of Companies, a Sri Lankan family business operating 13 companies across manufacturing, retail, distribution and hospitality since 1978."
       keywords="Supun Group of Companies, Sri Lankan companies, Sri Lanka manufacturing, retail and distribution Sri Lanka, hospitality Colombo, Supun Group history"
       path="/about"
       image={DEFAULT_IMAGE}
@@ -135,6 +153,7 @@ const About = () => (
         src={aboutHeroSriLanka}
         alt="Colombo skyline and a modern Sri Lankan business campus at sunrise"
         className="absolute inset-0 -z-20 h-full w-full object-cover object-center"
+        decoding="async"
       />
       <div className="absolute inset-0 -z-10 bg-gradient-to-r from-[#071426]/90 via-[#071426]/45 to-transparent" />
       <div className="container mx-auto flex min-h-[620px] items-center px-4 pb-16 pt-36 md:min-h-[690px] md:pt-40">
@@ -169,35 +188,37 @@ const About = () => (
       <div className="container mx-auto grid gap-10 px-4 lg:grid-cols-[.9fr_1.1fr] lg:items-center">
         <AnimatedSection animation="fade" duration={500} triggerOnce={false}>
           <Label>Our story</Label>
-          <h2 className="mt-3 text-4xl font-semibold normal-case tracking-[-.04em] md:text-5xl">
+          <h2 className="mt-3 text-4xl font-semibold normal-case tracking-[-.04em] text-[#28271f] md:text-5xl">
             From trading goods to making them.
           </h2>
           <Rule />
           <div className="mt-6 space-y-4 text-sm leading-7 text-[#53647a] md:text-base">
-            <p>
-              A family-run business since 1978, Supun Group of Companies began when Mr. Mohamed
-              Fareed founded Supun Traders in Colombo, trading household appliances and electronics
-              for Sri Lankan homes. In 1999, his son, current Chairman Mr. M.F.M. Kaleel, took over
-              the business and formalized it as the Supun Group of Companies, setting the Group on a
-              new course: from trading goods to manufacturing them.
-            </p>
-            <p>
-              Through structured growth, the Group is now involved in manufacturing, retail,
-              distribution, and hospitality, each held to the same standard of quality and Sri
-              Lankan craftsmanship. Under the Camy name, Supun manufactures SLS-certified motorcycle
-              helmets, non-stick cookware, air conditioners, and fans entirely in its own factories,
-              reaching homes across the island through Supun Super Center and a network of 250+
-              distributors.
-            </p>
-            <p>
-              Supun Arcade Residency extends the Group into hospitality with luxury serviced
-              apartments in central Colombo, alongside Area 56, its rooftop dining venue.
-            </p>
-            <p>
-              With an eye on the future and a continued focus on Sri Lankan manufacturing, the Group
-              credits its growth to two generations of family leadership and a shared commitment to
-              quality, innovation, and Sri Lankan pride, in everything it builds.
-            </p>
+            <ResponsiveCopy summary="Founded as Supun Traders in 1978, our family business now brings together 13 companies in manufacturing, retail, distribution and hospitality. Camy products are made in Sri Lanka and distributed island-wide.">
+              <p>
+                A family-run business since 1978, Supun Group of Companies began when Mr. Mohamed
+                Fareed founded Supun Traders in Colombo, trading household appliances and
+                electronics for Sri Lankan homes. In 1999, his son, current Chairman Mr. M.F.M.
+                Kaleel, took over the business and formalized it as the Supun Group of Companies,
+                setting the Group on a new course: from trading goods to manufacturing them.
+              </p>
+              <p>
+                Through structured growth, the Group is now involved in manufacturing, retail,
+                distribution, and hospitality, each held to the same standard of quality and Sri
+                Lankan craftsmanship. Under the Camy name, Supun manufactures SLS-certified
+                motorcycle helmets, non-stick cookware, air conditioners, and fans entirely in its
+                own factories, reaching homes across the island through Supun Super Center and a
+                network of 250+ distributors.
+              </p>
+              <p>
+                Supun Arcade Residency extends the Group into hospitality with luxury serviced
+                apartments in central Colombo, alongside Area 56, its rooftop dining venue.
+              </p>
+              <p>
+                With an eye on the future and a continued focus on Sri Lankan manufacturing, the
+                Group credits its growth to two generations of family leadership and a shared
+                commitment to quality, innovation, and Sri Lankan pride, in everything it builds.
+              </p>
+            </ResponsiveCopy>
           </div>
           <div className="mt-7 grid grid-cols-3 gap-3">
             {stats.map(([value, label]) => (
@@ -209,22 +230,25 @@ const About = () => (
           </div>
         </AnimatedSection>
         <AnimatedSection animation="fade" duration={550} triggerOnce={false}>
-          <div className="relative mx-auto min-h-[500px] max-w-2xl">
+          <div className="about-story-collage relative mx-auto min-h-[500px] max-w-2xl">
             <img
               src={sriLankaMap}
               alt=""
               aria-hidden="true"
               className="absolute -right-[3%] -top-[3%] h-[106%] w-[48%] object-contain opacity-45 mix-blend-multiply"
+              decoding="async"
             />
             <img
-              src={retailStore}
-              alt="The Group's retail beginnings"
-              className="absolute left-0 top-5 z-10 h-[285px] w-[67%] -rotate-2 border-[8px] border-white object-cover shadow-xl grayscale"
+              src={supunTradersHeritage}
+              alt="Historic Supun Traders storefront in Colombo"
+              className="absolute left-0 top-5 z-10 h-[285px] w-[67%] -rotate-2 border-[8px] border-white object-cover shadow-xl"
+              decoding="async"
             />
             <img
               src={heroCorporate}
               alt="Supun Group today"
               className="absolute bottom-4 left-[27%] z-20 h-[235px] w-[62%] rotate-3 border-[8px] border-white object-cover shadow-xl"
+              decoding="async"
             />
             <div className="absolute right-[2%] top-[25%] z-30 w-[34%] text-center text-[10px] font-bold uppercase leading-5 tracking-[.14em] text-[#75561f]">
               Local Roots.
@@ -239,12 +263,16 @@ const About = () => (
     <section id="chairman" className="scroll-mt-24 bg-white">
       <div className="container mx-auto grid lg:grid-cols-[.72fr_1.28fr] lg:items-stretch">
         <AnimatedSection animation="fade" duration={500} triggerOnce={false}>
-          <div className="flex h-full flex-col items-center justify-center bg-white px-6 py-12 text-center lg:px-10">
-            <img
-              src={chairmanImage}
-              alt="M.F.M. Kaleel, Chairman"
-              className="max-h-[500px] w-full max-w-[430px] object-contain object-center"
-            />
+          <div className="flex h-full flex-col items-center justify-center bg-white px-6 py-5 text-center sm:py-12 lg:px-10">
+            <div className="chairman-portrait w-full max-w-[430px] overflow-hidden">
+              <img
+                src={chairmanImage}
+                alt="M.F.M. Kaleel, Chairman"
+                className="max-h-[500px] w-full max-w-[430px] object-contain object-center"
+                decoding="async"
+                loading="lazy"
+              />
+            </div>
             <div className="mt-5 w-full max-w-[430px] border-t border-[#102746]/10 pt-5">
               <p className="text-xl font-medium leading-snug text-[#102746]">
                 “Innovation and creativity for a better tomorrow.”
@@ -262,34 +290,38 @@ const About = () => (
             </h2>
             <Rule />
             <div className="mt-7 space-y-4 text-sm leading-7 text-[#53647a]">
-              <p>
-                Since the company was established in 1999, Supun Group of Companies has cultivated
-                its status as a pioneer in the manufacturing and the trading business. Guided by our
-                corporate creed of “Innovation &amp; Creativity”, we have continued to challenge
-                ourselves to provide a wide range of products and services locally and
-                internationally through technology transfers, human commitment and professionalism.
-              </p>
-              <p>
-                The business environment has experienced radical changes due to the rapid
-                advancement of technology and natural environmental distresses. This has helped
-                businesses to identify new opportunities and also challenged them with greater
-                pressures for change in their approach. As a result, businesses continually change
-                their conventional approach to a more agile, lean and forward-thinking structure in
-                the perpetually changing environment.
-              </p>
-              <p>
-                We too are constantly challenged by these competitive forces, be it natural or
-                man-made, facing them positively and proactively with our dedicated team is what we
-                always strive for.
-              </p>
-              <p>
-                At Supun, I am proud to be a part of an excellent team, that has dedicated
-                themselves to the success story of a proud Sri Lankan entity. We continue to
-                challenge ourselves to seize every opportunity within our reach enabling us to
-                enrich the lives of our stakeholders in our efforts to exceed their expectations.
-                This has been the core of our success story and we strive to continue our journey in
-                nurturing business goals through various new products and services in the future.
-              </p>
+              <ResponsiveCopy summary="Our growth is guided by innovation, creativity and a dedicated team. We continue to invest in Sri Lankan manufacturing and create lasting value for our customers, people and partners.">
+                <p>
+                  Since the company was established in 1999, Supun Group of Companies has cultivated
+                  its status as a pioneer in the manufacturing and the trading business. Guided by
+                  our corporate creed of “Innovation &amp; Creativity”, we have continued to
+                  challenge ourselves to provide a wide range of products and services locally and
+                  internationally through technology transfers, human commitment and
+                  professionalism.
+                </p>
+                <p>
+                  The business environment has experienced radical changes due to the rapid
+                  advancement of technology and natural environmental distresses. This has helped
+                  businesses to identify new opportunities and also challenged them with greater
+                  pressures for change in their approach. As a result, businesses continually change
+                  their conventional approach to a more agile, lean and forward-thinking structure
+                  in the perpetually changing environment.
+                </p>
+                <p>
+                  We too are constantly challenged by these competitive forces, be it natural or
+                  man-made, facing them positively and proactively with our dedicated team is what
+                  we always strive for.
+                </p>
+                <p>
+                  At Supun, I am proud to be a part of an excellent team, that has dedicated
+                  themselves to the success story of a proud Sri Lankan entity. We continue to
+                  challenge ourselves to seize every opportunity within our reach enabling us to
+                  enrich the lives of our stakeholders in our efforts to exceed their expectations.
+                  This has been the core of our success story and we strive to continue our journey
+                  in nurturing business goals through various new products and services in the
+                  future.
+                </p>
+              </ResponsiveCopy>
             </div>
             <p className="mt-7 border-t border-[#102746]/10 pt-5 font-semibold">
               M.F.M. Kaleel{' '}
@@ -300,103 +332,112 @@ const About = () => (
       </div>
     </section>
 
-    <section id="leadership" className="scroll-mt-24 bg-white py-14 md:py-20">
+    <section id="leadership" className="scroll-mt-24 overflow-hidden bg-[#faf8f2] py-12 md:py-16">
       <div className="container mx-auto px-4">
-        <Label>Leadership team</Label>
-        <h2 className="mt-3 text-4xl font-semibold normal-case tracking-[-.04em]">
-          Leading with experience.
-        </h2>
-        <Rule />
-        <div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-12">
-          {leadership.map((person, index) => (
-            <AnimatedSection
-              key={person.name}
-              animation="fade"
-              delay={(index % 4) * 40}
-              duration={450}
-              triggerOnce={false}
-              className={index < 3 ? 'lg:col-span-4' : 'lg:col-span-3'}
-            >
-              <article className="flex h-full flex-col overflow-hidden border border-[#102746]/10 bg-white transition duration-300 hover:-translate-y-1 hover:shadow-[0_14px_32px_rgba(16,39,70,.08)]">
-                {person.name === 'Lasitha Samarasinghe' ? (
-                  <img
-                    src={lasithaImage}
-                    alt="Lasitha Samarasinghe"
-                    className="aspect-[4/3] w-full bg-[#e9edf2] object-cover object-top"
-                  />
-                ) : person.name === 'Mohamed Riaz Farouk' ? (
-                  <img
-                    src={riazImage}
-                    alt="Mohamed Riaz Farouk"
-                    className="aspect-[4/3] w-full bg-[#e9edf2] object-cover object-top"
-                  />
-                ) : (
-                  <div className="flex aspect-[4/3] w-full flex-col items-center justify-center bg-[#e9edf2] text-[#8b98a8]">
-                    <span className="flex h-20 w-20 items-center justify-center rounded-full border border-[#102746]/10 bg-white/70">
-                      <UserRound size={38} strokeWidth={1.25} />
-                    </span>
-                    <span className="mt-3 text-[9px] font-bold uppercase tracking-[.16em]">
-                      Portrait placeholder
-                    </span>
-                  </div>
-                )}
-                <div className="flex flex-1 flex-col p-5">
-                  <h3 className="text-lg font-semibold normal-case leading-tight">{person.name}</h3>
-                  <p className="mt-2 text-xs font-semibold uppercase leading-5 tracking-[.08em] text-[#947027]">
+        <div className="mx-auto max-w-3xl text-center">
+          <div className="mx-auto flex h-11 w-11 items-center justify-center rounded-full bg-[#214a36] text-white shadow-[0_10px_25px_rgba(33,74,54,.16)]">
+            <Users size={22} strokeWidth={1.7} />
+          </div>
+          <p className="mt-4 text-xs font-bold uppercase tracking-[.2em] text-[#9a6a16]">
+            Leadership structure
+          </p>
+          <h2 className="mt-3 text-4xl font-semibold normal-case tracking-[-.04em] md:text-5xl">
+            One vision. Clear leadership.
+          </h2>
+          <p className="mx-auto mt-4 max-w-2xl text-sm leading-6 text-[#69665e] md:text-base">
+            A connected leadership structure guiding Group strategy, operational excellence and the
+            growth of every Supun business.
+          </p>
+        </div>
+
+        <div className="relative mx-auto mt-9 max-w-6xl md:mt-11">
+          <div className="mx-auto mb-3 w-fit rounded-full border border-[#d79a22]/25 bg-[#fff3d7] px-4 py-1.5 text-[9px] font-bold uppercase tracking-[.18em] text-[#8b5d10]">
+            Board leadership
+          </div>
+          <div className="grid gap-4 md:grid-cols-3">
+            {leadership.slice(0, 3).map((person, index) => (
+              <AnimatedSection
+                key={person.name}
+                animation="fade"
+                delay={index * 60}
+                duration={450}
+                triggerOnce={false}
+              >
+                <article className="h-full rounded-xl border border-[#d79a22]/25 bg-white p-4 text-center shadow-[0_8px_24px_rgba(74,55,20,.06)] transition duration-300 hover:-translate-y-1 hover:border-[#d79a22]/50">
+                  <span className="mx-auto block h-1 w-10 rounded-full bg-[#d79a22]" />
+                  <h3 className="mt-3 text-lg font-semibold normal-case text-[#28271f]">
+                    {person.name}
+                  </h3>
+                  <p className="mt-2 text-[11px] font-bold uppercase leading-5 tracking-[.12em] text-[#947027]">
                     {person.title}
                   </p>
                   {person.description && person.description !== '—' && (
-                    <p className="mt-4 border-t border-[#102746]/10 pt-4 text-xs leading-5 text-[#68778a]">
-                      {person.description}
-                    </p>
+                    <p className="mt-2 text-xs leading-5 text-[#777267]">{person.description}</p>
                   )}
-                </div>
-              </article>
-            </AnimatedSection>
-          ))}
-        </div>
-      </div>
-    </section>
+                </article>
+              </AnimatedSection>
+            ))}
+          </div>
 
-    <section id="direction" className="w-full scroll-mt-24 bg-white">
-      <div className="grid w-full lg:grid-cols-[1.35fr_.65fr]">
-        <div className="grid gap-px bg-[#d9d7d1] sm:grid-cols-2">
-          <article className="bg-white px-6 py-10 sm:px-10 lg:px-16 xl:px-20">
-            <Eye className="text-[#d79a22]" size={34} strokeWidth={1.6} />
-            <Label>Vision</Label>
-            <h2 className="mt-3 text-2xl font-semibold normal-case">
-              Innovate. Unleash and Excel.
-            </h2>
-            <p className="mt-4 text-sm leading-6 text-[#637186]">
-              To unleash the potential within us to transform the markets through innovation and
-              exceed people’s expectations for a better tomorrow, through the goods and services
-              which empower and enrich the lives of Sri Lankans.
-            </p>
-          </article>
-          <article className="bg-white px-6 py-10 sm:px-10 lg:px-12 xl:px-16">
-            <Target className="text-[#d79a22]" size={34} strokeWidth={1.6} />
-            <Label>Mission</Label>
-            <h2 className="mt-3 text-2xl font-semibold normal-case">
-              Superior thinking. Sustainable value.
-            </h2>
-            <p className="mt-4 text-sm leading-6 text-[#637186]">
-              To harness superior thinking in the creation of products and services that
-              functionally enhance the livelihood of people, while remaining cautious in reducing
-              our carbon footprint. We integrate sustainable practices across our operations while
-              delivering exceptional value to our stakeholders.
-            </p>
-          </article>
-        </div>
-        <div className="relative min-h-[360px]">
-          <img
-            src={manufacturingImage}
-            alt="Sustainable local manufacturing"
-            className="absolute inset-0 h-full w-full object-cover"
-          />
-          <div className="absolute inset-0 bg-gradient-to-t from-[#102746]/90 to-[#102746]/10" />
-          <p className="absolute bottom-8 left-8 max-w-[230px] text-2xl font-medium leading-snug text-white">
-            Sustainable solutions for generations.
-          </p>
+          <div className="mx-auto mb-3 mt-8 w-fit rounded-full border border-[#4e7c47]/20 bg-[#edf5e8] px-4 py-1.5 text-[9px] font-bold uppercase tracking-[.18em] text-[#3f6c39]">
+            Group executive leadership
+          </div>
+          <div className="mx-auto grid max-w-4xl gap-4 md:grid-cols-2">
+            {leadership.slice(3, 5).map((person, index) => (
+              <AnimatedSection
+                key={person.name}
+                animation="fade"
+                delay={index * 60}
+                duration={450}
+                triggerOnce={false}
+              >
+                <article className="h-full rounded-xl border border-[#4e7c47]/20 bg-white p-5 text-center shadow-[0_8px_24px_rgba(45,82,54,.06)] transition duration-300 hover:-translate-y-1 hover:border-[#4e7c47]/45">
+                  <span className="mx-auto block h-1 w-10 rounded-full bg-[#4e7c47]" />
+                  <h3 className="mt-2.5 text-xl font-semibold normal-case text-[#28271f]">
+                    {person.name}
+                  </h3>
+                  <p className="mt-1.5 text-[11px] font-semibold uppercase leading-5 tracking-[.08em] text-[#4f852c]">
+                    {person.title}
+                  </p>
+                  <p className="mt-3 border-t border-[#4e7c47]/10 pt-3 text-xs leading-5 text-[#777267]">
+                    {person.description}
+                  </p>
+                </article>
+              </AnimatedSection>
+            ))}
+          </div>
+
+          <div className="mx-auto mb-3 mt-8 w-fit rounded-full border border-[#78be43]/25 bg-[#eff8e9] px-4 py-1.5 text-[9px] font-bold uppercase tracking-[.18em] text-[#4f852c]">
+            Business leadership
+          </div>
+          <div className="mx-auto grid max-w-4xl gap-4 md:grid-cols-2">
+            {leadership.slice(5).map((person, index) => (
+              <AnimatedSection
+                key={person.name}
+                animation="fade"
+                delay={index * 60}
+                duration={450}
+                triggerOnce={false}
+              >
+                <article className="h-full rounded-xl border border-[#4e7c47]/15 bg-white p-5 text-center transition duration-300 hover:-translate-y-1 hover:shadow-[0_10px_26px_rgba(45,82,54,.08)]">
+                  <div className="text-center">
+                    <span className="mx-auto mb-3 block h-1 w-10 rounded-full bg-[#4e7c47]" />
+                    <div>
+                      <h3 className="text-lg font-semibold normal-case text-[#28271f]">
+                        {person.name}
+                      </h3>
+                      <p className="mt-1.5 text-[11px] font-bold uppercase leading-5 tracking-[.08em] text-[#4f852c]">
+                        {person.title}
+                      </p>
+                    </div>
+                  </div>
+                  <p className="mt-3 border-t border-[#4e7c47]/10 pt-3 text-xs leading-5 text-[#777267]">
+                    {person.description}
+                  </p>
+                </article>
+              </AnimatedSection>
+            ))}
+          </div>
         </div>
       </div>
     </section>
@@ -409,10 +450,10 @@ const About = () => (
         </h2>
         <Rule />
         <p className="mt-3 hidden text-xs text-[#788496] lg:block">
-          Move over a year to read its story.
+          Explore the milestones in our story.
         </p>
-        <div className="relative mt-9 grid grid-cols-2 gap-x-4 gap-y-7 sm:grid-cols-3 md:grid-cols-5 lg:grid-cols-10 lg:gap-0 lg:before:absolute lg:before:left-2 lg:before:right-2 lg:before:top-[63px] lg:before:h-px lg:before:bg-[#d79a22]">
-          {journey.map(([year, description], index) => {
+        <div className="relative mt-9 grid grid-cols-2 gap-x-4 gap-y-8 sm:grid-cols-3 md:grid-cols-5 xl:grid-cols-10 xl:gap-x-3 xl:before:absolute xl:before:left-2 xl:before:right-2 xl:before:top-[87px] xl:before:h-px xl:before:bg-[#d79a22]">
+          {journey.map(([year, description]) => {
             const logos = journeyCompanyLogos[year] ?? [];
 
             return (
@@ -420,20 +461,15 @@ const About = () => (
                 key={year}
                 tabIndex={0}
                 aria-label={`${year}: ${description}`}
-                className="group relative min-w-0 pr-3 outline-none focus-visible:ring-2 focus-visible:ring-[#315f9f]"
+                className="group relative min-w-0 pr-2 outline-none focus-visible:ring-2 focus-visible:ring-[#315f9f]"
               >
-                <div className="flex h-14 items-center gap-1 pb-2">
+                <div className="flex h-20 items-center gap-1 pb-2">
                   {logos.map(({ id, name }) => (
                     <span
                       key={id}
-                      className="flex h-11 w-11 shrink-0 items-center justify-center rounded-lg border border-[#102746]/10 bg-white p-1 shadow-sm transition-transform group-hover:-translate-y-1 group-focus:-translate-y-1"
+                      className="flex h-16 w-16 min-w-0 shrink items-center justify-center overflow-hidden rounded-xl border border-[#102746]/10 bg-white p-1 shadow-sm transition-transform group-hover:-translate-y-1 group-focus:-translate-y-1"
                     >
-                      <img
-                        src={journeyLogoSource(id)}
-                        alt={name}
-                        className="max-h-full max-w-full object-contain"
-                        loading="lazy"
-                      />
+                      <JourneyLogo id={id} name={name} />
                     </span>
                   ))}
                 </div>
@@ -442,34 +478,6 @@ const About = () => (
                   {year}
                 </strong>
                 <p className="mt-1.5 text-[10px] leading-4 text-[#637186]">{description}</p>
-                <div
-                  className={`pointer-events-none absolute bottom-[calc(100%+12px)] z-40 hidden w-72 rounded-xl border border-[#102746]/10 bg-white p-5 text-left shadow-[0_18px_45px_rgba(16,39,70,.16)] lg:group-hover:block lg:group-focus:block ${index === 0 ? 'left-0' : index === journey.length - 1 ? 'right-0' : 'left-1/2 -translate-x-1/2'}`}
-                >
-                  <div className="flex items-center gap-3">
-                    {logos.map(({ id, name }) => (
-                      <span
-                        key={id}
-                        className="flex h-14 w-14 items-center justify-center rounded-lg border border-[#102746]/10 bg-white p-1.5"
-                      >
-                        <img
-                          src={journeyLogoSource(id)}
-                          alt={name}
-                          className="max-h-full max-w-full object-contain"
-                        />
-                      </span>
-                    ))}
-                    <div>
-                      <span className="text-[10px] font-bold uppercase tracking-[.16em] text-[#a87417]">
-                        Milestone
-                      </span>
-                      <strong className="mt-1 block text-xl text-[#102746]">{year}</strong>
-                    </div>
-                  </div>
-                  <p className="mt-3 text-sm leading-6 text-[#53647a]">{description}</p>
-                  <span
-                    className={`absolute -bottom-2 h-4 w-4 rotate-45 border-b border-r border-[#102746]/10 bg-white ${index === 0 ? 'left-2' : index === journey.length - 1 ? 'right-2' : 'left-1/2 -translate-x-1/2'}`}
-                  />
-                </div>
               </article>
             );
           })}
@@ -477,56 +485,61 @@ const About = () => (
       </div>
     </section>
 
-    <section className="bg-white py-14 md:py-20">
-      <div className="container mx-auto grid gap-10 px-4 lg:grid-cols-[.82fr_1.18fr] lg:items-center lg:gap-14">
-        <div className="relative min-h-[520px] overflow-hidden rounded-[1.75rem] bg-[#102746] shadow-[0_24px_60px_rgba(16,39,70,.16)] sm:min-h-[620px]">
-          <img
-            src={coreValuesTeam}
-            alt="Sri Lankan product development team working together"
-            className="absolute inset-0 h-full w-full object-cover"
-          />
-          <div className="absolute inset-0 bg-gradient-to-t from-[#071b2d] via-[#071b2d]/15 to-transparent" />
-          <div className="absolute inset-x-0 bottom-0 p-7 text-white sm:p-9">
-            <p className="text-xs font-bold uppercase tracking-[.22em] text-[#efbd55]">
-              Values in action
-            </p>
-            <h2 className="mt-3 text-3xl font-semibold normal-case leading-tight tracking-[-.03em] sm:text-4xl">
-              Built with purpose.
-              <br />
-              Led by people.
+    <section id="direction" className="scroll-mt-24 bg-white py-12 md:py-16">
+      <div className="container mx-auto grid items-stretch gap-8 px-4 lg:grid-cols-[1.6fr_1fr] lg:gap-12">
+        <div className="grid gap-4 sm:grid-cols-2 sm:gap-5">
+          <article className="rounded-2xl border border-[#e6e1d5] bg-[#faf9f5] p-6 sm:p-7">
+            <h2 className="text-3xl font-semibold normal-case tracking-[-.03em] text-[#102746]">
+              Vision
             </h2>
-            <div className="mt-6 flex items-center gap-5 border-t border-white/25 pt-5">
-              <strong className="text-4xl font-semibold tracking-[-.05em]">04</strong>
-              <p className="max-w-[10rem] text-[10px] font-semibold uppercase leading-5 tracking-[.16em] text-white/65">
-                Principles that guide our Group
-              </p>
+            <div className="my-5 h-0.5 w-10 bg-[#c39a42]" aria-hidden="true" />
+            <h3 className="text-xl font-semibold normal-case leading-tight text-[#354d66]">
+              Innovate. Unleash and Excel.
+            </h3>
+            <div className="mt-4 text-sm leading-6 text-[#637186]">
+              <ResponsiveCopy summary="Transforming Sri Lankan lives through innovation, quality products and services that exceed expectations.">
+                To unleash the potential within us to transform the markets through innovation and
+                exceed people’s expectations for a better tomorrow, through the goods and services
+                which empower and enrich the lives of Sri Lankans.
+              </ResponsiveCopy>
             </div>
-          </div>
+          </article>
+          <article className="rounded-2xl border border-[#e6e1d5] bg-[#faf9f5] p-6 sm:p-7">
+            <h2 className="text-3xl font-semibold normal-case tracking-[-.03em] text-[#102746]">
+              Mission
+            </h2>
+            <div className="my-5 h-0.5 w-10 bg-[#c39a42]" aria-hidden="true" />
+            <h3 className="text-xl font-semibold normal-case leading-tight text-[#354d66]">
+              Superior thinking. Sustainable value.
+            </h3>
+            <div className="mt-4 text-sm leading-6 text-[#637186]">
+              <ResponsiveCopy summary="Creating useful products and services through superior thinking, sustainable practices and a smaller carbon footprint.">
+                To harness superior thinking in the creation of products and services that
+                functionally enhance the livelihood of people, while remaining cautious in reducing
+                our carbon footprint. We integrate sustainable practices across our operations while
+                delivering exceptional value to our stakeholders.
+              </ResponsiveCopy>
+            </div>
+          </article>
         </div>
-        <div>
-          <Label>Core values</Label>
-          <h2 className="mt-4 max-w-2xl text-4xl font-semibold normal-case leading-[1.05] tracking-[-.04em] md:text-5xl">
-            What guides us.
-          </h2>
-          <p className="mt-5 max-w-xl text-base leading-7 text-[#637186]">
-            The principles behind how we build, serve and grow across every company in the Group.
-          </p>
-          <div className="mt-8 grid gap-3 sm:grid-cols-2">
-            {coreValues.map((value, index) => {
-              const Icon = valueIcons[index % valueIcons.length];
-              return (
-                <article
-                  key={value.title}
-                  className="group rounded-xl border border-[#102746]/10 bg-[#f7f9fc] p-5 transition duration-300 hover:-translate-y-1 hover:border-[#315f9f]/35 hover:shadow-[0_14px_30px_rgba(16,39,70,.08)]"
-                >
-                  <span className="flex h-11 w-11 items-center justify-center rounded-lg bg-[#e8eef6] text-[#315f9f]">
-                    <Icon size={21} strokeWidth={1.7} />
-                  </span>
-                  <h3 className="mt-5 text-xl font-semibold normal-case">{value.title}</h3>
-                  <p className="mt-2 text-sm leading-6 text-[#657286]">{value.description}</p>
-                </article>
-              );
-            })}
+        <div className="about-welding-photo relative min-h-[400px] overflow-hidden rounded-2xl sm:min-h-[440px]">
+          <img
+            src={manufacturingImage}
+            alt="A Camy technician brazing copper tubing on an air-conditioning unit"
+            className="absolute inset-0 h-full w-full origin-[55%_35%] scale-[1.28] object-cover object-[50%_25%]"
+            loading="lazy"
+            decoding="async"
+          />
+          <div className="absolute inset-0 bg-[linear-gradient(0deg,rgba(6,24,40,.92)_0%,rgba(6,24,40,.40)_18%,transparent_40%)]" />
+          <div className="absolute inset-x-0 bottom-0 p-6 text-white sm:p-7">
+            <p className="text-[10px] font-bold uppercase tracking-[.22em] text-[#efbd55]">
+              Purpose in practice
+            </p>
+            <h3 className="mt-2 text-2xl font-semibold normal-case leading-[1.15] tracking-[-.03em] sm:text-3xl">
+              Sustainable solutions.
+              <br />
+              For generations.
+            </h3>
           </div>
         </div>
       </div>
@@ -580,13 +593,14 @@ const About = () => (
     <section className="bg-white px-4 pb-14 pt-4 md:pb-20 md:pt-8">
       <div className="container relative isolate mx-auto overflow-hidden rounded-[2rem] py-20 text-white shadow-[0_24px_60px_rgba(16,39,70,.16)] md:py-24">
         <img
-          src={hospitalityImage}
-          alt="Sri Lanka at sunset"
+          src={industryBanner}
+          alt="Illustration of a Sri Lankan manufacturing and distribution facility"
           className="absolute inset-0 -z-20 h-full w-full object-cover"
+          decoding="async"
         />
-        <div className="absolute inset-0 -z-10 bg-[#102746]/78" />
+        <div className="absolute inset-0 -z-10 bg-[linear-gradient(90deg,rgba(4,16,28,0.9)_0%,rgba(4,16,28,0.76)_52%,rgba(4,16,28,0.25)_100%)]" />
         <div className="flex flex-col items-start justify-between gap-7 px-7 sm:px-10 md:flex-row md:items-center lg:px-14">
-          <h2 className="max-w-2xl text-4xl font-semibold normal-case leading-tight tracking-[-.04em] md:text-5xl">
+          <h2 className="max-w-2xl text-4xl font-semibold normal-case leading-tight tracking-[-.04em] text-white [text-shadow:0_2px_8px_rgba(0,0,0,0.6)] md:text-5xl">
             Building a stronger Sri Lanka, together.
           </h2>
           <Link

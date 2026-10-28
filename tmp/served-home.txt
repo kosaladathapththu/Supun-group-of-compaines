@@ -1,0 +1,1521 @@
+import { createHotContext as __vite__createHotContext } from "/@vite/client";import.meta.hot = __vite__createHotContext("/src/pages/Home.tsx");import * as RefreshRuntime from "/@react-refresh";
+const inWebWorker = typeof WorkerGlobalScope !== 'undefined' && self instanceof WorkerGlobalScope;
+
+let prevRefreshReg;
+let prevRefreshSig;
+
+if (import.meta.hot && !inWebWorker) {
+  if (!window.$RefreshReg$) {
+    throw new Error(
+      "@vitejs/plugin-react-swc can't detect preamble. Something is wrong."
+    );
+  }
+
+  prevRefreshReg = window.$RefreshReg$;
+  prevRefreshSig = window.$RefreshSig$;
+  window.$RefreshReg$ = RefreshRuntime.getRefreshReg("D:/Local Repository/Supun-group-of compaines/src/pages/Home.tsx");
+  window.$RefreshSig$ = RefreshRuntime.createSignatureFunctionForTransform;
+}
+
+import __vite__cjsImport2_react_jsxDevRuntime from "/node_modules/.vite/deps/react_jsx-dev-runtime.js?v=137ac95f"; const _jsxDEV = __vite__cjsImport2_react_jsxDevRuntime["jsxDEV"];
+var _s = $RefreshSig$(), _s1 = $RefreshSig$();
+import __vite__cjsImport3_react from "/node_modules/.vite/deps/react.js?v=137ac95f"; const useEffect = __vite__cjsImport3_react["useEffect"]; const useRef = __vite__cjsImport3_react["useRef"]; const useState = __vite__cjsImport3_react["useState"];
+import { Link } from "/node_modules/.vite/deps/react-router-dom.js?v=137ac95f";
+import { ArrowDown, ArrowRight, Sparkles } from "/node_modules/.vite/deps/lucide-react.js?v=137ac95f";
+import Seo, { DEFAULT_IMAGE, SITE_NAME, SITE_URL } from "/src/components/Seo.tsx";
+import { AnimatedSection } from "/src/components/AnimatedSection.tsx";
+import { CompanyLogo } from "/src/components/CompanyLogo.tsx";
+import { companies } from "/src/data/companies.ts";
+import { sectorHighlights, siteStats } from "/src/data/siteContent.ts";
+import heroVideo from "/src/assets/supun-group-hero-optimized.mp4?import";
+import heroMobileVideo from "/src/assets/supun-group-hero-mobile.mp4?import";
+import heroPoster from "/src/assets/optimized/hero-poster.jpg?import";
+import manufacturingImage from "/src/assets/optimized/camy-cookware-production-focus-v2.jpg?import";
+import { CertificationSection } from "/src/components/CertificationSection.tsx";
+const featuredCompanyIds = [
+    'supun-traders',
+    'supun-super-center',
+    'supun-arcade-residency',
+    'camy-global'
+];
+const homeCompanies = [
+    ...featuredCompanyIds.flatMap((id)=>companies.filter((company)=>company.id === id)),
+    ...companies.filter((company)=>!featuredCompanyIds.includes(company.id))
+];
+const CountUpStat = ({ value, label, index })=>{
+    _s();
+    const target = Number.parseInt(value, 10);
+    const suffix = value.replace(String(target), '');
+    const [count, setCount] = useState(0);
+    const ref = useRef(null);
+    useEffect(()=>{
+        const element = ref.current;
+        if (!element) return;
+        const observer = new IntersectionObserver(([entry])=>{
+            if (!entry.isIntersecting) return;
+            observer.disconnect();
+            if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                setCount(target);
+                return;
+            }
+            const duration = 1400;
+            const start = performance.now();
+            const animate = (time)=>{
+                const progress = Math.min((time - start) / duration, 1);
+                const eased = 1 - Math.pow(1 - progress, 3);
+                setCount(Math.round(target * eased));
+                if (progress < 1) requestAnimationFrame(animate);
+            };
+            requestAnimationFrame(animate);
+        }, {
+            threshold: 0.4
+        });
+        observer.observe(element);
+        return ()=>observer.disconnect();
+    }, [
+        target
+    ]);
+    return /*#__PURE__*/ _jsxDEV("div", {
+        ref: ref,
+        className: "hero-stat group relative py-2 md:py-3",
+        style: {
+            animationDelay: `${index * 100}ms`
+        },
+        children: [
+            /*#__PURE__*/ _jsxDEV("div", {
+                className: "flex items-start gap-2",
+                children: [
+                    /*#__PURE__*/ _jsxDEV("span", {
+                        className: "text-3xl font-semibold tracking-[-0.04em] text-white tabular-nums sm:text-4xl",
+                        children: [
+                            count,
+                            suffix
+                        ]
+                    }, void 0, true, {
+                        fileName: "D:/Local Repository/Supun-group-of compaines/src/pages/Home.tsx",
+                        lineNumber: 67,
+                        columnNumber: 9
+                    }, this),
+                    /*#__PURE__*/ _jsxDEV("span", {
+                        className: "mt-1 h-1.5 w-1.5 rounded-full bg-[#d99a24] shadow-[0_0_12px_rgba(217,154,36,.65)]"
+                    }, void 0, false, {
+                        fileName: "D:/Local Repository/Supun-group-of compaines/src/pages/Home.tsx",
+                        lineNumber: 71,
+                        columnNumber: 9
+                    }, this)
+                ]
+            }, void 0, true, {
+                fileName: "D:/Local Repository/Supun-group-of compaines/src/pages/Home.tsx",
+                lineNumber: 66,
+                columnNumber: 7
+            }, this),
+            /*#__PURE__*/ _jsxDEV("div", {
+                className: "mt-1.5 max-w-[9rem] text-[9px] font-semibold uppercase leading-snug tracking-[0.14em] text-white/50 sm:text-[10px]",
+                children: label
+            }, void 0, false, {
+                fileName: "D:/Local Repository/Supun-group-of compaines/src/pages/Home.tsx",
+                lineNumber: 73,
+                columnNumber: 7
+            }, this)
+        ]
+    }, void 0, true, {
+        fileName: "D:/Local Repository/Supun-group-of compaines/src/pages/Home.tsx",
+        lineNumber: 61,
+        columnNumber: 5
+    }, this);
+};
+_s(CountUpStat, "wgDSH1POmZEidm8lqLungl40j2E=");
+_c = CountUpStat;
+const Home = ()=>{
+    _s1();
+    const [heroVideoReady, setHeroVideoReady] = useState(false);
+    const [shouldPlayHeroVideo, setShouldPlayHeroVideo] = useState(false);
+    const heroVideoRef = useRef(null);
+    const companyCarouselRef = useRef(null);
+    useEffect(()=>{
+        const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+        const connection = navigator.connection;
+        const updateVideoPreference = ()=>{
+            const constrainedConnection = connection?.saveData || connection?.effectiveType === 'slow-2g' || connection?.effectiveType === '2g';
+            const enabled = !reducedMotion.matches && !constrainedConnection;
+            setHeroVideoReady(false);
+            setShouldPlayHeroVideo(enabled);
+        };
+        updateVideoPreference();
+        reducedMotion.addEventListener('change', updateVideoPreference);
+        return ()=>{
+            reducedMotion.removeEventListener('change', updateVideoPreference);
+        };
+    }, []);
+    useEffect(()=>{
+        const video = heroVideoRef.current;
+        if (!video) return;
+        const handleVisibilityChange = ()=>{
+            if (document.hidden) {
+                video.pause();
+            } else {
+                void video.play().catch(()=>undefined);
+            }
+        };
+        document.addEventListener('visibilitychange', handleVisibilityChange);
+        return ()=>document.removeEventListener('visibilitychange', handleVisibilityChange);
+    }, [
+        shouldPlayHeroVideo
+    ]);
+    const scrollCompanies = (direction)=>{
+        const carousel = companyCarouselRef.current;
+        if (carousel) {
+            const firstCard = carousel.firstElementChild;
+            const distance = (firstCard?.offsetWidth ?? carousel.clientWidth * 0.85) + 20;
+            carousel.scrollBy({
+                left: direction * distance,
+                behavior: 'smooth'
+            });
+        }
+    };
+    return /*#__PURE__*/ _jsxDEV("div", {
+        className: "min-h-screen overflow-hidden bg-[#edf3fb]",
+        children: [
+            /*#__PURE__*/ _jsxDEV(Seo, {
+                title: "Supun Group of Companies | Built in Sri Lanka. Built to Last.",
+                description: "Supun Group of Companies is a Sri Lankan family-run group with 13 companies across manufacturing, retail, distribution and hospitality, with roots going back to 1978.",
+                keywords: "Supun Group of Companies, Sri Lanka manufacturing, Camy, Supun Traders, Supun Super Center, Sri Lankan conglomerate",
+                path: "/",
+                jsonLd: {
+                    '@context': 'https://schema.org',
+                    '@graph': [
+                        {
+                            '@type': 'WebSite',
+                            '@id': `${SITE_URL}/#website`,
+                            name: SITE_NAME,
+                            url: SITE_URL,
+                            inLanguage: 'en-LK'
+                        },
+                        {
+                            '@type': 'Organization',
+                            '@id': `${SITE_URL}/#organization`,
+                            name: SITE_NAME,
+                            url: SITE_URL,
+                            logo: {
+                                '@type': 'ImageObject',
+                                url: DEFAULT_IMAGE
+                            },
+                            foundingDate: '1978',
+                            description: 'A Sri Lankan family-run group operating across manufacturing, retail, distribution and hospitality.',
+                            address: {
+                                '@type': 'PostalAddress',
+                                addressLocality: 'Colombo',
+                                addressCountry: 'LK'
+                            },
+                            contactPoint: {
+                                '@type': 'ContactPoint',
+                                telephone: '+94-112-055-026',
+                                contactType: 'general enquiries',
+                                email: 'info@supungroup.lk'
+                            }
+                        }
+                    ]
+                }
+            }, void 0, false, {
+                fileName: "D:/Local Repository/Supun-group-of compaines/src/pages/Home.tsx",
+                lineNumber: 139,
+                columnNumber: 7
+            }, this),
+            /*#__PURE__*/ _jsxDEV("section", {
+                className: "premium-hero relative isolate h-[58svh] min-h-[520px] max-h-[640px] overflow-hidden bg-[#07110d] text-white md:h-auto md:max-h-none md:min-h-[760px] lg:min-h-screen",
+                children: [
+                    /*#__PURE__*/ _jsxDEV("img", {
+                        src: heroPoster,
+                        alt: "",
+                        fetchPriority: "high",
+                        className: `absolute inset-0 h-full w-full object-cover object-[62%_center] transition-opacity duration-500 ${heroVideoReady ? 'opacity-0' : 'opacity-100'}`,
+                        "aria-hidden": "true",
+                        decoding: "async"
+                    }, void 0, false, {
+                        fileName: "D:/Local Repository/Supun-group-of compaines/src/pages/Home.tsx",
+                        lineNumber: 180,
+                        columnNumber: 9
+                    }, this),
+                    shouldPlayHeroVideo && /*#__PURE__*/ _jsxDEV("video", {
+                        ref: heroVideoRef,
+                        className: `absolute inset-0 h-full w-full object-cover object-[62%_center] transition-opacity duration-200 ${heroVideoReady ? 'opacity-100' : 'opacity-0'}`,
+                        autoPlay: true,
+                        muted: true,
+                        loop: true,
+                        playsInline: true,
+                        preload: "auto",
+                        poster: heroPoster,
+                        onLoadedData: ()=>setHeroVideoReady(true),
+                        "aria-hidden": "true",
+                        children: [
+                            /*#__PURE__*/ _jsxDEV("source", {
+                                media: "(max-width: 767px)",
+                                src: heroMobileVideo,
+                                type: "video/mp4"
+                            }, void 0, false, {
+                                fileName: "D:/Local Repository/Supun-group-of compaines/src/pages/Home.tsx",
+                                lineNumber: 201,
+                                columnNumber: 13
+                            }, this),
+                            /*#__PURE__*/ _jsxDEV("source", {
+                                src: heroVideo,
+                                type: "video/mp4"
+                            }, void 0, false, {
+                                fileName: "D:/Local Repository/Supun-group-of compaines/src/pages/Home.tsx",
+                                lineNumber: 202,
+                                columnNumber: 13
+                            }, this)
+                        ]
+                    }, void 0, true, {
+                        fileName: "D:/Local Repository/Supun-group-of compaines/src/pages/Home.tsx",
+                        lineNumber: 189,
+                        columnNumber: 11
+                    }, this),
+                    /*#__PURE__*/ _jsxDEV("div", {
+                        className: "absolute inset-0 bg-[linear-gradient(90deg,rgba(3,12,8,.55)_0%,rgba(5,18,12,.32)_38%,rgba(5,17,12,.1)_72%,rgba(3,12,8,.04)_100%)]"
+                    }, void 0, false, {
+                        fileName: "D:/Local Repository/Supun-group-of compaines/src/pages/Home.tsx",
+                        lineNumber: 205,
+                        columnNumber: 9
+                    }, this),
+                    /*#__PURE__*/ _jsxDEV("div", {
+                        className: "absolute inset-0 bg-[linear-gradient(180deg,rgba(3,10,7,.08)_0%,transparent_36%,rgba(3,10,7,.42)_100%)]"
+                    }, void 0, false, {
+                        fileName: "D:/Local Repository/Supun-group-of compaines/src/pages/Home.tsx",
+                        lineNumber: 206,
+                        columnNumber: 9
+                    }, this),
+                    /*#__PURE__*/ _jsxDEV("div", {
+                        className: "container relative z-10 mx-auto flex h-full min-h-0 flex-col px-5 pb-5 pt-20 sm:h-auto sm:min-h-[760px] sm:px-6 sm:pb-6 sm:pt-32 lg:min-h-screen lg:px-8 lg:pb-9 lg:pt-36",
+                        children: [
+                            /*#__PURE__*/ _jsxDEV("div", {
+                                className: "hero-topline flex items-center justify-between gap-5 pb-1 text-[8px] font-semibold uppercase tracking-[0.16em] text-white/58 sm:pb-5 sm:text-[11px] sm:tracking-[0.24em]",
+                                children: [
+                                    /*#__PURE__*/ _jsxDEV("span", {
+                                        className: "flex items-center gap-3",
+                                        children: [
+                                            /*#__PURE__*/ _jsxDEV("span", {
+                                                className: "h-px w-8 bg-[#e8aa3a]"
+                                            }, void 0, false, {
+                                                fileName: "D:/Local Repository/Supun-group-of compaines/src/pages/Home.tsx",
+                                                lineNumber: 211,
+                                                columnNumber: 15
+                                            }, this),
+                                            " Independent. Sri Lankan. Since 1978."
+                                        ]
+                                    }, void 0, true, {
+                                        fileName: "D:/Local Repository/Supun-group-of compaines/src/pages/Home.tsx",
+                                        lineNumber: 210,
+                                        columnNumber: 13
+                                    }, this),
+                                    /*#__PURE__*/ _jsxDEV("span", {
+                                        className: "hidden items-center gap-2 sm:flex",
+                                        children: [
+                                            /*#__PURE__*/ _jsxDEV("span", {
+                                                className: "hero-live-dot"
+                                            }, void 0, false, {
+                                                fileName: "D:/Local Repository/Supun-group-of compaines/src/pages/Home.tsx",
+                                                lineNumber: 214,
+                                                columnNumber: 15
+                                            }, this),
+                                            " Colombo, Sri Lanka"
+                                        ]
+                                    }, void 0, true, {
+                                        fileName: "D:/Local Repository/Supun-group-of compaines/src/pages/Home.tsx",
+                                        lineNumber: 213,
+                                        columnNumber: 13
+                                    }, this)
+                                ]
+                            }, void 0, true, {
+                                fileName: "D:/Local Repository/Supun-group-of compaines/src/pages/Home.tsx",
+                                lineNumber: 209,
+                                columnNumber: 11
+                            }, this),
+                            /*#__PURE__*/ _jsxDEV("div", {
+                                className: "grid flex-1 items-center gap-4 py-2 sm:gap-10 sm:py-10 lg:grid-cols-[minmax(0,1fr)_18rem] lg:gap-16 lg:py-14 xl:grid-cols-[minmax(0,1fr)_21rem]",
+                                children: [
+                                    /*#__PURE__*/ _jsxDEV("div", {
+                                        className: "hero-copy max-w-5xl",
+                                        children: [
+                                            /*#__PURE__*/ _jsxDEV("h1", {
+                                                className: "hero-title max-w-5xl text-[clamp(2.15rem,10.5vw,2.8rem)] font-semibold normal-case leading-[0.94] tracking-[-0.055em] text-white sm:text-[clamp(3rem,8vw,6.6rem)] sm:leading-[0.92]",
+                                                children: [
+                                                    /*#__PURE__*/ _jsxDEV("span", {
+                                                        className: "hero-title-blue",
+                                                        children: "Built in"
+                                                    }, void 0, false, {
+                                                        fileName: "D:/Local Repository/Supun-group-of compaines/src/pages/Home.tsx",
+                                                        lineNumber: 221,
+                                                        columnNumber: 17
+                                                    }, this),
+                                                    ' ',
+                                                    /*#__PURE__*/ _jsxDEV("span", {
+                                                        className: "hero-title-accent",
+                                                        children: "Sri Lanka."
+                                                    }, void 0, false, {
+                                                        fileName: "D:/Local Repository/Supun-group-of compaines/src/pages/Home.tsx",
+                                                        lineNumber: 222,
+                                                        columnNumber: 17
+                                                    }, this),
+                                                    /*#__PURE__*/ _jsxDEV("br", {}, void 0, false, {
+                                                        fileName: "D:/Local Repository/Supun-group-of compaines/src/pages/Home.tsx",
+                                                        lineNumber: 223,
+                                                        columnNumber: 17
+                                                    }, this),
+                                                    /*#__PURE__*/ _jsxDEV("span", {
+                                                        className: "hero-title-blue",
+                                                        children: "Built to "
+                                                    }, void 0, false, {
+                                                        fileName: "D:/Local Repository/Supun-group-of compaines/src/pages/Home.tsx",
+                                                        lineNumber: 224,
+                                                        columnNumber: 17
+                                                    }, this),
+                                                    /*#__PURE__*/ _jsxDEV("span", {
+                                                        className: "hero-title-accent",
+                                                        children: "last."
+                                                    }, void 0, false, {
+                                                        fileName: "D:/Local Repository/Supun-group-of compaines/src/pages/Home.tsx",
+                                                        lineNumber: 225,
+                                                        columnNumber: 17
+                                                    }, this)
+                                                ]
+                                            }, void 0, true, {
+                                                fileName: "D:/Local Repository/Supun-group-of compaines/src/pages/Home.tsx",
+                                                lineNumber: 220,
+                                                columnNumber: 15
+                                            }, this),
+                                            /*#__PURE__*/ _jsxDEV("p", {
+                                                className: "mt-3 max-w-xl border-l border-[#e8aa3a]/70 pl-3 text-xs leading-relaxed text-white/80 sm:mt-8 sm:pl-5 sm:text-base",
+                                                children: "One Sri Lankan Group, built across four industries since 1978."
+                                            }, void 0, false, {
+                                                fileName: "D:/Local Repository/Supun-group-of compaines/src/pages/Home.tsx",
+                                                lineNumber: 227,
+                                                columnNumber: 15
+                                            }, this),
+                                            /*#__PURE__*/ _jsxDEV("div", {
+                                                className: "relative z-20 mt-4 flex gap-2.5 sm:mt-10 sm:flex-row sm:gap-3",
+                                                children: [
+                                                    /*#__PURE__*/ _jsxDEV(Link, {
+                                                        to: "/companies",
+                                                        "aria-label": "Explore all Supun Group companies",
+                                                        className: "hero-primary-button group relative z-20 inline-flex min-h-12 flex-1 items-center justify-center gap-2 rounded-full bg-[#efbd55] px-4 text-xs font-bold text-[#0b1b13] sm:min-h-14 sm:flex-none sm:px-7 sm:text-sm",
+                                                        children: [
+                                                            "Explore our companies",
+                                                            ' ',
+                                                            /*#__PURE__*/ _jsxDEV("span", {
+                                                                className: "flex h-8 w-8 items-center justify-center rounded-full bg-[#0b1b13] text-white transition duration-300 group-hover:translate-x-1",
+                                                                children: /*#__PURE__*/ _jsxDEV(ArrowRight, {
+                                                                    size: 16
+                                                                }, void 0, false, {
+                                                                    fileName: "D:/Local Repository/Supun-group-of compaines/src/pages/Home.tsx",
+                                                                    lineNumber: 238,
+                                                                    columnNumber: 21
+                                                                }, this)
+                                                            }, void 0, false, {
+                                                                fileName: "D:/Local Repository/Supun-group-of compaines/src/pages/Home.tsx",
+                                                                lineNumber: 237,
+                                                                columnNumber: 19
+                                                            }, this)
+                                                        ]
+                                                    }, void 0, true, {
+                                                        fileName: "D:/Local Repository/Supun-group-of compaines/src/pages/Home.tsx",
+                                                        lineNumber: 231,
+                                                        columnNumber: 17
+                                                    }, this),
+                                                    /*#__PURE__*/ _jsxDEV(Link, {
+                                                        to: "/about",
+                                                        className: "hero-ghost-button group inline-flex min-h-12 flex-1 items-center justify-center gap-2 rounded-full px-4 text-xs font-semibold text-white sm:min-h-14 sm:flex-none sm:px-7 sm:text-sm",
+                                                        children: [
+                                                            "Discover our story",
+                                                            ' ',
+                                                            /*#__PURE__*/ _jsxDEV(ArrowRight, {
+                                                                className: "transition duration-300 group-hover:translate-x-1 group-hover:text-[#f4bd59]",
+                                                                size: 18
+                                                            }, void 0, false, {
+                                                                fileName: "D:/Local Repository/Supun-group-of compaines/src/pages/Home.tsx",
+                                                                lineNumber: 246,
+                                                                columnNumber: 19
+                                                            }, this)
+                                                        ]
+                                                    }, void 0, true, {
+                                                        fileName: "D:/Local Repository/Supun-group-of compaines/src/pages/Home.tsx",
+                                                        lineNumber: 241,
+                                                        columnNumber: 17
+                                                    }, this)
+                                                ]
+                                            }, void 0, true, {
+                                                fileName: "D:/Local Repository/Supun-group-of compaines/src/pages/Home.tsx",
+                                                lineNumber: 230,
+                                                columnNumber: 15
+                                            }, this)
+                                        ]
+                                    }, void 0, true, {
+                                        fileName: "D:/Local Repository/Supun-group-of compaines/src/pages/Home.tsx",
+                                        lineNumber: 219,
+                                        columnNumber: 13
+                                    }, this),
+                                    /*#__PURE__*/ _jsxDEV("div", {
+                                        className: "hero-legacy-feature hidden self-end lg:block",
+                                        children: [
+                                            /*#__PURE__*/ _jsxDEV("div", {
+                                                className: "flex items-center gap-3 text-[10px] font-bold uppercase tracking-[0.25em] text-[#f4bd59]",
+                                                children: [
+                                                    /*#__PURE__*/ _jsxDEV("span", {
+                                                        className: "h-px w-10 bg-[#f4bd59]"
+                                                    }, void 0, false, {
+                                                        fileName: "D:/Local Repository/Supun-group-of compaines/src/pages/Home.tsx",
+                                                        lineNumber: 256,
+                                                        columnNumber: 17
+                                                    }, this),
+                                                    " Established 1978"
+                                                ]
+                                            }, void 0, true, {
+                                                fileName: "D:/Local Repository/Supun-group-of compaines/src/pages/Home.tsx",
+                                                lineNumber: 255,
+                                                columnNumber: 15
+                                            }, this),
+                                            /*#__PURE__*/ _jsxDEV("div", {
+                                                className: "mt-5 flex items-end gap-3",
+                                                children: /*#__PURE__*/ _jsxDEV("strong", {
+                                                    className: "hero-stat-blue text-[5.75rem] font-semibold leading-[.8] tracking-[-0.09em]",
+                                                    children: "48"
+                                                }, void 0, false, {
+                                                    fileName: "D:/Local Repository/Supun-group-of compaines/src/pages/Home.tsx",
+                                                    lineNumber: 259,
+                                                    columnNumber: 17
+                                                }, this)
+                                            }, void 0, false, {
+                                                fileName: "D:/Local Repository/Supun-group-of compaines/src/pages/Home.tsx",
+                                                lineNumber: 258,
+                                                columnNumber: 15
+                                            }, this),
+                                            /*#__PURE__*/ _jsxDEV("p", {
+                                                className: "mt-5 max-w-[13rem] text-sm leading-relaxed text-white/60",
+                                                children: [
+                                                    /*#__PURE__*/ _jsxDEV("span", {
+                                                        className: "font-semibold text-white",
+                                                        children: "Years of enterprise."
+                                                    }, void 0, false, {
+                                                        fileName: "D:/Local Repository/Supun-group-of compaines/src/pages/Home.tsx",
+                                                        lineNumber: 264,
+                                                        columnNumber: 17
+                                                    }, this),
+                                                    /*#__PURE__*/ _jsxDEV("br", {}, void 0, false, {
+                                                        fileName: "D:/Local Repository/Supun-group-of compaines/src/pages/Home.tsx",
+                                                        lineNumber: 265,
+                                                        columnNumber: 17
+                                                    }, this),
+                                                    "One vision, built across generations."
+                                                ]
+                                            }, void 0, true, {
+                                                fileName: "D:/Local Repository/Supun-group-of compaines/src/pages/Home.tsx",
+                                                lineNumber: 263,
+                                                columnNumber: 15
+                                            }, this),
+                                            /*#__PURE__*/ _jsxDEV(Link, {
+                                                to: "/about#journey",
+                                                className: "group mt-6 inline-flex min-h-12 items-center gap-3 rounded-full bg-[#efbd55] px-5 text-xs font-bold uppercase tracking-[0.15em] text-[#071b2d] shadow-[0_10px_28px_rgba(239,189,85,.28)] transition hover:-translate-y-0.5 hover:bg-white",
+                                                children: [
+                                                    "Explore our journey",
+                                                    ' ',
+                                                    /*#__PURE__*/ _jsxDEV(ArrowRight, {
+                                                        className: "transition group-hover:translate-x-1",
+                                                        size: 16
+                                                    }, void 0, false, {
+                                                        fileName: "D:/Local Repository/Supun-group-of compaines/src/pages/Home.tsx",
+                                                        lineNumber: 273,
+                                                        columnNumber: 17
+                                                    }, this)
+                                                ]
+                                            }, void 0, true, {
+                                                fileName: "D:/Local Repository/Supun-group-of compaines/src/pages/Home.tsx",
+                                                lineNumber: 268,
+                                                columnNumber: 15
+                                            }, this)
+                                        ]
+                                    }, void 0, true, {
+                                        fileName: "D:/Local Repository/Supun-group-of compaines/src/pages/Home.tsx",
+                                        lineNumber: 254,
+                                        columnNumber: 13
+                                    }, this)
+                                ]
+                            }, void 0, true, {
+                                fileName: "D:/Local Repository/Supun-group-of compaines/src/pages/Home.tsx",
+                                lineNumber: 218,
+                                columnNumber: 11
+                            }, this),
+                            /*#__PURE__*/ _jsxDEV("div", {
+                                className: "hero-bottom-rail hidden items-end justify-between gap-6 pt-5 sm:flex",
+                                children: [
+                                    /*#__PURE__*/ _jsxDEV("a", {
+                                        href: "#legacy",
+                                        className: "group hidden items-center gap-3 text-[10px] font-semibold uppercase tracking-[0.2em] text-white/55 transition hover:text-white md:flex",
+                                        children: [
+                                            /*#__PURE__*/ _jsxDEV("span", {
+                                                className: "flex h-10 w-10 items-center justify-center rounded-full border border-white/20 transition duration-300 group-hover:border-[#e8aa3a] group-hover:bg-[#e8aa3a] group-hover:text-[#102016]",
+                                                children: /*#__PURE__*/ _jsxDEV(ArrowDown, {
+                                                    size: 16
+                                                }, void 0, false, {
+                                                    fileName: "D:/Local Repository/Supun-group-of compaines/src/pages/Home.tsx",
+                                                    lineNumber: 284,
+                                                    columnNumber: 17
+                                                }, this)
+                                            }, void 0, false, {
+                                                fileName: "D:/Local Repository/Supun-group-of compaines/src/pages/Home.tsx",
+                                                lineNumber: 283,
+                                                columnNumber: 15
+                                            }, this),
+                                            "Scroll to discover"
+                                        ]
+                                    }, void 0, true, {
+                                        fileName: "D:/Local Repository/Supun-group-of compaines/src/pages/Home.tsx",
+                                        lineNumber: 279,
+                                        columnNumber: 13
+                                    }, this),
+                                    /*#__PURE__*/ _jsxDEV("div", {
+                                        className: "ml-auto grid w-full max-w-2xl grid-cols-2 gap-x-7 gap-y-3 sm:grid-cols-4 sm:gap-6",
+                                        children: siteStats.map((stat, index)=>/*#__PURE__*/ _jsxDEV(CountUpStat, {
+                                                value: stat.value,
+                                                label: stat.label,
+                                                index: index
+                                            }, stat.label, false, {
+                                                fileName: "D:/Local Repository/Supun-group-of compaines/src/pages/Home.tsx",
+                                                lineNumber: 290,
+                                                columnNumber: 17
+                                            }, this))
+                                    }, void 0, false, {
+                                        fileName: "D:/Local Repository/Supun-group-of compaines/src/pages/Home.tsx",
+                                        lineNumber: 288,
+                                        columnNumber: 13
+                                    }, this)
+                                ]
+                            }, void 0, true, {
+                                fileName: "D:/Local Repository/Supun-group-of compaines/src/pages/Home.tsx",
+                                lineNumber: 278,
+                                columnNumber: 11
+                            }, this)
+                        ]
+                    }, void 0, true, {
+                        fileName: "D:/Local Repository/Supun-group-of compaines/src/pages/Home.tsx",
+                        lineNumber: 208,
+                        columnNumber: 9
+                    }, this)
+                ]
+            }, void 0, true, {
+                fileName: "D:/Local Repository/Supun-group-of compaines/src/pages/Home.tsx",
+                lineNumber: 179,
+                columnNumber: 7
+            }, this),
+            /*#__PURE__*/ _jsxDEV("section", {
+                id: "legacy",
+                className: "legacy-premium relative isolate overflow-hidden py-12 sm:py-14 md:py-20",
+                children: [
+                    /*#__PURE__*/ _jsxDEV("div", {
+                        className: "legacy-aurora legacy-aurora-blue",
+                        "aria-hidden": "true"
+                    }, void 0, false, {
+                        fileName: "D:/Local Repository/Supun-group-of compaines/src/pages/Home.tsx",
+                        lineNumber: 301,
+                        columnNumber: 9
+                    }, this),
+                    /*#__PURE__*/ _jsxDEV("div", {
+                        className: "legacy-lines absolute inset-0 opacity-50",
+                        "aria-hidden": "true"
+                    }, void 0, false, {
+                        fileName: "D:/Local Repository/Supun-group-of compaines/src/pages/Home.tsx",
+                        lineNumber: 302,
+                        columnNumber: 9
+                    }, this),
+                    /*#__PURE__*/ _jsxDEV("div", {
+                        className: "container relative z-10 mx-auto px-4",
+                        children: /*#__PURE__*/ _jsxDEV("div", {
+                            className: "grid items-stretch gap-6 lg:grid-cols-[.72fr_1.28fr]",
+                            children: [
+                                /*#__PURE__*/ _jsxDEV(AnimatedSection, {
+                                    animation: "slide-right",
+                                    duration: 900,
+                                    triggerOnce: false,
+                                    children: /*#__PURE__*/ _jsxDEV("div", {
+                                        className: "legacy-year-card group relative flex h-full min-h-[350px] flex-col justify-between overflow-hidden rounded-[2rem] p-7 sm:min-h-[430px] sm:p-10",
+                                        children: [
+                                            /*#__PURE__*/ _jsxDEV("div", {
+                                                className: "legacy-year-ring",
+                                                "aria-hidden": "true",
+                                                children: [
+                                                    /*#__PURE__*/ _jsxDEV("span", {}, void 0, false, {
+                                                        fileName: "D:/Local Repository/Supun-group-of compaines/src/pages/Home.tsx",
+                                                        lineNumber: 308,
+                                                        columnNumber: 19
+                                                    }, this),
+                                                    /*#__PURE__*/ _jsxDEV("span", {}, void 0, false, {
+                                                        fileName: "D:/Local Repository/Supun-group-of compaines/src/pages/Home.tsx",
+                                                        lineNumber: 309,
+                                                        columnNumber: 19
+                                                    }, this),
+                                                    /*#__PURE__*/ _jsxDEV("span", {}, void 0, false, {
+                                                        fileName: "D:/Local Repository/Supun-group-of compaines/src/pages/Home.tsx",
+                                                        lineNumber: 310,
+                                                        columnNumber: 19
+                                                    }, this)
+                                                ]
+                                            }, void 0, true, {
+                                                fileName: "D:/Local Repository/Supun-group-of compaines/src/pages/Home.tsx",
+                                                lineNumber: 307,
+                                                columnNumber: 17
+                                            }, this),
+                                            /*#__PURE__*/ _jsxDEV("div", {
+                                                className: "relative flex items-center justify-between",
+                                                children: [
+                                                    /*#__PURE__*/ _jsxDEV("span", {
+                                                        className: "rounded-full border border-primary/10 bg-white/65 px-3 py-1.5 text-[10px] font-semibold uppercase tracking-[0.2em] text-primary/70 backdrop-blur-xl",
+                                                        children: "Where it began"
+                                                    }, void 0, false, {
+                                                        fileName: "D:/Local Repository/Supun-group-of compaines/src/pages/Home.tsx",
+                                                        lineNumber: 313,
+                                                        columnNumber: 19
+                                                    }, this),
+                                                    /*#__PURE__*/ _jsxDEV("span", {
+                                                        className: "legacy-pulse",
+                                                        children: /*#__PURE__*/ _jsxDEV("span", {}, void 0, false, {
+                                                            fileName: "D:/Local Repository/Supun-group-of compaines/src/pages/Home.tsx",
+                                                            lineNumber: 317,
+                                                            columnNumber: 21
+                                                        }, this)
+                                                    }, void 0, false, {
+                                                        fileName: "D:/Local Repository/Supun-group-of compaines/src/pages/Home.tsx",
+                                                        lineNumber: 316,
+                                                        columnNumber: 19
+                                                    }, this)
+                                                ]
+                                            }, void 0, true, {
+                                                fileName: "D:/Local Repository/Supun-group-of compaines/src/pages/Home.tsx",
+                                                lineNumber: 312,
+                                                columnNumber: 17
+                                            }, this),
+                                            /*#__PURE__*/ _jsxDEV("div", {
+                                                className: "relative",
+                                                children: [
+                                                    /*#__PURE__*/ _jsxDEV("p", {
+                                                        className: "text-xs font-semibold uppercase tracking-[0.25em] text-[#a66d0d]",
+                                                        children: "Established"
+                                                    }, void 0, false, {
+                                                        fileName: "D:/Local Repository/Supun-group-of compaines/src/pages/Home.tsx",
+                                                        lineNumber: 321,
+                                                        columnNumber: 19
+                                                    }, this),
+                                                    /*#__PURE__*/ _jsxDEV("div", {
+                                                        className: "legacy-year mt-2 text-[clamp(5rem,14vw,9rem)] font-semibold leading-none tracking-[-0.075em]",
+                                                        children: "1978"
+                                                    }, void 0, false, {
+                                                        fileName: "D:/Local Repository/Supun-group-of compaines/src/pages/Home.tsx",
+                                                        lineNumber: 324,
+                                                        columnNumber: 19
+                                                    }, this),
+                                                    /*#__PURE__*/ _jsxDEV("p", {
+                                                        className: "mt-4 max-w-xs border-l-2 border-[#d99a24] pl-4 text-sm leading-relaxed text-[#526278]",
+                                                        children: "A legacy built over generations."
+                                                    }, void 0, false, {
+                                                        fileName: "D:/Local Repository/Supun-group-of compaines/src/pages/Home.tsx",
+                                                        lineNumber: 327,
+                                                        columnNumber: 19
+                                                    }, this)
+                                                ]
+                                            }, void 0, true, {
+                                                fileName: "D:/Local Repository/Supun-group-of compaines/src/pages/Home.tsx",
+                                                lineNumber: 320,
+                                                columnNumber: 17
+                                            }, this)
+                                        ]
+                                    }, void 0, true, {
+                                        fileName: "D:/Local Repository/Supun-group-of compaines/src/pages/Home.tsx",
+                                        lineNumber: 306,
+                                        columnNumber: 15
+                                    }, this)
+                                }, void 0, false, {
+                                    fileName: "D:/Local Repository/Supun-group-of compaines/src/pages/Home.tsx",
+                                    lineNumber: 305,
+                                    columnNumber: 13
+                                }, this),
+                                /*#__PURE__*/ _jsxDEV(AnimatedSection, {
+                                    animation: "slide-left",
+                                    delay: 140,
+                                    duration: 950,
+                                    triggerOnce: false,
+                                    children: /*#__PURE__*/ _jsxDEV("div", {
+                                        className: "legacy-story-card relative flex h-full min-h-[430px] flex-col overflow-hidden rounded-[2rem] p-7 sm:p-10 lg:p-12",
+                                        children: [
+                                            /*#__PURE__*/ _jsxDEV("div", {
+                                                className: "legacy-corner-mark",
+                                                "aria-hidden": "true"
+                                            }, void 0, false, {
+                                                fileName: "D:/Local Repository/Supun-group-of compaines/src/pages/Home.tsx",
+                                                lineNumber: 335,
+                                                columnNumber: 17
+                                            }, this),
+                                            /*#__PURE__*/ _jsxDEV("div", {
+                                                className: "relative",
+                                                children: [
+                                                    /*#__PURE__*/ _jsxDEV("span", {
+                                                        className: "mb-6 inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.2em] text-[#a66d0d]",
+                                                        children: [
+                                                            /*#__PURE__*/ _jsxDEV("span", {
+                                                                className: "h-2 w-2 rounded-full bg-[#d99a24]"
+                                                            }, void 0, false, {
+                                                                fileName: "D:/Local Repository/Supun-group-of compaines/src/pages/Home.tsx",
+                                                                lineNumber: 338,
+                                                                columnNumber: 21
+                                                            }, this),
+                                                            " Built across generations"
+                                                        ]
+                                                    }, void 0, true, {
+                                                        fileName: "D:/Local Repository/Supun-group-of compaines/src/pages/Home.tsx",
+                                                        lineNumber: 337,
+                                                        columnNumber: 19
+                                                    }, this),
+                                                    /*#__PURE__*/ _jsxDEV("h2", {
+                                                        className: "max-w-4xl text-4xl font-semibold normal-case leading-[1.04] tracking-[-0.04em] text-[#071b2d] sm:text-5xl lg:text-6xl",
+                                                        children: [
+                                                            "A family-run business with the courage to",
+                                                            ' ',
+                                                            /*#__PURE__*/ _jsxDEV("span", {
+                                                                className: "text-[#071b2d]",
+                                                                children: "keep building."
+                                                            }, void 0, false, {
+                                                                fileName: "D:/Local Repository/Supun-group-of compaines/src/pages/Home.tsx",
+                                                                lineNumber: 342,
+                                                                columnNumber: 21
+                                                            }, this)
+                                                        ]
+                                                    }, void 0, true, {
+                                                        fileName: "D:/Local Repository/Supun-group-of compaines/src/pages/Home.tsx",
+                                                        lineNumber: 340,
+                                                        columnNumber: 19
+                                                    }, this)
+                                                ]
+                                            }, void 0, true, {
+                                                fileName: "D:/Local Repository/Supun-group-of compaines/src/pages/Home.tsx",
+                                                lineNumber: 336,
+                                                columnNumber: 17
+                                            }, this),
+                                            /*#__PURE__*/ _jsxDEV("div", {
+                                                className: "relative mt-auto pt-10",
+                                                children: [
+                                                    /*#__PURE__*/ _jsxDEV("div", {
+                                                        className: "grid gap-6 border-t border-primary/10 pt-7 md:grid-cols-2",
+                                                        children: [
+                                                            /*#__PURE__*/ _jsxDEV("p", {
+                                                                className: "leading-relaxed text-[#526278]",
+                                                                children: "From Colombo trading roots to 13 companies in manufacturing, retail, distribution and hospitality."
+                                                            }, void 0, false, {
+                                                                fileName: "D:/Local Repository/Supun-group-of compaines/src/pages/Home.tsx",
+                                                                lineNumber: 347,
+                                                                columnNumber: 21
+                                                            }, this),
+                                                            /*#__PURE__*/ _jsxDEV("p", {
+                                                                className: "leading-relaxed text-[#526278]",
+                                                                children: "Creating lasting value for our customers, people and country since 1978."
+                                                            }, void 0, false, {
+                                                                fileName: "D:/Local Repository/Supun-group-of compaines/src/pages/Home.tsx",
+                                                                lineNumber: 351,
+                                                                columnNumber: 21
+                                                            }, this)
+                                                        ]
+                                                    }, void 0, true, {
+                                                        fileName: "D:/Local Repository/Supun-group-of compaines/src/pages/Home.tsx",
+                                                        lineNumber: 346,
+                                                        columnNumber: 19
+                                                    }, this),
+                                                    /*#__PURE__*/ _jsxDEV(Link, {
+                                                        to: "/about",
+                                                        className: "legacy-link group mt-8 inline-flex items-center gap-4 font-semibold text-primary",
+                                                        children: [
+                                                            "Read our story",
+                                                            ' ',
+                                                            /*#__PURE__*/ _jsxDEV("span", {
+                                                                className: "flex h-11 w-11 items-center justify-center rounded-full border border-primary/20 bg-primary/5 text-primary transition duration-300 group-hover:translate-x-1 group-hover:border-[#78be43] group-hover:bg-[#78be43] group-hover:text-white",
+                                                                children: /*#__PURE__*/ _jsxDEV(ArrowRight, {
+                                                                    size: 18
+                                                                }, void 0, false, {
+                                                                    fileName: "D:/Local Repository/Supun-group-of compaines/src/pages/Home.tsx",
+                                                                    lineNumber: 361,
+                                                                    columnNumber: 23
+                                                                }, this)
+                                                            }, void 0, false, {
+                                                                fileName: "D:/Local Repository/Supun-group-of compaines/src/pages/Home.tsx",
+                                                                lineNumber: 360,
+                                                                columnNumber: 21
+                                                            }, this)
+                                                        ]
+                                                    }, void 0, true, {
+                                                        fileName: "D:/Local Repository/Supun-group-of compaines/src/pages/Home.tsx",
+                                                        lineNumber: 355,
+                                                        columnNumber: 19
+                                                    }, this)
+                                                ]
+                                            }, void 0, true, {
+                                                fileName: "D:/Local Repository/Supun-group-of compaines/src/pages/Home.tsx",
+                                                lineNumber: 345,
+                                                columnNumber: 17
+                                            }, this)
+                                        ]
+                                    }, void 0, true, {
+                                        fileName: "D:/Local Repository/Supun-group-of compaines/src/pages/Home.tsx",
+                                        lineNumber: 334,
+                                        columnNumber: 15
+                                    }, this)
+                                }, void 0, false, {
+                                    fileName: "D:/Local Repository/Supun-group-of compaines/src/pages/Home.tsx",
+                                    lineNumber: 333,
+                                    columnNumber: 13
+                                }, this)
+                            ]
+                        }, void 0, true, {
+                            fileName: "D:/Local Repository/Supun-group-of compaines/src/pages/Home.tsx",
+                            lineNumber: 304,
+                            columnNumber: 11
+                        }, this)
+                    }, void 0, false, {
+                        fileName: "D:/Local Repository/Supun-group-of compaines/src/pages/Home.tsx",
+                        lineNumber: 303,
+                        columnNumber: 9
+                    }, this)
+                ]
+            }, void 0, true, {
+                fileName: "D:/Local Repository/Supun-group-of compaines/src/pages/Home.tsx",
+                lineNumber: 297,
+                columnNumber: 7
+            }, this),
+            /*#__PURE__*/ _jsxDEV("section", {
+                className: "relative overflow-hidden bg-white py-12 text-[#10233f] sm:py-14 md:py-20",
+                children: /*#__PURE__*/ _jsxDEV("div", {
+                    className: "container relative z-10 mx-auto px-4",
+                    children: /*#__PURE__*/ _jsxDEV("div", {
+                        className: "grid gap-9 lg:grid-cols-[0.82fr_1.18fr] lg:items-center lg:gap-14",
+                        children: [
+                            /*#__PURE__*/ _jsxDEV(AnimatedSection, {
+                                animation: "slide-right",
+                                duration: 900,
+                                triggerOnce: false,
+                                children: /*#__PURE__*/ _jsxDEV("div", {
+                                    className: "home-production-card overflow-hidden rounded-[1.5rem] bg-[#10233f] shadow-[0_24px_60px_rgba(16,35,63,.18)]",
+                                    children: [
+                                        /*#__PURE__*/ _jsxDEV("img", {
+                                            src: manufacturingImage,
+                                            alt: "A Camy factory employee handling cookware on the production line",
+                                            className: "block h-auto w-full",
+                                            loading: "lazy",
+                                            decoding: "async"
+                                        }, void 0, false, {
+                                            fileName: "D:/Local Repository/Supun-group-of compaines/src/pages/Home.tsx",
+                                            lineNumber: 376,
+                                            columnNumber: 17
+                                        }, this),
+                                        /*#__PURE__*/ _jsxDEV("div", {
+                                            className: "p-5 text-white sm:p-6",
+                                            children: [
+                                                /*#__PURE__*/ _jsxDEV("p", {
+                                                    className: "text-xs font-semibold uppercase tracking-[0.22em] text-[#efbd55]",
+                                                    children: "Built in Sri Lanka"
+                                                }, void 0, false, {
+                                                    fileName: "D:/Local Repository/Supun-group-of compaines/src/pages/Home.tsx",
+                                                    lineNumber: 384,
+                                                    columnNumber: 19
+                                                }, this),
+                                                /*#__PURE__*/ _jsxDEV("h3", {
+                                                    className: "mt-2 max-w-md text-2xl font-semibold normal-case leading-tight tracking-[-0.03em] sm:text-3xl",
+                                                    children: "Local capability. Lasting value."
+                                                }, void 0, false, {
+                                                    fileName: "D:/Local Repository/Supun-group-of compaines/src/pages/Home.tsx",
+                                                    lineNumber: 387,
+                                                    columnNumber: 19
+                                                }, this),
+                                                /*#__PURE__*/ _jsxDEV("div", {
+                                                    className: "mt-4 flex items-center gap-4 border-t border-white/25 pt-4",
+                                                    children: [
+                                                        /*#__PURE__*/ _jsxDEV("strong", {
+                                                            className: "text-3xl font-semibold tracking-[-0.05em]",
+                                                            children: "48"
+                                                        }, void 0, false, {
+                                                            fileName: "D:/Local Repository/Supun-group-of compaines/src/pages/Home.tsx",
+                                                            lineNumber: 391,
+                                                            columnNumber: 21
+                                                        }, this),
+                                                        /*#__PURE__*/ _jsxDEV("span", {
+                                                            className: "max-w-[9rem] text-xs font-semibold uppercase leading-relaxed tracking-[0.14em] text-white/70",
+                                                            children: "Years of trusted enterprise"
+                                                        }, void 0, false, {
+                                                            fileName: "D:/Local Repository/Supun-group-of compaines/src/pages/Home.tsx",
+                                                            lineNumber: 392,
+                                                            columnNumber: 21
+                                                        }, this)
+                                                    ]
+                                                }, void 0, true, {
+                                                    fileName: "D:/Local Repository/Supun-group-of compaines/src/pages/Home.tsx",
+                                                    lineNumber: 390,
+                                                    columnNumber: 19
+                                                }, this)
+                                            ]
+                                        }, void 0, true, {
+                                            fileName: "D:/Local Repository/Supun-group-of compaines/src/pages/Home.tsx",
+                                            lineNumber: 383,
+                                            columnNumber: 17
+                                        }, this)
+                                    ]
+                                }, void 0, true, {
+                                    fileName: "D:/Local Repository/Supun-group-of compaines/src/pages/Home.tsx",
+                                    lineNumber: 375,
+                                    columnNumber: 15
+                                }, this)
+                            }, void 0, false, {
+                                fileName: "D:/Local Repository/Supun-group-of compaines/src/pages/Home.tsx",
+                                lineNumber: 374,
+                                columnNumber: 13
+                            }, this),
+                            /*#__PURE__*/ _jsxDEV("div", {
+                                children: [
+                                    /*#__PURE__*/ _jsxDEV(AnimatedSection, {
+                                        animation: "slide-up",
+                                        duration: 800,
+                                        triggerOnce: false,
+                                        children: [
+                                            /*#__PURE__*/ _jsxDEV("p", {
+                                                className: "section-kicker text-primary before:bg-[#d99a24]",
+                                                children: "What we do"
+                                            }, void 0, false, {
+                                                fileName: "D:/Local Repository/Supun-group-of compaines/src/pages/Home.tsx",
+                                                lineNumber: 402,
+                                                columnNumber: 17
+                                            }, this),
+                                            /*#__PURE__*/ _jsxDEV("h2", {
+                                                className: "mt-5 max-w-3xl text-4xl font-semibold normal-case leading-[1.05] tracking-[-0.04em] text-[#071b2d] sm:text-5xl md:text-6xl",
+                                                children: "A Sri Lankan group built across industries."
+                                            }, void 0, false, {
+                                                fileName: "D:/Local Repository/Supun-group-of compaines/src/pages/Home.tsx",
+                                                lineNumber: 403,
+                                                columnNumber: 17
+                                            }, this),
+                                            /*#__PURE__*/ _jsxDEV("p", {
+                                                className: "mt-6 max-w-2xl text-base leading-relaxed text-[#526278]",
+                                                children: "From a single trading company to four industries today: manufacturing, retail, distribution, and hospitality, each one held to the same standard."
+                                            }, void 0, false, {
+                                                fileName: "D:/Local Repository/Supun-group-of compaines/src/pages/Home.tsx",
+                                                lineNumber: 406,
+                                                columnNumber: 17
+                                            }, this)
+                                        ]
+                                    }, void 0, true, {
+                                        fileName: "D:/Local Repository/Supun-group-of compaines/src/pages/Home.tsx",
+                                        lineNumber: 401,
+                                        columnNumber: 15
+                                    }, this),
+                                    /*#__PURE__*/ _jsxDEV("div", {
+                                        className: "mt-9 grid gap-3 sm:grid-cols-2",
+                                        children: sectorHighlights.map((sector, index)=>{
+                                            return /*#__PURE__*/ _jsxDEV(AnimatedSection, {
+                                                animation: "slide-left",
+                                                delay: index * 90,
+                                                duration: 750,
+                                                triggerOnce: false,
+                                                children: /*#__PURE__*/ _jsxDEV("article", {
+                                                    className: "group h-full rounded-xl border border-[#10233f]/10 bg-[#f7f9fc] p-5 transition duration-300 hover:-translate-y-1 hover:border-[#315f9f]/35 hover:shadow-[0_14px_32px_rgba(16,35,63,.08)]",
+                                                    children: /*#__PURE__*/ _jsxDEV("div", {
+                                                        children: [
+                                                            /*#__PURE__*/ _jsxDEV("h3", {
+                                                                className: "text-xl font-semibold normal-case text-[#071b2d]",
+                                                                children: sector.title
+                                                            }, void 0, false, {
+                                                                fileName: "D:/Local Repository/Supun-group-of compaines/src/pages/Home.tsx",
+                                                                lineNumber: 424,
+                                                                columnNumber: 27
+                                                            }, this),
+                                                            /*#__PURE__*/ _jsxDEV("p", {
+                                                                className: "mt-2 text-sm leading-relaxed text-[#667388]",
+                                                                children: sector.description
+                                                            }, void 0, false, {
+                                                                fileName: "D:/Local Repository/Supun-group-of compaines/src/pages/Home.tsx",
+                                                                lineNumber: 427,
+                                                                columnNumber: 27
+                                                            }, this)
+                                                        ]
+                                                    }, void 0, true, {
+                                                        fileName: "D:/Local Repository/Supun-group-of compaines/src/pages/Home.tsx",
+                                                        lineNumber: 423,
+                                                        columnNumber: 25
+                                                    }, this)
+                                                }, void 0, false, {
+                                                    fileName: "D:/Local Repository/Supun-group-of compaines/src/pages/Home.tsx",
+                                                    lineNumber: 422,
+                                                    columnNumber: 23
+                                                }, this)
+                                            }, sector.title, false, {
+                                                fileName: "D:/Local Repository/Supun-group-of compaines/src/pages/Home.tsx",
+                                                lineNumber: 415,
+                                                columnNumber: 21
+                                            }, this);
+                                        })
+                                    }, void 0, false, {
+                                        fileName: "D:/Local Repository/Supun-group-of compaines/src/pages/Home.tsx",
+                                        lineNumber: 412,
+                                        columnNumber: 15
+                                    }, this),
+                                    /*#__PURE__*/ _jsxDEV(AnimatedSection, {
+                                        animation: "fade",
+                                        delay: 250,
+                                        duration: 700,
+                                        triggerOnce: false,
+                                        children: /*#__PURE__*/ _jsxDEV(Link, {
+                                            to: "/companies",
+                                            className: "group mt-8 inline-flex items-center gap-4 font-semibold text-primary",
+                                            children: [
+                                                "Explore the group",
+                                                ' ',
+                                                /*#__PURE__*/ _jsxDEV("span", {
+                                                    className: "flex h-11 w-11 items-center justify-center rounded-full bg-[#10233f] text-white transition duration-300 group-hover:translate-x-1 group-hover:bg-[#78be43]",
+                                                    children: /*#__PURE__*/ _jsxDEV(ArrowRight, {
+                                                        size: 18
+                                                    }, void 0, false, {
+                                                        fileName: "D:/Local Repository/Supun-group-of compaines/src/pages/Home.tsx",
+                                                        lineNumber: 444,
+                                                        columnNumber: 21
+                                                    }, this)
+                                                }, void 0, false, {
+                                                    fileName: "D:/Local Repository/Supun-group-of compaines/src/pages/Home.tsx",
+                                                    lineNumber: 443,
+                                                    columnNumber: 19
+                                                }, this)
+                                            ]
+                                        }, void 0, true, {
+                                            fileName: "D:/Local Repository/Supun-group-of compaines/src/pages/Home.tsx",
+                                            lineNumber: 438,
+                                            columnNumber: 17
+                                        }, this)
+                                    }, void 0, false, {
+                                        fileName: "D:/Local Repository/Supun-group-of compaines/src/pages/Home.tsx",
+                                        lineNumber: 437,
+                                        columnNumber: 15
+                                    }, this)
+                                ]
+                            }, void 0, true, {
+                                fileName: "D:/Local Repository/Supun-group-of compaines/src/pages/Home.tsx",
+                                lineNumber: 400,
+                                columnNumber: 13
+                            }, this)
+                        ]
+                    }, void 0, true, {
+                        fileName: "D:/Local Repository/Supun-group-of compaines/src/pages/Home.tsx",
+                        lineNumber: 373,
+                        columnNumber: 11
+                    }, this)
+                }, void 0, false, {
+                    fileName: "D:/Local Repository/Supun-group-of compaines/src/pages/Home.tsx",
+                    lineNumber: 372,
+                    columnNumber: 9
+                }, this)
+            }, void 0, false, {
+                fileName: "D:/Local Repository/Supun-group-of compaines/src/pages/Home.tsx",
+                lineNumber: 371,
+                columnNumber: 7
+            }, this),
+            /*#__PURE__*/ _jsxDEV(CertificationSection, {}, void 0, false, {
+                fileName: "D:/Local Repository/Supun-group-of compaines/src/pages/Home.tsx",
+                lineNumber: 453,
+                columnNumber: 7
+            }, this),
+            /*#__PURE__*/ _jsxDEV("section", {
+                className: "py-12 sm:py-14 md:py-20",
+                children: /*#__PURE__*/ _jsxDEV("div", {
+                    className: "container mx-auto px-4",
+                    children: [
+                        /*#__PURE__*/ _jsxDEV(AnimatedSection, {
+                            animation: "slide-up",
+                            duration: 800,
+                            triggerOnce: false,
+                            children: /*#__PURE__*/ _jsxDEV("div", {
+                                className: "flex flex-col justify-between gap-6 md:flex-row md:items-end",
+                                children: [
+                                    /*#__PURE__*/ _jsxDEV("div", {
+                                        children: [
+                                            /*#__PURE__*/ _jsxDEV("p", {
+                                                className: "section-kicker",
+                                                children: "Inside the group"
+                                            }, void 0, false, {
+                                                fileName: "D:/Local Repository/Supun-group-of compaines/src/pages/Home.tsx",
+                                                lineNumber: 460,
+                                                columnNumber: 17
+                                            }, this),
+                                            /*#__PURE__*/ _jsxDEV("h2", {
+                                                className: "mt-5 text-4xl font-semibold normal-case tracking-[-0.035em] text-[#071b2d] md:text-6xl",
+                                                children: "The businesses behind Supun Group"
+                                            }, void 0, false, {
+                                                fileName: "D:/Local Repository/Supun-group-of compaines/src/pages/Home.tsx",
+                                                lineNumber: 461,
+                                                columnNumber: 17
+                                            }, this)
+                                        ]
+                                    }, void 0, true, {
+                                        fileName: "D:/Local Repository/Supun-group-of compaines/src/pages/Home.tsx",
+                                        lineNumber: 459,
+                                        columnNumber: 15
+                                    }, this),
+                                    /*#__PURE__*/ _jsxDEV("div", {
+                                        className: "flex items-center gap-3",
+                                        children: [
+                                            /*#__PURE__*/ _jsxDEV(Link, {
+                                                to: "/companies",
+                                                className: "mr-2 hidden font-semibold text-primary transition hover:text-[#315f9f] sm:inline",
+                                                children: "Explore our companies"
+                                            }, void 0, false, {
+                                                fileName: "D:/Local Repository/Supun-group-of compaines/src/pages/Home.tsx",
+                                                lineNumber: 466,
+                                                columnNumber: 17
+                                            }, this),
+                                            /*#__PURE__*/ _jsxDEV("button", {
+                                                type: "button",
+                                                onClick: ()=>scrollCompanies(-1),
+                                                "aria-label": "Previous companies",
+                                                className: "flex h-12 w-12 items-center justify-center rounded-full border border-primary/20 bg-white text-primary transition hover:border-[#78be43] hover:bg-[#78be43] hover:text-white",
+                                                children: /*#__PURE__*/ _jsxDEV(ArrowRight, {
+                                                    className: "rotate-180",
+                                                    size: 19
+                                                }, void 0, false, {
+                                                    fileName: "D:/Local Repository/Supun-group-of compaines/src/pages/Home.tsx",
+                                                    lineNumber: 478,
+                                                    columnNumber: 19
+                                                }, this)
+                                            }, void 0, false, {
+                                                fileName: "D:/Local Repository/Supun-group-of compaines/src/pages/Home.tsx",
+                                                lineNumber: 472,
+                                                columnNumber: 17
+                                            }, this),
+                                            /*#__PURE__*/ _jsxDEV("button", {
+                                                type: "button",
+                                                onClick: ()=>scrollCompanies(1),
+                                                "aria-label": "Next companies",
+                                                className: "flex h-12 w-12 items-center justify-center rounded-full bg-primary text-white transition hover:bg-[#78be43]",
+                                                children: /*#__PURE__*/ _jsxDEV(ArrowRight, {
+                                                    size: 19
+                                                }, void 0, false, {
+                                                    fileName: "D:/Local Repository/Supun-group-of compaines/src/pages/Home.tsx",
+                                                    lineNumber: 486,
+                                                    columnNumber: 19
+                                                }, this)
+                                            }, void 0, false, {
+                                                fileName: "D:/Local Repository/Supun-group-of compaines/src/pages/Home.tsx",
+                                                lineNumber: 480,
+                                                columnNumber: 17
+                                            }, this)
+                                        ]
+                                    }, void 0, true, {
+                                        fileName: "D:/Local Repository/Supun-group-of compaines/src/pages/Home.tsx",
+                                        lineNumber: 465,
+                                        columnNumber: 15
+                                    }, this)
+                                ]
+                            }, void 0, true, {
+                                fileName: "D:/Local Repository/Supun-group-of compaines/src/pages/Home.tsx",
+                                lineNumber: 458,
+                                columnNumber: 13
+                            }, this)
+                        }, void 0, false, {
+                            fileName: "D:/Local Repository/Supun-group-of compaines/src/pages/Home.tsx",
+                            lineNumber: 457,
+                            columnNumber: 11
+                        }, this),
+                        /*#__PURE__*/ _jsxDEV("div", {
+                            ref: companyCarouselRef,
+                            className: "home-company-carousel mt-6 flex items-stretch snap-x snap-mandatory gap-5 overflow-x-auto scroll-smooth pb-4 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden",
+                            children: homeCompanies.map((company, index)=>/*#__PURE__*/ _jsxDEV(AnimatedSection, {
+                                    animation: "slide-up",
+                                    delay: index % 4 * 130,
+                                    duration: 850,
+                                    triggerOnce: false,
+                                    className: "home-company-slide flex w-[88%] flex-none snap-center self-stretch sm:w-[calc(50%_-_0.625rem)] sm:snap-start lg:w-[calc(33.333%_-_0.833rem)] xl:w-[calc(25%_-_0.9375rem)]",
+                                    children: /*#__PURE__*/ _jsxDEV(Link, {
+                                        to: `/companies/${company.id}`,
+                                        className: "company-glass group relative flex min-h-[340px] w-full flex-col overflow-hidden rounded-[1.5rem] p-5 transition duration-300 hover:-translate-y-2 md:min-h-[420px] md:p-6",
+                                        children: [
+                                            /*#__PURE__*/ _jsxDEV("div", {
+                                                className: "relative flex min-h-[130px] items-center justify-center px-2 py-2 md:min-h-[170px]",
+                                                children: /*#__PURE__*/ _jsxDEV(CompanyLogo, {
+                                                    companyId: company.id,
+                                                    companyName: company.shortName,
+                                                    placement: "home",
+                                                    className: "h-28 w-full bg-transparent md:h-40"
+                                                }, void 0, false, {
+                                                    fileName: "D:/Local Repository/Supun-group-of compaines/src/pages/Home.tsx",
+                                                    lineNumber: 509,
+                                                    columnNumber: 21
+                                                }, this)
+                                            }, void 0, false, {
+                                                fileName: "D:/Local Repository/Supun-group-of compaines/src/pages/Home.tsx",
+                                                lineNumber: 508,
+                                                columnNumber: 19
+                                            }, this),
+                                            /*#__PURE__*/ _jsxDEV("div", {
+                                                className: "relative flex flex-1 flex-col px-2 pb-1 pt-7",
+                                                children: [
+                                                    /*#__PURE__*/ _jsxDEV("div", {
+                                                        className: "mb-4 flex items-center gap-3 text-[10px] font-bold uppercase tracking-[.16em] text-[#738197]",
+                                                        children: [
+                                                            /*#__PURE__*/ _jsxDEV("span", {
+                                                                className: "h-2 w-2 rounded-full bg-[#d99a24]"
+                                                            }, void 0, false, {
+                                                                fileName: "D:/Local Repository/Supun-group-of compaines/src/pages/Home.tsx",
+                                                                lineNumber: 518,
+                                                                columnNumber: 23
+                                                            }, this),
+                                                            company.established ? `Established ${company.established}` : 'Supun Group company'
+                                                        ]
+                                                    }, void 0, true, {
+                                                        fileName: "D:/Local Repository/Supun-group-of compaines/src/pages/Home.tsx",
+                                                        lineNumber: 517,
+                                                        columnNumber: 21
+                                                    }, this),
+                                                    /*#__PURE__*/ _jsxDEV("h3", {
+                                                        className: "text-3xl font-semibold normal-case tracking-[-0.03em] text-[#071b2d]",
+                                                        children: company.shortName
+                                                    }, void 0, false, {
+                                                        fileName: "D:/Local Repository/Supun-group-of compaines/src/pages/Home.tsx",
+                                                        lineNumber: 523,
+                                                        columnNumber: 21
+                                                    }, this),
+                                                    /*#__PURE__*/ _jsxDEV("p", {
+                                                        className: "mt-3 hidden line-clamp-2 leading-relaxed text-[#667388] sm:block",
+                                                        children: company.description
+                                                    }, void 0, false, {
+                                                        fileName: "D:/Local Repository/Supun-group-of compaines/src/pages/Home.tsx",
+                                                        lineNumber: 526,
+                                                        columnNumber: 21
+                                                    }, this),
+                                                    /*#__PURE__*/ _jsxDEV("div", {
+                                                        className: "mt-auto flex items-center justify-between border-t border-primary/10 pt-5",
+                                                        children: [
+                                                            /*#__PURE__*/ _jsxDEV("span", {
+                                                                className: "font-semibold text-primary",
+                                                                children: "View company"
+                                                            }, void 0, false, {
+                                                                fileName: "D:/Local Repository/Supun-group-of compaines/src/pages/Home.tsx",
+                                                                lineNumber: 530,
+                                                                columnNumber: 23
+                                                            }, this),
+                                                            /*#__PURE__*/ _jsxDEV("span", {
+                                                                className: "flex h-12 w-12 items-center justify-center rounded-full bg-[#10233f] text-white shadow-[0_8px_20px_rgba(16,35,63,.18)] transition duration-300 group-hover:translate-x-1 group-hover:bg-[#78be43]",
+                                                                children: /*#__PURE__*/ _jsxDEV(ArrowRight, {
+                                                                    size: 18
+                                                                }, void 0, false, {
+                                                                    fileName: "D:/Local Repository/Supun-group-of compaines/src/pages/Home.tsx",
+                                                                    lineNumber: 532,
+                                                                    columnNumber: 25
+                                                                }, this)
+                                                            }, void 0, false, {
+                                                                fileName: "D:/Local Repository/Supun-group-of compaines/src/pages/Home.tsx",
+                                                                lineNumber: 531,
+                                                                columnNumber: 23
+                                                            }, this)
+                                                        ]
+                                                    }, void 0, true, {
+                                                        fileName: "D:/Local Repository/Supun-group-of compaines/src/pages/Home.tsx",
+                                                        lineNumber: 529,
+                                                        columnNumber: 21
+                                                    }, this)
+                                                ]
+                                            }, void 0, true, {
+                                                fileName: "D:/Local Repository/Supun-group-of compaines/src/pages/Home.tsx",
+                                                lineNumber: 516,
+                                                columnNumber: 19
+                                            }, this)
+                                        ]
+                                    }, void 0, true, {
+                                        fileName: "D:/Local Repository/Supun-group-of compaines/src/pages/Home.tsx",
+                                        lineNumber: 504,
+                                        columnNumber: 17
+                                    }, this)
+                                }, company.id, false, {
+                                    fileName: "D:/Local Repository/Supun-group-of compaines/src/pages/Home.tsx",
+                                    lineNumber: 496,
+                                    columnNumber: 15
+                                }, this))
+                        }, void 0, false, {
+                            fileName: "D:/Local Repository/Supun-group-of compaines/src/pages/Home.tsx",
+                            lineNumber: 491,
+                            columnNumber: 11
+                        }, this)
+                    ]
+                }, void 0, true, {
+                    fileName: "D:/Local Repository/Supun-group-of compaines/src/pages/Home.tsx",
+                    lineNumber: 456,
+                    columnNumber: 9
+                }, this)
+            }, void 0, false, {
+                fileName: "D:/Local Repository/Supun-group-of compaines/src/pages/Home.tsx",
+                lineNumber: 455,
+                columnNumber: 7
+            }, this),
+            /*#__PURE__*/ _jsxDEV("section", {
+                className: "relative overflow-hidden bg-[#f3f7fb] px-4 pb-12 sm:pb-14 md:pb-20",
+                children: /*#__PURE__*/ _jsxDEV(AnimatedSection, {
+                    animation: "scale",
+                    duration: 900,
+                    triggerOnce: false,
+                    className: "container mx-auto",
+                    children: /*#__PURE__*/ _jsxDEV("div", {
+                        className: "relative isolate overflow-hidden rounded-[2rem] bg-[#071b2d] px-7 py-12 text-white shadow-[0_30px_80px_rgba(7,27,45,.20)] sm:px-12 sm:py-16 md:rounded-[3rem] lg:px-20 lg:py-20",
+                        children: [
+                            /*#__PURE__*/ _jsxDEV("div", {
+                                className: "absolute inset-y-0 right-0 -z-10 w-full bg-[radial-gradient(circle_at_85%_35%,rgba(217,154,36,.16),transparent_30%),linear-gradient(115deg,transparent_45%,rgba(25,83,132,.38))] lg:w-2/3"
+                            }, void 0, false, {
+                                fileName: "D:/Local Repository/Supun-group-of compaines/src/pages/Home.tsx",
+                                lineNumber: 551,
+                                columnNumber: 13
+                            }, this),
+                            /*#__PURE__*/ _jsxDEV("div", {
+                                className: "grid gap-12 lg:grid-cols-[minmax(0,1fr)_18rem] lg:items-end lg:gap-20",
+                                children: [
+                                    /*#__PURE__*/ _jsxDEV("div", {
+                                        children: [
+                                            /*#__PURE__*/ _jsxDEV("p", {
+                                                className: "mb-6 flex items-center gap-3 text-xs font-bold uppercase tracking-[0.24em] text-[#efbd55]",
+                                                children: [
+                                                    /*#__PURE__*/ _jsxDEV(Sparkles, {
+                                                        size: 15
+                                                    }, void 0, false, {
+                                                        fileName: "D:/Local Repository/Supun-group-of compaines/src/pages/Home.tsx",
+                                                        lineNumber: 555,
+                                                        columnNumber: 19
+                                                    }, this),
+                                                    " The next chapter"
+                                                ]
+                                            }, void 0, true, {
+                                                fileName: "D:/Local Repository/Supun-group-of compaines/src/pages/Home.tsx",
+                                                lineNumber: 554,
+                                                columnNumber: 17
+                                            }, this),
+                                            /*#__PURE__*/ _jsxDEV("h2", {
+                                                className: "max-w-4xl text-4xl font-semibold normal-case leading-[1.02] tracking-[-0.04em] sm:text-5xl md:text-7xl",
+                                                children: [
+                                                    "Let's build something ",
+                                                    /*#__PURE__*/ _jsxDEV("span", {
+                                                        className: "text-[#efbd55]",
+                                                        children: "lasting."
+                                                    }, void 0, false, {
+                                                        fileName: "D:/Local Repository/Supun-group-of compaines/src/pages/Home.tsx",
+                                                        lineNumber: 558,
+                                                        columnNumber: 45
+                                                    }, this)
+                                                ]
+                                            }, void 0, true, {
+                                                fileName: "D:/Local Repository/Supun-group-of compaines/src/pages/Home.tsx",
+                                                lineNumber: 557,
+                                                columnNumber: 17
+                                            }, this),
+                                            /*#__PURE__*/ _jsxDEV("p", {
+                                                className: "mt-7 max-w-2xl text-base leading-relaxed text-white/65 sm:text-lg",
+                                                children: "From ambitious ideas to trusted partnerships, we are ready to create what Sri Lanka needs next."
+                                            }, void 0, false, {
+                                                fileName: "D:/Local Repository/Supun-group-of compaines/src/pages/Home.tsx",
+                                                lineNumber: 560,
+                                                columnNumber: 17
+                                            }, this)
+                                        ]
+                                    }, void 0, true, {
+                                        fileName: "D:/Local Repository/Supun-group-of compaines/src/pages/Home.tsx",
+                                        lineNumber: 553,
+                                        columnNumber: 15
+                                    }, this),
+                                    /*#__PURE__*/ _jsxDEV("div", {
+                                        className: "border-t border-white/15 pt-7 lg:border-l lg:border-t-0 lg:pl-10 lg:pt-0",
+                                        children: [
+                                            /*#__PURE__*/ _jsxDEV("p", {
+                                                className: "mb-6 text-sm leading-relaxed text-white/55",
+                                                children: "Have an opportunity, partnership or idea in mind?"
+                                            }, void 0, false, {
+                                                fileName: "D:/Local Repository/Supun-group-of compaines/src/pages/Home.tsx",
+                                                lineNumber: 567,
+                                                columnNumber: 17
+                                            }, this),
+                                            /*#__PURE__*/ _jsxDEV(Link, {
+                                                to: "/contact",
+                                                className: "group inline-flex w-full items-center justify-between rounded-full bg-[#efbd55] px-6 py-4 font-semibold text-[#071b2d] transition duration-300 hover:bg-white",
+                                                children: [
+                                                    "Talk to our team",
+                                                    /*#__PURE__*/ _jsxDEV("span", {
+                                                        className: "flex h-10 w-10 items-center justify-center rounded-full bg-[#071b2d] text-white transition duration-300 group-hover:translate-x-1 group-hover:bg-[#78be43]",
+                                                        children: /*#__PURE__*/ _jsxDEV(ArrowRight, {
+                                                            size: 18
+                                                        }, void 0, false, {
+                                                            fileName: "D:/Local Repository/Supun-group-of compaines/src/pages/Home.tsx",
+                                                            lineNumber: 576,
+                                                            columnNumber: 21
+                                                        }, this)
+                                                    }, void 0, false, {
+                                                        fileName: "D:/Local Repository/Supun-group-of compaines/src/pages/Home.tsx",
+                                                        lineNumber: 575,
+                                                        columnNumber: 19
+                                                    }, this)
+                                                ]
+                                            }, void 0, true, {
+                                                fileName: "D:/Local Repository/Supun-group-of compaines/src/pages/Home.tsx",
+                                                lineNumber: 570,
+                                                columnNumber: 17
+                                            }, this)
+                                        ]
+                                    }, void 0, true, {
+                                        fileName: "D:/Local Repository/Supun-group-of compaines/src/pages/Home.tsx",
+                                        lineNumber: 566,
+                                        columnNumber: 15
+                                    }, this)
+                                ]
+                            }, void 0, true, {
+                                fileName: "D:/Local Repository/Supun-group-of compaines/src/pages/Home.tsx",
+                                lineNumber: 552,
+                                columnNumber: 13
+                            }, this)
+                        ]
+                    }, void 0, true, {
+                        fileName: "D:/Local Repository/Supun-group-of compaines/src/pages/Home.tsx",
+                        lineNumber: 550,
+                        columnNumber: 11
+                    }, this)
+                }, void 0, false, {
+                    fileName: "D:/Local Repository/Supun-group-of compaines/src/pages/Home.tsx",
+                    lineNumber: 544,
+                    columnNumber: 9
+                }, this)
+            }, void 0, false, {
+                fileName: "D:/Local Repository/Supun-group-of compaines/src/pages/Home.tsx",
+                lineNumber: 543,
+                columnNumber: 7
+            }, this)
+        ]
+    }, void 0, true, {
+        fileName: "D:/Local Repository/Supun-group-of compaines/src/pages/Home.tsx",
+        lineNumber: 138,
+        columnNumber: 5
+    }, this);
+};
+_s1(Home, "wwfhk/el/PUlZlw1psJAvwxUNu0=");
+_c1 = Home;
+export default Home;
+var _c, _c1;
+$RefreshReg$(_c, "CountUpStat");
+$RefreshReg$(_c1, "Home");
+
+
+if (import.meta.hot && !inWebWorker) {
+  window.$RefreshReg$ = prevRefreshReg;
+  window.$RefreshSig$ = prevRefreshSig;
+}
+
+
+if (import.meta.hot && !inWebWorker) {
+  RefreshRuntime.__hmr_import(import.meta.url).then((currentExports) => {
+    RefreshRuntime.registerExportsForReactRefresh("D:/Local Repository/Supun-group-of compaines/src/pages/Home.tsx", currentExports);
+    import.meta.hot.accept((nextExports) => {
+      if (!nextExports) return;
+      const invalidateMessage = RefreshRuntime.validateRefreshBoundaryAndEnqueueUpdate("D:/Local Repository/Supun-group-of compaines/src/pages/Home.tsx", currentExports, nextExports);
+      if (invalidateMessage) import.meta.hot.invalidate(invalidateMessage);
+    });
+  });
+}
+
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIkhvbWUudHN4Il0sInNvdXJjZXNDb250ZW50IjpbImltcG9ydCB7IHVzZUVmZmVjdCwgdXNlUmVmLCB1c2VTdGF0ZSB9IGZyb20gJ3JlYWN0JztcbmltcG9ydCB7IExpbmsgfSBmcm9tICdyZWFjdC1yb3V0ZXItZG9tJztcbmltcG9ydCB7IEFycm93RG93biwgQXJyb3dSaWdodCwgU3BhcmtsZXMgfSBmcm9tICdsdWNpZGUtcmVhY3QnO1xuaW1wb3J0IFNlbywgeyBERUZBVUxUX0lNQUdFLCBTSVRFX05BTUUsIFNJVEVfVVJMIH0gZnJvbSAnQC9jb21wb25lbnRzL1Nlbyc7XG5pbXBvcnQgeyBBbmltYXRlZFNlY3Rpb24gfSBmcm9tICdAL2NvbXBvbmVudHMvQW5pbWF0ZWRTZWN0aW9uJztcbmltcG9ydCB7IENvbXBhbnlMb2dvIH0gZnJvbSAnQC9jb21wb25lbnRzL0NvbXBhbnlMb2dvJztcbmltcG9ydCB7IGNvbXBhbmllcyB9IGZyb20gJ0AvZGF0YS9jb21wYW5pZXMnO1xuaW1wb3J0IHsgc2VjdG9ySGlnaGxpZ2h0cywgc2l0ZVN0YXRzIH0gZnJvbSAnQC9kYXRhL3NpdGVDb250ZW50JztcbmltcG9ydCBoZXJvVmlkZW8gZnJvbSAnQC9hc3NldHMvc3VwdW4tZ3JvdXAtaGVyby1vcHRpbWl6ZWQubXA0JztcbmltcG9ydCBoZXJvTW9iaWxlVmlkZW8gZnJvbSAnQC9hc3NldHMvc3VwdW4tZ3JvdXAtaGVyby1tb2JpbGUubXA0JztcbmltcG9ydCBoZXJvUG9zdGVyIGZyb20gJ0AvYXNzZXRzL29wdGltaXplZC9oZXJvLXBvc3Rlci5qcGcnO1xuaW1wb3J0IG1hbnVmYWN0dXJpbmdJbWFnZSBmcm9tICdAL2Fzc2V0cy9vcHRpbWl6ZWQvY2FteS1jb29rd2FyZS1wcm9kdWN0aW9uLWZvY3VzLXYyLmpwZyc7XG5pbXBvcnQgeyBDZXJ0aWZpY2F0aW9uU2VjdGlvbiB9IGZyb20gJ0AvY29tcG9uZW50cy9DZXJ0aWZpY2F0aW9uU2VjdGlvbic7XG5pbXBvcnQgY2FteVJlZExvZ28gZnJvbSAnQC9hc3NldHMvY2FteS1sb2dvLXJlZC10cmFuc3BhcmVudC5wbmcnO1xuXG5jb25zdCBmZWF0dXJlZENvbXBhbnlJZHMgPSBbXG4gICdzdXB1bi10cmFkZXJzJyxcbiAgJ3N1cHVuLXN1cGVyLWNlbnRlcicsXG4gICdzdXB1bi1hcmNhZGUtcmVzaWRlbmN5JyxcbiAgJ2NhbXktZ2xvYmFsJyxcbl07XG5jb25zdCBob21lQ29tcGFuaWVzID0gW1xuICAuLi5mZWF0dXJlZENvbXBhbnlJZHMuZmxhdE1hcCgoaWQpID0+IGNvbXBhbmllcy5maWx0ZXIoKGNvbXBhbnkpID0+IGNvbXBhbnkuaWQgPT09IGlkKSksXG4gIC4uLmNvbXBhbmllcy5maWx0ZXIoKGNvbXBhbnkpID0+ICFmZWF0dXJlZENvbXBhbnlJZHMuaW5jbHVkZXMoY29tcGFueS5pZCkpLFxuXTtcblxuY29uc3QgQ291bnRVcFN0YXQgPSAoeyB2YWx1ZSwgbGFiZWwsIGluZGV4IH06IHsgdmFsdWU6IHN0cmluZzsgbGFiZWw6IHN0cmluZzsgaW5kZXg6IG51bWJlciB9KSA9PiB7XG4gIGNvbnN0IHRhcmdldCA9IE51bWJlci5wYXJzZUludCh2YWx1ZSwgMTApO1xuICBjb25zdCBzdWZmaXggPSB2YWx1ZS5yZXBsYWNlKFN0cmluZyh0YXJnZXQpLCAnJyk7XG4gIGNvbnN0IFtjb3VudCwgc2V0Q291bnRdID0gdXNlU3RhdGUoMCk7XG4gIGNvbnN0IHJlZiA9IHVzZVJlZjxIVE1MRGl2RWxlbWVudD4obnVsbCk7XG5cbiAgdXNlRWZmZWN0KCgpID0+IHtcbiAgICBjb25zdCBlbGVtZW50ID0gcmVmLmN1cnJlbnQ7XG4gICAgaWYgKCFlbGVtZW50KSByZXR1cm47XG4gICAgY29uc3Qgb2JzZXJ2ZXIgPSBuZXcgSW50ZXJzZWN0aW9uT2JzZXJ2ZXIoXG4gICAgICAoW2VudHJ5XSkgPT4ge1xuICAgICAgICBpZiAoIWVudHJ5LmlzSW50ZXJzZWN0aW5nKSByZXR1cm47XG4gICAgICAgIG9ic2VydmVyLmRpc2Nvbm5lY3QoKTtcbiAgICAgICAgaWYgKHdpbmRvdy5tYXRjaE1lZGlhKCcocHJlZmVycy1yZWR1Y2VkLW1vdGlvbjogcmVkdWNlKScpLm1hdGNoZXMpIHtcbiAgICAgICAgICBzZXRDb3VudCh0YXJnZXQpO1xuICAgICAgICAgIHJldHVybjtcbiAgICAgICAgfVxuICAgICAgICBjb25zdCBkdXJhdGlvbiA9IDE0MDA7XG4gICAgICAgIGNvbnN0IHN0YXJ0ID0gcGVyZm9ybWFuY2Uubm93KCk7XG4gICAgICAgIGNvbnN0IGFuaW1hdGUgPSAodGltZTogbnVtYmVyKSA9PiB7XG4gICAgICAgICAgY29uc3QgcHJvZ3Jlc3MgPSBNYXRoLm1pbigodGltZSAtIHN0YXJ0KSAvIGR1cmF0aW9uLCAxKTtcbiAgICAgICAgICBjb25zdCBlYXNlZCA9IDEgLSBNYXRoLnBvdygxIC0gcHJvZ3Jlc3MsIDMpO1xuICAgICAgICAgIHNldENvdW50KE1hdGgucm91bmQodGFyZ2V0ICogZWFzZWQpKTtcbiAgICAgICAgICBpZiAocHJvZ3Jlc3MgPCAxKSByZXF1ZXN0QW5pbWF0aW9uRnJhbWUoYW5pbWF0ZSk7XG4gICAgICAgIH07XG4gICAgICAgIHJlcXVlc3RBbmltYXRpb25GcmFtZShhbmltYXRlKTtcbiAgICAgIH0sXG4gICAgICB7IHRocmVzaG9sZDogMC40IH0sXG4gICAgKTtcbiAgICBvYnNlcnZlci5vYnNlcnZlKGVsZW1lbnQpO1xuICAgIHJldHVybiAoKSA9PiBvYnNlcnZlci5kaXNjb25uZWN0KCk7XG4gIH0sIFt0YXJnZXRdKTtcblxuICByZXR1cm4gKFxuICAgIDxkaXZcbiAgICAgIHJlZj17cmVmfVxuICAgICAgY2xhc3NOYW1lPVwiaGVyby1zdGF0IGdyb3VwIHJlbGF0aXZlIHB5LTIgbWQ6cHktM1wiXG4gICAgICBzdHlsZT17eyBhbmltYXRpb25EZWxheTogYCR7aW5kZXggKiAxMDB9bXNgIH19XG4gICAgPlxuICAgICAgPGRpdiBjbGFzc05hbWU9XCJmbGV4IGl0ZW1zLXN0YXJ0IGdhcC0yXCI+XG4gICAgICAgIDxzcGFuIGNsYXNzTmFtZT1cInRleHQtM3hsIGZvbnQtc2VtaWJvbGQgdHJhY2tpbmctWy0wLjA0ZW1dIHRleHQtd2hpdGUgdGFidWxhci1udW1zIHNtOnRleHQtNHhsXCI+XG4gICAgICAgICAge2NvdW50fVxuICAgICAgICAgIHtzdWZmaXh9XG4gICAgICAgIDwvc3Bhbj5cbiAgICAgICAgPHNwYW4gY2xhc3NOYW1lPVwibXQtMSBoLTEuNSB3LTEuNSByb3VuZGVkLWZ1bGwgYmctWyNkOTlhMjRdIHNoYWRvdy1bMF8wXzEycHhfcmdiYSgyMTcsMTU0LDM2LC42NSldXCIgLz5cbiAgICAgIDwvZGl2PlxuICAgICAgPGRpdiBjbGFzc05hbWU9XCJtdC0xLjUgbWF4LXctWzlyZW1dIHRleHQtWzlweF0gZm9udC1zZW1pYm9sZCB1cHBlcmNhc2UgbGVhZGluZy1zbnVnIHRyYWNraW5nLVswLjE0ZW1dIHRleHQtd2hpdGUvNTAgc206dGV4dC1bMTBweF1cIj5cbiAgICAgICAge2xhYmVsfVxuICAgICAgPC9kaXY+XG4gICAgPC9kaXY+XG4gICk7XG59O1xuXG5jb25zdCBIb21lID0gKCkgPT4ge1xuICBjb25zdCBbaGVyb1ZpZGVvUmVhZHksIHNldEhlcm9WaWRlb1JlYWR5XSA9IHVzZVN0YXRlKGZhbHNlKTtcbiAgY29uc3QgW3Nob3VsZFBsYXlIZXJvVmlkZW8sIHNldFNob3VsZFBsYXlIZXJvVmlkZW9dID0gdXNlU3RhdGUoZmFsc2UpO1xuICBjb25zdCBoZXJvVmlkZW9SZWYgPSB1c2VSZWY8SFRNTFZpZGVvRWxlbWVudD4obnVsbCk7XG4gIGNvbnN0IGNvbXBhbnlDYXJvdXNlbFJlZiA9IHVzZVJlZjxIVE1MRGl2RWxlbWVudD4obnVsbCk7XG5cbiAgdXNlRWZmZWN0KCgpID0+IHtcbiAgICBjb25zdCByZWR1Y2VkTW90aW9uID0gd2luZG93Lm1hdGNoTWVkaWEoJyhwcmVmZXJzLXJlZHVjZWQtbW90aW9uOiByZWR1Y2UpJyk7XG4gICAgY29uc3QgY29ubmVjdGlvbiA9IChcbiAgICAgIG5hdmlnYXRvciBhcyBOYXZpZ2F0b3IgJiB7XG4gICAgICAgIGNvbm5lY3Rpb24/OiB7IHNhdmVEYXRhPzogYm9vbGVhbjsgZWZmZWN0aXZlVHlwZT86IHN0cmluZyB9O1xuICAgICAgfVxuICAgICkuY29ubmVjdGlvbjtcblxuICAgIGNvbnN0IHVwZGF0ZVZpZGVvUHJlZmVyZW5jZSA9ICgpID0+IHtcbiAgICAgIGNvbnN0IGNvbnN0cmFpbmVkQ29ubmVjdGlvbiA9XG4gICAgICAgIGNvbm5lY3Rpb24/LnNhdmVEYXRhIHx8XG4gICAgICAgIGNvbm5lY3Rpb24/LmVmZmVjdGl2ZVR5cGUgPT09ICdzbG93LTJnJyB8fFxuICAgICAgICBjb25uZWN0aW9uPy5lZmZlY3RpdmVUeXBlID09PSAnMmcnO1xuICAgICAgY29uc3QgZW5hYmxlZCA9ICFyZWR1Y2VkTW90aW9uLm1hdGNoZXMgJiYgIWNvbnN0cmFpbmVkQ29ubmVjdGlvbjtcbiAgICAgIHNldEhlcm9WaWRlb1JlYWR5KGZhbHNlKTtcbiAgICAgIHNldFNob3VsZFBsYXlIZXJvVmlkZW8oZW5hYmxlZCk7XG4gICAgfTtcblxuICAgIHVwZGF0ZVZpZGVvUHJlZmVyZW5jZSgpO1xuICAgIHJlZHVjZWRNb3Rpb24uYWRkRXZlbnRMaXN0ZW5lcignY2hhbmdlJywgdXBkYXRlVmlkZW9QcmVmZXJlbmNlKTtcblxuICAgIHJldHVybiAoKSA9PiB7XG4gICAgICByZWR1Y2VkTW90aW9uLnJlbW92ZUV2ZW50TGlzdGVuZXIoJ2NoYW5nZScsIHVwZGF0ZVZpZGVvUHJlZmVyZW5jZSk7XG4gICAgfTtcbiAgfSwgW10pO1xuXG4gIHVzZUVmZmVjdCgoKSA9PiB7XG4gICAgY29uc3QgdmlkZW8gPSBoZXJvVmlkZW9SZWYuY3VycmVudDtcbiAgICBpZiAoIXZpZGVvKSByZXR1cm47XG5cbiAgICBjb25zdCBoYW5kbGVWaXNpYmlsaXR5Q2hhbmdlID0gKCkgPT4ge1xuICAgICAgaWYgKGRvY3VtZW50LmhpZGRlbikge1xuICAgICAgICB2aWRlby5wYXVzZSgpO1xuICAgICAgfSBlbHNlIHtcbiAgICAgICAgdm9pZCB2aWRlby5wbGF5KCkuY2F0Y2goKCkgPT4gdW5kZWZpbmVkKTtcbiAgICAgIH1cbiAgICB9O1xuXG4gICAgZG9jdW1lbnQuYWRkRXZlbnRMaXN0ZW5lcigndmlzaWJpbGl0eWNoYW5nZScsIGhhbmRsZVZpc2liaWxpdHlDaGFuZ2UpO1xuICAgIHJldHVybiAoKSA9PiBkb2N1bWVudC5yZW1vdmVFdmVudExpc3RlbmVyKCd2aXNpYmlsaXR5Y2hhbmdlJywgaGFuZGxlVmlzaWJpbGl0eUNoYW5nZSk7XG4gIH0sIFtzaG91bGRQbGF5SGVyb1ZpZGVvXSk7XG5cbiAgY29uc3Qgc2Nyb2xsQ29tcGFuaWVzID0gKGRpcmVjdGlvbjogLTEgfCAxKSA9PiB7XG4gICAgY29uc3QgY2Fyb3VzZWwgPSBjb21wYW55Q2Fyb3VzZWxSZWYuY3VycmVudDtcbiAgICBpZiAoY2Fyb3VzZWwpIHtcbiAgICAgIGNvbnN0IGZpcnN0Q2FyZCA9IGNhcm91c2VsLmZpcnN0RWxlbWVudENoaWxkIGFzIEhUTUxFbGVtZW50IHwgbnVsbDtcbiAgICAgIGNvbnN0IGRpc3RhbmNlID0gKGZpcnN0Q2FyZD8ub2Zmc2V0V2lkdGggPz8gY2Fyb3VzZWwuY2xpZW50V2lkdGggKiAwLjg1KSArIDIwO1xuICAgICAgY2Fyb3VzZWwuc2Nyb2xsQnkoeyBsZWZ0OiBkaXJlY3Rpb24gKiBkaXN0YW5jZSwgYmVoYXZpb3I6ICdzbW9vdGgnIH0pO1xuICAgIH1cbiAgfTtcblxuICByZXR1cm4gKFxuICAgIDxkaXYgY2xhc3NOYW1lPVwibWluLWgtc2NyZWVuIG92ZXJmbG93LWhpZGRlbiBiZy1bI2VkZjNmYl1cIj5cbiAgICAgIDxTZW9cbiAgICAgICAgdGl0bGU9XCJTdXB1biBHcm91cCBvZiBDb21wYW5pZXMgfCBCdWlsdCBpbiBTcmkgTGFua2EuIEJ1aWx0IHRvIExhc3QuXCJcbiAgICAgICAgZGVzY3JpcHRpb249XCJTdXB1biBHcm91cCBvZiBDb21wYW5pZXMgaXMgYSBTcmkgTGFua2FuIGZhbWlseS1ydW4gZ3JvdXAgd2l0aCAxMyBjb21wYW5pZXMgYWNyb3NzIG1hbnVmYWN0dXJpbmcsIHJldGFpbCwgZGlzdHJpYnV0aW9uIGFuZCBob3NwaXRhbGl0eSwgd2l0aCByb290cyBnb2luZyBiYWNrIHRvIDE5NzguXCJcbiAgICAgICAga2V5d29yZHM9XCJTdXB1biBHcm91cCBvZiBDb21wYW5pZXMsIFNyaSBMYW5rYSBtYW51ZmFjdHVyaW5nLCBDYW15LCBTdXB1biBUcmFkZXJzLCBTdXB1biBTdXBlciBDZW50ZXIsIFNyaSBMYW5rYW4gY29uZ2xvbWVyYXRlXCJcbiAgICAgICAgcGF0aD1cIi9cIlxuICAgICAgICBqc29uTGQ9e3tcbiAgICAgICAgICAnQGNvbnRleHQnOiAnaHR0cHM6Ly9zY2hlbWEub3JnJyxcbiAgICAgICAgICAnQGdyYXBoJzogW1xuICAgICAgICAgICAge1xuICAgICAgICAgICAgICAnQHR5cGUnOiAnV2ViU2l0ZScsXG4gICAgICAgICAgICAgICdAaWQnOiBgJHtTSVRFX1VSTH0vI3dlYnNpdGVgLFxuICAgICAgICAgICAgICBuYW1lOiBTSVRFX05BTUUsXG4gICAgICAgICAgICAgIHVybDogU0lURV9VUkwsXG4gICAgICAgICAgICAgIGluTGFuZ3VhZ2U6ICdlbi1MSycsXG4gICAgICAgICAgICB9LFxuICAgICAgICAgICAge1xuICAgICAgICAgICAgICAnQHR5cGUnOiAnT3JnYW5pemF0aW9uJyxcbiAgICAgICAgICAgICAgJ0BpZCc6IGAke1NJVEVfVVJMfS8jb3JnYW5pemF0aW9uYCxcbiAgICAgICAgICAgICAgbmFtZTogU0lURV9OQU1FLFxuICAgICAgICAgICAgICB1cmw6IFNJVEVfVVJMLFxuICAgICAgICAgICAgICBsb2dvOiB7ICdAdHlwZSc6ICdJbWFnZU9iamVjdCcsIHVybDogREVGQVVMVF9JTUFHRSB9LFxuICAgICAgICAgICAgICBmb3VuZGluZ0RhdGU6ICcxOTc4JyxcbiAgICAgICAgICAgICAgZGVzY3JpcHRpb246XG4gICAgICAgICAgICAgICAgJ0EgU3JpIExhbmthbiBmYW1pbHktcnVuIGdyb3VwIG9wZXJhdGluZyBhY3Jvc3MgbWFudWZhY3R1cmluZywgcmV0YWlsLCBkaXN0cmlidXRpb24gYW5kIGhvc3BpdGFsaXR5LicsXG4gICAgICAgICAgICAgIGFkZHJlc3M6IHtcbiAgICAgICAgICAgICAgICAnQHR5cGUnOiAnUG9zdGFsQWRkcmVzcycsXG4gICAgICAgICAgICAgICAgYWRkcmVzc0xvY2FsaXR5OiAnQ29sb21ibycsXG4gICAgICAgICAgICAgICAgYWRkcmVzc0NvdW50cnk6ICdMSycsXG4gICAgICAgICAgICAgIH0sXG4gICAgICAgICAgICAgIGNvbnRhY3RQb2ludDoge1xuICAgICAgICAgICAgICAgICdAdHlwZSc6ICdDb250YWN0UG9pbnQnLFxuICAgICAgICAgICAgICAgIHRlbGVwaG9uZTogJys5NC0xMTItMDU1LTAyNicsXG4gICAgICAgICAgICAgICAgY29udGFjdFR5cGU6ICdnZW5lcmFsIGVucXVpcmllcycsXG4gICAgICAgICAgICAgICAgZW1haWw6ICdpbmZvQHN1cHVuZ3JvdXAubGsnLFxuICAgICAgICAgICAgICB9LFxuICAgICAgICAgICAgfSxcbiAgICAgICAgICBdLFxuICAgICAgICB9fVxuICAgICAgLz5cblxuICAgICAgPHNlY3Rpb24gY2xhc3NOYW1lPVwicHJlbWl1bS1oZXJvIHJlbGF0aXZlIGlzb2xhdGUgaC1bNThzdmhdIG1pbi1oLVs1MjBweF0gbWF4LWgtWzY0MHB4XSBvdmVyZmxvdy1oaWRkZW4gYmctWyMwNzExMGRdIHRleHQtd2hpdGUgbWQ6aC1hdXRvIG1kOm1heC1oLW5vbmUgbWQ6bWluLWgtWzc2MHB4XSBsZzptaW4taC1zY3JlZW5cIj5cbiAgICAgICAgPGltZ1xuICAgICAgICAgIHNyYz17aGVyb1Bvc3Rlcn1cbiAgICAgICAgICBhbHQ9XCJcIlxuICAgICAgICAgIGZldGNoUHJpb3JpdHk9XCJoaWdoXCJcbiAgICAgICAgICBjbGFzc05hbWU9e2BhYnNvbHV0ZSBpbnNldC0wIGgtZnVsbCB3LWZ1bGwgb2JqZWN0LWNvdmVyIG9iamVjdC1bNjIlX2NlbnRlcl0gdHJhbnNpdGlvbi1vcGFjaXR5IGR1cmF0aW9uLTUwMCAke2hlcm9WaWRlb1JlYWR5ID8gJ29wYWNpdHktMCcgOiAnb3BhY2l0eS0xMDAnfWB9XG4gICAgICAgICAgYXJpYS1oaWRkZW49XCJ0cnVlXCJcbiAgICAgICAgICBkZWNvZGluZz1cImFzeW5jXCJcbiAgICAgICAgLz5cbiAgICAgICAge3Nob3VsZFBsYXlIZXJvVmlkZW8gJiYgKFxuICAgICAgICAgIDx2aWRlb1xuICAgICAgICAgICAgcmVmPXtoZXJvVmlkZW9SZWZ9XG4gICAgICAgICAgICBjbGFzc05hbWU9e2BhYnNvbHV0ZSBpbnNldC0wIGgtZnVsbCB3LWZ1bGwgb2JqZWN0LWNvdmVyIG9iamVjdC1bNjIlX2NlbnRlcl0gdHJhbnNpdGlvbi1vcGFjaXR5IGR1cmF0aW9uLTIwMCAke2hlcm9WaWRlb1JlYWR5ID8gJ29wYWNpdHktMTAwJyA6ICdvcGFjaXR5LTAnfWB9XG4gICAgICAgICAgICBhdXRvUGxheVxuICAgICAgICAgICAgbXV0ZWRcbiAgICAgICAgICAgIGxvb3BcbiAgICAgICAgICAgIHBsYXlzSW5saW5lXG4gICAgICAgICAgICBwcmVsb2FkPVwiYXV0b1wiXG4gICAgICAgICAgICBwb3N0ZXI9e2hlcm9Qb3N0ZXJ9XG4gICAgICAgICAgICBvbkxvYWRlZERhdGE9eygpID0+IHNldEhlcm9WaWRlb1JlYWR5KHRydWUpfVxuICAgICAgICAgICAgYXJpYS1oaWRkZW49XCJ0cnVlXCJcbiAgICAgICAgICA+XG4gICAgICAgICAgICA8c291cmNlIG1lZGlhPVwiKG1heC13aWR0aDogNzY3cHgpXCIgc3JjPXtoZXJvTW9iaWxlVmlkZW99IHR5cGU9XCJ2aWRlby9tcDRcIiAvPlxuICAgICAgICAgICAgPHNvdXJjZSBzcmM9e2hlcm9WaWRlb30gdHlwZT1cInZpZGVvL21wNFwiIC8+XG4gICAgICAgICAgPC92aWRlbz5cbiAgICAgICAgKX1cbiAgICAgICAgPGRpdiBjbGFzc05hbWU9XCJhYnNvbHV0ZSBpbnNldC0wIGJnLVtsaW5lYXItZ3JhZGllbnQoOTBkZWcscmdiYSgzLDEyLDgsLjU1KV8wJSxyZ2JhKDUsMTgsMTIsLjMyKV8zOCUscmdiYSg1LDE3LDEyLC4xKV83MiUscmdiYSgzLDEyLDgsLjA0KV8xMDAlKV1cIiAvPlxuICAgICAgICA8ZGl2IGNsYXNzTmFtZT1cImFic29sdXRlIGluc2V0LTAgYmctW2xpbmVhci1ncmFkaWVudCgxODBkZWcscmdiYSgzLDEwLDcsLjA4KV8wJSx0cmFuc3BhcmVudF8zNiUscmdiYSgzLDEwLDcsLjQyKV8xMDAlKV1cIiAvPlxuXG4gICAgICAgIDxkaXYgY2xhc3NOYW1lPVwiY29udGFpbmVyIHJlbGF0aXZlIHotMTAgbXgtYXV0byBmbGV4IGgtZnVsbCBtaW4taC0wIGZsZXgtY29sIHB4LTUgcGItNSBwdC0yMCBzbTpoLWF1dG8gc206bWluLWgtWzc2MHB4XSBzbTpweC02IHNtOnBiLTYgc206cHQtMzIgbGc6bWluLWgtc2NyZWVuIGxnOnB4LTggbGc6cGItOSBsZzpwdC0zNlwiPlxuICAgICAgICAgIDxkaXYgY2xhc3NOYW1lPVwiaGVyby10b3BsaW5lIGZsZXggaXRlbXMtY2VudGVyIGp1c3RpZnktYmV0d2VlbiBnYXAtNSBwYi0xIHRleHQtWzhweF0gZm9udC1zZW1pYm9sZCB1cHBlcmNhc2UgdHJhY2tpbmctWzAuMTZlbV0gdGV4dC13aGl0ZS81OCBzbTpwYi01IHNtOnRleHQtWzExcHhdIHNtOnRyYWNraW5nLVswLjI0ZW1dXCI+XG4gICAgICAgICAgICA8c3BhbiBjbGFzc05hbWU9XCJmbGV4IGl0ZW1zLWNlbnRlciBnYXAtM1wiPlxuICAgICAgICAgICAgICA8c3BhbiBjbGFzc05hbWU9XCJoLXB4IHctOCBiZy1bI2U4YWEzYV1cIiAvPiBJbmRlcGVuZGVudC4gU3JpIExhbmthbi4gU2luY2UgMTk3OC5cbiAgICAgICAgICAgIDwvc3Bhbj5cbiAgICAgICAgICAgIDxzcGFuIGNsYXNzTmFtZT1cImhpZGRlbiBpdGVtcy1jZW50ZXIgZ2FwLTIgc206ZmxleFwiPlxuICAgICAgICAgICAgICA8c3BhbiBjbGFzc05hbWU9XCJoZXJvLWxpdmUtZG90XCIgLz4gQ29sb21ibywgU3JpIExhbmthXG4gICAgICAgICAgICA8L3NwYW4+XG4gICAgICAgICAgPC9kaXY+XG5cbiAgICAgICAgICA8ZGl2IGNsYXNzTmFtZT1cImdyaWQgZmxleC0xIGl0ZW1zLWNlbnRlciBnYXAtNCBweS0yIHNtOmdhcC0xMCBzbTpweS0xMCBsZzpncmlkLWNvbHMtW21pbm1heCgwLDFmcilfMThyZW1dIGxnOmdhcC0xNiBsZzpweS0xNCB4bDpncmlkLWNvbHMtW21pbm1heCgwLDFmcilfMjFyZW1dXCI+XG4gICAgICAgICAgICA8ZGl2IGNsYXNzTmFtZT1cImhlcm8tY29weSBtYXgtdy01eGxcIj5cbiAgICAgICAgICAgICAgPGgxIGNsYXNzTmFtZT1cImhlcm8tdGl0bGUgbWF4LXctNXhsIHRleHQtW2NsYW1wKDIuMTVyZW0sMTAuNXZ3LDIuOHJlbSldIGZvbnQtc2VtaWJvbGQgbm9ybWFsLWNhc2UgbGVhZGluZy1bMC45NF0gdHJhY2tpbmctWy0wLjA1NWVtXSB0ZXh0LXdoaXRlIHNtOnRleHQtW2NsYW1wKDNyZW0sOHZ3LDYuNnJlbSldIHNtOmxlYWRpbmctWzAuOTJdXCI+XG4gICAgICAgICAgICAgICAgPHNwYW4gY2xhc3NOYW1lPVwiaGVyby10aXRsZS1ibHVlXCI+QnVpbHQgaW48L3NwYW4+eycgJ31cbiAgICAgICAgICAgICAgICA8c3BhbiBjbGFzc05hbWU9XCJoZXJvLXRpdGxlLWFjY2VudFwiPlNyaSBMYW5rYS48L3NwYW4+XG4gICAgICAgICAgICAgICAgPGJyIC8+XG4gICAgICAgICAgICAgICAgPHNwYW4gY2xhc3NOYW1lPVwiaGVyby10aXRsZS1ibHVlXCI+QnVpbHQgdG8gPC9zcGFuPlxuICAgICAgICAgICAgICAgIDxzcGFuIGNsYXNzTmFtZT1cImhlcm8tdGl0bGUtYWNjZW50XCI+bGFzdC48L3NwYW4+XG4gICAgICAgICAgICAgIDwvaDE+XG4gICAgICAgICAgICAgIDxwIGNsYXNzTmFtZT1cIm10LTMgbWF4LXcteGwgYm9yZGVyLWwgYm9yZGVyLVsjZThhYTNhXS83MCBwbC0zIHRleHQteHMgbGVhZGluZy1yZWxheGVkIHRleHQtd2hpdGUvODAgc206bXQtOCBzbTpwbC01IHNtOnRleHQtYmFzZVwiPlxuICAgICAgICAgICAgICAgIE9uZSBTcmkgTGFua2FuIEdyb3VwLCBidWlsdCBhY3Jvc3MgZm91ciBpbmR1c3RyaWVzIHNpbmNlIDE5NzguXG4gICAgICAgICAgICAgIDwvcD5cbiAgICAgICAgICAgICAgPGRpdiBjbGFzc05hbWU9XCJyZWxhdGl2ZSB6LTIwIG10LTQgZmxleCBnYXAtMi41IHNtOm10LTEwIHNtOmZsZXgtcm93IHNtOmdhcC0zXCI+XG4gICAgICAgICAgICAgICAgPExpbmtcbiAgICAgICAgICAgICAgICAgIHRvPVwiL2NvbXBhbmllc1wiXG4gICAgICAgICAgICAgICAgICBhcmlhLWxhYmVsPVwiRXhwbG9yZSBhbGwgU3VwdW4gR3JvdXAgY29tcGFuaWVzXCJcbiAgICAgICAgICAgICAgICAgIGNsYXNzTmFtZT1cImhlcm8tcHJpbWFyeS1idXR0b24gZ3JvdXAgcmVsYXRpdmUgei0yMCBpbmxpbmUtZmxleCBtaW4taC0xMiBmbGV4LTEgaXRlbXMtY2VudGVyIGp1c3RpZnktY2VudGVyIGdhcC0yIHJvdW5kZWQtZnVsbCBiZy1bI2VmYmQ1NV0gcHgtNCB0ZXh0LXhzIGZvbnQtYm9sZCB0ZXh0LVsjMGIxYjEzXSBzbTptaW4taC0xNCBzbTpmbGV4LW5vbmUgc206cHgtNyBzbTp0ZXh0LXNtXCJcbiAgICAgICAgICAgICAgICA+XG4gICAgICAgICAgICAgICAgICBFeHBsb3JlIG91ciBjb21wYW5pZXN7JyAnfVxuICAgICAgICAgICAgICAgICAgPHNwYW4gY2xhc3NOYW1lPVwiZmxleCBoLTggdy04IGl0ZW1zLWNlbnRlciBqdXN0aWZ5LWNlbnRlciByb3VuZGVkLWZ1bGwgYmctWyMwYjFiMTNdIHRleHQtd2hpdGUgdHJhbnNpdGlvbiBkdXJhdGlvbi0zMDAgZ3JvdXAtaG92ZXI6dHJhbnNsYXRlLXgtMVwiPlxuICAgICAgICAgICAgICAgICAgICA8QXJyb3dSaWdodCBzaXplPXsxNn0gLz5cbiAgICAgICAgICAgICAgICAgIDwvc3Bhbj5cbiAgICAgICAgICAgICAgICA8L0xpbms+XG4gICAgICAgICAgICAgICAgPExpbmtcbiAgICAgICAgICAgICAgICAgIHRvPVwiL2Fib3V0XCJcbiAgICAgICAgICAgICAgICAgIGNsYXNzTmFtZT1cImhlcm8tZ2hvc3QtYnV0dG9uIGdyb3VwIGlubGluZS1mbGV4IG1pbi1oLTEyIGZsZXgtMSBpdGVtcy1jZW50ZXIganVzdGlmeS1jZW50ZXIgZ2FwLTIgcm91bmRlZC1mdWxsIHB4LTQgdGV4dC14cyBmb250LXNlbWlib2xkIHRleHQtd2hpdGUgc206bWluLWgtMTQgc206ZmxleC1ub25lIHNtOnB4LTcgc206dGV4dC1zbVwiXG4gICAgICAgICAgICAgICAgPlxuICAgICAgICAgICAgICAgICAgRGlzY292ZXIgb3VyIHN0b3J5eycgJ31cbiAgICAgICAgICAgICAgICAgIDxBcnJvd1JpZ2h0XG4gICAgICAgICAgICAgICAgICAgIGNsYXNzTmFtZT1cInRyYW5zaXRpb24gZHVyYXRpb24tMzAwIGdyb3VwLWhvdmVyOnRyYW5zbGF0ZS14LTEgZ3JvdXAtaG92ZXI6dGV4dC1bI2Y0YmQ1OV1cIlxuICAgICAgICAgICAgICAgICAgICBzaXplPXsxOH1cbiAgICAgICAgICAgICAgICAgIC8+XG4gICAgICAgICAgICAgICAgPC9MaW5rPlxuICAgICAgICAgICAgICA8L2Rpdj5cbiAgICAgICAgICAgIDwvZGl2PlxuXG4gICAgICAgICAgICA8ZGl2IGNsYXNzTmFtZT1cImhlcm8tbGVnYWN5LWZlYXR1cmUgaGlkZGVuIHNlbGYtZW5kIGxnOmJsb2NrXCI+XG4gICAgICAgICAgICAgIDxkaXYgY2xhc3NOYW1lPVwiZmxleCBpdGVtcy1jZW50ZXIgZ2FwLTMgdGV4dC1bMTBweF0gZm9udC1ib2xkIHVwcGVyY2FzZSB0cmFja2luZy1bMC4yNWVtXSB0ZXh0LVsjZjRiZDU5XVwiPlxuICAgICAgICAgICAgICAgIDxzcGFuIGNsYXNzTmFtZT1cImgtcHggdy0xMCBiZy1bI2Y0YmQ1OV1cIiAvPiBFc3RhYmxpc2hlZCAxOTc4XG4gICAgICAgICAgICAgIDwvZGl2PlxuICAgICAgICAgICAgICA8ZGl2IGNsYXNzTmFtZT1cIm10LTUgZmxleCBpdGVtcy1lbmQgZ2FwLTNcIj5cbiAgICAgICAgICAgICAgICA8c3Ryb25nIGNsYXNzTmFtZT1cImhlcm8tc3RhdC1ibHVlIHRleHQtWzUuNzVyZW1dIGZvbnQtc2VtaWJvbGQgbGVhZGluZy1bLjhdIHRyYWNraW5nLVstMC4wOWVtXVwiPlxuICAgICAgICAgICAgICAgICAgNDhcbiAgICAgICAgICAgICAgICA8L3N0cm9uZz5cbiAgICAgICAgICAgICAgPC9kaXY+XG4gICAgICAgICAgICAgIDxwIGNsYXNzTmFtZT1cIm10LTUgbWF4LXctWzEzcmVtXSB0ZXh0LXNtIGxlYWRpbmctcmVsYXhlZCB0ZXh0LXdoaXRlLzYwXCI+XG4gICAgICAgICAgICAgICAgPHNwYW4gY2xhc3NOYW1lPVwiZm9udC1zZW1pYm9sZCB0ZXh0LXdoaXRlXCI+WWVhcnMgb2YgZW50ZXJwcmlzZS48L3NwYW4+XG4gICAgICAgICAgICAgICAgPGJyIC8+XG4gICAgICAgICAgICAgICAgT25lIHZpc2lvbiwgYnVpbHQgYWNyb3NzIGdlbmVyYXRpb25zLlxuICAgICAgICAgICAgICA8L3A+XG4gICAgICAgICAgICAgIDxMaW5rXG4gICAgICAgICAgICAgICAgdG89XCIvYWJvdXQjam91cm5leVwiXG4gICAgICAgICAgICAgICAgY2xhc3NOYW1lPVwiZ3JvdXAgbXQtNiBpbmxpbmUtZmxleCBtaW4taC0xMiBpdGVtcy1jZW50ZXIgZ2FwLTMgcm91bmRlZC1mdWxsIGJnLVsjZWZiZDU1XSBweC01IHRleHQteHMgZm9udC1ib2xkIHVwcGVyY2FzZSB0cmFja2luZy1bMC4xNWVtXSB0ZXh0LVsjMDcxYjJkXSBzaGFkb3ctWzBfMTBweF8yOHB4X3JnYmEoMjM5LDE4OSw4NSwuMjgpXSB0cmFuc2l0aW9uIGhvdmVyOi10cmFuc2xhdGUteS0wLjUgaG92ZXI6Ymctd2hpdGVcIlxuICAgICAgICAgICAgICA+XG4gICAgICAgICAgICAgICAgRXhwbG9yZSBvdXIgam91cm5leXsnICd9XG4gICAgICAgICAgICAgICAgPEFycm93UmlnaHQgY2xhc3NOYW1lPVwidHJhbnNpdGlvbiBncm91cC1ob3Zlcjp0cmFuc2xhdGUteC0xXCIgc2l6ZT17MTZ9IC8+XG4gICAgICAgICAgICAgIDwvTGluaz5cbiAgICAgICAgICAgIDwvZGl2PlxuICAgICAgICAgIDwvZGl2PlxuXG4gICAgICAgICAgPGRpdiBjbGFzc05hbWU9XCJoZXJvLWJvdHRvbS1yYWlsIGhpZGRlbiBpdGVtcy1lbmQganVzdGlmeS1iZXR3ZWVuIGdhcC02IHB0LTUgc206ZmxleFwiPlxuICAgICAgICAgICAgPGFcbiAgICAgICAgICAgICAgaHJlZj1cIiNsZWdhY3lcIlxuICAgICAgICAgICAgICBjbGFzc05hbWU9XCJncm91cCBoaWRkZW4gaXRlbXMtY2VudGVyIGdhcC0zIHRleHQtWzEwcHhdIGZvbnQtc2VtaWJvbGQgdXBwZXJjYXNlIHRyYWNraW5nLVswLjJlbV0gdGV4dC13aGl0ZS81NSB0cmFuc2l0aW9uIGhvdmVyOnRleHQtd2hpdGUgbWQ6ZmxleFwiXG4gICAgICAgICAgICA+XG4gICAgICAgICAgICAgIDxzcGFuIGNsYXNzTmFtZT1cImZsZXggaC0xMCB3LTEwIGl0ZW1zLWNlbnRlciBqdXN0aWZ5LWNlbnRlciByb3VuZGVkLWZ1bGwgYm9yZGVyIGJvcmRlci13aGl0ZS8yMCB0cmFuc2l0aW9uIGR1cmF0aW9uLTMwMCBncm91cC1ob3Zlcjpib3JkZXItWyNlOGFhM2FdIGdyb3VwLWhvdmVyOmJnLVsjZThhYTNhXSBncm91cC1ob3Zlcjp0ZXh0LVsjMTAyMDE2XVwiPlxuICAgICAgICAgICAgICAgIDxBcnJvd0Rvd24gc2l6ZT17MTZ9IC8+XG4gICAgICAgICAgICAgIDwvc3Bhbj5cbiAgICAgICAgICAgICAgU2Nyb2xsIHRvIGRpc2NvdmVyXG4gICAgICAgICAgICA8L2E+XG4gICAgICAgICAgICA8ZGl2IGNsYXNzTmFtZT1cIm1sLWF1dG8gZ3JpZCB3LWZ1bGwgbWF4LXctMnhsIGdyaWQtY29scy0yIGdhcC14LTcgZ2FwLXktMyBzbTpncmlkLWNvbHMtNCBzbTpnYXAtNlwiPlxuICAgICAgICAgICAgICB7c2l0ZVN0YXRzLm1hcCgoc3RhdCwgaW5kZXgpID0+IChcbiAgICAgICAgICAgICAgICA8Q291bnRVcFN0YXQga2V5PXtzdGF0LmxhYmVsfSB2YWx1ZT17c3RhdC52YWx1ZX0gbGFiZWw9e3N0YXQubGFiZWx9IGluZGV4PXtpbmRleH0gLz5cbiAgICAgICAgICAgICAgKSl9XG4gICAgICAgICAgICA8L2Rpdj5cbiAgICAgICAgICA8L2Rpdj5cbiAgICAgICAgPC9kaXY+XG4gICAgICA8L3NlY3Rpb24+XG5cbiAgICAgIDxzZWN0aW9uXG4gICAgICAgIGlkPVwibGVnYWN5XCJcbiAgICAgICAgY2xhc3NOYW1lPVwibGVnYWN5LXByZW1pdW0gcmVsYXRpdmUgaXNvbGF0ZSBvdmVyZmxvdy1oaWRkZW4gcHktMTIgc206cHktMTQgbWQ6cHktMjBcIlxuICAgICAgPlxuICAgICAgICA8ZGl2IGNsYXNzTmFtZT1cImxlZ2FjeS1hdXJvcmEgbGVnYWN5LWF1cm9yYS1ibHVlXCIgYXJpYS1oaWRkZW49XCJ0cnVlXCIgLz5cbiAgICAgICAgPGRpdiBjbGFzc05hbWU9XCJsZWdhY3ktbGluZXMgYWJzb2x1dGUgaW5zZXQtMCBvcGFjaXR5LTUwXCIgYXJpYS1oaWRkZW49XCJ0cnVlXCIgLz5cbiAgICAgICAgPGRpdiBjbGFzc05hbWU9XCJjb250YWluZXIgcmVsYXRpdmUgei0xMCBteC1hdXRvIHB4LTRcIj5cbiAgICAgICAgICA8ZGl2IGNsYXNzTmFtZT1cImdyaWQgaXRlbXMtc3RyZXRjaCBnYXAtNiBsZzpncmlkLWNvbHMtWy43MmZyXzEuMjhmcl1cIj5cbiAgICAgICAgICAgIDxBbmltYXRlZFNlY3Rpb24gYW5pbWF0aW9uPVwic2xpZGUtcmlnaHRcIiBkdXJhdGlvbj17OTAwfSB0cmlnZ2VyT25jZT17ZmFsc2V9PlxuICAgICAgICAgICAgICA8ZGl2IGNsYXNzTmFtZT1cImxlZ2FjeS15ZWFyLWNhcmQgZ3JvdXAgcmVsYXRpdmUgZmxleCBoLWZ1bGwgbWluLWgtWzM1MHB4XSBmbGV4LWNvbCBqdXN0aWZ5LWJldHdlZW4gb3ZlcmZsb3ctaGlkZGVuIHJvdW5kZWQtWzJyZW1dIHAtNyBzbTptaW4taC1bNDMwcHhdIHNtOnAtMTBcIj5cbiAgICAgICAgICAgICAgICA8ZGl2IGNsYXNzTmFtZT1cImxlZ2FjeS15ZWFyLXJpbmdcIiBhcmlhLWhpZGRlbj1cInRydWVcIj5cbiAgICAgICAgICAgICAgICAgIDxzcGFuIC8+XG4gICAgICAgICAgICAgICAgICA8c3BhbiAvPlxuICAgICAgICAgICAgICAgICAgPHNwYW4gLz5cbiAgICAgICAgICAgICAgICA8L2Rpdj5cbiAgICAgICAgICAgICAgICA8ZGl2IGNsYXNzTmFtZT1cInJlbGF0aXZlIGZsZXggaXRlbXMtY2VudGVyIGp1c3RpZnktYmV0d2VlblwiPlxuICAgICAgICAgICAgICAgICAgPHNwYW4gY2xhc3NOYW1lPVwicm91bmRlZC1mdWxsIGJvcmRlciBib3JkZXItcHJpbWFyeS8xMCBiZy13aGl0ZS82NSBweC0zIHB5LTEuNSB0ZXh0LVsxMHB4XSBmb250LXNlbWlib2xkIHVwcGVyY2FzZSB0cmFja2luZy1bMC4yZW1dIHRleHQtcHJpbWFyeS83MCBiYWNrZHJvcC1ibHVyLXhsXCI+XG4gICAgICAgICAgICAgICAgICAgIFdoZXJlIGl0IGJlZ2FuXG4gICAgICAgICAgICAgICAgICA8L3NwYW4+XG4gICAgICAgICAgICAgICAgICA8c3BhbiBjbGFzc05hbWU9XCJsZWdhY3ktcHVsc2VcIj5cbiAgICAgICAgICAgICAgICAgICAgPHNwYW4gLz5cbiAgICAgICAgICAgICAgICAgIDwvc3Bhbj5cbiAgICAgICAgICAgICAgICA8L2Rpdj5cbiAgICAgICAgICAgICAgICA8ZGl2IGNsYXNzTmFtZT1cInJlbGF0aXZlXCI+XG4gICAgICAgICAgICAgICAgICA8cCBjbGFzc05hbWU9XCJ0ZXh0LXhzIGZvbnQtc2VtaWJvbGQgdXBwZXJjYXNlIHRyYWNraW5nLVswLjI1ZW1dIHRleHQtWyNhNjZkMGRdXCI+XG4gICAgICAgICAgICAgICAgICAgIEVzdGFibGlzaGVkXG4gICAgICAgICAgICAgICAgICA8L3A+XG4gICAgICAgICAgICAgICAgICA8ZGl2IGNsYXNzTmFtZT1cImxlZ2FjeS15ZWFyIG10LTIgdGV4dC1bY2xhbXAoNXJlbSwxNHZ3LDlyZW0pXSBmb250LXNlbWlib2xkIGxlYWRpbmctbm9uZSB0cmFja2luZy1bLTAuMDc1ZW1dXCI+XG4gICAgICAgICAgICAgICAgICAgIDE5NzhcbiAgICAgICAgICAgICAgICAgIDwvZGl2PlxuICAgICAgICAgICAgICAgICAgPHAgY2xhc3NOYW1lPVwibXQtNCBtYXgtdy14cyBib3JkZXItbC0yIGJvcmRlci1bI2Q5OWEyNF0gcGwtNCB0ZXh0LXNtIGxlYWRpbmctcmVsYXhlZCB0ZXh0LVsjNTI2Mjc4XVwiPlxuICAgICAgICAgICAgICAgICAgICBBIGxlZ2FjeSBidWlsdCBvdmVyIGdlbmVyYXRpb25zLlxuICAgICAgICAgICAgICAgICAgPC9wPlxuICAgICAgICAgICAgICAgIDwvZGl2PlxuICAgICAgICAgICAgICA8L2Rpdj5cbiAgICAgICAgICAgIDwvQW5pbWF0ZWRTZWN0aW9uPlxuICAgICAgICAgICAgPEFuaW1hdGVkU2VjdGlvbiBhbmltYXRpb249XCJzbGlkZS1sZWZ0XCIgZGVsYXk9ezE0MH0gZHVyYXRpb249ezk1MH0gdHJpZ2dlck9uY2U9e2ZhbHNlfT5cbiAgICAgICAgICAgICAgPGRpdiBjbGFzc05hbWU9XCJsZWdhY3ktc3RvcnktY2FyZCByZWxhdGl2ZSBmbGV4IGgtZnVsbCBtaW4taC1bNDMwcHhdIGZsZXgtY29sIG92ZXJmbG93LWhpZGRlbiByb3VuZGVkLVsycmVtXSBwLTcgc206cC0xMCBsZzpwLTEyXCI+XG4gICAgICAgICAgICAgICAgPGRpdiBjbGFzc05hbWU9XCJsZWdhY3ktY29ybmVyLW1hcmtcIiBhcmlhLWhpZGRlbj1cInRydWVcIiAvPlxuICAgICAgICAgICAgICAgIDxkaXYgY2xhc3NOYW1lPVwicmVsYXRpdmVcIj5cbiAgICAgICAgICAgICAgICAgIDxzcGFuIGNsYXNzTmFtZT1cIm1iLTYgaW5saW5lLWZsZXggaXRlbXMtY2VudGVyIGdhcC0yIHRleHQteHMgZm9udC1zZW1pYm9sZCB1cHBlcmNhc2UgdHJhY2tpbmctWzAuMmVtXSB0ZXh0LVsjYTY2ZDBkXVwiPlxuICAgICAgICAgICAgICAgICAgICA8c3BhbiBjbGFzc05hbWU9XCJoLTIgdy0yIHJvdW5kZWQtZnVsbCBiZy1bI2Q5OWEyNF1cIiAvPiBCdWlsdCBhY3Jvc3MgZ2VuZXJhdGlvbnNcbiAgICAgICAgICAgICAgICAgIDwvc3Bhbj5cbiAgICAgICAgICAgICAgICAgIDxoMiBjbGFzc05hbWU9XCJtYXgtdy00eGwgdGV4dC00eGwgZm9udC1zZW1pYm9sZCBub3JtYWwtY2FzZSBsZWFkaW5nLVsxLjA0XSB0cmFja2luZy1bLTAuMDRlbV0gdGV4dC1bIzA3MWIyZF0gc206dGV4dC01eGwgbGc6dGV4dC02eGxcIj5cbiAgICAgICAgICAgICAgICAgICAgQSBmYW1pbHktcnVuIGJ1c2luZXNzIHdpdGggdGhlIGNvdXJhZ2UgdG97JyAnfVxuICAgICAgICAgICAgICAgICAgICA8c3BhbiBjbGFzc05hbWU9XCJ0ZXh0LVsjMDcxYjJkXVwiPmtlZXAgYnVpbGRpbmcuPC9zcGFuPlxuICAgICAgICAgICAgICAgICAgPC9oMj5cbiAgICAgICAgICAgICAgICA8L2Rpdj5cbiAgICAgICAgICAgICAgICA8ZGl2IGNsYXNzTmFtZT1cInJlbGF0aXZlIG10LWF1dG8gcHQtMTBcIj5cbiAgICAgICAgICAgICAgICAgIDxkaXYgY2xhc3NOYW1lPVwiZ3JpZCBnYXAtNiBib3JkZXItdCBib3JkZXItcHJpbWFyeS8xMCBwdC03IG1kOmdyaWQtY29scy0yXCI+XG4gICAgICAgICAgICAgICAgICAgIDxwIGNsYXNzTmFtZT1cImxlYWRpbmctcmVsYXhlZCB0ZXh0LVsjNTI2Mjc4XVwiPlxuICAgICAgICAgICAgICAgICAgICAgIEZyb20gQ29sb21ibyB0cmFkaW5nIHJvb3RzIHRvIDEzIGNvbXBhbmllcyBpbiBtYW51ZmFjdHVyaW5nLCByZXRhaWwsXG4gICAgICAgICAgICAgICAgICAgICAgZGlzdHJpYnV0aW9uIGFuZCBob3NwaXRhbGl0eS5cbiAgICAgICAgICAgICAgICAgICAgPC9wPlxuICAgICAgICAgICAgICAgICAgICA8cCBjbGFzc05hbWU9XCJsZWFkaW5nLXJlbGF4ZWQgdGV4dC1bIzUyNjI3OF1cIj5cbiAgICAgICAgICAgICAgICAgICAgICBDcmVhdGluZyBsYXN0aW5nIHZhbHVlIGZvciBvdXIgY3VzdG9tZXJzLCBwZW9wbGUgYW5kIGNvdW50cnkgc2luY2UgMTk3OC5cbiAgICAgICAgICAgICAgICAgICAgPC9wPlxuICAgICAgICAgICAgICAgICAgPC9kaXY+XG4gICAgICAgICAgICAgICAgICA8TGlua1xuICAgICAgICAgICAgICAgICAgICB0bz1cIi9hYm91dFwiXG4gICAgICAgICAgICAgICAgICAgIGNsYXNzTmFtZT1cImxlZ2FjeS1saW5rIGdyb3VwIG10LTggaW5saW5lLWZsZXggaXRlbXMtY2VudGVyIGdhcC00IGZvbnQtc2VtaWJvbGQgdGV4dC1wcmltYXJ5XCJcbiAgICAgICAgICAgICAgICAgID5cbiAgICAgICAgICAgICAgICAgICAgUmVhZCBvdXIgc3Rvcnl7JyAnfVxuICAgICAgICAgICAgICAgICAgICA8c3BhbiBjbGFzc05hbWU9XCJmbGV4IGgtMTEgdy0xMSBpdGVtcy1jZW50ZXIganVzdGlmeS1jZW50ZXIgcm91bmRlZC1mdWxsIGJvcmRlciBib3JkZXItcHJpbWFyeS8yMCBiZy1wcmltYXJ5LzUgdGV4dC1wcmltYXJ5IHRyYW5zaXRpb24gZHVyYXRpb24tMzAwIGdyb3VwLWhvdmVyOnRyYW5zbGF0ZS14LTEgZ3JvdXAtaG92ZXI6Ym9yZGVyLVsjNzhiZTQzXSBncm91cC1ob3ZlcjpiZy1bIzc4YmU0M10gZ3JvdXAtaG92ZXI6dGV4dC13aGl0ZVwiPlxuICAgICAgICAgICAgICAgICAgICAgIDxBcnJvd1JpZ2h0IHNpemU9ezE4fSAvPlxuICAgICAgICAgICAgICAgICAgICA8L3NwYW4+XG4gICAgICAgICAgICAgICAgICA8L0xpbms+XG4gICAgICAgICAgICAgICAgPC9kaXY+XG4gICAgICAgICAgICAgIDwvZGl2PlxuICAgICAgICAgICAgPC9BbmltYXRlZFNlY3Rpb24+XG4gICAgICAgICAgPC9kaXY+XG4gICAgICAgIDwvZGl2PlxuICAgICAgPC9zZWN0aW9uPlxuXG4gICAgICA8c2VjdGlvbiBjbGFzc05hbWU9XCJyZWxhdGl2ZSBvdmVyZmxvdy1oaWRkZW4gYmctd2hpdGUgcHktMTIgdGV4dC1bIzEwMjMzZl0gc206cHktMTQgbWQ6cHktMjBcIj5cbiAgICAgICAgPGRpdiBjbGFzc05hbWU9XCJjb250YWluZXIgcmVsYXRpdmUgei0xMCBteC1hdXRvIHB4LTRcIj5cbiAgICAgICAgICA8ZGl2IGNsYXNzTmFtZT1cImdyaWQgZ2FwLTkgbGc6Z3JpZC1jb2xzLVswLjgyZnJfMS4xOGZyXSBsZzppdGVtcy1jZW50ZXIgbGc6Z2FwLTE0XCI+XG4gICAgICAgICAgICA8QW5pbWF0ZWRTZWN0aW9uIGFuaW1hdGlvbj1cInNsaWRlLXJpZ2h0XCIgZHVyYXRpb249ezkwMH0gdHJpZ2dlck9uY2U9e2ZhbHNlfT5cbiAgICAgICAgICAgICAgPGRpdiBjbGFzc05hbWU9XCJob21lLXByb2R1Y3Rpb24tY2FyZCBvdmVyZmxvdy1oaWRkZW4gcm91bmRlZC1bMS41cmVtXSBiZy1bIzEwMjMzZl0gc2hhZG93LVswXzI0cHhfNjBweF9yZ2JhKDE2LDM1LDYzLC4xOCldXCI+XG4gICAgICAgICAgICAgICAgPGltZ1xuICAgICAgICAgICAgICAgICAgc3JjPXttYW51ZmFjdHVyaW5nSW1hZ2V9XG4gICAgICAgICAgICAgICAgICBhbHQ9XCJBIENhbXkgZmFjdG9yeSBlbXBsb3llZSBoYW5kbGluZyBjb29rd2FyZSBvbiB0aGUgcHJvZHVjdGlvbiBsaW5lXCJcbiAgICAgICAgICAgICAgICAgIGNsYXNzTmFtZT1cImJsb2NrIGgtYXV0byB3LWZ1bGxcIlxuICAgICAgICAgICAgICAgICAgbG9hZGluZz1cImxhenlcIlxuICAgICAgICAgICAgICAgICAgZGVjb2Rpbmc9XCJhc3luY1wiXG4gICAgICAgICAgICAgICAgLz5cbiAgICAgICAgICAgICAgICA8ZGl2IGNsYXNzTmFtZT1cInAtNSB0ZXh0LXdoaXRlIHNtOnAtNlwiPlxuICAgICAgICAgICAgICAgICAgPHAgY2xhc3NOYW1lPVwidGV4dC14cyBmb250LXNlbWlib2xkIHVwcGVyY2FzZSB0cmFja2luZy1bMC4yMmVtXSB0ZXh0LVsjZWZiZDU1XVwiPlxuICAgICAgICAgICAgICAgICAgICBCdWlsdCBpbiBTcmkgTGFua2FcbiAgICAgICAgICAgICAgICAgIDwvcD5cbiAgICAgICAgICAgICAgICAgIDxoMyBjbGFzc05hbWU9XCJtdC0yIG1heC13LW1kIHRleHQtMnhsIGZvbnQtc2VtaWJvbGQgbm9ybWFsLWNhc2UgbGVhZGluZy10aWdodCB0cmFja2luZy1bLTAuMDNlbV0gc206dGV4dC0zeGxcIj5cbiAgICAgICAgICAgICAgICAgICAgTG9jYWwgY2FwYWJpbGl0eS4gTGFzdGluZyB2YWx1ZS5cbiAgICAgICAgICAgICAgICAgIDwvaDM+XG4gICAgICAgICAgICAgICAgICA8ZGl2IGNsYXNzTmFtZT1cIm10LTQgZmxleCBpdGVtcy1jZW50ZXIgZ2FwLTQgYm9yZGVyLXQgYm9yZGVyLXdoaXRlLzI1IHB0LTRcIj5cbiAgICAgICAgICAgICAgICAgICAgPHN0cm9uZyBjbGFzc05hbWU9XCJ0ZXh0LTN4bCBmb250LXNlbWlib2xkIHRyYWNraW5nLVstMC4wNWVtXVwiPjQ4PC9zdHJvbmc+XG4gICAgICAgICAgICAgICAgICAgIDxzcGFuIGNsYXNzTmFtZT1cIm1heC13LVs5cmVtXSB0ZXh0LXhzIGZvbnQtc2VtaWJvbGQgdXBwZXJjYXNlIGxlYWRpbmctcmVsYXhlZCB0cmFja2luZy1bMC4xNGVtXSB0ZXh0LXdoaXRlLzcwXCI+XG4gICAgICAgICAgICAgICAgICAgICAgWWVhcnMgb2YgdHJ1c3RlZCBlbnRlcnByaXNlXG4gICAgICAgICAgICAgICAgICAgIDwvc3Bhbj5cbiAgICAgICAgICAgICAgICAgIDwvZGl2PlxuICAgICAgICAgICAgICAgIDwvZGl2PlxuICAgICAgICAgICAgICA8L2Rpdj5cbiAgICAgICAgICAgIDwvQW5pbWF0ZWRTZWN0aW9uPlxuXG4gICAgICAgICAgICA8ZGl2PlxuICAgICAgICAgICAgICA8QW5pbWF0ZWRTZWN0aW9uIGFuaW1hdGlvbj1cInNsaWRlLXVwXCIgZHVyYXRpb249ezgwMH0gdHJpZ2dlck9uY2U9e2ZhbHNlfT5cbiAgICAgICAgICAgICAgICA8cCBjbGFzc05hbWU9XCJzZWN0aW9uLWtpY2tlciB0ZXh0LXByaW1hcnkgYmVmb3JlOmJnLVsjZDk5YTI0XVwiPldoYXQgd2UgZG88L3A+XG4gICAgICAgICAgICAgICAgPGgyIGNsYXNzTmFtZT1cIm10LTUgbWF4LXctM3hsIHRleHQtNHhsIGZvbnQtc2VtaWJvbGQgbm9ybWFsLWNhc2UgbGVhZGluZy1bMS4wNV0gdHJhY2tpbmctWy0wLjA0ZW1dIHRleHQtWyMwNzFiMmRdIHNtOnRleHQtNXhsIG1kOnRleHQtNnhsXCI+XG4gICAgICAgICAgICAgICAgICBBIFNyaSBMYW5rYW4gZ3JvdXAgYnVpbHQgYWNyb3NzIGluZHVzdHJpZXMuXG4gICAgICAgICAgICAgICAgPC9oMj5cbiAgICAgICAgICAgICAgICA8cCBjbGFzc05hbWU9XCJtdC02IG1heC13LTJ4bCB0ZXh0LWJhc2UgbGVhZGluZy1yZWxheGVkIHRleHQtWyM1MjYyNzhdXCI+XG4gICAgICAgICAgICAgICAgICBGcm9tIGEgc2luZ2xlIHRyYWRpbmcgY29tcGFueSB0byBmb3VyIGluZHVzdHJpZXMgdG9kYXk6IG1hbnVmYWN0dXJpbmcsIHJldGFpbCxcbiAgICAgICAgICAgICAgICAgIGRpc3RyaWJ1dGlvbiwgYW5kIGhvc3BpdGFsaXR5LCBlYWNoIG9uZSBoZWxkIHRvIHRoZSBzYW1lIHN0YW5kYXJkLlxuICAgICAgICAgICAgICAgIDwvcD5cbiAgICAgICAgICAgICAgPC9BbmltYXRlZFNlY3Rpb24+XG5cbiAgICAgICAgICAgICAgPGRpdiBjbGFzc05hbWU9XCJtdC05IGdyaWQgZ2FwLTMgc206Z3JpZC1jb2xzLTJcIj5cbiAgICAgICAgICAgICAgICB7c2VjdG9ySGlnaGxpZ2h0cy5tYXAoKHNlY3RvciwgaW5kZXgpID0+IHtcbiAgICAgICAgICAgICAgICAgIHJldHVybiAoXG4gICAgICAgICAgICAgICAgICAgIDxBbmltYXRlZFNlY3Rpb25cbiAgICAgICAgICAgICAgICAgICAgICBrZXk9e3NlY3Rvci50aXRsZX1cbiAgICAgICAgICAgICAgICAgICAgICBhbmltYXRpb249XCJzbGlkZS1sZWZ0XCJcbiAgICAgICAgICAgICAgICAgICAgICBkZWxheT17aW5kZXggKiA5MH1cbiAgICAgICAgICAgICAgICAgICAgICBkdXJhdGlvbj17NzUwfVxuICAgICAgICAgICAgICAgICAgICAgIHRyaWdnZXJPbmNlPXtmYWxzZX1cbiAgICAgICAgICAgICAgICAgICAgPlxuICAgICAgICAgICAgICAgICAgICAgIDxhcnRpY2xlIGNsYXNzTmFtZT1cImdyb3VwIGgtZnVsbCByb3VuZGVkLXhsIGJvcmRlciBib3JkZXItWyMxMDIzM2ZdLzEwIGJnLVsjZjdmOWZjXSBwLTUgdHJhbnNpdGlvbiBkdXJhdGlvbi0zMDAgaG92ZXI6LXRyYW5zbGF0ZS15LTEgaG92ZXI6Ym9yZGVyLVsjMzE1ZjlmXS8zNSBob3ZlcjpzaGFkb3ctWzBfMTRweF8zMnB4X3JnYmEoMTYsMzUsNjMsLjA4KV1cIj5cbiAgICAgICAgICAgICAgICAgICAgICAgIDxkaXY+XG4gICAgICAgICAgICAgICAgICAgICAgICAgIDxoMyBjbGFzc05hbWU9XCJ0ZXh0LXhsIGZvbnQtc2VtaWJvbGQgbm9ybWFsLWNhc2UgdGV4dC1bIzA3MWIyZF1cIj5cbiAgICAgICAgICAgICAgICAgICAgICAgICAgICB7c2VjdG9yLnRpdGxlfVxuICAgICAgICAgICAgICAgICAgICAgICAgICA8L2gzPlxuICAgICAgICAgICAgICAgICAgICAgICAgICA8cCBjbGFzc05hbWU9XCJtdC0yIHRleHQtc20gbGVhZGluZy1yZWxheGVkIHRleHQtWyM2NjczODhdXCI+XG4gICAgICAgICAgICAgICAgICAgICAgICAgICAge3NlY3Rvci5kZXNjcmlwdGlvbn1cbiAgICAgICAgICAgICAgICAgICAgICAgICAgPC9wPlxuICAgICAgICAgICAgICAgICAgICAgICAgPC9kaXY+XG4gICAgICAgICAgICAgICAgICAgICAgPC9hcnRpY2xlPlxuICAgICAgICAgICAgICAgICAgICA8L0FuaW1hdGVkU2VjdGlvbj5cbiAgICAgICAgICAgICAgICAgICk7XG4gICAgICAgICAgICAgICAgfSl9XG4gICAgICAgICAgICAgIDwvZGl2PlxuXG4gICAgICAgICAgICAgIDxBbmltYXRlZFNlY3Rpb24gYW5pbWF0aW9uPVwiZmFkZVwiIGRlbGF5PXsyNTB9IGR1cmF0aW9uPXs3MDB9IHRyaWdnZXJPbmNlPXtmYWxzZX0+XG4gICAgICAgICAgICAgICAgPExpbmtcbiAgICAgICAgICAgICAgICAgIHRvPVwiL2NvbXBhbmllc1wiXG4gICAgICAgICAgICAgICAgICBjbGFzc05hbWU9XCJncm91cCBtdC04IGlubGluZS1mbGV4IGl0ZW1zLWNlbnRlciBnYXAtNCBmb250LXNlbWlib2xkIHRleHQtcHJpbWFyeVwiXG4gICAgICAgICAgICAgICAgPlxuICAgICAgICAgICAgICAgICAgRXhwbG9yZSB0aGUgZ3JvdXB7JyAnfVxuICAgICAgICAgICAgICAgICAgPHNwYW4gY2xhc3NOYW1lPVwiZmxleCBoLTExIHctMTEgaXRlbXMtY2VudGVyIGp1c3RpZnktY2VudGVyIHJvdW5kZWQtZnVsbCBiZy1bIzEwMjMzZl0gdGV4dC13aGl0ZSB0cmFuc2l0aW9uIGR1cmF0aW9uLTMwMCBncm91cC1ob3Zlcjp0cmFuc2xhdGUteC0xIGdyb3VwLWhvdmVyOmJnLVsjNzhiZTQzXVwiPlxuICAgICAgICAgICAgICAgICAgICA8QXJyb3dSaWdodCBzaXplPXsxOH0gLz5cbiAgICAgICAgICAgICAgICAgIDwvc3Bhbj5cbiAgICAgICAgICAgICAgICA8L0xpbms+XG4gICAgICAgICAgICAgIDwvQW5pbWF0ZWRTZWN0aW9uPlxuICAgICAgICAgICAgPC9kaXY+XG4gICAgICAgICAgPC9kaXY+XG4gICAgICAgIDwvZGl2PlxuICAgICAgPC9zZWN0aW9uPlxuXG4gICAgICA8Q2VydGlmaWNhdGlvblNlY3Rpb24gLz5cblxuICAgICAgPHNlY3Rpb24gY2xhc3NOYW1lPVwicHktMTIgc206cHktMTQgbWQ6cHktMjBcIj5cbiAgICAgICAgPGRpdiBjbGFzc05hbWU9XCJjb250YWluZXIgbXgtYXV0byBweC00XCI+XG4gICAgICAgICAgPEFuaW1hdGVkU2VjdGlvbiBhbmltYXRpb249XCJzbGlkZS11cFwiIGR1cmF0aW9uPXs4MDB9IHRyaWdnZXJPbmNlPXtmYWxzZX0+XG4gICAgICAgICAgICA8ZGl2IGNsYXNzTmFtZT1cImZsZXggZmxleC1jb2wganVzdGlmeS1iZXR3ZWVuIGdhcC02IG1kOmZsZXgtcm93IG1kOml0ZW1zLWVuZFwiPlxuICAgICAgICAgICAgICA8ZGl2PlxuICAgICAgICAgICAgICAgIDxwIGNsYXNzTmFtZT1cInNlY3Rpb24ta2lja2VyXCI+SW5zaWRlIHRoZSBncm91cDwvcD5cbiAgICAgICAgICAgICAgICA8aDIgY2xhc3NOYW1lPVwibXQtNSB0ZXh0LTR4bCBmb250LXNlbWlib2xkIG5vcm1hbC1jYXNlIHRyYWNraW5nLVstMC4wMzVlbV0gdGV4dC1bIzA3MWIyZF0gbWQ6dGV4dC02eGxcIj5cbiAgICAgICAgICAgICAgICAgIFRoZSBidXNpbmVzc2VzIGJlaGluZCBTdXB1biBHcm91cFxuICAgICAgICAgICAgICAgIDwvaDI+XG4gICAgICAgICAgICAgIDwvZGl2PlxuICAgICAgICAgICAgICA8ZGl2IGNsYXNzTmFtZT1cImZsZXggaXRlbXMtY2VudGVyIGdhcC0zXCI+XG4gICAgICAgICAgICAgICAgPExpbmtcbiAgICAgICAgICAgICAgICAgIHRvPVwiL2NvbXBhbmllc1wiXG4gICAgICAgICAgICAgICAgICBjbGFzc05hbWU9XCJtci0yIGhpZGRlbiBmb250LXNlbWlib2xkIHRleHQtcHJpbWFyeSB0cmFuc2l0aW9uIGhvdmVyOnRleHQtWyMzMTVmOWZdIHNtOmlubGluZVwiXG4gICAgICAgICAgICAgICAgPlxuICAgICAgICAgICAgICAgICAgRXhwbG9yZSBvdXIgY29tcGFuaWVzXG4gICAgICAgICAgICAgICAgPC9MaW5rPlxuICAgICAgICAgICAgICAgIDxidXR0b25cbiAgICAgICAgICAgICAgICAgIHR5cGU9XCJidXR0b25cIlxuICAgICAgICAgICAgICAgICAgb25DbGljaz17KCkgPT4gc2Nyb2xsQ29tcGFuaWVzKC0xKX1cbiAgICAgICAgICAgICAgICAgIGFyaWEtbGFiZWw9XCJQcmV2aW91cyBjb21wYW5pZXNcIlxuICAgICAgICAgICAgICAgICAgY2xhc3NOYW1lPVwiZmxleCBoLTEyIHctMTIgaXRlbXMtY2VudGVyIGp1c3RpZnktY2VudGVyIHJvdW5kZWQtZnVsbCBib3JkZXIgYm9yZGVyLXByaW1hcnkvMjAgYmctd2hpdGUgdGV4dC1wcmltYXJ5IHRyYW5zaXRpb24gaG92ZXI6Ym9yZGVyLVsjNzhiZTQzXSBob3ZlcjpiZy1bIzc4YmU0M10gaG92ZXI6dGV4dC13aGl0ZVwiXG4gICAgICAgICAgICAgICAgPlxuICAgICAgICAgICAgICAgICAgPEFycm93UmlnaHQgY2xhc3NOYW1lPVwicm90YXRlLTE4MFwiIHNpemU9ezE5fSAvPlxuICAgICAgICAgICAgICAgIDwvYnV0dG9uPlxuICAgICAgICAgICAgICAgIDxidXR0b25cbiAgICAgICAgICAgICAgICAgIHR5cGU9XCJidXR0b25cIlxuICAgICAgICAgICAgICAgICAgb25DbGljaz17KCkgPT4gc2Nyb2xsQ29tcGFuaWVzKDEpfVxuICAgICAgICAgICAgICAgICAgYXJpYS1sYWJlbD1cIk5leHQgY29tcGFuaWVzXCJcbiAgICAgICAgICAgICAgICAgIGNsYXNzTmFtZT1cImZsZXggaC0xMiB3LTEyIGl0ZW1zLWNlbnRlciBqdXN0aWZ5LWNlbnRlciByb3VuZGVkLWZ1bGwgYmctcHJpbWFyeSB0ZXh0LXdoaXRlIHRyYW5zaXRpb24gaG92ZXI6YmctWyM3OGJlNDNdXCJcbiAgICAgICAgICAgICAgICA+XG4gICAgICAgICAgICAgICAgICA8QXJyb3dSaWdodCBzaXplPXsxOX0gLz5cbiAgICAgICAgICAgICAgICA8L2J1dHRvbj5cbiAgICAgICAgICAgICAgPC9kaXY+XG4gICAgICAgICAgICA8L2Rpdj5cbiAgICAgICAgICA8L0FuaW1hdGVkU2VjdGlvbj5cbiAgICAgICAgICA8ZGl2XG4gICAgICAgICAgICByZWY9e2NvbXBhbnlDYXJvdXNlbFJlZn1cbiAgICAgICAgICAgIGNsYXNzTmFtZT1cImhvbWUtY29tcGFueS1jYXJvdXNlbCBtdC02IGZsZXggaXRlbXMtc3RyZXRjaCBzbmFwLXggc25hcC1tYW5kYXRvcnkgZ2FwLTUgb3ZlcmZsb3cteC1hdXRvIHNjcm9sbC1zbW9vdGggcGItNCBbc2Nyb2xsYmFyLXdpZHRoOm5vbmVdIFsmOjotd2Via2l0LXNjcm9sbGJhcl06aGlkZGVuXCJcbiAgICAgICAgICA+XG4gICAgICAgICAgICB7aG9tZUNvbXBhbmllcy5tYXAoKGNvbXBhbnksIGluZGV4KSA9PiAoXG4gICAgICAgICAgICAgIDxBbmltYXRlZFNlY3Rpb25cbiAgICAgICAgICAgICAgICBrZXk9e2NvbXBhbnkuaWR9XG4gICAgICAgICAgICAgICAgYW5pbWF0aW9uPVwic2xpZGUtdXBcIlxuICAgICAgICAgICAgICAgIGRlbGF5PXsoaW5kZXggJSA0KSAqIDEzMH1cbiAgICAgICAgICAgICAgICBkdXJhdGlvbj17ODUwfVxuICAgICAgICAgICAgICAgIHRyaWdnZXJPbmNlPXtmYWxzZX1cbiAgICAgICAgICAgICAgICBjbGFzc05hbWU9XCJob21lLWNvbXBhbnktc2xpZGUgZmxleCB3LVs4OCVdIGZsZXgtbm9uZSBzbmFwLWNlbnRlciBzZWxmLXN0cmV0Y2ggc206dy1bY2FsYyg1MCVfLV8wLjYyNXJlbSldIHNtOnNuYXAtc3RhcnQgbGc6dy1bY2FsYygzMy4zMzMlXy1fMC44MzNyZW0pXSB4bDp3LVtjYWxjKDI1JV8tXzAuOTM3NXJlbSldXCJcbiAgICAgICAgICAgICAgPlxuICAgICAgICAgICAgICAgIDxMaW5rXG4gICAgICAgICAgICAgICAgICB0bz17YC9jb21wYW5pZXMvJHtjb21wYW55LmlkfWB9XG4gICAgICAgICAgICAgICAgICBjbGFzc05hbWU9XCJjb21wYW55LWdsYXNzIGdyb3VwIHJlbGF0aXZlIGZsZXggbWluLWgtWzM0MHB4XSB3LWZ1bGwgZmxleC1jb2wgb3ZlcmZsb3ctaGlkZGVuIHJvdW5kZWQtWzEuNXJlbV0gcC01IHRyYW5zaXRpb24gZHVyYXRpb24tMzAwIGhvdmVyOi10cmFuc2xhdGUteS0yIG1kOm1pbi1oLVs0MjBweF0gbWQ6cC02XCJcbiAgICAgICAgICAgICAgICA+XG4gICAgICAgICAgICAgICAgICA8ZGl2IGNsYXNzTmFtZT1cInJlbGF0aXZlIGZsZXggbWluLWgtWzEzMHB4XSBpdGVtcy1jZW50ZXIganVzdGlmeS1jZW50ZXIgcHgtMiBweS0yIG1kOm1pbi1oLVsxNzBweF1cIj5cbiAgICAgICAgICAgICAgICAgICAgPENvbXBhbnlMb2dvXG4gICAgICAgICAgICAgICAgICAgICAgY29tcGFueUlkPXtjb21wYW55LmlkfVxuICAgICAgICAgICAgICAgICAgICAgIGNvbXBhbnlOYW1lPXtjb21wYW55LnNob3J0TmFtZX1cbiAgICAgICAgICAgICAgICAgICAgICBwbGFjZW1lbnQ9XCJob21lXCJcbiAgICAgICAgICAgICAgICAgICAgICBjbGFzc05hbWU9XCJoLTI4IHctZnVsbCBiZy10cmFuc3BhcmVudCBtZDpoLTQwXCJcbiAgICAgICAgICAgICAgICAgICAgLz5cbiAgICAgICAgICAgICAgICAgIDwvZGl2PlxuICAgICAgICAgICAgICAgICAgPGRpdiBjbGFzc05hbWU9XCJyZWxhdGl2ZSBmbGV4IGZsZXgtMSBmbGV4LWNvbCBweC0yIHBiLTEgcHQtN1wiPlxuICAgICAgICAgICAgICAgICAgICA8ZGl2IGNsYXNzTmFtZT1cIm1iLTQgZmxleCBpdGVtcy1jZW50ZXIgZ2FwLTMgdGV4dC1bMTBweF0gZm9udC1ib2xkIHVwcGVyY2FzZSB0cmFja2luZy1bLjE2ZW1dIHRleHQtWyM3MzgxOTddXCI+XG4gICAgICAgICAgICAgICAgICAgICAgPHNwYW4gY2xhc3NOYW1lPVwiaC0yIHctMiByb3VuZGVkLWZ1bGwgYmctWyNkOTlhMjRdXCIgLz5cbiAgICAgICAgICAgICAgICAgICAgICB7Y29tcGFueS5lc3RhYmxpc2hlZFxuICAgICAgICAgICAgICAgICAgICAgICAgPyBgRXN0YWJsaXNoZWQgJHtjb21wYW55LmVzdGFibGlzaGVkfWBcbiAgICAgICAgICAgICAgICAgICAgICAgIDogJ1N1cHVuIEdyb3VwIGNvbXBhbnknfVxuICAgICAgICAgICAgICAgICAgICA8L2Rpdj5cbiAgICAgICAgICAgICAgICAgICAgPGgzIGNsYXNzTmFtZT1cInRleHQtM3hsIGZvbnQtc2VtaWJvbGQgbm9ybWFsLWNhc2UgdHJhY2tpbmctWy0wLjAzZW1dIHRleHQtWyMwNzFiMmRdXCI+XG4gICAgICAgICAgICAgICAgICAgICAge2NvbXBhbnkuc2hvcnROYW1lfVxuICAgICAgICAgICAgICAgICAgICA8L2gzPlxuICAgICAgICAgICAgICAgICAgICA8cCBjbGFzc05hbWU9XCJtdC0zIGhpZGRlbiBsaW5lLWNsYW1wLTIgbGVhZGluZy1yZWxheGVkIHRleHQtWyM2NjczODhdIHNtOmJsb2NrXCI+XG4gICAgICAgICAgICAgICAgICAgICAge2NvbXBhbnkuZGVzY3JpcHRpb259XG4gICAgICAgICAgICAgICAgICAgIDwvcD5cbiAgICAgICAgICAgICAgICAgICAgPGRpdiBjbGFzc05hbWU9XCJtdC1hdXRvIGZsZXggaXRlbXMtY2VudGVyIGp1c3RpZnktYmV0d2VlbiBib3JkZXItdCBib3JkZXItcHJpbWFyeS8xMCBwdC01XCI+XG4gICAgICAgICAgICAgICAgICAgICAgPHNwYW4gY2xhc3NOYW1lPVwiZm9udC1zZW1pYm9sZCB0ZXh0LXByaW1hcnlcIj5WaWV3IGNvbXBhbnk8L3NwYW4+XG4gICAgICAgICAgICAgICAgICAgICAgPHNwYW4gY2xhc3NOYW1lPVwiZmxleCBoLTEyIHctMTIgaXRlbXMtY2VudGVyIGp1c3RpZnktY2VudGVyIHJvdW5kZWQtZnVsbCBiZy1bIzEwMjMzZl0gdGV4dC13aGl0ZSBzaGFkb3ctWzBfOHB4XzIwcHhfcmdiYSgxNiwzNSw2MywuMTgpXSB0cmFuc2l0aW9uIGR1cmF0aW9uLTMwMCBncm91cC1ob3Zlcjp0cmFuc2xhdGUteC0xIGdyb3VwLWhvdmVyOmJnLVsjNzhiZTQzXVwiPlxuICAgICAgICAgICAgICAgICAgICAgICAgPEFycm93UmlnaHQgc2l6ZT17MTh9IC8+XG4gICAgICAgICAgICAgICAgICAgICAgPC9zcGFuPlxuICAgICAgICAgICAgICAgICAgICA8L2Rpdj5cbiAgICAgICAgICAgICAgICAgIDwvZGl2PlxuICAgICAgICAgICAgICAgIDwvTGluaz5cbiAgICAgICAgICAgICAgPC9BbmltYXRlZFNlY3Rpb24+XG4gICAgICAgICAgICApKX1cbiAgICAgICAgICA8L2Rpdj5cbiAgICAgICAgPC9kaXY+XG4gICAgICA8L3NlY3Rpb24+XG5cbiAgICAgIDxzZWN0aW9uIGNsYXNzTmFtZT1cInJlbGF0aXZlIG92ZXJmbG93LWhpZGRlbiBiZy1bI2YzZjdmYl0gcHgtNCBwYi0xMiBzbTpwYi0xNCBtZDpwYi0yMFwiPlxuICAgICAgICA8QW5pbWF0ZWRTZWN0aW9uXG4gICAgICAgICAgYW5pbWF0aW9uPVwic2NhbGVcIlxuICAgICAgICAgIGR1cmF0aW9uPXs5MDB9XG4gICAgICAgICAgdHJpZ2dlck9uY2U9e2ZhbHNlfVxuICAgICAgICAgIGNsYXNzTmFtZT1cImNvbnRhaW5lciBteC1hdXRvXCJcbiAgICAgICAgPlxuICAgICAgICAgIDxkaXYgY2xhc3NOYW1lPVwicmVsYXRpdmUgaXNvbGF0ZSBvdmVyZmxvdy1oaWRkZW4gcm91bmRlZC1bMnJlbV0gYmctWyMwNzFiMmRdIHB4LTcgcHktMTIgdGV4dC13aGl0ZSBzaGFkb3ctWzBfMzBweF84MHB4X3JnYmEoNywyNyw0NSwuMjApXSBzbTpweC0xMiBzbTpweS0xNiBtZDpyb3VuZGVkLVszcmVtXSBsZzpweC0yMCBsZzpweS0yMFwiPlxuICAgICAgICAgICAgPGRpdiBjbGFzc05hbWU9XCJhYnNvbHV0ZSBpbnNldC15LTAgcmlnaHQtMCAtei0xMCB3LWZ1bGwgYmctW3JhZGlhbC1ncmFkaWVudChjaXJjbGVfYXRfODUlXzM1JSxyZ2JhKDIxNywxNTQsMzYsLjE2KSx0cmFuc3BhcmVudF8zMCUpLGxpbmVhci1ncmFkaWVudCgxMTVkZWcsdHJhbnNwYXJlbnRfNDUlLHJnYmEoMjUsODMsMTMyLC4zOCkpXSBsZzp3LTIvM1wiIC8+XG4gICAgICAgICAgICA8ZGl2IGNsYXNzTmFtZT1cImdyaWQgZ2FwLTEyIGxnOmdyaWQtY29scy1bbWlubWF4KDAsMWZyKV8xOHJlbV0gbGc6aXRlbXMtZW5kIGxnOmdhcC0yMFwiPlxuICAgICAgICAgICAgICA8ZGl2PlxuICAgICAgICAgICAgICAgIDxwIGNsYXNzTmFtZT1cIm1iLTYgZmxleCBpdGVtcy1jZW50ZXIgZ2FwLTMgdGV4dC14cyBmb250LWJvbGQgdXBwZXJjYXNlIHRyYWNraW5nLVswLjI0ZW1dIHRleHQtWyNlZmJkNTVdXCI+XG4gICAgICAgICAgICAgICAgICA8U3BhcmtsZXMgc2l6ZT17MTV9IC8+IFRoZSBuZXh0IGNoYXB0ZXJcbiAgICAgICAgICAgICAgICA8L3A+XG4gICAgICAgICAgICAgICAgPGgyIGNsYXNzTmFtZT1cIm1heC13LTR4bCB0ZXh0LTR4bCBmb250LXNlbWlib2xkIG5vcm1hbC1jYXNlIGxlYWRpbmctWzEuMDJdIHRyYWNraW5nLVstMC4wNGVtXSBzbTp0ZXh0LTV4bCBtZDp0ZXh0LTd4bFwiPlxuICAgICAgICAgICAgICAgICAgTGV0JiMzOTtzIGJ1aWxkIHNvbWV0aGluZyA8c3BhbiBjbGFzc05hbWU9XCJ0ZXh0LVsjZWZiZDU1XVwiPmxhc3RpbmcuPC9zcGFuPlxuICAgICAgICAgICAgICAgIDwvaDI+XG4gICAgICAgICAgICAgICAgPHAgY2xhc3NOYW1lPVwibXQtNyBtYXgtdy0yeGwgdGV4dC1iYXNlIGxlYWRpbmctcmVsYXhlZCB0ZXh0LXdoaXRlLzY1IHNtOnRleHQtbGdcIj5cbiAgICAgICAgICAgICAgICAgIEZyb20gYW1iaXRpb3VzIGlkZWFzIHRvIHRydXN0ZWQgcGFydG5lcnNoaXBzLCB3ZSBhcmUgcmVhZHkgdG8gY3JlYXRlIHdoYXQgU3JpXG4gICAgICAgICAgICAgICAgICBMYW5rYSBuZWVkcyBuZXh0LlxuICAgICAgICAgICAgICAgIDwvcD5cbiAgICAgICAgICAgICAgPC9kaXY+XG5cbiAgICAgICAgICAgICAgPGRpdiBjbGFzc05hbWU9XCJib3JkZXItdCBib3JkZXItd2hpdGUvMTUgcHQtNyBsZzpib3JkZXItbCBsZzpib3JkZXItdC0wIGxnOnBsLTEwIGxnOnB0LTBcIj5cbiAgICAgICAgICAgICAgICA8cCBjbGFzc05hbWU9XCJtYi02IHRleHQtc20gbGVhZGluZy1yZWxheGVkIHRleHQtd2hpdGUvNTVcIj5cbiAgICAgICAgICAgICAgICAgIEhhdmUgYW4gb3Bwb3J0dW5pdHksIHBhcnRuZXJzaGlwIG9yIGlkZWEgaW4gbWluZD9cbiAgICAgICAgICAgICAgICA8L3A+XG4gICAgICAgICAgICAgICAgPExpbmtcbiAgICAgICAgICAgICAgICAgIHRvPVwiL2NvbnRhY3RcIlxuICAgICAgICAgICAgICAgICAgY2xhc3NOYW1lPVwiZ3JvdXAgaW5saW5lLWZsZXggdy1mdWxsIGl0ZW1zLWNlbnRlciBqdXN0aWZ5LWJldHdlZW4gcm91bmRlZC1mdWxsIGJnLVsjZWZiZDU1XSBweC02IHB5LTQgZm9udC1zZW1pYm9sZCB0ZXh0LVsjMDcxYjJkXSB0cmFuc2l0aW9uIGR1cmF0aW9uLTMwMCBob3ZlcjpiZy13aGl0ZVwiXG4gICAgICAgICAgICAgICAgPlxuICAgICAgICAgICAgICAgICAgVGFsayB0byBvdXIgdGVhbVxuICAgICAgICAgICAgICAgICAgPHNwYW4gY2xhc3NOYW1lPVwiZmxleCBoLTEwIHctMTAgaXRlbXMtY2VudGVyIGp1c3RpZnktY2VudGVyIHJvdW5kZWQtZnVsbCBiZy1bIzA3MWIyZF0gdGV4dC13aGl0ZSB0cmFuc2l0aW9uIGR1cmF0aW9uLTMwMCBncm91cC1ob3Zlcjp0cmFuc2xhdGUteC0xIGdyb3VwLWhvdmVyOmJnLVsjNzhiZTQzXVwiPlxuICAgICAgICAgICAgICAgICAgICA8QXJyb3dSaWdodCBzaXplPXsxOH0gLz5cbiAgICAgICAgICAgICAgICAgIDwvc3Bhbj5cbiAgICAgICAgICAgICAgICA8L0xpbms+XG4gICAgICAgICAgICAgIDwvZGl2PlxuICAgICAgICAgICAgPC9kaXY+XG4gICAgICAgICAgPC9kaXY+XG4gICAgICAgIDwvQW5pbWF0ZWRTZWN0aW9uPlxuICAgICAgPC9zZWN0aW9uPlxuICAgIDwvZGl2PlxuICApO1xufTtcblxuZXhwb3J0IGRlZmF1bHQgSG9tZTtcbiJdLCJuYW1lcyI6WyJ1c2VFZmZlY3QiLCJ1c2VSZWYiLCJ1c2VTdGF0ZSIsIkxpbmsiLCJBcnJvd0Rvd24iLCJBcnJvd1JpZ2h0IiwiU3BhcmtsZXMiLCJTZW8iLCJERUZBVUxUX0lNQUdFIiwiU0lURV9OQU1FIiwiU0lURV9VUkwiLCJBbmltYXRlZFNlY3Rpb24iLCJDb21wYW55TG9nbyIsImNvbXBhbmllcyIsInNlY3RvckhpZ2hsaWdodHMiLCJzaXRlU3RhdHMiLCJoZXJvVmlkZW8iLCJoZXJvTW9iaWxlVmlkZW8iLCJoZXJvUG9zdGVyIiwibWFudWZhY3R1cmluZ0ltYWdlIiwiQ2VydGlmaWNhdGlvblNlY3Rpb24iLCJmZWF0dXJlZENvbXBhbnlJZHMiLCJob21lQ29tcGFuaWVzIiwiZmxhdE1hcCIsImlkIiwiZmlsdGVyIiwiY29tcGFueSIsImluY2x1ZGVzIiwiQ291bnRVcFN0YXQiLCJ2YWx1ZSIsImxhYmVsIiwiaW5kZXgiLCJ0YXJnZXQiLCJOdW1iZXIiLCJwYXJzZUludCIsInN1ZmZpeCIsInJlcGxhY2UiLCJTdHJpbmciLCJjb3VudCIsInNldENvdW50IiwicmVmIiwiZWxlbWVudCIsImN1cnJlbnQiLCJvYnNlcnZlciIsIkludGVyc2VjdGlvbk9ic2VydmVyIiwiZW50cnkiLCJpc0ludGVyc2VjdGluZyIsImRpc2Nvbm5lY3QiLCJ3aW5kb3ciLCJtYXRjaE1lZGlhIiwibWF0Y2hlcyIsImR1cmF0aW9uIiwic3RhcnQiLCJwZXJmb3JtYW5jZSIsIm5vdyIsImFuaW1hdGUiLCJ0aW1lIiwicHJvZ3Jlc3MiLCJNYXRoIiwibWluIiwiZWFzZWQiLCJwb3ciLCJyb3VuZCIsInJlcXVlc3RBbmltYXRpb25GcmFtZSIsInRocmVzaG9sZCIsIm9ic2VydmUiLCJkaXYiLCJjbGFzc05hbWUiLCJzdHlsZSIsImFuaW1hdGlvbkRlbGF5Iiwic3BhbiIsIkhvbWUiLCJoZXJvVmlkZW9SZWFkeSIsInNldEhlcm9WaWRlb1JlYWR5Iiwic2hvdWxkUGxheUhlcm9WaWRlbyIsInNldFNob3VsZFBsYXlIZXJvVmlkZW8iLCJoZXJvVmlkZW9SZWYiLCJjb21wYW55Q2Fyb3VzZWxSZWYiLCJyZWR1Y2VkTW90aW9uIiwiY29ubmVjdGlvbiIsIm5hdmlnYXRvciIsInVwZGF0ZVZpZGVvUHJlZmVyZW5jZSIsImNvbnN0cmFpbmVkQ29ubmVjdGlvbiIsInNhdmVEYXRhIiwiZWZmZWN0aXZlVHlwZSIsImVuYWJsZWQiLCJhZGRFdmVudExpc3RlbmVyIiwicmVtb3ZlRXZlbnRMaXN0ZW5lciIsInZpZGVvIiwiaGFuZGxlVmlzaWJpbGl0eUNoYW5nZSIsImRvY3VtZW50IiwiaGlkZGVuIiwicGF1c2UiLCJwbGF5IiwiY2F0Y2giLCJ1bmRlZmluZWQiLCJzY3JvbGxDb21wYW5pZXMiLCJkaXJlY3Rpb24iLCJjYXJvdXNlbCIsImZpcnN0Q2FyZCIsImZpcnN0RWxlbWVudENoaWxkIiwiZGlzdGFuY2UiLCJvZmZzZXRXaWR0aCIsImNsaWVudFdpZHRoIiwic2Nyb2xsQnkiLCJsZWZ0IiwiYmVoYXZpb3IiLCJ0aXRsZSIsImRlc2NyaXB0aW9uIiwia2V5d29yZHMiLCJwYXRoIiwianNvbkxkIiwibmFtZSIsInVybCIsImluTGFuZ3VhZ2UiLCJsb2dvIiwiZm91bmRpbmdEYXRlIiwiYWRkcmVzcyIsImFkZHJlc3NMb2NhbGl0eSIsImFkZHJlc3NDb3VudHJ5IiwiY29udGFjdFBvaW50IiwidGVsZXBob25lIiwiY29udGFjdFR5cGUiLCJlbWFpbCIsInNlY3Rpb24iLCJpbWciLCJzcmMiLCJhbHQiLCJmZXRjaFByaW9yaXR5IiwiYXJpYS1oaWRkZW4iLCJkZWNvZGluZyIsImF1dG9QbGF5IiwibXV0ZWQiLCJsb29wIiwicGxheXNJbmxpbmUiLCJwcmVsb2FkIiwicG9zdGVyIiwib25Mb2FkZWREYXRhIiwic291cmNlIiwibWVkaWEiLCJ0eXBlIiwiaDEiLCJiciIsInAiLCJ0byIsImFyaWEtbGFiZWwiLCJzaXplIiwic3Ryb25nIiwiYSIsImhyZWYiLCJtYXAiLCJzdGF0IiwiYW5pbWF0aW9uIiwidHJpZ2dlck9uY2UiLCJkZWxheSIsImgyIiwibG9hZGluZyIsImgzIiwic2VjdG9yIiwiYXJ0aWNsZSIsImJ1dHRvbiIsIm9uQ2xpY2siLCJjb21wYW55SWQiLCJjb21wYW55TmFtZSIsInNob3J0TmFtZSIsInBsYWNlbWVudCIsImVzdGFibGlzaGVkIl0sIm1hcHBpbmdzIjoiOzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7QUFBQSxTQUFTQSxTQUFTLEVBQUVDLE1BQU0sRUFBRUMsUUFBUSxRQUFRLFFBQVE7QUFDcEQsU0FBU0MsSUFBSSxRQUFRLG1CQUFtQjtBQUN4QyxTQUFTQyxT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
