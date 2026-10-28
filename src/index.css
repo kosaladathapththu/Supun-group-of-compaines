@@ -141,8 +141,8 @@ All colors MUST be HSL.
   }
 
   .premium-hero video {
-    animation: hero-zoom 18s ease-in-out infinite alternate;
-    filter: brightness(1.18) saturate(1.05) contrast(1.02);
+    animation: none;
+    filter: none;
   }
 
   @media (max-width: 767px) {

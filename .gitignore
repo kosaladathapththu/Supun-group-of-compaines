@@ -29,3 +29,6 @@ dist-ssr
 *.sqlite-journal
 server/uploads/*
 !server/uploads/.gitkeep
+
+# Local hosting packages
+/tmp/*.zip
