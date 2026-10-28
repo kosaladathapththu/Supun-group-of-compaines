@@ -6,7 +6,7 @@ import { AnimatedSection } from '@/components/AnimatedSection';
 import { CompanyLogo } from '@/components/CompanyLogo';
 import { companies } from '@/data/companies';
 import { sectorHighlights, siteStats } from '@/data/siteContent';
-import heroVideo from '@/assets/supun-group-hero-optimized.mp4';
+import heroVideo from '../../Full Video.mp4';
 import heroMobileVideo from '@/assets/supun-group-hero-mobile.mp4';
 import heroPoster from '@/assets/optimized/hero-poster.jpg';
 import manufacturingImage from '@/assets/optimized/camy-cookware-production-focus-v2.jpg';
