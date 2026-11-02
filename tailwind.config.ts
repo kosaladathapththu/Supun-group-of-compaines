@@ -21,7 +21,7 @@ export default {
     extend: {
       fontFamily: {
         sans: ['Work Sans', 'system-ui', 'sans-serif'],
-        heading: ['Barlow Semi Condensed', 'system-ui', 'sans-serif'],
+        heading: ['Fraunces', 'Georgia', 'serif'],
       },
       colors: {
         border: 'hsl(var(--border))',

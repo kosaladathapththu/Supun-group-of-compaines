@@ -1,15 +1,13 @@
 import { useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { ArrowDown, ArrowRight, Sparkles } from 'lucide-react';
+import { ArrowRight, ArrowUpRight } from 'lucide-react';
 import Seo, { DEFAULT_IMAGE, SITE_NAME, SITE_URL } from '@/components/Seo';
-import { AnimatedSection } from '@/components/AnimatedSection';
 import { CompanyLogo } from '@/components/CompanyLogo';
 import { companies } from '@/data/companies';
 import { sectorHighlights, siteStats } from '@/data/siteContent';
 import heroVideo from '@/assets/supun-hero-streaming-hq.mp4';
 import heroPoster from '@/assets/optimized/hero-poster.jpg';
 import manufacturingImage from '@/assets/optimized/camy-cookware-production-focus-v2.jpg';
-import camyRedLogo from '@/assets/camy-logo-red-transparent.png';
 
 const featuredCompanyIds = [
   'supun-traders',
@@ -22,64 +20,12 @@ const homeCompanies = [
   ...companies.filter((company) => !featuredCompanyIds.includes(company.id)),
 ];
 
-const CountUpStat = ({ value, label, index }: { value: string; label: string; index: number }) => {
-  const target = Number.parseInt(value, 10);
-  const suffix = value.replace(String(target), '');
-  const [count, setCount] = useState(0);
-  const ref = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    const element = ref.current;
-    if (!element) return;
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (!entry.isIntersecting) return;
-        observer.disconnect();
-        if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-          setCount(target);
-          return;
-        }
-        const duration = 1400;
-        const start = performance.now();
-        const animate = (time: number) => {
-          const progress = Math.min((time - start) / duration, 1);
-          const eased = 1 - Math.pow(1 - progress, 3);
-          setCount(Math.round(target * eased));
-          if (progress < 1) requestAnimationFrame(animate);
-        };
-        requestAnimationFrame(animate);
-      },
-      { threshold: 0.4 },
-    );
-    observer.observe(element);
-    return () => observer.disconnect();
-  }, [target]);
-
-  return (
-    <div
-      ref={ref}
-      className="hero-stat group relative py-2 md:py-3"
-      style={{ animationDelay: `${index * 100}ms` }}
-    >
-      <div className="flex items-start gap-2">
-        <span className="text-3xl font-semibold tracking-[-0.04em] text-white tabular-nums sm:text-4xl">
-          {count}
-          {suffix}
-        </span>
-        <span className="mt-1 h-1.5 w-1.5 rounded-full bg-[#d99a24] shadow-[0_0_12px_rgba(217,154,36,.65)]" />
-      </div>
-      <div className="mt-1.5 max-w-[9rem] text-[9px] font-semibold uppercase leading-snug tracking-[0.14em] text-white/50 sm:text-[10px]">
-        {label}
-      </div>
-    </div>
-  );
-};
+const pad = (n: number) => String(n).padStart(2, '0');
 
 const Home = () => {
   const [heroVideoReady, setHeroVideoReady] = useState(false);
   const [shouldPlayHeroVideo, setShouldPlayHeroVideo] = useState(false);
   const heroVideoRef = useRef<HTMLVideoElement>(null);
-  const companyCarouselRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
@@ -94,46 +40,28 @@ const Home = () => {
         connection?.saveData ||
         connection?.effectiveType === 'slow-2g' ||
         connection?.effectiveType === '2g';
-      const enabled = !reducedMotion.matches && !constrainedConnection;
       setHeroVideoReady(false);
-      setShouldPlayHeroVideo(enabled);
+      setShouldPlayHeroVideo(!reducedMotion.matches && !constrainedConnection);
     };
 
     updateVideoPreference();
     reducedMotion.addEventListener('change', updateVideoPreference);
-
-    return () => {
-      reducedMotion.removeEventListener('change', updateVideoPreference);
-    };
+    return () => reducedMotion.removeEventListener('change', updateVideoPreference);
   }, []);
 
   useEffect(() => {
     const video = heroVideoRef.current;
     if (!video) return;
-
     const handleVisibilityChange = () => {
-      if (document.hidden) {
-        video.pause();
-      } else {
-        void video.play().catch(() => undefined);
-      }
+      if (document.hidden) video.pause();
+      else void video.play().catch(() => undefined);
     };
-
     document.addEventListener('visibilitychange', handleVisibilityChange);
     return () => document.removeEventListener('visibilitychange', handleVisibilityChange);
   }, [shouldPlayHeroVideo]);
 
-  const scrollCompanies = (direction: -1 | 1) => {
-    const carousel = companyCarouselRef.current;
-    if (carousel) {
-      const firstCard = carousel.firstElementChild as HTMLElement | null;
-      const distance = (firstCard?.offsetWidth ?? carousel.clientWidth * 0.85) + 20;
-      carousel.scrollBy({ left: direction * distance, behavior: 'smooth' });
-    }
-  };
-
   return (
-    <div className="min-h-screen overflow-hidden bg-[#edf3fb]">
+    <div className="min-h-screen bg-background text-foreground">
       <Seo
         title="Supun Group of Companies | Built in Sri Lanka. Built to Last."
         description="Supun Group of Companies is a Sri Lankan family-run group with 13 companies across manufacturing, retail, distribution and hospitality, with roots going back to 1978."
@@ -174,407 +102,234 @@ const Home = () => {
         }}
       />
 
-      <section className="premium-hero relative isolate h-[100svh] min-h-[560px] max-h-none overflow-hidden bg-[#07110d] text-white md:h-auto md:max-h-none md:min-h-[760px] lg:min-h-screen">
-        <img
-          src={heroPoster}
-          alt=""
-          fetchPriority="high"
-          className={`absolute inset-0 h-full w-full object-cover object-[62%_center] transition-opacity duration-500 ${heroVideoReady ? 'opacity-0' : 'opacity-100'}`}
-          aria-hidden="true"
-          decoding="async"
-        />
-        {shouldPlayHeroVideo && (
-          <video
-            ref={heroVideoRef}
-            className={`absolute inset-0 h-full w-full object-cover object-[62%_center] transition-opacity duration-200 ${heroVideoReady ? 'opacity-100' : 'opacity-0'}`}
-            autoPlay
-            muted
-            loop
-            playsInline
-            preload="auto"
-            poster={heroPoster}
-            onLoadedData={() => setHeroVideoReady(true)}
-            aria-hidden="true"
-          >
-            <source src={heroVideo} type="video/mp4" />
-          </video>
-        )}
-        <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(3,12,8,.55)_0%,rgba(5,18,12,.32)_38%,rgba(5,17,12,.1)_72%,rgba(3,12,8,.04)_100%)]" />
-        <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(3,10,7,.08)_0%,transparent_36%,rgba(3,10,7,.42)_100%)]" />
 
-        <div className="container relative z-10 mx-auto flex h-full min-h-0 flex-col px-5 pb-5 pt-20 sm:h-auto sm:min-h-[760px] sm:px-6 sm:pb-6 sm:pt-32 lg:min-h-screen lg:px-8 lg:pb-9 lg:pt-36">
-          <div className="hero-topline flex items-center justify-between gap-5 pb-1 text-[8px] font-semibold uppercase tracking-[0.16em] text-white/58 sm:pb-5 sm:text-[11px] sm:tracking-[0.24em]">
-            <span className="flex items-center gap-3">
-              <span className="h-px w-8 bg-[#e8aa3a]" /> Independent. Sri Lankan. Since 1978.
-            </span>
-            <span className="hidden items-center gap-2 sm:flex">
-              <span className="hero-live-dot" /> Colombo, Sri Lanka
-            </span>
-          </div>
-
-          <div className="grid flex-1 items-center gap-4 py-2 sm:gap-10 sm:py-10 lg:grid-cols-[minmax(0,1fr)_18rem] lg:gap-16 lg:py-14 xl:grid-cols-[minmax(0,1fr)_21rem]">
-            <div className="hero-copy max-w-5xl">
-              <h1 className="hero-title max-w-5xl text-[clamp(2.15rem,10.5vw,2.8rem)] font-semibold normal-case leading-[0.94] tracking-[-0.055em] text-white sm:text-[clamp(3rem,8vw,6.6rem)] sm:leading-[0.92]">
-                <span className="hero-title-blue">Built in</span>{' '}
-                <span className="hero-title-accent">Sri Lanka.</span>
-                <br />
-                <span className="hero-title-blue">Built to </span>
-                <span className="hero-title-accent">last.</span>
-              </h1>
-              <p className="mt-3 max-w-xl border-l border-[#e8aa3a]/70 pl-3 text-xs leading-relaxed text-white/80 sm:mt-8 sm:pl-5 sm:text-base">
-                One Sri Lankan Group, built across four industries since 1978.
+      {/* Hero: headline on paper, the group's own video in a plain frame */}
+      <section className="border-b border-border">
+        <div className="container mx-auto grid max-w-[1240px] gap-10 px-5 pb-14 pt-10 lg:grid-cols-12 lg:gap-14 lg:pb-20 lg:pt-16">
+          <div className="flex flex-col justify-between lg:col-span-7">
+            <div>
+              <p className="flex items-center gap-3 text-xs font-semibold uppercase tracking-[0.2em] text-primary">
+                <span className="h-px w-8 bg-primary" /> Colombo, since 1978
               </p>
-              <div className="relative z-20 mt-4 flex gap-2.5 sm:mt-10 sm:flex-row sm:gap-3">
+              <h1 className="mt-7 font-heading text-[clamp(2.7rem,6vw,5.2rem)] font-medium leading-[0.98] tracking-[-0.025em] text-foreground [text-wrap:balance]">
+                Built in Sri Lanka.
+                <br />
+                <span className="italic text-primary">Built to last.</span>
+              </h1>
+              <p className="mt-7 max-w-md text-lg leading-relaxed text-foreground/75">
+                One Sri Lankan family group, built across four industries since 1978.
+              </p>
+              <div className="mt-9 flex flex-wrap items-center gap-x-8 gap-y-4">
                 <Link
                   to="/companies"
-                  aria-label="Explore all Supun Group companies"
-                  className="hero-primary-button group relative z-20 inline-flex min-h-12 flex-1 items-center justify-center gap-2 rounded-full bg-[#efbd55] px-4 text-xs font-bold text-[#0b1b13] sm:min-h-14 sm:flex-none sm:px-7 sm:text-sm"
+                  className="inline-flex items-center gap-2 bg-primary px-6 py-3.5 text-sm font-semibold text-white transition hover:bg-[#14233f]"
                 >
-                  Explore our companies{' '}
-                  <span className="flex h-8 w-8 items-center justify-center rounded-full bg-[#0b1b13] text-white transition duration-300 group-hover:translate-x-1">
-                    <ArrowRight size={16} />
-                  </span>
+                  Our companies <ArrowRight size={16} />
                 </Link>
                 <Link
                   to="/about"
-                  className="hero-ghost-button group inline-flex min-h-12 flex-1 items-center justify-center gap-2 rounded-full px-4 text-xs font-semibold text-white sm:min-h-14 sm:flex-none sm:px-7 sm:text-sm"
+                  className="border-b border-foreground/40 pb-0.5 text-sm font-semibold transition hover:border-primary hover:text-primary"
                 >
-                  Discover our story{' '}
-                  <ArrowRight
-                    className="transition duration-300 group-hover:translate-x-1 group-hover:text-[#f4bd59]"
-                    size={18}
-                  />
+                  Read our story
                 </Link>
               </div>
             </div>
 
-            <div className="hero-legacy-feature hidden self-end lg:block">
-              <div className="flex items-center gap-3 text-[10px] font-bold uppercase tracking-[0.25em] text-[#f4bd59]">
-                <span className="h-px w-10 bg-[#f4bd59]" /> Established 1978
-              </div>
-              <div className="mt-5 flex items-end gap-3">
-                <strong className="hero-stat-blue text-[5.75rem] font-semibold leading-[.8] tracking-[-0.09em]">
-                  48
-                </strong>
-              </div>
-              <p className="mt-5 max-w-[13rem] text-sm leading-relaxed text-white/60">
-                <span className="font-semibold text-white">Years of enterprise.</span>
-                <br />
-                One vision, built across generations.
-              </p>
-              <Link
-                to="/about#journey"
-                className="group mt-6 inline-flex min-h-12 items-center gap-3 rounded-full bg-[#efbd55] px-5 text-xs font-bold uppercase tracking-[0.15em] text-[#071b2d] shadow-[0_10px_28px_rgba(239,189,85,.28)] transition hover:-translate-y-0.5 hover:bg-white"
-              >
-                Explore our journey{' '}
-                <ArrowRight className="transition group-hover:translate-x-1" size={16} />
-              </Link>
-            </div>
-          </div>
-
-          <div className="hero-bottom-rail hidden items-end justify-between gap-6 pt-5 sm:flex">
-            <a
-              href="#legacy"
-              className="group hidden items-center gap-3 text-[10px] font-semibold uppercase tracking-[0.2em] text-white/55 transition hover:text-white md:flex"
-            >
-              <span className="flex h-10 w-10 items-center justify-center rounded-full border border-white/20 transition duration-300 group-hover:border-[#e8aa3a] group-hover:bg-[#e8aa3a] group-hover:text-[#102016]">
-                <ArrowDown size={16} />
-              </span>
-              Scroll to discover
-            </a>
-            <div className="ml-auto grid w-full max-w-2xl grid-cols-2 gap-x-7 gap-y-3 sm:grid-cols-4 sm:gap-6">
-              {siteStats.map((stat, index) => (
-                <CountUpStat key={stat.label} value={stat.value} label={stat.label} index={index} />
+            <dl className="mt-14 grid grid-cols-2 gap-y-6 border-t border-border pt-6 sm:grid-cols-4">
+              {siteStats.map((stat) => (
+                <div key={stat.label} className="flex flex-col">
+                  <dt className="order-2 mt-1 max-w-[10rem] text-[11px] font-medium uppercase leading-snug tracking-[0.12em] text-foreground/55">
+                    {stat.label}
+                  </dt>
+                  <dd className="font-heading text-4xl font-medium tabular-nums text-foreground">
+                    {stat.value}
+                  </dd>
+                </div>
               ))}
+            </dl>
+          </div>
+
+          <div className="lg:col-span-5">
+            <div className="relative aspect-[4/5] overflow-hidden bg-[#14233f] sm:aspect-[5/4] lg:aspect-auto lg:h-full lg:min-h-[560px]">
+              <img
+                src={heroPoster}
+                alt="Supun Group factory and retail operations"
+                fetchPriority="high"
+                decoding="async"
+                className={`absolute inset-0 h-full w-full object-cover object-[62%_center] transition-opacity duration-500 ${heroVideoReady ? 'opacity-0' : 'opacity-100'}`}
+              />
+              {shouldPlayHeroVideo && (
+                <video
+                  ref={heroVideoRef}
+                  className={`absolute inset-0 h-full w-full object-cover object-[62%_center] transition-opacity duration-300 ${heroVideoReady ? 'opacity-100' : 'opacity-0'}`}
+                  autoPlay
+                  muted
+                  loop
+                  playsInline
+                  preload="auto"
+                  poster={heroPoster}
+                  onLoadedData={() => setHeroVideoReady(true)}
+                  aria-hidden="true"
+                >
+                  <source src={heroVideo} type="video/mp4" />
+                </video>
+              )}
             </div>
           </div>
         </div>
       </section>
 
-      <section
-        id="legacy"
-        className="legacy-premium relative isolate overflow-hidden py-12 sm:py-14 md:py-20"
-      >
-        <div className="legacy-aurora legacy-aurora-blue" aria-hidden="true" />
-        <div className="legacy-lines absolute inset-0 opacity-50" aria-hidden="true" />
-        <div className="container relative z-10 mx-auto px-4">
-          <div className="grid items-stretch gap-6 lg:grid-cols-[.72fr_1.28fr]">
-            <AnimatedSection animation="slide-right" duration={900} triggerOnce={false}>
-              <div className="legacy-year-card group relative flex h-full min-h-[350px] flex-col justify-between overflow-hidden rounded-[2rem] p-7 sm:min-h-[430px] sm:p-10">
-                <div className="legacy-year-ring" aria-hidden="true">
-                  <span />
-                  <span />
-                  <span />
-                </div>
-                <div className="relative flex items-center justify-between">
-                  <span className="rounded-full border border-primary/10 bg-white/65 px-3 py-1.5 text-[10px] font-semibold uppercase tracking-[0.2em] text-primary/70 backdrop-blur-xl">
-                    Where it began
-                  </span>
-                  <span className="legacy-pulse">
-                    <span />
-                  </span>
-                </div>
-                <div className="relative">
-                  <p className="text-xs font-semibold uppercase tracking-[0.25em] text-[#a66d0d]">
-                    Established
-                  </p>
-                  <div className="legacy-year mt-2 text-[clamp(5rem,14vw,9rem)] font-semibold leading-none tracking-[-0.075em]">
-                    1978
-                  </div>
-                  <p className="mt-4 max-w-xs border-l-2 border-[#d99a24] pl-4 text-sm leading-relaxed text-[#526278]">
-                    A legacy built over generations.
-                  </p>
-                </div>
-              </div>
-            </AnimatedSection>
-            <AnimatedSection animation="slide-left" delay={140} duration={950} triggerOnce={false}>
-              <div className="legacy-story-card relative flex h-full min-h-[430px] flex-col overflow-hidden rounded-[2rem] p-7 sm:p-10 lg:p-12">
-                <div className="legacy-corner-mark" aria-hidden="true" />
-                <div className="relative">
-                  <span className="mb-6 inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.2em] text-[#a66d0d]">
-                    <span className="h-2 w-2 rounded-full bg-[#d99a24]" /> Built across generations
-                  </span>
-                  <h2 className="max-w-4xl text-4xl font-semibold normal-case leading-[1.04] tracking-[-0.04em] text-[#071b2d] sm:text-5xl lg:text-6xl">
-                    A family-run business with the courage to{' '}
-                    <span className="text-[#071b2d]">keep building.</span>
-                  </h2>
-                </div>
-                <div className="relative mt-auto pt-10">
-                  <div className="grid gap-6 border-t border-primary/10 pt-7 md:grid-cols-2">
-                    <p className="leading-relaxed text-[#526278]">
-                      From Colombo trading roots to 13 companies in manufacturing, retail,
-                      distribution and hospitality.
-                    </p>
-                    <p className="leading-relaxed text-[#526278]">
-                      Creating lasting value for our customers, people and country since 1978.
-                    </p>
-                  </div>
-                  <Link
-                    to="/about"
-                    className="legacy-link group mt-8 inline-flex items-center gap-4 font-semibold text-primary"
-                  >
-                    Read our story{' '}
-                    <span className="flex h-11 w-11 items-center justify-center rounded-full border border-primary/20 bg-primary/5 text-primary transition duration-300 group-hover:translate-x-1 group-hover:border-[#78be43] group-hover:bg-[#78be43] group-hover:text-white">
-                      <ArrowRight size={18} />
-                    </span>
-                  </Link>
-                </div>
-              </div>
-            </AnimatedSection>
+      {/* Legacy */}
+      <section id="legacy" className="border-b border-border">
+        <div className="container mx-auto grid max-w-[1240px] gap-10 px-5 py-16 md:py-24 lg:grid-cols-12 lg:gap-14">
+          <div className="lg:col-span-5">
+            <p className="text-xs font-semibold uppercase tracking-[0.2em] text-primary">
+              Where it began
+            </p>
+            <p className="mt-4 font-heading text-[clamp(6rem,17vw,12rem)] font-medium leading-[0.85] tracking-[-0.05em] text-primary">
+              1978
+            </p>
+          </div>
+          <div className="lg:col-span-7 lg:pt-3">
+            <h2 className="font-heading text-4xl font-medium leading-[1.08] tracking-[-0.02em] md:text-5xl">
+              A family business with the courage to keep building.
+            </h2>
+            <div className="mt-8 grid gap-6 border-t border-border pt-7 text-base leading-relaxed text-foreground/75 md:grid-cols-2">
+              <p>
+                From Colombo trading roots to {siteStats[1].value} companies in manufacturing,
+                retail, distribution and hospitality.
+              </p>
+              <p>Creating lasting value for our customers, people and country since 1978.</p>
+            </div>
+            <Link
+              to="/about"
+              className="mt-8 inline-flex items-center gap-2 border-b border-foreground/40 pb-0.5 text-sm font-semibold transition hover:border-primary hover:text-primary"
+            >
+              Read our story <ArrowUpRight size={16} />
+            </Link>
           </div>
         </div>
       </section>
 
-      <section className="relative overflow-hidden bg-white py-12 text-[#10233f] sm:py-14 md:py-20">
-        <div className="container relative z-10 mx-auto px-4">
-          <div className="grid gap-9 lg:grid-cols-[0.82fr_1.18fr] lg:items-center lg:gap-14">
-            <AnimatedSection animation="slide-right" duration={900} triggerOnce={false}>
-              <div className="home-production-card overflow-hidden rounded-[1.5rem] bg-[#10233f] shadow-[0_24px_60px_rgba(16,35,63,.18)]">
-                <img
-                  src={manufacturingImage}
-                  alt="A Camy factory employee handling cookware on the production line"
-                  className="block h-auto w-full"
-                  loading="lazy"
-                  decoding="async"
-                />
-                <div className="p-5 text-white sm:p-6">
-                  <p className="text-xs font-semibold uppercase tracking-[0.22em] text-[#efbd55]">
-                    Built in Sri Lanka
-                  </p>
-                  <h3 className="mt-2 max-w-md text-2xl font-semibold normal-case leading-tight tracking-[-0.03em] sm:text-3xl">
-                    Local capability. Lasting value.
-                  </h3>
-                  <div className="mt-4 flex items-center gap-4 border-t border-white/25 pt-4">
-                    <strong className="text-3xl font-semibold tracking-[-0.05em]">48</strong>
-                    <span className="max-w-[9rem] text-xs font-semibold uppercase leading-relaxed tracking-[0.14em] text-white/70">
-                      Years of trusted enterprise
-                    </span>
-                  </div>
-                </div>
-              </div>
-            </AnimatedSection>
+      {/* What we do */}
+      <section className="border-b border-border bg-card">
+        <div className="container mx-auto grid max-w-[1240px] gap-12 px-5 py-16 md:py-24 lg:grid-cols-12 lg:gap-14">
+          <figure className="lg:col-span-5">
+            <img
+              src={manufacturingImage}
+              alt="A Camy factory employee handling cookware on the production line"
+              className="block aspect-[4/5] w-full object-cover"
+              loading="lazy"
+              decoding="async"
+            />
+            <figcaption className="mt-3 text-xs text-foreground/55">
+              Camy cookware, on the production line in Sri Lanka.
+            </figcaption>
+          </figure>
 
+          <div className="lg:col-span-7">
+            <p className="text-xs font-semibold uppercase tracking-[0.2em] text-primary">
+              What we do
+            </p>
+            <h2 className="mt-4 max-w-2xl font-heading text-4xl font-medium leading-[1.08] tracking-[-0.02em] md:text-5xl">
+              Four industries, one standard.
+            </h2>
+            <ol className="mt-10 border-t border-foreground/80">
+              {sectorHighlights.map((sector, index) => (
+                <li
+                  key={sector.title}
+                  className="grid grid-cols-[2.5rem_1fr] gap-x-4 border-b border-border py-6 sm:grid-cols-[3rem_14rem_1fr]"
+                >
+                  <span className="font-heading text-lg text-primary">{pad(index + 1)}</span>
+                  <h3 className="font-heading text-2xl font-medium">{sector.title}</h3>
+                  <p className="col-start-2 mt-2 text-sm leading-relaxed text-foreground/70 sm:col-start-3 sm:mt-1">
+                    {sector.description}
+                  </p>
+                </li>
+              ))}
+            </ol>
+          </div>
+        </div>
+      </section>
+
+      {/* Companies index */}
+      <section className="border-b border-border">
+        <div className="container mx-auto max-w-[1240px] px-5 py-16 md:py-24">
+          <div className="flex flex-col justify-between gap-5 md:flex-row md:items-end">
             <div>
-              <AnimatedSection animation="slide-up" duration={800} triggerOnce={false}>
-                <p className="section-kicker text-primary before:bg-[#d99a24]">What we do</p>
-                <h2 className="mt-5 max-w-3xl text-4xl font-semibold normal-case leading-[1.05] tracking-[-0.04em] text-[#071b2d] sm:text-5xl md:text-6xl">
-                  A Sri Lankan group built across industries.
-                </h2>
-                <p className="mt-6 max-w-2xl text-base leading-relaxed text-[#526278]">
-                  From a single trading company to four industries today: manufacturing, retail,
-                  distribution, and hospitality, each one held to the same standard.
-                </p>
-              </AnimatedSection>
-
-              <div className="mt-9 grid gap-3 sm:grid-cols-2">
-                {sectorHighlights.map((sector, index) => {
-                  return (
-                    <AnimatedSection
-                      key={sector.title}
-                      animation="slide-left"
-                      delay={index * 90}
-                      duration={750}
-                      triggerOnce={false}
-                    >
-                      <article className="group h-full rounded-xl border border-[#10233f]/10 bg-[#f7f9fc] p-5 transition duration-300 hover:-translate-y-1 hover:border-[#315f9f]/35 hover:shadow-[0_14px_32px_rgba(16,35,63,.08)]">
-                        <div>
-                          <h3 className="text-xl font-semibold normal-case text-[#071b2d]">
-                            {sector.title}
-                          </h3>
-                          <p className="mt-2 text-sm leading-relaxed text-[#667388]">
-                            {sector.description}
-                          </p>
-                        </div>
-                      </article>
-                    </AnimatedSection>
-                  );
-                })}
-              </div>
-
-              <AnimatedSection animation="fade" delay={250} duration={700} triggerOnce={false}>
-                <Link
-                  to="/companies"
-                  className="group mt-8 inline-flex items-center gap-4 font-semibold text-primary"
-                >
-                  Explore the group{' '}
-                  <span className="flex h-11 w-11 items-center justify-center rounded-full bg-[#10233f] text-white transition duration-300 group-hover:translate-x-1 group-hover:bg-[#78be43]">
-                    <ArrowRight size={18} />
-                  </span>
-                </Link>
-              </AnimatedSection>
+              <p className="text-xs font-semibold uppercase tracking-[0.2em] text-primary">
+                Inside the group
+              </p>
+              <h2 className="mt-4 font-heading text-4xl font-medium leading-[1.08] tracking-[-0.02em] md:text-5xl">
+                The businesses behind Supun Group
+              </h2>
             </div>
+            <Link
+              to="/companies"
+              className="inline-flex items-center gap-2 self-start border-b border-foreground/40 pb-0.5 text-sm font-semibold transition hover:border-primary hover:text-primary md:self-auto"
+            >
+              All companies <ArrowUpRight size={16} />
+            </Link>
           </div>
-        </div>
-      </section>
 
-      <section className="py-12 sm:py-14 md:py-20">
-        <div className="container mx-auto px-4">
-          <AnimatedSection animation="slide-up" duration={800} triggerOnce={false}>
-            <div className="flex flex-col justify-between gap-6 md:flex-row md:items-end">
-              <div>
-                <p className="section-kicker">Inside the group</p>
-                <h2 className="mt-5 text-4xl font-semibold normal-case tracking-[-0.035em] text-[#071b2d] md:text-6xl">
-                  The businesses behind Supun Group
-                </h2>
-              </div>
-              <div className="flex items-center gap-3">
-                <Link
-                  to="/companies"
-                  className="mr-2 hidden font-semibold text-primary transition hover:text-[#315f9f] sm:inline"
-                >
-                  Explore our companies
-                </Link>
-                <button
-                  type="button"
-                  onClick={() => scrollCompanies(-1)}
-                  aria-label="Previous companies"
-                  className="flex h-12 w-12 items-center justify-center rounded-full border border-primary/20 bg-white text-primary transition hover:border-[#78be43] hover:bg-[#78be43] hover:text-white"
-                >
-                  <ArrowRight className="rotate-180" size={19} />
-                </button>
-                <button
-                  type="button"
-                  onClick={() => scrollCompanies(1)}
-                  aria-label="Next companies"
-                  className="flex h-12 w-12 items-center justify-center rounded-full bg-primary text-white transition hover:bg-[#78be43]"
-                >
-                  <ArrowRight size={19} />
-                </button>
-              </div>
-            </div>
-          </AnimatedSection>
-          <div
-            ref={companyCarouselRef}
-            className="home-company-carousel mt-6 flex items-stretch snap-x snap-mandatory gap-5 overflow-x-auto scroll-smooth pb-4 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
-          >
+          <ul className="mt-12 border-t border-foreground/80">
             {homeCompanies.map((company, index) => (
-              <AnimatedSection
-                key={company.id}
-                animation="slide-up"
-                delay={(index % 4) * 130}
-                duration={850}
-                triggerOnce={false}
-                className="home-company-slide flex w-[88%] flex-none snap-center self-stretch sm:w-[calc(50%_-_0.625rem)] sm:snap-start lg:w-[calc(33.333%_-_0.833rem)] xl:w-[calc(25%_-_0.9375rem)]"
-              >
+              <li key={company.id} className="border-b border-border">
                 <Link
                   to={`/companies/${company.id}`}
-                  className="company-glass group relative flex min-h-[340px] w-full flex-col overflow-hidden rounded-[1.5rem] p-5 transition duration-300 hover:-translate-y-2 md:min-h-[420px] md:p-6"
+                  className="group grid grid-cols-[2rem_1fr_auto] items-center gap-x-4 gap-y-1 py-5 transition-colors hover:bg-card md:grid-cols-[3rem_5rem_minmax(0,1.1fr)_minmax(0,1.4fr)_9rem_2rem] md:gap-x-6 md:px-2"
                 >
-                  <div className="relative flex min-h-[130px] items-center justify-center px-2 py-2 md:min-h-[170px]">
+                  <span className="font-heading text-base text-foreground/45">
+                    {pad(index + 1)}
+                  </span>
+                  <span className="hidden h-12 w-20 items-center md:flex">
                     <CompanyLogo
                       companyId={company.id}
                       companyName={company.shortName}
                       placement="home"
-                      className="h-28 w-full bg-transparent md:h-40"
+                      className="h-12 w-full bg-transparent"
                     />
-                  </div>
-                  <div className="relative flex flex-1 flex-col px-2 pb-1 pt-7">
-                    <div className="mb-4 flex items-center gap-3 text-[10px] font-bold uppercase tracking-[.16em] text-[#738197]">
-                      <span className="h-2 w-2 rounded-full bg-[#d99a24]" />
-                      {company.established
-                        ? `Established ${company.established}`
-                        : 'Supun Group company'}
-                    </div>
-                    <h3 className="text-3xl font-semibold normal-case tracking-[-0.03em] text-[#071b2d]">
-                      {company.shortName}
-                    </h3>
-                    <p className="mt-3 hidden line-clamp-2 leading-relaxed text-[#667388] sm:block">
-                      {company.description}
-                    </p>
-                    <div className="mt-auto flex items-center justify-between border-t border-primary/10 pt-5">
-                      <span className="font-semibold text-primary">View company</span>
-                      <span className="flex h-12 w-12 items-center justify-center rounded-full bg-[#10233f] text-white shadow-[0_8px_20px_rgba(16,35,63,.18)] transition duration-300 group-hover:translate-x-1 group-hover:bg-[#78be43]">
-                        <ArrowRight size={18} />
-                      </span>
-                    </div>
-                  </div>
+                  </span>
+                  <span className="font-heading text-xl font-medium md:text-2xl">
+                    {company.shortName}
+                  </span>
+                  <span className="col-start-2 col-end-4 line-clamp-2 text-sm leading-relaxed text-foreground/65 md:col-start-auto md:col-end-auto">
+                    {company.description}
+                  </span>
+                  <span className="hidden text-xs font-medium uppercase tracking-[0.12em] text-foreground/55 md:block">
+                    {company.industry}
+                  </span>
+                  <ArrowUpRight
+                    size={20}
+                    className="col-start-3 row-start-1 justify-self-end text-foreground/40 transition group-hover:text-primary md:col-start-auto md:row-start-auto"
+                  />
                 </Link>
-              </AnimatedSection>
+              </li>
             ))}
-          </div>
+          </ul>
         </div>
       </section>
 
-      <section className="relative overflow-hidden bg-[#f3f7fb] px-4 pb-12 sm:pb-14 md:pb-20">
-        <AnimatedSection
-          animation="scale"
-          duration={900}
-          triggerOnce={false}
-          className="container mx-auto"
-        >
-          <div className="relative isolate overflow-hidden rounded-[2rem] bg-[#071b2d] px-7 py-12 text-white shadow-[0_30px_80px_rgba(7,27,45,.20)] sm:px-12 sm:py-16 md:rounded-[3rem] lg:px-20 lg:py-20">
-            <div className="absolute inset-y-0 right-0 -z-10 w-full bg-[radial-gradient(circle_at_85%_35%,rgba(217,154,36,.16),transparent_30%),linear-gradient(115deg,transparent_45%,rgba(25,83,132,.38))] lg:w-2/3" />
-            <div className="grid gap-12 lg:grid-cols-[minmax(0,1fr)_18rem] lg:items-end lg:gap-20">
-              <div>
-                <p className="mb-6 flex items-center gap-3 text-xs font-bold uppercase tracking-[0.24em] text-[#efbd55]">
-                  <Sparkles size={15} /> The next chapter
-                </p>
-                <h2 className="max-w-4xl text-4xl font-semibold normal-case leading-[1.02] tracking-[-0.04em] sm:text-5xl md:text-7xl">
-                  Let&#39;s build something <span className="text-[#efbd55]">lasting.</span>
-                </h2>
-                <p className="mt-7 max-w-2xl text-base leading-relaxed text-white/65 sm:text-lg">
-                  From ambitious ideas to trusted partnerships, we are ready to create what Sri
-                  Lanka needs next.
-                </p>
-              </div>
-
-              <div className="border-t border-white/15 pt-7 lg:border-l lg:border-t-0 lg:pl-10 lg:pt-0">
-                <p className="mb-6 text-sm leading-relaxed text-white/55">
-                  Have an opportunity, partnership or idea in mind?
-                </p>
-                <Link
-                  to="/contact"
-                  className="group inline-flex w-full items-center justify-between rounded-full bg-[#efbd55] px-6 py-4 font-semibold text-[#071b2d] transition duration-300 hover:bg-white"
-                >
-                  Talk to our team
-                  <span className="flex h-10 w-10 items-center justify-center rounded-full bg-[#071b2d] text-white transition duration-300 group-hover:translate-x-1 group-hover:bg-[#78be43]">
-                    <ArrowRight size={18} />
-                  </span>
-                </Link>
-              </div>
-            </div>
+      {/* Contact */}
+      <section className="bg-primary text-white">
+        <div className="container mx-auto grid max-w-[1240px] gap-10 px-5 py-16 md:py-24 lg:grid-cols-12 lg:items-end">
+          <div className="lg:col-span-8">
+            <h2 className="font-heading text-[clamp(2.6rem,6vw,4.8rem)] font-medium leading-[1.02] tracking-[-0.025em]">
+              Have an opportunity, a partnership or an idea?
+            </h2>
+            <p className="mt-6 max-w-xl text-lg leading-relaxed text-white/75">
+              We would like to hear it. Write to our team and we will get back to you.
+            </p>
           </div>
-        </AnimatedSection>
+          <div className="lg:col-span-4 lg:justify-self-end">
+            <Link
+              to="/contact"
+              className="inline-flex items-center gap-3 bg-[#f7f3eb] px-7 py-4 text-sm font-semibold text-[#14233f] transition hover:bg-accent"
+            >
+              Talk to our team <ArrowRight size={16} />
+            </Link>
+          </div>
+        </div>
       </section>
     </div>
   );

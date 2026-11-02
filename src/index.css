@@ -8,43 +8,44 @@ All colors MUST be HSL.
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 217 33% 17%;
+    /* Warm paper, ink blue, one fresh green taken from the Supun logo */
+    --background: 40 38% 96%;
+    --foreground: 222 45% 13%;
 
-    --card: 0 0% 100%;
-    --card-foreground: 217 33% 17%;
+    --card: 40 45% 98.5%;
+    --card-foreground: 222 45% 13%;
 
-    --popover: 0 0% 100%;
-    --popover-foreground: 217 33% 17%;
+    --popover: 40 45% 98.5%;
+    --popover-foreground: 222 45% 13%;
 
     --primary: 217 71% 33%;
     --primary-foreground: 0 0% 100%;
 
-    --primary-dark: 221 47% 7%;
-    --primary-light: 217 71% 53%;
+    --primary-dark: 222 55% 10%;
+    --primary-light: 217 60% 45%;
 
-    --secondary: 215 16% 35%;
-    --secondary-foreground: 0 0% 100%;
+    --secondary: 38 22% 90%;
+    --secondary-foreground: 222 45% 13%;
 
-    --muted: 220 13% 96%;
-    --muted-foreground: 217 20% 40%;
+    --muted: 38 24% 92%;
+    --muted-foreground: 220 14% 36%;
 
-    --accent: 38 92% 50%;
-    --accent-foreground: 0 0% 100%;
+    --accent: 84 52% 52%;
+    --accent-foreground: 222 55% 10%;
 
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 0 0% 100%;
 
-    --border: 217 20% 90%;
-    --input: 217 20% 90%;
+    --border: 38 18% 82%;
+    --input: 38 18% 82%;
     --ring: 217 71% 33%;
 
-    --radius: 0.5rem;
+    --radius: 0.25rem;
 
-    --gradient-primary: linear-gradient(135deg, hsl(217, 71%, 33%), hsl(217, 71%, 45%));
-    --gradient-hero: linear-gradient(135deg, hsl(217, 71%, 23%) 0%, hsl(217, 71%, 33%) 100%);
-    --shadow-elegant: 0 10px 30px -10px hsl(217 71% 33% / 0.2);
-    --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    --gradient-primary: hsl(217, 71%, 33%);
+    --gradient-hero: hsl(222, 55%, 12%);
+    --shadow-elegant: 0 1px 0 hsl(38 18% 82%);
+    --transition-smooth: all 0.2s ease;
 
     --sidebar-background: 0 0% 98%;
 
@@ -117,7 +118,7 @@ All colors MUST be HSL.
   h4,
   h5,
   h6 {
-    @apply font-heading font-bold tracking-tight uppercase;
+    @apply font-heading font-semibold tracking-tight;
   }
 }
 
