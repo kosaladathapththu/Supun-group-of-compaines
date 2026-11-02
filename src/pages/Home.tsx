@@ -6,7 +6,7 @@ import { AnimatedSection } from '@/components/AnimatedSection';
 import { CompanyLogo } from '@/components/CompanyLogo';
 import { companies } from '@/data/companies';
 import { sectorHighlights, siteStats } from '@/data/siteContent';
-import heroVideo from '../../Full Video.mp4';
+import heroVideo from '@/assets/supun-hero-streaming-hq.mp4';
 import heroPoster from '@/assets/optimized/hero-poster.jpg';
 import manufacturingImage from '@/assets/optimized/camy-cookware-production-focus-v2.jpg';
 import camyRedLogo from '@/assets/camy-logo-red-transparent.png';
@@ -174,7 +174,7 @@ const Home = () => {
         }}
       />
 
-      <section className="premium-hero relative isolate h-[58svh] min-h-[520px] max-h-[640px] overflow-hidden bg-[#07110d] text-white md:h-auto md:max-h-none md:min-h-[760px] lg:min-h-screen">
+      <section className="premium-hero relative isolate h-[100svh] min-h-[560px] max-h-none overflow-hidden bg-[#07110d] text-white md:h-auto md:max-h-none md:min-h-[760px] lg:min-h-screen">
         <img
           src={heroPoster}
           alt=""

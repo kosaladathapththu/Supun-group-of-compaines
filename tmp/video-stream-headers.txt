@@ -1,0 +1,10 @@
+HTTP/1.1 206 Partial Content
+keep-alive: timeout=5, max=100
+content-type: video/mp4
+last-modified: Wed, 28 Oct 2026 17:08:16 GMT
+content-range: bytes 0-1048575/323221521
+content-length: 1048576
+date: Wed, 28 Oct 2026 09:35:23 GMT
+server: LiteSpeed
+x-turbo-charged-by: LiteSpeed
+
