@@ -6,11 +6,9 @@ import { AnimatedSection } from '@/components/AnimatedSection';
 import { CompanyLogo } from '@/components/CompanyLogo';
 import { companies } from '@/data/companies';
 import { sectorHighlights, siteStats } from '@/data/siteContent';
-import heroVideo from '@/assets/supun-group-hero-optimized.mp4';
-import heroMobileVideo from '@/assets/supun-group-hero-mobile.mp4';
+import heroVideo from '@/assets/supun-hero-streaming-hq.mp4';
 import heroPoster from '@/assets/optimized/hero-poster.jpg';
 import manufacturingImage from '@/assets/optimized/camy-cookware-production-focus-v2.jpg';
-import { CertificationSection } from '@/components/CertificationSection';
 import camyRedLogo from '@/assets/camy-logo-red-transparent.png';
 
 const featuredCompanyIds = [
@@ -176,7 +174,7 @@ const Home = () => {
         }}
       />
 
-      <section className="premium-hero relative isolate h-[58svh] min-h-[520px] max-h-[640px] overflow-hidden bg-[#07110d] text-white md:h-auto md:max-h-none md:min-h-[760px] lg:min-h-screen">
+      <section className="premium-hero relative isolate h-[100svh] min-h-[560px] max-h-none overflow-hidden bg-[#07110d] text-white md:h-auto md:max-h-none md:min-h-[760px] lg:min-h-screen">
         <img
           src={heroPoster}
           alt=""
@@ -198,7 +196,6 @@ const Home = () => {
             onLoadedData={() => setHeroVideoReady(true)}
             aria-hidden="true"
           >
-            <source media="(max-width: 767px)" src={heroMobileVideo} type="video/mp4" />
             <source src={heroVideo} type="video/mp4" />
           </video>
         )}
@@ -449,8 +446,6 @@ const Home = () => {
           </div>
         </div>
       </section>
-
-      <CertificationSection />
 
       <section className="py-12 sm:py-14 md:py-20">
         <div className="container mx-auto px-4">

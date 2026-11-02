@@ -29,3 +29,10 @@ dist-ssr
 *.sqlite-journal
 server/uploads/*
 !server/uploads/.gitkeep
+
+# Local hosting packages
+/tmp/*.zip
+
+/tmp/ffmpeg*
+/tmp/hero-streaming-*.log
+/tmp/video-stream-*
