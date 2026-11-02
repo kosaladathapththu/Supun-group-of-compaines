@@ -1,73 +1,46 @@
-# Welcome to your Lovable project
+# Supun Group website
 
-## Project info
+React, TypeScript and Vite website with a Node/Express administration API.
 
-**URL**: https://lovable.dev/projects/fb819894-33a8-40a9-b81b-d3f5f2c533f8
+## Project structure
 
-## How can I edit this code?
+| Location | Purpose |
+| --- | --- |
+| src/pages/ | Public pages and administration screens |
+| src/components/ | Shared layout, interface and UI components |
+| src/data/ | Website copy, company records and shared content |
+| src/assets/ | Images and the active hero video; optimized photos and product images have their own folders |
+| src/hooks/, src/lib/, src/services/ | Shared hooks, utilities and API calls |
+| public/ | Files served at fixed URLs, including company logos, icons and sitemap |
+| server/ | API routes, authentication, database tools and uploaded media |
+| scripts/ | Media and logo maintenance utilities |
+| docs/ | Existing setup, deployment and maintenance notes, plus the supplied change document |
+| .github/ | Repository automation |
+| Full Video.mp4 | Original hero-video master, retained unchanged |
+| tmp/ | Local output only; the latest hosting ZIP is retained here and ignored by Git |
+| dist/ | Generated production website, ignored by Git |
 
-There are several ways of editing your application.
+## Local development
 
-**Use Lovable**
+Install dependencies with npm ci, then run npm run dev.
+Run npm run server:dev separately when working with the administration API.
+Environment templates are in .env.example and .env.production.example.
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/fb819894-33a8-40a9-b81b-d3f5f2c533f8) and start prompting.
+## Validation and production
 
-Changes made via Lovable will be committed automatically to this repo.
+- npm exec tsc -- -p tsconfig.app.json --noEmit
+- npm run build
+- npm run preview
 
-**Use your preferred IDE**
+The root configuration files are required by Vite, TypeScript, Tailwind, ESLint and npm.
+Use package-lock.json as the dependency lockfile.
 
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
+## Hosting
 
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
+Upload the contents of dist/ directly into public_html, with index.html at its root.
+Preserve the hosting account's existing .htaccess when replacing the website files.
+The existing cPanel deployment guide is [docs/NAMECHEAP_DEPLOYMENT.md](docs/NAMECHEAP_DEPLOYMENT.md).
+The original full video is retained as a master; the website uses src/assets/supun-hero-streaming-hq.mp4.
 
-Follow these steps:
-
-```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
-
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
-
-# Step 3: Install the necessary dependencies.
-npm i
-
-# Step 4: Start the development server with auto-reloading and an instant preview.
-npm run dev
-```
-
-**Edit a file directly in GitHub**
-
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
-
-**Use GitHub Codespaces**
-
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
-
-## What technologies are used for this project?
-
-This project is built with:
-
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
-
-## How can I deploy this project?
-
-Simply open [Lovable](https://lovable.dev/projects/fb819894-33a8-40a9-b81b-d3f5f2c533f8) and click on Share -> Publish.
-
-## Can I connect a custom domain to my Lovable project?
-
-Yes, you can!
-
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
-
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/features/custom-domain#custom-domain)
+Generated ZIPs, review frames, downloaded tools and cache files should not be committed.
+The server's uploads and database files are runtime data and should be preserved.
