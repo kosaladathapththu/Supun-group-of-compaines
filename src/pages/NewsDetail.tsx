@@ -26,6 +26,9 @@ export default function NewsDetail() {
 
   useEffect(() => {
     if (!slug) return;
+    let active = true;
+    setIsLoading(true);
+    setArticle(null);
     (async () => {
       const awardStory = getAwardNewsBySlug(slug);
 
@@ -47,13 +50,17 @@ export default function NewsDetail() {
       }
 
       try {
-        setArticle(await newsAPI.getBySlug(slug));
+        const result = await newsAPI.getBySlug(slug);
+        if (active) setArticle(result);
       } catch {
-        setArticle(null);
+        if (active) setArticle(null);
       } finally {
-        setIsLoading(false);
+        if (active) setIsLoading(false);
       }
     })();
+    return () => {
+      active = false;
+    };
   }, [slug]);
 
   if (isLoading)

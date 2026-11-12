@@ -6,12 +6,35 @@ const ScrollToTop = () => {
 
   useEffect(() => {
     if (hash) {
-      window.requestAnimationFrame(() =>
-        document
-          .getElementById(hash.slice(1))
-          ?.scrollIntoView({ behavior: 'smooth', block: 'start' }),
-      );
-      return;
+      let targetId = hash.slice(1);
+      try {
+        targetId = decodeURIComponent(targetId);
+      } catch {
+        /* Keep malformed fragments harmless. */
+      }
+      let frame = 0;
+      const observer = new MutationObserver(() => scrollToTarget());
+      const scrollToTarget = () => {
+        const target = document.getElementById(targetId);
+        if (!target) return false;
+        observer.disconnect();
+        frame = window.requestAnimationFrame(() =>
+          target.scrollIntoView({
+            behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches
+              ? 'auto'
+              : 'smooth',
+            block: 'start',
+          }),
+        );
+        return true;
+      };
+      if (!scrollToTarget()) observer.observe(document.body, { childList: true, subtree: true });
+      const timeout = window.setTimeout(() => observer.disconnect(), 8000);
+      return () => {
+        observer.disconnect();
+        window.clearTimeout(timeout);
+        window.cancelAnimationFrame(frame);
+      };
     }
     window.scrollTo(0, 0);
   }, [pathname, hash]);

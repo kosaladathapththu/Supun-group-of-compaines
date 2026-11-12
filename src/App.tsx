@@ -13,6 +13,7 @@ import AdminLayout from './components/AdminLayout';
 import { PageTransition } from './components/PageTransition';
 import { RouteLoader } from './components/RouteLoader';
 import Home from './pages/Home';
+import RouteErrorBoundary from './components/RouteErrorBoundary';
 const About = lazy(() => import('./pages/About'));
 const Companies = lazy(() => import('./pages/Companies'));
 const CompanyDetail = lazy(() => import('./pages/CompanyDetail'));
@@ -56,253 +57,255 @@ const App = () => (
       <Sonner />
       <BrowserRouter>
         <ScrollToTop />
-        <Suspense fallback={<RouteLoader />}>
-          <Routes>
-            <Route
-              path="/"
-              element={
-                <PublicPage>
-                  <Home />
-                </PublicPage>
-              }
-            />
-            <Route
-              path="/about"
-              element={
-                <PublicPage>
-                  <About />
-                </PublicPage>
-              }
-            />
-            <Route
-              path="/companies"
-              element={
-                <PublicPage>
-                  <Companies />
-                </PublicPage>
-              }
-            />
-            <Route
-              path="/companies/:id"
-              element={
-                <PublicPage>
-                  <CompanyDetail />
-                </PublicPage>
-              }
-            />
-            <Route
-              path="/camy-products"
-              element={
-                <PublicPage>
-                  <CamyProducts />
-                </PublicPage>
-              }
-            />
-            <Route
-              path="/careers"
-              element={
-                <PublicPage>
-                  <Careers />
-                </PublicPage>
-              }
-            />
-            <Route
-              path="/news"
-              element={
-                <PublicPage>
-                  <News />
-                </PublicPage>
-              }
-            />
-            <Route
-              path="/news/:slug"
-              element={
-                <PublicPage>
-                  <NewsDetail />
-                </PublicPage>
-              }
-            />
-            <Route
-              path="/contact"
-              element={
-                <PublicPage>
-                  <Contact />
-                </PublicPage>
-              }
-            />
-            <Route
-              path="/cookie-policy"
-              element={
-                <PublicPage>
-                  <CookiePolicy />
-                </PublicPage>
-              }
-            />
-            <Route path="/shop" element={<Navigate to="/camy-products" replace />} />
-            <Route path="/shop/:id" element={<Navigate to="/camy-products" replace />} />
-            <Route
-              path="/admin/login"
-              element={
-                <PageTransition>
-                  <Login />
-                </PageTransition>
-              }
-            />
-            <Route
-              path="/admin"
-              element={
-                <ProtectedRoute>
-                  <AdminLayout />
-                </ProtectedRoute>
-              }
-            >
+        <RouteErrorBoundary>
+          <Suspense fallback={<RouteLoader />}>
+            <Routes>
               <Route
-                index
+                path="/"
+                element={
+                  <PublicPage>
+                    <Home />
+                  </PublicPage>
+                }
+              />
+              <Route
+                path="/about"
+                element={
+                  <PublicPage>
+                    <About />
+                  </PublicPage>
+                }
+              />
+              <Route
+                path="/companies"
+                element={
+                  <PublicPage>
+                    <Companies />
+                  </PublicPage>
+                }
+              />
+              <Route
+                path="/companies/:id"
+                element={
+                  <PublicPage>
+                    <CompanyDetail />
+                  </PublicPage>
+                }
+              />
+              <Route
+                path="/camy-products"
+                element={
+                  <PublicPage>
+                    <CamyProducts />
+                  </PublicPage>
+                }
+              />
+              <Route
+                path="/careers"
+                element={
+                  <PublicPage>
+                    <Careers />
+                  </PublicPage>
+                }
+              />
+              <Route
+                path="/news"
+                element={
+                  <PublicPage>
+                    <News />
+                  </PublicPage>
+                }
+              />
+              <Route
+                path="/news/:slug"
+                element={
+                  <PublicPage>
+                    <NewsDetail />
+                  </PublicPage>
+                }
+              />
+              <Route
+                path="/contact"
+                element={
+                  <PublicPage>
+                    <Contact />
+                  </PublicPage>
+                }
+              />
+              <Route
+                path="/cookie-policy"
+                element={
+                  <PublicPage>
+                    <CookiePolicy />
+                  </PublicPage>
+                }
+              />
+              <Route path="/shop" element={<Navigate to="/camy-products" replace />} />
+              <Route path="/shop/:id" element={<Navigate to="/camy-products" replace />} />
+              <Route
+                path="/admin/login"
                 element={
                   <PageTransition>
-                    <Dashboard />
+                    <Login />
                   </PageTransition>
                 }
               />
               <Route
-                path="companies"
+                path="/admin"
                 element={
-                  <PageTransition>
-                    <CompanyList />
-                  </PageTransition>
+                  <ProtectedRoute>
+                    <AdminLayout />
+                  </ProtectedRoute>
                 }
-              />
+              >
+                <Route
+                  index
+                  element={
+                    <PageTransition>
+                      <Dashboard />
+                    </PageTransition>
+                  }
+                />
+                <Route
+                  path="companies"
+                  element={
+                    <PageTransition>
+                      <CompanyList />
+                    </PageTransition>
+                  }
+                />
+                <Route
+                  path="companies/new"
+                  element={
+                    <PageTransition>
+                      <CompanyForm />
+                    </PageTransition>
+                  }
+                />
+                <Route
+                  path="companies/:id/edit"
+                  element={
+                    <PageTransition>
+                      <CompanyForm />
+                    </PageTransition>
+                  }
+                />
+                <Route
+                  path="brands"
+                  element={
+                    <PageTransition>
+                      <BrandList />
+                    </PageTransition>
+                  }
+                />
+                <Route
+                  path="brands/new"
+                  element={
+                    <PageTransition>
+                      <BrandForm />
+                    </PageTransition>
+                  }
+                />
+                <Route
+                  path="brands/:id/edit"
+                  element={
+                    <PageTransition>
+                      <BrandForm />
+                    </PageTransition>
+                  }
+                />
+                <Route
+                  path="categories"
+                  element={
+                    <PageTransition>
+                      <CategoryList />
+                    </PageTransition>
+                  }
+                />
+                <Route
+                  path="categories/new"
+                  element={
+                    <PageTransition>
+                      <CategoryForm />
+                    </PageTransition>
+                  }
+                />
+                <Route
+                  path="categories/:id/edit"
+                  element={
+                    <PageTransition>
+                      <CategoryForm />
+                    </PageTransition>
+                  }
+                />
+                <Route
+                  path="products"
+                  element={
+                    <PageTransition>
+                      <ProductList />
+                    </PageTransition>
+                  }
+                />
+                <Route
+                  path="products/new"
+                  element={
+                    <PageTransition>
+                      <ProductForm />
+                    </PageTransition>
+                  }
+                />
+                <Route
+                  path="products/:id/edit"
+                  element={
+                    <PageTransition>
+                      <ProductForm />
+                    </PageTransition>
+                  }
+                />
+                <Route
+                  path="news"
+                  element={
+                    <PageTransition>
+                      <NewsList />
+                    </PageTransition>
+                  }
+                />
+                <Route
+                  path="news/new"
+                  element={
+                    <PageTransition>
+                      <NewsForm />
+                    </PageTransition>
+                  }
+                />
+                <Route
+                  path="news/:id/edit"
+                  element={
+                    <PageTransition>
+                      <NewsForm />
+                    </PageTransition>
+                  }
+                />
+                <Route
+                  path="password-reset"
+                  element={
+                    <PageTransition>
+                      <PasswordReset />
+                    </PageTransition>
+                  }
+                />
+              </Route>
               <Route
-                path="companies/new"
+                path="*"
                 element={
-                  <PageTransition>
-                    <CompanyForm />
-                  </PageTransition>
+                  <PublicPage>
+                    <NotFound />
+                  </PublicPage>
                 }
               />
-              <Route
-                path="companies/:id/edit"
-                element={
-                  <PageTransition>
-                    <CompanyForm />
-                  </PageTransition>
-                }
-              />
-              <Route
-                path="brands"
-                element={
-                  <PageTransition>
-                    <BrandList />
-                  </PageTransition>
-                }
-              />
-              <Route
-                path="brands/new"
-                element={
-                  <PageTransition>
-                    <BrandForm />
-                  </PageTransition>
-                }
-              />
-              <Route
-                path="brands/:id/edit"
-                element={
-                  <PageTransition>
-                    <BrandForm />
-                  </PageTransition>
-                }
-              />
-              <Route
-                path="categories"
-                element={
-                  <PageTransition>
-                    <CategoryList />
-                  </PageTransition>
-                }
-              />
-              <Route
-                path="categories/new"
-                element={
-                  <PageTransition>
-                    <CategoryForm />
-                  </PageTransition>
-                }
-              />
-              <Route
-                path="categories/:id/edit"
-                element={
-                  <PageTransition>
-                    <CategoryForm />
-                  </PageTransition>
-                }
-              />
-              <Route
-                path="products"
-                element={
-                  <PageTransition>
-                    <ProductList />
-                  </PageTransition>
-                }
-              />
-              <Route
-                path="products/new"
-                element={
-                  <PageTransition>
-                    <ProductForm />
-                  </PageTransition>
-                }
-              />
-              <Route
-                path="products/:id/edit"
-                element={
-                  <PageTransition>
-                    <ProductForm />
-                  </PageTransition>
-                }
-              />
-              <Route
-                path="news"
-                element={
-                  <PageTransition>
-                    <NewsList />
-                  </PageTransition>
-                }
-              />
-              <Route
-                path="news/new"
-                element={
-                  <PageTransition>
-                    <NewsForm />
-                  </PageTransition>
-                }
-              />
-              <Route
-                path="news/:id/edit"
-                element={
-                  <PageTransition>
-                    <NewsForm />
-                  </PageTransition>
-                }
-              />
-              <Route
-                path="password-reset"
-                element={
-                  <PageTransition>
-                    <PasswordReset />
-                  </PageTransition>
-                }
-              />
-            </Route>
-            <Route
-              path="*"
-              element={
-                <PublicPage>
-                  <NotFound />
-                </PublicPage>
-              }
-            />
-          </Routes>
-        </Suspense>
+            </Routes>
+          </Suspense>
+        </RouteErrorBoundary>
       </BrowserRouter>
     </TooltipProvider>
   </QueryClientProvider>

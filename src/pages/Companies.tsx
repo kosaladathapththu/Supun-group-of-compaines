@@ -1,9 +1,10 @@
+import { usePublicCompanies } from '@/hooks/use-public-companies';
 import { useMemo, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowRight } from 'lucide-react';
 import { CompanyLogo } from '@/components/CompanyLogo';
 import Seo, { SITE_URL } from '@/components/Seo';
-import { companies, type CompanySector } from '@/data/companies';
+import { type CompanySector } from '@/data/companies';
 import heroImage from '@/assets/optimized/about-hero-sri-lanka-v3.jpg';
 
 const filters: Array<'All' | CompanySector> = [
@@ -15,17 +16,18 @@ const filters: Array<'All' | CompanySector> = [
 ];
 
 const Companies = () => {
+  const { companies } = usePublicCompanies();
   const [activeFilter, setActiveFilter] = useState<(typeof filters)[number]>('All');
   const visibleCompanies = useMemo(
     () =>
       activeFilter === 'All'
         ? companies
         : companies.filter((company) => company.industry === activeFilter),
-    [activeFilter],
+    [activeFilter, companies],
   );
 
   return (
-    <div className="min-h-screen bg-[#eee5d5]">
+    <div className="min-h-screen bg-white">
       <Seo
         title="Our Companies | Supun Group of Companies"
         description="Explore 13 Supun Group companies across manufacturing, retail, distribution and hospitality in Sri Lanka."
@@ -130,18 +132,19 @@ const Companies = () => {
                 key={company.id}
                 to={`/companies/${company.id}`}
                 aria-label={`View ${company.shortName}`}
-                className="group flex min-w-0 flex-col overflow-hidden rounded-2xl border border-[#c8b99d] bg-[#fffaf0] shadow-[0_12px_30px_rgba(76,55,25,.11)] ring-1 ring-white/80 transition duration-300 hover:-translate-y-1 hover:border-[#ad956d] hover:shadow-[0_20px_44px_rgba(76,55,25,.17)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2"
+                className="group flex min-w-0 flex-col overflow-hidden rounded-2xl border border-[#d7e0e6] bg-[#f8fafc] shadow-[0_12px_30px_rgba(76,55,25,.11)] ring-1 ring-white/80 transition duration-300 hover:-translate-y-1 hover:border-[#ad956d] hover:shadow-[0_20px_44px_rgba(76,55,25,.17)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2"
               >
                 <div className="flex h-32 items-center justify-center bg-white p-3 sm:h-48 sm:p-4">
                   <CompanyLogo
                     companyId={company.id}
                     companyName={company.shortName}
+                    logoUrl={company.logoUrl}
                     placement="listing"
                     className="h-full w-full"
                     imageClassName="h-full w-full object-contain"
                   />
                 </div>
-                <div className="flex flex-1 flex-col border-t border-[#d9c9ad]/70 bg-[#fffaf0] p-4 sm:p-5">
+                <div className="flex flex-1 flex-col border-t border-[#d7e0e6] bg-[#f8fafc] p-4 sm:p-5">
                   <h2 className="min-h-[2.6em] text-base font-semibold normal-case leading-tight text-[#10233f] sm:text-xl">
                     {company.name}
                   </h2>

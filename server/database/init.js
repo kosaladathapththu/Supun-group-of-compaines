@@ -1,13 +1,14 @@
 import Database from 'better-sqlite3';
-import { fileURLToPath } from 'url';
-import { dirname, join } from 'path';
+
+import { dirname } from 'path';
 import bcrypt from 'bcryptjs';
+import { mkdirSync } from 'node:fs';
+import { databasePath, isProduction } from '../config.js';
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = dirname(__filename);
-
-const dbPath = join(__dirname, '..', 'database.sqlite');
-const db = new Database(dbPath);
+mkdirSync(dirname(databasePath), { recursive: true });
+const db = new Database(databasePath);
+db.pragma('journal_mode = WAL');
+db.pragma('busy_timeout = 5000');
 
 export function initDatabase() {
   console.log('🗄️  Initializing database...');
@@ -136,9 +137,19 @@ export function initDatabase() {
       password TEXT NOT NULL,
       email TEXT UNIQUE NOT NULL,
       role TEXT DEFAULT 'admin',
+      tokenVersion INTEGER NOT NULL DEFAULT 0,
       createdAt DATETIME DEFAULT CURRENT_TIMESTAMP
     )
   `);
+
+  if (
+    !db
+      .prepare('PRAGMA table_info(users)')
+      .all()
+      .some((column) => column.name === 'tokenVersion')
+  ) {
+    db.exec('ALTER TABLE users ADD COLUMN tokenVersion INTEGER NOT NULL DEFAULT 0');
+  }
 
   // Create brands table for logo showcase
   db.exec(`
@@ -203,14 +214,6 @@ export function initDatabase() {
       updatedAt DATETIME DEFAULT CURRENT_TIMESTAMP,
       FOREIGN KEY (productId) REFERENCES products(id)
     )
-  `);
-
-  // Indexes used by the public site and admin listing screens.
-  db.exec(`
-    CREATE INDEX IF NOT EXISTS idx_companies_sequence ON companies(sequence, createdAt DESC);
-    CREATE INDEX IF NOT EXISTS idx_brands_active_order ON brands(isActive, displayOrder);
-    CREATE INDEX IF NOT EXISTS idx_categories_active ON categories(isActive, name);
-    CREATE INDEX IF NOT EXISTS idx_products_active_category ON products(isActive, categoryId);
   `);
 
   // Migration: Ensure categories schema has expected columns
@@ -298,21 +301,39 @@ export function initDatabase() {
     console.error('⚠️  Product variations migration error:', error.message);
   }
 
+  // Indexes used by the public site and admin listing screens.
+  db.exec(`
+    CREATE INDEX IF NOT EXISTS idx_companies_sequence ON companies(sequence, createdAt DESC);
+    CREATE INDEX IF NOT EXISTS idx_brands_active_order ON brands(isActive, displayOrder);
+    CREATE INDEX IF NOT EXISTS idx_categories_active ON categories(isActive, name);
+    CREATE INDEX IF NOT EXISTS idx_products_active_category ON products(isActive, categoryId);
+  `);
+
   // Create default admin user if none exists
   const userCount = db.prepare('SELECT COUNT(*) as count FROM users').get();
 
   if (userCount.count === 0) {
-    const hashedPassword = bcrypt.hashSync('admin123', 10);
+    const initialPassword = process.env.ADMIN_PASSWORD || (isProduction ? '' : 'admin123');
+    if (initialPassword.length < (isProduction ? 12 : 6)) {
+      throw new Error(
+        'Set ADMIN_PASSWORD (at least 12 characters) to create the first production administrator.',
+      );
+    }
+    const hashedPassword = bcrypt.hashSync(initialPassword, 12);
     db.prepare(
       `
       INSERT INTO users (username, password, email, role)
       VALUES (?, ?, ?, ?)
     `,
-    ).run('admin', hashedPassword, 'admin@supungroup.lk', 'admin');
+    ).run(
+      process.env.ADMIN_USERNAME || 'admin',
+      hashedPassword,
+      process.env.ADMIN_EMAIL || 'admin@supungroup.lk',
+      'admin',
+    );
 
     console.log('✅ Default admin user created');
-    console.log('   Username: admin');
-    console.log('   Password: admin123');
+    console.log('   Administrator account initialized.');
     console.log('   ⚠️  Please change this password after first login!');
   }
 

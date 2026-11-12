@@ -1,10 +1,13 @@
+import { usePublicCompanies } from '@/hooks/use-public-companies';
 import { useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowDown, ArrowRight, Sparkles } from 'lucide-react';
 import Seo, { DEFAULT_IMAGE, SITE_NAME, SITE_URL } from '@/components/Seo';
 import { AnimatedSection } from '@/components/AnimatedSection';
 import { CompanyLogo } from '@/components/CompanyLogo';
-import { companies } from '@/data/companies';
+import { BrandShowcase } from '@/components/BrandShowcase';
+import { brandsAPI } from '@/services/api';
+import { useQuery } from '@tanstack/react-query';
 import { sectorHighlights, siteStats } from '@/data/siteContent';
 import heroVideo from '@/assets/supun-hero-streaming-hq.mp4';
 import heroPoster from '@/assets/optimized/hero-poster.jpg';
@@ -16,10 +19,6 @@ const featuredCompanyIds = [
   'supun-super-center',
   'supun-arcade-residency',
   'camy-global',
-];
-const homeCompanies = [
-  ...featuredCompanyIds.flatMap((id) => companies.filter((company) => company.id === id)),
-  ...companies.filter((company) => !featuredCompanyIds.includes(company.id)),
 ];
 
 const CountUpStat = ({ value, label, index }: { value: string; label: string; index: number }) => {
@@ -76,6 +75,18 @@ const CountUpStat = ({ value, label, index }: { value: string; label: string; in
 };
 
 const Home = () => {
+  const { data: brands = [] } = useQuery({
+    queryKey: ['public-brands'],
+    queryFn: brandsAPI.getAll,
+    retry: false,
+    staleTime: 30_000,
+  });
+  const { companies } = usePublicCompanies();
+  const homeCompanies = [
+    ...featuredCompanyIds.flatMap((id) => companies.filter((company) => company.id === id)),
+    ...companies.filter((company) => !featuredCompanyIds.includes(company.id)),
+  ];
+
   const [heroVideoReady, setHeroVideoReady] = useState(false);
   const [shouldPlayHeroVideo, setShouldPlayHeroVideo] = useState(false);
   const heroVideoRef = useRef<HTMLVideoElement>(null);
@@ -504,6 +515,7 @@ const Home = () => {
                     <CompanyLogo
                       companyId={company.id}
                       companyName={company.shortName}
+                      logoUrl={company.logoUrl}
                       placement="home"
                       className="h-28 w-full bg-transparent md:h-40"
                     />
@@ -534,6 +546,15 @@ const Home = () => {
           </div>
         </div>
       </section>
+
+      {brands.length > 0 && (
+        <section className="border-t border-slate-200 bg-white py-12">
+          <div className="container mx-auto px-4">
+            <h2 className="text-3xl font-semibold text-[#10233f]">Our brands</h2>
+            <BrandShowcase brands={brands} />
+          </div>
+        </section>
+      )}
 
       <section className="relative overflow-hidden bg-[#f3f7fb] px-4 pb-12 sm:pb-14 md:pb-20">
         <AnimatedSection

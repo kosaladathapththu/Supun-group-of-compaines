@@ -1,43 +1,11 @@
+import { createUpload } from '../middleware/upload.js';
 import express from 'express';
-import multer from 'multer';
-import { fileURLToPath } from 'url';
-import { dirname, join } from 'path';
-import { existsSync, mkdirSync } from 'fs';
 import db from '../database/init.js';
 import { authenticateToken, isAdmin } from '../middleware/auth.js';
 
 const router = express.Router();
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = dirname(__filename);
-
-const uploadDir = join(__dirname, '..', 'uploads');
-if (!existsSync(uploadDir)) {
-  mkdirSync(uploadDir, { recursive: true });
-}
-
-const storage = multer.diskStorage({
-  destination: (req, file, cb) => {
-    cb(null, uploadDir);
-  },
-  filename: (req, file, cb) => {
-    const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1e9);
-    cb(null, uniqueSuffix + '-' + file.originalname);
-  },
-});
-
-const upload = multer({
-  storage,
-  limits: { fileSize: 10 * 1024 * 1024 },
-  fileFilter: (req, file, cb) => {
-    const allowedTypes = ['image/jpeg', 'image/jpg', 'image/png', 'image/webp'];
-    if (allowedTypes.includes(file.mimetype)) {
-      cb(null, true);
-    } else {
-      cb(new Error('Invalid file type. Only JPEG, PNG and WebP images are allowed.'));
-    }
-  },
-});
+const upload = createUpload();
 
 function slugify(text) {
   return String(text || '')
@@ -85,7 +53,7 @@ function mapProductRow(product) {
   };
 }
 
-function getProductWithRelations(id) {
+function getProductWithRelations(id, includeInactive = false) {
   const product = db
     .prepare(
       `SELECT p.*, c.name as categoryName
@@ -104,6 +72,7 @@ function getProductWithRelations(id) {
        ORDER BY id ASC`,
     )
     .all(id)
+    .filter((variation) => includeInactive || Number(variation.isActive) === 1)
     .map((variation) => ({
       ...variation,
       isActive: Number(variation.isActive) === 1,
@@ -155,7 +124,7 @@ router.get('/all', authenticateToken, isAdmin, (req, res) => {
       )
       .all();
 
-    const formatted = products.map((product) => getProductWithRelations(product.id));
+    const formatted = products.map((product) => getProductWithRelations(product.id, true));
 
     res.json(formatted);
   } catch (error) {
@@ -167,12 +136,16 @@ router.get('/all', authenticateToken, isAdmin, (req, res) => {
 // Get single product
 router.get('/:id', (req, res) => {
   try {
-    const product = getProductWithRelations(req.params.id);
+    const product = getProductWithRelations(req.params.id, true);
 
     if (!product) {
       return res.status(404).json({ error: 'Product not found' });
     }
 
+    if (!product.isActive || req.headers.authorization) {
+      return authenticateToken(req, res, () => isAdmin(req, res, () => res.json(product)));
+    }
+    product.variations = product.variations.filter((variation) => variation.isActive);
     res.json(product);
   } catch (error) {
     console.error('Get product error:', error);
@@ -180,8 +153,57 @@ router.get('/:id', (req, res) => {
   }
 });
 
+function validateProduct(req, res, next) {
+  const body = req.body;
+  for (const field of ['price', 'wholesalePrice']) {
+    if (
+      body[field] !== undefined &&
+      body[field] !== '' &&
+      (!Number.isFinite(Number(body[field])) || Number(body[field]) < 0)
+    ) {
+      return res.status(400).json({ error: 'Prices must be valid non-negative numbers.' });
+    }
+  }
+  if (
+    body.categoryId &&
+    (!Number.isInteger(Number(body.categoryId)) ||
+      !db.prepare('SELECT id FROM categories WHERE id = ?').get(Number(body.categoryId)))
+  ) {
+    return res.status(400).json({ error: 'Select an existing product category.' });
+  }
+  if (body.variations !== undefined) {
+    let variations;
+    try {
+      variations =
+        typeof body.variations === 'string' ? JSON.parse(body.variations) : body.variations;
+    } catch {
+      return res.status(400).json({ error: 'Invalid product variations.' });
+    }
+    if (
+      !Array.isArray(variations) ||
+      variations.some(
+        (item) =>
+          !item ||
+          typeof item.name !== 'string' ||
+          !item.name.trim() ||
+          ['price', 'wholesalePrice'].some(
+            (field) =>
+              item[field] != null &&
+              item[field] !== '' &&
+              (!Number.isFinite(Number(item[field])) || Number(item[field]) < 0),
+          ),
+      )
+    ) {
+      return res
+        .status(400)
+        .json({ error: 'Every variation needs a name and valid non-negative prices.' });
+    }
+  }
+  next();
+}
+
 // Create product
-router.post('/', authenticateToken, isAdmin, upload.any(), (req, res) => {
+router.post('/', authenticateToken, isAdmin, upload.any(), validateProduct, (req, res) => {
   try {
     const {
       title,
@@ -202,7 +224,7 @@ router.post('/', authenticateToken, isAdmin, upload.any(), (req, res) => {
       return res.status(400).json({ error: 'Product title is required' });
     }
 
-    if (!price) {
+    if (price === undefined || price === null || price === '') {
       return res.status(400).json({ error: 'Product price is required' });
     }
 
@@ -216,64 +238,66 @@ router.post('/', authenticateToken, isAdmin, upload.any(), (req, res) => {
 
     const imageUrl = uploadedFiles.get('image') || null;
 
-    const result = db
-      .prepare(
-        `INSERT INTO products (
+    const created = db.transaction(() => {
+      const result = db
+        .prepare(
+          `INSERT INTO products (
           title, slug, shortDescription, longDescription, imageUrl,
           price, wholesalePrice, categoryId, isVariable, isActive
          )
          VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
-      )
-      .run(
-        title,
-        finalSlug,
-        shortDescription || null,
-        longDescription || null,
-        imageUrl,
-        Number(price),
-        wholesalePrice !== undefined && wholesalePrice !== '' ? Number(wholesalePrice) : 0,
-        categoryId ? Number(categoryId) : null,
-        isVariable === 'true' || isVariable === true ? 1 : 0,
-        isActive === 'false' || isActive === false ? 0 : 1,
-      );
+        )
+        .run(
+          title,
+          finalSlug,
+          shortDescription || null,
+          longDescription || null,
+          imageUrl,
+          Number(price),
+          wholesalePrice !== undefined && wholesalePrice !== '' ? Number(wholesalePrice) : 0,
+          categoryId ? Number(categoryId) : null,
+          isVariable === 'true' || isVariable === true ? 1 : 0,
+          isActive === 'false' || isActive === false ? 0 : 1,
+        );
 
-    const productId = result.lastInsertRowid;
+      const productId = result.lastInsertRowid;
 
-    const parsedVariations = parseVariations(variations);
-    if (parsedVariations.length > 0) {
-      const variationInsert = db.prepare(
-        `INSERT INTO product_variations (
+      const parsedVariations = parseVariations(variations);
+      if (parsedVariations.length > 0) {
+        const variationInsert = db.prepare(
+          `INSERT INTO product_variations (
           productId, name, color, size, imageUrl, price, wholesalePrice, isActive
          ) VALUES (?, ?, ?, ?, ?, ?, ?, ?)`,
-      );
+        );
 
-      const insertMany = db.transaction((items) => {
-        for (const item of items) {
-          if (!item?.name) continue;
+        const insertMany = db.transaction((items) => {
+          for (const item of items) {
+            if (!item?.name) continue;
 
-          const variationImageUrl = uploadedFiles.get(item?.imageField) || item?.imageUrl || null;
+            const variationImageUrl = uploadedFiles.get(item?.imageField) || item?.imageUrl || null;
 
-          variationInsert.run(
-            productId,
-            item.name,
-            item.color || null,
-            item.size || null,
-            variationImageUrl,
-            item.price !== undefined && item.price !== '' ? Number(item.price) : Number(price),
-            item.wholesalePrice !== undefined && item.wholesalePrice !== ''
-              ? Number(item.wholesalePrice)
-              : wholesalePrice !== undefined && wholesalePrice !== ''
-                ? Number(wholesalePrice)
-                : 0,
-            item.isActive === false || item.isActive === 'false' ? 0 : 1,
-          );
-        }
-      });
+            variationInsert.run(
+              productId,
+              item.name,
+              item.color || null,
+              item.size || null,
+              variationImageUrl,
+              item.price !== undefined && item.price !== '' ? Number(item.price) : Number(price),
+              item.wholesalePrice !== undefined && item.wholesalePrice !== ''
+                ? Number(item.wholesalePrice)
+                : wholesalePrice !== undefined && wholesalePrice !== ''
+                  ? Number(wholesalePrice)
+                  : 0,
+              item.isActive === false || item.isActive === 'false' ? 0 : 1,
+            );
+          }
+        });
 
-      insertMany(parsedVariations);
-    }
+        insertMany(parsedVariations);
+      }
 
-    const created = getProductWithRelations(productId);
+      return getProductWithRelations(productId, true);
+    })();
     res.status(201).json(created);
   } catch (error) {
     console.error('Create product error:', error);
@@ -282,7 +306,7 @@ router.post('/', authenticateToken, isAdmin, upload.any(), (req, res) => {
 });
 
 // Update product
-router.put('/:id', authenticateToken, isAdmin, upload.any(), (req, res) => {
+router.put('/:id', authenticateToken, isAdmin, upload.any(), validateProduct, (req, res) => {
   try {
     const { id } = req.params;
     const {
@@ -306,7 +330,7 @@ router.put('/:id', authenticateToken, isAdmin, upload.any(), (req, res) => {
     }
 
     const nextTitle = title || existing.title;
-    const nextSlugBase = slugify(slug || nextTitle);
+    const nextSlugBase = slugify(slug || existing.slug);
     const duplicate = db
       .prepare('SELECT id FROM products WHERE slug = ? AND id != ?')
       .get(nextSlugBase, id);
@@ -314,80 +338,83 @@ router.put('/:id', authenticateToken, isAdmin, upload.any(), (req, res) => {
 
     const imageUrl = uploadedFiles.get('image') || existing.imageUrl;
 
-    db.prepare(
-      `UPDATE products
+    const updated = db.transaction(() => {
+      db.prepare(
+        `UPDATE products
        SET title = ?, slug = ?, shortDescription = ?, longDescription = ?, imageUrl = ?,
            price = ?, wholesalePrice = ?, categoryId = ?, isVariable = ?, isActive = ?,
            updatedAt = CURRENT_TIMESTAMP
        WHERE id = ?`,
-    ).run(
-      nextTitle,
-      nextSlug,
-      shortDescription !== undefined ? shortDescription : existing.shortDescription,
-      longDescription !== undefined ? longDescription : existing.longDescription,
-      imageUrl,
-      price !== undefined && price !== '' ? Number(price) : existing.price,
-      wholesalePrice !== undefined && wholesalePrice !== ''
-        ? Number(wholesalePrice)
-        : existing.wholesalePrice,
-      categoryId !== undefined && categoryId !== '' ? Number(categoryId) : null,
-      isVariable !== undefined
-        ? isVariable === 'true' || isVariable === true
-          ? 1
-          : 0
-        : existing.isVariable,
-      isActive !== undefined
-        ? isActive === 'false' || isActive === false
-          ? 0
-          : 1
-        : existing.isActive,
-      id,
-    );
+      ).run(
+        nextTitle,
+        nextSlug,
+        shortDescription !== undefined ? shortDescription : existing.shortDescription,
+        longDescription !== undefined ? longDescription : existing.longDescription,
+        imageUrl,
+        price !== undefined && price !== '' ? Number(price) : existing.price,
+        wholesalePrice !== undefined && wholesalePrice !== ''
+          ? Number(wholesalePrice)
+          : existing.wholesalePrice,
+        categoryId === undefined ? existing.categoryId : categoryId ? Number(categoryId) : null,
+        isVariable !== undefined
+          ? isVariable === 'true' || isVariable === true
+            ? 1
+            : 0
+          : existing.isVariable,
+        isActive !== undefined
+          ? isActive === 'false' || isActive === false
+            ? 0
+            : 1
+          : existing.isActive,
+        id,
+      );
 
-    if (variations !== undefined) {
-      const parsedVariations = parseVariations(variations);
+      if (variations !== undefined) {
+        const parsedVariations = parseVariations(variations);
 
-      db.prepare('DELETE FROM product_variations WHERE productId = ?').run(id);
+        db.prepare('DELETE FROM product_variations WHERE productId = ?').run(id);
 
-      if (parsedVariations.length > 0) {
-        const variationInsert = db.prepare(
-          `INSERT INTO product_variations (
+        if (parsedVariations.length > 0) {
+          const variationInsert = db.prepare(
+            `INSERT INTO product_variations (
             productId, name, color, size, imageUrl, price, wholesalePrice, isActive
            ) VALUES (?, ?, ?, ?, ?, ?, ?, ?)`,
-        );
+          );
 
-        const insertMany = db.transaction((items) => {
-          for (const item of items) {
-            if (!item?.name) continue;
+          const insertMany = db.transaction((items) => {
+            for (const item of items) {
+              if (!item?.name) continue;
 
-            const variationImageUrl = uploadedFiles.get(item?.imageField) || item?.imageUrl || null;
+              const variationImageUrl =
+                uploadedFiles.get(item?.imageField) || item?.imageUrl || null;
 
-            variationInsert.run(
-              id,
-              item.name,
-              item.color || null,
-              item.size || null,
-              variationImageUrl,
-              item.price !== undefined && item.price !== ''
-                ? Number(item.price)
-                : price !== undefined && price !== ''
-                  ? Number(price)
-                  : existing.price,
-              item.wholesalePrice !== undefined && item.wholesalePrice !== ''
-                ? Number(item.wholesalePrice)
-                : wholesalePrice !== undefined && wholesalePrice !== ''
-                  ? Number(wholesalePrice)
-                  : existing.wholesalePrice,
-              item.isActive === false || item.isActive === 'false' ? 0 : 1,
-            );
-          }
-        });
+              variationInsert.run(
+                id,
+                item.name,
+                item.color || null,
+                item.size || null,
+                variationImageUrl,
+                item.price !== undefined && item.price !== ''
+                  ? Number(item.price)
+                  : price !== undefined && price !== ''
+                    ? Number(price)
+                    : existing.price,
+                item.wholesalePrice !== undefined && item.wholesalePrice !== ''
+                  ? Number(item.wholesalePrice)
+                  : wholesalePrice !== undefined && wholesalePrice !== ''
+                    ? Number(wholesalePrice)
+                    : existing.wholesalePrice,
+                item.isActive === false || item.isActive === 'false' ? 0 : 1,
+              );
+            }
+          });
 
-        insertMany(parsedVariations);
+          insertMany(parsedVariations);
+        }
       }
-    }
 
-    const updated = getProductWithRelations(id);
+      return getProductWithRelations(id, true);
+    })();
     res.json(updated);
   } catch (error) {
     console.error('Update product error:', error);

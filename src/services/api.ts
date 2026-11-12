@@ -1,12 +1,15 @@
 import axios, { AxiosError } from 'axios';
 
-const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:3001/api';
+const API_BASE_URL = (
+  import.meta.env.VITE_API_URL || (import.meta.env.DEV ? 'http://localhost:3001/api' : '/api')
+).replace(/\/+$/, '');
 // Extract the base URL without /api suffix for uploads
 const BASE_URL = API_BASE_URL.replace(/\/api$/, '');
 
 // Create axios instance
 const api = axios.create({
   baseURL: API_BASE_URL,
+  timeout: 15000,
   headers: {
     'Content-Type': 'application/json',
   },
@@ -28,7 +31,44 @@ api.interceptors.request.use(
 
 // Handle response errors
 api.interceptors.response.use(
-  (response) => response,
+  (response) => {
+    const data = response.data;
+    if (data === null || typeof data !== 'object') {
+      throw new Error(
+        'The server is unavailable or returned an invalid response. Please try again later.',
+      );
+    }
+    const endpoint = response.config.url?.split('?')[0] || '';
+    const listEndpoint = /^\/(companies|brands|categories|products|news)(\/all)?$/.test(endpoint);
+    if (response.config.method === 'get' && listEndpoint && !Array.isArray(data)) {
+      throw new Error('The server returned an invalid list. Please try again later.');
+    }
+    if (
+      Array.isArray(data) &&
+      data.some((item) => !item || typeof item !== 'object' || Array.isArray(item))
+    ) {
+      throw new Error('The server returned invalid records. Please try again later.');
+    }
+    if (
+      Array.isArray(data) &&
+      /^\/products/.test(endpoint) &&
+      data.some(
+        (item) =>
+          typeof item.title !== 'string' ||
+          (item.imageUrl != null && typeof item.imageUrl !== 'string'),
+      )
+    ) {
+      throw new Error('The server returned an invalid product. Please try again later.');
+    }
+    if (
+      Array.isArray(data) &&
+      /^\/brands/.test(endpoint) &&
+      data.some((item) => typeof item.name !== 'string' || typeof item.logoUrl !== 'string')
+    ) {
+      throw new Error('The server returned an invalid brand. Please try again later.');
+    }
+    return response;
+  },
   (error) => {
     if (error.response?.status === 401) {
       // Token expired or invalid, clear storage and redirect to login
@@ -162,11 +202,22 @@ export interface Product {
 export const authAPI = {
   login: async (credentials: LoginCredentials): Promise<LoginResponse> => {
     const { data } = await api.post('/auth/login', credentials);
+    if (
+      typeof data.token !== 'string' ||
+      !data.token ||
+      !data.user ||
+      typeof data.user.username !== 'string'
+    ) {
+      throw new Error('Unable to sign in: the authentication server returned an invalid response.');
+    }
     return data;
   },
 
   verify: async (): Promise<{ valid: boolean; user: User }> => {
     const { data } = await api.get('/auth/verify');
+    if (data.valid !== true || !data.user || typeof data.user.username !== 'string') {
+      throw new Error('Your session could not be verified. Please sign in again.');
+    }
     return data;
   },
 

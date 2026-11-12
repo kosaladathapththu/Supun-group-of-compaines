@@ -1,6 +1,6 @@
 import jwt from 'jsonwebtoken';
-
-const JWT_SECRET = process.env.JWT_SECRET || 'your-secret-key-change-this-in-production';
+import db from '../database/init.js';
+import { jwtSecret } from '../config.js';
 
 export function authenticateToken(req, res, next) {
   const token = req.headers.authorization?.replace('Bearer ', '');
@@ -10,11 +10,16 @@ export function authenticateToken(req, res, next) {
   }
 
   try {
-    const decoded = jwt.verify(token, JWT_SECRET);
-    req.user = decoded;
+    const decoded = jwt.verify(token, jwtSecret, { algorithms: ['HS256'] });
+    const user = db
+      .prepare('SELECT id, username, role, tokenVersion FROM users WHERE id = ?')
+      .get(decoded.id);
+    if (!user || (decoded.version ?? 0) !== user.tokenVersion)
+      return res.status(401).json({ error: 'Invalid or expired session' });
+    req.user = { id: user.id, username: user.username, role: user.role };
     next();
   } catch (error) {
-    res.status(403).json({ error: 'Invalid or expired token' });
+    res.status(401).json({ error: 'Invalid or expired token' });
   }
 }
 

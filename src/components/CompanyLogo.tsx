@@ -9,6 +9,7 @@ interface CompanyLogoProps {
   placement?: Placement;
   className?: string;
   imageClassName?: string;
+  logoUrl?: string;
 }
 
 // Visible artwork bounds within each original file. This removes empty margins
@@ -91,17 +92,25 @@ export const CompanyLogo = ({
   placement = 'listing',
   className = '',
   imageClassName = '',
+  logoUrl,
 }: CompanyLogoProps) => {
-  if (companyId === 'fuji-industries' && placement !== 'home' && placement !== 'listing')
+  if (
+    !logoUrl &&
+    companyId === 'fuji-industries' &&
+    placement !== 'home' &&
+    placement !== 'listing'
+  )
     return null;
 
   const sourceId = companyId === 'supun-traders-distributors' ? 'supun-traders' : companyId;
   const logo =
-    sourceId === 'new-camy-smart' || sourceId === 'fuji-industries'
+    logoUrl ||
+    (sourceId === 'new-camy-smart' || sourceId === 'fuji-industries'
       ? camyRedLogo
-      : getCompanyLogo(sourceId);
-  const bounds =
-    placement === 'listing' && sourceId === 'supun-aerosoft'
+      : getCompanyLogo(sourceId));
+  const bounds = logoUrl
+    ? undefined
+    : placement === 'listing' && sourceId === 'supun-aerosoft'
       ? { width: 730, height: 280, x: 174, y: 402, canvasWidth: 1080 }
       : artwork[sourceId];
   const [maxWidth, maxHeight] = sizes[placement][companyId] || [180, 90];

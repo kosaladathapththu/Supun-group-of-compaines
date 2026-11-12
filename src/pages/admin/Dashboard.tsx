@@ -75,7 +75,7 @@ export default function Dashboard() {
     ]).then((results) => {
       if (!active) return;
       const value = (index: number) =>
-        results[index].status === 'fulfilled' ? results[index].value.length : 0;
+        results[index].status === 'fulfilled' ? results[index].value.length : null;
       setCounts({
         companies: value(0),
         news: value(1),

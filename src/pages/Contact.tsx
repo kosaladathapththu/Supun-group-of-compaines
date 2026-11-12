@@ -1,3 +1,4 @@
+import { usePublicCompanies } from '@/hooks/use-public-companies';
 import { FormEvent, type CSSProperties } from 'react';
 import {
   ArrowRight,
@@ -16,7 +17,7 @@ import { Label } from '@/components/ui/label';
 import { Textarea } from '@/components/ui/textarea';
 import { CompanyLogo } from '@/components/CompanyLogo';
 import Seo, { SITE_NAME, SITE_URL } from '@/components/Seo';
-import { companies } from '@/data/companies';
+import './Contact.css';
 import heroImage from '@/assets/optimized/contact-hero-v2.jpg';
 
 const methods = [
@@ -58,6 +59,7 @@ const brandColours: Record<string, string> = {
 };
 
 const Contact = () => {
+  const { companies } = usePublicCompanies();
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
@@ -74,7 +76,7 @@ const Contact = () => {
   };
 
   return (
-    <div className="min-h-screen bg-[#f4efe5] text-[#10233f]">
+    <div className="contact-page min-h-screen bg-white text-[#10233f]">
       <Seo
         title="Contact Supun Group of Companies | Colombo, Sri Lanka"
         description="Contact Supun Group of Companies in Colombo for corporate, manufacturing, retail, distribution and hospitality enquiries."
@@ -156,7 +158,7 @@ const Contact = () => {
               href={href}
               target={label === 'Visit us' ? '_blank' : undefined}
               rel={label === 'Visit us' ? 'noopener noreferrer' : undefined}
-              className="group flex items-center gap-4 rounded-2xl border border-[#cdbd9e] bg-[#fffaf0] p-5 shadow-[0_16px_38px_rgba(76,55,25,.15)] ring-1 ring-white/80 transition hover:-translate-y-1 hover:border-[#b9944e] hover:bg-white"
+              className="group flex items-center gap-4 rounded-2xl border border-[#d7e0e6] bg-white p-5 shadow-[0_16px_38px_rgba(76,55,25,.15)] ring-1 ring-white/80 transition hover:-translate-y-1 hover:border-[#b9944e] hover:bg-white"
             >
               <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl border border-[#dfcca3] bg-[#f5e7c8] text-[#8a651d]">
                 <Icon size={21} />
@@ -178,9 +180,9 @@ const Contact = () => {
       </section>
 
       <section id="send-enquiry" className="scroll-mt-28 px-4 py-16 md:py-24">
-        <div className="container mx-auto max-w-7xl overflow-hidden rounded-[2rem] border border-[#cdbd9e] bg-[#fffaf0] shadow-[0_26px_70px_rgba(76,55,25,.14)] ring-1 ring-white">
-          <div className="grid lg:grid-cols-5">
-            <div className="relative overflow-hidden bg-[#0b2747] p-8 text-white sm:p-10 lg:col-span-2 lg:p-12">
+        <div className="contact-enquiry-card mx-auto w-full max-w-7xl overflow-hidden rounded-[2rem] border border-[#d7e0e6] bg-white shadow-[0_26px_70px_rgba(76,55,25,.14)] ring-1 ring-white">
+          <div className="contact-enquiry-grid">
+            <div className="contact-enquiry-intro relative overflow-hidden bg-[#0b2747] text-white">
               <span className="absolute -right-20 -top-20 h-60 w-60 rounded-full border-[45px] border-white/[.04]" />
               <p className="relative text-xs font-bold uppercase tracking-[.2em] text-[#9bd36d]">
                 One message. The right team.
@@ -209,8 +211,8 @@ const Contact = () => {
                 </div>
               </div>
             </div>
-            <div className="bg-[#fffaf0] p-7 sm:p-10 lg:col-span-3 lg:p-12">
-              <div className="mb-8 flex items-center justify-between border-b border-[#bcae95]/40 pb-6">
+            <div className="contact-enquiry-form">
+              <div className="contact-form-heading">
                 <div>
                   <p className="text-xs font-bold uppercase tracking-[.18em] text-[#5c9c30]">
                     Your enquiry
@@ -221,7 +223,7 @@ const Contact = () => {
                   <Send size={20} />
                 </span>
               </div>
-              <form onSubmit={handleSubmit} className="grid gap-5 sm:grid-cols-2">
+              <form onSubmit={handleSubmit} className="contact-field-grid">
                 <div>
                   <Label
                     htmlFor="fullName"
@@ -232,8 +234,9 @@ const Contact = () => {
                   <Input
                     id="fullName"
                     name="fullName"
+                    autoComplete="name"
                     required
-                    className="mt-2 h-12 rounded-xl bg-[#f7f9fb]"
+                    className="contact-input"
                     placeholder="Your name"
                   />
                 </div>
@@ -247,9 +250,10 @@ const Contact = () => {
                   <Input
                     id="email"
                     name="email"
+                    autoComplete="email"
                     type="email"
                     required
-                    className="mt-2 h-12 rounded-xl bg-[#f7f9fb]"
+                    className="contact-input"
                     placeholder="you@company.com"
                   />
                 </div>
@@ -263,7 +267,9 @@ const Contact = () => {
                   <Input
                     id="phone"
                     name="phone"
-                    className="mt-2 h-12 rounded-xl bg-[#f7f9fb]"
+                    type="tel"
+                    autoComplete="tel"
+                    className="contact-input"
                     placeholder="+94"
                   />
                 </div>
@@ -277,7 +283,8 @@ const Contact = () => {
                   <Input
                     id="companyName"
                     name="companyName"
-                    className="mt-2 h-12 rounded-xl bg-[#f7f9fb]"
+                    autoComplete="organization"
+                    className="contact-input"
                     placeholder="Optional"
                   />
                 </div>
@@ -293,7 +300,7 @@ const Contact = () => {
                     name="message"
                     rows={5}
                     required
-                    className="mt-2 resize-none rounded-xl bg-[#f7f9fb]"
+                    className="contact-input contact-message"
                     placeholder="Tell us briefly about your enquiry..."
                   />
                 </div>
@@ -315,7 +322,7 @@ const Contact = () => {
         </div>
       </section>
 
-      <section className="border-t border-[#cdbd9e]/60 bg-[#eee5d5] px-4 py-16 md:py-24">
+      <section className="border-t border-[#d7e0e6]/60 bg-white px-4 py-16 md:py-24">
         <div className="container mx-auto max-w-7xl">
           <div className="flex flex-col justify-between gap-5 border-b border-[#9e8b68]/30 pb-8 md:flex-row md:items-end">
             <div>
@@ -342,14 +349,15 @@ const Contact = () => {
               return (
                 <article
                   key={company.id}
-                  className="relative flex min-h-[330px] flex-col overflow-hidden rounded-2xl border border-[#c8b99d] bg-[#fffaf0] shadow-[0_12px_30px_rgba(76,55,25,.11)] ring-1 ring-white/80 transition hover:-translate-y-1 hover:border-[#ad956d] hover:shadow-[0_20px_44px_rgba(76,55,25,.17)]"
+                  className="relative flex min-h-[330px] flex-col overflow-hidden rounded-2xl border border-[#d7e0e6] bg-white shadow-[0_12px_30px_rgba(76,55,25,.11)] ring-1 ring-white/80 transition hover:-translate-y-1 hover:border-[#ad956d] hover:shadow-[0_20px_44px_rgba(76,55,25,.17)]"
                   style={{ '--brand': brandColours[company.id] || '#315f9f' } as CSSProperties}
                 >
                   <span className="absolute inset-x-0 top-0 h-1 bg-[var(--brand)]" />
                   <CompanyLogo
                     companyId={company.id}
                     companyName={company.shortName}
-                    className="h-36 w-full border-b border-[#c8b99d]/55 bg-[#fffdf8] p-5"
+                    logoUrl={company.logoUrl}
+                    className="h-36 w-full border-b border-[#d7e0e6]/55 bg-[#fffdf8] p-5"
                     imageClassName="h-full w-full object-contain"
                   />
                   <div className="flex flex-1 flex-col p-6">
@@ -380,12 +388,16 @@ const Contact = () => {
                       >
                         {company.website ? (
                           <Globe2 size={15} />
-                        ) : company.email ? (
+                        ) : company.email || !company.phone ? (
                           <Mail size={15} />
                         ) : (
                           <Phone size={15} />
                         )}
-                        {company.website ? 'Website' : company.email ? 'Email' : 'Call'}
+                        {company.website
+                          ? 'Website'
+                          : company.email || !company.phone
+                            ? 'Email'
+                            : 'Call'}
                       </a>
                     </div>
                   </div>

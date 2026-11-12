@@ -1,5 +1,5 @@
 .career-page {
-  background: #f4efe5;
+  background: #fff;
 }
 
 .career-shell {
@@ -272,7 +272,7 @@
   border: 1px solid rgb(16 35 63 / 0.12);
   border-left: 5px solid #dca43a;
   border-radius: 20px;
-  background: rgb(255 255 255 / 0.78);
+  background: #f8fafc;
   box-shadow: 0 12px 32px rgb(16 35 63 / 0.06);
 }
 
@@ -310,10 +310,10 @@
   display: grid;
   grid-template-columns: 0.72fr 1.28fr;
   overflow: hidden;
-  border: 1px solid #cdbd9e;
+  border: 1px solid #d7e0e6;
   border-radius: 32px;
   outline: 1px solid rgb(255 255 255 / 0.9);
-  background: #fffaf0;
+  background: #fff;
   box-shadow: 0 26px 70px rgb(76 55 25 / 0.14);
 }
 
@@ -325,7 +325,7 @@
 
 .talent-form {
   padding: 50px;
-  background: #fffaf0;
+  background: #fff;
 }
 
 .form-grid {

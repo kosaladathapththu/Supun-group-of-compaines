@@ -16,11 +16,12 @@ export const BrandShowcase = ({ brands }: BrandShowcaseProps) => {
 
   useEffect(() => {
     const scrollContainer = scrollRef.current;
-    if (!scrollContainer) return;
+    if (!scrollContainer || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
 
     let scrollAmount = 0;
     const scrollSpeed = 0.5; // Pixels per frame
 
+    let animationId = 0;
     const scroll = () => {
       if (!isPaused && scrollContainer) {
         scrollAmount += scrollSpeed;
@@ -29,10 +30,10 @@ export const BrandShowcase = ({ brands }: BrandShowcaseProps) => {
         }
         scrollContainer.scrollLeft = scrollAmount;
       }
-      requestAnimationFrame(scroll);
+      animationId = requestAnimationFrame(scroll);
     };
 
-    const animationId = requestAnimationFrame(scroll);
+    animationId = requestAnimationFrame(scroll);
 
     return () => cancelAnimationFrame(animationId);
   }, [isPaused]);
@@ -44,7 +45,12 @@ export const BrandShowcase = ({ brands }: BrandShowcaseProps) => {
     <div className="relative overflow-hidden py-8">
       <div
         ref={scrollRef}
-        className="flex gap-6 md:gap-12 overflow-hidden"
+        className="flex gap-6 md:gap-12 overflow-x-auto [&::-webkit-scrollbar]:hidden"
+        role="region"
+        aria-label="Group brands"
+        tabIndex={0}
+        onFocus={() => setIsPaused(true)}
+        onBlur={() => setIsPaused(false)}
         onMouseEnter={() => setIsPaused(true)}
         onMouseLeave={() => setIsPaused(false)}
         style={{
@@ -86,12 +92,6 @@ export const BrandShowcase = ({ brands }: BrandShowcaseProps) => {
           </div>
         ))}
       </div>
-
-      <style>{`
-        div::-webkit-scrollbar {
-          display: none;
-        }
-      `}</style>
     </div>
   );
 };

@@ -55,21 +55,23 @@ const categoryLinks: Record<string, string> = {
 };
 
 const CamyProducts = () => {
-  const { data: databaseProducts = [] } = useQuery({
+  const { data: databaseProducts } = useQuery({
     queryKey: ['public-products'],
     queryFn: () => productsAPI.getAll(),
     staleTime: 30_000,
+    retry: false,
   });
 
   const displayProducts =
-    databaseProducts.length > 0
+    databaseProducts !== undefined
       ? databaseProducts.map((product: Product) => {
           const original = camyProducts.find((item) => item.name === product.title);
           return {
             id: product.id,
             name: product.title,
             madeBy: original?.madeBy || 'Supun Group',
-            note: original?.note || product.categoryName || 'Camy Product',
+            note:
+              product.shortDescription || product.categoryName || original?.note || 'Camy Product',
             image:
               product.title === 'Mixer Grinders'
                 ? mixerGrinderImage
@@ -255,6 +257,11 @@ const CamyProducts = () => {
           </div>
 
           <div className="camy-catalog">
+            {displayProducts.length === 0 && (
+              <p className="col-span-full rounded-2xl border border-slate-200 bg-white p-8 text-center">
+                The catalogue is being updated. Please contact us for product enquiries.
+              </p>
+            )}
             {displayProducts.map((product) => (
               <article key={product.id} className="camy-card">
                 <a

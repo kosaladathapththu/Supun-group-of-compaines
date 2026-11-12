@@ -1,73 +1,36 @@
-# Welcome to your Lovable project
+# Supun Group website V2
 
-## Project info
+React/TypeScript public website with an Express/SQLite administration API.
 
-**URL**: https://lovable.dev/projects/fb819894-33a8-40a9-b81b-d3f5f2c533f8
+## Development
 
-## How can I edit this code?
+Use Node.js 22.18 or newer (Node 24 was used for release verification).
 
-There are several ways of editing your application.
+1. Run npm ci.
+2. Copy .env.example to .env and configure your local settings.
+3. Run npm run dev and npm run server:dev in separate terminals.
 
-**Use Lovable**
+## Checks
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/fb819894-33a8-40a9-b81b-d3f5f2c533f8) and start prompting.
+- npm run typecheck
+- npm test
+- npm run lint
+- npm run build
 
-Changes made via Lovable will be committed automatically to this repo.
+Tests use temporary databases and uploads under tmp/. They do not modify the working website database.
 
-**Use your preferred IDE**
+## Production
 
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
+See [the V2 readiness record](docs/RELEASE_READINESS.md) for the final changes, validation and deployment requirements.
 
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
+The production frontend uses /api by default. A static dist/ upload runs the public website with built-in content; the admin panel and database updates require a running Node API. Configure the same-origin /api and /uploads routes, or set VITE_API_URL to an HTTPS backend URL before building.
 
-Follow these steps:
+Copy .env.production.example to .env and set a unique JWT_SECRET and first-administrator ADMIN_PASSWORD. Start the backend with npm run server:prod. A production backend serves dist/ when present, so it can also run the complete site behind an HTTPS reverse proxy.
 
-```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
+For a new database, npm run db:sync-frontend imports the existing company, product, category and brand content without overwriting existing records. It respects DATABASE_PATH and UPLOAD_DIR. Back up the database and uploads before running any setup against existing hosting.
 
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
+Contact and career forms prepare an email in the visitor's email application; they do not send email from the server.
 
-# Step 3: Install the necessary dependencies.
-npm i
+The scripts build-production.sh and deploy.sh prepare local build files. They do not change DNS, install server software or alter running VPS services.
 
-# Step 4: Start the development server with auto-reloading and an instant preview.
-npm run dev
-```
-
-**Edit a file directly in GitHub**
-
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
-
-**Use GitHub Codespaces**
-
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
-
-## What technologies are used for this project?
-
-This project is built with:
-
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
-
-## How can I deploy this project?
-
-Simply open [Lovable](https://lovable.dev/projects/fb819894-33a8-40a9-b81b-d3f5f2c533f8) and click on Share -> Publish.
-
-## Can I connect a custom domain to my Lovable project?
-
-Yes, you can!
-
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
-
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/features/custom-domain#custom-domain)
+Hosting ZIPs are available in `tmp/hosting/`. See [hosting instructions](docs/HOSTING.md) for static and full Node hosting setup.

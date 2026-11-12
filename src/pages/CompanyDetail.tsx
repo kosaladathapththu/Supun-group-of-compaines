@@ -1,3 +1,4 @@
+import { usePublicCompanies } from '@/hooks/use-public-companies';
 import { Link, useParams } from 'react-router-dom';
 import {
   ArrowLeft,
@@ -13,7 +14,6 @@ import { CompanyLogo } from '@/components/CompanyLogo';
 import { ResponsiveCopy } from '@/components/ResponsiveCopy';
 import { AwardIssuerMark } from '@/components/AwardIssuerMark';
 import Seo, { SITE_URL } from '@/components/Seo';
-import { companyById } from '@/data/companies';
 import retailImage from '@/assets/optimized/retail-store.jpg';
 import supunTradersImage from '@/assets/optimized/supun-traders-real-storefront.jpg';
 import distributorsImage from '@/assets/optimized/supun-traders-storefront-v4.jpg';
@@ -44,8 +44,11 @@ const companyImages: Record<string, string> = {
 };
 
 const CompanyDetail = () => {
+  const { companies, isLoading: companiesLoading } = usePublicCompanies();
   const { id } = useParams();
-  const company = companyById(id);
+  const company = companies.find((item) => item.id === id);
+  if (!company && companiesLoading)
+    return <div className="min-h-[60vh] px-6 py-40 text-center">Loading company...</div>;
 
   if (!company)
     return (
@@ -176,6 +179,7 @@ const CompanyDetail = () => {
                 <CompanyLogo
                   companyId={company.id}
                   companyName={company.shortName}
+                  logoUrl={company.logoUrl}
                   placement="detail"
                   className="company-detail-hero-logo h-40 w-[min(320px,100%)] max-w-full rounded-xl border border-white/40 p-4 shadow-2xl transition duration-300 group-hover:-translate-y-1 group-hover:border-[#efbd55]"
                   imageClassName="h-full w-full object-contain"
@@ -185,6 +189,7 @@ const CompanyDetail = () => {
               <CompanyLogo
                 companyId={company.id}
                 companyName={company.shortName}
+                logoUrl={company.logoUrl}
                 placement="detail"
                 className="company-detail-hero-logo h-40 w-[min(320px,100%)] max-w-full justify-self-start rounded-xl border border-white/40 p-4 shadow-2xl"
                 imageClassName="h-full w-full object-contain"

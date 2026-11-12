@@ -31,6 +31,9 @@ server/uploads/*
 !server/uploads/.gitkeep
 
 # Local hosting packages
+/tmp/
+*.sqlite-wal
+*.sqlite-shm
 /tmp/*.zip
 
 /tmp/ffmpeg*

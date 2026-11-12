@@ -77,7 +77,12 @@ export default function AdminLayout() {
   const location = useLocation();
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const storedUser = localStorage.getItem('admin_user');
-  const user: User | null = storedUser ? JSON.parse(storedUser) : null;
+  let user: User | null = null;
+  try {
+    user = storedUser ? JSON.parse(storedUser) : null;
+  } catch {
+    localStorage.removeItem('admin_user');
+  }
   const isActive = (path: string) =>
     location.pathname === path || location.pathname.startsWith(`${path}/`);
   const currentSection = navItems.find((item) => isActive(item.path));
@@ -209,7 +214,8 @@ export default function AdminLayout() {
                   Admin workspace
                 </p>
                 <h1 className="text-xl font-semibold normal-case text-[#071b2d]">
-                  {currentSection?.label || 'Account settings'}
+                  {currentSection?.label ||
+                    (location.pathname === '/admin' ? 'Dashboard' : 'Account settings')}
                 </h1>
               </div>
             </div>

@@ -4,13 +4,13 @@ import { fileURLToPath } from 'url';
 import { companies } from '../../src/data/companies.ts';
 import { companyLogos } from '../../src/data/companyLogos.ts';
 import { camyProducts } from '../../src/data/siteContent.ts';
+import { uploadDir } from '../config.js';
 import db, { initDatabase } from './init.js';
 import { initNewsDatabase } from './initNews.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 const projectRoot = join(__dirname, '..', '..');
-const uploadDir = join(projectRoot, 'server', 'uploads');
 
 const productAssets = {
   'Motorcycle Helmets': 'camy-motorcycle-helmet.png',

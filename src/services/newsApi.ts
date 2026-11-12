@@ -19,13 +19,43 @@ export interface NewsArticle {
   updatedAt?: string;
 }
 
+// Static hosting may rewrite a missing /api route to index.html with HTTP 200.
+// Validate public responses before they reach the article components.
+const isNewsArticle = (value: unknown): value is NewsArticle => {
+  if (!value || typeof value !== 'object') return false;
+  const article = value as Record<string, unknown>;
+  return (
+    typeof article.id === 'number' &&
+    ['title', 'slug', 'summary', 'content', 'category'].every(
+      (field) => typeof article[field] === 'string',
+    ) &&
+    (article.status === 'draft' || article.status === 'published') &&
+    [
+      'featuredImage',
+      'author',
+      'publishedDate',
+      'seoTitle',
+      'seoDescription',
+      'createdAt',
+      'updatedAt',
+    ].every((field) => article[field] == null || typeof article[field] === 'string')
+  );
+};
+
 export const newsAPI = {
   getPublished: async (category?: string): Promise<NewsArticle[]> => {
-    const { data } = await api.get('/news', { params: category ? { category } : undefined });
-    return data;
+    const { data } = await api.get<unknown>('/news', {
+      params: category ? { category } : undefined,
+      timeout: 10000,
+    });
+    if (!Array.isArray(data)) throw new Error('News API returned an invalid article list');
+    return data.filter(isNewsArticle);
   },
   getBySlug: async (slug: string): Promise<NewsArticle> => {
-    const { data } = await api.get(`/news/${slug}`);
+    const { data } = await api.get<unknown>(`/news/${encodeURIComponent(slug)}`, {
+      timeout: 10000,
+    });
+    if (!isNewsArticle(data)) throw new Error('News API returned an invalid article');
     return data;
   },
   getAllAdmin: async (): Promise<NewsArticle[]> => {

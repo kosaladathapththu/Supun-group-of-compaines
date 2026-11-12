@@ -8,7 +8,7 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
-import { companies } from '@/data/companies';
+import { usePublicCompanies } from '@/hooks/use-public-companies';
 import logo from '@/assets/supun-group-logo-transparent.png';
 
 const primaryLinks = [
@@ -21,6 +21,7 @@ const primaryLinks = [
 ];
 
 const Navigation = () => {
+  const { companies } = usePublicCompanies();
   const [isOpen, setIsOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const location = useLocation();
