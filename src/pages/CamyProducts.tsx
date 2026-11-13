@@ -1,4 +1,4 @@
-import { ArrowRight, ExternalLink, Factory, ShieldCheck } from 'lucide-react';
+import { ArrowRight, ExternalLink, ShieldCheck } from 'lucide-react';
 import { useQuery } from '@tanstack/react-query';
 import Seo, { SITE_URL } from '@/components/Seo';
 import { camyProducts } from '@/data/siteContent';
@@ -6,7 +6,7 @@ import { getFileUrl, productsAPI, type Product } from '@/services/api';
 import camyBlackLogo from '@/assets/camy-brand-logo.png';
 import camyRedLogo from '@/assets/camy-logo-red-transparent.png';
 import anythingAtSupunLogo from '@/assets/anything-at-supun-logo.png';
-import helmetImage from '@/assets/optimized/helmet-manufacturing.jpg';
+import './CamyHero.css';
 import manufacturingImage from '@/assets/optimized/hero-manufacturing.jpg';
 import airConditionerImage from '@/assets/products/camy-air-conditioners-cutout.png';
 import doubleDoorRefrigeratorImage from '@/assets/products/camy-double-door-refrigerator.jpeg';
@@ -172,70 +172,46 @@ const CamyProducts = () => {
       @media(max-width:640px) { .camy-actions { flex-direction:column; } .camy-button { width:100%; } .camy-proof { grid-template-columns:1fr; } .camy-proof-item { padding:1rem 1.35rem; } .camy-proof-item+.camy-proof-item { border-left:0; border-top:1px solid rgba(255,255,255,.16); } .camy-proof-icon { margin-bottom:.35rem; } .camy-proof-text { margin-top:.2rem; font-size:.78rem; } .camy-card,.camy-card:nth-child(n) { grid-template-columns:1fr; } .camy-card:nth-child(n) .camy-media,.camy-card:hover .camy-media { order:0; height:235px; clip-path:inset(0 round 0); transform:none; } .camy-copy { min-height:245px; padding:1.5rem; } }
     `}</style>
 
-      <section className="border-b border-black/10 bg-white pb-14 pt-6 md:pb-20 md:pt-8">
-        <div className="camy-hero container mx-auto px-6 lg:px-12">
-          <div className="max-w-2xl">
-            <img
-              src={camyRedLogo}
-              alt="Camy"
-              className="mb-7 h-32 w-64 object-contain object-left md:h-40 md:w-80"
-              decoding="async"
-              loading="lazy"
-            />
-            <p className="text-xs font-bold uppercase tracking-[.22em] text-[#ed1c24]">
-              A Supun Group brand
-            </p>
-            <h1
-              className="mt-5 max-w-xl font-bold uppercase"
-              style={{
-                fontSize: 'clamp(3rem,5.2vw,5.1rem)',
-                lineHeight: '.94',
-                letterSpacing: '-.045em',
-              }}
-            >
-              Products for <span style={{ color: '#ed1c24' }}>everyday life.</span>
+      <section className="camy-showroom" aria-labelledby="camy-hero-title">
+        <div className="camy-showroom-inner">
+          <div className="camy-showroom-copy">
+            <div className="camy-showroom-brand">
+              <img src={camyRedLogo} alt="Camy" width="120" height="100" decoding="async" />
+              <span>A Supun Group brand</span>
+            </div>
+            <h1 id="camy-hero-title">
+              EVERYDAY LIFE.<span>MADE BETTER.</span>
             </h1>
-            <p className="mt-6 max-w-lg text-lg leading-7 text-black/60">
-              Everyday essentials for your home and the road, backed by Supun Group's manufacturing
-              experience.
+            <p className="camy-showroom-description">
+              More comfort. More possibility. More you. Discover the CAMY essentials that bring your
+              everyday to life.
             </p>
             <div className="camy-actions">
-              <a href="#camy-range" className="camy-button camy-button-dark">
-                Explore the range <ArrowRight size={18} />
+              <a href="#camy-range" className="camy-button camy-button-red">
+                Discover the range <ArrowRight size={18} />
               </a>
               <a
                 href={shopUrl}
-                className="camy-button camy-button-red"
+                className="camy-showroom-shop"
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                <ExternalLink size={17} /> Shop online
+                Shop online <ExternalLink size={16} />
               </a>
             </div>
           </div>
-          <div className="camy-visual">
+          <a
+            className="camy-banner-art"
+            href="#camy-range"
+            aria-label="Explore the CAMY everyday collection"
+          >
             <img
-              src={helmetImage}
-              alt="Camy helmet manufacturing in Sri Lanka"
+              src="/images/camy-hero/camy-marble-banner.webp"
+              alt="CAMY home appliances, cookware and lifestyle products arranged on an ivory marble display platform"
+              fetchPriority="high"
               decoding="async"
-              loading="lazy"
             />
-            <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent" />
-            <div className="camy-proof">
-              <div className="camy-proof-item">
-                <ShieldCheck className="camy-proof-icon" size={24} />
-                <strong className="camy-proof-title">Designed with purpose</strong>
-                <p className="camy-proof-text">Made around the details of everyday life.</p>
-              </div>
-              <div className="camy-proof-item">
-                <Factory className="camy-proof-icon" size={24} />
-                <strong className="camy-proof-title">Backed by experience</strong>
-                <p className="camy-proof-text">
-                  Built on the Group's hands-on manufacturing expertise.
-                </p>
-              </div>
-            </div>
-          </div>
+          </a>
         </div>
       </section>
 

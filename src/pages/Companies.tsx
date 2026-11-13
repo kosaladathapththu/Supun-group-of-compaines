@@ -30,7 +30,7 @@ const Companies = () => {
     <div className="min-h-screen bg-white">
       <Seo
         title="Our Companies | Supun Group of Companies"
-        description="Explore 13 Supun Group companies across manufacturing, retail, distribution and hospitality in Sri Lanka."
+        description={`Explore ${companies.length} Supun Group companies across manufacturing, retail, distribution, hospitality and engineering services in Sri Lanka.`}
         keywords="Supun Group companies, Camy Smart, Supun Traders, Supun Super Center, Air Condition and Fans manufacturing, Sri Lanka manufacturing"
         path="/companies"
         jsonLd={{
@@ -41,7 +41,7 @@ const Companies = () => {
               name: 'Supun Group Companies',
               url: `${SITE_URL}/companies`,
               description:
-                'Supun Group companies across manufacturing, retail, distribution and hospitality in Sri Lanka.',
+                'Supun Group companies across manufacturing, retail, distribution, hospitality and engineering services in Sri Lanka.',
               mainEntity: {
                 '@type': 'ItemList',
                 numberOfItems: companies.length,
@@ -87,7 +87,7 @@ const Companies = () => {
             </h1>
             <p className="mt-5 max-w-2xl text-base leading-7 text-white/80 md:text-lg">
               The businesses that power Supun Group across wholesale, retail, manufacturing,
-              distribution and hospitality.
+              distribution, hospitality and engineering services.
             </p>
             <div className="mt-7 flex items-center gap-4 text-[10px] font-bold uppercase tracking-[.2em] text-white/80">
               <span className="h-px w-12 bg-[#efbd55]" />

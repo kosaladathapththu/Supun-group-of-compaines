@@ -28,6 +28,7 @@ import coolingImage from '@/assets/products/camy-air-conditioners.webp';
 import ecotempImage from '@/assets/optimized/camy-factory-technician.jpg';
 
 const companyImages: Record<string, string> = {
+  'united-electricals-engineering': ecotempImage,
   'supun-traders': supunTradersImage,
   'supun-traders-distributors': distributorsImage,
   'supun-super-center': retailImage,

@@ -1,0 +1,212 @@
+.camy-showroom {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  width: min(1180px, calc(100% - 48px));
+  margin: 48px auto 28px;
+  border: 1px solid #f0e6e7;
+  border-radius: 20px;
+  background: #fffafb;
+  color: #202020;
+}
+.camy-showroom-inner {
+  display: grid;
+  grid-template-columns: 38% 62%;
+  min-height: 420px;
+}
+.camy-showroom-copy {
+  position: relative;
+  z-index: 1;
+  align-self: center;
+  padding: 24px 12px 24px 36px;
+}
+.camy-showroom-brand {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  margin-bottom: 22px;
+}
+.camy-showroom-brand img {
+  width: 88px;
+  height: 72px;
+  object-fit: contain;
+}
+.camy-showroom-brand > span {
+  padding-left: 15px;
+  border-left: 1px solid #ded4d5;
+  color: #888;
+  font-size: 11px;
+  line-height: 1.7;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  font-weight: 500;
+  max-width: 135px;
+}
+.camy-showroom-copy h1 {
+  margin: 0;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: clamp(34px, 3.3vw, 44px);
+  font-weight: 700;
+  line-height: 1.16;
+  letter-spacing: -0.045em;
+  text-transform: uppercase;
+}
+.camy-showroom-copy h1 > span {
+  display: block;
+  margin-top: 5px;
+  color: #e91c28;
+  white-space: nowrap;
+}
+.camy-showroom-description {
+  max-width: 350px;
+  margin-top: 20px;
+  color: #777;
+  font-size: 15px;
+  line-height: 1.65;
+}
+.camy-showroom-copy .camy-actions {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 18px;
+  margin-top: 25px;
+}
+.camy-showroom-copy .camy-button {
+  width: auto;
+  min-height: 46px;
+  padding: 12px 18px;
+  font-size: 12px;
+  font-weight: 600;
+  border-radius: 8px;
+  box-shadow: 0 5px 12px -7px #d91c2855;
+}
+.camy-showroom-copy .camy-button svg {
+  width: 17px;
+  height: 17px;
+}
+.camy-showroom-shop {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: #555;
+  font-size: 12px;
+  font-weight: 600;
+}
+.camy-showroom-shop svg {
+  width: 16px;
+  height: 16px;
+}
+.camy-showroom-shop:hover {
+  color: #ed1c24;
+}
+.camy-banner-art {
+  position: relative;
+  display: block;
+  min-width: 0;
+  overflow: hidden;
+}
+.camy-banner-art::after {
+  content: '';
+  position: absolute;
+  inset: 0 auto 0 0;
+  width: 40px;
+  background: linear-gradient(90deg, #fffafb, #fffafb00);
+  pointer-events: none;
+}
+.camy-banner-art img {
+  position: absolute;
+  right: 0;
+  top: 0;
+  display: block;
+  width: auto;
+  max-width: none;
+  height: 100%;
+}
+.camy-showroom a:focus-visible {
+  outline: 2px solid #ed1c24;
+  outline-offset: 4px;
+}
+.camy-banner-art:focus-visible {
+  outline-offset: -5px;
+}
+@media (max-width: 1000px) and (min-width: 701px) {
+  .camy-showroom-inner {
+    min-height: 355px;
+    grid-template-columns: 40% 60%;
+  }
+  .camy-showroom-copy {
+    padding: 25px 10px 25px 24px;
+  }
+  .camy-showroom-brand {
+    margin-bottom: 22px;
+  }
+  .camy-showroom-brand img {
+    width: 68px;
+    height: 56px;
+  }
+  .camy-showroom-copy h1 {
+    font-size: 32px;
+  }
+  .camy-showroom-description {
+    font-size: 13px;
+    margin-top: 16px;
+  }
+  .camy-showroom-copy .camy-actions {
+    gap: 13px;
+    margin-top: 20px;
+  }
+  .camy-showroom-copy .camy-button {
+    font-size: 11px;
+    padding-inline: 14px;
+  }
+}
+@media (max-width: 700px) {
+  .camy-showroom {
+    width: calc(100% - 32px);
+    margin: 32px auto 24px;
+    border-radius: 18px;
+  }
+  .camy-showroom-inner {
+    display: flex;
+    flex-direction: column;
+    min-height: 0;
+  }
+  .camy-showroom-copy {
+    align-self: stretch;
+    padding: 26px 26px 0;
+  }
+  .camy-showroom-brand {
+    margin-bottom: 23px;
+  }
+  .camy-showroom-brand img {
+    width: 76px;
+    height: 62px;
+  }
+  .camy-showroom-copy h1 {
+    font-size: clamp(29px, 7.8vw, 42px);
+  }
+  .camy-showroom-description {
+    font-size: 15px;
+    margin-top: 17px;
+    max-width: 340px;
+  }
+  .camy-showroom-copy .camy-actions {
+    margin-top: 20px;
+  }
+  .camy-banner-art {
+    margin-top: 16px;
+    aspect-ratio: 1.65;
+  }
+  .camy-banner-art img {
+    height: 100%;
+  }
+  .camy-banner-art::after {
+    display: none;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .camy-showroom * {
+    transition: none !important;
+  }
+}

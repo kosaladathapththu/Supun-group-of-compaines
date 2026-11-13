@@ -18,6 +18,7 @@ const artwork: Record<
   string,
   { width: number; height: number; x: number; y: number; canvasWidth: number }
 > = {
+  'united-electricals-engineering': { width: 924, height: 1007, x: 118, y: 124, canvasWidth: 1254 },
   'supun-super-center': { width: 650, height: 225, x: 215, y: 427, canvasWidth: 1080 },
   'supun-arcade-residency': { width: 500, height: 190, x: 98, y: 178, canvasWidth: 721 },
   'camy-global': { width: 550, height: 190, x: 248, y: 437, canvasWidth: 1080 },
@@ -40,6 +41,7 @@ const sizes: Record<Placement, Record<string, [number, number]>> = {
     'fuji-industries': [92, 58],
   },
   home: {
+    'united-electricals-engineering': [160, 150],
     ecotemp: [270, 110],
     'supun-traders': [190, 150],
     'supun-traders-distributors': [190, 150],
@@ -55,6 +57,7 @@ const sizes: Record<Placement, Record<string, [number, number]>> = {
     'camy-global': [260, 110],
   },
   listing: {
+    'united-electricals-engineering': [150, 145],
     ecotemp: [315, 128],
     'supun-traders': [173, 141],
     'supun-traders-distributors': [173, 141],
@@ -70,6 +73,7 @@ const sizes: Record<Placement, Record<string, [number, number]>> = {
     'camy-global': [315, 128],
   },
   detail: {
+    'united-electricals-engineering': [140, 130],
     ecotemp: [280, 115],
     'supun-traders': [155, 125],
     'supun-traders-distributors': [155, 125],

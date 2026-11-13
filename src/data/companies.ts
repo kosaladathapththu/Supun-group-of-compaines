@@ -248,4 +248,27 @@ companies.push({
   phone: '076 605 1243',
 });
 
+companies.push({
+  id: 'united-electricals-engineering',
+  name: 'United Electricals Engineering (Pvt) Ltd',
+  shortName: 'United Electricals Engineering',
+  tagline: 'A World of Solutions for Your Cooling Needs',
+  description: 'Air-conditioning and commercial refrigeration supply, installation and maintenance.',
+  fullDescription:
+    'United Electricals Engineering (Pvt) Ltd took over the Air Conditioning and Refrigeration Division of United Electricals Ltd in February 1988. The company supplies, installs and maintains domestic air conditioners, central air-conditioning systems and commercial refrigeration equipment. Its capabilities include air- and water-cooled chillers, packaged units, VRF systems, air-handling and fan-coil units, cooling towers, walk-in coolers and freezers, and mortuary coolers. Projects span hospitals, hotels, banks, factories, laboratories, government departments and office complexes in Sri Lanka, as well as air-conditioning and cold-room installations in the Maldives. Its Peliyagoda workshop supports duct fabrication, compressor overhauls and after-sales service, backed by stocks of spare parts.',
+  industry: 'Engineering Services',
+  established: '1988',
+  features: [
+    'Domestic and central air-conditioning systems',
+    'Chillers, VRF systems and cooling towers',
+    'Commercial refrigeration, cold rooms and mortuary coolers',
+    'Supply, installation, maintenance and after-sales service',
+    'Duct fabrication and compressor overhauls at the Peliyagoda workshop',
+    'Projects across Sri Lanka and the Maldives',
+  ],
+  phone: '+94 11 2948792',
+  email: 'unilec@sltnet.lk',
+  location: 'No. 51/29, New Nuge Road, Peliyagoda, Sri Lanka',
+});
+
 export const companyById = (id?: string) => companies.find((company) => company.id === id);
