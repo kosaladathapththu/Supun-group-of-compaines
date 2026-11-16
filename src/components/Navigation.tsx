@@ -70,14 +70,14 @@ const Navigation = () => {
         <div className="flex min-h-[3.75rem] items-center justify-between gap-3 md:min-h-[4.25rem]">
           <Link
             to="/"
-            className="flex items-center py-2"
+            className="flex shrink-0 items-center py-1"
             aria-label="Supun Group of Companies home"
             onClick={() => setIsOpen(false)}
           >
             <img
               src={logo}
               alt="Supun Group of Companies"
-              className="h-12 w-auto drop-shadow-[0_2px_8px_rgba(0,0,0,.25)] md:h-14"
+              className="h-[60px] w-auto object-contain md:h-[72px]"
             />
           </Link>
 
