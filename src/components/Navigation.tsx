@@ -46,11 +46,14 @@ const Navigation = () => {
   }, []);
 
   const transparentHome = isHome && !isScrolled && !isOpen;
-  const navLinkClass = transparentHome
-    ? 'text-white hover:bg-[#315f9f]/25 hover:text-[#9fd0ff]'
-    : 'text-white/80 hover:bg-[#315f9f]/25 hover:text-[#9fd0ff]';
-  const activeLinkClass =
-    'bg-white/20 text-white ring-1 ring-white/35 shadow-[0_8px_22px_rgba(0,0,0,.14)] backdrop-blur-xl';
+  const navLinkClass = isHome
+    ? 'text-white/90 hover:bg-white/10 hover:text-white'
+    : transparentHome
+      ? 'text-white hover:bg-[#315f9f]/25 hover:text-[#9fd0ff]'
+      : 'text-white/80 hover:bg-[#315f9f]/25 hover:text-[#9fd0ff]';
+  const activeLinkClass = isHome
+    ? 'bg-gradient-to-br from-[#0869ff] to-[#073293] text-white hover:text-white shadow-sm'
+    : 'bg-white/20 text-white ring-1 ring-white/35 shadow-[0_8px_22px_rgba(0,0,0,.14)] backdrop-blur-xl';
   const activeSplitLinkClass = 'text-white hover:bg-white/10 hover:text-white';
   const dropdownGlassClass =
     'border-white/70 bg-white/80 shadow-[0_18px_45px_rgba(16,35,63,.18)] backdrop-blur-xl';
@@ -59,10 +62,10 @@ const Navigation = () => {
 
   return (
     <nav
-      className={`${overlaysHero ? 'fixed' : 'sticky'} left-0 right-0 top-0 z-50 bg-transparent px-3 py-2.5 transition-all duration-500 sm:px-4 sm:py-3`}
+      className={`${isHome ? 'home-light-navigation' : ''} ${overlaysHero ? 'fixed' : 'sticky'} left-0 right-0 top-0 z-50 bg-transparent px-3 py-2.5 transition-all duration-500 sm:px-4 sm:py-3`}
     >
       <div
-        className={`${transparentHome ? 'nav-soft-glass' : 'nav-dark-glass'} mx-auto max-w-[1180px] rounded-[1.35rem] px-3 transition-all duration-500 sm:px-5`}
+        className={`${isHome ? 'home-nav-glass' : transparentHome ? 'nav-soft-glass' : 'nav-dark-glass'} mx-auto max-w-[1180px] rounded-[1.35rem] px-3 transition-all duration-500 sm:px-5`}
       >
         <div className="flex min-h-[3.75rem] items-center justify-between gap-3 md:min-h-[4.25rem]">
           <Link

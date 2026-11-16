@@ -1,7 +1,17 @@
 import { usePublicCompanies } from '@/hooks/use-public-companies';
-import { useEffect, useRef, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { ArrowDown, ArrowRight, Sparkles } from 'lucide-react';
+import {
+  ArrowDown,
+  ArrowRight,
+  Sparkles,
+  CalendarDays,
+  Layers3,
+  Users,
+  MapPin,
+  Pause,
+  Play,
+} from 'lucide-react';
 import Seo, { DEFAULT_IMAGE, SITE_NAME, SITE_URL } from '@/components/Seo';
 import { AnimatedSection } from '@/components/AnimatedSection';
 import { CompanyLogo } from '@/components/CompanyLogo';
@@ -9,6 +19,7 @@ import { BrandShowcase } from '@/components/BrandShowcase';
 import { brandsAPI } from '@/services/api';
 import { useQuery } from '@tanstack/react-query';
 import { sectorHighlights, siteStats } from '@/data/siteContent';
+import './HomeHero.css';
 import heroVideo from '@/assets/supun-hero-streaming-hq.mp4';
 import heroPoster from '@/assets/optimized/hero-poster.jpg';
 import manufacturingImage from '@/assets/optimized/camy-cookware-production-focus-v2.jpg';
@@ -54,21 +65,16 @@ const CountUpStat = ({ value, label, index }: { value: string; label: string; in
     return () => observer.disconnect();
   }, [target]);
 
+  const Icon = [CalendarDays, Layers3, Users, MapPin][index] || Layers3;
   return (
-    <div
-      ref={ref}
-      className="hero-stat group relative py-2 md:py-3"
-      style={{ animationDelay: `${index * 100}ms` }}
-    >
-      <div className="flex items-start gap-2">
-        <span className="text-3xl font-semibold tracking-[-0.04em] text-white tabular-nums sm:text-4xl">
+    <div ref={ref} className="home-reference-stat">
+      <Icon size={30} strokeWidth={1.7} aria-hidden="true" />
+      <div>
+        <strong>
           {count}
           {suffix}
-        </span>
-        <span className="mt-1 h-1.5 w-1.5 rounded-full bg-[#d99a24] shadow-[0_0_12px_rgba(217,154,36,.65)]" />
-      </div>
-      <div className="mt-1.5 max-w-[9rem] text-[9px] font-semibold uppercase leading-snug tracking-[0.14em] text-white/50 sm:text-[10px]">
-        {label}
+        </strong>
+        <span>{label}</span>
       </div>
     </div>
   );
@@ -87,10 +93,13 @@ const Home = () => {
     ...companies.filter((company) => !featuredCompanyIds.includes(company.id)),
   ];
 
-  const [heroVideoReady, setHeroVideoReady] = useState(false);
-  const [shouldPlayHeroVideo, setShouldPlayHeroVideo] = useState(false);
-  const heroVideoRef = useRef<HTMLVideoElement>(null);
   const companyCarouselRef = useRef<HTMLDivElement>(null);
+  const carouselInteractionUntil = useRef(0);
+  const [autoScrollEnabled, setAutoScrollEnabled] = useState(
+    () => !window.matchMedia('(prefers-reduced-motion: reduce)').matches,
+  );
+  const heroVideoRef = useRef<HTMLVideoElement>(null);
+  const [playHeroVideo, setPlayHeroVideo] = useState(false);
 
   useEffect(() => {
     const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
@@ -99,52 +108,133 @@ const Home = () => {
         connection?: { saveData?: boolean; effectiveType?: string };
       }
     ).connection;
-
-    const updateVideoPreference = () => {
-      const constrainedConnection =
-        connection?.saveData ||
-        connection?.effectiveType === 'slow-2g' ||
-        connection?.effectiveType === '2g';
-      const enabled = !reducedMotion.matches && !constrainedConnection;
-      setHeroVideoReady(false);
-      setShouldPlayHeroVideo(enabled);
-    };
-
-    updateVideoPreference();
-    reducedMotion.addEventListener('change', updateVideoPreference);
-
-    return () => {
-      reducedMotion.removeEventListener('change', updateVideoPreference);
-    };
+    const updatePreference = () =>
+      setPlayHeroVideo(
+        !reducedMotion.matches &&
+          !connection?.saveData &&
+          !['slow-2g', '2g'].includes(connection?.effectiveType || ''),
+      );
+    updatePreference();
+    reducedMotion.addEventListener('change', updatePreference);
+    return () => reducedMotion.removeEventListener('change', updatePreference);
   }, []);
 
   useEffect(() => {
-    const video = heroVideoRef.current;
-    if (!video) return;
-
-    const handleVisibilityChange = () => {
-      if (document.hidden) {
-        video.pause();
-      } else {
-        void video.play().catch(() => undefined);
-      }
+    if (!playHeroVideo) return;
+    const updateVisibility = () => {
+      const video = heroVideoRef.current;
+      if (!video) return;
+      if (document.hidden) video.pause();
+      else void video.play().catch(() => undefined);
     };
+    document.addEventListener('visibilitychange', updateVisibility);
+    return () => document.removeEventListener('visibilitychange', updateVisibility);
+  }, [playHeroVideo]);
 
-    document.addEventListener('visibilitychange', handleVisibilityChange);
-    return () => document.removeEventListener('visibilitychange', handleVisibilityChange);
-  }, [shouldPlayHeroVideo]);
-
-  const scrollCompanies = (direction: -1 | 1) => {
+  const scrollCompanies = useCallback((direction: -1 | 1) => {
     const carousel = companyCarouselRef.current;
-    if (carousel) {
-      const firstCard = carousel.firstElementChild as HTMLElement | null;
-      const distance = (firstCard?.offsetWidth ?? carousel.clientWidth * 0.85) + 20;
-      carousel.scrollBy({ left: direction * distance, behavior: 'smooth' });
-    }
+    if (!carousel) return;
+    const firstCard = carousel.firstElementChild as HTMLElement | null;
+    const gap = Number.parseFloat(getComputedStyle(carousel).columnGap) || 20;
+    const distance = (firstCard?.offsetWidth ?? carousel.clientWidth * 0.85) + gap;
+    const end = carousel.scrollWidth - carousel.clientWidth;
+    const atEnd = carousel.scrollLeft >= end - 4;
+    const atStart = carousel.scrollLeft <= 4;
+    const left =
+      direction === 1 && atEnd
+        ? 0
+        : direction === -1 && atStart
+          ? end
+          : Math.max(0, Math.min(end, carousel.scrollLeft + direction * distance));
+    carousel.scrollTo({
+      left,
+      behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches
+        ? 'instant'
+        : 'smooth',
+    });
+  }, []);
+
+  useEffect(() => {
+    const carousel = companyCarouselRef.current;
+    if (!carousel || !autoScrollEnabled || companies.length < 2) return;
+    let hovered = carousel.matches(':hover') && window.matchMedia('(hover: hover)').matches;
+    let touching = false;
+    let visible = false;
+    const delayResume = () => {
+      carouselInteractionUntil.current = Date.now() + 3500;
+    };
+    const stopMotion = () => carousel.scrollTo({ left: carousel.scrollLeft, behavior: 'instant' });
+    const onEnter = (event: PointerEvent) => {
+      if (event.pointerType !== 'mouse') return;
+      hovered = true;
+      stopMotion();
+    };
+    const onLeave = (event: PointerEvent) => {
+      if (event.pointerType !== 'mouse') return;
+      hovered = false;
+      delayResume();
+    };
+    const onTouchStart = () => {
+      touching = true;
+      stopMotion();
+    };
+    const onTouchEnd = (event: TouchEvent) => {
+      touching = event.touches.length > 0;
+      delayResume();
+    };
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        visible = entry.isIntersecting;
+      },
+      { threshold: 0.2 },
+    );
+    observer.observe(carousel);
+    carousel.addEventListener('pointerenter', onEnter);
+    carousel.addEventListener('pointerleave', onLeave);
+    carousel.addEventListener('touchstart', onTouchStart, { passive: true });
+    window.addEventListener('touchend', onTouchEnd, { passive: true });
+    window.addEventListener('touchcancel', onTouchEnd, { passive: true });
+    carousel.addEventListener('wheel', delayResume, { passive: true });
+    carousel.addEventListener('focusout', delayResume);
+    const timer = window.setInterval(() => {
+      if (
+        !visible ||
+        document.hidden ||
+        hovered ||
+        touching ||
+        carousel.contains(document.activeElement) ||
+        Date.now() < carouselInteractionUntil.current
+      )
+        return;
+      scrollCompanies(1);
+    }, 3500);
+    return () => {
+      window.clearInterval(timer);
+      observer.disconnect();
+      carousel.removeEventListener('pointerenter', onEnter);
+      carousel.removeEventListener('pointerleave', onLeave);
+      carousel.removeEventListener('touchstart', onTouchStart);
+      window.removeEventListener('touchend', onTouchEnd);
+      window.removeEventListener('touchcancel', onTouchEnd);
+      carousel.removeEventListener('wheel', delayResume);
+      carousel.removeEventListener('focusout', delayResume);
+    };
+  }, [autoScrollEnabled, companies.length, scrollCompanies]);
+
+  useEffect(() => {
+    const preference = window.matchMedia('(prefers-reduced-motion: reduce)');
+    const update = () => setAutoScrollEnabled(!preference.matches);
+    preference.addEventListener('change', update);
+    return () => preference.removeEventListener('change', update);
+  }, []);
+
+  const manuallyScrollCompanies = (direction: -1 | 1) => {
+    carouselInteractionUntil.current = Date.now() + 5000;
+    scrollCompanies(direction);
   };
 
   return (
-    <div className="min-h-screen overflow-hidden bg-[#edf3fb]">
+    <div className="home-page min-h-screen overflow-hidden bg-[#edf3fb]">
       <Seo
         title="Supun Group of Companies | Built in Sri Lanka. Built to Last."
         description="Supun Group of Companies is a Sri Lankan family-run group with 13 companies across manufacturing, retail, distribution and hospitality, with roots going back to 1978."
@@ -185,275 +275,200 @@ const Home = () => {
         }}
       />
 
-      <section className="premium-hero relative isolate h-[100svh] min-h-[560px] max-h-none overflow-hidden bg-[#07110d] text-white md:h-auto md:max-h-none md:min-h-[760px] lg:min-h-screen">
+      <section className="home-reference-hero" aria-labelledby="home-hero-heading">
         <img
+          className="home-reference-backdrop"
           src={heroPoster}
           alt=""
           fetchPriority="high"
-          className={`absolute inset-0 h-full w-full object-cover object-[62%_center] transition-opacity duration-500 ${heroVideoReady ? 'opacity-0' : 'opacity-100'}`}
-          aria-hidden="true"
           decoding="async"
         />
-        {shouldPlayHeroVideo && (
+        {playHeroVideo && (
           <video
             ref={heroVideoRef}
-            className={`absolute inset-0 h-full w-full object-cover object-[62%_center] transition-opacity duration-200 ${heroVideoReady ? 'opacity-100' : 'opacity-0'}`}
+            className="home-reference-backdrop"
             autoPlay
             muted
             loop
             playsInline
-            preload="auto"
+            preload="metadata"
             poster={heroPoster}
-            onLoadedData={() => setHeroVideoReady(true)}
             aria-hidden="true"
           >
             <source src={heroVideo} type="video/mp4" />
           </video>
         )}
-        <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(3,12,8,.55)_0%,rgba(5,18,12,.32)_38%,rgba(5,17,12,.1)_72%,rgba(3,12,8,.04)_100%)]" />
-        <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(3,10,7,.08)_0%,transparent_36%,rgba(3,10,7,.42)_100%)]" />
-
-        <div className="container relative z-10 mx-auto flex h-full min-h-0 flex-col px-5 pb-5 pt-20 sm:h-auto sm:min-h-[760px] sm:px-6 sm:pb-6 sm:pt-32 lg:min-h-screen lg:px-8 lg:pb-9 lg:pt-36">
-          <div className="hero-topline flex items-center justify-between gap-5 pb-1 text-[8px] font-semibold uppercase tracking-[0.16em] text-white/58 sm:pb-5 sm:text-[11px] sm:tracking-[0.24em]">
-            <span className="flex items-center gap-3">
-              <span className="h-px w-8 bg-[#e8aa3a]" /> Independent. Sri Lankan. Since 1978.
-            </span>
-            <span className="hidden items-center gap-2 sm:flex">
-              <span className="hero-live-dot" /> Colombo, Sri Lanka
-            </span>
-          </div>
-
-          <div className="grid flex-1 items-center gap-4 py-2 sm:gap-10 sm:py-10 lg:grid-cols-[minmax(0,1fr)_18rem] lg:gap-16 lg:py-14 xl:grid-cols-[minmax(0,1fr)_21rem]">
-            <div className="hero-copy max-w-5xl">
-              <h1 className="hero-title max-w-5xl text-[clamp(2.15rem,10.5vw,2.8rem)] font-semibold normal-case leading-[0.94] tracking-[-0.055em] text-white sm:text-[clamp(3rem,8vw,6.6rem)] sm:leading-[0.92]">
-                <span className="hero-title-blue">Built in</span>{' '}
-                <span className="hero-title-accent">Sri Lanka.</span>
-                <br />
-                <span className="hero-title-blue">Built to </span>
-                <span className="hero-title-accent">last.</span>
-              </h1>
-              <p className="mt-3 max-w-xl border-l border-[#e8aa3a]/70 pl-3 text-xs leading-relaxed text-white/80 sm:mt-8 sm:pl-5 sm:text-base">
-                One Sri Lankan Group, built across four industries since 1978.
-              </p>
-              <div className="relative z-20 mt-4 flex gap-2.5 sm:mt-10 sm:flex-row sm:gap-3">
-                <Link
-                  to="/companies"
-                  aria-label="Explore all Supun Group companies"
-                  className="hero-primary-button group relative z-20 inline-flex min-h-12 flex-1 items-center justify-center gap-2 rounded-full bg-[#efbd55] px-4 text-xs font-bold text-[#0b1b13] sm:min-h-14 sm:flex-none sm:px-7 sm:text-sm"
-                >
-                  Explore our companies{' '}
-                  <span className="flex h-8 w-8 items-center justify-center rounded-full bg-[#0b1b13] text-white transition duration-300 group-hover:translate-x-1">
-                    <ArrowRight size={16} />
-                  </span>
-                </Link>
-                <Link
-                  to="/about"
-                  className="hero-ghost-button group inline-flex min-h-12 flex-1 items-center justify-center gap-2 rounded-full px-4 text-xs font-semibold text-white sm:min-h-14 sm:flex-none sm:px-7 sm:text-sm"
-                >
-                  Discover our story{' '}
-                  <ArrowRight
-                    className="transition duration-300 group-hover:translate-x-1 group-hover:text-[#f4bd59]"
-                    size={18}
-                  />
-                </Link>
-              </div>
-            </div>
-
-            <div className="hero-legacy-feature hidden self-end lg:block">
-              <div className="flex items-center gap-3 text-[10px] font-bold uppercase tracking-[0.25em] text-[#f4bd59]">
-                <span className="h-px w-10 bg-[#f4bd59]" /> Established 1978
-              </div>
-              <div className="mt-5 flex items-end gap-3">
-                <strong className="hero-stat-blue text-[5.75rem] font-semibold leading-[.8] tracking-[-0.09em]">
-                  48
-                </strong>
-              </div>
-              <p className="mt-5 max-w-[13rem] text-sm leading-relaxed text-white/60">
-                <span className="font-semibold text-white">Years of enterprise.</span>
-                <br />
-                One vision, built across generations.
-              </p>
-              <Link
-                to="/about#journey"
-                className="group mt-6 inline-flex min-h-12 items-center gap-3 rounded-full bg-[#efbd55] px-5 text-xs font-bold uppercase tracking-[0.15em] text-[#071b2d] shadow-[0_10px_28px_rgba(239,189,85,.28)] transition hover:-translate-y-0.5 hover:bg-white"
-              >
-                Explore our journey{' '}
-                <ArrowRight className="transition group-hover:translate-x-1" size={16} />
+        <div className="home-reference-content">
+          <div className="home-reference-copy">
+            <p className="home-reference-kicker">
+              <span />
+              Independent. Sri Lankan. Since 1978.
+            </p>
+            <h1 id="home-hero-heading">
+              Built in Sri Lanka.
+              <br />
+              Built to <span>Last.</span>
+            </h1>
+            <p className="home-reference-description">
+              A diversified Sri Lankan group, delivering trusted products, services and solutions
+              across multiple industries for over four decades.
+            </p>
+            <div className="home-reference-actions">
+              <Link to="/companies" className="home-reference-primary">
+                Explore Our Companies <ArrowRight size={20} />
+              </Link>
+              <Link to="/about#journey" className="home-reference-secondary">
+                Our Journey <ArrowRight size={20} />
               </Link>
             </div>
           </div>
+          <div className="home-reference-stats" aria-label="Supun Group at a glance">
+            {siteStats.map((stat, index) => (
+              <CountUpStat
+                key={stat.label}
+                value={
+                  index === 1
+                    ? `${companies.length}+`
+                    : stat.value.includes('+')
+                      ? stat.value
+                      : `${stat.value}+`
+                }
+                label={stat.label}
+                index={index}
+              />
+            ))}
+          </div>
+          <a href="#legacy" className="home-reference-scroll" aria-label="Discover our story">
+            <ArrowDown size={17} />
+          </a>
+        </div>
+      </section>
 
-          <div className="hero-bottom-rail hidden items-end justify-between gap-6 pt-5 sm:flex">
-            <a
-              href="#legacy"
-              className="group hidden items-center gap-3 text-[10px] font-semibold uppercase tracking-[0.2em] text-white/55 transition hover:text-white md:flex"
-            >
-              <span className="flex h-10 w-10 items-center justify-center rounded-full border border-white/20 transition duration-300 group-hover:border-[#e8aa3a] group-hover:bg-[#e8aa3a] group-hover:text-[#102016]">
-                <ArrowDown size={16} />
+      <section id="legacy" className="home-legacy" aria-labelledby="home-legacy-heading">
+        <div className="home-legacy-layout">
+          <figure className="home-legacy-visual">
+            <img
+              src="/images/companies/supun-building-hero.webp"
+              alt="Supun Group of Companies building with the Supun sign on its facade"
+              loading="lazy"
+              decoding="async"
+            />
+            <figcaption className="home-legacy-since">
+              <span>Since</span>
+              <strong>1978</strong>
+              <span>Rooted in Sri Lanka.</span>
+            </figcaption>
+          </figure>
+          <div className="home-legacy-editorial">
+            <p className="home-legacy-eyebrow">Our story. Still unfolding.</p>
+            <h2 id="home-legacy-heading">
+              A family legacy.
+              <br />
+              <span>
+                A future we build
+                <br />
+                together.
               </span>
-              Scroll to discover
-            </a>
-            <div className="ml-auto grid w-full max-w-2xl grid-cols-2 gap-x-7 gap-y-3 sm:grid-cols-4 sm:gap-6">
-              {siteStats.map((stat, index) => (
-                <CountUpStat key={stat.label} value={stat.value} label={stat.label} index={index} />
-              ))}
+            </h2>
+            <p className="home-legacy-intro">
+              From one trading company in Colombo to a group that touches everyday life across Sri
+              Lanka.
+            </p>
+            <p className="home-legacy-body">
+              Since 1978, we have grown across manufacturing, retail, distribution and hospitality,
+              carrying the same commitment to our customers, our people and our country.
+            </p>
+            <Link to="/about" className="home-legacy-story-link">
+              Discover our story{' '}
+              <span>
+                <ArrowRight size={21} aria-hidden="true" />
+              </span>
+            </Link>
+            <div className="home-legacy-footnote">
+              <span className="home-legacy-footnote-line" aria-hidden="true" />
+              <p>
+                Built across generations.
+                <br />
+                <strong>Built for what comes next.</strong>
+              </p>
             </div>
           </div>
         </div>
       </section>
-
-      <section
-        id="legacy"
-        className="legacy-premium relative isolate overflow-hidden py-12 sm:py-14 md:py-20"
-      >
-        <div className="legacy-aurora legacy-aurora-blue" aria-hidden="true" />
-        <div className="legacy-lines absolute inset-0 opacity-50" aria-hidden="true" />
-        <div className="container relative z-10 mx-auto px-4">
-          <div className="grid items-stretch gap-6 lg:grid-cols-[.72fr_1.28fr]">
-            <AnimatedSection animation="slide-right" duration={900} triggerOnce={false}>
-              <div className="legacy-year-card group relative flex h-full min-h-[350px] flex-col justify-between overflow-hidden rounded-[2rem] p-7 sm:min-h-[430px] sm:p-10">
-                <div className="legacy-year-ring" aria-hidden="true">
-                  <span />
-                  <span />
-                  <span />
-                </div>
-                <div className="relative flex items-center justify-between">
-                  <span className="rounded-full border border-primary/10 bg-white/65 px-3 py-1.5 text-[10px] font-semibold uppercase tracking-[0.2em] text-primary/70 backdrop-blur-xl">
-                    Where it began
-                  </span>
-                  <span className="legacy-pulse">
-                    <span />
-                  </span>
-                </div>
-                <div className="relative">
-                  <p className="text-xs font-semibold uppercase tracking-[0.25em] text-[#a66d0d]">
-                    Established
-                  </p>
-                  <div className="legacy-year mt-2 text-[clamp(5rem,14vw,9rem)] font-semibold leading-none tracking-[-0.075em]">
-                    1978
-                  </div>
-                  <p className="mt-4 max-w-xs border-l-2 border-[#d99a24] pl-4 text-sm leading-relaxed text-[#526278]">
-                    A legacy built over generations.
-                  </p>
-                </div>
-              </div>
-            </AnimatedSection>
-            <AnimatedSection animation="slide-left" delay={140} duration={950} triggerOnce={false}>
-              <div className="legacy-story-card relative flex h-full min-h-[430px] flex-col overflow-hidden rounded-[2rem] p-7 sm:p-10 lg:p-12">
-                <div className="legacy-corner-mark" aria-hidden="true" />
-                <div className="relative">
-                  <span className="mb-6 inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.2em] text-[#a66d0d]">
-                    <span className="h-2 w-2 rounded-full bg-[#d99a24]" /> Built across generations
-                  </span>
-                  <h2 className="max-w-4xl text-4xl font-semibold normal-case leading-[1.04] tracking-[-0.04em] text-[#071b2d] sm:text-5xl lg:text-6xl">
-                    A family-run business with the courage to{' '}
-                    <span className="text-[#071b2d]">keep building.</span>
-                  </h2>
-                </div>
-                <div className="relative mt-auto pt-10">
-                  <div className="grid gap-6 border-t border-primary/10 pt-7 md:grid-cols-2">
-                    <p className="leading-relaxed text-[#526278]">
-                      From Colombo trading roots to 13 companies in manufacturing, retail,
-                      distribution and hospitality.
-                    </p>
-                    <p className="leading-relaxed text-[#526278]">
-                      Creating lasting value for our customers, people and country since 1978.
-                    </p>
-                  </div>
-                  <Link
-                    to="/about"
-                    className="legacy-link group mt-8 inline-flex items-center gap-4 font-semibold text-primary"
-                  >
-                    Read our story{' '}
-                    <span className="flex h-11 w-11 items-center justify-center rounded-full border border-primary/20 bg-primary/5 text-primary transition duration-300 group-hover:translate-x-1 group-hover:border-[#78be43] group-hover:bg-[#78be43] group-hover:text-white">
-                      <ArrowRight size={18} />
-                    </span>
-                  </Link>
-                </div>
-              </div>
-            </AnimatedSection>
-          </div>
-        </div>
-      </section>
-
-      <section className="relative overflow-hidden bg-white py-12 text-[#10233f] sm:py-14 md:py-20">
-        <div className="container relative z-10 mx-auto px-4">
-          <div className="grid gap-9 lg:grid-cols-[0.82fr_1.18fr] lg:items-center lg:gap-14">
-            <AnimatedSection animation="slide-right" duration={900} triggerOnce={false}>
-              <div className="home-production-card overflow-hidden rounded-[1.5rem] bg-[#10233f] shadow-[0_24px_60px_rgba(16,35,63,.18)]">
-                <img
-                  src={manufacturingImage}
-                  alt="A Camy factory employee handling cookware on the production line"
-                  className="block h-auto w-full"
-                  loading="lazy"
-                  decoding="async"
-                />
-                <div className="p-5 text-white sm:p-6">
-                  <p className="text-xs font-semibold uppercase tracking-[0.22em] text-[#efbd55]">
-                    Built in Sri Lanka
-                  </p>
-                  <h3 className="mt-2 max-w-md text-2xl font-semibold normal-case leading-tight tracking-[-0.03em] sm:text-3xl">
-                    Local capability. Lasting value.
-                  </h3>
-                  <div className="mt-4 flex items-center gap-4 border-t border-white/25 pt-4">
-                    <strong className="text-3xl font-semibold tracking-[-0.05em]">48</strong>
-                    <span className="max-w-[9rem] text-xs font-semibold uppercase leading-relaxed tracking-[0.14em] text-white/70">
-                      Years of trusted enterprise
-                    </span>
-                  </div>
-                </div>
-              </div>
-            </AnimatedSection>
-
-            <div>
-              <AnimatedSection animation="slide-up" duration={800} triggerOnce={false}>
-                <p className="section-kicker text-primary before:bg-[#d99a24]">What we do</p>
-                <h2 className="mt-5 max-w-3xl text-4xl font-semibold normal-case leading-[1.05] tracking-[-0.04em] text-[#071b2d] sm:text-5xl md:text-6xl">
-                  A Sri Lankan group built across industries.
-                </h2>
-                <p className="mt-6 max-w-2xl text-base leading-relaxed text-[#526278]">
-                  From a single trading company to four industries today: manufacturing, retail,
-                  distribution, and hospitality, each one held to the same standard.
+      <section className="home-presence" aria-labelledby="home-presence-heading">
+        <div className="home-presence-inner">
+          <div className="home-presence-photo-card">
+            <img
+              src={manufacturingImage}
+              alt="A Camy factory employee handling cookware on the production line"
+              loading="lazy"
+              decoding="async"
+            />
+            <div className="home-presence-stats" aria-label="Our group at a glance">
+              <svg
+                className="home-presence-photo-wave"
+                viewBox="0 0 500 60"
+                preserveAspectRatio="none"
+                aria-hidden="true"
+              >
+                <path d="M0 25Q230 85 500 0V60H0Z" fill="#85c442" />
+                <path d="M0 35Q230 95 500 13V60H0Z" fill="#102944" />
+              </svg>
+              <div>
+                <CalendarDays aria-hidden="true" />
+                <p>
+                  <strong>4</strong>
+                  <span>Sectors</span>
                 </p>
-              </AnimatedSection>
-
-              <div className="mt-9 grid gap-3 sm:grid-cols-2">
-                {sectorHighlights.map((sector, index) => {
-                  return (
-                    <AnimatedSection
-                      key={sector.title}
-                      animation="slide-left"
-                      delay={index * 90}
-                      duration={750}
-                      triggerOnce={false}
-                    >
-                      <article className="group h-full rounded-xl border border-[#10233f]/10 bg-[#f7f9fc] p-5 transition duration-300 hover:-translate-y-1 hover:border-[#315f9f]/35 hover:shadow-[0_14px_32px_rgba(16,35,63,.08)]">
-                        <div>
-                          <h3 className="text-xl font-semibold normal-case text-[#071b2d]">
-                            {sector.title}
-                          </h3>
-                          <p className="mt-2 text-sm leading-relaxed text-[#667388]">
-                            {sector.description}
-                          </p>
-                        </div>
-                      </article>
-                    </AnimatedSection>
-                  );
-                })}
               </div>
-
-              <AnimatedSection animation="fade" delay={250} duration={700} triggerOnce={false}>
-                <Link
-                  to="/companies"
-                  className="group mt-8 inline-flex items-center gap-4 font-semibold text-primary"
-                >
-                  Explore the group{' '}
-                  <span className="flex h-11 w-11 items-center justify-center rounded-full bg-[#10233f] text-white transition duration-300 group-hover:translate-x-1 group-hover:bg-[#78be43]">
-                    <ArrowRight size={18} />
-                  </span>
-                </Link>
-              </AnimatedSection>
+              <div>
+                <Layers3 aria-hidden="true" />
+                <p>
+                  <strong>{companies.length}+</strong>
+                  <span>Companies</span>
+                </p>
+              </div>
+              <div>
+                <Users aria-hidden="true" />
+                <p>
+                  <strong>300+</strong>
+                  <span>Employees</span>
+                </p>
+              </div>
             </div>
+          </div>
+          <div className="home-presence-copy">
+            <p className="home-presence-kicker">Our presence</p>
+            <h2 id="home-presence-heading">
+              A Sri Lankan group built
+              <br className="home-presence-heading-break" /> across industries.
+            </h2>
+            <p className="home-presence-description">
+              From a single trading company to a diversified group across manufacturing, retail,
+              distribution and hospitality, we create lasting value for our customers, people and
+              the country.
+            </p>
+            <div className="home-presence-sectors">
+              {sectorHighlights.map((sector, index) => {
+                const title = [
+                  'Manufacturing',
+                  'Retail & Distribution',
+                  'Hospitality',
+                  'Consumer Brands',
+                ][index];
+                return (
+                  <article key={sector.title} className="home-presence-sector">
+                    <div>
+                      <h3>{title}</h3>
+                      <p>{sector.description}</p>
+                    </div>
+                  </article>
+                );
+              })}
+            </div>
+            <Link to="/companies" className="home-legacy-cta home-presence-cta">
+              Explore our companies <ArrowRight size={21} aria-hidden="true" />
+            </Link>
           </div>
         </div>
       </section>
@@ -477,7 +492,20 @@ const Home = () => {
                 </Link>
                 <button
                   type="button"
-                  onClick={() => scrollCompanies(-1)}
+                  onClick={() => setAutoScrollEnabled((enabled) => !enabled)}
+                  aria-label={
+                    autoScrollEnabled
+                      ? 'Pause automatic company scrolling'
+                      : 'Start automatic company scrolling'
+                  }
+                  aria-controls="home-company-carousel"
+                  className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full border border-primary/20 bg-white text-primary transition hover:bg-primary/5"
+                >
+                  {autoScrollEnabled ? <Pause size={18} /> : <Play size={18} />}
+                </button>
+                <button
+                  type="button"
+                  onClick={() => manuallyScrollCompanies(-1)}
                   aria-label="Previous companies"
                   className="flex h-12 w-12 items-center justify-center rounded-full border border-primary/20 bg-white text-primary transition hover:border-[#78be43] hover:bg-[#78be43] hover:text-white"
                 >
@@ -485,7 +513,7 @@ const Home = () => {
                 </button>
                 <button
                   type="button"
-                  onClick={() => scrollCompanies(1)}
+                  onClick={() => manuallyScrollCompanies(1)}
                   aria-label="Next companies"
                   className="flex h-12 w-12 items-center justify-center rounded-full bg-primary text-white transition hover:bg-[#78be43]"
                 >
@@ -496,6 +524,16 @@ const Home = () => {
           </AnimatedSection>
           <div
             ref={companyCarouselRef}
+            id="home-company-carousel"
+            role="region"
+            aria-roledescription="carousel"
+            aria-label="Supun Group companies"
+            tabIndex={0}
+            onKeyDown={(event) => {
+              if (event.key !== 'ArrowLeft' && event.key !== 'ArrowRight') return;
+              event.preventDefault();
+              manuallyScrollCompanies(event.key === 'ArrowRight' ? 1 : -1);
+            }}
             className="home-company-carousel mt-6 flex items-stretch snap-x snap-mandatory gap-5 overflow-x-auto scroll-smooth pb-4 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
           >
             {homeCompanies.map((company, index) => (
