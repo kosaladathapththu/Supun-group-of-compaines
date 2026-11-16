@@ -649,7 +649,6 @@ const Home = () => {
             </p>
           </div>
           <div className="home-contact-action">
-            <p>Have an opportunity, partnership or idea in mind?</p>
             <Link to="/contact">
               Talk to our team <ArrowRight size={21} aria-hidden="true" />
             </Link>

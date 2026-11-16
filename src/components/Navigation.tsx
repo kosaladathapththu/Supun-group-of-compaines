@@ -66,6 +66,7 @@ const Navigation = () => {
     >
       <div
         className={`${isHome ? `home-nav-glass ${isScrolled || isOpen ? 'home-nav-glass-scrolled' : ''}` : transparentHome ? 'nav-soft-glass' : 'nav-dark-glass'} mx-auto max-w-[1180px] rounded-[1.35rem] px-3 transition-all duration-500 sm:px-5`}
+        style={location.pathname === '/about' ? { background: 'rgb(5 18 30 / 94%)' } : undefined}
       >
         <div className="flex min-h-[3.75rem] items-center justify-between gap-3 md:min-h-[4.25rem]">
           <Link

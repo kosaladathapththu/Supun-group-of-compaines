@@ -1,0 +1,341 @@
+.about-brand-story {
+  position: relative;
+  overflow: hidden;
+  background: #f7faff;
+  color: #0b2942;
+}
+.about-brand-story-inner {
+  display: grid;
+  grid-template-columns: 1fr 1.05fr;
+  align-items: center;
+  column-gap: clamp(40px, 5vw, 80px);
+  row-gap: 30px;
+  width: min(1380px, calc(100% - 96px));
+  margin: 38px auto 32px;
+}
+.about-brand-story-copy {
+  padding-block: 20px;
+}
+.about-brand-story-eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 24px;
+  color: #426682;
+  font-size: 10px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+}
+.about-brand-story-eyebrow::before {
+  content: '';
+  width: 28px;
+  height: 2px;
+  flex-shrink: 0;
+  background: #78b742;
+}
+.about-brand-story-copy h2 {
+  margin: 0;
+  color: #0b2942;
+  font-size: clamp(42px, 3.7vw, 60px);
+  font-weight: 600;
+  line-height: 1.05;
+  text-transform: none;
+  letter-spacing: -0.025em;
+}
+.about-brand-story-copy h2 > span {
+  color: #3e812c;
+}
+.about-brand-story-text {
+  margin-top: 28px;
+  max-width: 560px;
+  color: #61758b;
+  font-size: 15px;
+  line-height: 1.85;
+}
+.about-brand-story-text p + p {
+  margin-top: 16px;
+}
+.about-story-milestones {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-top: 30px;
+  padding-top: 24px;
+  border-top: 1px solid #dfe9f1;
+}
+.about-story-milestones > div {
+  flex-shrink: 0;
+}
+.about-story-milestones strong {
+  display: block;
+  color: #174f7c;
+  font-family: 'Barlow Semi Condensed', system-ui, sans-serif;
+  font-size: 24px;
+  line-height: 1.2;
+  font-weight: 600;
+}
+.about-story-milestones div > span {
+  display: block;
+  margin-top: 5px;
+  color: #728599;
+  font-size: 10px;
+}
+.about-story-milestone-line {
+  flex: 1;
+  height: 1px;
+  background: #b7d09e;
+}
+.about-brand-story-visual {
+  position: relative;
+  isolation: isolate;
+  min-width: 0;
+  height: 480px;
+}
+.about-brand-story-map {
+  position: absolute;
+  z-index: -1;
+  right: -8%;
+  top: -12px;
+  width: 49%;
+  height: 97%;
+  object-fit: contain;
+  opacity: 0.58;
+  filter: hue-rotate(145deg) saturate(0.55);
+  mix-blend-mode: multiply;
+}
+.about-brand-story-map-caption {
+  position: absolute;
+  right: -2%;
+  top: 62px;
+  max-width: 25%;
+  color: #41687e;
+  font-size: 10px;
+  line-height: 1.8;
+  text-align: center;
+  letter-spacing: 0.05em;
+}
+.about-brand-story-map-caption strong {
+  font-weight: 600;
+}
+.about-brand-story-today {
+  position: absolute;
+  top: 0;
+  left: 4%;
+  width: 77%;
+  height: 360px;
+  margin: 0;
+  overflow: hidden;
+  border-radius: 70px 16px 16px 16px;
+  box-shadow: 0 16px 32px #14354b14;
+}
+.about-brand-story-today > img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: right center;
+}
+.about-brand-story-today figcaption {
+  position: absolute;
+  inset: auto 0 0;
+  padding: 44px 24px 22px;
+  color: #fff;
+  background: linear-gradient(transparent, #082639ce);
+  font-size: 12px;
+  line-height: 1.6;
+}
+.about-brand-story-today figcaption strong {
+  font-weight: 500;
+}
+.about-brand-story-heritage {
+  position: absolute;
+  left: -3%;
+  bottom: 0;
+  width: 47%;
+  margin: 0;
+  padding: 7px;
+  border-radius: 14px;
+  background: #fff;
+  box-shadow: 0 12px 26px #15364b1c;
+}
+.about-brand-story-heritage > img {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 1.6;
+  object-fit: cover;
+  object-position: center 45%;
+  border-radius: 8px;
+}
+.about-brand-story-heritage figcaption {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 6px;
+  padding: 12px 6px 6px;
+  color: #708295;
+  font-size: 10px;
+}
+.about-brand-story-heritage figcaption > span {
+  color: #285d80;
+  font-weight: 600;
+}
+.about-brand-story-stats {
+  grid-column: 1 / -1;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  border-top: 1px solid #dce7ef;
+  padding-top: 25px;
+}
+.about-brand-story-stats > div {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  padding-inline: 20px;
+}
+.about-brand-story-stats > div + div {
+  border-left: 1px solid #dce7ef;
+}
+.about-brand-story-stats strong {
+  color: #0f3d60;
+  font-family: 'Barlow Semi Condensed', system-ui, sans-serif;
+  font-size: 44px;
+  line-height: 1;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+}
+.about-brand-story-stats strong > span {
+  color: #78ad46;
+}
+.about-brand-story-stats p {
+  max-width: 120px;
+  color: #627c90;
+  font-size: 11px;
+  line-height: 1.6;
+}
+@media (max-width: 1100px) {
+  .about-brand-story-inner {
+    width: calc(100% - 64px);
+    column-gap: 36px;
+  }
+  .about-brand-story-visual {
+    height: 450px;
+  }
+  .about-brand-story-today {
+    height: 340px;
+  }
+  .about-story-milestones {
+    gap: 10px;
+  }
+  .about-story-milestones div > span {
+    font-size: 9px;
+  }
+}
+@media (max-width: 850px) {
+  .about-brand-story-inner {
+    grid-template-columns: 1fr;
+    width: calc(100% - 48px);
+    margin: 24px auto 28px;
+    row-gap: 30px;
+  }
+  .about-brand-story-copy {
+    padding-block: 0;
+  }
+  .about-brand-story-text {
+    max-width: 100%;
+  }
+  .about-brand-story-visual {
+    width: min(100%, 600px);
+    margin-inline: auto;
+    height: 470px;
+  }
+  .about-brand-story-today {
+    height: 350px;
+  }
+  .about-brand-story-stats > div {
+    gap: 12px;
+    padding-inline: 12px;
+  }
+}
+@media (max-width: 580px) {
+  .about-brand-story-inner {
+    width: calc(100% - 40px);
+  }
+  .about-brand-story-eyebrow {
+    font-size: 9px;
+    letter-spacing: 0.14em;
+    gap: 10px;
+    margin-bottom: 20px;
+  }
+  .public-content .about-brand-story-copy h2 {
+    font-size: clamp(37px, 8vw, 46px);
+    line-height: 1.08;
+  }
+  .about-brand-story-text {
+    margin-top: 22px;
+    font-size: 14px;
+  }
+  .about-story-milestones {
+    gap: 8px;
+    margin-top: 24px;
+    padding-top: 20px;
+  }
+  .about-story-milestones strong {
+    font-size: 22px;
+  }
+  .about-story-milestones div > span {
+    font-size: 8px;
+  }
+  .about-brand-story-visual {
+    height: 390px;
+  }
+  .about-brand-story-today {
+    left: 0;
+    width: 80%;
+    height: 300px;
+    border-top-left-radius: 48px;
+  }
+  .about-brand-story-map {
+    right: -5%;
+    top: -12px;
+    width: 53%;
+    height: 93%;
+  }
+  .about-brand-story-map-caption {
+    right: -2%;
+    top: 30px;
+    font-size: 8px;
+    max-width: 21%;
+  }
+  .about-brand-story-heritage {
+    left: 0;
+    width: 58%;
+    padding: 5px;
+  }
+  .about-brand-story-heritage figcaption {
+    font-size: 8px;
+    padding: 9px 4px 5px;
+  }
+  .about-brand-story-today figcaption {
+    font-size: 10px;
+    padding: 34px 18px 18px;
+  }
+  .about-brand-story-stats {
+    padding-top: 20px;
+  }
+  .about-brand-story-stats > div {
+    flex-direction: column;
+    gap: 8px;
+    padding-inline: 6px;
+    text-align: center;
+  }
+  .about-brand-story-stats strong {
+    font-size: 34px;
+  }
+  .about-brand-story-stats p {
+    font-size: 9px;
+  }
+}

@@ -4,7 +4,6 @@ import Seo, { DEFAULT_IMAGE, SITE_NAME, SITE_URL } from '@/components/Seo';
 import { AnimatedSection } from '@/components/AnimatedSection';
 import { AwardIssuerMark } from '@/components/AwardIssuerMark';
 import chairmanImage from '@/assets/Chairman.png';
-import heroCorporate from '@/assets/optimized/hero-corporate.jpg';
 import aboutHeroSriLanka from '@/assets/optimized/about-hero-sri-lanka-v3.jpg';
 import supunTradersHeritage from '@/assets/optimized/supun-traders-heritage.jpg';
 import manufacturingImage from '@/assets/optimized/camy-factory-technician.jpg';
@@ -14,12 +13,8 @@ import camyLogo from '@/assets/camy-logo-red-transparent.png';
 import { awards, journey, leadership } from '@/data/siteContent';
 import { CompanyLogo } from '@/components/CompanyLogo';
 import { ResponsiveCopy } from '@/components/ResponsiveCopy';
+import './AboutStory.css';
 
-const stats = [
-  ['13', 'Group companies'],
-  ['300+', 'Employees'],
-  ['250+', 'Distributors'],
-];
 const awardCompanyPaths: Record<string, string> = {
   'Camy Smart': '/companies/camy-smart',
   'Aero Star (Aerostar Home Appliances)': '/companies/aerostar-home-appliances',
@@ -32,7 +27,7 @@ const Label = ({ children }: { children: React.ReactNode }) => (
     {children}
   </p>
 );
-const Rule = () => <div className="mt-4 h-0.5 w-12 bg-[#d79a22]" />;
+const Rule = () => <div className="mt-4 h-0.5 w-12 bg-[#78be43]" />;
 
 // Keep the timeline tied to the same logo assets used across the company pages.
 const journeyCompanyLogos: Record<string, { id: string; name: string }[]> = {
@@ -75,7 +70,7 @@ const JourneyLogo = ({ id, name }: { id: string; name: string }) =>
   );
 
 const About = () => (
-  <div className="min-h-screen overflow-hidden bg-[#fbfaf7] text-[#102746]">
+  <div className="min-h-screen overflow-hidden bg-[#f4f8fc] text-[#102746]">
     <Seo
       title="About Supun Group of Companies | Sri Lanka Since 1978"
       description="Learn about Supun Group of Companies, a Sri Lankan family business operating 13 companies across manufacturing, retail, distribution and hospitality since 1978."
@@ -159,7 +154,7 @@ const About = () => (
       <div className="container mx-auto flex min-h-[620px] items-center px-4 pb-16 pt-36 md:min-h-[690px] md:pt-40">
         <AnimatedSection animation="fade" duration={550} triggerOnce={false}>
           <div className="max-w-2xl text-white">
-            <p className="text-xs font-bold uppercase tracking-[.18em] text-[#efbd55]">
+            <p className="text-xs font-bold uppercase tracking-[.18em] text-[#a8d17c]">
               Our story continues
             </p>
             <h1 className="mt-5 text-5xl font-semibold normal-case leading-[1.03] tracking-[-.045em] sm:text-6xl md:text-7xl">
@@ -171,7 +166,7 @@ const About = () => (
               Two generations. Multiple industries. One unwavering commitment to quality, innovation
               and Sri Lankan pride.
             </p>
-            <div className="mt-7 h-0.5 w-16 bg-[#e2a630]" />
+            <div className="mt-7 h-0.5 w-16 bg-[#78be43]" />
           </div>
         </AnimatedSection>
       </div>
@@ -184,79 +179,95 @@ const About = () => (
       </div>
     </section>
 
-    <section id="story" className="scroll-mt-24 bg-white py-14 md:py-20">
-      <div className="container mx-auto grid gap-10 px-4 lg:grid-cols-[.9fr_1.1fr] lg:items-center">
-        <AnimatedSection animation="fade" duration={500} triggerOnce={false}>
-          <Label>Our story</Label>
-          <h2 className="mt-3 text-4xl font-semibold normal-case tracking-[-.04em] text-[#28271f] md:text-5xl">
-            From trading goods to making them.
+    <section id="story" className="about-brand-story" aria-labelledby="about-story-heading">
+      <div className="about-brand-story-inner">
+        <div className="about-brand-story-copy">
+          <p className="about-brand-story-eyebrow">Rooted here. Growing forward.</p>
+          <h2 id="about-story-heading">
+            A Sri Lankan story.
+            <br />
+            <span>Still being written.</span>
           </h2>
-          <Rule />
-          <div className="mt-6 space-y-4 text-sm leading-7 text-[#53647a] md:text-base">
-            <ResponsiveCopy summary="Founded as Supun Traders in 1978, our family business now brings together 13 companies in manufacturing, retail, distribution and hospitality. Camy products are made in Sri Lanka and distributed island-wide.">
-              <p>
-                A family-run business since 1978, Supun Group of Companies began when Mr. Mohamed
-                Fareed founded Supun Traders in Colombo, trading household appliances and
-                electronics for Sri Lankan homes. In 1999, his son, current Chairman Mr. M.F.M.
-                Kaleel, took over the business and formalized it as the Supun Group of Companies,
-                setting the Group on a new course: from trading goods to manufacturing them.
-              </p>
-              <p>
-                Through structured growth, the Group is now involved in manufacturing, retail,
-                distribution, and hospitality, each held to the same standard of quality and Sri
-                Lankan craftsmanship. Under the Camy name, Supun manufactures SLS-certified
-                motorcycle helmets, non-stick cookware, air conditioners, and fans entirely in its
-                own factories, reaching homes across the island through Supun Super Center and a
-                network of 250+ distributors.
-              </p>
-              <p>
-                Supun Arcade Residency extends the Group into hospitality with luxury serviced
-                apartments in central Colombo, alongside Area 56, its rooftop dining venue.
-              </p>
-              <p>
-                With an eye on the future and a continued focus on Sri Lankan manufacturing, the
-                Group credits its growth to two generations of family leadership and a shared
-                commitment to quality, innovation, and Sri Lankan pride, in everything it builds.
-              </p>
-            </ResponsiveCopy>
+          <div className="about-brand-story-text">
+            <p>
+              Our story began in 1978, when Mr. Mohamed Fareed founded Supun Traders in Colombo,
+              bringing household appliances and electronics to Sri Lankan homes.
+            </p>
+            <p>
+              In 1999, his son, Chairman Mr. M.F.M. Kaleel, carried that vision forward as the Supun
+              Group of Companies. From trading goods to making them, we have grown across
+              manufacturing, retail, distribution and hospitality, guided by family values and pride
+              in Sri Lankan craftsmanship.
+            </p>
           </div>
-          <div className="mt-7 grid grid-cols-3 gap-3">
-            {stats.map(([value, label]) => (
-              <div key={label} className="border-l-2 border-[#d79a22] pl-3">
-                <strong className="text-2xl font-semibold md:text-3xl">{value}</strong>
-                <p className="mt-1 text-[10px] uppercase tracking-wide text-[#6a788a]">{label}</p>
-              </div>
-            ))}
-          </div>
-        </AnimatedSection>
-        <AnimatedSection animation="fade" duration={550} triggerOnce={false}>
-          <div className="about-story-collage relative mx-auto min-h-[500px] max-w-2xl">
-            <img
-              src={sriLankaMap}
-              alt=""
-              aria-hidden="true"
-              className="absolute -right-[3%] -top-[3%] h-[106%] w-[48%] object-contain opacity-45 mix-blend-multiply"
-              decoding="async"
-            />
-            <img
-              src={supunTradersHeritage}
-              alt="Historic Supun Traders storefront in Colombo"
-              className="absolute left-0 top-5 z-10 h-[285px] w-[67%] -rotate-2 border-[8px] border-white object-cover shadow-xl"
-              decoding="async"
-            />
-            <img
-              src={heroCorporate}
-              alt="Supun Group today"
-              className="absolute bottom-4 left-[27%] z-20 h-[235px] w-[62%] rotate-3 border-[8px] border-white object-cover shadow-xl"
-              decoding="async"
-            />
-            <div className="absolute right-[2%] top-[25%] z-30 w-[34%] text-center text-[10px] font-bold uppercase leading-5 tracking-[.14em] text-[#75561f]">
-              Local Roots.
-              <br />
-              Lasting Impact.
+          <div className="about-story-milestones" aria-label="Our milestones">
+            <div>
+              <strong>1978</strong>
+              <span>Where we began</span>
+            </div>
+            <span className="about-story-milestone-line" aria-hidden="true" />
+            <div>
+              <strong>1999</strong>
+              <span>A new generation</span>
+            </div>
+            <span className="about-story-milestone-line" aria-hidden="true" />
+            <div>
+              <strong>Today</strong>
+              <span>Building forward</span>
             </div>
           </div>
-        </AnimatedSection>
+        </div>
+        <div className="about-brand-story-visual">
+          <img
+            className="about-brand-story-map"
+            src={sriLankaMap}
+            alt=""
+            aria-hidden="true"
+            decoding="async"
+          />
+          <span className="about-brand-story-map-caption">
+            Our home.
+            <br />
+            <strong>Our inspiration.</strong>
+          </span>
+          <figure className="about-brand-story-today">
+            <img
+              src="/images/companies/supun-building-hero.webp"
+              alt="The Supun Group building today"
+              loading="lazy"
+              decoding="async"
+            />
+          </figure>
+          <figure className="about-brand-story-heritage">
+            <img
+              src={supunTradersHeritage}
+              alt="The original Supun Traders storefront in Colombo"
+              loading="lazy"
+              decoding="async"
+            />
+            <figcaption>
+              <span>Est. 1978</span>Our first chapter.
+            </figcaption>
+          </figure>
+        </div>
+        <div className="about-brand-story-stats" aria-label="Our story in numbers">
+          <div>
+            <strong>
+              48<span>+</span>
+            </strong>
+            <p>Years of shared progress</p>
+          </div>
+          <div>
+            <strong>4</strong>
+            <p>Industries. One commitment.</p>
+          </div>
+          <div>
+            <strong>
+              250<span>+</span>
+            </strong>
+            <p>Distributors across Sri Lanka</p>
+          </div>
+        </div>
       </div>
     </section>
 
@@ -332,26 +343,26 @@ const About = () => (
       </div>
     </section>
 
-    <section id="leadership" className="scroll-mt-24 overflow-hidden bg-[#faf8f2] py-12 md:py-16">
+    <section id="leadership" className="scroll-mt-24 overflow-hidden bg-[#f0f7fc] py-12 md:py-16">
       <div className="container mx-auto px-4">
         <div className="mx-auto max-w-3xl text-center">
-          <div className="mx-auto flex h-11 w-11 items-center justify-center rounded-full bg-[#214a36] text-white shadow-[0_10px_25px_rgba(33,74,54,.16)]">
+          <div className="mx-auto flex h-11 w-11 items-center justify-center rounded-full bg-[#0b365a] text-white shadow-[0_10px_25px_rgba(18,64,120,.16)]">
             <Users size={22} strokeWidth={1.7} />
           </div>
-          <p className="mt-4 text-xs font-bold uppercase tracking-[.2em] text-[#9a6a16]">
+          <p className="mt-4 text-xs font-bold uppercase tracking-[.2em] text-[#315f9f]">
             Leadership structure
           </p>
           <h2 className="mt-3 text-4xl font-semibold normal-case tracking-[-.04em] md:text-5xl">
             One vision. Clear leadership.
           </h2>
-          <p className="mx-auto mt-4 max-w-2xl text-sm leading-6 text-[#69665e] md:text-base">
+          <p className="mx-auto mt-4 max-w-2xl text-sm leading-6 text-[#61758a] md:text-base">
             A connected leadership structure guiding Group strategy, operational excellence and the
             growth of every Supun business.
           </p>
         </div>
 
         <div className="relative mx-auto mt-9 max-w-6xl md:mt-11">
-          <div className="mx-auto mb-3 w-fit rounded-full border border-[#d79a22]/25 bg-[#fff3d7] px-4 py-1.5 text-[9px] font-bold uppercase tracking-[.18em] text-[#8b5d10]">
+          <div className="mx-auto mb-3 w-fit rounded-full border border-[#78be43]/25 bg-[#eaf3fd] px-4 py-1.5 text-[9px] font-bold uppercase tracking-[.18em] text-[#315f9f]">
             Board leadership
           </div>
           <div className="grid gap-4 md:grid-cols-3">
@@ -363,23 +374,23 @@ const About = () => (
                 duration={450}
                 triggerOnce={false}
               >
-                <article className="h-full rounded-xl border border-[#d79a22]/25 bg-white p-4 text-center shadow-[0_8px_24px_rgba(74,55,20,.06)] transition duration-300 hover:-translate-y-1 hover:border-[#d79a22]/50">
-                  <span className="mx-auto block h-1 w-10 rounded-full bg-[#d79a22]" />
-                  <h3 className="mt-3 text-lg font-semibold normal-case text-[#28271f]">
+                <article className="h-full rounded-xl border border-[#78be43]/25 bg-white p-4 text-center shadow-[0_8px_24px_rgba(18,64,120,.06)] transition duration-300 hover:-translate-y-1 hover:border-[#78be43]/50">
+                  <span className="mx-auto block h-1 w-10 rounded-full bg-[#78be43]" />
+                  <h3 className="mt-3 text-lg font-semibold normal-case text-[#0b2942]">
                     {person.name}
                   </h3>
-                  <p className="mt-2 text-[11px] font-bold uppercase leading-5 tracking-[.12em] text-[#947027]">
+                  <p className="mt-2 text-[11px] font-bold uppercase leading-5 tracking-[.12em] text-[#315f9f]">
                     {person.title}
                   </p>
                   {person.description && person.description !== '—' && (
-                    <p className="mt-2 text-xs leading-5 text-[#777267]">{person.description}</p>
+                    <p className="mt-2 text-xs leading-5 text-[#61758a]">{person.description}</p>
                   )}
                 </article>
               </AnimatedSection>
             ))}
           </div>
 
-          <div className="mx-auto mb-3 mt-8 w-fit rounded-full border border-[#4e7c47]/20 bg-[#edf5e8] px-4 py-1.5 text-[9px] font-bold uppercase tracking-[.18em] text-[#3f6c39]">
+          <div className="mx-auto mb-3 mt-8 w-fit rounded-full border border-[#78be43]/20 bg-[#edf5e8] px-4 py-1.5 text-[9px] font-bold uppercase tracking-[.18em] text-[#397d29]">
             Group executive leadership
           </div>
           <div className="mx-auto grid max-w-4xl gap-4 md:grid-cols-2">
@@ -391,15 +402,15 @@ const About = () => (
                 duration={450}
                 triggerOnce={false}
               >
-                <article className="h-full rounded-xl border border-[#4e7c47]/20 bg-white p-5 text-center shadow-[0_8px_24px_rgba(45,82,54,.06)] transition duration-300 hover:-translate-y-1 hover:border-[#4e7c47]/45">
-                  <span className="mx-auto block h-1 w-10 rounded-full bg-[#4e7c47]" />
-                  <h3 className="mt-2.5 text-xl font-semibold normal-case text-[#28271f]">
+                <article className="h-full rounded-xl border border-[#78be43]/20 bg-white p-5 text-center shadow-[0_8px_24px_rgba(45,82,54,.06)] transition duration-300 hover:-translate-y-1 hover:border-[#78be43]/45">
+                  <span className="mx-auto block h-1 w-10 rounded-full bg-[#78be43]" />
+                  <h3 className="mt-2.5 text-xl font-semibold normal-case text-[#0b2942]">
                     {person.name}
                   </h3>
-                  <p className="mt-1.5 text-[11px] font-semibold uppercase leading-5 tracking-[.08em] text-[#4f852c]">
+                  <p className="mt-1.5 text-[11px] font-semibold uppercase leading-5 tracking-[.08em] text-[#397d29]">
                     {person.title}
                   </p>
-                  <p className="mt-3 border-t border-[#4e7c47]/10 pt-3 text-xs leading-5 text-[#777267]">
+                  <p className="mt-3 border-t border-[#78be43]/10 pt-3 text-xs leading-5 text-[#61758a]">
                     {person.description}
                   </p>
                 </article>
@@ -407,7 +418,7 @@ const About = () => (
             ))}
           </div>
 
-          <div className="mx-auto mb-3 mt-8 w-fit rounded-full border border-[#78be43]/25 bg-[#eff8e9] px-4 py-1.5 text-[9px] font-bold uppercase tracking-[.18em] text-[#4f852c]">
+          <div className="mx-auto mb-3 mt-8 w-fit rounded-full border border-[#78be43]/25 bg-[#eff8e9] px-4 py-1.5 text-[9px] font-bold uppercase tracking-[.18em] text-[#397d29]">
             Business leadership
           </div>
           <div className="mx-auto grid max-w-4xl gap-4 md:grid-cols-2">
@@ -419,19 +430,19 @@ const About = () => (
                 duration={450}
                 triggerOnce={false}
               >
-                <article className="h-full rounded-xl border border-[#4e7c47]/15 bg-white p-5 text-center transition duration-300 hover:-translate-y-1 hover:shadow-[0_10px_26px_rgba(45,82,54,.08)]">
+                <article className="h-full rounded-xl border border-[#78be43]/15 bg-white p-5 text-center transition duration-300 hover:-translate-y-1 hover:shadow-[0_10px_26px_rgba(45,82,54,.08)]">
                   <div className="text-center">
-                    <span className="mx-auto mb-3 block h-1 w-10 rounded-full bg-[#4e7c47]" />
+                    <span className="mx-auto mb-3 block h-1 w-10 rounded-full bg-[#78be43]" />
                     <div>
-                      <h3 className="text-lg font-semibold normal-case text-[#28271f]">
+                      <h3 className="text-lg font-semibold normal-case text-[#0b2942]">
                         {person.name}
                       </h3>
-                      <p className="mt-1.5 text-[11px] font-bold uppercase leading-5 tracking-[.08em] text-[#4f852c]">
+                      <p className="mt-1.5 text-[11px] font-bold uppercase leading-5 tracking-[.08em] text-[#397d29]">
                         {person.title}
                       </p>
                     </div>
                   </div>
-                  <p className="mt-3 border-t border-[#4e7c47]/10 pt-3 text-xs leading-5 text-[#777267]">
+                  <p className="mt-3 border-t border-[#78be43]/10 pt-3 text-xs leading-5 text-[#61758a]">
                     {person.description}
                   </p>
                 </article>
@@ -452,7 +463,7 @@ const About = () => (
         <p className="mt-3 hidden text-xs text-[#788496] lg:block">
           Explore the milestones in our story.
         </p>
-        <div className="relative mt-9 grid grid-cols-2 gap-x-4 gap-y-8 sm:grid-cols-3 md:grid-cols-5 xl:grid-cols-10 xl:gap-x-3 xl:before:absolute xl:before:left-2 xl:before:right-2 xl:before:top-[87px] xl:before:h-px xl:before:bg-[#d79a22]">
+        <div className="relative mt-9 grid grid-cols-2 gap-x-4 gap-y-8 sm:grid-cols-3 md:grid-cols-5 xl:grid-cols-10 xl:gap-x-3 xl:before:absolute xl:before:left-2 xl:before:right-2 xl:before:top-[87px] xl:before:h-px xl:before:bg-[#78be43]">
           {journey.map(([year, description]) => {
             const logos = journeyCompanyLogos[year] ?? [];
 
@@ -473,7 +484,7 @@ const About = () => (
                     </span>
                   ))}
                 </div>
-                <span className="relative z-10 block h-[15px] w-[15px] rounded-full border-[4px] border-white bg-[#d79a22] shadow-[0_0_0_1px_rgba(215,154,34,.25)] transition group-hover:scale-125 group-focus:scale-125" />
+                <span className="relative z-10 block h-[15px] w-[15px] rounded-full border-[4px] border-white bg-[#78be43] shadow-[0_0_0_1px_rgba(120,190,67,.25)] transition group-hover:scale-125 group-focus:scale-125" />
                 <strong className="mt-3 block text-base font-semibold tracking-[-.02em] text-[#102746]">
                   {year}
                 </strong>
@@ -488,11 +499,11 @@ const About = () => (
     <section id="direction" className="scroll-mt-24 bg-white py-12 md:py-16">
       <div className="container mx-auto grid items-stretch gap-8 px-4 lg:grid-cols-[1.6fr_1fr] lg:gap-12">
         <div className="grid gap-4 sm:grid-cols-2 sm:gap-5">
-          <article className="rounded-2xl border border-[#e6e1d5] bg-[#faf9f5] p-6 sm:p-7">
+          <article className="rounded-2xl border border-[#dce7f3] bg-[#f4f8fc] p-6 sm:p-7">
             <h2 className="text-3xl font-semibold normal-case tracking-[-.03em] text-[#102746]">
               Vision
             </h2>
-            <div className="my-5 h-0.5 w-10 bg-[#c39a42]" aria-hidden="true" />
+            <div className="my-5 h-0.5 w-10 bg-[#78be43]" aria-hidden="true" />
             <h3 className="text-xl font-semibold normal-case leading-tight text-[#354d66]">
               Innovate. Unleash and Excel.
             </h3>
@@ -504,11 +515,11 @@ const About = () => (
               </ResponsiveCopy>
             </div>
           </article>
-          <article className="rounded-2xl border border-[#e6e1d5] bg-[#faf9f5] p-6 sm:p-7">
+          <article className="rounded-2xl border border-[#dce7f3] bg-[#f4f8fc] p-6 sm:p-7">
             <h2 className="text-3xl font-semibold normal-case tracking-[-.03em] text-[#102746]">
               Mission
             </h2>
-            <div className="my-5 h-0.5 w-10 bg-[#c39a42]" aria-hidden="true" />
+            <div className="my-5 h-0.5 w-10 bg-[#78be43]" aria-hidden="true" />
             <h3 className="text-xl font-semibold normal-case leading-tight text-[#354d66]">
               Superior thinking. Sustainable value.
             </h3>
@@ -532,7 +543,7 @@ const About = () => (
           />
           <div className="absolute inset-0 bg-[linear-gradient(0deg,rgba(6,24,40,.92)_0%,rgba(6,24,40,.40)_18%,transparent_40%)]" />
           <div className="absolute inset-x-0 bottom-0 p-6 text-white sm:p-7">
-            <p className="text-[10px] font-bold uppercase tracking-[.22em] text-[#efbd55]">
+            <p className="text-[10px] font-bold uppercase tracking-[.22em] text-[#a8d17c]">
               Purpose in practice
             </p>
             <h3 className="mt-2 text-2xl font-semibold normal-case leading-[1.15] tracking-[-.03em] sm:text-3xl">
@@ -566,7 +577,7 @@ const About = () => (
               <Link
                 to={awardCompanyPaths[item.awardedTo] ?? '/companies'}
                 key={`${item.award}-${item.awardedTo}`}
-                className={`group flex min-h-[310px] flex-col rounded-[1.5rem] border p-6 transition duration-300 hover:-translate-y-1 hover:shadow-[0_18px_40px_rgba(16,39,70,.10)] ${isCertification ? 'border-[#d79a22]/30 bg-[#fff8e9]' : 'border-[#102746]/10 bg-white'}`}
+                className={`group flex min-h-[310px] flex-col rounded-[1.5rem] border p-6 transition duration-300 hover:-translate-y-1 hover:shadow-[0_18px_40px_rgba(16,39,70,.10)] ${isCertification ? 'border-[#78be43]/30 bg-[#edf5ff]' : 'border-[#102746]/10 bg-white'}`}
                 aria-label={`View ${item.awardedTo}`}
               >
                 <div className="flex h-24 items-center justify-center">
@@ -605,7 +616,7 @@ const About = () => (
           </h2>
           <Link
             to="/companies"
-            className="group inline-flex min-h-14 items-center justify-center gap-4 rounded-full bg-[#efbd55] px-7 py-3 font-semibold text-[#071b2d] transition duration-300 hover:bg-white"
+            className="group inline-flex min-h-14 items-center justify-center gap-4 rounded-full bg-gradient-to-r from-[#033475] to-[#075d00] px-7 py-3 font-semibold text-white transition duration-300 hover:brightness-110"
           >
             Explore our businesses{' '}
             <span className="flex h-9 w-9 items-center justify-center rounded-full bg-[#071b2d] text-white transition duration-300 group-hover:translate-x-1 group-hover:bg-[#78be43]">
