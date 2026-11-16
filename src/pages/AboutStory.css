@@ -61,20 +61,16 @@
 .about-brand-story-photos {
   position: relative;
   isolation: isolate;
-  display: grid;
-  grid-template-columns: 1fr 1.1fr;
-  align-items: start;
-  gap: 18px;
-  padding: 34px 0 10px;
+  width: 100%;
+  aspect-ratio: 1.25;
 }
 .about-brand-story-map {
   position: absolute;
   z-index: -1;
-  right: -3%;
-  top: -25px;
-  width: 60%;
-  height: 100%;
-  min-height: 330px;
+  right: -1%;
+  top: -2%;
+  width: 43%;
+  height: 99%;
   object-fit: contain;
   opacity: 0.45;
   filter: hue-rotate(150deg) saturate(0.55);
@@ -82,60 +78,50 @@
 }
 .about-brand-story-map-caption {
   position: absolute;
-  top: 6px;
-  right: 16%;
-  width: 26%;
-  color: #315f9f;
+  top: 20%;
+  right: 5%;
+  width: 27%;
   text-align: center;
-  font-size: 9px;
+  color: #315f9f;
+  font-size: 10px;
   font-weight: 600;
-  line-height: 1.8;
-  letter-spacing: 0.18em;
+  line-height: 2;
+  letter-spacing: 0.16em;
   text-transform: uppercase;
 }
 .about-brand-story-photos figure {
-  min-width: 0;
+  position: absolute;
   margin: 0;
-  position: relative;
 }
 .about-brand-story-photos figure > img {
   display: block;
   width: 100%;
-  height: auto;
-  aspect-ratio: 1.2;
+  height: 100%;
   object-fit: cover;
-  border-radius: 14px;
-  box-shadow: 0 10px 24px #15394e14;
+  border: 7px solid #fff;
+  border-radius: 2px;
+  box-shadow: 0 12px 22px #14384d1c;
 }
-.about-brand-story-photos .about-brand-story-today {
-  margin-top: 100px;
+.about-brand-story-heritage {
+  left: 0;
+  top: 3%;
+  width: 69%;
+  height: 59%;
+  transform: rotate(-2deg);
+}
+.about-brand-story-heritage > img {
+  object-position: center;
+}
+.about-brand-story-today {
+  z-index: 1;
+  right: 7%;
+  bottom: 0;
+  width: 66%;
+  height: 46%;
+  transform: rotate(3deg);
 }
 .about-brand-story-today > img {
-  object-position: right center;
-}
-.about-brand-story-photos figcaption {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 6px;
-  margin-top: 16px;
-  color: #6b7d8f;
-  font-size: 11px;
-  line-height: 1.5;
-}
-.about-brand-story-photos figcaption > span {
-  display: inline-flex;
-  align-items: center;
-  gap: 9px;
-  color: #133f66;
-  font-size: 13px;
-  font-weight: 600;
-}
-.about-brand-story-photos figcaption > span::before {
-  content: '';
-  width: 18px;
-  height: 2px;
-  background: #80b448;
+  object-position: center;
 }
 @media (max-width: 1200px) {
   .about-brand-story-inner {
@@ -165,29 +151,20 @@
     margin-top: 22px;
   }
   .about-brand-story-photos {
-    gap: 12px;
-    padding-top: 24px;
-  }
-  .about-brand-story-photos .about-brand-story-today {
-    margin-top: 86px;
+    aspect-ratio: 1.15;
   }
   .about-brand-story-photos figure > img {
-    aspect-ratio: 0.95;
-    border-radius: 10px;
-  }
-  .about-brand-story-map {
-    min-height: 250px;
-    right: 0;
+    border-width: 4px;
   }
   .about-brand-story-map-caption {
-    top: 0;
-    right: 12%;
+    top: 17%;
+    right: 2%;
     font-size: 8px;
-    letter-spacing: 0.08em;
+    letter-spacing: 0.07em;
   }
-  .about-brand-story-photos figcaption {
-    font-size: 10px;
-    margin-top: 12px;
+  .about-brand-story-today {
+    right: 3%;
+    width: 70%;
   }
 }
 
@@ -220,7 +197,7 @@
   line-height: 1;
 }
 .about-story-facts strong > span {
-  color: #78ad46;
+  color: inherit;
 }
 .about-story-facts div > span {
   color: #627b90;

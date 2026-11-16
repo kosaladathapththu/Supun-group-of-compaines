@@ -1,9 +1,10 @@
-import { ArrowRight, Users } from 'lucide-react';
+import { ArrowRight, Users, Eye, Target } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import Seo, { DEFAULT_IMAGE, SITE_NAME, SITE_URL } from '@/components/Seo';
 import { AnimatedSection } from '@/components/AnimatedSection';
 import { AwardIssuerMark } from '@/components/AwardIssuerMark';
 import chairmanImage from '@/assets/Chairman.png';
+import supunTradersToday from '@/assets/optimized/supun-traders-neighbour-signs-blurred.png';
 import aboutHeroSriLanka from '@/assets/optimized/about-hero-sri-lanka-v3.jpg';
 import supunTradersHeritage from '@/assets/optimized/supun-traders-heritage.jpg';
 import manufacturingImage from '@/assets/optimized/camy-factory-technician.jpg';
@@ -14,6 +15,7 @@ import { awards, journey, leadership } from '@/data/siteContent';
 import { CompanyLogo } from '@/components/CompanyLogo';
 import { ResponsiveCopy } from '@/components/ResponsiveCopy';
 import './AboutStory.css';
+import './AboutJourney.css';
 
 const awardCompanyPaths: Record<string, string> = {
   'Camy Smart': '/companies/camy-smart',
@@ -46,6 +48,7 @@ const journeyCompanyLogos: Record<string, { id: string; name: string }[]> = {
   ],
   '2018': [{ id: 'new-camy-smart', name: 'New Camy Smart' }],
   '2023': [{ id: 'camy-brand', name: 'Camy' }],
+  Today: [{ id: 'group', name: 'Supun Group of Companies' }],
 };
 
 const JourneyLogo = ({ id, name }: { id: string; name: string }) =>
@@ -216,11 +219,9 @@ const About = () => (
               decoding="async"
             />
             <span className="about-brand-story-map-caption">
-              A Sri Lankan
+              Local roots.
               <br />
-              business
-              <br />
-              journey
+              Lasting impact.
             </span>
             <figure className="about-brand-story-heritage">
               <img
@@ -229,20 +230,14 @@ const About = () => (
                 loading="lazy"
                 decoding="async"
               />
-              <figcaption>
-                <span>1978</span>Where our story began
-              </figcaption>
             </figure>
             <figure className="about-brand-story-today">
               <img
-                src="/images/companies/supun-building-hero.webp"
-                alt="Supun Group today, with the company name on its building"
+                src={supunTradersToday}
+                alt="Supun Traders storefront at 114, 2nd Cross Street, Colombo"
                 loading="lazy"
                 decoding="async"
               />
-              <figcaption>
-                <span>Today</span>Built for what comes next
-              </figcaption>
             </figure>
           </div>
         </div>
@@ -453,105 +448,128 @@ const About = () => (
       </div>
     </section>
 
-    <section id="journey" className="scroll-mt-24 bg-white py-14 md:py-16">
-      <div className="container mx-auto px-4">
-        <Label>Our journey</Label>
-        <h2 className="mt-3 text-4xl font-semibold normal-case tracking-[-.04em]">
-          Progress through the years.
-        </h2>
-        <Rule />
-        <p className="mt-3 hidden text-xs text-[#788496] lg:block">
-          Explore the milestones in our story.
+    <section id="journey" className="about-journey" aria-labelledby="about-journey-heading">
+      <div className="about-journey-inner">
+        <h2 id="about-journey-heading">Progress through the years.</h2>
+        <div className="about-journey-rule" aria-hidden="true" />
+        <p className="about-journey-intro">
+          Explore the key milestones that have shaped the Supun Group of Companies’ journey from
+          humble beginnings to a diversified Sri Lankan business group.
         </p>
-        <div className="relative mt-9 grid grid-cols-2 gap-x-4 gap-y-8 sm:grid-cols-3 md:grid-cols-5 xl:grid-cols-10 xl:gap-x-3 xl:before:absolute xl:before:left-2 xl:before:right-2 xl:before:top-[87px] xl:before:h-px xl:before:bg-[#78be43]">
-          {journey.map(([year, description]) => {
-            const logos = journeyCompanyLogos[year] ?? [];
-
-            return (
-              <article
-                key={year}
-                tabIndex={0}
-                aria-label={`${year}: ${description}`}
-                className="group relative min-w-0 pr-2 outline-none focus-visible:ring-2 focus-visible:ring-[#315f9f]"
-              >
-                <div className="flex h-20 items-center gap-1 pb-2">
-                  {logos.map(({ id, name }) => (
-                    <span
-                      key={id}
-                      className="flex h-16 w-16 min-w-0 shrink items-center justify-center overflow-hidden rounded-xl border border-[#102746]/10 bg-white p-1 shadow-sm transition-transform group-hover:-translate-y-1 group-focus:-translate-y-1"
-                    >
+        <div
+          className="about-journey-scroll"
+          tabIndex={0}
+          role="region"
+          aria-label="Company milestones"
+        >
+          <ol className="about-journey-track">
+            {journey.map(([year, description]) => (
+              <li key={year} className="about-journey-milestone">
+                <div className="about-journey-logo">
+                  {(journeyCompanyLogos[year] ?? []).map(({ id, name }) => (
+                    <span key={id}>
                       <JourneyLogo id={id} name={name} />
                     </span>
                   ))}
                 </div>
-                <span className="relative z-10 block h-[15px] w-[15px] rounded-full border-[4px] border-white bg-[#78be43] shadow-[0_0_0_1px_rgba(120,190,67,.25)] transition group-hover:scale-125 group-focus:scale-125" />
-                <strong className="mt-3 block text-base font-semibold tracking-[-.02em] text-[#102746]">
-                  {year}
-                </strong>
-                <p className="mt-1.5 text-[10px] leading-4 text-[#637186]">{description}</p>
-              </article>
-            );
-          })}
+                <span className="about-journey-dot" aria-hidden="true" />
+                <strong className="about-journey-year">{year}</strong>
+                <p>{description}</p>
+              </li>
+            ))}
+          </ol>
         </div>
       </div>
     </section>
 
-    <section id="direction" className="scroll-mt-24 bg-white py-12 md:py-16">
-      <div className="container mx-auto grid items-stretch gap-8 px-4 lg:grid-cols-[1.6fr_1fr] lg:gap-12">
-        <div className="grid gap-4 sm:grid-cols-2 sm:gap-5">
-          <article className="rounded-2xl border border-[#dce7f3] bg-[#f4f8fc] p-6 sm:p-7">
-            <h2 className="text-3xl font-semibold normal-case tracking-[-.03em] text-[#102746]">
-              Vision
-            </h2>
-            <div className="my-5 h-0.5 w-10 bg-[#78be43]" aria-hidden="true" />
-            <h3 className="text-xl font-semibold normal-case leading-tight text-[#354d66]">
-              Innovate. Unleash and Excel.
-            </h3>
-            <div className="mt-4 text-sm leading-6 text-[#637186]">
-              <ResponsiveCopy summary="Transforming Sri Lankan lives through innovation, quality products and services that exceed expectations.">
-                To unleash the potential within us to transform the markets through innovation and
-                exceed people’s expectations for a better tomorrow, through the goods and services
-                which empower and enrich the lives of Sri Lankans.
-              </ResponsiveCopy>
+    <section
+      id="direction"
+      className="about-direction"
+      aria-label="Our vision, mission and purpose"
+    >
+      <div className="about-direction-inner">
+        <div className="about-direction-orbit about-direction-vision">
+          <article className="about-direction-card">
+            <div className="about-direction-title">
+              <span>
+                <Eye size={32} strokeWidth={1.6} aria-hidden="true" />
+              </span>
+              <div>
+                <h2>Vision</h2>
+                <div className="about-journey-rule" aria-hidden="true" />
+              </div>
             </div>
+            <h3>Innovate. Unleash and Excel.</h3>
+            <p className="about-direction-full">
+              To unleash the potential within us to transform the markets through innovation and
+              exceed people’s expectations for a better tomorrow, through the goods and services
+              which empower and enrich the lives of Sri Lankans.
+            </p>
+            <p className="about-direction-short">
+              Transforming Sri Lankan lives through innovation, quality products and services that
+              exceed expectations.
+            </p>
           </article>
-          <article className="rounded-2xl border border-[#dce7f3] bg-[#f4f8fc] p-6 sm:p-7">
-            <h2 className="text-3xl font-semibold normal-case tracking-[-.03em] text-[#102746]">
-              Mission
-            </h2>
-            <div className="my-5 h-0.5 w-10 bg-[#78be43]" aria-hidden="true" />
-            <h3 className="text-xl font-semibold normal-case leading-tight text-[#354d66]">
-              Superior thinking. Sustainable value.
-            </h3>
-            <div className="mt-4 text-sm leading-6 text-[#637186]">
-              <ResponsiveCopy summary="Creating useful products and services through superior thinking, sustainable practices and a smaller carbon footprint.">
-                To harness superior thinking in the creation of products and services that
-                functionally enhance the livelihood of people, while remaining cautious in reducing
-                our carbon footprint. We integrate sustainable practices across our operations while
-                delivering exceptional value to our stakeholders.
-              </ResponsiveCopy>
-            </div>
-          </article>
+          <details className="about-direction-mobile-details">
+            <summary>Read our full vision</summary>
+            <p>
+              To unleash the potential within us to transform the markets through innovation and
+              exceed people’s expectations for a better tomorrow, through the goods and services
+              which empower and enrich the lives of Sri Lankans.
+            </p>
+          </details>
         </div>
-        <div className="about-welding-photo relative min-h-[400px] overflow-hidden rounded-2xl sm:min-h-[440px]">
+        <div className="about-direction-purpose">
           <img
             src={manufacturingImage}
             alt="A Camy technician brazing copper tubing on an air-conditioning unit"
-            className="absolute inset-0 h-full w-full origin-[55%_35%] scale-[1.28] object-cover object-[50%_25%]"
             loading="lazy"
             decoding="async"
           />
-          <div className="absolute inset-0 bg-[linear-gradient(0deg,rgba(6,24,40,.92)_0%,rgba(6,24,40,.40)_18%,transparent_40%)]" />
-          <div className="absolute inset-x-0 bottom-0 p-6 text-white sm:p-7">
-            <p className="text-[10px] font-bold uppercase tracking-[.22em] text-[#a8d17c]">
-              Purpose in practice
-            </p>
-            <h3 className="mt-2 text-2xl font-semibold normal-case leading-[1.15] tracking-[-.03em] sm:text-3xl">
-              Sustainable solutions.
+          <div className="about-direction-purpose-copy">
+            <p>Our purpose</p>
+            <h3>
+              Sustainable
+              <br />
+              solutions.
               <br />
               For generations.
             </h3>
+            <div className="about-journey-rule" aria-hidden="true" />
           </div>
+        </div>
+        <div className="about-direction-orbit about-direction-mission">
+          <article className="about-direction-card">
+            <div className="about-direction-title">
+              <span>
+                <Target size={32} strokeWidth={1.6} aria-hidden="true" />
+              </span>
+              <div>
+                <h2>Mission</h2>
+                <div className="about-journey-rule" aria-hidden="true" />
+              </div>
+            </div>
+            <h3>Superior thinking. Sustainable value.</h3>
+            <p className="about-direction-full">
+              To harness superior thinking in the creation of products and services that
+              functionally enhance the livelihood of people, while remaining cautious in reducing
+              our carbon footprint. We integrate sustainable practices across our operations while
+              delivering exceptional value to our stakeholders.
+            </p>
+            <p className="about-direction-short">
+              Creating products and services that improve everyday life, through superior thinking,
+              sustainable practices and lasting value.
+            </p>
+          </article>
+          <details className="about-direction-mobile-details">
+            <summary>Read our full mission</summary>
+            <p>
+              To harness superior thinking in the creation of products and services that
+              functionally enhance the livelihood of people, while remaining cautious in reducing
+              our carbon footprint. We integrate sustainable practices across our operations while
+              delivering exceptional value to our stakeholders.
+            </p>
+          </details>
         </div>
       </div>
     </section>
