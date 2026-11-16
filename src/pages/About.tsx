@@ -182,90 +182,90 @@ const About = () => (
     <section id="story" className="about-brand-story" aria-labelledby="about-story-heading">
       <div className="about-brand-story-inner">
         <div className="about-brand-story-copy">
-          <p className="about-brand-story-eyebrow">Rooted here. Growing forward.</p>
+          <p className="about-brand-story-eyebrow">
+            Our story <span aria-hidden="true" />
+          </p>
           <h2 id="about-story-heading">
-            A Sri Lankan story.
+            From trading goods
             <br />
-            <span>Still being written.</span>
+            to <span>making them.</span>
           </h2>
+          <div className="about-brand-story-rule" aria-hidden="true" />
           <div className="about-brand-story-text">
             <p>
-              Our story began in 1978, when Mr. Mohamed Fareed founded Supun Traders in Colombo,
-              bringing household appliances and electronics to Sri Lankan homes.
+              A family-run business since 1978, Supun Group of Companies began when Mr. Mohamed
+              Fareed founded Supun Traders in Colombo, trading household appliances and electronics
+              for Sri Lankan homes.
             </p>
             <p>
-              In 1999, his son, Chairman Mr. M.F.M. Kaleel, carried that vision forward as the Supun
-              Group of Companies. From trading goods to making them, we have grown across
-              manufacturing, retail, distribution and hospitality, guided by family values and pride
-              in Sri Lankan craftsmanship.
+              In 1999, his son, current Chairman Mr. M.F.M. Kaleel, took over the business and
+              formalized it as the Supun Group of Companies, setting the Group on a new course: from
+              trading goods to manufacturing them. Through structured growth, the Group is now
+              involved in manufacturing, retail, distribution and hospitality, each held to the same
+              standard of quality and Sri Lankan craftsmanship.
             </p>
-          </div>
-          <div className="about-story-milestones" aria-label="Our milestones">
-            <div>
-              <strong>1978</strong>
-              <span>Where we began</span>
-            </div>
-            <span className="about-story-milestone-line" aria-hidden="true" />
-            <div>
-              <strong>1999</strong>
-              <span>A new generation</span>
-            </div>
-            <span className="about-story-milestone-line" aria-hidden="true" />
-            <div>
-              <strong>Today</strong>
-              <span>Building forward</span>
-            </div>
           </div>
         </div>
         <div className="about-brand-story-visual">
-          <img
-            className="about-brand-story-map"
-            src={sriLankaMap}
-            alt=""
-            aria-hidden="true"
-            decoding="async"
-          />
-          <span className="about-brand-story-map-caption">
-            Our home.
-            <br />
-            <strong>Our inspiration.</strong>
-          </span>
-          <figure className="about-brand-story-today">
+          <div className="about-brand-story-photos">
             <img
-              src="/images/companies/supun-building-hero.webp"
-              alt="The Supun Group building today"
-              loading="lazy"
+              className="about-brand-story-map"
+              src={sriLankaMap}
+              alt=""
+              aria-hidden="true"
               decoding="async"
             />
-          </figure>
-          <figure className="about-brand-story-heritage">
-            <img
-              src={supunTradersHeritage}
-              alt="The original Supun Traders storefront in Colombo"
-              loading="lazy"
-              decoding="async"
-            />
-            <figcaption>
-              <span>Est. 1978</span>Our first chapter.
-            </figcaption>
-          </figure>
+            <span className="about-brand-story-map-caption">
+              A Sri Lankan
+              <br />
+              business
+              <br />
+              journey
+            </span>
+            <figure className="about-brand-story-heritage">
+              <img
+                src={supunTradersHeritage}
+                alt="The historic Supun Traders storefront in Colombo"
+                loading="lazy"
+                decoding="async"
+              />
+              <figcaption>
+                <span>1978</span>Where our story began
+              </figcaption>
+            </figure>
+            <figure className="about-brand-story-today">
+              <img
+                src="/images/companies/supun-building-hero.webp"
+                alt="Supun Group today, with the company name on its building"
+                loading="lazy"
+                decoding="async"
+              />
+              <figcaption>
+                <span>Today</span>Built for what comes next
+              </figcaption>
+            </figure>
+          </div>
         </div>
-        <div className="about-brand-story-stats" aria-label="Our story in numbers">
+        <div className="about-story-facts" aria-label="Supun Group at a glance">
+          <div>
+            <strong>1978</strong>
+            <span>Founded in Colombo</span>
+          </div>
           <div>
             <strong>
               48<span>+</span>
             </strong>
-            <p>Years of shared progress</p>
+            <span>Years of experience</span>
           </div>
           <div>
             <strong>4</strong>
-            <p>Industries. One commitment.</p>
+            <span>Industries, one vision</span>
           </div>
           <div>
             <strong>
               250<span>+</span>
             </strong>
-            <p>Distributors across Sri Lanka</p>
+            <span>Distributors nationwide</span>
           </div>
         </div>
       </div>
