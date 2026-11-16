@@ -863,3 +863,48 @@
     gap: 20px;
   }
 }
+
+.home-nav-glass.home-nav-glass-scrolled {
+  background: rgb(5 18 30 / 96%);
+}
+.home-company-carousel:focus-visible {
+  outline: 2px solid #0877ef;
+  outline-offset: 4px;
+  border-radius: 16px;
+}
+@media (max-width: 380px) {
+  .home-presence-stats {
+    padding: 22px 6px;
+  }
+  .home-presence-stats > div {
+    gap: 4px;
+    padding-inline: 4px;
+  }
+  .home-presence-stats > div > svg {
+    width: 18px;
+    height: 22px;
+  }
+  .home-presence-stats strong {
+    font-size: 25px;
+  }
+  .home-presence-stats span {
+    font-size: 9px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .home-company-carousel {
+    scroll-behavior: auto;
+  }
+}
+
+/* Continuous company marquee: native scrolling remains available when paused. */
+.home-company-carousel {
+  position: relative;
+  scroll-snap-type: none;
+  scroll-behavior: auto;
+  overflow-anchor: none;
+}
+.home-company-carousel .home-company-slide {
+  scroll-snap-align: none;
+  scroll-snap-stop: normal;
+}

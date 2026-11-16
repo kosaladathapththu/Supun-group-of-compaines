@@ -137,20 +137,19 @@ const Home = () => {
     const firstCard = carousel.firstElementChild as HTMLElement | null;
     const gap = Number.parseFloat(getComputedStyle(carousel).columnGap) || 20;
     const distance = (firstCard?.offsetWidth ?? carousel.clientWidth * 0.85) + gap;
-    const end = carousel.scrollWidth - carousel.clientWidth;
-    const atEnd = carousel.scrollLeft >= end - 4;
-    const atStart = carousel.scrollLeft <= 4;
-    const left =
-      direction === 1 && atEnd
-        ? 0
-        : direction === -1 && atStart
-          ? end
-          : Math.max(0, Math.min(end, carousel.scrollLeft + direction * distance));
+    const loopStart = carousel.querySelector<HTMLElement>('[data-marquee-copy="true"]');
+    const loopWidth = loopStart && firstCard ? loopStart.offsetLeft - firstCard.offsetLeft : 0;
+    const current = loopWidth ? carousel.scrollLeft % loopWidth : carousel.scrollLeft;
+    const target = current + direction * distance;
+    const wrapping = loopWidth > 0 && (target < 0 || target >= loopWidth);
+    const left = loopWidth ? (target + loopWidth) % loopWidth : target;
+
     carousel.scrollTo({
       left,
-      behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches
-        ? 'instant'
-        : 'smooth',
+      behavior:
+        wrapping || window.matchMedia('(prefers-reduced-motion: reduce)').matches
+          ? 'instant'
+          : 'smooth',
     });
   }, []);
 
@@ -161,7 +160,7 @@ const Home = () => {
     let touching = false;
     let visible = false;
     const delayResume = () => {
-      carouselInteractionUntil.current = Date.now() + 3500;
+      carouselInteractionUntil.current = Date.now() + 500;
     };
     const stopMotion = () => carousel.scrollTo({ left: carousel.scrollLeft, behavior: 'instant' });
     const onEnter = (event: PointerEvent) => {
@@ -196,20 +195,46 @@ const Home = () => {
     window.addEventListener('touchcancel', onTouchEnd, { passive: true });
     carousel.addEventListener('wheel', delayResume, { passive: true });
     carousel.addEventListener('focusout', delayResume);
-    const timer = window.setInterval(() => {
+    let frame = 0;
+    let previousTime = 0;
+    let position = carousel.scrollLeft;
+    let lastWritten = position;
+    let loopWidth = 0;
+    const measure = () => {
+      const first = carousel.firstElementChild as HTMLElement | null;
+      const copy = carousel.querySelector<HTMLElement>('[data-marquee-copy="true"]');
+      loopWidth = first && copy ? copy.offsetLeft - first.offsetLeft : 0;
+    };
+    const resizeObserver = new ResizeObserver(measure);
+    resizeObserver.observe(carousel);
+    measure();
+    const animate = (time: number) => {
+      const elapsed = previousTime ? Math.min(time - previousTime, 50) : 0;
+      previousTime = time;
       if (
         !visible ||
         document.hidden ||
         hovered ||
         touching ||
         carousel.contains(document.activeElement) ||
-        Date.now() < carouselInteractionUntil.current
-      )
-        return;
-      scrollCompanies(1);
-    }, 3500);
+        Date.now() < carouselInteractionUntil.current ||
+        !loopWidth
+      ) {
+        position = carousel.scrollLeft;
+        lastWritten = position;
+      } else {
+        if (Math.abs(carousel.scrollLeft - lastWritten) > 1) position = carousel.scrollLeft;
+        position = (position + elapsed * 0.04) % loopWidth;
+        carousel.scrollTo({ left: position, behavior: 'instant' });
+        lastWritten = carousel.scrollLeft;
+      }
+      frame = requestAnimationFrame(animate);
+    };
+    frame = requestAnimationFrame(animate);
     return () => {
-      window.clearInterval(timer);
+      cancelAnimationFrame(frame);
+      resizeObserver.disconnect();
+      stopMotion();
       observer.disconnect();
       carousel.removeEventListener('pointerenter', onEnter);
       carousel.removeEventListener('pointerleave', onLeave);
@@ -219,7 +244,7 @@ const Home = () => {
       carousel.removeEventListener('wheel', delayResume);
       carousel.removeEventListener('focusout', delayResume);
     };
-  }, [autoScrollEnabled, companies.length, scrollCompanies]);
+  }, [autoScrollEnabled, companies.length]);
 
   useEffect(() => {
     const preference = window.matchMedia('(prefers-reduced-motion: reduce)');
@@ -534,19 +559,18 @@ const Home = () => {
               event.preventDefault();
               manuallyScrollCompanies(event.key === 'ArrowRight' ? 1 : -1);
             }}
-            className="home-company-carousel mt-6 flex items-stretch snap-x snap-mandatory gap-5 overflow-x-auto scroll-smooth pb-4 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+            className="home-company-carousel mt-6 flex items-stretch gap-5 overflow-x-auto pb-4 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
           >
-            {homeCompanies.map((company, index) => (
-              <AnimatedSection
-                key={company.id}
-                animation="slide-up"
-                delay={(index % 4) * 130}
-                duration={850}
-                triggerOnce={false}
+            {[...homeCompanies, ...homeCompanies].map((company, index) => (
+              <div
+                key={company.id + '-' + index}
+                data-marquee-copy={index === homeCompanies.length ? 'true' : undefined}
+                aria-hidden={index >= homeCompanies.length ? true : undefined}
                 className="home-company-slide flex w-[88%] flex-none snap-center self-stretch sm:w-[calc(50%_-_0.625rem)] sm:snap-start lg:w-[calc(33.333%_-_0.833rem)] xl:w-[calc(25%_-_0.9375rem)]"
               >
                 <Link
                   to={`/companies/${company.id}`}
+                  tabIndex={index >= homeCompanies.length ? -1 : undefined}
                   className="company-glass group relative flex min-h-[340px] w-full flex-col overflow-hidden rounded-[1.5rem] p-5 transition duration-300 hover:-translate-y-2 md:min-h-[420px] md:p-6"
                 >
                   <div className="relative flex min-h-[130px] items-center justify-center px-2 py-2 md:min-h-[170px]">
@@ -579,7 +603,7 @@ const Home = () => {
                     </div>
                   </div>
                 </Link>
-              </AnimatedSection>
+              </div>
             ))}
           </div>
         </div>
