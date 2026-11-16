@@ -4,13 +4,17 @@ import { Link } from 'react-router-dom';
 import {
   ArrowDown,
   ArrowRight,
-  Sparkles,
   CalendarDays,
   Layers3,
   Users,
   MapPin,
   Pause,
   Play,
+  ShoppingCart,
+  ShoppingBag,
+  Building2,
+  Package,
+  Factory,
 } from 'lucide-react';
 import Seo, { DEFAULT_IMAGE, SITE_NAME, SITE_URL } from '@/components/Seo';
 import { AnimatedSection } from '@/components/AnimatedSection';
@@ -498,55 +502,52 @@ const Home = () => {
         </div>
       </section>
 
-      <section className="py-12 sm:py-14 md:py-20">
-        <div className="container mx-auto px-4">
-          <AnimatedSection animation="slide-up" duration={800} triggerOnce={false}>
-            <div className="flex flex-col justify-between gap-6 md:flex-row md:items-end">
-              <div>
-                <p className="section-kicker">Inside the group</p>
-                <h2 className="mt-5 text-4xl font-semibold normal-case tracking-[-0.035em] text-[#071b2d] md:text-6xl">
-                  The businesses behind Supun Group
-                </h2>
-              </div>
-              <div className="flex items-center gap-3">
-                <Link
-                  to="/companies"
-                  className="mr-2 hidden font-semibold text-primary transition hover:text-[#315f9f] sm:inline"
-                >
-                  Explore our companies
-                </Link>
-                <button
-                  type="button"
-                  onClick={() => setAutoScrollEnabled((enabled) => !enabled)}
-                  aria-label={
-                    autoScrollEnabled
-                      ? 'Pause automatic company scrolling'
-                      : 'Start automatic company scrolling'
-                  }
-                  aria-controls="home-company-carousel"
-                  className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full border border-primary/20 bg-white text-primary transition hover:bg-primary/5"
-                >
-                  {autoScrollEnabled ? <Pause size={18} /> : <Play size={18} />}
-                </button>
-                <button
-                  type="button"
-                  onClick={() => manuallyScrollCompanies(-1)}
-                  aria-label="Previous companies"
-                  className="flex h-12 w-12 items-center justify-center rounded-full border border-primary/20 bg-white text-primary transition hover:border-[#78be43] hover:bg-[#78be43] hover:text-white"
-                >
-                  <ArrowRight className="rotate-180" size={19} />
-                </button>
-                <button
-                  type="button"
-                  onClick={() => manuallyScrollCompanies(1)}
-                  aria-label="Next companies"
-                  className="flex h-12 w-12 items-center justify-center rounded-full bg-primary text-white transition hover:bg-[#78be43]"
-                >
-                  <ArrowRight size={19} />
-                </button>
-              </div>
+      <section className="home-companies" aria-labelledby="home-companies-heading">
+        <div className="home-companies-inner">
+          <header className="home-companies-header">
+            <div>
+              <p className="home-companies-eyebrow">Our group companies</p>
+              <h2 id="home-companies-heading">The businesses behind Supun Group</h2>
+              <p className="home-companies-description">
+                A diversified group serving Sri Lanka across retail, trading, hospitality and
+                consumer businesses.
+              </p>
             </div>
-          </AnimatedSection>
+            <div className="home-companies-controls">
+              <Link to="/companies" className="home-companies-explore">
+                Explore our companies <ArrowRight size={20} aria-hidden="true" />
+              </Link>
+              <button
+                type="button"
+                onClick={() => setAutoScrollEnabled((enabled) => !enabled)}
+                aria-label={
+                  autoScrollEnabled
+                    ? 'Pause automatic company scrolling'
+                    : 'Start automatic company scrolling'
+                }
+                aria-controls="home-company-carousel"
+                className="home-companies-control"
+              >
+                {autoScrollEnabled ? <Pause size={16} /> : <Play size={16} />}
+              </button>
+              <button
+                type="button"
+                onClick={() => manuallyScrollCompanies(-1)}
+                aria-label="Previous companies"
+                className="home-companies-control"
+              >
+                <ArrowRight className="rotate-180" size={19} />
+              </button>
+              <button
+                type="button"
+                onClick={() => manuallyScrollCompanies(1)}
+                aria-label="Next companies"
+                className="home-companies-control home-companies-next"
+              >
+                <ArrowRight size={19} />
+              </button>
+            </div>
+          </header>
           <div
             ref={companyCarouselRef}
             id="home-company-carousel"
@@ -559,52 +560,69 @@ const Home = () => {
               event.preventDefault();
               manuallyScrollCompanies(event.key === 'ArrowRight' ? 1 : -1);
             }}
-            className="home-company-carousel mt-6 flex items-stretch gap-5 overflow-x-auto pb-4 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+            className="home-company-carousel home-companies-track"
           >
-            {[...homeCompanies, ...homeCompanies].map((company, index) => (
-              <div
-                key={company.id + '-' + index}
-                data-marquee-copy={index === homeCompanies.length ? 'true' : undefined}
-                aria-hidden={index >= homeCompanies.length ? true : undefined}
-                className="home-company-slide flex w-[88%] flex-none snap-center self-stretch sm:w-[calc(50%_-_0.625rem)] sm:snap-start lg:w-[calc(33.333%_-_0.833rem)] xl:w-[calc(25%_-_0.9375rem)]"
-              >
-                <Link
-                  to={`/companies/${company.id}`}
-                  tabIndex={index >= homeCompanies.length ? -1 : undefined}
-                  className="company-glass group relative flex min-h-[340px] w-full flex-col overflow-hidden rounded-[1.5rem] p-5 transition duration-300 hover:-translate-y-2 md:min-h-[420px] md:p-6"
+            {[...homeCompanies, ...homeCompanies].map((company, index) => {
+              const SectorIcon =
+                company.id === 'supun-traders'
+                  ? ShoppingCart
+                  : company.id === 'supun-super-center'
+                    ? ShoppingBag
+                    : company.industry === 'Hospitality'
+                      ? Building2
+                      : company.industry === 'Manufacturing'
+                        ? Factory
+                        : Package;
+              return (
+                <div
+                  key={company.id + '-' + index}
+                  data-marquee-copy={index === homeCompanies.length ? 'true' : undefined}
+                  aria-hidden={index >= homeCompanies.length ? true : undefined}
+                  className="home-company-slide home-company-tile"
                 >
-                  <div className="relative flex min-h-[130px] items-center justify-center px-2 py-2 md:min-h-[170px]">
-                    <CompanyLogo
-                      companyId={company.id}
-                      companyName={company.shortName}
-                      logoUrl={company.logoUrl}
-                      placement="home"
-                      className="h-28 w-full bg-transparent md:h-40"
-                    />
-                  </div>
-                  <div className="relative flex flex-1 flex-col px-2 pb-1 pt-7">
-                    <div className="mb-4 flex items-center gap-3 text-[10px] font-bold uppercase tracking-[.16em] text-[#738197]">
-                      <span className="h-2 w-2 rounded-full bg-[#d99a24]" />
-                      {company.established
-                        ? `Established ${company.established}`
-                        : 'Supun Group company'}
+                  <Link
+                    to={`/companies/${company.id}`}
+                    tabIndex={index >= homeCompanies.length ? -1 : undefined}
+                    className="home-company-card"
+                  >
+                    <div className="home-company-art">
+                      <SectorIcon
+                        className="home-company-sector-mark"
+                        size={29}
+                        strokeWidth={1.3}
+                        aria-hidden="true"
+                      />
+                      <CompanyLogo
+                        companyId={company.id}
+                        companyName={company.shortName}
+                        logoUrl={company.logoUrl}
+                        placement="home"
+                        className="home-company-logo"
+                      />
                     </div>
-                    <h3 className="text-3xl font-semibold normal-case tracking-[-0.03em] text-[#071b2d]">
-                      {company.shortName}
-                    </h3>
-                    <p className="mt-3 hidden line-clamp-2 leading-relaxed text-[#667388] sm:block">
-                      {company.description}
-                    </p>
-                    <div className="mt-auto flex items-center justify-between border-t border-primary/10 pt-5">
-                      <span className="font-semibold text-primary">View company</span>
-                      <span className="flex h-12 w-12 items-center justify-center rounded-full bg-[#10233f] text-white shadow-[0_8px_20px_rgba(16,35,63,.18)] transition duration-300 group-hover:translate-x-1 group-hover:bg-[#78be43]">
-                        <ArrowRight size={18} />
-                      </span>
+                    <div className="home-company-details">
+                      <p className="home-company-established">
+                        <span aria-hidden="true" />
+                        {company.established
+                          ? `Established ${company.established}`
+                          : 'Group company'}
+                      </p>
+                      <h3>{company.shortName}</h3>
+                      <p className="home-company-summary">{company.description}</p>
+                      <div className="home-company-view">
+                        <span>View company</span>
+                        <ArrowRight size={20} aria-hidden="true" />
+                      </div>
                     </div>
-                  </div>
-                </Link>
-              </div>
-            ))}
+                  </Link>
+                </div>
+              );
+            })}
+          </div>
+          <div className="home-companies-bottom">
+            <Link to="/companies">
+              Explore Our Companies <ArrowRight size={20} aria-hidden="true" />
+            </Link>
           </div>
         </div>
       </section>
@@ -618,46 +636,25 @@ const Home = () => {
         </section>
       )}
 
-      <section className="relative overflow-hidden bg-[#f3f7fb] px-4 pb-12 sm:pb-14 md:pb-20">
-        <AnimatedSection
-          animation="scale"
-          duration={900}
-          triggerOnce={false}
-          className="container mx-auto"
-        >
-          <div className="relative isolate overflow-hidden rounded-[2rem] bg-[#071b2d] px-7 py-12 text-white shadow-[0_30px_80px_rgba(7,27,45,.20)] sm:px-12 sm:py-16 md:rounded-[3rem] lg:px-20 lg:py-20">
-            <div className="absolute inset-y-0 right-0 -z-10 w-full bg-[radial-gradient(circle_at_85%_35%,rgba(217,154,36,.16),transparent_30%),linear-gradient(115deg,transparent_45%,rgba(25,83,132,.38))] lg:w-2/3" />
-            <div className="grid gap-12 lg:grid-cols-[minmax(0,1fr)_18rem] lg:items-end lg:gap-20">
-              <div>
-                <p className="mb-6 flex items-center gap-3 text-xs font-bold uppercase tracking-[0.24em] text-[#efbd55]">
-                  <Sparkles size={15} /> The next chapter
-                </p>
-                <h2 className="max-w-4xl text-4xl font-semibold normal-case leading-[1.02] tracking-[-0.04em] sm:text-5xl md:text-7xl">
-                  Let&#39;s build something <span className="text-[#efbd55]">lasting.</span>
-                </h2>
-                <p className="mt-7 max-w-2xl text-base leading-relaxed text-white/65 sm:text-lg">
-                  From ambitious ideas to trusted partnerships, we are ready to create what Sri
-                  Lanka needs next.
-                </p>
-              </div>
-
-              <div className="border-t border-white/15 pt-7 lg:border-l lg:border-t-0 lg:pl-10 lg:pt-0">
-                <p className="mb-6 text-sm leading-relaxed text-white/55">
-                  Have an opportunity, partnership or idea in mind?
-                </p>
-                <Link
-                  to="/contact"
-                  className="group inline-flex w-full items-center justify-between rounded-full bg-[#efbd55] px-6 py-4 font-semibold text-[#071b2d] transition duration-300 hover:bg-white"
-                >
-                  Talk to our team
-                  <span className="flex h-10 w-10 items-center justify-center rounded-full bg-[#071b2d] text-white transition duration-300 group-hover:translate-x-1 group-hover:bg-[#78be43]">
-                    <ArrowRight size={18} />
-                  </span>
-                </Link>
-              </div>
-            </div>
+      <section className="home-contact" aria-labelledby="home-contact-heading">
+        <div className="home-contact-panel">
+          <div className="home-contact-copy">
+            <p className="home-contact-eyebrow">The next chapter</p>
+            <h2 id="home-contact-heading">
+              Let's build something <span>lasting.</span>
+            </h2>
+            <p className="home-contact-description">
+              From ambitious ideas to trusted partnerships, we are ready to create what Sri Lanka
+              needs next.
+            </p>
           </div>
-        </AnimatedSection>
+          <div className="home-contact-action">
+            <p>Have an opportunity, partnership or idea in mind?</p>
+            <Link to="/contact">
+              Talk to our team <ArrowRight size={21} aria-hidden="true" />
+            </Link>
+          </div>
+        </div>
       </section>
     </div>
   );

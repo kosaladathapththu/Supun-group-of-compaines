@@ -114,7 +114,7 @@ export const CompanyLogo = ({
       : getCompanyLogo(sourceId));
   const bounds = logoUrl
     ? undefined
-    : placement === 'listing' && sourceId === 'supun-aerosoft'
+    : (placement === 'listing' || placement === 'home') && sourceId === 'supun-aerosoft'
       ? { width: 730, height: 280, x: 174, y: 402, canvasWidth: 1080 }
       : artwork[sourceId];
   const [maxWidth, maxHeight] = sizes[placement][companyId] || [180, 90];
@@ -128,7 +128,11 @@ export const CompanyLogo = ({
         bounds ? (
           <div
             className="relative shrink-0 overflow-hidden"
-            style={{ width, maxWidth: '100%', aspectRatio: `${bounds.width} / ${bounds.height}` }}
+            style={{
+              width: `min(${width}px, calc(var(--company-logo-height, ${maxHeight}px) * ${ratio}))`,
+              maxWidth: '100%',
+              aspectRatio: `${bounds.width} / ${bounds.height}`,
+            }}
           >
             <img
               src={logo}
@@ -152,7 +156,7 @@ export const CompanyLogo = ({
             style={{
               width: maxWidth,
               maxWidth: '100%',
-              maxHeight: `min(${maxHeight}px, 100%)`,
+              maxHeight: `min(${maxHeight}px, var(--company-logo-height, ${maxHeight}px), 100%)`,
               height: 'auto',
             }}
           />
