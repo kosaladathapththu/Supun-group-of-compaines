@@ -346,7 +346,7 @@ const Home = () => {
               <Link to="/companies" className="home-reference-primary">
                 Explore Our Companies <ArrowRight size={20} />
               </Link>
-              <Link to="/about#journey" className="home-reference-secondary">
+              <Link to="/companies#journey" className="home-reference-secondary">
                 Our Journey <ArrowRight size={20} />
               </Link>
             </div>

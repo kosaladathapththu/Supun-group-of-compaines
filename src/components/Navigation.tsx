@@ -123,7 +123,7 @@ const Navigation = () => {
                       Vision &amp; Mission
                     </DropdownMenuItem>
                   </Link>
-                  <Link to="/about#journey">
+                  <Link to="/companies#journey">
                     <DropdownMenuItem className={dropdownItemClass}>Our Journey</DropdownMenuItem>
                   </Link>
                   <Link to="/about#leadership">
@@ -230,7 +230,7 @@ const Navigation = () => {
                 <Link to="/about#chairman" onClick={() => setIsOpen(false)} className="py-2">
                   Chairman
                 </Link>
-                <Link to="/about#journey" onClick={() => setIsOpen(false)} className="py-2">
+                <Link to="/companies#journey" onClick={() => setIsOpen(false)} className="py-2">
                   Our Journey
                 </Link>
                 <Link to="/about#leadership" onClick={() => setIsOpen(false)} className="py-2">

@@ -1,4 +1,4 @@
-import { ArrowRight, Users, Building2, Layers3 } from 'lucide-react';
+import { ArrowRight, Users } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import Seo, { DEFAULT_IMAGE, SITE_NAME, SITE_URL } from '@/components/Seo';
 import { AnimatedSection } from '@/components/AnimatedSection';
@@ -9,15 +9,11 @@ import aboutHeroSriLanka from '@/assets/optimized/about-colombo-sunset.png';
 import supunTradersHeritage from '@/assets/optimized/supun-traders-heritage.jpg';
 import industryBanner from '@/assets/optimized/sri-lanka-industry-banner.jpg';
 import sriLankaMap from '@/assets/optimized/sri-lanka-watercolor-map.webp';
-import camyLogo from '@/assets/camy-logo-red-transparent.png';
-import { awards, journey, leadership } from '@/data/siteContent';
-import { CompanyLogo } from '@/components/CompanyLogo';
-import { usePublicCompanies } from '@/hooks/use-public-companies';
+import { awards, leadership } from '@/data/siteContent';
 import { ResponsiveCopy } from '@/components/ResponsiveCopy';
 import { RoundStatementBook } from '@/components/RoundStatementBook';
 import './AboutStory.css';
 import './AboutJourney.css';
-import './AboutJourneyCards.css';
 
 const awardCompanyPaths: Record<string, string> = {
   'Camy Smart': '/companies/camy-smart',
@@ -33,66 +29,7 @@ const Label = ({ children }: { children: React.ReactNode }) => (
 );
 const Rule = () => <div className="mt-4 h-0.5 w-12 bg-[#78be43]" />;
 
-// Keep the timeline tied to the same logo assets used across the company pages.
-const journeyCompanyLogos: Record<string, { id: string; name: string }[]> = {
-  '1978': [{ id: 'supun-traders', name: 'Supun Traders' }],
-  '1999': [{ id: 'group', name: 'Supun Group of Companies' }],
-  '2003': [{ id: 'supun-super-center', name: 'Supun Super Center' }],
-  '2010': [
-    { id: 'supun-arcade-residency', name: 'Supun Arcade Residency' },
-    { id: 'area-56', name: 'Area 56' },
-  ],
-  '2011': [{ id: 'supun-aerosoft', name: 'Supun Aerosoft' }],
-  '2016': [{ id: 'aerostar-home-appliances', name: 'Aero Star' }],
-  '2017': [
-    { id: 'camy-smart', name: 'Camy Smart' },
-    { id: 'rodsons', name: 'Rodsons' },
-  ],
-  '2018': [{ id: 'new-camy-smart', name: 'New Camy Smart' }],
-  '2023': [{ id: 'camy-brand', name: 'Camy' }],
-  Today: [
-    { id: 'united-electricals-engineering', name: 'United Electricals Engineering' },
-    { id: 'ecotemp', name: 'Ecotemp' },
-  ],
-};
-
-const JourneyLogo = ({ id, name }: { id: string; name: string }) =>
-  id === 'group' ? (
-    <img
-      src="/supun-group-of-companies-logo.png"
-      alt={name}
-      className="h-16 w-20 object-contain"
-      loading="lazy"
-      decoding="async"
-    />
-  ) : id === 'camy-brand' ? (
-    <img
-      src={camyLogo}
-      alt={name}
-      className="h-full w-full object-contain p-2"
-      loading="lazy"
-      decoding="async"
-    />
-  ) : (
-    <CompanyLogo companyId={id} companyName={name} placement="home" className="h-full w-full" />
-  );
-
-const journeyTitles: Record<string, string> = {
-  '1978': 'Where our story began',
-  '1999': 'A new generation of leadership',
-  '2003': 'A new retail destination',
-  '2010': 'Welcoming Sri Lanka and the world',
-  '2011': 'Stepping into manufacturing',
-  '2016': 'Building more in-house',
-  '2017': 'Safety, made in Sri Lanka',
-  '2018': 'Everyday essentials, locally made',
-  '2023': 'More comfort for Sri Lankan homes',
-  Today: 'Our next chapter',
-};
-
 const About = () => {
-  const { companies } = usePublicCompanies();
-  const sectorCount = new Set(companies.map((company) => company.industry)).size;
   return (
     <div className="min-h-screen overflow-hidden bg-[#f4f8fc] text-[#102746]">
       <Seo
@@ -466,90 +403,6 @@ const About = () => {
               ))}
             </div>
           </div>
-        </div>
-      </section>
-
-      <section
-        id="journey"
-        className="about-journey about-journey-cards"
-        aria-labelledby="about-journey-heading"
-      >
-        <div className="about-journey-card-inner">
-          <header className="about-journey-card-header">
-            <div>
-              <p className="about-journey-card-eyebrow">Our journey</p>
-              <h2 id="about-journey-heading">Progress through the years.</h2>
-              <p className="about-journey-card-intro">
-                Key milestones that shaped Supun Group of Companies from a single trading business
-                to a diversified group across Sri Lanka.
-              </p>
-            </div>
-            <div className="about-journey-overview" aria-label="Our group today">
-              <div>
-                <Building2 aria-hidden="true" />
-                <p>
-                  <strong>{companies.length}+</strong>
-                  <span>Companies</span>
-                </p>
-              </div>
-              <div>
-                <Users aria-hidden="true" />
-                <p>
-                  <strong>300+</strong>
-                  <span>People</span>
-                </p>
-              </div>
-              <div>
-                <Layers3 aria-hidden="true" />
-                <p>
-                  <strong>{sectorCount}</strong>
-                  <span>Business sectors</span>
-                </p>
-              </div>
-            </div>
-          </header>
-          <ol className="about-journey-card-grid">
-            {journey.map(([year, description]) => {
-              const logos = journeyCompanyLogos[year] ?? [];
-              const destination =
-                year === 'Today'
-                  ? '/companies'
-                  : year === '1999'
-                    ? '/about#story'
-                    : '/companies/' + (year === '2023' ? 'fuji-industries' : logos[0]?.id || '');
-              const text =
-                year === 'Today'
-                  ? `United Electricals Engineering and Ecotemp are part of our next chapter. Today, ${companies.length} companies and 300+ people carry our story forward.`
-                  : description;
-              return (
-                <li key={year}>
-                  <Link
-                    to={destination}
-                    className="about-journey-card"
-                    aria-label={`${year === 'Today' ? 'Today (2026)' : year}: ${text}`}
-                  >
-                    <span className="about-journey-card-year">
-                      {year === 'Today' ? 'Today (2026)' : year}
-                    </span>
-                    <div className="about-journey-card-content">
-                      <h3>{journeyTitles[year]}</h3>
-                      <p>{text}</p>
-                      <div className="about-journey-card-logos">
-                        {logos.map(({ id, name }) => (
-                          <span key={id}>
-                            <JourneyLogo id={id} name={name} />
-                          </span>
-                        ))}
-                      </div>
-                    </div>
-                    <span className="about-journey-card-arrow" aria-hidden="true">
-                      <ArrowRight size={19} />
-                    </span>
-                  </Link>
-                </li>
-              );
-            })}
-          </ol>
         </div>
       </section>
 
