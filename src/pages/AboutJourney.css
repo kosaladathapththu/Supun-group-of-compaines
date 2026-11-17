@@ -391,231 +391,40 @@
   }
 }
 
-/* Vision and mission frame the purpose photograph. */
+/* A permanently open book of guiding principles. */
 #direction .about-direction-inner {
-  grid-template-columns: minmax(0, 1fr) minmax(0, 0.75fr) minmax(0, 1fr);
-  align-items: center;
-  justify-content: center;
-  gap: 32px;
-  width: min(1480px, calc(100% - 80px));
-  padding: 24px 0 16px;
-  margin-top: 12px;
-}
-.about-direction-orbit {
   position: relative;
   isolation: isolate;
-  min-width: 0;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  align-items: stretch;
+  justify-content: center;
+  gap: 0;
+  width: min(1140px, calc(100% - 96px));
+  margin: 24px auto 36px;
+  padding: 0;
+  perspective: 1500px;
 }
-.about-direction-orbit::before {
+#direction .about-direction-inner::before {
   content: '';
   position: absolute;
-  z-index: -1;
-  top: -12px;
-  left: -12px;
-  width: calc(100% + 24px);
-  aspect-ratio: 1;
+  z-index: 2;
+  top: 12px;
+  bottom: 10px;
+  left: calc(50% - 12px);
+  width: 24px;
   border-radius: 50%;
-  background: conic-gradient(from 220deg, #72b342 0deg, #a1cb75 178deg, transparent 178deg 360deg);
+  background: linear-gradient(90deg, #36586a00, #11374c1f 36%, #fff8 50%, #11374c1f 64%, #36586a00);
+  pointer-events: none;
 }
-.about-direction-mission::before {
-  background: conic-gradient(from 40deg, #145a97 0deg, #65a6d7 178deg, transparent 178deg 360deg);
-}
-#direction.about-direction .about-direction-card {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  width: 100%;
-  aspect-ratio: 1;
-  padding: 38px;
-  border: 1px solid #fff;
-  border-radius: 50%;
-  background: linear-gradient(145deg, #fff, #f3f7fa);
-  box-shadow:
-    0 12px 20px #16344820,
-    inset 0 1px 2px #fff;
-  text-align: center;
-}
-.about-direction-card::after {
-  content: none;
-}
-#direction .about-direction-title {
-  flex-direction: column;
-  gap: 10px;
-  margin-bottom: 14px;
-}
-#direction .about-direction-title > span {
-  width: auto;
-  height: auto;
-  border-radius: 0;
-  background: transparent;
-  color: #5e9e30;
-}
-#direction .about-direction-mission .about-direction-title > span {
-  color: #17639f;
-}
-#direction .about-direction-title h2 {
-  color: #477d2a;
-  font-size: 30px;
-}
-#direction .about-direction-mission .about-direction-title h2 {
-  color: #175b94;
-}
-#direction .about-direction-title .about-journey-rule {
-  display: none;
-}
-#direction .about-direction-card h3 {
-  margin-bottom: 14px;
-  max-width: 290px;
-  font-size: 20px;
-}
-#direction .about-direction-card > p {
-  font-size: 13px;
-  line-height: 1.65;
-}
-.about-direction-short,
-.about-direction-mobile-details {
-  display: none;
-}
-#direction .about-direction-purpose {
-  grid-column: auto;
-  align-self: center;
-  width: 100%;
-  height: 420px;
-  min-height: 0;
-  margin: 0;
-  border: 5px solid #fff;
-  border-radius: 28px;
-  box-shadow: 0 14px 26px #123a5c18;
-}
-#direction .about-direction-purpose > img {
-  object-position: center 28%;
-}
-#direction .about-direction-purpose::before {
-  background: linear-gradient(0deg, #062031f0 0%, #062031b0 26%, #06203100 65%);
-}
-#direction .about-direction-purpose::after {
-  content: none;
-}
-#direction .about-direction-purpose-copy {
-  position: absolute;
-  inset: auto 0 0;
-  padding: 24px;
-}
-#direction .about-direction-purpose-copy > p {
-  margin-bottom: 12px;
-  font-size: 10px;
-}
-#direction .about-direction-purpose-copy h3 {
-  font-size: 28px;
-}
-#direction .about-direction-purpose-copy .about-journey-rule {
-  margin-top: 16px;
-  width: 36px;
-}
-@media (max-width: 1200px) {
+@media (max-width: 700px) {
   #direction .about-direction-inner {
-    grid-template-columns: minmax(0, 440px);
-    width: calc(100% - 56px);
-    gap: 42px;
+    width: calc(100% - 48px);
+    grid-template-columns: 1fr;
+    gap: 22px;
+    margin: 16px auto 26px;
   }
-  #direction.about-direction .about-direction-card {
-    padding: 42px;
-  }
-  #direction .about-direction-purpose {
-    height: 380px;
-  }
-  #direction .about-direction-purpose-copy h3 {
-    font-size: 32px;
-  }
-}
-@media (max-width: 580px) {
-  #direction .about-direction-inner {
-    width: calc(100% - 64px);
-    grid-template-columns: minmax(0, 360px);
-    gap: 34px;
-    padding-top: 14px;
-  }
-  .about-direction-orbit::before {
-    top: -10px;
-    left: -10px;
-    width: calc(100% + 20px);
-  }
-  #direction.about-direction .about-direction-card {
-    padding: 28px;
-  }
-  #direction .about-direction-title {
-    gap: 8px;
-    margin-bottom: 12px;
-  }
-  #direction .about-direction-title > span > svg {
-    width: 28px;
-    height: 28px;
-  }
-  .public-content #direction .about-direction-title h2 {
-    font-size: 28px;
-  }
-  #direction .about-direction-card h3 {
-    font-size: 17px;
-    margin-bottom: 10px;
-  }
-  #direction .about-direction-card .about-direction-full {
-    display: none;
-  }
-  #direction .about-direction-card .about-direction-short {
-    display: block;
-    font-size: 12px;
-    line-height: 1.6;
-  }
-  .about-direction-mobile-details {
-    display: block;
-    position: relative;
-    margin-top: 22px;
-    text-align: center;
-  }
-  .about-direction-mobile-details summary {
-    color: #1a5e95;
-    cursor: pointer;
-    font-size: 12px;
-  }
-  .about-direction-mobile-details p {
-    margin-top: 14px;
-    color: #536b82;
-    font-size: 13px;
-    line-height: 1.7;
-    text-align: left;
-  }
-  #direction .about-direction-purpose {
-    height: 360px;
-    border-radius: 24px;
-  }
-  #direction .about-direction-purpose-copy {
-    padding: 24px 20px;
-  }
-  #direction .about-direction-purpose-copy h3 {
-    font-size: 28px;
-  }
-}
-@media (max-width: 380px) {
-  #direction.about-direction .about-direction-card {
-    padding: 22px;
-  }
-  #direction .about-direction-title {
-    gap: 6px;
-    margin-bottom: 10px;
-  }
-  #direction .about-direction-title > span > svg {
-    width: 24px;
-    height: 24px;
-  }
-  .public-content #direction .about-direction-title h2 {
-    font-size: 26px;
-  }
-  #direction .about-direction-card h3 {
-    font-size: 16px;
-  }
-  #direction .about-direction-card .about-direction-short {
-    font-size: 11.5px;
-    line-height: 1.55;
+  #direction .about-direction-inner::before {
+    content: none;
   }
 }

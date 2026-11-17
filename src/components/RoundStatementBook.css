@@ -1,0 +1,184 @@
+.round-book {
+  --book-accent: #6da53e;
+  position: relative;
+  min-width: 0;
+  display: flex;
+  perspective: 1400px;
+}
+.round-book--mission {
+  --book-accent: #206ca6;
+}
+.round-book-shell {
+  position: relative;
+  isolation: isolate;
+  display: flex;
+  width: 100%;
+  border: 1px solid #d6e3eb;
+  border-bottom: 4px solid #80ab52;
+  border-radius: 46% 8px 8px 24%;
+  background: linear-gradient(110deg, #eaf4df 0%, #f4faed 30%, #fcfef9 75%, #e0ead8 100%);
+  box-shadow:
+    0 15px 28px #14354913,
+    -3px 5px 0 #edf2f6,
+    -5px 8px 0 #d5e0e8;
+  transform-origin: right center;
+  transition:
+    transform 0.5s ease,
+    box-shadow 0.5s ease;
+}
+.round-book--mission .round-book-shell {
+  border-bottom-color: #2a6f9f;
+  border-radius: 8px 46% 24% 8px;
+  background: linear-gradient(70deg, #dce8f3 0%, #f7fbff 25%, #edf6ff 70%, #e0effb 100%);
+  box-shadow:
+    0 15px 28px #14354913,
+    3px 5px 0 #edf2f6,
+    5px 8px 0 #d5e0e8;
+  transform-origin: left center;
+}
+.round-book-shell::before {
+  content: '';
+  position: absolute;
+  z-index: -1;
+  inset: 5px 2px -1px;
+  border: 1px solid #dfe8ee;
+  border-radius: inherit;
+  pointer-events: none;
+}
+.round-book-page {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  min-height: 420px;
+  padding: 62px 58px 65px;
+  text-align: center;
+}
+.round-book-page::after {
+  content: '';
+  position: absolute;
+  right: 18%;
+  bottom: 12px;
+  width: 46%;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, #9bb2c666, transparent);
+  animation: open-book-page-light 7s ease-in-out infinite;
+  pointer-events: none;
+}
+.round-book-heading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  color: var(--book-accent);
+}
+.public-content #direction .round-book-heading h2 {
+  margin: 0;
+  color: #173f5d;
+  font-size: 34px;
+  font-weight: 600;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  text-transform: none;
+}
+.round-book-rule {
+  width: 34px;
+  height: 2px;
+  margin: 20px 0 24px;
+  border-radius: 2px;
+  background: var(--book-accent);
+}
+.public-content #direction .round-book-page h3 {
+  margin: 0 0 18px;
+  color: #173f5d;
+  font-size: 24px;
+  font-weight: 600;
+  line-height: 1.15;
+  text-transform: none;
+  letter-spacing: -0.02em;
+}
+.public-content #direction .round-book-page p {
+  margin: 0;
+  color: #60768a;
+  font-size: 14px;
+  line-height: 1.8;
+}
+.round-book-page-number {
+  position: absolute;
+  bottom: 28px;
+  color: #8fa3b2;
+  font-size: 10px;
+}
+@keyframes open-book-page-light {
+  0%,
+  100% {
+    opacity: 0.3;
+    transform: translateY(0);
+  }
+  50% {
+    opacity: 0.8;
+    transform: translateY(-2px);
+  }
+}
+@media (hover: hover) {
+  .round-book:hover .round-book-shell {
+    transform: rotateY(-2deg);
+  }
+  .round-book--mission:hover .round-book-shell {
+    transform: rotateY(2deg);
+  }
+}
+@media (max-width: 1000px) {
+  .round-book-page {
+    min-height: 420px;
+    padding: 52px 38px 60px;
+  }
+  .public-content #direction .round-book-page h3 {
+    font-size: 22px;
+  }
+  .public-content #direction .round-book-page p {
+    font-size: 13px;
+  }
+}
+@media (max-width: 700px) {
+  .round-book-shell {
+    border-radius: 50px 12px 12px 28px;
+  }
+  .round-book--mission .round-book-shell {
+    border-radius: 12px 50px 28px 12px;
+  }
+  .round-book-page {
+    min-height: 0;
+    padding: 38px 28px 55px;
+  }
+  .public-content #direction .round-book-heading h2 {
+    font-size: 30px;
+  }
+  .round-book-rule {
+    margin: 18px 0 22px;
+  }
+  .public-content #direction .round-book-page h3 {
+    font-size: 24px;
+  }
+  .public-content #direction .round-book-page p {
+    font-size: 13px;
+    line-height: 1.75;
+  }
+  .round-book-page-number {
+    bottom: 22px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .round-book-shell {
+    transition: none;
+  }
+  .round-book-page::after {
+    animation: none;
+  }
+  .round-book:hover .round-book-shell,
+  .round-book--mission:hover .round-book-shell {
+    transform: none;
+  }
+}
