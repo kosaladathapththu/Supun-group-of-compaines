@@ -49,9 +49,9 @@ const Companies = () => {
 
       <section className="relative isolate overflow-hidden bg-[#0b2747] pb-14 pt-36 text-white md:pb-20 md:pt-40">
         <img
-          src="/images/companies/supun-building-hero.webp"
-          alt="Architectural visualization of a modern Supun Companies building"
-          className="absolute inset-0 -z-20 h-full w-full object-cover object-center"
+          src="/images/companies/supun-arcade-exterior-v1.png"
+          alt="Supun Arcade building exterior in Colombo"
+          className="companies-arcade-hero absolute inset-0 -z-20 h-full w-full object-cover"
           decoding="async"
         />
         <div className="absolute inset-0 -z-10 bg-gradient-to-r from-[#071d37]/90 via-[#0b2747]/65 to-[#071d37]/5" />

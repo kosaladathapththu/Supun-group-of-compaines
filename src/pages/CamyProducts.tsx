@@ -206,7 +206,7 @@ const CamyProducts = () => {
             aria-label="Explore the CAMY everyday collection"
           >
             <img
-              src="/images/camy-hero/camy-marble-banner-v3.png"
+              src="/images/camy-hero/camy-marble-banner-white-v4.png"
               alt="CAMY home appliances, cookware and lifestyle products arranged on an ivory marble display platform"
               fetchPriority="high"
               decoding="async"

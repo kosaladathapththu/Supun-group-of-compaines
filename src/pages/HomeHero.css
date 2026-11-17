@@ -1495,3 +1495,10 @@
     transform: none;
   }
 }
+
+/* Preserve the full height of the Supun Arcade facade. */
+.home-legacy-visual > img {
+  object-fit: contain;
+  object-position: right center;
+  background: linear-gradient(130deg, #eaf4ff, #f5f9fd);
+}

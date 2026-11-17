@@ -94,17 +94,10 @@ const Footer = () => {
             href="https://it.supuncompanies.com"
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex rounded-md bg-[#f7f7f7] p-2 transition-opacity hover:opacity-90 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white"
+            className="font-medium text-white/80 transition-colors hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white"
             aria-label="Supun IT Solutions (opens in a new tab)"
           >
-            <img
-              src="/supun-it-solutions-logo.jpeg"
-              alt="Supun IT Solutions"
-              width={1600}
-              height={533}
-              loading="lazy"
-              className="h-auto w-40 sm:w-44"
-            />
+            Supun IT Solutions
           </a>
         </div>
       </div>

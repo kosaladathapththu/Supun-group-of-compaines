@@ -86,20 +86,7 @@ export function CompanyJourney({ companies }: { companies: Company[] }) {
                   </p>
                 </div>
                 <div className="company-journey-businesses">
-                  {(year === 'Today'
-                    ? [
-                        ...journeyCompanyLogos.Today,
-                        ...companies
-                          .filter(
-                            (company) =>
-                              !Object.values(journeyCompanyLogos)
-                                .flat()
-                                .some((logo) => logo.id === company.id),
-                          )
-                          .map((company) => ({ id: company.id, name: company.shortName })),
-                      ]
-                    : (journeyCompanyLogos[year] ?? [])
-                  ).map(({ id, name }) => {
+                  {(journeyCompanyLogos[year] ?? []).map(({ id, name }) => {
                     const company = companies.find((c) => c.id === id);
                     return (
                       <Link
@@ -141,6 +128,55 @@ export function CompanyJourney({ companies }: { companies: Company[] }) {
             </li>
           ))}
         </ol>
+
+        <div className="company-journey-associated">
+          <div className="company-journey-copy">
+            <h3>Connecting our businesses to everyday life.</h3>
+            <p>Explore our retail and distribution companies across Sri Lanka.</p>
+          </div>
+          <div className="company-journey-businesses">
+            {companies
+              .filter(
+                (company) =>
+                  !Object.values(journeyCompanyLogos)
+                    .flat()
+                    .some((logo) => logo.id === company.id),
+              )
+              .map(({ id, shortName: name }) => {
+                const company = companies.find((c) => c.id === id);
+                return (
+                  <Link
+                    key={id}
+                    to={id === 'group' ? '/about' : '/companies/' + id}
+                    className="company-journey-business"
+                    aria-label={'Explore ' + name}
+                  >
+                    <div className="company-journey-logo">
+                      {id === 'group' ? (
+                        <img src="/supun-group-of-companies-logo.png" alt={name} loading="lazy" />
+                      ) : (
+                        <CompanyLogo
+                          companyId={id}
+                          companyName={name}
+                          placement="home"
+                          className="h-full w-full"
+                        />
+                      )}
+                    </div>
+                    <div>
+                      <strong>{company?.shortName ?? name}</strong>
+                      <span>
+                        {id === 'group'
+                          ? 'Discover our story'
+                          : (company?.industry ?? 'Explore company')}
+                      </span>
+                    </div>
+                    <ArrowUpRight size={20} />
+                  </Link>
+                );
+              })}
+          </div>
+        </div>
         <div className="company-journey-end">
           <span />
           The story continues.

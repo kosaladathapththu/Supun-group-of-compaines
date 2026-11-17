@@ -377,8 +377,8 @@ const Home = () => {
         <div className="home-legacy-layout">
           <figure className="home-legacy-visual">
             <img
-              src="/images/companies/supun-building-hero.webp"
-              alt="Supun Group of Companies building with the Supun sign on its facade"
+              src="/images/companies/supun-arcade-exterior-v1.png"
+              alt="Supun Arcade building exterior in Colombo"
               loading="lazy"
               decoding="async"
             />
