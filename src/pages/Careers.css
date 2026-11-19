@@ -502,3 +502,9 @@
 .career-job-footer .career-primary { padding: 12px 18px; gap: 10px; }
 .career-job-footer span { color: #708095; font-size: 11px; }
 @media (max-width: 760px) { .career-vacancies { grid-template-columns: 1fr; } .career-job-card { padding: 22px; } }
+
+/* Original recruitment posters, fully visible and clickable */
+.career-poster-link { display: block; overflow: hidden; border-radius: 14px; border: 1px solid #e1e8f0; background: #f4f8fc; }
+.career-poster-image { display: block; width: 100%; height: auto; aspect-ratio: 1 / 1; object-fit: contain; transition: transform .2s ease; }
+.career-poster-link:hover .career-poster-image { transform: scale(1.015); }
+.career-poster-link:focus-visible { outline: 3px solid #175690; outline-offset: 3px; }
