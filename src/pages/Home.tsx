@@ -433,12 +433,12 @@ const Home = () => {
             <div className="home-presence-stats" aria-label="Our group at a glance">
               <svg
                 className="home-presence-photo-wave"
-                viewBox="0 0 500 60"
+                viewBox="0 0 500 42"
                 preserveAspectRatio="none"
                 aria-hidden="true"
               >
-                <path d="M0 25Q230 85 500 0V60H0Z" fill="#85c442" />
-                <path d="M0 35Q230 95 500 13V60H0Z" fill="#102944" />
+                <path d="M0 18Q230 52 500 0V42H0Z" fill="#85c442" />
+                <path d="M0 24Q230 58 500 8V42H0Z" fill="#102944" />
               </svg>
               <div>
                 <CalendarDays aria-hidden="true" />
