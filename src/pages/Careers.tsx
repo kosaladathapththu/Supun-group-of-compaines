@@ -19,7 +19,7 @@ const HR_EMAIL = 'hr.supungroup@gmail.com';
 const vacancies = [
   {
     id: 'cashier',
-    poster: '/images/careers/cashier-optimized.webp',
+    poster: '/images/careers/Supun Super Center Cashier Recruitment.png',
     title: 'Cashier',
     company: 'Supun Super Center',
     location: 'Bambalapitiya',
@@ -30,7 +30,7 @@ const vacancies = [
   },
   {
     id: 'sales-assistant',
-    poster: '/images/careers/sales-assistant-optimized.webp',
+    poster: '/images/careers/Supun Super Center Sales Hiring Poster.png',
     title: 'Sales Assistant',
     company: 'Supun Super Center',
     location: 'Bambalapitiya',
@@ -41,7 +41,7 @@ const vacancies = [
   },
   {
     id: 'business-analyst-intern',
-    poster: '/images/careers/business-analyst-optimized.webp',
+    poster: '/images/careers/WhatsApp Image 2026-11-18 at 5.14.12 PM.jpeg',
     title: 'Intern – Business Analyst (Accounts Focus)',
     company: 'Supun Group of Companies',
     location: 'Supun Arcade, Wellawatta',
@@ -52,7 +52,7 @@ const vacancies = [
   },
   {
     id: 'sales-representative',
-    poster: '/images/careers/sales-representative-optimized.webp',
+    poster: '/images/careers/WhatsApp Image 2026-11-18 at 5.36.58 PM.jpeg',
     title: 'Sales Representative',
     company: 'Supun Aerosoft (Pvt) Ltd',
     location: 'Islandwide travel',
