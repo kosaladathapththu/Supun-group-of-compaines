@@ -471,3 +471,34 @@
     transform: none;
   }
 }
+
+
+/* Current vacancy cards */
+.career-vacancies {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 20px;
+}
+.career-job-card {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 28px;
+  border: 1px solid #dce8f1;
+  border-radius: 20px;
+  background: #fff;
+  box-shadow: 0 10px 28px #12395808;
+}
+.career-job-topline { display: flex; align-items: center; flex-wrap: wrap; justify-content: space-between; gap: 10px; }
+.career-job-tag { font-size: 10px; font-weight: 700; letter-spacing: .08em; color: #26722f; text-transform: uppercase; }
+.career-job-employment { background: #edf5fa; color: #305778; border-radius: 999px; padding: 6px 10px; font-size: 11px; }
+.career-job-card h3 { font-size: clamp(21px, 2vw, 28px); font-weight: 650; line-height: 1.2; letter-spacing: -.03em; text-transform: none; }
+.career-job-company { color: #315f9f; font-size: 14px; font-weight: 600; }
+.career-job-location { display: inline-flex; gap: 6px; align-items: center; color: #586e81; font-size: 12px; }
+.career-job-details { color: #51677b; line-height: 1.7; font-size: 13px; }
+.career-job-benefits { color: #3d596b; font-size: 12px; line-height: 1.6; margin-top: auto; }
+.career-job-footer { display: flex; align-items: center; gap: 16px; flex-wrap: wrap; border-top: 1px solid #e1ebf3; padding-top: 18px; margin-top: 8px; }
+.career-job-footer .career-primary { padding: 12px 18px; gap: 10px; }
+.career-job-footer span { color: #708095; font-size: 11px; }
+@media (max-width: 760px) { .career-vacancies { grid-template-columns: 1fr; } .career-job-card { padding: 22px; } }
