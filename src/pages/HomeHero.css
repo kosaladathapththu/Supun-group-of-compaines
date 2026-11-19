@@ -1480,10 +1480,10 @@
 .home-legacy-visual { margin: 0 0 28px; padding-left: 32px; }
 .home-legacy-visual::before { inset: 28px 28px -28px 0; width: auto; background: transparent; border: 1px solid #cfd9c9; border-radius: 150px 12px 12px 12px; }
 .home-legacy-visual > img { width: 100%; height: 570px; object-fit: cover; object-position: center; border-radius: 150px 12px 12px 12px; background: #e8eef2; }
-.home-legacy-since { top: auto; bottom: 30px; left: -12px; width: 230px; display: block; padding: 25px 28px; border: 1px solid #ffffff38; border-radius: 4px 24px 4px 4px; background: #123d33; box-shadow: 0 18px 40px #132c3220; }
-.home-legacy-since > span:first-child { display: block; writing-mode: horizontal-tb; transform: none; color: #c9dfb4; font-size: 9px; letter-spacing: .18em; }
-.home-legacy-since strong { display: block; margin: 8px 0 12px; font-size: 76px; font-weight: 500; background: none; color: #fff; -webkit-text-fill-color: currentColor; }
-.home-legacy-since > span:last-child { display: block; border-top: 1px solid #ffffff30; padding-top: 12px; color: #d8e3dc; font-size: 11px; }
+.home-legacy-since { top: auto; bottom: 26px; left: -12px; width: 156px; display: block; padding: 15px 17px; border: 1px solid #ffffff38; border-radius: 4px 18px 4px 4px; background: #123d33; box-shadow: 0 12px 26px #132c3220; }
+.home-legacy-since > span:first-child { display: block; writing-mode: horizontal-tb; transform: none; color: #c9dfb4; font-size: 8px; letter-spacing: .1em; }
+.home-legacy-since strong { display: block; margin: 6px 0 8px; font-size: 52px; line-height: 1.05; font-weight: 500; background: none; color: #fff; -webkit-text-fill-color: currentColor; }
+.home-legacy-since > span:last-child { display: block; border-top: 1px solid #ffffff30; padding-top: 8px; color: #d8e3dc; font-size: 10px; }
 .home-legacy-since > span:last-child::before { content: none; }
 .home-legacy-eyebrow { color: #527043; margin-bottom: 26px; }
 .home-legacy-eyebrow::before { background: #7d9d54; height: 1px; }
@@ -1509,8 +1509,8 @@
   .home-legacy-visual { padding-left: 18px; margin-bottom: 16px; }
   .home-legacy-visual > img { height: clamp(390px, 105vw, 540px); border-top-left-radius: 110px; }
   .home-legacy-visual::before { inset: 18px 18px -18px 0; border-top-left-radius: 110px; }
-  .home-legacy-since { top: auto; left: -6px; bottom: 24px; width: 200px; padding: 20px 24px; }
-  .home-legacy-since strong { font-size: 60px; }
+  .home-legacy-since { top: auto; left: -6px; bottom: 18px; width: 140px; padding: 13px 14px; }
+  .home-legacy-since strong { font-size: 46px; }
   .public-content .home-legacy-editorial h2 { font-size: clamp(42px, 9vw, 58px); line-height: 1.08; }
 }
 @media (prefers-reduced-motion: reduce) {
