@@ -18,6 +18,17 @@ const HR_EMAIL = 'hr.supungroup@gmail.com';
 
 const vacancies = [
   {
+    id: 'software-developer-intern',
+    poster: '/images/careers/WhatsApp Image 2026-11-18 at 5.08.49 PM.jpeg',
+    title: 'Software Developer Intern (Accounts Knowledge)',
+    company: 'Supun Group of Companies',
+    location: 'Supun Arcade, Wellawatta',
+    area: 'Group Services',
+    employment: 'Paid internship',
+    details: 'For undergraduates or recent graduates in Software Engineering or a related field. Basic front-end development (JavaScript, React, PHP or similar), accounting knowledge, problem-solving, willingness to learn and good communication skills.',
+    benefits: 'Paid internship, lunch, real industry exposure, learning and growth',
+  },
+  {
     id: 'cashier',
     poster: '/images/careers/Supun Super Center Cashier Recruitment.png',
     title: 'Cashier',
