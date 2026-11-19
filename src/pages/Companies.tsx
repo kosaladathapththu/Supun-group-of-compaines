@@ -1,3 +1,4 @@
+import area56Rooftop from '@/assets/optimized/area-56-rooftop-night.jpg';
 import { usePublicCompanies } from '@/hooks/use-public-companies';
 import Seo, { SITE_URL } from '@/components/Seo';
 import { CompanyJourney } from '@/components/CompanyJourney';
@@ -48,13 +49,25 @@ const Companies = () => {
       />
 
       <section className="relative isolate overflow-hidden bg-[#0b2747] pb-14 pt-36 text-white md:pb-20 md:pt-40">
-        <img
-          src="/images/supun-arcade-exterior.png"
-          alt="Supun Arcade building exterior in Colombo"
-          className="companies-arcade-hero absolute inset-0 -z-20 h-full w-full object-cover"
-          decoding="async"
-        />
-        <div className="absolute inset-0 -z-10 bg-gradient-to-r from-[#071d37]/90 via-[#0b2747]/65 to-[#071d37]/5" />
+        {/* Photo-only header collage: all heading copy remains live HTML text. */}
+        <div aria-hidden="true" className="pointer-events-none absolute inset-0 -z-20 overflow-hidden">
+          <img
+            src={area56Rooftop}
+            alt=""
+            className="absolute inset-0 h-full w-full object-cover object-center opacity-65"
+            decoding="async"
+          />
+          <div className="absolute inset-y-0 right-0 w-[46%] overflow-hidden max-md:w-[52%]">
+            <img
+              src="/images/supun-arcade-exterior.png"
+              alt=""
+              className="h-full w-full object-cover object-center"
+              decoding="async"
+            />
+          </div>
+        </div>
+        <div className="pointer-events-none absolute inset-0 -z-10 bg-gradient-to-r from-[#071d37]/95 via-[#0b2747]/85 via-54% to-[#071d37]/10" />
+        <div className="pointer-events-none absolute inset-0 -z-10 bg-gradient-to-t from-[#071d37]/35 via-transparent to-[#071d37]/20" />
         <div className="container mx-auto px-4">
           <div className="max-w-3xl">
             <p className="text-xs font-bold uppercase tracking-[.24em] text-[#a8d17c]">
