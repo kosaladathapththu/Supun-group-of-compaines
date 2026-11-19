@@ -19,6 +19,7 @@ const HR_EMAIL = 'hr.supungroup@gmail.com';
 const vacancies = [
   {
     id: 'cashier',
+    poster: '/images/careers/cashier-optimized.webp',
     title: 'Cashier',
     company: 'Supun Super Center',
     location: 'Bambalapitiya',
@@ -29,6 +30,7 @@ const vacancies = [
   },
   {
     id: 'sales-assistant',
+    poster: '/images/careers/sales-assistant-optimized.webp',
     title: 'Sales Assistant',
     company: 'Supun Super Center',
     location: 'Bambalapitiya',
@@ -39,6 +41,7 @@ const vacancies = [
   },
   {
     id: 'business-analyst-intern',
+    poster: '/images/careers/business-analyst-optimized.webp',
     title: 'Intern – Business Analyst (Accounts Focus)',
     company: 'Supun Group of Companies',
     location: 'Supun Arcade, Wellawatta',
@@ -49,6 +52,7 @@ const vacancies = [
   },
   {
     id: 'sales-representative',
+    poster: '/images/careers/sales-representative-optimized.webp',
     title: 'Sales Representative',
     company: 'Supun Aerosoft (Pvt) Ltd',
     location: 'Islandwide travel',
@@ -210,6 +214,9 @@ const Careers = () => {
               {visibleVacancies.length > 0 ? (
                 visibleVacancies.map((job) => (
                   <article className="career-job-card" key={job.id}>
+                    <a href={job.poster} target="_blank" rel="noopener noreferrer" className="career-poster-link" aria-label={`View full ${job.title} vacancy poster`}>
+                      <img src={job.poster} alt={`${job.title} recruitment poster from ${job.company}`} className="career-poster-image" loading="lazy" decoding="async" />
+                    </a>
                     <div className="career-job-topline">
                       <span className="career-job-tag">{job.area}</span>
                       <span className="career-job-employment">{job.employment}</span>
