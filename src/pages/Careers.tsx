@@ -180,46 +180,65 @@ const Careers = () => {
       </section>
 
       <section className="career-benefits px-5 md:px-8" aria-label="Working at Supun">
-        <div className="career-shell grid gap-5 border-b border-[#d4e2ee]/50 py-5 sm:grid-cols-3">
-          {[
-            ['Learn by doing', 'Build practical skills through real work.'],
-            ['Grow with us', 'Explore different businesses across the Group.'],
-            ['Make a difference', 'Bring your ideas to a team that values them.'],
-          ].map(([title, copy], index) => (
-            <div key={title} className="career-benefit">
-              <span className="career-benefit-number">0{index + 1}</span>
-              <h2 className="!text-lg font-semibold">{title}</h2>
-              <p className="mt-1 text-sm text-[#56677c]">{copy}</p>
-            </div>
-          ))}
+        <div className="career-shell">
+          <div className="career-benefits-intro">
+            <span className="career-benefits-kicker">WHY BUILD YOUR CAREER HERE</span>
+            <h2>More than a job. <span>Room to grow.</span></h2>
+          </div>
+          <div className="career-benefits-grid">
+            {[
+              ['01', 'Learn by doing', 'Build practical skills through real work.'],
+              ['02', 'Grow with us', 'Explore different businesses across the Group.'],
+              ['03', 'Make a difference', 'Bring your ideas to a team that values them.'],
+            ].map(([number, title, copy]) => (
+              <div key={title} className="career-benefit">
+                <span className="career-benefit-number">{number}</span>
+                <h3>{title}</h3>
+                <p>{copy}</p>
+                <span className="career-benefit-accent" aria-hidden="true" />
+              </div>
+            ))}
+          </div>
         </div>
       </section>
 
       <section id="opportunities" className="px-5 py-20 md:px-8 md:py-28">
         <div className="career-shell">
-          <p className="text-xs font-bold uppercase tracking-[.22em] text-[#315f9f]">
-            Current vacancies
-          </p>
-          <h2 className="mt-4 text-4xl font-bold tracking-[-.04em] md:text-5xl">
-            Find your next role.
-          </h2>
-          <p className="mt-4 max-w-2xl leading-7 text-[#56677c]">
-            Choose an area or send your profile for future opportunities.
-          </p>
-          <div className="jobs-layout mt-6">
-            <div className="job-filters" aria-label="Filter vacancies by career area">
-              {careerAreaNames.map((areaName) => (
-                <button
-                  key={areaName}
-                  type="button"
-                  onClick={() => setSelected(areaName)}
-                  className={`filter-button ${selected === areaName ? 'active' : ''}`}
-                  aria-pressed={selected === areaName}
-                >
-                  <span>{areaName}</span>
-                  <ArrowRight size={15} />
-                </button>
-              ))}
+          <div className="career-opportunities-heading">
+            <div className="career-opportunities-copy">
+              <p className="career-section-kicker"><span aria-hidden="true" /> Current vacancies</p>
+              <h2>Find your <span>next role.</span></h2>
+              <p className="career-opportunities-description">
+                Discover the opportunities waiting for you across Supun Group.
+                Explore open positions or share your profile for future roles.
+              </p>
+            </div>
+            <div className="career-openings-summary" aria-label={`${vacancies.length} available vacancies`}>
+              <strong>{String(vacancies.length).padStart(2, '0')}</strong>
+              <span>Open positions<br />across the Group</span>
+              <BriefcaseBusiness size={25} aria-hidden="true" />
+            </div>
+          </div>
+          <div className="jobs-layout">
+            <div className="career-filter-panel">
+              <div className="career-filter-header">
+                <span>Explore by department</span>
+                <span>{visibleVacancies.length} {visibleVacancies.length === 1 ? 'opening' : 'openings'} found</span>
+              </div>
+              <div className="job-filters" aria-label="Filter vacancies by career area">
+                {careerAreaNames.map((areaName) => (
+                  <button
+                    key={areaName}
+                    type="button"
+                    onClick={() => setSelected(areaName)}
+                    className={`filter-button ${selected === areaName ? 'active' : ''}`}
+                    aria-pressed={selected === areaName}
+                  >
+                    <span>{areaName}</span>
+                    {selected === areaName && <ArrowRight size={15} aria-hidden="true" />}
+                  </button>
+                ))}
+              </div>
             </div>
             <div className="career-vacancies" aria-live="polite">
               {visibleVacancies.length > 0 ? (
