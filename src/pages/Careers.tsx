@@ -59,8 +59,19 @@ const vacancies = [
   },
 ] as const;
 
-const applicationLink = (role: string) =>
-  `mailto:${HR_EMAIL}?subject=${encodeURIComponent(`Application for ${role}`)}&body=${encodeURIComponent('Dear HR Team,\\n\\nI would like to apply for the above vacancy. Please find my CV attached.\\n\\nName: \\nPhone: \\n\\nThank you.')}`;
+const applicationLink = (role: string) => {
+  const body = [
+    'Dear HR Team,',
+    '',
+    'I would like to apply for the above vacancy. Please find my CV attached.',
+    '',
+    'Name:',
+    'Phone:',
+    '',
+    'Thank you.',
+  ].join('\\n');
+  return `mailto:${HR_EMAIL}?subject=${encodeURIComponent(`Application for ${role}`)}&body=${encodeURIComponent(body)}`;
+};
 
 const Careers = () => {
   const [selected, setSelected] = useState('All areas');
