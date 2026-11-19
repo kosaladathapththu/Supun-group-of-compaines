@@ -1,5 +1,5 @@
 import { FormEvent, useState } from 'react';
-import { ArrowRight, Send, BriefcaseBusiness } from 'lucide-react';
+import { ArrowRight, Send, BriefcaseBusiness, MapPin, Mail } from 'lucide-react';
 import Seo, { SITE_NAME, SITE_URL } from '@/components/Seo';
 import careersHero from '@/assets/optimized/careers-hero-team.jpg';
 import './Careers.css';
@@ -14,8 +14,57 @@ const areas = [
 
 const careerAreaNames = ['All areas', ...areas.map((area) => area.name)];
 
+const HR_EMAIL = 'hr.supungroup@gmail.com';
+
+const vacancies = [
+  {
+    id: 'cashier',
+    title: 'Cashier',
+    company: 'Supun Super Center',
+    location: 'Bambalapitiya',
+    area: 'Retail & Distribution',
+    employment: 'Full-time',
+    details: 'Customer service and cashier operations. G.C.E. O/L or A/L, computer literacy and a friendly approach. The poster specifies female candidates aged 18–30.',
+    benefits: 'Free accommodation provided',
+  },
+  {
+    id: 'sales-assistant',
+    title: 'Sales Assistant',
+    company: 'Supun Super Center',
+    location: 'Bambalapitiya',
+    area: 'Retail & Distribution',
+    employment: 'Full-time',
+    details: 'G.C.E. O/L, friendly customer service and a willingness to help shoppers. The poster specifies male candidates aged 18–30.',
+    benefits: 'Accommodation, commissions and incentives in addition to salary',
+  },
+  {
+    id: 'business-analyst-intern',
+    title: 'Intern – Business Analyst (Accounts Focus)',
+    company: 'Supun Group of Companies',
+    location: 'Supun Arcade, Wellawatta',
+    area: 'Group Services',
+    employment: 'Paid internship',
+    details: 'For accounting, finance, business analytics or related students and recent graduates. Basic accounting knowledge, Excel/Google Sheets, analytical skills and communication are useful.',
+    benefits: 'Paid internship, lunch, industry exposure and mentorship',
+  },
+  {
+    id: 'sales-representative',
+    title: 'Sales Representative',
+    company: 'Supun Aerosoft (Pvt) Ltd',
+    location: 'Islandwide travel',
+    area: 'Retail & Distribution',
+    employment: 'Full-time',
+    details: 'Develop new dealers and customers, promote products, handle orders and collections, and prepare sales reports. G.C.E. A/L or higher, good communication and a valid driving licence are required. Two years of sales/marketing experience is an advantage.',
+    benefits: 'Opportunity to grow a sales network',
+  },
+] as const;
+
+const applicationLink = (role: string) =>
+  `mailto:${HR_EMAIL}?subject=${encodeURIComponent(`Application for ${role}`)}&body=${encodeURIComponent('Dear HR Team,\\n\\nI would like to apply for the above vacancy. Please find my CV attached.\\n\\nName: \\nPhone: \\n\\nThank you.')}`;
+
 const Careers = () => {
   const [selected, setSelected] = useState('All areas');
+  const visibleVacancies = vacancies.filter((job) => selected === 'All areas' || job.area === selected);
 
   const submitInterest = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -33,7 +82,7 @@ const Careers = () => {
       '',
       'Please attach your CV before sending.',
     ].join('\n');
-    window.location.href = `mailto:info@supungroup.lk?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+    window.location.href = `mailto:${HR_EMAIL}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
   };
 
   return (
@@ -146,24 +195,38 @@ const Careers = () => {
                 </button>
               ))}
             </div>
-            <div className="vacancy-panel" role="status">
-              <span className="vacancy-panel-icon">
-                <BriefcaseBusiness size={26} />
-              </span>
-              <div>
-                <span className="vacancy-status">{selected}</span>
-                <h3 className="mt-2 text-2xl font-bold normal-case tracking-[-.025em] text-[#071b2d]">
-                  Your next opportunity starts with a conversation.
-                </h3>
-                <p className="mt-2 max-w-3xl text-sm leading-6 text-[#56677c]">
-                  No vacancies are currently listed for{' '}
-                  {selected === 'All areas' ? 'the Group' : selected.toLowerCase()}. Share your
-                  profile for future opportunities.
-                </p>
-                <a href="#talent" className="career-text-link">
-                  Register your interest <ArrowRight size={16} />
-                </a>
-              </div>
+            <div className="career-vacancies" aria-live="polite">
+              {visibleVacancies.length > 0 ? (
+                visibleVacancies.map((job) => (
+                  <article className="career-job-card" key={job.id}>
+                    <div className="career-job-topline">
+                      <span className="career-job-tag">{job.area}</span>
+                      <span className="career-job-employment">{job.employment}</span>
+                    </div>
+                    <h3>{job.title}</h3>
+                    <p className="career-job-company">{job.company}</p>
+                    <p className="career-job-location"><MapPin size={15} aria-hidden="true" />{job.location}</p>
+                    <p className="career-job-details">{job.details}</p>
+                    <p className="career-job-benefits"><strong>Benefits:</strong> {job.benefits}</p>
+                    <div className="career-job-footer">
+                      <a href={applicationLink(job.title)} className="career-primary">
+                        Apply now <Mail size={16} aria-hidden="true" />
+                      </a>
+                      <span>Attach your CV in the email</span>
+                    </div>
+                  </article>
+                ))
+              ) : (
+                <div className="vacancy-panel">
+                  <span className="vacancy-panel-icon"><BriefcaseBusiness size={26} /></span>
+                  <div>
+                    <span className="vacancy-status">{selected}</span>
+                    <h3 className="mt-2 text-2xl font-bold normal-case">No vacancies listed in this area</h3>
+                    <p className="mt-2 text-sm text-[#56677c]">You can still share your profile for future opportunities.</p>
+                    <a href="#talent" className="career-text-link">Register your interest <ArrowRight size={16} /></a>
+                  </div>
+                </div>
+              )}
             </div>
           </div>
         </div>
