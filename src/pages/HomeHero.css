@@ -1263,112 +1263,83 @@
   background: transparent;
 }
 
-/* Open, light closing invitation. */
+/* Centered closing invitation with a subtle ambient glow. */
 .home-contact {
   position: relative;
+  isolation: isolate;
   overflow: hidden;
   background: #fff;
+  padding: clamp(64px, 6vw, 88px) 24px;
 }
-.home-contact-panel {
-  width: min(1100px, calc(100% - 64px));
-  margin: 22px auto 28px;
-  padding: 28px 0;
-  text-align: center;
+.home-contact::before {
+  content: '';
+  position: absolute;
+  z-index: -1;
+  inset: 5% 10%;
+  background: radial-gradient(ellipse at 35% 55%, #eaf3fc 0%, transparent 55%), radial-gradient(ellipse at 70% 50%, #eff7e9 0%, transparent 50%);
+  opacity: .55;
+  animation: home-contact-glow 9s ease-in-out infinite alternate;
+  pointer-events: none;
 }
+.home-contact-panel { width: min(1100px, 100%); margin: 0 auto; text-align: center; }
 .home-contact-eyebrow {
   display: inline-flex;
   align-items: center;
-  gap: 12px;
-  margin-bottom: 18px;
+  gap: 14px;
+  margin: 0 0 26px;
   color: #62788c;
   font-size: 10px;
   font-weight: 600;
-  letter-spacing: 0.23em;
+  letter-spacing: .25em;
   text-transform: uppercase;
 }
 .home-contact-eyebrow::before,
-.home-contact-eyebrow::after {
-  content: '';
-  width: 30px;
-  height: 1px;
-  background: #8eb85d;
-}
+.home-contact-eyebrow::after { content: ''; width: 30px; height: 1px; background: #83ac58; }
 .home-contact-copy h2 {
   margin: 0;
   color: #0b2942;
-  font-size: clamp(38px, 4vw, 58px);
-  line-height: 1.1;
+  font-size: clamp(36px, 4vw, 58px);
   font-weight: 600;
-  letter-spacing: -0.03em;
+  line-height: 1.12;
+  letter-spacing: -.03em;
   text-transform: none;
 }
-.home-contact-copy h2 span {
-  color: #3c812b;
-}
-.home-contact-description {
-  max-width: 620px;
-  margin: 18px auto 0;
-  color: #61758a;
-  font-size: 16px;
-  line-height: 1.75;
-}
-.home-contact-action {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-wrap: wrap;
-  gap: 24px;
-  margin-top: 28px;
-}
+.home-contact-copy h2 span { color: #3c812b; }
+.home-contact-description { max-width: 650px; margin: 22px auto 0; color: #61758a; font-size: 16px; line-height: 1.8; }
+.home-contact-action { display: flex; justify-content: center; margin-top: 32px; }
 .home-contact-action > a:first-child {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 32px;
-  padding: 17px 34px;
+  gap: 34px;
+  padding: 18px 34px;
   border: 1px solid #79bb35;
   border-left-color: #064887;
   border-radius: 999px;
   color: #fff;
   background: linear-gradient(105deg, #033475, #003460 55%, #075d00);
-  box-shadow: 0 12px 22px #00476b24;
+  box-shadow: 0 12px 26px #00476b24;
   font-size: 16px;
   font-weight: 600;
-  transition: box-shadow 0.2s;
 }
-.home-contact-action > a:first-child:hover {
-  box-shadow: 0 12px 26px #00476b45;
-}
-.home-contact-action a:focus-visible {
-  outline: 3px solid #0877ef;
-  outline-offset: 5px;
+.home-contact-action a svg { transition: transform .25s ease; }
+.home-contact-action a:is(:hover, :focus-visible) svg { transform: translateX(5px); }
+.home-contact-action a:focus-visible { outline: 3px solid #0877ef; outline-offset: 5px; }
+@keyframes home-contact-glow {
+  from { opacity: .35; transform: translate3d(-2%, 0, 0) scale(.96); }
+  to { opacity: .75; transform: translate3d(2%, 0, 0) scale(1.04); }
 }
 @media (max-width: 650px) {
-  .home-contact-panel {
-    width: calc(100% - 40px);
-    margin: 16px auto 22px;
-    padding: 22px 0;
-  }
-  .public-content .home-contact-copy h2 {
-    font-size: 38px;
-    line-height: 1.1;
-  }
-  .home-contact-description {
-    font-size: 14px;
-    margin-top: 16px;
-  }
-  .home-contact-action {
-    flex-direction: column;
-    gap: 18px;
-    margin-top: 24px;
-  }
+  .home-contact { padding: 56px 24px; }
+  .public-content .home-contact-copy h2 { font-size: clamp(34px, 8vw, 44px); line-height: 1.15; }
+  .home-contact-description { font-size: 14px; margin-top: 20px; }
+  .home-contact-action > a:first-child { padding: 16px 28px; font-size: 15px; }
 }
 @media (prefers-reduced-motion: reduce) {
-  .home-contact-action > a:first-child {
-    transition: none;
-  }
+  .home-contact::before { animation: none; }
+  .home-contact-action a svg { transition: none; }
+  .home-contact-action a:is(:hover, :focus-visible) svg { transform: none; }
 }
-
 /* Gentle button lift and a soft, occasional highlight. */
 .home-page
   :is(
@@ -1501,4 +1472,47 @@
   object-fit: contain;
   object-position: right center;
   background: linear-gradient(130deg, #eaf4ff, #f5f9fd);
+}
+
+/* Refined heritage editorial. */
+.home-legacy { background: #fafbf7; padding: clamp(56px, 6vw, 100px) 0; overflow: hidden; }
+.home-legacy-layout { width: min(1280px, calc(100% - 112px)); margin: 0 auto; grid-template-columns: 1fr 1fr; gap: clamp(48px, 7vw, 112px); }
+.home-legacy-visual { margin: 0 0 28px; padding-left: 32px; }
+.home-legacy-visual::before { inset: 28px 28px -28px 0; width: auto; background: transparent; border: 1px solid #cfd9c9; border-radius: 150px 12px 12px 12px; }
+.home-legacy-visual > img { width: 100%; height: 570px; object-fit: cover; object-position: center; border-radius: 150px 12px 12px 12px; background: #e8eef2; }
+.home-legacy-since { top: auto; bottom: 30px; left: -12px; width: 230px; display: block; padding: 25px 28px; border: 1px solid #ffffff38; border-radius: 4px 24px 4px 4px; background: #123d33; box-shadow: 0 18px 40px #132c3220; }
+.home-legacy-since > span:first-child { display: block; writing-mode: horizontal-tb; transform: none; color: #c9dfb4; font-size: 9px; letter-spacing: .18em; }
+.home-legacy-since strong { display: block; margin: 8px 0 12px; font-size: 76px; font-weight: 500; background: none; color: #fff; -webkit-text-fill-color: currentColor; }
+.home-legacy-since > span:last-child { display: block; border-top: 1px solid #ffffff30; padding-top: 12px; color: #d8e3dc; font-size: 11px; }
+.home-legacy-since > span:last-child::before { content: none; }
+.home-legacy-eyebrow { color: #527043; margin-bottom: 26px; }
+.home-legacy-eyebrow::before { background: #7d9d54; height: 1px; }
+.home-legacy-editorial h2 { font-size: clamp(44px, 4.2vw, 66px); font-weight: 500; line-height: 1.06; letter-spacing: -.035em; color: #112e38; }
+.home-legacy-editorial h2 > span { display: block; margin-top: 8px; color: #54823c; }
+.home-legacy-intro { margin-top: 26px; font-size: 17px; line-height: 1.7; color: #324d51; }
+.home-legacy-body { font-size: 13px; line-height: 1.9; color: #6c7b7b; }
+.home-legacy-story-link { gap: 28px; margin-top: 26px; padding: 8px 8px 8px 22px; border-radius: 100px; background: #123d33; color: #fff; font-size: 12px; }
+.home-legacy-story-link > span { width: 36px; height: 36px; border: 0; background: #d6e7b7; color: #123d33; transition: transform .2s; }
+.home-legacy-story-link:hover > span { background: #d6e7b7; color: #123d33; transform: rotate(-35deg); }
+.home-legacy-footnote { margin-top: 30px; padding-top: 20px; border-color: #dfe5d9; }
+.home-legacy-footnote-line { width: 2px; background: #91aa6c; }
+.home-legacy-footnote p { color: #7c8981; }
+.home-legacy-footnote strong { color: #365b47; }
+@media (max-width: 1000px) {
+  .home-legacy-layout { width: calc(100% - 64px); gap: 40px; }
+  .home-legacy-visual > img { height: 530px; }
+  .home-legacy-editorial h2 { font-size: 46px; }
+}
+@media (max-width: 760px) {
+  .home-legacy { padding: 48px 0; }
+  .home-legacy-layout { grid-template-columns: 1fr; gap: 42px; width: calc(100% - 48px); margin: 0 auto; }
+  .home-legacy-visual { padding-left: 18px; margin-bottom: 16px; }
+  .home-legacy-visual > img { height: clamp(390px, 105vw, 540px); border-top-left-radius: 110px; }
+  .home-legacy-visual::before { inset: 18px 18px -18px 0; border-top-left-radius: 110px; }
+  .home-legacy-since { top: auto; left: -6px; bottom: 24px; width: 200px; padding: 20px 24px; }
+  .home-legacy-since strong { font-size: 60px; }
+  .public-content .home-legacy-editorial h2 { font-size: clamp(42px, 9vw, 58px); line-height: 1.08; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .home-legacy-story-link > span { transition: none; }
 }

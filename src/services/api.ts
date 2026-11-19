@@ -415,6 +415,26 @@ export const getErrorMessage = (error: unknown): string => {
  */
 export const getFileUrl = (path: string | undefined): string | null => {
   if (!path) return null;
+  // Static website media belongs to the frontend, while uploads belong to the API.
+  const movedMedia: Record<string, string> = {
+    '/image.png': '/images/image.png',
+    '/image copy.png': '/images/image copy.png',
+    '/image copy 2.png': '/images/image copy 2.png',
+    '/image copy 3.png': '/images/image copy 3.png',
+    '/image copy 4.png': '/images/supun-arcade-exterior.png',
+    '/colombo.jpg': '/images/colombo.jpg',
+    '/certificates-combined.png': '/images/certificates-combined.png',
+    '/images/companies/supun-arcade-exterior-v1.png': '/images/supun-arcade-exterior.png',
+    '/images/camy-hero/camy-marble-banner-v2.png':
+      '/images/camy-hero/camy-marble-banner-white-v4.png',
+    '/images/camy-hero/camy-marble-banner-v3.png':
+      '/images/camy-hero/camy-marble-banner-white-v4.png',
+    '/images/camy-hero/camy-marble-banner.webp':
+      '/images/camy-hero/camy-marble-banner-white-v4.png',
+  };
+  const localPath = '/' + path.replace(/^\/+/, '');
+  if (movedMedia[localPath]) return movedMedia[localPath];
+  if (/^\/(?:images|videos|logos)\//.test(localPath)) return localPath;
   // If it's already a full URL, return as is
   if (path.startsWith('http://') || path.startsWith('https://')) return path;
   // Otherwise, construct full URL with backend server

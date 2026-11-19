@@ -1,5 +1,5 @@
 import { FormEvent, useState } from 'react';
-import { ArrowRight, Send, Sparkles } from 'lucide-react';
+import { ArrowRight, Send, BriefcaseBusiness } from 'lucide-react';
 import Seo, { SITE_NAME, SITE_URL } from '@/components/Seo';
 import careersHero from '@/assets/optimized/careers-hero-team.jpg';
 import './Careers.css';
@@ -8,6 +8,7 @@ const areas = [
   { name: 'Manufacturing' },
   { name: 'Retail & Distribution' },
   { name: 'Hospitality' },
+  { name: 'Engineering Services' },
   { name: 'Group Services' },
 ];
 
@@ -68,51 +69,50 @@ const Careers = () => {
           ],
         }}
       />
-      <section className="career-hero px-5 pt-0 md:px-8">
-        <img
-          className="career-hero-image"
-          src={careersHero}
-          alt="A diverse team of Sri Lankan professionals in a modern workplace"
-          decoding="async"
-        />
-        <div className="career-shell career-hero-grid relative z-10">
-          <div className="pb-16 pr-6 md:pb-24 lg:pr-16">
-            <p className="flex items-center gap-3 text-xs font-bold uppercase tracking-[.25em] text-[#efc66f]">
-              <span className="h-px w-11 bg-[#dca43a]" /> Careers at Supun
-            </p>
-            <h1 className="mt-7 max-w-4xl text-5xl font-bold leading-[.94] tracking-[-.055em] md:text-7xl lg:text-[5.4rem]">
-              Build your future with Supun Group.
+      <section className="career-hero" aria-labelledby="career-title">
+        <div className="career-shell career-hero-grid">
+          <div className="career-hero-copy">
+            <p className="career-eyebrow">Your next chapter</p>
+            <h1 id="career-title">
+              Good people.
+              <br />
+              Great possibilities.
+              <br />
+              <span>Grow with Supun.</span>
             </h1>
-            <p className="mt-7 max-w-xl text-lg leading-8 text-white/80">
-              Build your skills across manufacturing, retail, distribution and hospitality in Sri
-              Lanka.
+            <p className="career-hero-description">
+              Bring your skills, your ideas and your ambition. Build a meaningful career with
+              businesses that touch everyday life across Sri Lanka.
             </p>
-            <div className="mt-9 flex flex-wrap gap-3">
-              <a
-                href="#opportunities"
-                className="inline-flex items-center gap-3 rounded-full bg-[#dca43a] px-7 py-4 text-sm font-bold text-[#10233f] transition hover:bg-[#78be43]"
-              >
-                View opportunities <ArrowRight size={17} />
+            <div className="career-hero-actions">
+              <a href="#opportunities" className="career-primary">
+                Explore opportunities <ArrowRight size={18} />
               </a>
-              <a
-                href="#talent"
-                className="inline-flex items-center rounded-full border border-white/30 bg-white/5 px-7 py-4 text-sm font-bold backdrop-blur transition hover:bg-white/10"
-              >
-                Send your profile
+              <a href="#talent" className="career-text-link">
+                Introduce yourself <ArrowRight size={16} />
               </a>
+            </div>
+            <p className="career-hero-note">Sri Lankan roots. A shared future.</p>
+          </div>
+          <div className="career-hero-visual">
+            <img src={careersHero} alt="Sri Lankan colleagues working together" decoding="async" />
+            <div className="career-photo-caption">
+              <span>People make the difference.</span>
+              <strong>Be part of what comes next.</strong>
             </div>
           </div>
         </div>
       </section>
 
       <section className="career-benefits px-5 md:px-8" aria-label="Working at Supun">
-        <div className="career-shell grid gap-5 border-b border-[#cdbd9e]/50 py-5 sm:grid-cols-3">
+        <div className="career-shell grid gap-5 border-b border-[#d4e2ee]/50 py-5 sm:grid-cols-3">
           {[
             ['Learn by doing', 'Build practical skills through real work.'],
-            ['Grow with us', 'Explore opportunities across 13 companies.'],
+            ['Grow with us', 'Explore different businesses across the Group.'],
             ['Make a difference', 'Bring your ideas to a team that values them.'],
-          ].map(([title, copy]) => (
-            <div key={title}>
+          ].map(([title, copy], index) => (
+            <div key={title} className="career-benefit">
+              <span className="career-benefit-number">0{index + 1}</span>
               <h2 className="!text-lg font-semibold">{title}</h2>
               <p className="mt-1 text-sm text-[#56677c]">{copy}</p>
             </div>
@@ -122,7 +122,7 @@ const Careers = () => {
 
       <section id="opportunities" className="px-5 py-20 md:px-8 md:py-28">
         <div className="career-shell">
-          <p className="text-xs font-bold uppercase tracking-[.22em] text-[#9a6b16]">
+          <p className="text-xs font-bold uppercase tracking-[.22em] text-[#315f9f]">
             Current vacancies
           </p>
           <h2 className="mt-4 text-4xl font-bold tracking-[-.04em] md:text-5xl">
@@ -148,17 +148,21 @@ const Careers = () => {
             </div>
             <div className="vacancy-panel" role="status">
               <span className="vacancy-panel-icon">
-                <Sparkles size={22} />
+                <BriefcaseBusiness size={26} />
               </span>
               <div>
                 <span className="vacancy-status">{selected}</span>
                 <h3 className="mt-2 text-2xl font-bold normal-case tracking-[-.025em] text-[#071b2d]">
-                  No vacancies are listed in this area right now.
+                  Your next opportunity starts with a conversation.
                 </h3>
                 <p className="mt-2 max-w-3xl text-sm leading-6 text-[#56677c]">
-                  Please check again later. You can also register your interest using the form in
-                  the next section.
+                  No vacancies are currently listed for{' '}
+                  {selected === 'All areas' ? 'the Group' : selected.toLowerCase()}. Share your
+                  profile for future opportunities.
                 </p>
+                <a href="#talent" className="career-text-link">
+                  Register your interest <ArrowRight size={16} />
+                </a>
               </div>
             </div>
           </div>
@@ -168,15 +172,26 @@ const Careers = () => {
       <section id="talent" className="px-5 pb-24 md:px-8 md:pb-32">
         <div className="career-shell talent-grid">
           <div className="talent-copy">
-            <p className="text-xs font-bold uppercase tracking-[.22em] text-[#efc66f]">
+            <p className="text-xs font-bold uppercase tracking-[.22em] text-[#a8d17c]">
               Register your interest
             </p>
             <h2 className="mt-5 text-4xl font-bold leading-tight tracking-[-.04em]">
               Join our talent pool.
             </h2>
             <p className="mt-5 leading-7 text-white/70">
-              Tell us about yourself and the work you?re interested in.
+              Tell us about yourself and the work you are interested in.
             </p>
+            <ol className="career-application-steps">
+              <li>
+                <span>01</span>Tell us about yourself
+              </li>
+              <li>
+                <span>02</span>Review your prepared email
+              </li>
+              <li>
+                <span>03</span>Attach your CV and send
+              </li>
+            </ol>
             <div className="mt-6 border-t border-white/20 pt-5">
               <strong className="text-sm">Remember your CV</strong>
               <p className="mt-2 text-sm leading-6 text-white/65">
@@ -188,15 +203,22 @@ const Careers = () => {
             <form onSubmit={submitInterest} className="form-grid">
               <div className="career-field">
                 <label htmlFor="name">Full name</label>
-                <input id="name" name="name" required placeholder="Your name" />
+                <input id="name" name="name" autoComplete="name" required placeholder="Your name" />
               </div>
               <div className="career-field">
                 <label htmlFor="email">Email address</label>
-                <input id="email" name="email" type="email" required placeholder="you@email.com" />
+                <input
+                  id="email"
+                  name="email"
+                  autoComplete="email"
+                  type="email"
+                  required
+                  placeholder="you@email.com"
+                />
               </div>
               <div className="career-field">
                 <label htmlFor="phone">Phone number</label>
-                <input id="phone" name="phone" placeholder="+94" />
+                <input id="phone" name="phone" type="tel" autoComplete="tel" placeholder="+94" />
               </div>
               <div className="career-field">
                 <label htmlFor="area">Career area</label>
@@ -230,10 +252,7 @@ const Careers = () => {
                   Submitting opens your email app. Nothing is sent until you review and send the
                   email.
                 </p>
-                <button
-                  type="submit"
-                  className="inline-flex items-center justify-center gap-3 rounded-full bg-[#10233f] px-7 py-4 text-sm font-bold text-white"
-                >
+                <button type="submit" className="career-primary">
                   Prepare email <Send size={16} />
                 </button>
               </div>

@@ -49,7 +49,7 @@ const Companies = () => {
 
       <section className="relative isolate overflow-hidden bg-[#0b2747] pb-14 pt-36 text-white md:pb-20 md:pt-40">
         <img
-          src="/images/companies/supun-arcade-exterior-v1.png"
+          src="/images/supun-arcade-exterior.png"
           alt="Supun Arcade building exterior in Colombo"
           className="companies-arcade-hero absolute inset-0 -z-20 h-full w-full object-cover"
           decoding="async"

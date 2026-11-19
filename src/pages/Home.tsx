@@ -24,10 +24,11 @@ import { brandsAPI } from '@/services/api';
 import { useQuery } from '@tanstack/react-query';
 import { sectorHighlights, siteStats } from '@/data/siteContent';
 import './HomeHero.css';
-import heroVideo from '@/assets/supun-hero-streaming-hq.mp4';
 import heroPoster from '@/assets/optimized/hero-poster.jpg';
 import manufacturingImage from '@/assets/optimized/camy-cookware-production-focus-v2.jpg';
 import camyRedLogo from '@/assets/camy-logo-red-transparent.png';
+
+const heroVideo = '/videos/supun-hero-streaming-hq.mp4';
 
 const featuredCompanyIds = [
   'supun-traders',
@@ -377,13 +378,13 @@ const Home = () => {
         <div className="home-legacy-layout">
           <figure className="home-legacy-visual">
             <img
-              src="/images/companies/supun-arcade-exterior-v1.png"
+              src="/images/supun-arcade-exterior.png"
               alt="Supun Arcade building exterior in Colombo"
               loading="lazy"
               decoding="async"
             />
             <figcaption className="home-legacy-since">
-              <span>Since</span>
+              <span>Our roots run deep</span>
               <strong>1978</strong>
               <span>Rooted in Sri Lanka.</span>
             </figcaption>
@@ -393,11 +394,7 @@ const Home = () => {
             <h2 id="home-legacy-heading">
               A family legacy.
               <br />
-              <span>
-                A future we build
-                <br />
-                together.
-              </span>
+              <span>A future we build together.</span>
             </h2>
             <p className="home-legacy-intro">
               From one trading company in Colombo to a group that touches everyday life across Sri
@@ -637,7 +634,7 @@ const Home = () => {
       )}
 
       <section className="home-contact" aria-labelledby="home-contact-heading">
-        <div className="home-contact-panel">
+        <AnimatedSection animation="slide-up" className="home-contact-panel">
           <div className="home-contact-copy">
             <p className="home-contact-eyebrow">The next chapter</p>
             <h2 id="home-contact-heading">
@@ -653,7 +650,7 @@ const Home = () => {
               Talk to our team <ArrowRight size={21} aria-hidden="true" />
             </Link>
           </div>
-        </div>
+        </AnimatedSection>
       </section>
     </div>
   );

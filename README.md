@@ -34,3 +34,10 @@ Contact and career forms prepare an email in the visitor's email application; th
 The scripts build-production.sh and deploy.sh prepare local build files. They do not change DNS, install server software or alter running VPS services.
 
 Hosting ZIPs are available in `tmp/hosting/`. See [hosting instructions](docs/HOSTING.md) for static and full Node hosting setup.
+
+## Repository layout
+
+- `public/images/`: website images and supplied source photos.
+- `src/assets/`: bundled application assets; source video is in `src/assets/source-video/`.
+- `docs/guides/`: setup, deployment and maintenance guides.
+- `tmp/`: local previews, reports and hosting packages (not committed).

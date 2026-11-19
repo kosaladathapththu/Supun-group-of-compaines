@@ -39,3 +39,7 @@ server/uploads/*
 /tmp/ffmpeg*
 /tmp/hero-streaming-*.log
 /tmp/video-stream-*
+
+# Rebuildable compiler and dependency caches
+*.tsbuildinfo
+.vite/
