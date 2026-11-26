@@ -1,4 +1,4 @@
-import helmetManufacturing from '@/assets/optimized/helmet-manufacturing.jpg';
+import helmetManufacturing from '@/assets/optimized/camy-cs832-news-workshop-v1.jpg';
 import chromeManufacturing from '@/assets/optimized/chrome-manufacturing.jpg';
 import heroCorporate from '@/assets/optimized/hero-corporate.jpg';
 import coolingProducts from '@/assets/products/camy-air-conditioners.webp';

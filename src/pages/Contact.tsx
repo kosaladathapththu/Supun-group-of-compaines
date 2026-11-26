@@ -357,7 +357,7 @@ const Contact = () => {
                     companyId={company.id}
                     companyName={company.shortName}
                     logoUrl={company.logoUrl}
-                    className="h-36 w-full border-b border-[#d7e0e6]/55 bg-[#fffdf8] p-5"
+                    className="h-36 w-full border-b border-[#d7e0e6]/55 bg-[#fffdf8] p-5 [--company-logo-height:100px]"
                     imageClassName="h-full w-full object-contain"
                   />
                   <div className="flex flex-1 flex-col p-6">

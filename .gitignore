@@ -40,6 +40,9 @@ server/uploads/*
 /tmp/hero-streaming-*.log
 /tmp/video-stream-*
 
+# Keep large hosting release archives out of GitHub commits.
+/Supun-Group-Website-*-Hosting*.zip
+
 # Rebuildable compiler and dependency caches
 *.tsbuildinfo
 .vite/

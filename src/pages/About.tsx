@@ -4,7 +4,7 @@ import Seo, { DEFAULT_IMAGE, SITE_NAME, SITE_URL } from '@/components/Seo';
 import { AnimatedSection } from '@/components/AnimatedSection';
 import { AwardIssuerMark } from '@/components/AwardIssuerMark';
 import chairmanImage from '@/assets/Chairman.png';
-import supunTradersToday from '@/assets/optimized/supun-traders-neighbour-signs-blurred.png';
+import supunSuperCenterToday from '@/assets/optimized/supun-super-center-enhanced-v1.jpg';
 import aboutHeroSriLanka from '@/assets/optimized/about-colombo-sunset.png';
 import supunTradersHeritage from '@/assets/optimized/supun-traders-heritage.jpg';
 import industryBanner from '@/assets/optimized/sri-lanka-industry-banner.jpg';
@@ -191,8 +191,8 @@ const About = () => {
               </figure>
               <figure className="about-brand-story-today">
                 <img
-                  src={supunTradersToday}
-                  alt="Supun Traders storefront at 114, 2nd Cross Street, Colombo"
+                  src={supunSuperCenterToday}
+                  alt="Supun Super Center storefront with its blue signage and blue and yellow building"
                   loading="lazy"
                   decoding="async"
                 />

@@ -19,7 +19,6 @@ const HR_EMAIL = 'hr.supungroup@gmail.com';
 const vacancies = [
   {
     id: 'software-developer-intern',
-    poster: '/images/careers/WhatsApp Image 2026-11-18 at 5.08.49 PM.jpeg',
     title: 'Software Developer Intern (Accounts Knowledge)',
     company: 'Supun Group of Companies',
     location: 'Supun Arcade, Wellawatta',
@@ -30,29 +29,26 @@ const vacancies = [
   },
   {
     id: 'cashier',
-    poster: '/images/careers/Supun Super Center Cashier Recruitment.png',
     title: 'Cashier',
     company: 'Supun Super Center',
     location: 'Bambalapitiya',
     area: 'Retail & Distribution',
     employment: 'Full-time',
-    details: 'Customer service and cashier operations. G.C.E. O/L or A/L, computer literacy and a friendly approach. The poster specifies female candidates aged 18–30.',
+    details: 'Customer service and cashier operations. G.C.E. O/L or A/L, computer literacy and a friendly approach. Female candidates aged 18–30.',
     benefits: 'Free accommodation provided',
   },
   {
     id: 'sales-assistant',
-    poster: '/images/careers/Supun Super Center Sales Hiring Poster.png',
     title: 'Sales Assistant',
     company: 'Supun Super Center',
     location: 'Bambalapitiya',
     area: 'Retail & Distribution',
     employment: 'Full-time',
-    details: 'G.C.E. O/L, friendly customer service and a willingness to help shoppers. The poster specifies male candidates aged 18–30.',
+    details: 'G.C.E. O/L, friendly customer service and a willingness to help shoppers. Male candidates aged 18–30.',
     benefits: 'Accommodation, commissions and incentives in addition to salary',
   },
   {
     id: 'business-analyst-intern',
-    poster: '/images/careers/WhatsApp Image 2026-11-18 at 5.14.12 PM.jpeg',
     title: 'Intern – Business Analyst (Accounts Focus)',
     company: 'Supun Group of Companies',
     location: 'Supun Arcade, Wellawatta',
@@ -63,7 +59,6 @@ const vacancies = [
   },
   {
     id: 'sales-representative',
-    poster: '/images/careers/WhatsApp Image 2026-11-18 at 5.36.58 PM.jpeg',
     title: 'Sales Representative',
     company: 'Supun Aerosoft (Pvt) Ltd',
     location: 'Islandwide travel',
@@ -84,7 +79,7 @@ const applicationLink = (role: string) => {
     'Phone:',
     '',
     'Thank you.',
-  ].join('\\n');
+  ].join('\n');
   return `mailto:${HR_EMAIL}?subject=${encodeURIComponent(`Application for ${role}`)}&body=${encodeURIComponent(body)}`;
 };
 
@@ -234,7 +229,7 @@ const Careers = () => {
                     className={`filter-button ${selected === areaName ? 'active' : ''}`}
                     aria-pressed={selected === areaName}
                   >
-                    <span>{areaName}</span>
+                    <span>{areaName}</span><span className="career-filter-count">{areaName === 'All areas' ? vacancies.length : vacancies.filter((job) => job.area === areaName).length}</span>
                     {selected === areaName && <ArrowRight size={15} aria-hidden="true" />}
                   </button>
                 ))}
@@ -243,25 +238,36 @@ const Careers = () => {
             <div className="career-vacancies" aria-live="polite">
               {visibleVacancies.length > 0 ? (
                 visibleVacancies.map((job) => (
-                  <article className="career-job-card" key={job.id}>
-                    <a href={job.poster} target="_blank" rel="noopener noreferrer" className="career-poster-link" aria-label={`View full ${job.title} vacancy poster`}>
-                      <img src={job.poster} alt={`${job.title} recruitment poster from ${job.company}`} className="career-poster-image" loading="lazy" decoding="async" />
-                    </a>
-                    <div className="career-job-topline">
-                      <span className="career-job-tag">{job.area}</span>
-                      <span className="career-job-employment">{job.employment}</span>
-                    </div>
-                    <h3>{job.title}</h3>
-                    <p className="career-job-company">{job.company}</p>
-                    <p className="career-job-location"><MapPin size={15} aria-hidden="true" />{job.location}</p>
-                    <p className="career-job-details">{job.details}</p>
-                    <p className="career-job-benefits"><strong>Benefits:</strong> {job.benefits}</p>
-                    <div className="career-job-footer">
-                      <a href={applicationLink(job.title)} className="career-primary">
-                        Apply now <Mail size={16} aria-hidden="true" />
+                  <article className="career-job-card" key={job.id} aria-labelledby={`job-${job.id}`}>
+                    <div className="career-job-main">
+                      <div className="career-job-symbol" aria-hidden="true"><BriefcaseBusiness size={22} strokeWidth={1.5} /></div>
+                      <div className="career-job-overview">
+                        <p className="career-job-tag">{job.area}</p>
+                        <h3 id={`job-${job.id}`}>{job.title}</h3>
+                        <p className="career-job-company">{job.company}</p>
+                        <div className="career-job-meta">
+                          <span><MapPin size={14} aria-hidden="true" />{job.location}</span>
+                          <span><BriefcaseBusiness size={14} aria-hidden="true" />{job.employment}</span>
+                        </div>
+                      </div>
+                      <a href={applicationLink(job.title)} className="career-job-apply" aria-label={`Apply for ${job.title}`}>
+                        Apply now <ArrowRight size={17} aria-hidden="true" />
                       </a>
-                      <span>Attach your CV in the email</span>
                     </div>
+                    <details className="career-job-disclosure">
+                      <summary>View role details <span className="career-job-toggle" aria-hidden="true" /></summary>
+                      <div className="career-job-expanded">
+                        <div>
+                          <h4>Role &amp; requirements</h4>
+                          <p>{job.details}</p>
+                        </div>
+                        <div>
+                          <h4>What we offer</h4>
+                          <p>{job.benefits}</p>
+                          <p className="career-job-application-note"><Mail size={14} aria-hidden="true" /> Apply by email. Please attach your CV before sending.</p>
+                        </div>
+                      </div>
+                    </details>
                   </article>
                 ))
               ) : (

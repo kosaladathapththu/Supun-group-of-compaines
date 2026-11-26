@@ -121,7 +121,7 @@
   transform: rotate(3deg);
 }
 .about-brand-story-today > img {
-  object-position: center;
+  object-position: center 63%;
 }
 @media (max-width: 1200px) {
   .about-brand-story-inner {
